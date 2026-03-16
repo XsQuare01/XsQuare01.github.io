@@ -3,6 +3,7 @@ title: "Interesting Number Paradox"
 date: 2026-03-17
 description: "수학적 증명에서 '정의(definition)'의 엄밀함이 왜 중요한지를 보여주는 패러독스. 암호학 Complexity Theory 도입부."
 tags: ["암호학", "Complexity Theory", "수학"]
+category: math
 ---
 
 > 이 패러독스는 수학적 증명에서 '정의(definition)'의 엄밀함이 왜 중요한지를 보여주는 예시다. Complexity Theory의 도입부에서 다루는 주제이며, 암호학에서도 수학적 엄밀성은 핵심 전제이기 때문에 이 개념을 먼저 짚고 넘어간다.

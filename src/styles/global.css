@@ -124,6 +124,32 @@ a:hover { color: var(--accent); }
   color: var(--accent);
 }
 
+.sidebar-categories {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sidebar-category-link {
+  display: block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: all 0.15s;
+}
+
+.sidebar-category-link:hover,
+.sidebar-category-link.active {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.sidebar-category-link.active {
+  color: var(--accent);
+}
+
 .sidebar-tags {
   margin-bottom: 1.5rem;
 }

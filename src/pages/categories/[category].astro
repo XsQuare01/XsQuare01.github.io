@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { categories, getCategoryLabel } from '../../data/categories';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: {
+      label: cat.label,
+      posts: posts
+        .filter((p) => p.data.category === cat.slug)
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}
+
+const { label, posts } = Astro.props;
+---
+
+<BaseLayout title={label}>
+  <h1 class="page-title">{label}</h1>
+  {posts.length === 0 ? (
+    <p style="color: var(--text-muted);">아직 글이 없습니다.</p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <span class="post-item-date">
+            {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </span>
+          <a href={`/blog/${post.slug}`} class="post-item-title">
+            {post.data.title}
+          </a>
+          {post.data.description && (
+            <p class="post-item-desc">{post.data.description}</p>
+          )}
+          {post.data.tags.length > 0 && (
+            <div class="tags">
+              {post.data.tags.map((tag) => (
+                <a href={`/tags/${tag}`} class="tag">{tag}</a>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

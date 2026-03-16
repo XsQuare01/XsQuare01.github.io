@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { categories } from '../data/categories';
 
 interface Props {
   title: string;
@@ -45,10 +46,25 @@ const currentPath = Astro.url.pathname;
       <a href="/" class={currentPath === '/' ? 'active' : ''}>
         📝 &nbsp;글 목록
       </a>
+      <a href="/categories" class={currentPath.startsWith('/categories') ? 'active' : ''}>
+        📂 &nbsp;카테고리
+      </a>
       <a href="/tags" class={currentPath.startsWith('/tags') ? 'active' : ''}>
         🏷️ &nbsp;태그
       </a>
     </nav>
+
+    <div class="sidebar-categories">
+      <div class="sidebar-nav-label">카테고리</div>
+      {categories.map((cat) => (
+        <a
+          href={`/categories/${cat.slug}`}
+          class={`sidebar-category-link${currentPath === `/categories/${cat.slug}` ? ' active' : ''}`}
+        >
+          {cat.label}
+        </a>
+      ))}
+    </div>
 
     {topTags.length > 0 && (
       <div class="sidebar-tags">

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { categories } from '../../data/categories';
+
+const posts = await getCollection('posts');
+
+const countByCategory: Record<string, number> = {};
+for (const post of posts) {
+  if (post.data.category) {
+    countByCategory[post.data.category] = (countByCategory[post.data.category] ?? 0) + 1;
+  }
+}
+---
+
+<BaseLayout title="카테고리">
+  <h1 class="page-title">카테고리</h1>
+  <ul class="category-list">
+    {categories.map((cat) => (
+      <li class="category-item">
+        <a href={`/categories/${cat.slug}`} class="category-link">
+          <span class="category-label">{cat.label}</span>
+          <span class="category-count">{countByCategory[cat.slug] ?? 0}편</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .category-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .category-item a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .category-item a:hover {
+    background: var(--bg-card);
+    border-color: var(--border);
+    color: var(--accent);
+  }
+  .category-label {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .category-count {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+</style>
