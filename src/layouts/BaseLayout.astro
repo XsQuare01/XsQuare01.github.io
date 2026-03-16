@@ -1,10 +1,26 @@
 ---
+import { getCollection } from 'astro:content';
+
 interface Props {
   title: string;
   description?: string;
 }
 
 const { title, description = 'XsQuare01의 기술 블로그' } = Astro.props;
+
+const posts = await getCollection('posts');
+const tagCount: Record<string, number> = {};
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCount[tag] = (tagCount[tag] ?? 0) + 1;
+  }
+}
+const topTags = Object.entries(tagCount)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 12)
+  .map(([tag]) => tag);
+
+const currentPath = Astro.url.pathname;
 ---
 
 <!DOCTYPE html>
@@ -17,25 +33,42 @@ const { title, description = 'XsQuare01의 기술 블로그' } = Astro.props;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="/" class="site-title">XsQuare01</a>
-      <nav>
-        <a href="/">글</a>
-        <a href="/tags">태그</a>
-      </nav>
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="sidebar-avatar">🔐</div>
+      <div class="sidebar-name">XsQuare01</div>
+      <div class="sidebar-bio">기록하는 개발자</div>
     </div>
-  </header>
 
-  <main class="container">
-    <slot />
-  </main>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-label">메뉴</div>
+      <a href="/" class={currentPath === '/' ? 'active' : ''}>
+        📝 &nbsp;글 목록
+      </a>
+      <a href="/tags" class={currentPath.startsWith('/tags') ? 'active' : ''}>
+        🏷️ &nbsp;태그
+      </a>
+    </nav>
 
-  <footer>
-    <div class="container">
+    {topTags.length > 0 && (
+      <div class="sidebar-tags">
+        <div class="sidebar-nav-label">태그</div>
+        <div class="tag-list">
+          {topTags.map((tag) => (
+            <a href={`/tags/${tag}`} class="tag">{tag}</a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="sidebar-footer">
       © {new Date().getFullYear()} XsQuare01
     </div>
-  </footer>
+  </aside>
+
+  <div class="main-wrap">
+    <slot />
+  </div>
 </body>
 </html>
 
