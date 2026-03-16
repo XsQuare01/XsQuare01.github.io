@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout title="홈">
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li class="post-item">
+        <span class="post-item-date">
+          {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </span>
+        <a href={`/blog/${post.slug}`} class="post-item-title">
+          {post.data.title}
+        </a>
+        {post.data.description && (
+          <p class="post-item-desc">{post.data.description}</p>
+        )}
+        {post.data.tags.length > 0 && (
+          <div class="tags">
+            {post.data.tags.map((tag) => (
+              <a href={`/tags/${tag}`} class="tag">{tag}</a>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
