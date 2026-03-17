@@ -4,15 +4,25 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
-  return posts.map((post) => ({
+  const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+  return sorted.map((post, index) => ({
     params: { slug: post.id },
-    props: { post },
+    props: {
+      post,
+      prevPost: sorted[index + 1] ?? null,
+      nextPost: sorted[index - 1] ?? null,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);
 const h2Headings = headings.filter((h) => h.depth === 2);
+
+// 읽기 시간 계산 (분)
+const wordCount = post.body?.split(/\s+/).length ?? 0;
+const readingTime = Math.max(1, Math.round(wordCount / 200));
 ---
 
 <PostLayout
@@ -21,6 +31,9 @@ const h2Headings = headings.filter((h) => h.depth === 2);
   description={post.data.description}
   tags={post.data.tags}
   headings={h2Headings}
+  readingTime={readingTime}
+  prevPost={prevPost ? { slug: prevPost.id, title: prevPost.data.title } : undefined}
+  nextPost={nextPost ? { slug: nextPost.id, title: nextPost.data.title } : undefined}
 >
   <Content />
 </PostLayout>

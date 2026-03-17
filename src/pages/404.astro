@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="페이지를 찾을 수 없음">
+  <div style="text-align: center; padding: 4rem 0;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">404</div>
+    <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text);">
+      페이지를 찾을 수 없습니다
+    </h1>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">
+      요청하신 페이지가 존재하지 않거나 이동되었습니다.
+    </p>
+    <a
+      href="/"
+      style="display: inline-block; padding: 0.6rem 1.5rem; background: var(--accent); color: #fff; border-radius: 6px; font-weight: 600; font-size: 0.9rem;"
+    >
+      홈으로 돌아가기
+    </a>
+  </div>
+</BaseLayout>

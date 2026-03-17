@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { categories, getCategoryLabel } from '../../data/categories';
+import { categories } from '../../data/categories';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');

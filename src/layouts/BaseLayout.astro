@@ -58,6 +58,7 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:image" content={ogImage} />
 
   <title>{title} | XsQuare01</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
 </head>
 <body>
@@ -91,7 +92,7 @@ const currentPath = Astro.url.pathname;
           href={`/categories/${cat.slug}`}
           class={`sidebar-category-link${currentPath === `/categories/${cat.slug}` ? ' active' : ''}`}
         >
-          {cat.label}
+          <span style="margin-right:0.4rem">{cat.icon}</span>{cat.label}
         </a>
       ))}
     </div>

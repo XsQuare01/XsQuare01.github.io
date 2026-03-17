@@ -232,7 +232,7 @@ a:hover { color: var(--accent); }
   gap: 0.35rem;
   padding: 1.5rem;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid transparent;
   transition: all 0.15s;
 }
 
@@ -322,6 +322,9 @@ a:hover { color: var(--accent); }
   margin: 2.5rem 0 1rem;
   letter-spacing: -0.02em;
   color: var(--text);
+}
+
+article .prose h2 {
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
 }
@@ -471,6 +474,66 @@ a:hover { color: var(--accent); }
 
 .toc-link:hover { color: var(--text); }
 .toc-link.active { color: var(--accent); font-weight: 600; }
+
+/* ── Post Navigation ── */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.post-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: all 0.15s;
+  min-width: 0;
+}
+
+.post-nav-item:hover {
+  border-color: var(--accent);
+}
+
+.post-nav-item.next {
+  text-align: right;
+}
+
+.post-nav-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.post-nav-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.post-nav-item:hover .post-nav-title {
+  color: var(--accent);
+}
+
+/* ── Reading Time ── */
+.reading-time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
 
 /* Mobile */
 @media (max-width: 768px) {

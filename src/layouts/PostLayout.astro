@@ -1,15 +1,37 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
+interface Heading {
+  slug: string;
+  text: string;
+}
+
+interface PostLink {
+  slug: string;
+  title: string;
+}
+
 interface Props {
   title: string;
   date: Date;
   description?: string;
   tags?: string[];
-  headings?: { slug: string; text: string }[];
+  headings?: Heading[];
+  readingTime?: number;
+  prevPost?: PostLink;
+  nextPost?: PostLink;
 }
 
-const { title, date, description, tags = [], headings = [] } = Astro.props;
+const {
+  title,
+  date,
+  description,
+  tags = [],
+  headings = [],
+  readingTime,
+  prevPost,
+  nextPost,
+} = Astro.props;
 
 const formattedDate = date.toLocaleDateString('ko-KR', {
   year: 'numeric',
@@ -33,11 +55,15 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
       </div>
     </Fragment>
   )}
+
   <article>
     <div class="post-header">
       <h1>{title}</h1>
       <div class="post-meta">
         <span>{formattedDate}</span>
+        {readingTime && (
+          <span class="reading-time">· 약 {readingTime}분 읽기</span>
+        )}
         {tags.length > 0 && (
           <div class="tags">
             {tags.map((tag) => (
@@ -47,9 +73,27 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
         )}
       </div>
     </div>
+
     <div class="prose">
       <slot />
     </div>
+
+    {(prevPost || nextPost) && (
+      <nav class="post-nav">
+        {prevPost ? (
+          <a href={`/blog/${prevPost.slug}`} class="post-nav-item prev">
+            <span class="post-nav-label">← 이전 글</span>
+            <span class="post-nav-title">{prevPost.title}</span>
+          </a>
+        ) : <div />}
+        {nextPost ? (
+          <a href={`/blog/${nextPost.slug}`} class="post-nav-item next">
+            <span class="post-nav-label">다음 글 →</span>
+            <span class="post-nav-title">{nextPost.title}</span>
+          </a>
+        ) : <div />}
+      </nav>
+    )}
   </article>
 </BaseLayout>
 
@@ -72,7 +116,6 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
       },
       { rootMargin: '0px 0px -80% 0px' }
     );
-
     headings.forEach((h) => observer.observe(h));
   }
 </script>
