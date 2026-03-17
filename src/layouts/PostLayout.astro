@@ -80,16 +80,16 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
 
     {(prevPost || nextPost) && (
       <nav class="post-nav">
-        {prevPost ? (
-          <a href={`/blog/${prevPost.slug}`} class="post-nav-item prev">
-            <span class="post-nav-label">← 이전 글</span>
-            <span class="post-nav-title">{prevPost.title}</span>
+        {nextPost ? (
+          <a href={`/blog/${nextPost.slug}`} class="post-nav-item prev">
+            <span class="post-nav-label">← 다음 글</span>
+            <span class="post-nav-title">{nextPost.title}</span>
           </a>
         ) : <div />}
-        {nextPost ? (
-          <a href={`/blog/${nextPost.slug}`} class="post-nav-item next">
-            <span class="post-nav-label">다음 글 →</span>
-            <span class="post-nav-title">{nextPost.title}</span>
+        {prevPost ? (
+          <a href={`/blog/${prevPost.slug}`} class="post-nav-item next">
+            <span class="post-nav-label">이전 글 →</span>
+            <span class="post-nav-title">{prevPost.title}</span>
           </a>
         ) : <div />}
       </nav>
