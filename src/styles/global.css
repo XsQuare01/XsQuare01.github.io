@@ -63,13 +63,10 @@ a:hover { color: var(--accent); }
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: var(--accent-dim);
   border: 2px solid var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
+  display: block;
   margin: 0 auto 0.75rem;
+  object-fit: cover;
 }
 
 .sidebar-name {

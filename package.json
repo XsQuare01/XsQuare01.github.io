@@ -8,6 +8,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
     "astro": "^6.0.5",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
