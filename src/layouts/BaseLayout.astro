@@ -44,6 +44,9 @@ const currentPath = Astro.url.pathname;
     <nav class="sidebar-nav">
       <div class="sidebar-nav-label">메뉴</div>
       <a href="/" class={currentPath === '/' ? 'active' : ''}>
+        🏠 &nbsp;홈
+      </a>
+      <a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>
         📝 &nbsp;글 목록
       </a>
       <a href="/categories" class={currentPath.startsWith('/categories') ? 'active' : ''}>
