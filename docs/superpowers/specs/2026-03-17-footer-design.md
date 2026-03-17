@@ -22,38 +22,73 @@
 
 ## 구조 (HTML)
 
-```html
+Astro 템플릿 표현식을 사용해 연도를 동적으로 처리한다:
+
+```astro
 <footer class="site-footer">
   <div class="site-footer-top">
     <span class="site-footer-name">XsQuare01</span>
     <span class="site-footer-bio">기록하는 개발자</span>
   </div>
   <div class="site-footer-bottom">
-    <span>© {연도} XsQuare01</span>
-    <a href="https://github.com/XsQuare01" target="_blank" rel="noopener">GitHub</a>
+    <span>© {new Date().getFullYear()} XsQuare01</span>
+    <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
     <a href="mailto:mystic6113@naver.com">이메일</a>
   </div>
 </footer>
 ```
 
-- `{연도}`는 Astro에서 `new Date().getFullYear()` 동적 처리
-
 ---
 
 ## 스타일 (CSS)
 
-`src/styles/global.css`에 `.site-footer` 클래스 추가:
+`src/styles/global.css`에 `.site-footer` 관련 클래스 추가.
+`border-top` 라인은 `.main-wrap`의 전체 너비에 걸쳐 표시된다.
 
+### `.site-footer`
 | 속성 | 값 | 비고 |
 |------|-----|------|
 | border-top | `1px solid var(--border)` | 콘텐츠와 시각적 구분 |
 | padding | `2.5rem 0` | 상하 여유 |
 | margin-top | `3rem` | 콘텐츠와 간격 |
-| `.site-footer-top` | flexbox, gap 0.5rem | 이름 + 소개 한 줄 |
-| `.site-footer-name` | `font-weight: 700`, `var(--text)` | 굵게 |
-| `.site-footer-bio` | `var(--text-muted)`, `font-size: 0.85rem` | 흐리게 |
-| `.site-footer-bottom` | flexbox, gap 1rem, `font-size: 0.8rem`, `var(--text-dim)` | copyright + 링크 |
-| 링크 색상 | `var(--accent-2)` (기본), `var(--accent)` (hover) | 기존 링크 스타일 준수 |
+
+### `.site-footer-top`
+| 속성 | 값 | 비고 |
+|------|-----|------|
+| display | `flex` | |
+| flex-direction | `row` | 이름과 소개를 한 줄로 표시 |
+| align-items | `center` | |
+| gap | `0.5rem` | |
+
+### `.site-footer-name`
+| 속성 | 값 |
+|------|-----|
+| font-weight | `700` |
+| color | `var(--text)` |
+
+### `.site-footer-bio`
+| 속성 | 값 |
+|------|-----|
+| color | `var(--text-muted)` |
+| font-size | `0.85rem` |
+
+### `.site-footer-bottom`
+| 속성 | 값 | 비고 |
+|------|-----|------|
+| display | `flex` | |
+| flex-direction | `row` | |
+| flex-wrap | `wrap` | 좁은 화면에서 줄바꿈 허용 |
+| align-items | `center` | |
+| gap | `0.5rem 1rem` | 세로 0.5rem, 가로 1rem |
+| font-size | `0.8rem` | |
+| color | `var(--text-dim)` | copyright 텍스트 색상 |
+| margin-top | `0.5rem` | top과의 간격 |
+
+### 링크 색상
+| 상태 | 값 |
+|------|-----|
+| 기본 | `var(--accent-2)` (#38bdf8) |
+| hover | `var(--accent)` (#f97316) |
 
 ---
 
@@ -67,5 +102,12 @@
 ## 비변경 범위
 
 - 사이드바 구조 및 기존 `sidebar-footer` 유지
-- 모바일 레이아웃 구조 변경 없음 (기존 CSS로 자동 대응)
-- 다른 페이지 레이아웃(`PostLayout.astro` 등) 별도 수정 불필요 — `BaseLayout`을 상속하므로 자동 적용
+- 모바일 레이아웃의 `body` 구조 변경 없음
+
+---
+
+## 구현 전 확인 사항
+
+- `PostLayout.astro`가 `BaseLayout.astro`를 내부적으로 사용하는지 확인 필요.
+  사용한다면 footer가 자동으로 포스트 페이지에도 적용됨.
+  사용하지 않는다면 `PostLayout.astro`에도 동일하게 footer 추가 필요.
