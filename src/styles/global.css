@@ -241,6 +241,10 @@ a:hover { color: var(--accent); }
   border-color: var(--border);
 }
 
+.post-list--bordered .post-item {
+  border-color: var(--border);
+}
+
 .post-item-date {
   font-size: 0.75rem;
   color: var(--text-dim);

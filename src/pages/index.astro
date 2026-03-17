@@ -70,7 +70,7 @@ const recentPosts = (await getCollection('posts'))
     <!-- 섹션 4: 최근 포스트 -->
     <section style="margin-bottom: 2.5rem;">
       <h2>📝 Recent Posts</h2>
-      <ul class="post-list" style="margin-top: 1.5rem;">
+      <ul class="post-list post-list--bordered" style="margin-top: 1.5rem;">
         {recentPosts.map((post) => (
           <li class="post-item">
             <span class="post-item-date">
