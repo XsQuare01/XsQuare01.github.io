@@ -18,15 +18,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const posts = await getCollection('posts');
 const tagCount: Record<string, number> = {};
+const categoryCount: Record<string, number> = {};
 for (const post of posts) {
   for (const tag of post.data.tags) {
     tagCount[tag] = (tagCount[tag] ?? 0) + 1;
+  }
+  if (post.data.category) {
+    categoryCount[post.data.category] = (categoryCount[post.data.category] ?? 0) + 1;
   }
 }
 const topTags = Object.entries(tagCount)
   .sort((a, b) => b[1] - a[1])
   .slice(0, 12)
   .map(([tag]) => tag);
+const activeCategories = categories.filter((cat) => (categoryCount[cat.slug] ?? 0) > 0);
 
 const currentPath = Astro.url.pathname;
 ---
@@ -81,7 +86,7 @@ const currentPath = Astro.url.pathname;
 
     <div class="sidebar-categories">
       <div class="sidebar-nav-label">카테고리</div>
-      {categories.map((cat) => (
+      {activeCategories.map((cat) => (
         <a
           href={`/categories/${cat.slug}`}
           class={`sidebar-category-link${currentPath === `/categories/${cat.slug}` ? ' active' : ''}`}

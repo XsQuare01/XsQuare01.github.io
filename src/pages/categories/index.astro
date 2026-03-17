@@ -16,14 +16,16 @@ for (const post of posts) {
 <BaseLayout title="카테고리">
   <h1 class="page-title">카테고리</h1>
   <ul class="category-list">
-    {categories.map((cat) => (
-      <li class="category-item">
-        <a href={`/categories/${cat.slug}`} class="category-link">
-          <span class="category-label">{cat.label}</span>
-          <span class="category-count">{countByCategory[cat.slug] ?? 0}편</span>
-        </a>
-      </li>
-    ))}
+    {categories
+      .filter((cat) => (countByCategory[cat.slug] ?? 0) > 0)
+      .map((cat) => (
+        <li class="category-item">
+          <a href={`/categories/${cat.slug}`} class="category-link">
+            <span class="category-label">{cat.label}</span>
+            <span class="category-count">{countByCategory[cat.slug]}편</span>
+          </a>
+        </li>
+      ))}
   </ul>
 </BaseLayout>
 
