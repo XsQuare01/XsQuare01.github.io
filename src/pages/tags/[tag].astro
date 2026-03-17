@@ -23,7 +23,7 @@ const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime(
         <span class="post-item-date">
           {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
         </span>
-        <a href={`/blog/${post.slug}`} class="post-item-title">
+        <a href={`/blog/${post.id}`} class="post-item-title">
           {post.data.title}
         </a>
         {post.data.description && (
