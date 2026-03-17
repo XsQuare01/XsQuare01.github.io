@@ -6,9 +6,10 @@ interface Props {
   date: Date;
   description?: string;
   tags?: string[];
+  headings?: { slug: string; text: string }[];
 }
 
-const { title, date, description, tags = [] } = Astro.props;
+const { title, date, description, tags = [], headings = [] } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('ko-KR', {
   year: 'numeric',
@@ -18,6 +19,20 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
 ---
 
 <BaseLayout title={title} description={description}>
+  {headings.length > 0 && (
+    <Fragment slot="toc">
+      <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul class="toc-list">
+          {headings.map((h) => (
+            <li>
+              <a class="toc-link" href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Fragment>
+  )}
   <article>
     <div class="post-header">
       <h1>{title}</h1>
@@ -37,3 +52,27 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
     </div>
   </article>
 </BaseLayout>
+
+<script>
+  const headings = document.querySelectorAll('article h2[id]');
+  const tocLinks = document.querySelectorAll('.toc-link');
+
+  if (headings.length > 0 && tocLinks.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach((link) => link.classList.remove('active'));
+            const active = document.querySelector(
+              `.toc-link[href="#${entry.target.id}"]`
+            );
+            if (active) active.classList.add('active');
+          }
+        }
+      },
+      { rootMargin: '0px 0px -80% 0px' }
+    );
+
+    headings.forEach((h) => observer.observe(h));
+  }
+</script>

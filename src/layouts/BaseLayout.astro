@@ -118,7 +118,7 @@ const currentPath = Astro.url.pathname;
         <slot />
       </div>
       <aside class="right-panel">
-        <!-- 준비 중: 우측 패널 콘텐츠 -->
+        <slot name="toc" />
       </aside>
     </div>
     <footer class="site-footer">
