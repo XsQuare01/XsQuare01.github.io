@@ -8,6 +8,7 @@ const posts = (await getCollection('posts')).sort(
 ---
 
 <BaseLayout title="글 목록">
+  <h1 class="page-title">글 목록</h1>
   <ul class="post-list">
     {posts.map((post) => (
       <li class="post-item">
