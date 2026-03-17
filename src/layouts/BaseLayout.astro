@@ -113,7 +113,14 @@ const currentPath = Astro.url.pathname;
   </aside>
 
   <div class="main-wrap">
-    <slot />
+    <div class="main-row">
+      <div class="main-content">
+        <slot />
+      </div>
+      <aside class="right-panel">
+        <!-- 준비 중: 우측 패널 콘텐츠 -->
+      </aside>
+    </div>
     <footer class="site-footer">
       <div class="site-footer-top">
         <span class="site-footer-name">XsQuare01</span>

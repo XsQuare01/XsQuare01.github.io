@@ -197,6 +197,27 @@ a:hover { color: var(--accent); }
   margin-top: auto;
 }
 
+/* ── Main Row (content + right panel) ── */
+.main-row {
+  display: flex;
+  flex: 1;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.right-panel {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+}
+
 /* ── Post List ── */
 .post-list {
   list-style: none;
@@ -301,7 +322,7 @@ a:hover { color: var(--accent); }
   margin: 2.5rem 0 1rem;
   letter-spacing: -0.02em;
   color: var(--text);
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
 }
 .prose h3 { font-size: 1.1rem; font-weight: 600; margin: 2rem 0 0.6rem; color: var(--accent-2); }
@@ -430,5 +451,6 @@ a:hover { color: var(--accent); }
   }
   body { flex-direction: column; }
   .main-wrap { margin-left: 0; padding: 1.5rem; min-height: calc(100vh - 60px); }
+  .right-panel { display: none; }
   .post-header h1 { font-size: 1.4rem; }
 }
