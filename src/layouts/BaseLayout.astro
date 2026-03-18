@@ -110,15 +110,7 @@ const currentPath = Astro.url.pathname;
       <div class="main-content">
         <slot />
         <footer class="site-footer">
-          <div class="site-footer-top">
-            <span class="site-footer-name">XsQuare01</span>
-            <span class="site-footer-bio">기록하는 개발자</span>
-          </div>
-          <div class="site-footer-bottom">
-            <span>© {new Date().getFullYear()} XsQuare01</span>
-            <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="mailto:mystic6113@naver.com">이메일</a>
-          </div>
+          <span>© {new Date().getFullYear()} XsQuare01. Powered by GitHub Pages.</span>
         </footer>
       </div>
       <aside class="right-panel">

@@ -429,36 +429,9 @@ article .prose h2 {
 /* ── Site Footer ── */
 .site-footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 0;
-}
-
-.site-footer-top {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.site-footer-name {
-  font-weight: 700;
-  color: var(--text);
-}
-
-.site-footer-bio {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-.site-footer-bottom {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1rem;
+  padding: 1.5rem 0;
   font-size: 0.8rem;
   color: var(--text-dim);
-  margin-top: 0.5rem;
 }
 
 /* ── TOC ── */
