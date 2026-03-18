@@ -458,15 +458,15 @@ article .prose h2 {
 }
 
 .toc-link {
-  font-size: 1rem;
-  color: var(--text-muted);
+  font-size: 1.1rem;
+  color: var(--text);
   display: block;
   line-height: 1.4;
   transition: color 0.25s;
 }
 
-.toc-link:hover { color: var(--text); }
-.toc-link.active { color: var(--accent); font-weight: 600; }
+.toc-link:hover { color: var(--accent-2); }
+.toc-link.active { color: var(--accent); font-weight: 700; }
 
 /* ── Post Navigation ── */
 .post-nav {
