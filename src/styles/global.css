@@ -106,8 +106,8 @@ a:hover { color: var(--accent); }
   gap: 0.5rem;
   padding: 0.45rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.88rem;
-  color: var(--text-muted);
+  font-size: 0.95rem;
+  color: var(--text);
   transition: all 0.15s;
 }
 
@@ -132,8 +132,8 @@ a:hover { color: var(--accent); }
   display: block;
   padding: 0.35rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  font-size: 0.92rem;
+  color: var(--text);
   transition: all 0.15s;
 }
 
@@ -163,7 +163,7 @@ a:hover { color: var(--accent); }
   padding: 0.2rem 0.55rem;
   border-radius: 4px;
   background: var(--bg-card);
-  color: var(--text-muted);
+  color: var(--text);
   border: 1px solid var(--border);
   transition: all 0.15s;
 }
@@ -242,6 +242,8 @@ a:hover { color: var(--accent); }
 .post-item:hover {
   background: var(--bg-card);
   border-color: var(--border);
+  border-left: 3px solid var(--accent);
+  padding-left: calc(1.5rem - 3px);
 }
 
 .post-list--bordered .post-item {
