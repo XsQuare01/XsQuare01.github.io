@@ -209,7 +209,6 @@ a:hover { color: var(--accent); }
   display: flex;
   flex: 1;
   gap: 2.5rem;
-  align-items: flex-start;
 }
 
 .right-panel {
