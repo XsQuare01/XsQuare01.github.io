@@ -236,6 +236,7 @@ a:hover { color: var(--accent); }
   border-radius: 8px;
   border: 1px solid transparent;
   transition: all 0.15s;
+  position: relative;
 }
 
 .post-item:hover {
@@ -263,6 +264,17 @@ a:hover { color: var(--accent); }
 }
 
 .post-item:hover .post-item-title { color: var(--accent); }
+
+.post-item-link {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+}
+
+.post-item .tags {
+  position: relative;
+  z-index: 1;
+}
 
 .post-item-desc {
   font-size: 0.875rem;

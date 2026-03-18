@@ -12,12 +12,13 @@ const posts = (await getCollection('posts')).sort(
   <ul class="post-list">
     {posts.map((post) => (
       <li class="post-item">
+        <a href={`/blog/${post.id}`} class="post-item-link" aria-label={post.data.title}></a>
         <span class="post-item-date">
           {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
         </span>
-        <a href={`/blog/${post.id}`} class="post-item-title">
+        <span class="post-item-title">
           {post.data.title}
-        </a>
+        </span>
         {post.data.description && (
           <p class="post-item-desc">{post.data.description}</p>
         )}
