@@ -442,7 +442,7 @@ article .prose h2 {
 }
 
 .toc-title {
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -458,7 +458,7 @@ article .prose h2 {
 }
 
 .toc-link {
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
   display: block;
   line-height: 1.4;
