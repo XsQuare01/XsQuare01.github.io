@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { categories } from '../../data/categories';
+import { tagStyle } from '../../utils/tagColor';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -40,7 +41,7 @@ const { label, posts } = Astro.props;
           {post.data.tags.length > 0 && (
             <div class="tags">
               {post.data.tags.map((tag) => (
-                <a href={`/tags/${tag}`} class="tag">{tag}</a>
+                <a href={`/tags/${tag}`} class="tag" style={tagStyle(tag)}>{tag}</a>
               ))}
             </div>
           )}

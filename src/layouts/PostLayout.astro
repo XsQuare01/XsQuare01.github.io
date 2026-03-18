@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { tagStyle } from '../utils/tagColor';
 
 interface Heading {
   slug: string;
@@ -67,7 +68,7 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
         {tags.length > 0 && (
           <div class="tags">
             {tags.map((tag) => (
-              <a href={`/tags/${tag}`} class="tag">{tag}</a>
+              <a href={`/tags/${tag}`} class="tag" style={tagStyle(tag)}>{tag}</a>
             ))}
           </div>
         )}
