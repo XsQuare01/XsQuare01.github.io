@@ -11,15 +11,24 @@ const recentPosts = (await getCollection('posts'))
   <div class="prose">
 
     <!-- 섹션 1: 프로필 헤더 -->
-    <section style="margin-bottom: 2.5rem;">
-      <h1 style="font-size: 2rem; margin-bottom: 0.5rem; border: none;">XsQuare01</h1>
-      <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.75rem;">기록하는 개발자</p>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">
-        Seoul &nbsp;·&nbsp;
-        <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
-        &nbsp;·&nbsp;
-        <a href="mailto:mystic6113@naver.com">이메일</a>
-      </p>
+    <section style="margin-bottom: 3.5rem;">
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <img
+          src="https://github.com/XsQuare01.png"
+          alt="XsQuare01 프로필 사진"
+          style="width: 88px; height: 88px; border-radius: 50%; border: 2px solid var(--accent); flex-shrink: 0;"
+        />
+        <div>
+          <h1 style="font-size: 2.6rem; margin-bottom: 0.25rem; border: none;">XsQuare01</h1>
+          <p style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;">기록하는 개발자</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Seoul &nbsp;·&nbsp;
+            <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
+            &nbsp;·&nbsp;
+            <a href="mailto:mystic6113@naver.com">이메일</a>
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- 섹션 2: 기술 스택 -->
