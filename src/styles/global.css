@@ -119,6 +119,8 @@ a:hover { color: var(--accent); }
 
 .sidebar-nav a.active {
   color: var(--accent);
+  border-left: 2px solid var(--accent);
+  padding-left: calc(0.75rem - 2px);
 }
 
 .sidebar-categories {
@@ -224,7 +226,7 @@ a:hover { color: var(--accent); }
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0.75rem;
 }
 
 .post-item {
@@ -257,8 +259,8 @@ a:hover { color: var(--accent); }
 }
 
 .post-item-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text);
   line-height: 1.4;
   transition: color 0.15s;
@@ -279,7 +281,7 @@ a:hover { color: var(--accent); }
 
 .post-item-desc {
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--text-dim);
   line-height: 1.5;
 }
 
