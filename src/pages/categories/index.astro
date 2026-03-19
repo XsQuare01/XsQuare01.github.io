@@ -11,53 +11,70 @@ for (const post of posts) {
     countByCategory[post.data.category] = (countByCategory[post.data.category] ?? 0) + 1;
   }
 }
+
+const activeCategories = categories.filter((cat) => (countByCategory[cat.slug] ?? 0) > 0);
 ---
 
 <BaseLayout title="카테고리">
   <h1 class="page-title">카테고리</h1>
-  <ul class="category-list">
-    {categories
-      .filter((cat) => (countByCategory[cat.slug] ?? 0) > 0)
-      .map((cat) => (
-        <li class="category-item">
-          <a href={`/categories/${cat.slug}`} class="category-link">
-            <span class="category-label">{cat.label}</span>
-            <span class="category-count">{countByCategory[cat.slug]}편</span>
-          </a>
-        </li>
-      ))}
-  </ul>
+  <div class="category-grid">
+    {activeCategories.map((cat) => (
+      <a href={`/categories/${cat.slug}`} class="category-card">
+        <span class="category-name">{cat.label}</span>
+        <span class="category-desc">{cat.description}</span>
+        <span class="category-count">{countByCategory[cat.slug]}편</span>
+      </a>
+    ))}
+  </div>
 </BaseLayout>
 
 <style>
-  .category-list {
-    list-style: none;
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .category-card {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-  }
-  .category-item a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    color: var(--text);
-    transition: all 0.15s;
-  }
-  .category-item a:hover {
+    gap: 0.5rem;
+    padding: 1.25rem;
     background: var(--bg-card);
-    border-color: var(--border);
-    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.25s;
   }
-  .category-label {
+
+  .category-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .category-name {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--text);
   }
-  .category-count {
-    font-size: 0.78rem;
+
+  .category-desc {
+    font-size: 0.8rem;
     color: var(--text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .category-count {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
     font-family: var(--font-mono);
+  }
+
+  @media (max-width: 480px) {
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
