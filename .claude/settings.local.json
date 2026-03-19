@@ -3,7 +3,15 @@
     "allow": [
       "Bash(bash \"C:/Users/bhmun/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.4/scripts/start-server.sh\" --project-dir \"C:/Users/bhmun/XsQuare01.github.io\")",
       "Bash(bash \"C:/Users/bhmun/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.4/skills/brainstorming/scripts/start-server.sh\" --project-dir \"C:/Users/bhmun/XsQuare01.github.io\")",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "Bash(bash \"C:/Users/bhmun/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh\" --project-dir \"C:/Users/bhmun/XsQuare01.github.io\")",
+      "Bash(cat \"C:/Users/bhmun/XsQuare01.github.io/.superpowers/brainstorm/\"*\"/.server-info\")"
     ]
   }
 }
