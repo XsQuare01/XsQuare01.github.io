@@ -22,7 +22,7 @@ const activeCategories = categories.filter((cat) => (countByCategory[cat.slug] ?
       <a href={`/categories/${cat.slug}`} class="category-card">
         <span class="category-name">{cat.label}</span>
         <span class="category-desc">{cat.description}</span>
-        <span class="category-count">{countByCategory[cat.slug]}편</span>
+        <span class="category-count">{countByCategory[cat.slug]} posts</span>
       </a>
     ))}
   </div>
@@ -66,7 +66,7 @@ const activeCategories = categories.filter((cat) => (countByCategory[cat.slug] ?
   }
 
   .category-count {
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--accent);
     font-family: var(--font-mono);
