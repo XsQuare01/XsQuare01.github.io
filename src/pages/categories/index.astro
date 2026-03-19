@@ -53,26 +53,26 @@ const activeCategories = categories.filter((cat) => (countByCategory[cat.slug] ?
   }
 
   .category-name {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text);
   }
 
   .category-desc {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.5;
     flex: 1;
   }
 
   .category-count {
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--accent);
     font-family: var(--font-mono);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     .category-grid {
       grid-template-columns: 1fr;
     }
