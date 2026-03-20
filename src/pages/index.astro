@@ -53,27 +53,20 @@ const recentPosts = (await getCollection('posts'))
     </section>
 
     <!-- 섹션 3: 기술 스택 -->
-    <!--
-      ✏️ 기술 스택 수정 방법:
-      - 배지 추가: 아래 <img> 태그를 복사하고 skillicons.dev URL을 변경하세요.
-      - 아이콘 이름 목록: https://skillicons.dev 참고
-    -->
     <section class="home-section">
       <h2>Tech Stack</h2>
-      <div class="stack-group">
-        <span class="stack-label">주력</span>
-        <div class="stack-icons">
-          <img src="https://skillicons.dev/icons?i=kotlin" height="40" alt="Kotlin" title="Kotlin" />
-          <img src="https://skillicons.dev/icons?i=cpp" height="40" alt="C++" title="C++" />
-          <img src="https://skillicons.dev/icons?i=python" height="40" alt="Python" title="Python" />
+      <div class="stack-list">
+        <div class="stack-row">
+          <span class="stack-label">Main</span>
+          <span class="stack-items">Unity, C#, C++, UI 설계 및 구현</span>
         </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">경험</span>
-        <div class="stack-icons">
-          <img src="https://skillicons.dev/icons?i=ts" height="40" alt="TypeScript" title="TypeScript" />
-          <img src="https://skillicons.dev/icons?i=astro" height="40" alt="Astro" title="Astro" />
-          <img src="https://skillicons.dev/icons?i=git" height="40" alt="Git" title="Git" />
+        <div class="stack-row">
+          <span class="stack-label">Experienced With</span>
+          <span class="stack-items">TypeScript, Python, Git, 웹 프론트엔드/도구 활용</span>
+        </div>
+        <div class="stack-row">
+          <span class="stack-label">Interested In</span>
+          <span class="stack-items">알고리즘, 컴퓨터 사이언스, 클라이언트 구조 설계, 인터랙션 최적화</span>
         </div>
       </div>
     </section>
@@ -178,11 +171,17 @@ const recentPosts = (await getCollection('posts'))
     margin-bottom: 3rem;
   }
 
-  .stack-group {
+  .stack-list {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .stack-row {
+    display: flex;
+    align-items: baseline;
     gap: 1rem;
-    margin-top: 1rem;
   }
 
   .stack-label {
@@ -191,14 +190,14 @@ const recentPosts = (await getCollection('posts'))
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--text-dim);
-    width: 2.5rem;
+    width: 7.5rem;
     flex-shrink: 0;
   }
 
-  .stack-icons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  .stack-items {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
   }
 
   .what-grid {
