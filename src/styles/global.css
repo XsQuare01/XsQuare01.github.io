@@ -290,7 +290,6 @@ a:hover { color: var(--accent); }
   font-size: 0.85rem;
   color: var(--text-dim);
   line-height: 1.55;
-  max-width: 80ch;
 }
 
 /* ── Tags (목록 페이지에서는 채도 낮춤) ── */
