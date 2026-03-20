@@ -22,7 +22,7 @@ const h2Headings = headings.filter((h) => h.depth === 2);
 
 // 읽기 시간 계산 (분)
 const wordCount = post.body?.split(/\s+/).length ?? 0;
-const readingTime = Math.max(1, Math.round(wordCount / 200));
+const readingTime = Math.max(1, Math.round(wordCount / 130));
 ---
 
 <PostLayout
