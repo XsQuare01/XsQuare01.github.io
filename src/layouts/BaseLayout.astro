@@ -29,7 +29,7 @@ for (const post of posts) {
 }
 const topTags = Object.entries(tagCount)
   .sort((a, b) => b[1] - a[1])
-  .slice(0, 12)
+  .slice(0, 8)
   .map(([tag]) => tag);
 const activeCategories = categories.filter((cat) => (categoryCount[cat.slug] ?? 0) > 0);
 

@@ -11,31 +11,61 @@ for (const post of posts) {
   }
 }
 
-const tags = Object.entries(tagCount).sort((a, b) => b[1] - a[1]);
-
-const maxCount = Math.max(...tags.map(([, c]) => c));
-const minCount = Math.min(...tags.map(([, c]) => c));
-
-function getTagSize(count: number): string {
-  if (maxCount === minCount) return '0.9rem';
-  const ratio = (count - minCount) / (maxCount - minCount);
-  const size = 0.78 + ratio * 0.7; // 0.78rem ~ 1.48rem
-  return `${size.toFixed(2)}rem`;
-}
+const tags = Object.entries(tagCount).sort((a, b) => a[0].localeCompare(b[0]));
 ---
 
 <BaseLayout title="태그">
   <h1 class="page-title">태그</h1>
-  <div class="tag-cloud">
+  <div class="tag-grid">
     {tags.map(([tag, count]) => (
-      <a
-        href={`/tags/${tag}`}
-        class="tag"
-        style={`font-size: ${getTagSize(count)}; padding: 0.25rem 0.7rem;`}
-      >
-        {tag}
-        <span style="opacity:0.5; font-size:0.8em"> {count}</span>
+      <a href={`/tags/${tag}`} class="tag-card">
+        <span class="tag-name">{tag}</span>
+        <span class="tag-count">{count} posts</span>
       </a>
     ))}
   </div>
 </BaseLayout>
+
+<style>
+  .tag-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .tag-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.25s;
+  }
+
+  .tag-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .tag-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .tag-count {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 640px) {
+    .tag-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

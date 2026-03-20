@@ -3,7 +3,7 @@ title: "Problem & Solution — Complexity Theory의 수학적 정의"
 date: 2026-03-19
 description: "Complexity Theory에서 '문제'와 '풀이'는 어떻게 정의될까? Decision Problem, Language, 튜링 머신을 통해 풀리지 않는 문제가 왜 대부분인지를 살펴본다."
 tags: ["Mathematics", "Complexity Theory"]
-category: math
+category: cryptography
 ---
 
 > Complexity Theory에서 '문제'와 '풀이'는 우리가 일상적으로 쓰는 의미와 다르게 정의된다. 이 글에서는 그 수학적 정의를 따라가며, 풀 수 있는 문제보다 풀 수 없는 문제가 압도적으로 많다는 사실을 확인한다.
@@ -12,7 +12,7 @@ category: math
 
 ## Decision Problem
 
-**답이 yes 또는 no인 문제**를 Decision Problem이라 한다.
+**답이 yes 또는 no인 문제** 를 Decision Problem이라 한다.
 
 Complexity Theory에서는 모든 문제를 Decision Problem으로 다룬다. 이유는 두 가지다.
 

@@ -8,87 +8,90 @@ const recentPosts = (await getCollection('posts'))
 ---
 
 <BaseLayout title="홈">
-  <div class="prose">
+  <div class="prose home">
 
     <!-- 섹션 1: 프로필 헤더 -->
-    <section style="margin-bottom: 3.5rem;">
-      <div style="display: flex; align-items: center; gap: 1.5rem;">
-        <img
-          src="https://github.com/XsQuare01.png"
-          alt="XsQuare01 프로필 사진"
-          style="width: 88px; height: 88px; border-radius: 50%; border: 2px solid var(--accent); flex-shrink: 0;"
-        />
-        <div>
-          <h1 style="font-size: 2.6rem; margin-bottom: 0.25rem; border: none;">XsQuare01</h1>
-          <p style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;">기록하는 개발자</p>
-          <p style="font-size: 0.9rem; color: var(--text-muted);">
-            Seoul &nbsp;·&nbsp;
-            <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
-            &nbsp;·&nbsp;
-            <a href="mailto:mystic6113@naver.com">이메일</a>
-          </p>
+    <section class="home-hero">
+      <img
+        src="https://github.com/XsQuare01.png"
+        alt="XsQuare01 프로필 사진"
+        class="home-avatar"
+      />
+      <div class="home-intro">
+        <h1 class="home-name">XsQuare01</h1>
+        <p class="home-tagline">게임 클라이언트와 UI 구현에 집중하는 개발자</p>
+        <p class="home-desc">
+          사용자 경험이 자연스럽게 느껴지는 화면과 인터랙션을 만드는 데 관심이 있습니다.<br />
+          Unity 기반 클라이언트 개발, UI 설계와 구현, 그리고 문제 해결을 위한 CS 학습 과정을 기록합니다.
+        </p>
+        <p class="home-links">
+          Seoul &nbsp;·&nbsp;
+          <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:mystic6113@naver.com">이메일</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 섹션 2: What I Do -->
+    <section class="home-section">
+      <h2>What I Do</h2>
+      <div class="what-grid">
+        <div class="what-card">
+          <h3 class="what-title">게임 클라이언트 개발</h3>
+          <p class="what-desc">플레이 경험을 구성하는 기능과 흐름을 구현합니다.<br />입력, 상태 변화, 인터랙션, 연출이 자연스럽게 이어지도록 구조를 고민합니다.</p>
+        </div>
+        <div class="what-card">
+          <h3 class="what-title">UI / UX 구현</h3>
+          <p class="what-desc">화면을 단순히 배치하는 데서 끝내지 않고,<br />사용자가 보기 쉽고 쓰기 편한 흐름을 코드와 연출로 풀어내는 데 집중합니다.</p>
+        </div>
+        <div class="what-card">
+          <h3 class="what-title">CS / 알고리즘 기록</h3>
+          <p class="what-desc">구현의 깊이를 만들기 위해 컴퓨터 사이언스와 알고리즘을 꾸준히 공부합니다.<br />문제를 푸는 과정과 개념을 이해한 방식까지 함께 정리합니다.</p>
         </div>
       </div>
     </section>
 
-    <!-- 섹션 2: 기술 스택 -->
+    <!-- 섹션 3: 기술 스택 -->
     <!--
       ✏️ 기술 스택 수정 방법:
-      - 배지 추가: 아래 <img> 태그를 복사하고 shields.io URL을 변경하세요.
-      - URL 형식: https://img.shields.io/badge/{이름}-{색상hex}?style=flat&logo={로고이름}&logoColor=white
-      - 로고 이름 목록: https://simpleicons.org 에서 검색 (영문 소문자, 공백은 제거)
-      - 배지 삭제: 해당 <img> 태그 한 줄을 지우면 됩니다.
+      - 배지 추가: 아래 <img> 태그를 복사하고 skillicons.dev URL을 변경하세요.
+      - 아이콘 이름 목록: https://skillicons.dev 참고
     -->
-    <section style="margin-bottom: 3.5rem;">
+    <section class="home-section">
       <h2>Tech Stack</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
-        <img src="https://skillicons.dev/icons?i=kotlin" height="48" alt="Kotlin" title="Kotlin" />
-        <img src="https://skillicons.dev/icons?i=python" height="48" alt="Python" title="Python" />
-        <img src="https://skillicons.dev/icons?i=cpp" height="48" alt="C++" title="C++" />
-        <img src="https://skillicons.dev/icons?i=astro" height="48" alt="Astro" title="Astro" />
-        <img src="https://skillicons.dev/icons?i=ts" height="48" alt="TypeScript" title="TypeScript" />
-        <img src="https://skillicons.dev/icons?i=git" height="48" alt="Git" title="Git" />
+      <div class="stack-group">
+        <span class="stack-label">주력</span>
+        <div class="stack-icons">
+          <img src="https://skillicons.dev/icons?i=kotlin" height="40" alt="Kotlin" title="Kotlin" />
+          <img src="https://skillicons.dev/icons?i=cpp" height="40" alt="C++" title="C++" />
+          <img src="https://skillicons.dev/icons?i=python" height="40" alt="Python" title="Python" />
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">경험</span>
+        <div class="stack-icons">
+          <img src="https://skillicons.dev/icons?i=ts" height="40" alt="TypeScript" title="TypeScript" />
+          <img src="https://skillicons.dev/icons?i=astro" height="40" alt="Astro" title="Astro" />
+          <img src="https://skillicons.dev/icons?i=git" height="40" alt="Git" title="Git" />
+        </div>
       </div>
     </section>
 
-    <!-- 섹션 3: GitHub Stats + solved.ac -->
-    <section style="margin-bottom: 3.5rem;">
-      <h2>GitHub Stats</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
-        <img
-          src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
-          alt="XsQuare01's GitHub Stats"
-          loading="lazy"
-          height="160"
-        />
-        <img
-          src="https://github-readme-stats.vercel.app/api/top-langs/?username=XsQuare01&layout=compact&theme=dark&hide_border=true&bg_color=0f1117"
-          alt="Top Languages"
-          loading="lazy"
-          height="160"
-        />
-        <img
-          src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
-          alt="solved.ac 티어"
-          loading="lazy"
-          height="160"
-        />
+    <!-- 섹션 3: 최근 포스트 -->
+    <section class="home-section">
+      <div class="section-header">
+        <h2>Recent Posts</h2>
+        <a href="/blog" class="view-all">대표 글 보기 →</a>
       </div>
-    </section>
-
-    <!-- 섹션 4: 최근 포스트 -->
-    <section style="margin-bottom: 3.5rem;">
-      <h2>Recent Posts</h2>
-      <ul class="post-list post-list--bordered" style="margin-top: 1.5rem;">
+      <ul class="post-list post-list--bordered" style="margin-top: 1.25rem;">
         {recentPosts.map((post) => (
           <li class="post-item">
             <a href={`/blog/${post.id}`} class="post-item-link" aria-label={post.data.title}></a>
             <span class="post-item-date">
               {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
-            <span class="post-item-title">
-              {post.data.title}
-            </span>
+            <span class="post-item-title">{post.data.title}</span>
             {post.data.description && (
               <p class="post-item-desc">{post.data.description}</p>
             )}
@@ -97,15 +100,183 @@ const recentPosts = (await getCollection('posts'))
       </ul>
     </section>
 
-    <!-- 섹션 5: 프로젝트 & 관심사 -->
-    <section style="margin-bottom: 3.5rem;">
-      <h2>Projects & Interests</h2>
-      <ul style="margin-top: 0.75rem;">
-        <li><strong>이 블로그</strong> — Astro로 만든 개인 기술 블로그</li>
-        <li><strong>암호학</strong> — 수학적 기반의 암호 이론 공부</li>
-        <li><strong>알고리즘</strong> — 문제 해결과 복잡도 이론</li>
-      </ul>
+    <!-- 섹션 4: GitHub Stats -->
+    <section class="home-section">
+      <h2>GitHub Stats</h2>
+      <div class="stats-row">
+        <img
+          src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
+          alt="XsQuare01's GitHub Stats"
+          loading="lazy"
+          height="150"
+        />
+        <img
+          src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
+          alt="solved.ac 티어"
+          loading="lazy"
+          height="150"
+        />
+      </div>
     </section>
 
   </div>
 </BaseLayout>
+
+<style>
+  .home-hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .home-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .home-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .home-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    border: none;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .home-tagline {
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .home-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0.25rem 0 0;
+  }
+
+  .home-links {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  .home-section {
+    margin-bottom: 3rem;
+  }
+
+  .stack-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .stack-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    width: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .stack-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .what-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(74, 85, 104, 0.35);
+    border-radius: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .what-card:hover {
+    border-color: var(--accent);
+  }
+
+  .what-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .what-desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .what-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0;
+  }
+
+  .section-header h2 {
+    margin: 0;
+  }
+
+  .view-all {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .view-all:hover {
+    color: var(--accent);
+  }
+
+  .stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .home-hero {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>

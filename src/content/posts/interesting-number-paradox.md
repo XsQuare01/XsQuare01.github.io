@@ -3,7 +3,7 @@ title: "Interesting Number Paradox"
 date: 2026-03-16
 description: "수학적 증명에서 '정의(definition)'의 엄밀함이 왜 중요한지를 보여주는 패러독스. 암호학 Complexity Theory 도입부."
 tags: ["Cryptography", "Complexity Theory", "Mathematics"]
-category: math
+category: cryptography
 ---
 
 > 이 패러독스는 수학적 증명에서 '정의(definition)'의 엄밀함이 왜 중요한지를 보여주는 예시다. Complexity Theory의 도입부에서 다루는 주제이며, 암호학에서도 수학적 엄밀성은 핵심 전제이기 때문에 이 개념을 먼저 짚고 넘어간다.
@@ -63,6 +63,6 @@ $$\therefore \text{ 귀류법에 의해, 모든 자연수는 흥미롭다.}$$
 - 하지만, 이 과정에서 모순이 발생한다.
   - $x$는 OEIS에 포함되어 있지 않기에, '흥미로운' 자연수이고, 이로 인해 OEIS에 포함되어야 한다.
   - $x$는 '흥미롭지 않은 수'이기에, OEIS에 포함되어서는 안된다.
-- 따라서, OEIS는 모든 '흥미로운 수열'을 가지고 있지 않다. 이는 **OEIS의 완전성(completeness)이 불가능함을 보여주는 역설**이다.
+- 따라서, OEIS는 모든 '흥미로운 수열'을 가지고 있지 않다. 이는 **OEIS의 완전성(completeness)이 불가능함을 보여주는 역설** 이다.
 
 > **한계:** OEIS는 개별 숫자가 아닌 수열(sequence) 단위로 관리된다. 따라서 "숫자 $n$이 흥미롭다"를 OEIS 등재 여부로 정의하는 것은 엄밀하지 않다. 특정 숫자는 여러 수열에 동시에 속할 수 있으며, OEIS에 없다고 해서 흥미롭지 않다고 단언할 수 없다.
