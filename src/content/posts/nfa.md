@@ -1,6 +1,6 @@
 ---
 title: "NFA — 비결정론적 유한 오토마타"
-date: 2026-03-20
+date: 2026-03-20T09:00:00
 description: "DFA를 확장한 계산 모델인 NFA의 구조와 accept 조건을 살펴보고, Powerset Construction을 통해 NFA와 DFA의 계산 능력이 동일함을 설명한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: algorithm
