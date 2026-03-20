@@ -1,6 +1,6 @@
 ---
 title: "Turing Machine — 계산의 극한"
-date: 2026-03-22T09:00:00
+date: 2026-03-21T09:00:00
 description: "현대 컴퓨터의 이론적 모델인 튜링 머신의 구조를 살펴보고, 2-Tape DTM, Universal Turing Machine, 그리고 DTM과 NTM의 계산 능력이 동일함을 정리한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: cryptography
