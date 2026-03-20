@@ -33,6 +33,19 @@ const recentPosts = (await getCollection('posts'))
       </div>
     </section>
 
+    <!-- 섹션: About Me -->
+    <section class="home-section">
+      <h2>About Me</h2>
+      <p class="about-text">
+        저는 사용자 경험을 직접 만드는 클라이언트 개발자를 지향합니다.<br />
+        특히 Unity 기반 개발에서 UI와 상호작용, 화면 흐름, 구조 설계에 관심이 많습니다.
+      </p>
+      <p class="about-text">
+        이 블로그에는 단순한 결과만 남기지 않으려고 합니다.<br />
+        왜 이런 구조를 선택했는지, 어떤 문제를 만났고 어떻게 해결했는지, 그리고 그 과정에서 무엇을 배웠는지를 기록합니다.
+      </p>
+    </section>
+
     <!-- 섹션 2: What I Do -->
     <section class="home-section">
       <h2>What I Do</h2>
@@ -277,6 +290,13 @@ const recentPosts = (await getCollection('posts'))
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 1rem;
+  }
+
+  .about-text {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
   }
 
   @media (max-width: 640px) {
