@@ -638,6 +638,10 @@ article .prose h2 {
 }
 
 .section-label-deep {
+  font-size: 0.82rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
   color: var(--accent-3);
   background: rgba(167, 139, 250, 0.1);
   border: 1px solid rgba(167, 139, 250, 0.3);
