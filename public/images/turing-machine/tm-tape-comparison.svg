@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 220" width="780" height="220">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
+    </marker>
+  </defs>
+  <rect width="780" height="220" fill="#0f1117" rx="10"/>
+  <text x="390" y="20" text-anchor="middle" fill="#6b7a99" font-size="12" font-family="system-ui,-apple-system,sans-serif">1-Tape DTM vs 2-Tape DTM</text>
+  <rect x="10" y="30" width="355" height="175" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="10" y="30" width="355" height="38" rx="8" fill="rgba(96,165,250,0.15)"/>
+  <text x="187" y="55" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700" font-family="system-ui,-apple-system,sans-serif">1-Tape DTM</text>
+  <rect x="25" y="90" width="52" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="51" y="115" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="77" y="90" width="52" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="103" y="115" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="129" y="90" width="52" height="40" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="155" y="115" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="181" y="90" width="52" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="207" y="115" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="233" y="90" width="52" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="259" y="115" text-anchor="middle" fill="#4a5568" font-size="12" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <text x="187" y="145" text-anchor="middle" fill="#60a5fa" font-size="11" font-family="system-ui,-apple-system,sans-serif">Tape 1</text>
+  <text x="187" y="168" text-anchor="middle" fill="#6b7a99" font-size="11" font-family="system-ui,-apple-system,sans-serif">한 방향으로 무한한 테이프 1개</text>
+  <text x="187" y="185" text-anchor="middle" fill="#6b7a99" font-size="11" font-family="system-ui,-apple-system,sans-serif">두 구역으로 나눠 사용 가능</text>
+  <rect x="415" y="30" width="355" height="175" rx="8" fill="#1a2035" stroke="#a78bfa" stroke-width="1.5"/>
+  <rect x="415" y="30" width="355" height="38" rx="8" fill="rgba(167,139,250,0.15)"/>
+  <text x="592" y="55" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="700" font-family="system-ui,-apple-system,sans-serif">2-Tape DTM</text>
+  <rect x="430" y="80" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="455" y="99" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="480" y="80" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="505" y="99" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="530" y="80" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="555" y="99" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="580" y="80" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="605" y="99" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="630" y="80" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="655" y="99" text-anchor="middle" fill="#4a5568" font-size="12" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <text x="592" y="122" text-anchor="middle" fill="#a78bfa" font-size="10" font-family="system-ui,-apple-system,sans-serif">Tape 1 (입력)</text>
+  <rect x="430" y="130" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="455" y="149" text-anchor="middle" fill="#4a5568" font-size="12" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <rect x="480" y="130" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="505" y="149" text-anchor="middle" fill="#4a5568" font-size="12" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <rect x="530" y="130" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="555" y="149" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">a</text>
+  <rect x="580" y="130" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="605" y="149" text-anchor="middle" fill="#4a5568" font-size="12" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <rect x="630" y="130" width="50" height="28" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="655" y="149" text-anchor="middle" fill="#4a5568" font-size="12" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <text x="592" y="170" text-anchor="middle" fill="#a78bfa" font-size="10" font-family="system-ui,-apple-system,sans-serif">Tape 2 (작업)</text>
+  <text x="390" y="210" text-anchor="middle" fill="#4ade80" font-size="12" font-weight="700" font-family="system-ui,-apple-system,sans-serif">계산 능력: 동일</text>
+  <line x1="390" y1="35" x2="390" y2="195" stroke="#4a5568" stroke-width="1" stroke-dasharray="4,3"/>
+</svg>

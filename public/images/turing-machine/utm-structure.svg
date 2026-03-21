@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 230" width="780" height="230">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
+    </marker>
+  </defs>
+  <rect width="780" height="230" fill="#0f1117" rx="10"/>
+  <text x="390" y="20" text-anchor="middle" fill="#6b7a99" font-size="12" font-family="system-ui,-apple-system,sans-serif">Universal Turing Machine (UTM) — 구조</text>
+  <text x="107" y="35" text-anchor="middle" fill="#6b7a99" font-size="11" font-family="system-ui,-apple-system,sans-serif">입력</text>
+  <rect x="10" y="45" width="195" height="58" rx="8" fill="#1a2035" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="107" y="68" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700" font-family="system-ui,-apple-system,sans-serif">Tape 1</text>
+  <text x="107" y="88" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">기계 M의 rule set</text>
+  <text x="107" y="103" text-anchor="middle" fill="#6b7a99" font-size="10" font-family="system-ui,-apple-system,sans-serif">(이진 인코딩)</text>
+  <rect x="10" y="120" width="195" height="58" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="107" y="143" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="700" font-family="system-ui,-apple-system,sans-serif">Tape 2</text>
+  <text x="107" y="163" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">입력 문자열 w</text>
+  <text x="107" y="178" text-anchor="middle" fill="#6b7a99" font-size="10" font-family="system-ui,-apple-system,sans-serif">(M의 초기 상태 포함)</text>
+  <line x1="205" y1="112" x2="253" y2="112" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="255" y="45" width="270" height="140" rx="10" fill="#1a2035" stroke="#a78bfa" stroke-width="2"/>
+  <rect x="255" y="45" width="270" height="40" rx="10" fill="rgba(167,139,250,0.15)"/>
+  <text x="390" y="72" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="700" font-family="system-ui,-apple-system,sans-serif">Universal Turing Machine</text>
+  <text x="390" y="100" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">현재 상태 + 심볼 읽기</text>
+  <text x="390" y="120" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">rule set에서 매칭 규칙 탐색</text>
+  <text x="390" y="140" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">해당 전이 실행</text>
+  <text x="390" y="163" text-anchor="middle" fill="#a78bfa" font-size="12" font-family="system-ui,-apple-system,sans-serif">→ M을 완전히 시뮬레이션</text>
+  <line x1="525" y1="112" x2="573" y2="112" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="575" y="72" width="195" height="80" rx="8" fill="#1a2035" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="672" y="96" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700" font-family="system-ui,-apple-system,sans-serif">출력</text>
+  <text x="672" y="118" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">M(w)의 실행 결과</text>
+  <text x="672" y="138" text-anchor="middle" fill="#4ade80" font-size="12" font-family="system-ui,-apple-system,sans-serif">(Accept / Reject)</text>
+  <text x="390" y="210" text-anchor="middle" fill="#6b7a99" font-size="11" font-family="system-ui,-apple-system,sans-serif">Tape 1을 M'의 rule set으로 교체하면 어떤 기계든 시뮬레이션 가능</text>
+</svg>
