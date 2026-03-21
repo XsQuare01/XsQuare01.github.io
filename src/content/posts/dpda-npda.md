@@ -73,7 +73,7 @@ DPDA가 $L_7$을 accept한다고 가정하자.
 
 | | DPDA | NPDA |
 |---|---|---|
-| 비결정성 | ❌ 결정론적 | ✅ 비결정론적 |
+| 비결정성 | 결정론적 | 비결정론적 |
 | 인식 가능한 언어 | Deterministic CFL | Context-Free Languages |
 | 대표 예시 | L5: $0^i 1^i$ | L5, L7: $yy^R$ |
 | 풀 수 없는 언어 | L7: $yy^R$ | — |
