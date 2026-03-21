@@ -10,6 +10,7 @@ interface Heading {
 interface PostLink {
   slug: string;
   title: string;
+  description?: string;
 }
 
 interface Props {
@@ -85,12 +86,14 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
           <a href={`/blog/${nextPost.slug}`} class="post-nav-item prev">
             <span class="post-nav-label">← 다음 글</span>
             <span class="post-nav-title">{nextPost.title}</span>
+            {nextPost.description && <span class="post-nav-desc">{nextPost.description}</span>}
           </a>
         ) : <div />}
         {prevPost ? (
           <a href={`/blog/${prevPost.slug}`} class="post-nav-item next">
             <span class="post-nav-label">이전 글 →</span>
             <span class="post-nav-title">{prevPost.title}</span>
+            {prevPost.description && <span class="post-nav-desc">{prevPost.description}</span>}
           </a>
         ) : <div />}
       </nav>

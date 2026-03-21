@@ -32,8 +32,8 @@ const readingTime = Math.max(1, Math.round(wordCount / 130));
   tags={post.data.tags}
   headings={h2Headings}
   readingTime={readingTime}
-  prevPost={prevPost ? { slug: prevPost.id, title: prevPost.data.title } : undefined}
-  nextPost={nextPost ? { slug: nextPost.id, title: nextPost.data.title } : undefined}
+  prevPost={prevPost ? { slug: prevPost.id, title: prevPost.data.title, description: prevPost.data.description } : undefined}
+  nextPost={nextPost ? { slug: nextPost.id, title: nextPost.data.title, description: nextPost.data.description } : undefined}
 >
   <Content />
 </PostLayout>
