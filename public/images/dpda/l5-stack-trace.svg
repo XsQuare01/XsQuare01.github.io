@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 268" width="880" height="268">
+  <rect width="880" height="268" fill="#0f1117" rx="10"/>
+  <text x="440" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">L₅ = { 0ⁱ 1ⁱ } · 입력 "0011" 처리 과정</text>
+
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
+    </marker>
+  </defs>
+
+  <line x1="173" y1="137" x2="189" y2="137" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="343" y1="137" x2="359" y2="137" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="513" y1="137" x2="529" y2="137" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="683" y1="137" x2="699" y2="137" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- COL 1: 초기 (cx=96) -->
+  <rect x="22" y="30" width="148" height="214" rx="6" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="96" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#6b7a99" letter-spacing="1">초기</text>
+  <rect x="38" y="58" width="116" height="26" rx="4" fill="rgba(56,189,248,0.07)"/>
+  <text x="96" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="15" font-weight="700" fill="#f0f6fc">0011</text>
+  <text x="96" y="100" text-anchor="middle" font-size="8" font-weight="700" fill="#4a5568" letter-spacing="1">STACK</text>
+  <rect x="61" y="106" width="70" height="88" rx="3" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="96" y="154" text-anchor="middle" font-size="9" fill="#4a5568" font-style="italic">비어있음</text>
+  <rect x="38" y="208" width="116" height="20" rx="3" fill="rgba(107,122,153,0.10)"/>
+  <text x="96" y="222" text-anchor="middle" font-size="9" fill="#6b7a99">—</text>
+
+  <!-- COL 2: Step 1 push 0 (cx=266) -->
+  <rect x="192" y="30" width="148" height="214" rx="6" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="266" y="52" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a99" letter-spacing="1">STEP 1</text>
+  <rect x="208" y="58" width="116" height="26" rx="4" fill="rgba(56,189,248,0.07)"/>
+  <text x="266" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="15" font-weight="700" fill="#f0f6fc">011</text>
+  <text x="266" y="100" text-anchor="middle" font-size="8" font-weight="700" fill="#4a5568" letter-spacing="1">STACK</text>
+  <rect x="231" y="106" width="70" height="88" rx="3" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="235" y="168" width="62" height="24" rx="3" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="1"/>
+  <text x="266" y="184" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="#38bdf8">0</text>
+  <rect x="208" y="208" width="116" height="20" rx="3" fill="rgba(56,189,248,0.12)"/>
+  <text x="266" y="222" text-anchor="middle" font-size="9" fill="#38bdf8" font-weight="600">push 0</text>
+
+  <!-- COL 3: Step 2 push 0 (cx=436) -->
+  <rect x="362" y="30" width="148" height="214" rx="6" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="436" y="52" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a99" letter-spacing="1">STEP 2</text>
+  <rect x="378" y="58" width="116" height="26" rx="4" fill="rgba(56,189,248,0.07)"/>
+  <text x="436" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="15" font-weight="700" fill="#f0f6fc">11</text>
+  <text x="436" y="100" text-anchor="middle" font-size="8" font-weight="700" fill="#4a5568" letter-spacing="1">STACK</text>
+  <rect x="401" y="106" width="70" height="88" rx="3" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="405" y="142" width="62" height="24" rx="3" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="1"/>
+  <text x="436" y="158" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="#38bdf8">0</text>
+  <rect x="405" y="168" width="62" height="24" rx="3" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="1" opacity="0.75"/>
+  <text x="436" y="184" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="#38bdf8" opacity="0.75">0</text>
+  <rect x="378" y="208" width="116" height="20" rx="3" fill="rgba(56,189,248,0.12)"/>
+  <text x="436" y="222" text-anchor="middle" font-size="9" fill="#38bdf8" font-weight="600">push 0</text>
+
+  <!-- COL 4: Step 3 pop (cx=606) -->
+  <rect x="532" y="30" width="148" height="214" rx="6" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="606" y="52" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a99" letter-spacing="1">STEP 3</text>
+  <rect x="548" y="58" width="116" height="26" rx="4" fill="rgba(56,189,248,0.07)"/>
+  <text x="606" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="15" font-weight="700" fill="#f0f6fc">1</text>
+  <text x="606" y="100" text-anchor="middle" font-size="8" font-weight="700" fill="#4a5568" letter-spacing="1">STACK</text>
+  <rect x="571" y="106" width="70" height="88" rx="3" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="575" y="168" width="62" height="24" rx="3" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="1"/>
+  <text x="606" y="184" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="#38bdf8">0</text>
+  <rect x="548" y="208" width="116" height="20" rx="3" fill="rgba(167,139,250,0.12)"/>
+  <text x="606" y="222" text-anchor="middle" font-size="9" fill="#a78bfa" font-weight="600">pop</text>
+
+  <!-- COL 5: Step 4 Accept (cx=776) -->
+  <rect x="702" y="30" width="148" height="214" rx="6" fill="#1a2035" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="776" y="52" text-anchor="middle" font-size="9" font-weight="700" fill="#6b7a99" letter-spacing="1">STEP 4</text>
+  <rect x="718" y="58" width="116" height="26" rx="4" fill="rgba(74,222,128,0.07)"/>
+  <text x="776" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="700" fill="#a0aec0">(끝)</text>
+  <text x="776" y="100" text-anchor="middle" font-size="8" font-weight="700" fill="#4a5568" letter-spacing="1">STACK</text>
+  <rect x="741" y="106" width="70" height="88" rx="3" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="776" y="154" text-anchor="middle" font-size="9" fill="#4a5568" font-style="italic">비어있음</text>
+  <rect x="718" y="208" width="116" height="20" rx="3" fill="rgba(74,222,128,0.15)"/>
+  <text x="776" y="222" text-anchor="middle" font-size="9" fill="#4ade80" font-weight="700">✓ Accept</text>
+</svg>
