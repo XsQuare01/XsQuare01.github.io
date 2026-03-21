@@ -8,6 +8,15 @@ category: cryptography
 
 > DFA는 계산 이론에서 가장 단순한 형태의 계산 모델이다. 튜링 머신을 극도로 제한한 이 기계는 어떤 문제를 풀 수 있고, 어떤 문제를 풀 수 없을까?
 
+<div class="callout">
+<div class="callout-title">직관적으로 먼저 이해하기</div>
+<ul>
+<li>DFA는 <strong>테이프를 딱 한 번, 왼쪽에서 오른쪽으로만</strong> 읽는다. 되돌아갈 수 없다.</li>
+<li>메모리는 오직 <strong>현재 상태(state)</strong> 하나뿐이다. "지금까지 무엇을 봤는지"를 상태로만 기억한다.</li>
+<li>입력을 다 읽은 뒤 <strong>Accepting State에 있으면 yes</strong>, 아니면 no를 출력한다.</li>
+</ul>
+</div>
+
 DFA(Deterministic Finite Automata)는 튜링 머신을 단순화한 자동 기계로, 상태를 저장하는 state machine이다. 계산 이론에서 DFA는 가장 제한적인 계산 모델이며, 이를 통해 "어떤 문제가 DFA로 해결 가능한가?"라는 질문에 답할 수 있다.
 
 ---
@@ -48,13 +57,14 @@ $$L_1 = \{0, 00, 10, 010, \ldots\}$$
 
 마지막 비트가 0인 문자열, 즉 짝수를 나타내는 이진 문자열의 집합이다. 이에 대한 DFA는 다음과 같다.
 
-![L1 DFA](/images/dfa/L1.jpeg)
+![L1 DFA](/images/dfa/L1.svg)
 
-- 맨 왼쪽의 화살표는 초기 상태($\lambda$)를 나타낸다.
-- edge 위의 숫자는 해당 입력을 의미한다.
-- **Accepting state** 는 원을 2개로 표시한다.
+- **→** 는 초기 상태를 나타낸다.
+- edge 위의 숫자는 해당 입력 Symbol을 의미한다.
+- **이중 원 = Accepting State**: 이 상태에서 입력이 끝나면 yes를 출력한다.
+- `q_even`은 "마지막으로 읽은 비트가 0"인 상태, `q_odd`는 "마지막으로 읽은 비트가 1"인 상태다.
 
-입력 `110`(6, 짝수)에 대한 실행 예시:
+**입력 `110`(6, 짝수)에 대한 실행 trace:**
 
 | 단계 | 현재 상태 | 읽은 문자 | 다음 상태 |
 |---|---|---|---|
@@ -72,7 +82,9 @@ $$L_3 = \{101, 0101, 01010, 1101, \ldots\}$$
 
 부분 문자열로 `101`을 포함하는 모든 문자열의 집합이다. 이에 대한 DFA는 다음과 같다.
 
-![L3 DFA](/images/dfa/L3.png)
+![L3 DFA](/images/dfa/L3.svg)
+
+각 상태는 "지금까지 읽은 입력에서 `101`의 prefix를 얼마나 맞췄는가"를 나타낸다. q₃에 도달하면 `101`을 찾은 것이므로 이후 입력에 관계없이 accept 상태를 유지한다.
 
 ---
 
@@ -81,9 +93,9 @@ $$L_3 = \{101, 0101, 01010, 1101, \ldots\}$$
 - $\lambda \in L_4$ ($\because\ i = j = 0$)
 - 0이 임의의 횟수 나온 뒤 1이 임의의 횟수 나오는 문자열의 집합이다.
 
-$$L_4 \text{의 DFA:}$$
+![L4 DFA](/images/dfa/L4.svg)
 
-![L4 DFA](/images/dfa/L4.png)
+q₀와 q₁이 모두 Accepting State인 이유: 0만 나온 상태(q₀)도, 0 다음에 1이 나온 상태(q₁)도 모두 L₄에 속한다. `10`이 등장하는 순간 L₄ 조건을 위반하므로 Dead State(q_d)로 이동한다.
 
 ---
 
@@ -91,7 +103,7 @@ $$L_4 \text{의 DFA:}$$
 
 $$L_4' = \{x \mid x \text{는 '10'을 포함한다}\}$$
 
-![L4' DFA](/images/dfa/L4prime.png)
+![L4' DFA](/images/dfa/L4prime.svg)
 
 이 DFA를 자세히 보면 L4의 DFA를 뒤집은 것과 유사하다.
 
@@ -109,12 +121,12 @@ L4에서는 앞에 0이 몇 개 나오든 상관없었지만, L5에서는 0이 1
 
 따라서 DFA로 일부만 표현하면 다음과 같다.
 
-![L5 DFA (일부)](/images/dfa/L5.png)
+![L5 DFA (일부)](/images/dfa/L5.svg)
 
 1. $\lambda$는 L5에 속한다 ($i = 0$).
-2. 0이 입력되면, 다음에 반드시 1이 입력되어야 한다.
+2. 0이 입력되면, 다음에 반드시 같은 수의 1이 입력되어야 한다.
    - 1이 들어오면 accept.
-   - 그 이후 추가 입력이 오면 reject (왼쪽 dead state로 이동).
+   - 그 이후 추가 입력이 오면 reject (dead state로 이동).
 3. 0이 한 번 더 들어오면, "0이 1개인 상태"와 "0이 2개인 상태"는 다른 state여야 한다.
    - 전자는 이후 1이 한 번 나와야 accept, 후자는 두 번 나와야 accept하기 때문이다.
 4. 이 과정을 반복하면 Machine의 크기가 무한히 커진다.
@@ -139,7 +151,7 @@ $q_1, q_2, \ldots, q_{n+1}$은 총 $n+1$개이지만 상태는 $n$개뿐이다. 
 
 $$q_1 \xrightarrow{i_1} \cdots \xrightarrow{i_l} r_k \xrightarrow{i_m} \cdots \xrightarrow{i_o} r_k \xrightarrow{i_p} \cdots \xrightarrow{i_n} q_f$$
 
-$r_k$에서 $r_k$로 돌아오는 구간을 제거하거나 반복해도 여전히 $q_f$ (accepting state)에 도달할 수 있다. L3의 DFA를 예로 들면, $q_3 \to q_1$로 돌아가는 cycle이 있어, 이 구간을 생략하거나 반복해도 accepting state에 도달한다.
+$r_k$에서 $r_k$로 돌아오는 구간을 제거하거나 반복해도 여전히 $q_f$ (accepting state)에 도달할 수 있다. L3의 DFA를 예로 들면, q₁의 self-loop(1→q₁)가 cycle이 되어, 이 구간을 생략하거나 반복해도 accepting state에 도달한다.
 
 ### Pumping Lemma
 
@@ -188,6 +200,15 @@ $$\therefore \text{DFA로는 L5를 풀 수 없다.}$$
 | L3: '101' 포함 | ✅ | 유한 상태로 패턴 추적 가능 |
 | L4: 0* 1* | ✅ | '10' 포함 여부 하나로 판별 |
 | L5: 0^i 1^i | ❌ | 0의 개수를 유한 상태로 기억 불가 |
+
+<div class="callout callout-key">
+<div class="callout-title">핵심 한계: DFA는 셀 수 없다</div>
+<ul>
+<li>DFA는 유한한 상태(finite state)만 가진다. 상태의 수가 고정되면, 그 이상의 정보를 기억할 수 없다.</li>
+<li>"0이 몇 개였는지" 같은 <strong>무제한 카운팅</strong>이 필요한 문제는 DFA로 풀 수 없다.</li>
+<li>이것이 Class DFA의 본질적인 한계다. 더 강력한 모델(PDA, TM 등)이 필요한 이유이기도 하다.</li>
+</ul>
+</div>
 
 ---
 
