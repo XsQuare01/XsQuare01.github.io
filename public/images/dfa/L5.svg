@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 285" width="720" height="285">
   <rect width="720" height="285" fill="#0f1117" rx="10"/>
   <text x="360" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">L₅ DFA (일부) — 0ⁱ1ⁱ: 상태가 무한히 필요하다</text>
-
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
       <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
@@ -10,97 +9,53 @@
       <polygon points="0,0 7,4 0,8" fill="#f87171"/>
     </marker>
   </defs>
-
-  <!-- Dead (reject) state at (620, 75) -->
   <circle cx="620" cy="75" r="28" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
   <text x="620" y="71" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">q_d</text>
   <text x="620" y="85" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f87171">reject</text>
-  <!-- Dead self-loop -->
   <path d="M 607,47 C 576,8 668,8 635,47" fill="none" stroke="#f87171" stroke-width="1.2" marker-end="url(#arr-red)"/>
   <text x="620" y="8" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">0,1</text>
-
-  <!-- Initial arrow -->
   <line x1="22" y1="75" x2="50" y2="75" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-
-  <!-- q₀ (accept, i=0, λ) at (82, 75) -->
   <circle cx="82" cy="75" r="28" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="82" cy="75" r="20" fill="none" stroke="#4ade80" stroke-width="1.2"/>
   <text x="82" y="71" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">q₀</text>
   <text x="82" y="84" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">λ ★</text>
-
-  <!-- q₁ (after one 0) at (230, 75) -->
   <circle cx="230" cy="75" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
   <text x="230" y="71" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q₁</text>
   <text x="230" y="84" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">0 하나</text>
-
-  <!-- q₂ (after two 0s) at (378, 75) -->
   <circle cx="378" cy="75" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
   <text x="378" y="71" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q₂</text>
   <text x="378" y="84" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">0 둘</text>
-
-  <!-- "..." continuation -->
   <text x="500" y="80" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="22" fill="#4a5568">…</text>
-
-  <!-- q₁_a (accept, 01) at (230, 185) -->
   <circle cx="230" cy="185" r="28" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="230" cy="185" r="20" fill="none" stroke="#4ade80" stroke-width="1.2"/>
   <text x="230" y="181" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">q₁a</text>
   <text x="230" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">01 ★</text>
-
-  <!-- q₂₁ (after 001) at (378, 185) -->
   <circle cx="378" cy="185" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
   <text x="378" y="181" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q₂₁</text>
   <text x="378" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">001</text>
-
-  <!-- q₂a (accept, 0011) at (378, 260) -->
   <circle cx="378" cy="260" r="24" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="378" cy="260" r="17" fill="none" stroke="#4ade80" stroke-width="1.2"/>
   <text x="378" y="256" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">q₂a</text>
   <text x="378" y="268" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">0011 ★</text>
-
-  <!-- Arrows: main row (0 inputs going right) -->
-  <!-- q₀ --0--> q₁ -->
   <line x1="110" y1="75" x2="200" y2="75" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="155" y="68" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0</text>
-
-  <!-- q₁ --0--> q₂ -->
   <line x1="258" y1="75" x2="348" y2="75" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="303" y="68" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0</text>
-
-  <!-- q₂ --0--> ... (dashed) -->
   <line x1="406" y1="75" x2="468" y2="75" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
   <text x="437" y="68" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#6b7a99">0</text>
-
-  <!-- Arrows: 1 inputs going down (→ accept states) -->
-  <!-- q₁ --1--> q₁a -->
   <line x1="230" y1="103" x2="230" y2="155" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="220" y="132" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
-
-  <!-- q₂ --1--> q₂₁ -->
   <line x1="378" y1="103" x2="378" y2="155" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="368" y="132" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
-
-  <!-- q₂₁ --1--> q₂a -->
   <line x1="378" y1="213" x2="378" y2="234" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="368" y="227" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
-
-  <!-- Dead transitions (dashed red) -->
-  <!-- q₀ --1--> dead -->
   <path d="M 105,60 C 200,20 530,20 592,52" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
   <text x="340" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">1</text>
-
-  <!-- q₁a --0,1--> dead -->
   <path d="M 255,172 C 380,140 530,100 593,90" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
   <text x="420" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">0,1</text>
-
-  <!-- q₂₁ --0--> dead -->
   <path d="M 403,173 C 480,155 555,120 594,98" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
   <text x="510" y="162" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">0</text>
-
-  <!-- q₂a --0,1--> dead -->
   <path d="M 400,248 C 490,230 575,160 608,103" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
   <text x="530" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">0,1</text>
-
-  <!-- Note -->
-  <text x="360" y="277" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">★ = Accepting State  ·  빨간 점선 = dead state로의 전이  ·  각 깊이마다 새로운 상태가 필요 → 무한 상태</text>
+  <text x="360" y="277" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">★ = Accepting State  ·  빨간 점선 = dead state로의 전이  ·  각 깊이마다 새 상태 필요 → 무한 상태</text>
 </svg>
