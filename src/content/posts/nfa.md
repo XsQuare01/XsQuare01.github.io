@@ -8,7 +8,11 @@ category: cryptography
 
 > DFA에서는 하나의 상태에서 하나의 입력에 대해 정확히 하나의 다음 상태만 존재했다. NFA는 이 제약을 풀어, 하나의 입력에 대해 여러 상태로 동시에 전이할 수 있다. 더 강력한 모델처럼 보이지만, 실제 계산 능력은 DFA와 동일하다.
 
-NFA(Non-deterministic Finite Automata)는 **비결정론적 유한 자동기계** 다. DFA와 구조는 유사하지만, 하나의 상태에서 동일한 입력에 대해 여러 상태로 동시에 전이할 수 있다는 점이 근본적으로 다르다. "비결정론적"이란 다음 상태가 하나로 결정되지 않는다는 의미다.
+## DFA vs NFA
+
+![DFA vs NFA 비교](/images/nfa/dfa-vs-nfa.svg)
+
+NFA(Non-deterministic Finite Automata)는 **비결정론적 유한 자동기계**다. DFA와 구조는 유사하지만, 하나의 상태에서 동일한 입력에 대해 여러 상태로 동시에 전이할 수 있다는 점이 근본적으로 다르다. "비결정론적"이란 다음 상태가 하나로 결정되지 않는다는 의미다.
 
 ---
 
@@ -32,23 +36,32 @@ DFA의 transition function $\delta: Q \times \Sigma \to Q$는 항상 정확히 *
 
 ---
 
-## NFA의 Accept 조건
+## NFA의 비결정성: 동시에 여러 경로
 
-NFA는 같은 입력에 대해 선택 가능한 경로가 여러 개 존재한다. **하나의 경로라도 accepting state에서 종료되면 accept** 한다. 모든 경로가 accepting state에서 끝나지 않아야만 reject다.
+![NFA 분기 동작](/images/nfa/nfa-branch.svg)
 
-이 성질 때문에 NFA를 시뮬레이션하면 마치 "정답 경로를 미리 알고" 이동하는 것처럼 보이기도 한다. accept하는 경로가 단 하나라도 있으면 되므로, 그 경로만 따라가면 되기 때문이다. 실제 시뮬레이션에서는 가능한 모든 경로를 동시에 탐색하여 하나라도 accept하는지 확인한다.
+NFA는 같은 입력에서 여러 경로를 **동시에** 탐색한다. 각 분기점에서 가능한 모든 다음 상태로 동시에 이동하며, 경로 중 하나라도 accepting state에 도달하면 accept한다.
+
+<div class="callout callout-key">
+<div class="callout-title">Accept 조건</div>
+<p>가능한 경로 중 <strong>하나라도</strong> accepting state에 도달하면 accept한다.<br>모든 경로가 dead end이거나 non-accepting state에서 끝날 때만 reject한다.</p>
+</div>
+
+이 성질 때문에 NFA를 시뮬레이션하면 마치 "정답 경로를 미리 알고" 이동하는 것처럼 보이기도 한다. 실제 시뮬레이션에서는 가능한 모든 경로를 동시에 탐색하여 하나라도 accept하는지 확인한다.
 
 ---
 
 ## NFA와 DFA의 관계: Powerset Construction
 
-NFA는 직접 구현하기보다 **이론적 도구** 로서 유용하다. DFA보다 설계가 간결하고 직관적이기 때문에, 복잡한 언어를 NFA로 먼저 설계한 뒤 DFA로 변환하는 방식을 사용한다.
+NFA는 직접 구현하기보다 **이론적 도구**로서 유용하다. DFA보다 설계가 간결하고 직관적이기 때문에, 복잡한 언어를 NFA로 먼저 설계한 뒤 DFA로 변환하는 방식을 사용한다.
+
+아래는 4개의 state를 가진 NFA 예시다.
+
+![NFA 예시](/images/nfa/nfa-example.svg)
 
 모든 NFA는 **Powerset Construction(부분집합 구성법)**을 통해 동등한 DFA로 변환할 수 있다. NFA의 state 집합을 $Q$라 하면, 변환된 DFA의 각 state는 $Q$의 부분집합 $\mathcal{P}(Q)$의 원소가 된다.
 
-아래는 4개의 state를 가진 NFA의 예시다.
-
-![NFA 예시](/images/nfa/nfa-example.png)
+![Powerset Construction](/images/nfa/powerset-step.svg)
 
 이 NFA를 DFA로 변환하면 최대 $2^4 = 16$개의 state가 필요하다.
 
@@ -87,4 +100,11 @@ $$\{4\},\ \{1,4\},\ \{2,4\},\ \{3,4\},\ \{1,2,4\},\ \ldots$$
 
 $$\text{Class NFA} = \text{Class DFA}$$
 
-NFA는 DFA보다 설계가 간결하고 직관적이지만, 두 모델이 인식할 수 있는 **언어의 집합(Regular Languages)은 완전히 동일하다.** DFA로 풀 수 없는 문제(예: $L_5 = \{0^i1^i\}$)는 NFA로도 풀 수 없다.
+<div class="callout callout-key">
+<div class="callout-title">핵심 결론: 표현력은 같지만 설계 감각이 다르다</div>
+<ul>
+<li>NFA와 DFA는 인식할 수 있는 언어(Regular Languages)가 완전히 동일하다.</li>
+<li>NFA는 DFA보다 <strong>설계하기 쉽고 직관적</strong>이지만, 더 강력한 모델이 아니다.</li>
+<li>DFA로 풀 수 없는 문제(예: $L_5 = \{0^i1^i\}$)는 NFA로도 풀 수 없다.</li>
+</ul>
+</div>

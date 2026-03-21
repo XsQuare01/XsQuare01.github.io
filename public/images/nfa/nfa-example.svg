@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 195" width="620" height="195">
+  <rect width="620" height="195" fill="#0f1117" rx="10"/>
+  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">NFA &#xC608;&#xC2DC; &#x2014; &#x2018;101&#x2019;&#xC744; &#xD3EC;&#xD568;&#xD558;&#xB294; &#xBB38;&#xC790;&#xC5F4;</text>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
+    </marker>
+  </defs>
+  <line x1="38" y1="105" x2="60" y2="105" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <circle cx="90" cy="105" r="30" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="90" y="110" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#e2e8f0">1</text>
+  <circle cx="240" cy="105" r="30" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="240" y="110" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#e2e8f0">2</text>
+  <circle cx="390" cy="105" r="30" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="390" y="110" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#e2e8f0">3</text>
+  <circle cx="540" cy="105" r="30" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
+  <circle cx="540" cy="105" r="22" fill="none" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="540" y="110" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#4ade80">4</text>
+  <path d="M 75,79 C 42,36 138,36 105,79" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="90" y="32" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0,1</text>
+  <path d="M 525,79 C 492,36 588,36 555,79" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="540" y="32" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0,1</text>
+  <line x1="120" y1="105" x2="208" y2="105" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="165" y="97" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
+  <line x1="270" y1="105" x2="358" y2="105" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="315" y="97" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0</text>
+  <line x1="420" y1="105" x2="508" y2="105" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="465" y="97" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
+  <text x="310" y="185" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">&#xC774;&#xC911; &#xC6D0; = Accepting State  &#xB7;  &#x2192; = &#xCD08;&#xAE30; &#xC0C1;&#xD0DC;</text>
+</svg>
