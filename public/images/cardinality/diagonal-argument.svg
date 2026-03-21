@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 222" width="940" height="222">
+  <rect width="940" height="222" fill="#0f1117" rx="10"/>
+  <text x="470" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">칸토어 대각선 논법 — 4단계</text>
+
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
+    </marker>
+  </defs>
+
+  <!-- Arrows between cards -->
+  <line x1="232" y1="122" x2="252" y2="122" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="464" y1="122" x2="484" y2="122" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="696" y1="122" x2="716" y2="122" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- STEP 1: 가정 (orange, x=20..230) -->
+  <rect x="20" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <rect x="20" y="40" width="210" height="40" rx="8" fill="rgba(249,115,22,0.15)"/>
+  <rect x="20" y="68" width="210" height="12" rx="0" fill="rgba(249,115,22,0.15)"/>
+  <text x="125" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="#f97316">STEP 1  가정</text>
+  <text x="125" y="101" text-anchor="middle" font-size="13" fill="#cbd5e0">모든 실수를 자연수에</text>
+  <text x="125" y="120" text-anchor="middle" font-size="13" fill="#cbd5e0">대응한 목록이 있다고 가정</text>
+  <text x="125" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#f0f6fc">a₁ = 0.d₁₁d₁₂d₁₃…</text>
+  <text x="125" y="178" text-anchor="middle" font-size="11" fill="#6b7a99">(귀류법 시작)</text>
+
+  <!-- STEP 2: 대각선 선택 (blue, x=252..462) -->
+  <rect x="252" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <rect x="252" y="40" width="210" height="40" rx="8" fill="rgba(56,189,248,0.15)"/>
+  <rect x="252" y="68" width="210" height="12" rx="0" fill="rgba(56,189,248,0.15)"/>
+  <text x="357" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="#38bdf8">STEP 2  대각선 선택</text>
+  <text x="357" y="101" text-anchor="middle" font-size="13" fill="#cbd5e0">각 aₙ의 소수점 n번째</text>
+  <text x="357" y="120" text-anchor="middle" font-size="13" fill="#cbd5e0">자리 dₙₙ을 선택</text>
+  <text x="357" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#f0f6fc">d₁₁, d₂₂, d₃₃, …</text>
+  <text x="357" y="178" text-anchor="middle" font-size="11" fill="#6b7a99">(대각선 방향)</text>
+
+  <!-- STEP 3: 변환 (yellow, x=484..694) -->
+  <rect x="484" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <rect x="484" y="40" width="210" height="40" rx="8" fill="rgba(251,191,36,0.15)"/>
+  <rect x="484" y="68" width="210" height="12" rx="0" fill="rgba(251,191,36,0.15)"/>
+  <text x="589" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="#fbbf24">STEP 3  변환</text>
+  <text x="589" y="101" text-anchor="middle" font-size="13" fill="#cbd5e0">각 dₙₙ을 바꿔 새로운</text>
+  <text x="589" y="120" text-anchor="middle" font-size="13" fill="#cbd5e0">수 X를 만든다</text>
+  <text x="589" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#f0f6fc">Dᵢ: dᵢᵢ=5→4, 나머지→5</text>
+  <text x="589" y="178" text-anchor="middle" font-size="11" fill="#6b7a99">(핵심 장치)</text>
+
+  <!-- STEP 4: 모순 (red, x=716..926) -->
+  <rect x="716" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
+  <rect x="716" y="40" width="210" height="40" rx="8" fill="rgba(248,113,113,0.15)"/>
+  <rect x="716" y="68" width="210" height="12" rx="0" fill="rgba(248,113,113,0.15)"/>
+  <text x="821" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="#f87171">STEP 4  모순</text>
+  <text x="821" y="101" text-anchor="middle" font-size="13" fill="#cbd5e0">X는 모든 aₙ과 n번째</text>
+  <text x="821" y="120" text-anchor="middle" font-size="13" fill="#cbd5e0">자리에서 반드시 다름</text>
+  <text x="821" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" fill="#f87171">X ∉ 리스트</text>
+  <text x="821" y="178" text-anchor="middle" font-size="11" fill="#6b7a99">(∴ |ℝ| > |ℕ|)</text>
+</svg>
