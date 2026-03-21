@@ -202,3 +202,8 @@ $$\frac{1/3}{1 - 2/3} = 1$$
 <li>따라서 <strong>풀 수 없는 문제가 압도적으로 많다</strong>는 결론은 바로 이 크기 차이에서 나온다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Problem &amp; Solution</strong> — Complexity Theory에서 '문제'와 '풀이'는 어떻게 수학적으로 정의될까? 풀 수 없는 문제가 압도적으로 많을 수밖에 없는 이유를 집합의 크기 논증으로 증명한다.</p>
+</div>

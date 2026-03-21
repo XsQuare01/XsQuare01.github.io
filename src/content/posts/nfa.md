@@ -108,3 +108,8 @@ $$\text{Class NFA} = \text{Class DFA}$$
 <li>DFA로 풀 수 없는 문제(예: $L_5 = \{0^i1^i\}$)는 NFA로도 풀 수 없다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>DPDA와 NPDA — 스택을 가진 오토마타</strong> — DFA에 스택을 추가하면 무엇이 달라질까? DPDA와 NPDA의 계산 능력 차이를 분석하고, 스택 2개로 튜링 머신을 시뮬레이션하는 원리를 살펴본다.</p>
+</div>

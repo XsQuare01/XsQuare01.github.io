@@ -230,3 +230,8 @@ Solution = 튜링 머신이다.
 <li><strong>풀 수 없는 문제가 압도적으로 많다.</strong> 풀 수 있는 문제는 전체 중 극히 일부에 불과하다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>DFA — 결정론적 유한 오토마타</strong> — 계산 이론에서 가장 단순한 계산 모델인 DFA의 구조와 동작 원리를 살펴본다. Pumping Lemma를 통해 DFA로도 풀 수 없는 문제가 존재함을 증명한다.</p>
+</div>

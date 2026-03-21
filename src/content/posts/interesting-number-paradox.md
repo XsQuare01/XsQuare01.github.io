@@ -92,3 +92,8 @@ $$\therefore \text{ 귀류법에 의해, 모든 자연수는 흥미롭다.}$$
 <li>다음 글에서는 집합의 크기(Cardinality) 개념을 통해 "풀 수 없는 문제가 압도적으로 많다"는 사실을 증명한다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Toss Coin over Telephone</strong> — 서로를 불신하는 두 사람이 전화로 공정한 동전 던지기를 할 수 있을까? 이차잉여 구조를 기반으로 한 암호학적 프로토콜로 합의에 이르는 방법을 살펴본다.</p>
+</div>

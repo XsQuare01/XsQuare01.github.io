@@ -221,3 +221,8 @@ $$\therefore \text{DFA로는 L5를 풀 수 없다.}$$
 **DFA로 풀 수 있는 Language들의 집합** 을 Class DFA라 한다.
 
 $$L_4 \in \text{DFA}, \quad L_5 \notin \text{DFA}$$
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>NFA — 비결정론적 유한 오토마타</strong> — DFA의 '정확히 하나의 전이' 제약을 풀어 여러 경로를 동시에 탐색하는 NFA를 소개한다. Powerset Construction을 통해 NFA와 DFA의 계산 능력이 동일함을 보인다.</p>
+</div>

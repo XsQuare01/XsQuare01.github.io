@@ -132,3 +132,8 @@ $$L_{11} = \{x \mid x = yy^Ry^Ry^R\}$$
 | 스택 2개 DPDA | 상태 + 스택 2개 | Recursively Enumerable (튜링 머신과 동등) |
 
 스택 하나의 추가가 계산 능력을 극적으로 확장시키고, 비결정론의 도입이 결정론적 모델로는 불가능한 언어를 해결 가능하게 만든다. 계산 이론의 핵심은 이처럼 "모델의 제약을 조금씩 풀었을 때 무엇이 가능해지는가"를 탐구하는 데 있다.
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Turing Machine — 계산의 극한</strong> — 스택 2개는 튜링 머신과 동등하다. 현대 컴퓨터의 이론적 모델인 튜링 머신의 구조와 Universal Turing Machine의 의미, 그리고 DTM과 NTM의 계산 능력이 동일함을 탐구한다.</p>
+</div>
