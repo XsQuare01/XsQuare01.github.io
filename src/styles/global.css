@@ -618,19 +618,29 @@ article .prose h2 {
   line-height: 1.65;
 }
 
-/* ── Example Label ── */
-.example-label {
+/* ── Example / Section Labels ── */
+.example-label,
+.section-label {
   display: inline-block;
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--accent-2);
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.3);
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   margin-bottom: 0.5rem;
+}
+
+.example-label {
+  color: var(--accent-2);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.section-label-deep {
+  color: var(--accent-3);
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.3);
 }
 
 /* ── Post Nav Description ── */
