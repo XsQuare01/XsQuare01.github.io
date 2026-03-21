@@ -6,7 +6,13 @@ tags: ["Cryptography", "Complexity Theory", "Mathematics"]
 category: cryptography
 ---
 
-> 이 패러독스는 수학적 증명에서 '정의(definition)'의 엄밀함이 왜 중요한지를 보여주는 예시다. Complexity Theory의 도입부에서 다루는 주제이며, 암호학에서도 수학적 엄밀성은 핵심 전제이기 때문에 이 개념을 먼저 짚고 넘어간다.
+<div class="callout callout-key">
+<div class="callout-title">생각해볼 질문</div>
+재미없는 자연수 중 가장 작은 수는 존재할까?<br/>
+그리고 '재미있다'는 걸 정확히 정의하지 않으면, 증명은 어떻게 될까?
+</div>
+
+이 패러독스는 수학적 증명에서 **정의(definition)의 엄밀함이 왜 중요한지**를 보여주는 예시다. Complexity Theory의 도입부에서 다루는 주제이며, 암호학에서도 수학적 엄밀성은 핵심 전제이기 때문에 이 개념을 먼저 짚고 넘어간다.
 
 ---
 
@@ -24,6 +30,8 @@ category: cryptography
 ---
 
 ## 모순의 증명: 모든 자연수들이 흥미롭지 않다고 가정 (귀류법)
+
+![귀류법 4단계 전개](/images/interesting-number-paradox/paradox-flow.svg)
 
 1. $U:$ Uninteresting Number Set 이라고 할 때, 다음과 같이 표현할 수 있다.
 
@@ -44,9 +52,16 @@ $$
 
 $$\therefore \text{ 귀류법에 의해, 모든 자연수는 흥미롭다.}$$
 
+<div class="callout">
+<div class="callout-title">주의</div>
+이 논증은 실제 수학적 정리가 아니다. '흥미롭다'가 엄밀하게 정의되지 않았기 때문에 성립하는 <strong>반문(counter-argument)</strong>일 뿐이다. 수학적 증명은 명확히 정의된 개념 위에서만 성립한다.
+</div>
+
 ---
 
 ## '흥미롭다(Interesting)'의 정의가 모호하다
+
+![직관적 정의 vs 수학적 정의](/images/interesting-number-paradox/definition-compare.svg)
 
 - 흥미롭다(Interesting)는 것은 매우 주관적이다. 따라서, 듣는 사람에 따라서 '흥미롭다고' 느낄 수도 있고, 아닐 수도 있다.
 - 사실, 위의 귀류법을 사용한 증명도 모호하다. 정확히는 '증명'이 아닌, '반문'이기에, 정확한 증명이라고 보기는 어렵다. 이는 '흥미롭다(Interesting)'가 수학적으로 엄밀하게 정의된 개념이 아닌, 비형식적(informal)인 개념이기 때문이다. **수학적 증명은 명확히 정의된 개념 위에서만 성립한다.**
@@ -66,3 +81,14 @@ $$\therefore \text{ 귀류법에 의해, 모든 자연수는 흥미롭다.}$$
 - 따라서, OEIS는 모든 '흥미로운 수열'을 가지고 있지 않다. 이는 **OEIS의 완전성(completeness)이 불가능함을 보여주는 역설** 이다.
 
 > **한계:** OEIS는 개별 숫자가 아닌 수열(sequence) 단위로 관리된다. 따라서 "숫자 $n$이 흥미롭다"를 OEIS 등재 여부로 정의하는 것은 엄밀하지 않다. 특정 숫자는 여러 수열에 동시에 속할 수 있으며, OEIS에 없다고 해서 흥미롭지 않다고 단언할 수 없다.
+
+---
+
+<div class="callout callout-key">
+<div class="callout-title">다음 글과의 연결</div>
+<ul>
+<li>이 글의 핵심은 <strong>정의가 모호하면 증명도 무너진다</strong>는 것이다.</li>
+<li>Complexity Theory와 암호학은 이 교훈에서 출발한다 — 문제, 알고리즘, 안전성 모두 수학적으로 엄밀하게 정의되어야 한다.</li>
+<li>다음 글에서는 집합의 크기(Cardinality) 개념을 통해 "풀 수 없는 문제가 압도적으로 많다"는 사실을 증명한다.</li>
+</ul>
+</div>
