@@ -95,19 +95,19 @@ $n \nmid (x - x')$이고 $n \nmid (x + x')$이므로, $\gcd(x - x',\ n)$은 $p$ 
 <div class="glossary">
   <div class="glossary-item">
     <span class="glossary-term">이차잉여 (Quadratic Residue)</span>
-    <span class="glossary-def">$x^2 \equiv a \pmod{n}$을 만족하는 정수 $x$가 존재할 때, $a$를 $n$의 이차잉여라 한다.</span>
+    <span class="glossary-def">x² ≡ a (mod n)을 만족하는 정수 x가 존재할 때, a를 n의 이차잉여라 한다.</span>
   </div>
   <div class="glossary-item">
     <span class="glossary-term">Blum 정수</span>
-    <span class="glossary-def">$p \equiv q \equiv 3 \pmod{4}$를 만족하는 두 소수의 곱 $n = pq$. 제곱근 계산 공식을 정수 지수로 쓸 수 있게 해준다.</span>
+    <span class="glossary-def">p ≡ q ≡ 3 (mod 4)를 만족하는 두 소수의 곱 n = pq. 제곱근 계산 공식을 정수 지수로 쓸 수 있게 해준다.</span>
   </div>
   <div class="glossary-item">
     <span class="glossary-term">CRT (중국인의 나머지 정리)</span>
-    <span class="glossary-def">서로소인 모듈러스의 연립 합동식을 유일하게 풀어주는 정리. $\pmod{p}$와 $\pmod{q}$의 근을 합성해 $\pmod{n}$의 4개 근을 구할 때 사용한다.</span>
+    <span class="glossary-def">서로소인 모듈러스의 연립 합동식을 유일하게 풀어주는 정리. (mod p)와 (mod q)의 근을 합성해 (mod n)의 4개 근을 구할 때 사용한다.</span>
   </div>
   <div class="glossary-item">
     <span class="glossary-term">커밋 (Commit)</span>
-    <span class="glossary-def">값을 숨겨두되 나중에 공개·검증할 수 있게 하는 암호학적 약속. 이 프로토콜에서 $y$는 $x$에 대한 커밋이다.</span>
+    <span class="glossary-def">값을 숨겨두되 나중에 공개·검증할 수 있게 하는 암호학적 약속. 이 프로토콜에서 y는 x에 대한 커밋이다.</span>
   </div>
 </div>
 
