@@ -376,12 +376,14 @@ article .prose h2 {
 .prose li::marker { color: var(--accent); }
 .prose blockquote {
   border-left: 3px solid var(--accent);
-  padding: 0.6rem 0 0.6rem 1.25rem;
+  border-right: 3px solid var(--accent);
+  padding: 0.75rem 1.25rem;
   margin: 1.5rem 0;
   color: var(--text-muted);
   background: var(--accent-dim);
-  border-radius: 0 6px 6px 0;
+  border-radius: 6px;
   font-style: italic;
+  text-align: center;
 }
 .prose code {
   font-family: var(--font-mono);
