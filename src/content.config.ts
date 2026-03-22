@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const CATEGORY_SLUGS = ['cryptography', 'game-dev', 'web-dev'] as const;
+const CATEGORY_SLUGS = ['theory', 'cryptography', 'algorithm', 'os', 'unity', 'web-dev'] as const;
 
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),

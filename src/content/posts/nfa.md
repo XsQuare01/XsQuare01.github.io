@@ -3,7 +3,7 @@ title: "NFA — 비결정론적 유한 오토마타"
 date: 2026-03-20T10:00:00
 description: "DFA를 확장한 계산 모델인 NFA의 구조와 accept 조건을 살펴보고, Powerset Construction을 통해 NFA와 DFA의 계산 능력이 동일함을 설명한다."
 tags: ["Computer Science", "Complexity Theory"]
-category: cryptography
+category: theory
 ---
 
 > DFA에서는 하나의 상태에서 하나의 입력에 대해 정확히 하나의 다음 상태만 존재했다. NFA는 이 제약을 풀어, 하나의 입력에 대해 여러 상태로 동시에 전이할 수 있다. 더 강력한 모델처럼 보이지만, 실제 계산 능력은 DFA와 동일하다.

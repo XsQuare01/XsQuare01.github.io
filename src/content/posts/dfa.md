@@ -3,7 +3,7 @@ title: "DFA — 결정론적 유한 오토마타"
 date: 2026-03-20T09:00:00
 description: "튜링 머신을 단순화한 계산 모델인 DFA의 구조와 동작 원리를 살펴보고, Pumping Lemma를 통해 DFA로 풀 수 없는 문제가 존재함을 증명한다."
 tags: ["Computer Science", "Complexity Theory"]
-category: cryptography
+category: theory
 ---
 
 > DFA는 계산 이론에서 가장 단순한 형태의 계산 모델이다. 튜링 머신을 극도로 제한한 이 기계는 어떤 문제를 풀 수 있고, 어떤 문제를 풀 수 없을까?

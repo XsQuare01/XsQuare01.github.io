@@ -3,7 +3,7 @@ title: "Classes — 계산 가능성 클래스 D, E, co-E"
 date: 2026-03-21T14:00:00
 description: "결정 가능한 문제의 집합 D, 열거 가능한 문제의 집합 E, 그리고 co-E를 정의하고, D = E ∩ co-E를 증명한다. 정지 문제를 통해 E ≠ D임을 확인한다."
 tags: ["Computer Science", "Complexity Theory"]
-category: cryptography
+category: theory
 ---
 
 > 튜링 머신으로 풀 수 있는 문제를 분류하면 어떤 계층이 만들어질까? Class D, E, co-E는 이 계층의 가장 기본적인 세 층이다.

@@ -3,7 +3,7 @@ title: "Turing Machine — 계산의 극한"
 date: 2026-03-21T10:00:00
 description: "현대 컴퓨터의 이론적 모델인 튜링 머신의 구조를 살펴보고, 2-Tape DTM, Universal Turing Machine, 그리고 DTM과 NTM의 계산 능력이 동일함을 정리한다."
 tags: ["Computer Science", "Complexity Theory"]
-category: cryptography
+category: theory
 ---
 
 > DFA에 스택을 추가하면 DPDA, 스택을 2개로 늘리면 튜링 머신과 동등해진다. 그렇다면 튜링 머신 자체는 어떤 구조를 가지며, 얼마나 강력할까?
