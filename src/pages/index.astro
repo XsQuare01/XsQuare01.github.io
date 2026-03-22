@@ -1,10 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { categories } from '../data/categories';
 
-const recentPosts = (await getCollection('posts'))
+const allPosts = await getCollection('posts');
+
+const recentPosts = [...allPosts]
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 5);
+
+const totalPosts = allPosts.length;
+
+const categoryCounts = categories
+  .map((cat) => ({
+    ...cat,
+    count: allPosts.filter((p) => p.data.category === cat.slug).length,
+  }))
+  .filter((cat) => cat.count > 0);
+
+const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 ---
 
 <BaseLayout title="홈">
@@ -123,6 +137,24 @@ const recentPosts = (await getCollection('posts'))
           loading="lazy"
           height="150"
         />
+      </div>
+
+      <div class="post-stats">
+        <p class="post-stats-title">포스트 현황 <span class="post-stats-total">총 {totalPosts}개</span></p>
+        <ul class="post-bar-list">
+          {categoryCounts.map((cat) => (
+            <li class="post-bar-item">
+              <span class="post-bar-label">{cat.label}</span>
+              <div class="post-bar-track">
+                <div
+                  class="post-bar-fill"
+                  style={`width: ${Math.round((cat.count / maxCount) * 100)}%`}
+                />
+              </div>
+              <span class="post-bar-count">{cat.count}개</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
@@ -297,6 +329,73 @@ const recentPosts = (await getCollection('posts'))
     color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: 0.75rem;
+  }
+
+  .post-stats {
+    margin-top: 1.5rem;
+  }
+
+  .post-stats-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin: 0 0 0.75rem;
+  }
+
+  .post-stats-total {
+    font-weight: 400;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 0.5rem;
+  }
+
+  .post-bar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .post-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .post-bar-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    width: 5.5rem;
+    flex-shrink: 0;
+  }
+
+  .post-bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(74, 85, 104, 0.25);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .post-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    min-width: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .post-bar-count {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    width: 2.5rem;
+    text-align: right;
+    flex-shrink: 0;
   }
 
   @media (max-width: 640px) {
