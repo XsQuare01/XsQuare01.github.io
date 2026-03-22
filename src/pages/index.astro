@@ -124,38 +124,43 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
     <section class="home-section">
       <h2>Activity</h2>
       <p class="stats-desc">학습과 개발 과정에서 쌓인 기록들입니다.<br />세부적인 수치보다 꾸준히 만들고 정리하는 흐름을 중요하게 생각합니다.</p>
-      <div class="stats-row">
-        <img
-          src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
-          alt="XsQuare01's GitHub Stats"
-          loading="lazy"
-          height="150"
-        />
-        <img
-          src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
-          alt="solved.ac 티어"
-          loading="lazy"
-          height="150"
-        />
-      </div>
-
-      <div class="post-stats-card">
-        <p class="post-stats-header">Post Stats</p>
-        <p class="post-stats-total-row">총 <span class="post-stats-total">{totalPosts}</span>개</p>
-        <ul class="post-bar-list">
-          {categoryCounts.map((cat) => (
-            <li class="post-bar-item">
-              <span class="post-bar-label">{cat.label}</span>
-              <div class="post-bar-track">
-                <div
-                  class="post-bar-fill"
-                  style={`width: ${Math.round((cat.count / maxCount) * 100)}%`}
-                />
-              </div>
-              <span class="post-bar-count">{cat.count}</span>
-            </li>
-          ))}
-        </ul>
+      <div class="stats-grid">
+        <div class="stats-cell">
+          <img
+            src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=161b22"
+            alt="XsQuare01's GitHub Stats"
+            loading="lazy"
+            class="stats-img"
+          />
+        </div>
+        <div class="stats-cell">
+          <img
+            src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
+            alt="solved.ac 티어"
+            loading="lazy"
+            class="stats-img"
+          />
+        </div>
+        <div class="post-stats-card">
+          <div>
+            <p class="post-stats-header">Post Stats</p>
+            <p class="post-stats-total-row">총 <span class="post-stats-total">{totalPosts}</span>개</p>
+          </div>
+          <ul class="post-bar-list">
+            {categoryCounts.map((cat) => (
+              <li class="post-bar-item">
+                <span class="post-bar-label">{cat.label}</span>
+                <div class="post-bar-track">
+                  <div
+                    class="post-bar-fill"
+                    style={`width: ${Math.round((cat.count / maxCount) * 100)}%`}
+                  />
+                </div>
+                <span class="post-bar-count">{cat.count}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -318,11 +323,34 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
     margin: 0.75rem 0 0;
   }
 
-  .stats-row {
-    display: flex;
-    flex-wrap: wrap;
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
     margin-top: 1rem;
+    align-items: stretch;
+  }
+
+  .stats-cell {
+    display: flex;
+  }
+
+  .stats-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 6px;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .stats-img {
+      height: auto;
+    }
   }
 
   .about-text {
@@ -333,28 +361,29 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
   }
 
   .post-stats-card {
-    margin-top: 1rem;
-    background: #0f1117;
-    border: 1px solid rgba(74, 85, 104, 0.5);
+    background: #161b22;
+    border: 1px solid rgba(74, 85, 104, 0.4);
     border-radius: 6px;
-    padding: 1rem 1.25rem 1.1rem;
-    width: fit-content;
-    min-width: 220px;
-    max-width: 300px;
+    padding: 1rem 1.25rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
   }
 
   .post-stats-header {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--text-muted);
-    margin: 0 0 0.2rem;
-    letter-spacing: 0.02em;
+    color: #e6edf3;
+    margin: 0;
+    letter-spacing: 0.01em;
   }
 
   .post-stats-total-row {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    margin: 0 0 0.85rem;
+    font-size: 0.7rem;
+    color: #8b949e;
+    margin: 0.2rem 0 0;
   }
 
   .post-stats-total {
@@ -365,44 +394,46 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
   .post-bar-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0.5rem 0 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.42rem;
+    flex: 1;
+    justify-content: flex-end;
   }
 
   .post-bar-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.55rem;
   }
 
   .post-bar-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    width: 4.5rem;
+    font-size: 0.7rem;
+    color: #8b949e;
+    width: 4rem;
     flex-shrink: 0;
   }
 
   .post-bar-track {
     flex: 1;
-    height: 5px;
-    background: rgba(74, 85, 104, 0.3);
-    border-radius: 3px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
     overflow: hidden;
   }
 
   .post-bar-fill {
     height: 100%;
     background: var(--accent);
-    border-radius: 3px;
+    border-radius: 2px;
     min-width: 4px;
   }
 
   .post-bar-count {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    width: 1.5rem;
+    font-size: 0.68rem;
+    color: #8b949e;
+    width: 1.2rem;
     text-align: right;
     flex-shrink: 0;
   }
