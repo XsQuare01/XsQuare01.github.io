@@ -102,6 +102,24 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
 </BaseLayout>
 
 <script>
+  // ── 읽기 진행률 바 ──
+  const bar = document.createElement('div');
+  bar.id = 'reading-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+
+  function updateProgress() {
+    const article = document.querySelector('article');
+    if (!article) return;
+    const { top, height } = article.getBoundingClientRect();
+    const scrolled = Math.min(1, Math.max(0, -top / (height - window.innerHeight)));
+    bar.style.width = `${scrolled * 100}%`;
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ── TOC 활성 링크 ──
   const headings = document.querySelectorAll('article h2[id]');
   const tocLinks = document.querySelectorAll('.toc-link');
 
