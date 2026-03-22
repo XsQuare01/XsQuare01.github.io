@@ -19,6 +19,10 @@ const categoryCounts = categories
   .filter((cat) => cat.count > 0);
 
 const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
+
+// Featured Post — 나중에 RSA 포스트로 교체 시 ID만 변경
+const FEATURED_ID = 'dfa';
+const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 ---
 
 <BaseLayout title="홈">
@@ -98,7 +102,22 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
       </div>
     </section>
 
-    <!-- 섹션 3: 최근 포스트 -->
+    <!-- 섹션 3: Featured Post -->
+    {featuredPost && (
+      <section class="home-section">
+        <h2>Featured Post</h2>
+        <a href={`/blog/${featuredPost.id}`} class="featured-card">
+          <span class="featured-label">추천 글</span>
+          <h3 class="featured-title">{featuredPost.data.title}</h3>
+          {featuredPost.data.description && (
+            <p class="featured-desc">{featuredPost.data.description}</p>
+          )}
+          <span class="featured-link">읽어보기 →</span>
+        </a>
+      </section>
+    )}
+
+    <!-- 섹션 4: 최근 포스트 -->
     <section class="home-section">
       <div class="section-header">
         <h2>Recent Posts</h2>
@@ -347,6 +366,52 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 1rem;
+  }
+
+  .featured-card {
+    display: block;
+    margin-top: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(74, 85, 104, 0.35);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .featured-card:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .featured-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .featured-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0.4rem 0 0.5rem;
+    border: none;
+  }
+
+  .featured-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0 0 0.75rem;
+  }
+
+  .featured-link {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 500;
   }
 
   .about-text {
