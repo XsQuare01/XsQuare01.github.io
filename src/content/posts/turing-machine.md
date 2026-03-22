@@ -160,3 +160,8 @@ $$\text{Class DTM} = \text{Class NTM}$$
 <li>DPDA에서만 비결정론이 계산 능력 자체의 차이를 만들어낸다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Classes — 계산 가능성 클래스 D, E, co-E</strong> — 튜링 머신으로 풀 수 있는 문제를 D(결정 가능), E(열거 가능), co-E로 분류하고, Dovetailing 기법과 정지 문제의 모순 증명을 통해 D = E ∩ co-E를 보인다.</p>
+</div>

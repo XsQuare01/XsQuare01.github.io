@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 415" width="580" height="415">
+  <rect width="580" height="415" fill="#0f1117" rx="10"/>
+  <text x="290" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">도브테일링: 병렬 실행 순서 (숫자 = 전체 처리 순서)</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
+    </marker>
+  </defs>
+
+  <rect x="95" y="60" width="384" height="208" fill="none" stroke="#374151" stroke-width="1"/>
+
+  <line x1="95" y1="112" x2="479" y2="112" stroke="#374151" stroke-width="0.8"/>
+  <line x1="95" y1="164" x2="479" y2="164" stroke="#374151" stroke-width="0.8"/>
+  <line x1="95" y1="216" x2="479" y2="216" stroke="#374151" stroke-width="0.8"/>
+  <line x1="191" y1="60" x2="191" y2="268" stroke="#374151" stroke-width="0.8"/>
+  <line x1="287" y1="60" x2="287" y2="268" stroke="#374151" stroke-width="0.8"/>
+  <line x1="383" y1="60" x2="383" y2="268" stroke="#374151" stroke-width="0.8"/>
+
+  <text x="143" y="52" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#9ca3af">단계 1</text>
+  <text x="239" y="52" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#9ca3af">단계 2</text>
+  <text x="335" y="52" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#9ca3af">단계 3</text>
+  <text x="431" y="52" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#9ca3af">단계 4</text>
+
+  <text x="60" y="90" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">s₁</text>
+  <text x="60" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">s₂</text>
+  <text x="60" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">s₃</text>
+  <text x="60" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">s₄</text>
+
+  <rect x="95" y="60" width="96" height="52" fill="rgba(74,222,128,0.28)" rx="0"/>
+  <text x="143" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#4ade80">1</text>
+  <text x="143" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#86efac">1라운드</text>
+
+  <rect x="191" y="60" width="96" height="52" fill="rgba(96,165,250,0.22)" rx="0"/>
+  <text x="239" y="80" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#60a5fa">2</text>
+  <text x="239" y="96" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#93c5fd">accept!</text>
+  <text x="239" y="107" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">s₁ ∈ L</text>
+
+  <rect x="95" y="112" width="96" height="52" fill="rgba(96,165,250,0.22)" rx="0"/>
+  <text x="143" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#60a5fa">3</text>
+
+  <rect x="287" y="60" width="96" height="52" fill="rgba(167,139,250,0.2)" rx="0"/>
+  <text x="335" y="90" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#a78bfa">4</text>
+
+  <rect x="191" y="112" width="96" height="52" fill="rgba(167,139,250,0.2)" rx="0"/>
+  <text x="239" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#a78bfa">5</text>
+
+  <rect x="95" y="164" width="96" height="52" fill="rgba(167,139,250,0.2)" rx="0"/>
+  <text x="143" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#a78bfa">6</text>
+
+  <rect x="383" y="60" width="96" height="52" fill="rgba(251,191,36,0.18)" rx="0"/>
+  <text x="431" y="90" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#fbbf24">7</text>
+
+  <rect x="287" y="112" width="96" height="52" fill="rgba(251,191,36,0.18)" rx="0"/>
+  <text x="335" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#fbbf24">8</text>
+
+  <rect x="191" y="164" width="96" height="52" fill="rgba(251,191,36,0.18)" rx="0"/>
+  <text x="239" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#fbbf24">9</text>
+
+  <rect x="95" y="216" width="96" height="52" fill="rgba(251,191,36,0.18)" rx="0"/>
+  <text x="143" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#fbbf24">10</text>
+
+  <rect x="287" y="164" width="96" height="52" fill="rgba(251,191,36,0.08)" rx="0"/>
+  <text x="335" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">...</text>
+  <rect x="383" y="112" width="96" height="52" fill="rgba(251,191,36,0.08)" rx="0"/>
+  <text x="431" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">...</text>
+  <rect x="191" y="216" width="96" height="52" fill="rgba(251,191,36,0.08)" rx="0"/>
+  <text x="239" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">...</text>
+  <rect x="287" y="216" width="96" height="52" fill="rgba(251,191,36,0.08)" rx="0"/>
+  <text x="335" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">...</text>
+  <rect x="383" y="164" width="96" height="52" fill="rgba(251,191,36,0.08)" rx="0"/>
+  <text x="431" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">...</text>
+  <rect x="383" y="216" width="96" height="52" fill="rgba(251,191,36,0.08)" rx="0"/>
+  <text x="431" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">...</text>
+
+  <circle cx="239" cy="95" r="6" fill="#4ade80"/>
+
+  <line x1="288" y1="88" x2="340" y2="75" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="344" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#4ade80">M₂(s₁) accept!</text>
+  <text x="344" y="93" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#86efac">→ s₁을 L의 원소로 출력</text>
+
+  <line x1="14" y1="283" x2="566" y2="283" stroke="#1f2937" stroke-width="1"/>
+
+  <text x="22" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#6b7a99">s₁, s₂, ... =</text>
+  <text x="110" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#9ca3af">알파벳으로 만들 수 있는 모든 문자열 순서 나열</text>
+  <text x="110" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#6b7a99">(예: ε, a, b, aa, ab, ba, ...)</text>
+
+  <circle cx="22" cy="355" r="7" fill="#4ade80"/>
+  <text x="36" y="360" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#9ca3af">= M₂가 accept한 순간 — L의 원소임이 확인됨, 즉시 출력</text>
+
+  <circle cx="104" cy="393" r="8" fill="rgba(74,222,128,0.75)"/>
+  <text x="118" y="398" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">1라운드</text>
+  <circle cx="202" cy="393" r="8" fill="rgba(96,165,250,0.75)"/>
+  <text x="216" y="398" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#60a5fa">2라운드</text>
+  <circle cx="300" cy="393" r="8" fill="rgba(167,139,250,0.75)"/>
+  <text x="314" y="398" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#a78bfa">3라운드</text>
+  <circle cx="398" cy="393" r="8" fill="rgba(251,191,36,0.75)"/>
+  <text x="412" y="398" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#fbbf24">4라운드</text>
+</svg>
