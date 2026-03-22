@@ -18,7 +18,16 @@ export async function getStaticPaths() {
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);
-const h2Headings = headings.filter((h) => h.depth === 2);
+
+// post.body에서 ## 헤딩 원문을 추출 — remark-math가 $...$를 제거하기 전 텍스트 보존
+const rawH2Texts = (post.body ?? '')
+  .split('\n')
+  .filter((line) => line.startsWith('## '))
+  .map((line) => line.replace(/^## /, ''));
+
+const h2Headings = headings
+  .filter((h) => h.depth === 2)
+  .map((h, i) => ({ slug: h.slug, text: rawH2Texts[i] ?? h.text }));
 
 // 읽기 시간 계산 (분)
 const wordCount = post.body?.split(/\s+/).length ?? 0;

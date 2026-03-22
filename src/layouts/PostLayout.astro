@@ -1,6 +1,17 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { tagStyle } from '../utils/tagColor';
+import katex from 'katex';
+
+function renderHeadingText(text: string): string {
+  return text.replace(/\$([^$]+)\$/g, (_, math) => {
+    try {
+      return katex.renderToString(math, { throwOnError: false });
+    } catch {
+      return `$${math}$`;
+    }
+  });
+}
 
 interface Heading {
   slug: string;
@@ -50,7 +61,7 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
         <ul class="toc-list">
           {headings.map((h) => (
             <li>
-              <a class="toc-link" href={`#${h.slug}`}>{h.text}</a>
+              <a class="toc-link" href={`#${h.slug}`} set:html={renderHeadingText(h.text)} />
             </li>
           ))}
         </ul>
@@ -118,30 +129,6 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
 
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
-
-  // ── TOC LaTeX 렌더링 ──
-  const toc = document.querySelector('.toc');
-  if (toc) {
-    const loadScript = (src: string): Promise<void> =>
-      new Promise((resolve) => {
-        const s = document.createElement('script');
-        s.src = src;
-        s.onload = () => resolve();
-        document.head.appendChild(s);
-      });
-
-    loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js')
-      .then(() => loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'))
-      .then(() => {
-        (window as any).renderMathInElement(toc, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '$', right: '$', display: false },
-          ],
-          throwOnError: false,
-        });
-      });
-  }
 
   // ── TOC 활성 링크 ──
   const headings = document.querySelectorAll('article h2[id]');
