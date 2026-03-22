@@ -133,6 +133,16 @@ $$L_{11} = \{x \mid x = yy^Ry^Ry^R\}$$
 
 스택 하나의 추가가 계산 능력을 극적으로 확장시키고, 비결정론의 도입이 결정론적 모델로는 불가능한 언어를 해결 가능하게 만든다. 계산 이론의 핵심은 이처럼 "모델의 제약을 조금씩 풀었을 때 무엇이 가능해지는가"를 탐구하는 데 있다.
 
+<div class="callout callout-key">
+<div class="callout-title">핵심 정리: DPDA와 NPDA</div>
+<ul>
+<li>비결정론이 계산 능력 자체를 높이는 유일한 모델은 DPDA다 — DFA, DTM에서는 비결정론이 능력 차이를 만들지 않는다.</li>
+<li>DPDA ⊊ NPDA: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: {ww^R}).</li>
+<li>스택 1개 추가: Regular → CFL로 능력이 확장된다.</li>
+<li>스택 2개 추가: CFL → Recursively Enumerable로 확장 — 튜링 머신과 동등하다.</li>
+</ul>
+</div>
+
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
 <p><strong>Turing Machine — 계산의 극한</strong> — 스택 2개는 튜링 머신과 동등하다. 현대 컴퓨터의 이론적 모델인 튜링 머신의 구조와 Universal Turing Machine의 의미, 그리고 DTM과 NTM의 계산 능력이 동일함을 탐구한다.</p>
