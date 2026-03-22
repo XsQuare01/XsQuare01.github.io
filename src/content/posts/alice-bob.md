@@ -145,6 +145,8 @@ $$P \subseteq NP \subseteq PSPACE \subseteq EXP \subseteq NEXP \subseteq \cdots$
 
 > **Savitch 정리**: NTM이 공간 $s(n)$을 사용한다면 ($s(n) \geq \log n$), DTM으로 공간 $O(s(n)^2)$에 시뮬레이션할 수 있다.
 
+조건 $s(n) \geq \log n$은 테이프 헤드 위치와 단계 수를 추적하는 데 필요한 최소 공간이 $\log n$ 수준이기 때문에 붙는다. 이 조건 미만에서는 시뮬레이션 자체를 표현할 공간이 부족하다. PSPACE는 $s(n) = n^k$ 형태이므로 이 조건을 항상 만족한다.
+
 $s(n)$이 다항식이면 $s(n)^2$도 다항식이므로 NPSPACE ⊆ PSPACE가 성립하고, 반대 방향은 자명하므로:
 
 $$PSPACE = NPSPACE$$

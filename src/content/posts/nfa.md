@@ -34,6 +34,8 @@ DFA의 transition function $\delta: Q \times \Sigma \to Q$는 항상 정확히 *
 
 예를 들어 $\Delta(q, a) = \{r, s\}$이면, 상태 $q$에서 $a$를 읽었을 때 $r$로도, $s$로도 전이할 수 있다. 만약 $\Delta(q, a) = \emptyset$이면 해당 경로는 막힌다(dead end).
 
+> **ε-전이(Epsilon Transition):** NFA의 확장 버전으로, 입력을 소비하지 않고도 상태를 전이할 수 있는 **ε-NFA**가 있다. $\Delta: Q \times (\Sigma \cup \{\varepsilon\}) \to \mathcal{P}(Q)$로 정의하며, 입력 없이 자유롭게 다른 상태로 이동할 수 있다. ε-NFA도 Powerset Construction으로 DFA로 변환 가능하므로 계산 능력은 동일하다. 이 글에서는 ε-전이 없는 기본 NFA를 다룬다.
+
 ---
 
 ## NFA의 비결정성: 동시에 여러 경로
