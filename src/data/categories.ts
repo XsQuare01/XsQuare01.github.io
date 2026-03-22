@@ -16,7 +16,7 @@ export const categories: Category[] = [
     slug: 'cryptography',
     label: '암호학',
     icon: '🔐',
-    description: '정수론, 암호학적 프로토콜, 계산 복잡도의 응용을 탐구합니다.',
+    description: '정수론, 암호학적 프로토콜, 계산 복잡도의 응용을 탐구합니다.\n계산 이론 시리즈를 먼저 읽기를 권장합니다.',
   },
   {
     slug: 'algorithm',
