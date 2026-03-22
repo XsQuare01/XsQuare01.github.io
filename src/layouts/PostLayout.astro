@@ -119,6 +119,23 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
+  // ── TOC LaTeX 렌더링 ──
+  const toc = document.querySelector('.toc');
+  if (toc) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js';
+    script.onload = () => {
+      (window as any).renderMathInElement(toc, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+        ],
+        throwOnError: false,
+      });
+    };
+    document.head.appendChild(script);
+  }
+
   // ── TOC 활성 링크 ──
   const headings = document.querySelectorAll('article h2[id]');
   const tocLinks = document.querySelectorAll('.toc-link');
