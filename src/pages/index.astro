@@ -153,7 +153,8 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
               <div class="post-bar-track">
                 <div
                   class="post-bar-fill"
-                  style={`width: ${Math.round((cat.count / maxCount) * 100)}%`}
+                  data-width={`${Math.round((cat.count / maxCount) * 100)}%`}
+                  style="width: 0%"
                 />
               </div>
               <span class="post-bar-count">{cat.count}</span>
@@ -165,6 +166,25 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 
   </div>
 </BaseLayout>
+
+<script>
+  const bars = document.querySelectorAll<HTMLElement>('.post-bar-fill');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          el.style.width = el.dataset.width ?? '0%';
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  bars.forEach((bar) => observer.observe(bar));
+</script>
 
 <style>
   .home-hero {
@@ -389,12 +409,13 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
     height: 100%;
     background: var(--accent);
     border-radius: 3px;
-    min-width: 4px;
+    min-width: 0;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .post-bar-count {
-    font-size: 0.78rem;
-    color: var(--text-dim);
+    font-size: 0.82rem;
+    color: var(--text-muted);
     width: 2rem;
     text-align: right;
     flex-shrink: 0;
