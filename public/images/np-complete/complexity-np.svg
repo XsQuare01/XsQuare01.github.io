@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" width="620" height="300">
+  <rect width="620" height="300" fill="#0f1117" rx="10"/>
+  <text x="310" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">복잡도 클래스 계층</text>
+
+  <!-- NP-Hard outer region -->
+  <rect x="18" y="26" width="584" height="262" rx="8" fill="rgba(251,191,36,0.06)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="28" y="46" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#fbbf24">NP-Hard</text>
+  <text x="28" y="60" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fcd34d">모든 NP 문제가 귀착됨</text>
+
+  <!-- NP region -->
+  <ellipse cx="280" cy="165" rx="220" ry="110" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.8"/>
+  <text x="80" y="82" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#a78bfa">NP</text>
+  <text x="80" y="95" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#c4b5fd">NTM, 다항식 시간</text>
+
+  <!-- P region -->
+  <ellipse cx="200" cy="170" rx="105" ry="75" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1.8"/>
+  <text x="200" y="165" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#4ade80">P</text>
+  <text x="200" y="182" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#86efac">DTM, 다항식 시간</text>
+
+  <!-- NP-Complete dots (right part of NP, outside P) -->
+  <circle cx="358" cy="122" r="5" fill="#f87171"/>
+  <circle cx="382" cy="165" r="5" fill="#f87171"/>
+  <circle cx="358" cy="208" r="5" fill="#f87171"/>
+  <text x="368" y="118" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">SAT</text>
+  <text x="392" y="169" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">3-SAT</text>
+  <text x="368" y="222" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">Hamiltonian Path</text>
+
+  <!-- NP-Complete label with dashed lines -->
+  <text x="312" y="95" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#f87171">NP-Complete</text>
+  <line x1="330" y1="98" x2="358" y2="118" stroke="#f87171" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="330" y1="98" x2="382" y2="162" stroke="#f87171" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- NP-Hard outside NP -->
+  <circle cx="553" cy="148" r="4" fill="#fbbf24"/>
+  <text x="563" y="152" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">Halting Problem</text>
+
+  <!-- P = NP question -->
+  <text x="310" y="285" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4b5563" font-style="italic">P = NP이면 NP-Complete ⊂ P — 컴퓨터 과학 최대의 미해결 문제</text>
+</svg>
