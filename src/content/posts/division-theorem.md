@@ -125,3 +125,8 @@ $$\therefore \ r_2 - r_1 = 0 \implies r_1 = r_2, \quad q_1 = q_2$$
 <li>이 정리는 모듈러 산술, GCD(유클리드 호제법), RSA 등 암호학 전반의 수학적 기반이 된다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Greatest Common Divisor — 최대공약수와 유클리드 호제법</strong> — GCD를 대수적으로 정의하고, Division Theorem을 기반으로 한 유클리드 호제법과 확장 유클리드 알고리즘(베주 항등식)을 엄밀하게 증명한다. 서로소의 성질과 GCD 정의의 동치 증명까지 다룬다.</p>
+</div>
