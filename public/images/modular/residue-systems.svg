@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 268" width="620" height="268">
+  <rect width="620" height="268" fill="#0f1117" rx="10"/>
+  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">완전 잉여계 Zm과 축약 잉여계 Zm* — m = 10 예시</text>
+
+  <!-- Zm label -->
+  <text x="20" y="36" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">Zm = {0, 1, 2, ..., 9}  완전 잉여계 (Complete Residue System)</text>
+
+  <!-- Row 1: Z10 = {0,...,9}, spacing 60, r=20 -->
+  <!-- 0: excluded -->
+  <circle cx="40"  cy="65" r="20" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="40"  y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">0</text>
+  <!-- 1: Zm* -->
+  <circle cx="100" cy="65" r="20" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="100" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4ade80">1</text>
+  <!-- 2: excluded -->
+  <circle cx="160" cy="65" r="20" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="160" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">2</text>
+  <!-- 3: Zm* -->
+  <circle cx="220" cy="65" r="20" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="220" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4ade80">3</text>
+  <!-- 4: excluded -->
+  <circle cx="280" cy="65" r="20" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="280" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">4</text>
+  <!-- 5: excluded (gcd=5) -->
+  <circle cx="340" cy="65" r="20" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="340" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">5</text>
+  <!-- 6: excluded -->
+  <circle cx="400" cy="65" r="20" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="400" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">6</text>
+  <!-- 7: Zm* -->
+  <circle cx="460" cy="65" r="20" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="460" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4ade80">7</text>
+  <!-- 8: excluded -->
+  <circle cx="520" cy="65" r="20" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="520" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4b5563">8</text>
+  <!-- 9: Zm* -->
+  <circle cx="580" cy="65" r="20" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="580" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#4ade80">9</text>
+
+  <!-- Legend -->
+  <circle cx="28" cy="100" r="7" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="42" y="104" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">gcd(a, 10) = 1 → Zm* 원소</text>
+  <circle cx="28" cy="118" r="7" fill="#1a2035" stroke="#374151" stroke-width="1.5"/>
+  <text x="42" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4b5563">gcd(a, 10) &gt; 1 → Zm 전용</text>
+
+  <!-- Separator -->
+  <line x1="20" y1="132" x2="600" y2="132" stroke="#2d3748" stroke-width="1"/>
+
+  <!-- Zm* label -->
+  <text x="20" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">Zm* = {a | gcd(a, m) = 1}  축약 잉여계 (Reduced Residue System) — 곱셈 역원 존재</text>
+
+  <!-- Row 2: Zm* = {1, 3, 7, 9}, centered, r=23 -->
+  <circle cx="198" cy="180" r="23" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="198" y="186" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="700" fill="#4ade80">1</text>
+  <circle cx="273" cy="180" r="23" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="273" y="186" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="700" fill="#4ade80">3</text>
+  <circle cx="348" cy="180" r="23" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="348" y="186" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="700" fill="#4ade80">7</text>
+  <circle cx="423" cy="180" r="23" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
+  <text x="423" y="186" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="700" fill="#4ade80">9</text>
+
+  <!-- φ(10) annotation -->
+  <text x="490" y="174" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#fbbf24">φ(10) = 4</text>
+  <text x="490" y="191" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fcd34d">= |Zm*|</text>
+
+  <!-- Captions -->
+  <text x="310" y="232" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#94a3b8">a ∈ Zm*이면  a^φ(m) ≡ 1 (mod m)  — 오일러 정리</text>
+  <text x="310" y="251" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">m이 소수이면 φ(m) = m − 1  — 페르마의 소정리</text>
+</svg>
