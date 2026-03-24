@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" width="620" height="300">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 355" width="620" height="355">
   <rect width="620" height="300" fill="#0f1117" rx="10"/>
   <text x="310" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">복잡도 클래스 계층</text>
 
@@ -34,6 +34,7 @@
   <circle cx="553" cy="148" r="4" fill="#fbbf24"/>
   <text x="563" y="152" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">Halting Problem</text>
 
-  <!-- P = NP question -->
-  <text x="310" y="285" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4b5563" font-style="italic">P = NP이면 NP-Complete ⊂ P — 컴퓨터 과학 최대의 미해결 문제</text>
+  <!-- P = NP question (below diagram) -->
+  <text x="310" y="310" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#94a3b8">P = NP 이면, NP-Complete ⊂ P</text>
+  <text x="310" y="332" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">컴퓨터 과학 최대의 미해결 문제</text>
 </svg>
