@@ -166,3 +166,8 @@ $d = \gcd(a, b, c)$는 다음을 만족하는 유일한 정수 $d \geq 0$이다.
 <li>서로소 성질(gcd = 1)은 정수론 전반에서 핵심 도구로 쓰이며, 특히 암호 시스템에서 키와 모듈러스의 관계를 보장하는 데 필수적이다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Modular Arithmetic — 모듈러 산술과 잉여계</strong> — GCD를 기반으로 모듈러 산술의 동치 관계를 정의하고, 완전·축약 잉여계, 오일러 정리, 페르마의 소정리, 중국인의 나머지 정리(CRT)까지 — 공개키 암호의 계산 엔진을 완성한다.</p>
+</div>
