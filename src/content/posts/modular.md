@@ -184,6 +184,11 @@ $$
 
 이것이 **페르마의 소정리(Fermat's Little Theorem)**이다. RSA에서 복호화 정확성을 보장하는 핵심 정리이다.
 
+<div class="callout">
+<div class="callout-title">참고</div>
+<p>페르마의 소정리의 두 가지 증명, 모듈러 역원 공식(a^(p−2)), 페르마 소수 판별법, Carmichael 수의 한계까지 자세히 다룬다. → <strong>Fermat's Little Theorem — 페르마의 소정리</strong></p>
+</div>
+
 ## 중국인의 나머지 정리 (CRT)
 
 **설정**: $m_1, \ldots, m_r$이 서로 쌍으로 서로소(pairwise coprime)이고 $m = m_1 \cdots m_r$일 때,
@@ -222,6 +227,11 @@ x \cdot y \leftrightarrow (c_1 d_1, \ldots, c_r d_r)
 $$
 
 즉 $m$에 대한 연산을 각 $m_i$에 대한 작은 연산들로 분해할 수 있다. 이것이 CRT를 대규모 모듈러 연산 최적화에 활용하는 이유이다.
+
+<div class="callout">
+<div class="callout-title">참고</div>
+<p>유일성 증명, 단계별 수치 계산 예시(x≡2(mod 3), x≡3(mod 5), x≡2(mod 7) → x=23), RSA-CRT 4배 속도 향상까지 자세히 다룬다. → <strong>Chinese Remainder Theorem — 중국인의 나머지 정리</strong></p>
+</div>
 
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
