@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 315" width="580" height="315">
-  <rect width="580" height="315" fill="#0f1117" rx="10"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 368" width="580" height="368">
+  <rect width="580" height="368" fill="#0f1117" rx="10"/>
   <text x="290" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">복잡도 클래스 계층</text>
 
-  <rect x="18" y="28" width="544" height="272" rx="8" fill="rgba(248,113,113,0.07)" stroke="#f87171" stroke-width="1.8"/>
+  <rect x="18" y="28" width="544" height="248" rx="8" fill="rgba(248,113,113,0.07)" stroke="#f87171" stroke-width="1.8"/>
   <text x="28" y="48" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" fill="#f87171">EXP</text>
   <text x="28" y="63" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fca5a5">지수 시간, DTM</text>
 
@@ -22,5 +22,6 @@
   <text x="360" y="205" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99" font-style="italic">P = NP ?</text>
   <text x="360" y="221" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4b5563">미해결 문제</text>
 
-  <text x="400" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4b5563">P ≠ EXP 는 증명됨</text>
+  <text x="290" y="304" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#94a3b8">P ≠ EXP 는 증명됨</text>
+  <text x="290" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">반면 P = NP 여부는 미해결 문제</text>
 </svg>
