@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 355" width="620" height="355">
-  <rect width="620" height="300" fill="#0f1117" rx="10"/>
+  <rect width="620" height="355" fill="#0f1117" rx="10"/>
   <text x="310" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">복잡도 클래스 계층</text>
 
   <!-- NP-Hard outer region -->
@@ -31,8 +31,8 @@
   <line x1="330" y1="98" x2="382" y2="162" stroke="#f87171" stroke-width="1" stroke-dasharray="3,2"/>
 
   <!-- NP-Hard outside NP -->
-  <circle cx="553" cy="148" r="4" fill="#fbbf24"/>
-  <text x="563" y="152" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">Halting Problem</text>
+  <circle cx="508" cy="148" r="4" fill="#fbbf24"/>
+  <text x="518" y="152" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">Halting Problem</text>
 
   <!-- P = NP question (below diagram) -->
   <text x="310" y="310" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#94a3b8">P = NP 이면, NP-Complete ⊂ P</text>
