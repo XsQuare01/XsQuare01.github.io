@@ -156,3 +156,13 @@ $d = \gcd(a, b, c)$는 다음을 만족하는 유일한 정수 $d \geq 0$이다.
 2. 모든 정수 $e$에 대해 $e \mid a$, $e \mid b$, $e \mid c$이면 $e \mid d$
 
 계산은 연속 적용으로 처리한다. $\gcd(a, b, c) = \gcd(\gcd(a, b), c)$.
+
+<div class="callout callout-key">
+<div class="callout-title">핵심 정리</div>
+<ul>
+<li>GCD의 대수적 정의는 "가장 큰 공약수"라는 직관적 정의와 동치이며, c | d 조건이 더 엄밀하고 다루기 쉽다.</li>
+<li>유클리드 호제법은 gcd(b, a) = gcd(a, r)을 반복 적용해 로그 시간에 GCD를 구한다.</li>
+<li>확장 유클리드 알고리즘(베주 항등식)은 gcd(a, b) = xa + yb를 보장한다. 이는 서로소 판별, 모듈러 역원 계산, RSA 키 생성의 수학적 근거가 된다.</li>
+<li>서로소 성질(gcd = 1)은 정수론 전반에서 핵심 도구로 쓰이며, 특히 암호 시스템에서 키와 모듈러스의 관계를 보장하는 데 필수적이다.</li>
+</ul>
+</div>
