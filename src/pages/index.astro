@@ -39,16 +39,21 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
       <div class="home-intro">
         <h1 class="home-name">XsQuare01</h1>
         <p class="home-tagline">게임 클라이언트와 UI 구현에 집중하는 개발자</p>
+        <div class="home-badges">
+          <span class="home-badge">Unity</span>
+          <span class="home-badge">UI/UX</span>
+          <span class="home-badge">Game Client</span>
+          <span class="home-badge">CS</span>
+        </div>
         <p class="home-desc">
           사용자 경험이 자연스럽게 느껴지는 화면과 인터랙션을 만드는 데 관심이 있습니다.<br />
           Unity 기반 클라이언트 개발, UI 설계와 구현, 그리고 문제 해결을 위한 CS 학습 과정을 기록합니다.
         </p>
-        <p class="home-links">
-          Seoul &nbsp;·&nbsp;
-          <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer">GitHub</a>
-          &nbsp;·&nbsp;
-          <a href="mailto:mystic6113@naver.com">이메일</a>
-        </p>
+        <div class="home-cta-row">
+          <a href={`/blog/${FEATURED_ID}`} class="home-cta-primary">처음 방문했다면 이 글부터 →</a>
+          <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer" class="home-cta-secondary">GitHub</a>
+          <a href="mailto:mystic6113@naver.com" class="home-cta-secondary">이메일</a>
+        </div>
       </div>
     </section>
 
@@ -88,17 +93,32 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     <section class="home-section">
       <h2>Tech Stack</h2>
       <div class="stack-list">
-        <div class="stack-row">
+        <div class="stack-group">
           <span class="stack-label">Main</span>
-          <span class="stack-items">Unity, C#, C++, UI 설계 및 구현</span>
+          <div class="stack-chips">
+            <span class="stack-chip stack-chip--main">Unity</span>
+            <span class="stack-chip stack-chip--main">C#</span>
+            <span class="stack-chip stack-chip--main">C++</span>
+            <span class="stack-chip stack-chip--main">UI 설계 및 구현</span>
+          </div>
         </div>
-        <div class="stack-row">
+        <div class="stack-group">
           <span class="stack-label">Experienced With</span>
-          <span class="stack-items">TypeScript, Python, Git, 웹 프론트엔드/도구 활용</span>
+          <div class="stack-chips">
+            <span class="stack-chip">TypeScript</span>
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">Git</span>
+            <span class="stack-chip">웹 프론트엔드</span>
+          </div>
         </div>
-        <div class="stack-row">
+        <div class="stack-group">
           <span class="stack-label">Interested In</span>
-          <span class="stack-items">알고리즘, 컴퓨터 사이언스, 클라이언트 구조 설계, 인터랙션 최적화</span>
+          <div class="stack-chips">
+            <span class="stack-chip stack-chip--dim">알고리즘</span>
+            <span class="stack-chip stack-chip--dim">CS 이론</span>
+            <span class="stack-chip stack-chip--dim">클라이언트 구조 설계</span>
+            <span class="stack-chip stack-chip--dim">인터랙션 최적화</span>
+          </div>
         </div>
       </div>
     </section>
@@ -147,27 +167,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
       </ul>
     </section>
 
-    <!-- 섹션 4: Activity -->
-    <section class="home-section">
-      <h2>Activity</h2>
-      <p class="stats-desc">학습과 개발 과정에서 쌓인 기록들입니다.<br />세부적인 수치보다 꾸준히 만들고 정리하는 흐름을 중요하게 생각합니다.</p>
-      <div class="stats-row">
-        <img
-          src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
-          alt="XsQuare01's GitHub Stats"
-          loading="lazy"
-          height="150"
-        />
-        <img
-          src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
-          alt="solved.ac 티어"
-          loading="lazy"
-          height="150"
-        />
-      </div>
-    </section>
-
-    <!-- 섹션 5: Post Stats -->
+    <!-- 섹션 4: Post Stats -->
     <section class="home-section">
       <h2>Post Stats</h2>
       <p class="stats-desc">카테고리별 포스트 현황입니다.</p>
@@ -188,6 +188,26 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
             </li>
           ))}
         </ul>
+      </div>
+    </section>
+
+    <!-- 섹션 5: Activity -->
+    <section class="home-section">
+      <h2>Activity</h2>
+      <p class="stats-desc">학습과 개발 과정에서 쌓인 기록들입니다.<br />세부적인 수치보다 꾸준히 만들고 정리하는 흐름을 중요하게 생각합니다.</p>
+      <div class="stats-row">
+        <img
+          src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
+          alt="XsQuare01's GitHub Stats"
+          loading="lazy"
+          height="150"
+        />
+        <img
+          src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
+          alt="solved.ac 티어"
+          loading="lazy"
+          height="150"
+        />
       </div>
     </section>
 
@@ -492,6 +512,102 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     width: 2rem;
     text-align: right;
     flex-shrink: 0;
+  }
+
+  /* ── Home badges ── */
+  .home-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.25rem 0;
+  }
+
+  .home-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(249, 115, 22, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── CTA buttons ── */
+  .home-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .home-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .home-cta-primary:hover {
+    opacity: 0.85;
+  }
+
+  .home-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: var(--bg-hover);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .home-cta-secondary:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+
+  /* ── Stack chips ── */
+  .stack-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .stack-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .stack-chip {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--bg-hover);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .stack-chip--main {
+    background: rgba(249, 115, 22, 0.1);
+    color: var(--accent);
+    border-color: rgba(249, 115, 22, 0.25);
+    font-weight: 600;
+  }
+
+  .stack-chip--dim {
+    opacity: 0.65;
   }
 
   @media (max-width: 640px) {
