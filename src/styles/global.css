@@ -1,6 +1,15 @@
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+::selection {
+  background: rgba(249, 115, 22, 0.25);
+  color: var(--text);
+}
+::-moz-selection {
+  background: rgba(249, 115, 22, 0.25);
+  color: var(--text);
+}
+
 :root {
   --bg: #0f1117;
   --bg-sidebar: #141720;
