@@ -10,6 +10,13 @@
   color: var(--text);
 }
 
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid rgba(249, 115, 22, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 :root {
   --bg: #0f1117;
   --bg-sidebar: #141720;
