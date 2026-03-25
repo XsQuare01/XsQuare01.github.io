@@ -99,6 +99,12 @@ const currentPath = Astro.url.pathname;
       <div class="sidebar-bio">배운 것을 정리하고 남깁니다</div>
     </div>
 
+    <button id="search-btn" aria-label="검색">
+      <span id="search-btn-icon">🔍</span>
+      검색
+      <kbd id="search-btn-kbd">Ctrl K</kbd>
+    </button>
+
     <nav class="sidebar-nav">
       <div class="sidebar-nav-label">메뉴</div>
       <a href="/" class={currentPath === '/' ? 'active' : ''}>홈</a>
@@ -157,10 +163,126 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <button id="back-to-top" aria-label="맨 위로">↑</button>
+
+  <div id="search-modal" role="dialog" aria-modal="true" aria-label="검색">
+    <div class="search-modal-box">
+      <div class="search-modal-input-row">
+        <span class="search-modal-icon">🔍</span>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="검색어를 입력하세요..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <span class="search-modal-esc">esc</span>
+      </div>
+      <div id="search-results"></div>
+    </div>
+  </div>
 </body>
 </html>
 
 <script>
+  import Fuse from 'fuse.js';
+
+  // ── 검색 모달 ──
+  const modal = document.getElementById('search-modal') as HTMLElement;
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const searchResults = document.getElementById('search-results') as HTMLElement;
+
+  let fuse: InstanceType<typeof Fuse> | null = null;
+
+  async function loadIndex() {
+    if (fuse) return;
+    const res = await fetch('/search-index.json');
+    const data = await res.json();
+    fuse = new Fuse(data, {
+      keys: [
+        { name: 'title',       weight: 0.5 },
+        { name: 'description', weight: 0.25 },
+        { name: 'tags',        weight: 0.15 },
+        { name: 'category',    weight: 0.10 },
+      ],
+      threshold: 0.4,
+      minMatchCharLength: 2,
+    });
+  }
+
+  function openModal() {
+    modal.classList.add('open');
+    searchInput.focus();
+    loadIndex();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+  }
+
+  document.getElementById('search-btn')?.addEventListener('click', openModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      modal.classList.contains('open') ? closeModal() : openModal();
+    }
+    if (e.key === 'Escape') closeModal();
+  });
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim();
+    if (!query || !fuse) {
+      searchResults.innerHTML = '';
+      return;
+    }
+
+    const results = fuse.search(query, { limit: 8 });
+    if (results.length === 0) {
+      searchResults.innerHTML = `<div class="search-empty">결과 없음</div>`;
+      return;
+    }
+
+    searchResults.innerHTML = results
+      .map(({ item }) => `
+        <a class="search-result-item" href="/blog/${item.id}">
+          <span class="search-result-title">${item.title}</span>
+          ${item.category ? `<span class="search-result-badge">${item.category}</span>` : ''}
+        </a>
+      `)
+      .join('');
+
+    attachKeyNav();
+  });
+
+  function attachKeyNav() {
+    const items = searchResults.querySelectorAll<HTMLAnchorElement>('.search-result-item');
+    let idx = -1;
+
+    searchInput.onkeydown = (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        items[idx]?.classList.remove('focused');
+        idx = Math.min(idx + 1, items.length - 1);
+        items[idx]?.classList.add('focused');
+        items[idx]?.scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        items[idx]?.classList.remove('focused');
+        idx = Math.max(idx - 1, 0);
+        items[idx]?.scrollIntoView({ block: 'nearest' });
+        items[idx]?.classList.add('focused');
+      } else if (e.key === 'Enter' && idx >= 0) {
+        items[idx]?.click();
+      }
+    };
+  }
+
   const btn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
     btn?.classList.toggle('visible', window.scrollY > 300);
