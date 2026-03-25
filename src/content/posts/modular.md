@@ -242,3 +242,8 @@ $$
 <li>CRT는 큰 모듈러 연산을 작은 연산들로 분해해 병렬 처리를 가능하게 한다. RSA-CRT 최적화의 핵심이다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>RSA — 공개키 암호의 수학적 구조</strong> — 지금까지 쌓아온 모든 정수론 도구(GCD, 모듈러 산술, 오일러 정리, 페르마 정리, CRT)가 수렴하는 지점. RSA 키 생성, 복호화 정확성 증명, 소인수분해 보안 근거, Square-and-Multiply 고속 지수연산까지 다룬다.</p>
+</div>
