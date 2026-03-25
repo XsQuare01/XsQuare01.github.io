@@ -2,5 +2,4 @@ dist/
 node_modules/
 .astro/
 .env
-docs/
 .superpowers/
