@@ -192,21 +192,35 @@ const currentPath = Astro.url.pathname;
   const searchResults = document.getElementById('search-results') as HTMLElement;
 
   let fuse: InstanceType<typeof Fuse> | null = null;
+  let navIdx = -1;  // idx는 모달 스코프에서 관리
+
+  function escHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
 
   async function loadIndex() {
     if (fuse) return;
-    const res = await fetch('/search-index.json');
-    const data = await res.json();
-    fuse = new Fuse(data, {
-      keys: [
-        { name: 'title',       weight: 0.5 },
-        { name: 'description', weight: 0.25 },
-        { name: 'tags',        weight: 0.15 },
-        { name: 'category',    weight: 0.10 },
-      ],
-      threshold: 0.4,
-      minMatchCharLength: 2,
-    });
+    try {
+      const res = await fetch('/search-index.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      fuse = new Fuse(data, {
+        keys: [
+          { name: 'title',       weight: 0.5 },
+          { name: 'description', weight: 0.25 },
+          { name: 'tags',        weight: 0.15 },
+          { name: 'category',    weight: 0.10 },
+        ],
+        threshold: 0.4,
+        minMatchCharLength: 2,
+      });
+    } catch {
+      searchResults.innerHTML = `<div class="search-empty">인덱스 로드 실패</div>`;
+    }
   }
 
   function openModal() {
@@ -219,6 +233,38 @@ const currentPath = Astro.url.pathname;
     modal.classList.remove('open');
     searchInput.value = '';
     searchResults.innerHTML = '';
+    navIdx = -1;
+  }
+
+  function renderResults(query: string) {
+    if (!query || !fuse) {
+      searchResults.innerHTML = '';
+      navIdx = -1;
+      return;
+    }
+    const results = fuse.search(query, { limit: 8 });
+    searchResults.innerHTML = '';
+    navIdx = -1;
+    if (results.length === 0) {
+      searchResults.innerHTML = `<div class="search-empty">결과 없음</div>`;
+      return;
+    }
+    results.forEach(({ item }) => {
+      const a = document.createElement('a');
+      a.className = 'search-result-item';
+      a.href = `/blog/${escHtml(item.id)}`;
+      const title = document.createElement('span');
+      title.className = 'search-result-title';
+      title.textContent = item.title;
+      a.appendChild(title);
+      if (item.category) {
+        const badge = document.createElement('span');
+        badge.className = 'search-result-badge';
+        badge.textContent = item.category;
+        a.appendChild(badge);
+      }
+      searchResults.appendChild(a);
+    });
   }
 
   document.getElementById('search-btn')?.addEventListener('click', openModal);
@@ -236,52 +282,33 @@ const currentPath = Astro.url.pathname;
   });
 
   searchInput.addEventListener('input', () => {
-    const query = searchInput.value.trim();
-    if (!query || !fuse) {
-      searchResults.innerHTML = '';
-      return;
-    }
-
-    const results = fuse.search(query, { limit: 8 });
-    if (results.length === 0) {
-      searchResults.innerHTML = `<div class="search-empty">결과 없음</div>`;
-      return;
-    }
-
-    searchResults.innerHTML = results
-      .map(({ item }) => `
-        <a class="search-result-item" href="/blog/${item.id}">
-          <span class="search-result-title">${item.title}</span>
-          ${item.category ? `<span class="search-result-badge">${item.category}</span>` : ''}
-        </a>
-      `)
-      .join('');
-
-    attachKeyNav();
+    renderResults(searchInput.value.trim());
   });
 
-  function attachKeyNav() {
+  searchInput.addEventListener('keydown', (e) => {
     const items = searchResults.querySelectorAll<HTMLAnchorElement>('.search-result-item');
-    let idx = -1;
+    if (!items.length) return;
 
-    searchInput.onkeydown = (e) => {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        items[idx]?.classList.remove('focused');
-        idx = Math.min(idx + 1, items.length - 1);
-        items[idx]?.classList.add('focused');
-        items[idx]?.scrollIntoView({ block: 'nearest' });
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        items[idx]?.classList.remove('focused');
-        idx = Math.max(idx - 1, 0);
-        items[idx]?.scrollIntoView({ block: 'nearest' });
-        items[idx]?.classList.add('focused');
-      } else if (e.key === 'Enter' && idx >= 0) {
-        items[idx]?.click();
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      items[navIdx]?.classList.remove('focused');
+      navIdx = Math.min(navIdx + 1, items.length - 1);
+      items[navIdx]?.classList.add('focused');
+      items[navIdx]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      items[navIdx]?.classList.remove('focused');
+      navIdx = navIdx <= 0 ? -1 : navIdx - 1;
+      if (navIdx >= 0) {
+        items[navIdx]?.classList.add('focused');
+        items[navIdx]?.scrollIntoView({ block: 'nearest' });
+      } else {
+        searchInput.focus();
       }
-    };
-  }
+    } else if (e.key === 'Enter' && navIdx >= 0) {
+      items[navIdx]?.click();
+    }
+  });
 
   const btn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
