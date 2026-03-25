@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 348" width="860" height="348">
-  <rect width="860" height="348" fill="#0f1117" rx="10"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="860" height="380">
+  <rect width="860" height="380" fill="#0f1117" rx="10"/>
   <text x="430" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">RSA 구조 — 키 구성과 암복호화 흐름</text>
 
   <defs>
@@ -68,6 +68,6 @@
   <text x="557" y="303" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">암호문 C  →  평문 m</text>
 
   <!-- Captions -->
-  <text x="430" y="333" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#94a3b8">n, e 공개  ·  p, q, d, φ(n) 비공개</text>
-  <text x="430" y="344" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">n = pq 소인수분해 → φ(n) → d 역산 가능  — 소인수분해의 어려움이 보안 근거</text>
+  <text x="430" y="345" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#94a3b8">n, e 공개  ·  p, q, d, φ(n) 비공개</text>
+  <text x="430" y="362" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">n = pq 소인수분해 → φ(n) → d 역산 가능  — 소인수분해의 어려움이 보안 근거</text>
 </svg>
