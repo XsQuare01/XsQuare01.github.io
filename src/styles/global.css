@@ -35,6 +35,21 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
+html.light {
+  --bg: #f7f8fc;
+  --bg-sidebar: #eef0f7;
+  --bg-card: #ffffff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --text: #1a1f2e;
+  --text-muted: #4a5568;
+  --text-dim: #8896a8;
+  --border: #c8d0de;
+  --accent: #e8650f;
+  --accent-dim: rgba(232, 101, 15, 0.1);
+  --accent-2: #0284c7;
+  --accent-3: #7c3aed;
+}
+
 html {
   font-family: var(--font-sans);
   background: var(--bg);
@@ -242,6 +257,86 @@ a:hover { color: var(--accent); }
   text-align: center;
   padding-top: 1rem;
   opacity: 0.6;
+}
+
+/* ── Theme Toggle ── */
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  color: var(--text-dim);
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+#theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.theme-toggle-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.theme-label-dark,
+.theme-icon-sun { display: none; }
+
+html.light .theme-label-light,
+html.light .theme-icon-moon { display: none; }
+
+html.light .theme-label-dark,
+html.light .theme-icon-sun { display: inline; }
+
+/* ── Light Mode Overrides ── */
+html.light body {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 60% 0%, rgba(249, 115, 22, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(2, 132, 199, 0.04) 0%, transparent 50%);
+}
+
+html.light .sidebar-profile {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+html.light .post-item {
+  border-color: rgba(0, 0, 0, 0.09);
+}
+
+html.light .sidebar-tags .tag {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: var(--text-dim);
+}
+
+html.light .prose pre {
+  background: #f6f8fa !important;
+  border: 1px solid var(--border);
+}
+
+html.light .prose code {
+  background: rgba(0, 0, 0, 0.06);
+  color: #0e6a8f;
+}
+
+html.light .glossary {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+html.light .glossary-item {
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+
+html.light #reading-progress {
+  background: linear-gradient(90deg, var(--accent) 0%, #fbbf24 60%, rgba(249, 115, 22, 0.4) 100%);
 }
 
 /* ── Main ── */

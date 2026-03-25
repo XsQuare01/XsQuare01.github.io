@@ -59,6 +59,15 @@ const currentPath = Astro.url.pathname;
 
   <title>{title} | XsQuare01</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script is:inline>
+    (function() {
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'light' || (!stored && !prefersDark)) {
+        document.documentElement.classList.add('light');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
 
   <!-- Google tag (gtag.js) -->
@@ -123,7 +132,13 @@ const currentPath = Astro.url.pathname;
     )}
 
     <div class="sidebar-footer">
-      © {new Date().getFullYear()} XsQuare01
+      <button id="theme-toggle" aria-label="테마 전환">
+        <span class="theme-toggle-icon theme-icon-moon">☽</span>
+        <span class="theme-toggle-icon theme-icon-sun">☀</span>
+        <span class="theme-label-light">라이트 모드</span>
+        <span class="theme-label-dark">다크 모드</span>
+      </button>
+      <div style="margin-top:0.5rem;">© {new Date().getFullYear()} XsQuare01</div>
     </div>
   </aside>
 
@@ -151,6 +166,11 @@ const currentPath = Astro.url.pathname;
     btn?.classList.toggle('visible', window.scrollY > 300);
   }, { passive: true });
   btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
 </script>
 
 <style is:global>
