@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 310" width="620" height="310">
-  <rect width="620" height="310" fill="#0f1117" rx="10"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 348" width="620" height="348">
+  <rect width="620" height="348" fill="#0f1117" rx="10"/>
   <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">RSA 구조 — 키 구성과 암복호화 흐름</text>
 
   <defs>
@@ -11,63 +11,63 @@
     </marker>
   </defs>
 
-  <!-- Left panel: Key Components (x=15, width=232, height=248) -->
-  <rect x="15" y="28" width="232" height="248" rx="6" fill="rgba(30,41,59,0.5)" stroke="#374151" stroke-width="1.2"/>
+  <!-- Left panel (y=28, height=295 → bottom y=323) -->
+  <rect x="15" y="28" width="232" height="295" rx="6" fill="rgba(30,41,59,0.5)" stroke="#374151" stroke-width="1.2"/>
   <text x="131" y="46" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#94a3b8">키 구성</text>
   <line x1="15" y1="53" x2="247" y2="53" stroke="#374151" stroke-width="1"/>
 
-  <!-- Row 1: p, q -->
+  <!-- Row 1: p, q  (y=72) -->
   <text x="30" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fbbf24">p, q</text>
-  <text x="30" y="85" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">큰 소수 선택 · 비공개</text>
+  <text x="30" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">큰 소수 선택 · 비공개</text>
 
-  <!-- Row 2: n = pq -->
-  <text x="30" y="106" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#e2e8f0">n = p·q</text>
-  <text x="30" y="119" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">공개 (modulus)</text>
+  <!-- Row 2: n = pq  (y=116) -->
+  <text x="30" y="116" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#e2e8f0">n = p·q</text>
+  <text x="30" y="130" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">공개 (modulus)</text>
 
-  <!-- Row 3: φ(n) -->
-  <text x="30" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fbbf24">φ(n) = (p−1)(q−1)</text>
-  <text x="30" y="153" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">비공개 · 보안의 핵심</text>
+  <!-- Row 3: φ(n)  (y=160) -->
+  <text x="30" y="160" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fbbf24">φ(n) = (p−1)(q−1)</text>
+  <text x="30" y="174" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">비공개 · 보안의 핵심</text>
 
-  <!-- Row 4: e -->
-  <text x="30" y="174" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#e2e8f0">e</text>
-  <text x="30" y="187" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">gcd(e, φ(n)) = 1 · 공개</text>
+  <!-- Row 4: e  (y=204) -->
+  <text x="30" y="204" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#e2e8f0">e</text>
+  <text x="30" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">gcd(e, φ(n)) = 1 · 공개</text>
 
-  <!-- Row 5: d -->
-  <text x="30" y="208" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fbbf24">d</text>
-  <text x="30" y="221" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">ed ≡ 1 (mod φ(n)) · 비공개</text>
+  <!-- Row 5: d  (y=248) -->
+  <text x="30" y="248" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fbbf24">d</text>
+  <text x="30" y="262" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">ed ≡ 1 (mod φ(n)) · 비공개</text>
 
   <!-- Separator + Summary -->
-  <line x1="15" y1="234" x2="247" y2="234" stroke="#374151" stroke-width="1"/>
-  <text x="131" y="250" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#4ade80">공개키: (n, e)</text>
-  <text x="131" y="265" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#fbbf24">개인키: (p, q, d, φ(n))</text>
+  <line x1="15" y1="278" x2="247" y2="278" stroke="#374151" stroke-width="1"/>
+  <text x="131" y="295" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#4ade80">공개키: (n, e)</text>
+  <text x="131" y="311" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#fbbf24">개인키: (p, q, d, φ(n))</text>
 
-  <!-- Arrow: key gen → encryption (at encryption box midpoint y=88) -->
-  <line x1="247" y1="106" x2="270" y2="88" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <!-- Arrow: → encryption (from n=pq row) -->
+  <line x1="247" y1="116" x2="270" y2="98" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#arr-blue)"/>
 
-  <!-- Arrow: key gen → decryption (at decryption box midpoint y=220) -->
-  <line x1="247" y1="208" x2="270" y2="224" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <!-- Arrow: → decryption (from d row) -->
+  <line x1="247" y1="248" x2="270" y2="260" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-blue)"/>
 
-  <!-- Right top: Encryption box -->
-  <rect x="270" y="28" width="335" height="120" rx="6" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1.5"/>
+  <!-- Right top: Encryption box (y=28, height=139 → bottom y=167) -->
+  <rect x="270" y="28" width="335" height="139" rx="6" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1.5"/>
   <text x="437" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#60a5fa">암호화 (Encryption)</text>
   <line x1="270" y1="55" x2="605" y2="55" stroke="#60a5fa" stroke-width="0.8" stroke-opacity="0.5"/>
-  <text x="437" y="90" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#93c5fd">C = m^e  mod n</text>
-  <text x="437" y="110" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">공개키 (n, e) 사용 — 누구나 암호화 가능</text>
-  <text x="437" y="127" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#60a5fa">평문 m  →  암호문 C</text>
+  <text x="437" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#93c5fd">C = m^e  mod n</text>
+  <text x="437" y="120" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">공개키 (n, e) 사용 — 누구나 암호화 가능</text>
+  <text x="437" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#60a5fa">평문 m  →  암호문 C</text>
 
   <!-- Arrow: C flows down -->
-  <line x1="437" y1="148" x2="437" y2="173" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-gray)"/>
-  <text x="450" y="164" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">C</text>
+  <line x1="437" y1="167" x2="437" y2="192" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+  <text x="450" y="183" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">C</text>
 
-  <!-- Right bottom: Decryption box -->
-  <rect x="270" y="178" width="335" height="98" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="437" y="198" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#4ade80">복호화 (Decryption)</text>
-  <line x1="270" y1="205" x2="605" y2="205" stroke="#4ade80" stroke-width="0.8" stroke-opacity="0.5"/>
-  <text x="437" y="233" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#86efac">m = C^d  mod n</text>
-  <text x="437" y="252" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">개인키 d 사용 — 수신자만 복호화 가능</text>
-  <text x="437" y="268" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">암호문 C  →  평문 m</text>
+  <!-- Right bottom: Decryption box (y=197, height=126 → bottom y=323) -->
+  <rect x="270" y="197" width="335" height="126" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="437" y="217" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#4ade80">복호화 (Decryption)</text>
+  <line x1="270" y1="224" x2="605" y2="224" stroke="#4ade80" stroke-width="0.8" stroke-opacity="0.5"/>
+  <text x="437" y="265" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#86efac">m = C^d  mod n</text>
+  <text x="437" y="285" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">개인키 d 사용 — 수신자만 복호화 가능</text>
+  <text x="437" y="303" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">암호문 C  →  평문 m</text>
 
   <!-- Captions -->
-  <text x="310" y="289" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#94a3b8">n, e 공개  ·  p, q, d, φ(n) 비공개</text>
-  <text x="310" y="304" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">n = pq 소인수분해 → φ(n) → d 역산 가능  — 소인수분해의 어려움이 보안 근거</text>
+  <text x="310" y="333" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#94a3b8">n, e 공개  ·  p, q, d, φ(n) 비공개</text>
+  <text x="310" y="344" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">n = pq 소인수분해 → φ(n) → d 역산 가능  — 소인수분해의 어려움이 보안 근거</text>
 </svg>
