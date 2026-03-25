@@ -25,7 +25,8 @@
       "Bash(python3:*)",
       "Skill(update-config)",
       "Bash(python \"/c/Users/bhmun/XsQuare01.github.io/.claude/inject_datetime.py\" \"/c/Users/bhmun/XsQuare01.github.io/src/content/posts/np-complete.md\")",
-      "Bash(python \"/c/Users/bhmun/XsQuare01.github.io/.claude/inject_datetime.py\" \"/c/Users/bhmun/XsQuare01.github.io/src/content/posts/division-theorem.md\")"
+      "Bash(python \"/c/Users/bhmun/XsQuare01.github.io/.claude/inject_datetime.py\" \"/c/Users/bhmun/XsQuare01.github.io/src/content/posts/division-theorem.md\")",
+      "Bash(npx astro:*)"
     ]
   },
   "hooks": {

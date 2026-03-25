@@ -1,0 +1,55 @@
+<h2>카테고리 레이아웃 — A (아이콘 제거)</h2>
+<p class="subtitle">이 방향으로 진행할까요?</p>
+
+<style>
+  .preview-box {
+    background: #0d1117;
+    border: 2px solid #30363d;
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1.5rem;
+  }
+  .preview-box:hover { border-color: #f97316; }
+  .preview-box.selected { border-color: #f97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.25); }
+
+  .grid-a { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .card-a {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .card-a .name { font-weight: 700; color: #f0f6fc; font-size: 1rem; }
+  .card-a .desc { font-size: 0.78rem; color: #8b949e; line-height: 1.4; }
+  .card-a .count { font-size: 0.72rem; color: #f97316; font-weight: 600; margin-top: auto; }
+</style>
+
+<div class="preview-box" data-choice="a" onclick="toggleSelect(this)">
+  <div class="grid-a">
+    <div class="card-a">
+      <div class="name">수학</div>
+      <div class="desc">알고리즘과 암호학의 기초가 되는 수리적 개념들</div>
+      <div class="count">3편</div>
+    </div>
+    <div class="card-a">
+      <div class="name">알고리즘</div>
+      <div class="desc">문제 해결과 자료구조, 복잡도 분석</div>
+      <div class="count">0편</div>
+    </div>
+    <div class="card-a">
+      <div class="name">게임 개발</div>
+      <div class="desc">게임 설계 패턴과 구현 경험</div>
+      <div class="count">0편</div>
+    </div>
+    <div class="card-a">
+      <div class="name">웹 개발</div>
+      <div class="desc">프론트엔드, 백엔드, 인프라 경험</div>
+      <div class="count">0편</div>
+    </div>
+  </div>
+</div>

@@ -130,6 +130,25 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
+  // ── 코드 블록 복사 버튼 ──
+  document.querySelectorAll('.prose pre').forEach((pre) => {
+    const btn = document.createElement('button');
+    btn.className = 'code-copy-btn';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', async () => {
+      const code = pre.querySelector('code');
+      if (!code) return;
+      try {
+        await navigator.clipboard.writeText(code.innerText);
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      } catch {}
+    });
+    (pre as HTMLElement).style.position = 'relative';
+    pre.appendChild(btn);
+  });
+
   // ── TOC 활성 링크 ──
   const headings = document.querySelectorAll('article h2[id]');
   const tocLinks = document.querySelectorAll('.toc-link');

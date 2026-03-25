@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { tagStyle } from '../../utils/tagColor';
+import { getCategoryLabel } from '../../data/categories';
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -14,9 +15,16 @@ const posts = (await getCollection('posts')).sort(
     {posts.map((post) => (
       <li class="post-item">
         <a href={`/blog/${post.id}`} class="post-item-link" aria-label={post.data.title}></a>
-        <span class="post-item-date">
-          {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </span>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+          <span class="post-item-date">
+            {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </span>
+          {post.data.category && (
+            <a href={`/categories/${post.data.category}`} class="post-category-badge" style={tagStyle(post.data.category)}>
+              {getCategoryLabel(post.data.category)}
+            </a>
+          )}
+        </div>
         <span class="post-item-title">
           {post.data.title}
         </span>

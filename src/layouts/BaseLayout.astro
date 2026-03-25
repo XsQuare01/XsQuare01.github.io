@@ -139,8 +139,18 @@ const currentPath = Astro.url.pathname;
       </aside>
     </div>
   </div>
+
+  <button id="back-to-top" aria-label="맨 위로">↑</button>
 </body>
 </html>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    btn?.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
 
 <style is:global>
   @import '../styles/global.css';
