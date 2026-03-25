@@ -491,16 +491,10 @@ article .prose h2 {
 .prose li::marker { color: var(--accent); }
 .prose blockquote {
   border-left: 3px solid var(--accent);
-  border-right: 3px solid var(--accent);
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   margin: 1.5rem 0;
   color: var(--text-muted);
-  background: var(--accent-dim);
-  border-radius: 6px;
   font-style: italic;
-  display: flex;
-  align-items: center;
-  min-height: 3.5rem;
 }
 .prose blockquote > * { margin: 0; }
 .prose code {
