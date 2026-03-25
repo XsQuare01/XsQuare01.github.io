@@ -106,6 +106,7 @@ const currentPath = Astro.url.pathname;
           class={`sidebar-category-link${currentPath === `/categories/${cat.slug}` ? ' active' : ''}`}
         >
           {cat.label}
+          <span class="sidebar-category-count">{categoryCount[cat.slug]}</span>
         </a>
       ))}
     </div>

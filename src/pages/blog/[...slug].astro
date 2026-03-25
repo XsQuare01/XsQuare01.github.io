@@ -39,6 +39,7 @@ const readingTime = Math.max(1, Math.round(wordCount / 130));
   date={post.data.date}
   description={post.data.description}
   tags={post.data.tags}
+  category={post.data.category}
   headings={h2Headings}
   readingTime={readingTime}
   prevPost={prevPost ? { slug: prevPost.id, title: prevPost.data.title, description: prevPost.data.description } : undefined}

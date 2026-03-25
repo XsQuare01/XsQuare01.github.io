@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { tagStyle } from '../utils/tagColor';
+import { getCategoryLabel } from '../data/categories';
 import katex from 'katex';
 
 function renderHeadingText(text: string): string {
@@ -29,6 +30,7 @@ interface Props {
   date: Date;
   description?: string;
   tags?: string[];
+  category?: string;
   headings?: Heading[];
   readingTime?: number;
   prevPost?: PostLink;
@@ -40,6 +42,7 @@ const {
   date,
   description,
   tags = [],
+  category,
   headings = [],
   readingTime,
   prevPost,
@@ -70,6 +73,15 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
   )}
 
   <article>
+    {category && (
+      <nav class="post-breadcrumb" aria-label="breadcrumb">
+        <a href="/">홈</a>
+        <span class="post-breadcrumb-sep">›</span>
+        <a href={`/categories/${category}`}>{getCategoryLabel(category)}</a>
+        <span class="post-breadcrumb-sep">›</span>
+        <span>{title}</span>
+      </nav>
+    )}
     <div class="post-header">
       <h1>{title}</h1>
       <div class="post-meta">
