@@ -105,6 +105,8 @@ Carmichael 수를 제외한 합성수에서는 Witness가 얼마나 많은가?
 
 **주장**: Carmichael 수가 아닌 합성수 $n$에서 Witness의 수는 $\mathbb{Z}_n^*$의 **절반 이상**이다.
 
+![Witness 밀도 — B에서 A로의 단사함수 시각화](/images/find-prime/witness-density.svg)
+
 **증명:**
 
 $\mathbb{Z}_n^*$를 Witness 집합 $A$와 non-Witness 집합 $B$로 분리한다:
@@ -131,6 +133,8 @@ $$|A| \geq \frac{|\mathbb{Z}_n^*|}{2}$$
 ## Find Prime 알고리즘
 
 위 결과를 바탕으로 소수를 찾는 확률적 알고리즘을 구성할 수 있다.
+
+![Find Prime 알고리즘 흐름도](/images/find-prime/algorithm.svg)
 
 1. 임의의 홀수 $n$을 선택한다.
 2. $n$이 Carmichael 수인지 확인한다. 맞으면 1로 돌아간다.
