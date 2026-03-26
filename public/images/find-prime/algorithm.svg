@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 465" width="520" height="465">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 492" width="520" height="492">
   <defs>
     <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
@@ -14,85 +14,91 @@
     </marker>
   </defs>
 
-  <rect width="520" height="465" fill="#0f1117" rx="10"/>
-
+  <rect width="520" height="492" fill="#0f1117" rx="10"/>
   <text x="260" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">Find Prime — 알고리즘 흐름도</text>
 
-  <!-- ── Node 1: 임의의 n 선택 (start) ── -->
-  <rect x="175" y="26" width="170" height="36" rx="18" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="1.5"/>
-  <text x="260" y="49" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#fb923c">임의의 n 선택</text>
+  <!-- ── Node 1: 임의의 n 선택 ── -->
+  <rect x="175" y="27" width="170" height="36" rx="18" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="260" y="50" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#fb923c">임의의 n 선택</text>
 
-  <!-- Arrow 1→2 -->
-  <line x1="260" y1="62" x2="260" y2="91" stroke="#64748b" stroke-width="1.5" marker-end="url(#ag)"/>
+  <!-- Arrow 1 → 2 -->
+  <line x1="260" y1="63" x2="260" y2="97" stroke="#64748b" stroke-width="1.5" marker-end="url(#ag)"/>
 
-  <!-- ── Node 2: Carmichael? (center 260,120, hw=93, hh=28) ── -->
-  <polygon points="260,92 353,120 260,148 167,120" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">Carmichael 수?</text>
-  <text x="260" y="131" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">n이 Carmichael 수인지 확인</text>
+  <!-- ── Node 2: Carmichael? (center 260,125, hw=93, hh=28) ── -->
+  <polygon points="260,97 353,125 260,153 167,125" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
+  <text x="260" y="130" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">Carmichael 수?</text>
 
-  <!-- Yes label + Arrow 2→3 -->
-  <text x="249" y="164" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">Yes</text>
-  <line x1="260" y1="148" x2="260" y2="177" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <!-- Arrow 2 → 3 (Yes) -->
+  <line x1="260" y1="153" x2="260" y2="190" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <rect x="224" y="163" width="30" height="16" fill="#0f1117"/>
+  <text x="248" y="176" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">Yes</text>
 
-  <!-- ── Node 3: gcd? (center 260,205, hw=96, hh=28) ── -->
-  <polygon points="260,177 356,205 260,233 164,205" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">gcd(a, n) = 1 ?</text>
-  <text x="260" y="216" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">1 &lt; a &lt; n 인 임의의 a 선택</text>
+  <!-- ── Node 3: gcd? (center 260,218, hw=97, hh=28) ── -->
+  <polygon points="260,190 357,218 260,246 163,218" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
+  <text x="260" y="213" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">gcd(a, n) = 1 ?</text>
+  <text x="260" y="229" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">1 &lt; a &lt; n 인 임의의 a 선택</text>
 
-  <!-- Yes label + Arrow 3→4 -->
-  <text x="249" y="249" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">Yes</text>
-  <line x1="260" y1="233" x2="260" y2="262" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <!-- Arrow 3 → 4 (Yes) -->
+  <line x1="260" y1="246" x2="260" y2="283" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <rect x="224" y="256" width="30" height="16" fill="#0f1117"/>
+  <text x="248" y="269" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">Yes</text>
 
-  <!-- ── Node 4: Fermat test (center 260,290, hw=98, hh=28) ── -->
-  <polygon points="260,262 358,290 260,318 162,290" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="286" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">a^(n−1) ≡ 1 (mod n) ?</text>
-  <text x="260" y="301" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">Fermat 테스트</text>
+  <!-- ── Node 4: Fermat test (center 260,311, hw=100, hh=28) ── -->
+  <polygon points="260,283 360,311 260,339 160,311" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
+  <text x="260" y="306" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">a^(n−1) ≡ 1 (mod n) ?</text>
+  <text x="260" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">Fermat 테스트</text>
 
-  <!-- Yes label + Arrow 4→5 -->
-  <text x="249" y="332" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">Yes</text>
-  <line x1="260" y1="318" x2="260" y2="344" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <!-- Arrow 4 → 5 (Yes) -->
+  <line x1="260" y1="339" x2="260" y2="373" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <rect x="224" y="348" width="30" height="16" fill="#0f1117"/>
+  <text x="248" y="361" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">Yes</text>
 
-  <!-- ── Node 5: k회 완료? (center 260,372, hw=92, hh=28) ── -->
-  <polygon points="260,344 352,372 260,400 168,372" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="368" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">k회 반복 완료?</text>
-  <text x="260" y="383" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">3~4단계를 k번 반복</text>
+  <!-- ── Node 5: k회 완료? (center 260,400, hw=93, hh=28) ── -->
+  <polygon points="260,372 353,400 260,428 167,400" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
+  <text x="260" y="405" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">k회 반복 완료?</text>
 
-  <!-- Yes label + Arrow 5→6 -->
-  <text x="249" y="418" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">Yes</text>
-  <line x1="260" y1="400" x2="260" y2="425" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <!-- Arrow 5 → 6 (Yes) -->
+  <line x1="260" y1="428" x2="260" y2="451" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
+  <rect x="224" y="431" width="30" height="16" fill="#0f1117"/>
+  <text x="248" y="444" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">Yes</text>
 
-  <!-- ── Node 6: n은 소수 (end) ── -->
-  <rect x="175" y="425" width="170" height="34" rx="17" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="260" y="447" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#4ade80">n은 소수 ✓</text>
+  <!-- ── Node 6: 소수 (end) ── -->
+  <rect x="175" y="451" width="170" height="34" rx="17" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="260" y="473" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#4ade80">n은 소수 ✓</text>
 
-  <!-- ── Right-side rejection rail (No → n 재선택) ── -->
+  <!-- ══ Right rejection rail (No → n 재선택) ══ -->
 
-  <!-- Horizontal connectors to rail at x=455 -->
-  <!-- Node 2 No -->
-  <line x1="353" y1="120" x2="455" y2="120" stroke="#f87171" stroke-width="1.2"/>
-  <text x="402" y="113" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f87171">No</text>
+  <!-- Node 2 No: horizontal (353,125) → (455,125) -->
+  <line x1="353" y1="125" x2="455" y2="125" stroke="#f87171" stroke-width="1.2"/>
+  <rect x="384" y="113" width="26" height="16" fill="#0f1117"/>
+  <text x="397" y="125" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">No</text>
 
-  <!-- Node 3 No -->
-  <line x1="356" y1="205" x2="455" y2="205" stroke="#f87171" stroke-width="1.2"/>
-  <text x="408" y="198" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f87171">No</text>
+  <!-- Node 3 No: horizontal (357,218) → (455,218) -->
+  <line x1="357" y1="218" x2="455" y2="218" stroke="#f87171" stroke-width="1.2"/>
+  <rect x="388" y="206" width="26" height="16" fill="#0f1117"/>
+  <text x="401" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">No</text>
 
-  <!-- Node 4 No -->
-  <line x1="358" y1="290" x2="455" y2="290" stroke="#f87171" stroke-width="1.2"/>
-  <text x="408" y="283" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f87171">No</text>
-  <text x="408" y="296" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">(Witness 발견)</text>
+  <!-- Node 4 No: horizontal (360,311) → (455,311) -->
+  <line x1="360" y1="311" x2="455" y2="311" stroke="#f87171" stroke-width="1.2"/>
+  <rect x="388" y="299" width="26" height="16" fill="#0f1117"/>
+  <text x="401" y="311" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">No</text>
+  <rect x="374" y="315" width="56" height="14" fill="#0f1117"/>
+  <text x="402" y="326" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#94a3b8">(Witness 발견)</text>
 
-  <!-- Vertical rail x=455, from y=44 to y=290 -->
-  <line x1="455" y1="44" x2="455" y2="290" stroke="#f87171" stroke-width="1.2"/>
+  <!-- Vertical rail x=455, y=45 → y=311 -->
+  <line x1="455" y1="45" x2="455" y2="311" stroke="#f87171" stroke-width="1.2"/>
 
-  <!-- Arrow from rail top back to Node 1 -->
-  <line x1="455" y1="44" x2="346" y2="44" stroke="#f87171" stroke-width="1.5" marker-end="url(#an)"/>
-  <text x="461" y="40" text-anchor="start" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f87171">n 재선택</text>
+  <!-- Arrow rail → Node 1 -->
+  <line x1="455" y1="45" x2="346" y2="45" stroke="#f87171" stroke-width="1.5" marker-end="url(#an)"/>
+  <rect x="459" y="34" width="54" height="16" fill="#0f1117"/>
+  <text x="461" y="46" text-anchor="start" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">n 재선택</text>
 
-  <!-- ── Left-side loop: Node 5 No → back to Node 3 ── -->
-  <!-- Node 5 left (168,372) → x=62 → up to y=205 → Node 3 left (164,205) -->
-  <line x1="168" y1="372" x2="62"  y2="372" stroke="#60a5fa" stroke-width="1.2"/>
-  <line x1="62"  y1="372" x2="62"  y2="205" stroke="#60a5fa" stroke-width="1.2"/>
-  <line x1="62"  y1="205" x2="163" y2="205" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ar)"/>
-  <text x="113" y="365" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#60a5fa">No</text>
-  <text x="113" y="378" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">(반복)</text>
+  <!-- ══ Left loop: Node 5 No → Node 3 (repeat) ══ -->
+  <line x1="167" y1="400" x2="62"  y2="400" stroke="#60a5fa" stroke-width="1.2"/>
+  <line x1="62"  y1="400" x2="62"  y2="218" stroke="#60a5fa" stroke-width="1.2"/>
+  <line x1="62"  y1="218" x2="163" y2="218" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="100" y="388" width="26" height="16" fill="#0f1117"/>
+  <text x="113" y="400" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#60a5fa">No</text>
+  <rect x="90" y="404" width="46" height="14" fill="#0f1117"/>
+  <text x="113" y="415" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#94a3b8">(반복)</text>
 </svg>
