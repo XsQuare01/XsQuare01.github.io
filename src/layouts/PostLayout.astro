@@ -54,9 +54,40 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
   month: 'long',
   day: 'numeric',
 });
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description ?? '',
+  datePublished: date.toISOString(),
+  dateModified: date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'XsQuare01',
+    url: Astro.site?.toString() ?? '',
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'XsQuare01',
+    url: Astro.site?.toString() ?? '',
+  },
+  url: canonicalURL,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalURL,
+  },
+  ...(tags.length > 0 && { keywords: tags.join(', ') }),
+});
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} ogType="article">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={jsonLd} />
+  </Fragment>
+
   {headings.length > 0 && (
     <Fragment slot="toc">
       <div class="toc">

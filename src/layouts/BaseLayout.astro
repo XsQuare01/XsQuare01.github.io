@@ -6,12 +6,14 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogType?: string;
 }
 
 const {
   title,
   description = 'XsQuare01의 기술 블로그',
   ogImage = 'https://github.com/XsQuare01.png',
+  ogType = 'website',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -45,7 +47,7 @@ const currentPath = Astro.url.pathname;
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={`${title} | XsQuare01`} />
   <meta property="og:description" content={description} />
@@ -69,6 +71,7 @@ const currentPath = Astro.url.pathname;
     })();
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <slot name="head" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-35YPC8K6Y2"></script>
