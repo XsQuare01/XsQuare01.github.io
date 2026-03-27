@@ -49,6 +49,8 @@ $$
 
 이 관계는 **동치 관계(Equivalence Relation)**이다 — 다음 세 성질을 만족한다.
 
+![mod 7 시계 다이어그램 — 동치류 시각화](/images/modular/clock-equivalence.svg)
+
 **반사성(Reflexive)**: $a \equiv a \pmod{m}$
 
 $m \mid 0$이므로 성립.
@@ -96,6 +98,8 @@ a \equiv b \pmod{m} \implies a^n \equiv b^n \pmod{m}
 $$
 
 단, **나눗셈은 일반적으로 성립하지 않는다**. 예를 들어 $\text{mod}\ 6$에서 $2 \cdot 3 \equiv 0$이므로, 곱셈의 결과만으로는 원래 인수를 복원할 수 없다.
+
+![모듈러 연산 보존 성질 — 덧셈·곱셈·지수 예시](/images/modular/operation-preservation.svg)
 
 ## 완전 잉여계 (Complete Residue System)
 
@@ -156,6 +160,8 @@ $$
 3^4 = 81 \equiv 1 \pmod{10}, \quad 7^4 = 2401 \equiv 1 \pmod{10}
 $$
 
+![오일러 정리 — b·Zm* = Zm* 전단사 대응 시각화](/images/modular/euler-theorem.svg)
+
 **증명**: $\mathbb{Z}_m^* = \{a_1, \ldots, a_{\phi(m)}\}$에서 임의의 $b \in \mathbb{Z}_m^*$에 대해
 
 $$
@@ -198,6 +204,8 @@ $$
 $$
 x \equiv c_1 \pmod{m_1}, \quad x \equiv c_2 \pmod{m_2}, \quad \ldots, \quad x \equiv c_r \pmod{m_r}
 $$
+
+![CRT 구성 다이어그램 — 단계별 해 구성](/images/modular/crt-construction.svg)
 
 **구성(Construction)으로 증명**: 다음과 같이 정의한다.
 

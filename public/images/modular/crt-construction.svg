@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <marker id="darr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="garr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="640" height="360" fill="#0f1117" rx="10"/>
+  <text x="320" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">중국인의 나머지 정리 (CRT) — 해 구성 예시</text>
+  <text x="320" y="33" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#475569">x ≡ 2 (mod 3),  x ≡ 3 (mod 5),  x ≡ 2 (mod 7)  →  x ≡ ? (mod 105)</text>
+
+  <!-- Step boxes top row -->
+  <!-- Step 1: m = 3×5×7 = 105 -->
+  <rect x="18" y="48" width="178" height="56" rx="6" fill="#0f1929" stroke="#2d3748" stroke-width="1.5"/>
+  <text x="107" y="65" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">Step 1  m 계산</text>
+  <text x="107" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#60a5fa">m = 3 × 5 × 7 = 105</text>
+
+  <!-- Step 2: M_i = m / m_i -->
+  <rect x="206" y="48" width="220" height="56" rx="6" fill="#0f1929" stroke="#2d3748" stroke-width="1.5"/>
+  <text x="316" y="65" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">Step 2  Mᵢ = m / mᵢ</text>
+  <text x="316" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#a78bfa">M₁=35, M₂=21, M₃=15</text>
+
+  <!-- Step 3: N_i = M_i^{-1} mod m_i -->
+  <rect x="436" y="48" width="186" height="56" rx="6" fill="#0f1929" stroke="#2d3748" stroke-width="1.5"/>
+  <text x="529" y="65" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">Step 3  Nᵢ = Mᵢ⁻¹ mod mᵢ</text>
+  <text x="529" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#fbbf24">N₁=2, N₂=1, N₃=1</text>
+
+  <!-- Arrows down -->
+  <line x1="107" y1="104" x2="107" y2="122" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#darr)"/>
+  <line x1="316" y1="104" x2="316" y2="122" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#darr)"/>
+  <line x1="529" y1="104" x2="529" y2="122" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#darr)"/>
+
+  <!-- Three term rows -->
+  <!-- i=1: c1*M1*N1 = 2*35*2 = 140 -->
+  <rect x="18" y="126" width="178" height="50" rx="6" fill="rgba(96,165,250,0.08)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="107" y="145" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#60a5fa">항₁</text>
+  <text x="107" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#60a5fa">c₁M₁N₁ = 2·35·2 = 140</text>
+
+  <!-- i=2: c2*M2*N2 = 3*21*1 = 63 -->
+  <rect x="206" y="126" width="220" height="50" rx="6" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="316" y="145" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#a78bfa">항₂</text>
+  <text x="316" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#a78bfa">c₂M₂N₂ = 3·21·1 = 63</text>
+
+  <!-- i=3: c3*M3*N3 = 2*15*1 = 30 -->
+  <rect x="436" y="126" width="186" height="50" rx="6" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="529" y="145" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fbbf24">항₃</text>
+  <text x="529" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#fbbf24">c₃M₃N₃ = 2·15·1 = 30</text>
+
+  <!-- Sum arrows converging -->
+  <line x1="107" y1="176" x2="230" y2="210" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#darr)"/>
+  <line x1="316" y1="176" x2="316" y2="210" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#darr)"/>
+  <line x1="529" y1="176" x2="402" y2="210" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#darr)"/>
+
+  <!-- Sum box -->
+  <rect x="180" y="214" width="282" height="44" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="2"/>
+  <text x="321" y="234" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#94a3b8">x = 140 + 63 + 30 = 233</text>
+  <text x="321" y="250" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#4ade80">x ≡ 23 (mod 105)</text>
+
+  <!-- Verification section -->
+  <line x1="20" y1="272" x2="620" y2="272" stroke="#2d3748" stroke-width="1"/>
+  <text x="320" y="290" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#94a3b8">검증 (Verification)</text>
+
+  <!-- Why does each term vanish? -->
+  <text x="40" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">23 mod 3 = 2  ✓      23 mod 5 = 3  ✓      23 mod 7 = 2  ✓</text>
+
+  <!-- Key insight annotation -->
+  <rect x="18" y="318" width="604" height="32" rx="5" fill="rgba(74,222,128,0.06)" stroke="#2d3748" stroke-width="1"/>
+  <text x="320" y="333" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">핵심: i≠j이면 Mᵢ에 mⱼ가 인수로 포함 → Mᵢ ≡ 0 (mod mⱼ) → 다른 항들은 소거됨</text>
+  <text x="320" y="349" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">x mod mⱼ = cⱼ·Mⱼ·Nⱼ = cⱼ·1 = cⱼ</text>
+</svg>
