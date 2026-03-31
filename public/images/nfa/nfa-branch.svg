@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="680" height="330">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="1020" height="495">
   <rect width="680" height="330" fill="#0f1117" rx="10"/>
-  <text x="340" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">NFA의 비결정성 — 동시에 여러 경로 탐색</text>
+  <text x="340" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">NFA의 비결정성 — 동시에 여러 경로 탐색</text>
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
       <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
@@ -15,36 +15,36 @@
 
   <line x1="35" y1="140" x2="62" y2="140" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <circle cx="90" cy="140" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="90" y="145" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#e2e8f0">q</text>
+  <text x="90" y="145" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">q</text>
 
   <circle cx="290" cy="75" r="26" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="290" y="80" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#e2e8f0">r</text>
+  <text x="290" y="80" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">r</text>
 
   <circle cx="290" cy="207" r="26" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="290" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#e2e8f0">s</text>
+  <text x="290" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">s</text>
 
   <circle cx="460" cy="75" r="26" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="460" cy="75" r="19" fill="none" stroke="#4ade80" stroke-width="1.2"/>
-  <text x="460" y="80" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#4ade80">qf</text>
+  <text x="460" y="80" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#4ade80">qf</text>
 
   <circle cx="460" cy="207" r="26" fill="#1a2035" stroke="#f87171" stroke-width="2"/>
-  <text x="460" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#f87171">X</text>
+  <text x="460" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">X</text>
 
   <path d="M 116,126 C 165,75 225,75 262,75" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="188" y="90" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">a</text>
+  <text x="188" y="90" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">a</text>
 
   <path d="M 116,154 C 165,207 225,207 262,207" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="188" y="227" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">a</text>
+  <text x="188" y="227" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">a</text>
 
   <line x1="316" y1="75" x2="432" y2="75" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
   <line x1="316" y1="207" x2="432" y2="207" stroke="#f87171" stroke-width="1.5" marker-end="url(#arr-red)"/>
 
-  <text x="290" y="46" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">경로 1 (accept)</text>
-  <text x="290" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">경로 2 (dead end)</text>
+  <text x="290" y="46" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">경로 1 (accept)</text>
+  <text x="290" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f87171">경로 2 (dead end)</text>
 
   <rect x="504" y="116" width="160" height="50" rx="8" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="584" y="146" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700" fill="#4ade80">→ ACCEPT</text>
+  <text x="584" y="146" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#4ade80">→ ACCEPT</text>
 
-  <text x="340" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" fill="#94a3b8">하나라도 accept이면 전체 ACCEPT</text>
-  <text x="340" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">모든 경로가 실패할 때만 reject</text>
+  <text x="340" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#94a3b8">하나라도 accept이면 전체 ACCEPT</text>
+  <text x="340" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">모든 경로가 실패할 때만 reject</text>
 </svg>

@@ -1,21 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 220" width="740" height="220">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 220" width="1110" height="330">
   <rect width="740" height="220" fill="#0f1117" rx="10"/>
-  <text x="370" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#6b7a99">DFA vs NFA &#x2014; &#xAD6C;&#xC870; &#xBE44;&#xAD50;</text>
+  <text x="370" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#6b7a99">DFA vs NFA &#x2014; &#xAD6C;&#xC870; &#xBE44;&#xAD50;</text>
   <rect x="15" y="30" width="340" height="175" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
   <rect x="15" y="30" width="340" height="40" rx="8" fill="rgba(96,165,250,0.15)"/>
-  <text x="185" y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#60a5fa">DFA &#x2014; &#xACB0;&#xC815;&#xB860;&#xC801;</text>
-  <text x="185" y="92" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">&#xC804;&#xC774;: &#xC815;&#xD655;&#xD788; 1&#xAC1C;</text>
-  <text x="185" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">&#x3B5;-&#xC804;&#xC774;: &#xC5C6;&#xC74C;</text>
-  <text x="185" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">Accept: &#xCD5C;&#xC885; &#xC0C1;&#xD0DC; &#x2208; F</text>
-  <text x="185" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">&#xD2B9;&#xC9D5;: &#xD558;&#xB098;&#xC758; &#xACBD;&#xB85C;&#xB9CC; &#xC874;&#xC7AC;</text>
-  <text x="185" y="192" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#60a5fa">&#x3B4;: Q&#xD7;&#x3A3; &#x2192; Q</text>
+  <text x="185" y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#60a5fa">DFA &#x2014; &#xACB0;&#xC815;&#xB860;&#xC801;</text>
+  <text x="185" y="92" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#xC804;&#xC774;: &#xC815;&#xD655;&#xD788; 1&#xAC1C;</text>
+  <text x="185" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#x3B5;-&#xC804;&#xC774;: &#xC5C6;&#xC74C;</text>
+  <text x="185" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">Accept: &#xCD5C;&#xC885; &#xC0C1;&#xD0DC; &#x2208; F</text>
+  <text x="185" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#xD2B9;&#xC9D5;: &#xD558;&#xB098;&#xC758; &#xACBD;&#xB85C;&#xB9CC; &#xC874;&#xC7AC;</text>
+  <text x="185" y="192" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#60a5fa">&#x3B4;: Q&#xD7;&#x3A3; &#x2192; Q</text>
   <rect x="385" y="30" width="340" height="175" rx="8" fill="#1a2035" stroke="#a78bfa" stroke-width="1.5"/>
   <rect x="385" y="30" width="340" height="40" rx="8" fill="rgba(167,139,250,0.15)"/>
-  <text x="555" y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#a78bfa">NFA &#x2014; &#xBE44;&#xACB0;&#xC815;&#xB860;&#xC801;</text>
-  <text x="555" y="92" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">&#xC804;&#xC774;: 0&#xAC1C; &#xC774;&#xC0C1; (&#xC9D1;&#xD569; &#xBC18;&#xD658;)</text>
-  <text x="555" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">&#x3B5;-&#xC804;&#xC774;: &#xAC00;&#xB2A5;</text>
-  <text x="555" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">Accept: &#xD558;&#xB098;&#xB77C;&#xB3C4; accept&#xBA74; OK</text>
-  <text x="555" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#cbd5e0">&#xD2B9;&#xC9D5;: &#xC5EC;&#xB7EC; &#xACBD;&#xB85C; &#xB3D9;&#xC2DC; &#xD0D0;&#xC0C9;</text>
-  <text x="555" y="192" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" fill="#a78bfa">&#x394;: Q&#xD7;&#x3A3; &#x2192; P(Q)</text>
-  <text x="370" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="22" fill="#4a5568">=</text>
+  <text x="555" y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#a78bfa">NFA &#x2014; &#xBE44;&#xACB0;&#xC815;&#xB860;&#xC801;</text>
+  <text x="555" y="92" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#xC804;&#xC774;: 0&#xAC1C; &#xC774;&#xC0C1; (&#xC9D1;&#xD569; &#xBC18;&#xD658;)</text>
+  <text x="555" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#x3B5;-&#xC804;&#xC774;: &#xAC00;&#xB2A5;</text>
+  <text x="555" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">Accept: &#xD558;&#xB098;&#xB77C;&#xB3C4; accept&#xBA74; OK</text>
+  <text x="555" y="164" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#xD2B9;&#xC9D5;: &#xC5EC;&#xB7EC; &#xACBD;&#xB85C; &#xB3D9;&#xC2DC; &#xD0D0;&#xC0C9;</text>
+  <text x="555" y="192" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#a78bfa">&#x394;: Q&#xD7;&#x3A3; &#x2192; P(Q)</text>
+  <text x="370" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17.6" fill="#4a5568">=</text>
 </svg>
