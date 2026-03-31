@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" width="700" height="340">
+  <defs>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="ya" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#fbbf24"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="340" fill="#0f1117" rx="10"/>
+  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">Merkle-Damgård 구조 — SHA의 내부 동작</text>
+
+  <!-- ===== TOP: Message Padding ===== -->
+  <text x="20" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">① 패딩 (Padding)</text>
+
+  <!-- Original message -->
+  <rect x="20" y="48" width="140" height="28" rx="4" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="90" y="67" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#4ade80">원본 메시지 m</text>
+
+  <!-- padding bit -->
+  <rect x="164" y="48" width="32" height="28" rx="4" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="180" y="67" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#60a5fa">1</text>
+
+  <!-- zero padding -->
+  <rect x="200" y="48" width="64" height="28" rx="4" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="232" y="67" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#60a5fa">0 0 … 0</text>
+
+  <!-- length field -->
+  <rect x="268" y="48" width="80" height="28" rx="4" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="308" y="67" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fbbf24">|m| (64 bit)</text>
+
+  <text x="370" y="67" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#475569">← 512 bit 블록 경계로 패딩</text>
+
+  <!-- ===== Block division ===== -->
+  <text x="20" y="100" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">② 블록 분할 → 순차 압축</text>
+
+  <!-- IV box -->
+  <rect x="20" y="110" width="72" height="36" rx="5" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="56" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#a78bfa">IV</text>
+  <text x="56" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#a78bfa">초기값</text>
+
+  <!-- arrow IV → f1 -->
+  <line x1="92" y1="128" x2="112" y2="128" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#ra)"/>
+
+  <!-- Block 1 from above -->
+  <rect x="116" y="92" width="80" height="24" rx="4" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="156" y="108" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#60a5fa">블록 m₁</text>
+  <line x1="156" y1="116" x2="156" y2="126" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
+
+  <!-- Compress f1 -->
+  <rect x="116" y="110" width="80" height="36" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="156" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#fbbf24">압축 f</text>
+  <text x="156" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#fbbf24">(256→256)</text>
+
+  <!-- arrow f1 → h1 -->
+  <line x1="196" y1="128" x2="224" y2="128" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ra)"/>
+
+  <!-- h1 state -->
+  <rect x="228" y="110" width="56" height="36" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="256" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">h₁</text>
+  <text x="256" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#4ade80">중간값</text>
+
+  <!-- arrow h1 → f2 -->
+  <line x1="284" y1="128" x2="304" y2="128" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ra)"/>
+
+  <!-- Block 2 from above -->
+  <rect x="308" y="92" width="80" height="24" rx="4" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="348" y="108" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#60a5fa">블록 m₂</text>
+  <line x1="348" y1="116" x2="348" y2="126" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
+
+  <!-- Compress f2 -->
+  <rect x="308" y="110" width="80" height="36" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="348" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#fbbf24">압축 f</text>
+  <text x="348" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#fbbf24">(256→256)</text>
+
+  <!-- arrow f2 → h2 -->
+  <line x1="388" y1="128" x2="408" y2="128" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ra)"/>
+
+  <!-- h2 state -->
+  <rect x="412" y="110" width="56" height="36" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="440" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">h₂</text>
+  <text x="440" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#4ade80">중간값</text>
+
+  <!-- dots -->
+  <text x="482" y="132" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#475569">···</text>
+
+  <!-- Block n from above -->
+  <rect x="524" y="92" width="80" height="24" rx="4" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="564" y="108" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#60a5fa">블록 mₙ</text>
+  <line x1="564" y1="116" x2="564" y2="126" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
+
+  <!-- Compress fn -->
+  <rect x="524" y="110" width="80" height="36" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="564" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#fbbf24">압축 f</text>
+  <text x="564" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#fbbf24">(256→256)</text>
+
+  <!-- arrow fn → final hash -->
+  <line x1="604" y1="128" x2="624" y2="128" stroke="#4ade80" stroke-width="2" marker-end="url(#ga)"/>
+
+  <!-- Final hash output -->
+  <rect x="628" y="110" width="56" height="36" rx="5" fill="rgba(74,222,128,0.2)" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="656" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">Hash</text>
+  <text x="656" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#4ade80">256 bit</text>
+
+  <!-- ===== SHA-256 Compress Detail ===== -->
+  <line x1="16" y1="164" x2="684" y2="164" stroke="#2d3748" stroke-width="1"/>
+  <text x="350" y="182" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#94a3b8">③ SHA-256 압축 함수 내부 — 64라운드 반복</text>
+
+  <!-- State registers -->
+  <rect x="20" y="192" width="200" height="36" rx="5" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="120" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#a78bfa">8 × 32-bit 상태 레지스터</text>
+  <text x="120" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">A  B  C  D  E  F  G  H</text>
+
+  <!-- arrow → round -->
+  <line x1="220" y1="210" x2="248" y2="210" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="234" y="205" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">×64</text>
+
+  <!-- Round box -->
+  <rect x="252" y="192" width="196" height="36" rx="5" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="350" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#fbbf24">라운드 연산 (Ch, Maj, Σ, σ)</text>
+  <text x="350" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">+ 메시지 스케줄 Wᵢ + 상수 Kᵢ</text>
+
+  <!-- arrow → output -->
+  <line x1="448" y1="210" x2="468" y2="210" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+
+  <!-- add IV -->
+  <rect x="472" y="192" width="200" height="36" rx="5" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="572" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">Davies-Meyer: hᵢ = f(hᵢ₋₁, mᵢ) ⊕ hᵢ₋₁</text>
+  <text x="572" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">이전 상태를 더해 중간값 보존</text>
+
+  <!-- ===== Bottom: length extension note ===== -->
+  <line x1="16" y1="244" x2="684" y2="244" stroke="#2d3748" stroke-width="1"/>
+  <text x="350" y="262" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#94a3b8">④ Length Extension 취약점</text>
+
+  <rect x="20" y="270" width="320" height="54" rx="6" fill="rgba(248,113,113,0.05)" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="180" y="288" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#f87171">MD 구조의 취약점</text>
+  <text x="30" y="304" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">H(m) 만 알면 H(m ‖ padding ‖ m') 계산 가능</text>
+  <text x="30" y="318" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#f87171">→ MAC(메시지 인증)에 SHA-256 직접 사용 금지 → HMAC 사용</text>
+
+  <rect x="360" y="270" width="320" height="54" rx="6" fill="rgba(74,222,128,0.05)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="520" y="288" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">SHA-3 (Keccak) 해결책</text>
+  <text x="370" y="304" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">스펀지 구조(Sponge) 사용 — MD 구조 아님</text>
+  <text x="370" y="318" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#4ade80">→ Length Extension 취약점 근본적 해소</text>
+</svg>
