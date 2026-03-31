@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 415" width="870" height="623">
   <rect width="580" height="415" fill="#0f1117" rx="10"/>
-  <text x="290" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">도브테일링: 병렬 실행 순서 (숫자 = 전체 처리 순서)</text>
+  <text x="290" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">도브테일링: 병렬 실행 순서 (숫자 = 전체 처리 순서)</text>
 
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
@@ -81,9 +81,9 @@
 
   <line x1="14" y1="283" x2="566" y2="283" stroke="#1f2937" stroke-width="1"/>
 
-  <text x="22" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">s₁, s₂, ... =</text>
+  <text x="22" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">s₁, s₂, ... =</text>
   <text x="110" y="308" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#9ca3af">알파벳으로 만들 수 있는 모든 문자열 순서 나열</text>
-  <text x="110" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">(예: ε, a, b, aa, ab, ba, ...)</text>
+  <text x="110" y="330" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#e2e8f0">(예: ε, a, b, aa, ab, ba, ...)</text>
 
   <circle cx="22" cy="355" r="7" fill="#4ade80"/>
   <text x="36" y="360" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#9ca3af">= M₂가 accept한 순간 — L의 원소임이 확인됨, 즉시 출력</text>

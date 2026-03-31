@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 268" width="930" height="402">
   <rect width="620" height="268" fill="#0f1117" rx="10"/>
-  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">완전 잉여계 Zm과 축약 잉여계 Zm* — m = 10 예시</text>
+  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">완전 잉여계 Zm과 축약 잉여계 Zm* — m = 10 예시</text>
 
   <!-- Zm label -->
-  <text x="20" y="36" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">Zm = {0, 1, 2, ..., 9}  완전 잉여계 (Complete Residue System)</text>
+  <text x="20" y="36" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">Zm = {0, 1, 2, ..., 9}  완전 잉여계 (Complete Residue System)</text>
 
   <!-- Row 1: Z10 = {0,...,9}, spacing 60, r=20 -->
   <!-- 0: excluded -->
@@ -47,7 +47,7 @@
   <line x1="20" y1="132" x2="600" y2="132" stroke="#2d3748" stroke-width="1"/>
 
   <!-- Zm* label -->
-  <text x="20" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">Zm* = {a | gcd(a, m) = 1}  축약 잉여계 (Reduced Residue System) — 곱셈 역원 존재</text>
+  <text x="20" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">Zm* = {a | gcd(a, m) = 1}  축약 잉여계 (Reduced Residue System) — 곱셈 역원 존재</text>
 
   <!-- Row 2: Zm* = {1, 3, 7, 9}, centered, r=23 -->
   <circle cx="198" cy="180" r="23" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="2"/>
@@ -64,6 +64,6 @@
   <text x="490" y="191" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#fcd34d">= |Zm*|</text>
 
   <!-- Captions -->
-  <text x="310" y="232" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#94a3b8">a ∈ Zm*이면  a<tspan baseline-shift="super" font-size="70%">φ(m)</tspan> ≡ 1 (mod m)  — 오일러 정리</text>
-  <text x="310" y="251" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">m이 소수이면 φ(m) = m − 1  — 페르마의 소정리</text>
+  <text x="310" y="232" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#e2e8f0">a ∈ Zm*이면  a<tspan baseline-shift="super" font-size="70%">φ(m)</tspan> ≡ 1 (mod m)  — 오일러 정리</text>
+  <text x="310" y="251" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">m이 소수이면 φ(m) = m − 1  — 페르마의 소정리</text>
 </svg>

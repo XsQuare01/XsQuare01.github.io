@@ -15,7 +15,7 @@
   </defs>
 
   <rect width="520" height="492" fill="#0f1117" rx="10"/>
-  <text x="260" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Find Prime — 알고리즘 흐름도</text>
+  <text x="260" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Find Prime — 알고리즘 흐름도</text>
 
   <!-- ── Node 1: 임의의 n 선택 ── -->
   <rect x="175" y="27" width="170" height="36" rx="18" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="1.5"/>
@@ -36,7 +36,7 @@
   <!-- ── Node 3: gcd? (center 260,218, hw=97, hh=28) ── -->
   <polygon points="260,190 357,218 260,246 163,218" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
   <text x="260" y="213" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">gcd(a, n) = 1 ?</text>
-  <text x="260" y="229" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">1 &lt; a &lt; n 인 임의의 a 선택</text>
+  <text x="260" y="229" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">1 &lt; a &lt; n 인 임의의 a 선택</text>
 
   <!-- Arrow 3 → 4 (Yes) -->
   <line x1="260" y1="246" x2="260" y2="283" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
@@ -46,7 +46,7 @@
   <!-- ── Node 4: Fermat test (center 260,311, hw=100, hh=28) ── -->
   <polygon points="260,283 360,311 260,339 160,311" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
   <text x="260" y="306" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">a<tspan baseline-shift="super" font-size="70%">n−1</tspan> ≡ 1 (mod n) ?</text>
-  <text x="260" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">Fermat 테스트</text>
+  <text x="260" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Fermat 테스트</text>
 
   <!-- Arrow 4 → 5 (Yes) -->
   <line x1="260" y1="339" x2="260" y2="373" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
@@ -83,7 +83,7 @@
   <rect x="388" y="299" width="26" height="16" fill="#0f1117"/>
   <text x="401" y="311" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">No</text>
   <rect x="374" y="315" width="56" height="14" fill="#0f1117"/>
-  <text x="402" y="326" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">(Witness 발견)</text>
+  <text x="402" y="326" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">(Witness 발견)</text>
 
   <!-- Vertical rail x=455, y=45 → y=311 -->
   <line x1="455" y1="45" x2="455" y2="311" stroke="#f87171" stroke-width="1.2"/>
@@ -100,5 +100,5 @@
   <rect x="100" y="388" width="26" height="16" fill="#0f1117"/>
   <text x="113" y="400" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#60a5fa">No</text>
   <rect x="90" y="404" width="46" height="14" fill="#0f1117"/>
-  <text x="113" y="415" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">(반복)</text>
+  <text x="113" y="415" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">(반복)</text>
 </svg>

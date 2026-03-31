@@ -5,7 +5,7 @@
     </marker>
   </defs>
   <rect width="940" height="225" fill="#0f1117" rx="10"/>
-  <text x="470" y="18" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">L₁₃ 알고리즘 — y2y 동일성 검사</text>
+  <text x="470" y="18" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">L₁₃ 알고리즘 — y2y 동일성 검사</text>
   <rect x="10" y="28" width="220" height="185" rx="8" fill="#1a2035" stroke="#fb923c" stroke-width="1.5"/>
   <rect x="10" y="28" width="220" height="38" rx="8" fill="rgba(251,146,60,0.15)"/>
   <text x="120" y="45" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="700" font-family="system-ui,-apple-system,sans-serif">STEP 1</text>

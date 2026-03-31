@@ -5,7 +5,7 @@
     </marker>
   </defs>
   <rect width="780" height="215" fill="#0f1117" rx="10"/>
-  <text x="390" y="20" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">튜링 머신 한 스텝 실행 trace</text>
+  <text x="390" y="20" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">튜링 머신 한 스텝 실행 trace</text>
   <rect x="10" y="30" width="215" height="170" rx="8" fill="#1a2035" stroke="#fb923c" stroke-width="1.5"/>
   <rect x="10" y="30" width="215" height="38" rx="8" fill="rgba(251,146,60,0.15)"/>
   <text x="117" y="55" text-anchor="middle" fill="#fb923c" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">현재 구성</text>

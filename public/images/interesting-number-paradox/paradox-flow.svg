@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 222" width="1410" height="333">
   <rect width="940" height="222" fill="#0f1117" rx="10"/>
-  <text x="470" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">귀류법 전개 — 4단계</text>
+  <text x="470" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">귀류법 전개 — 4단계</text>
 
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
@@ -21,7 +21,7 @@
   <text x="125" y="101" text-anchor="middle" font-size="10.4" fill="#cbd5e0">흥미롭지 않은 수가</text>
   <text x="125" y="120" text-anchor="middle" font-size="10.4" fill="#cbd5e0">존재한다고 가정</text>
   <text x="125" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" fill="#f0f6fc">U ⊆ ℕ, U ≠ ∅</text>
-  <text x="125" y="178" text-anchor="middle" font-size="8.8" fill="#6b7a99">(귀류법 시작)</text>
+  <text x="125" y="178" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(귀류법 시작)</text>
 
   <!-- Step 2: 최솟값 선택 (x=252..462) -->
   <rect x="252" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
@@ -31,7 +31,7 @@
   <text x="357" y="101" text-anchor="middle" font-size="10.4" fill="#cbd5e0">정렬 원리에 의해</text>
   <text x="357" y="120" text-anchor="middle" font-size="10.4" fill="#cbd5e0">U의 최소 원소 x 존재</text>
   <text x="357" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" fill="#f0f6fc">∃ min(U) = x</text>
-  <text x="357" y="178" text-anchor="middle" font-size="8.8" fill="#6b7a99">(자연수의 성질)</text>
+  <text x="357" y="178" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(자연수의 성질)</text>
 
   <!-- Step 3: 반전 (x=484..694) -->
   <rect x="484" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
@@ -41,7 +41,7 @@
   <text x="589" y="101" text-anchor="middle" font-size="10.4" fill="#cbd5e0">"U에서 가장 작은 수"라는</text>
   <text x="589" y="120" text-anchor="middle" font-size="10.4" fill="#cbd5e0">흥미로운 성질이 생겨버림</text>
   <text x="589" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" fill="#f0f6fc">x → Interesting!</text>
-  <text x="589" y="178" text-anchor="middle" font-size="8.8" fill="#6b7a99">(정의의 허점)</text>
+  <text x="589" y="178" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(정의의 허점)</text>
 
   <!-- Step 4: 모순 (x=716..926) -->
   <rect x="716" y="40" width="210" height="162" rx="8" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
@@ -51,5 +51,5 @@
   <text x="821" y="101" text-anchor="middle" font-size="10.4" fill="#cbd5e0">x는 U에 속하면 안 되는데</text>
   <text x="821" y="120" text-anchor="middle" font-size="10.4" fill="#cbd5e0">흥미롭다 — 가정이 무너짐</text>
   <text x="821" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" fill="#f87171">x ∈ U  ↔  x ∉ U</text>
-  <text x="821" y="178" text-anchor="middle" font-size="8.8" fill="#6b7a99">(∴ 모든 자연수는 흥미롭다)</text>
+  <text x="821" y="178" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(∴ 모든 자연수는 흥미롭다)</text>
 </svg>

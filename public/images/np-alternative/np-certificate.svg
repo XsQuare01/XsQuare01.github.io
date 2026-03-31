@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 275" width="930" height="413">
   <rect width="620" height="275" fill="#0f1117" rx="10"/>
-  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">NP의 검증자 모델 (Verifier Model)</text>
+  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">NP의 검증자 모델 (Verifier Model)</text>
 
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
@@ -33,5 +33,5 @@
 
   <line x1="287" y1="190" x2="287" y2="160" stroke="#4ade80" stroke-width="1.8" marker-end="url(#arr-g)"/>
 
-  <text x="310" y="258" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">x ∈ L  ↔  ∃h : V(x, h) = Yes</text>
+  <text x="310" y="258" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">x ∈ L  ↔  ∃h : V(x, h) = Yes</text>
 </svg>

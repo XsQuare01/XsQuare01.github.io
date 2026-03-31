@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="1140" height="300">
   <rect width="760" height="200" fill="#0f1117" rx="10"/>
-  <text x="380" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Shortest Path — Decision Problem으로의 환원</text>
+  <text x="380" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Shortest Path — Decision Problem으로의 환원</text>
 
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
@@ -11,14 +11,14 @@
   <!-- Arrow 1: Decision → 길이 -->
   <line x1="217" y1="110" x2="271" y2="110" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <rect x="218" y="92" width="52" height="18" rx="3" fill="#0f1117"/>
-  <text x="244" y="105" text-anchor="middle" font-size="8" fill="#6b7a99">Binary</text>
-  <text x="244" y="117" text-anchor="middle" font-size="8" fill="#6b7a99">Search</text>
+  <text x="244" y="105" text-anchor="middle" font-size="8" fill="#e2e8f0">Binary</text>
+  <text x="244" y="117" text-anchor="middle" font-size="8" fill="#e2e8f0">Search</text>
 
   <!-- Arrow 2: 길이 → 경로 -->
   <line x1="477" y1="110" x2="531" y2="110" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <rect x="478" y="92" width="52" height="18" rx="3" fill="#0f1117"/>
-  <text x="504" y="105" text-anchor="middle" font-size="8" fill="#6b7a99">Edge</text>
-  <text x="504" y="117" text-anchor="middle" font-size="8" fill="#6b7a99">제거</text>
+  <text x="504" y="105" text-anchor="middle" font-size="8" fill="#e2e8f0">Edge</text>
+  <text x="504" y="117" text-anchor="middle" font-size="8" fill="#e2e8f0">제거</text>
 
   <!-- Card 1: Decision 문제 (green, x=15..215) -->
   <rect x="15" y="35" width="200" height="150" rx="8" fill="#1a2035" stroke="#4ade80" stroke-width="1.5"/>
@@ -28,7 +28,7 @@
   <text x="115" y="96" text-anchor="middle" font-size="10.4" fill="#cbd5e0">입력: G, S, E, L</text>
   <text x="115" y="116" text-anchor="middle" font-size="10.4" fill="#cbd5e0">출력: yes / no</text>
   <text x="115" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#4ade80">G, S, E, L → ?</text>
-  <text x="115" y="173" text-anchor="middle" font-size="8.8" fill="#6b7a99">(가장 단순한 형태)</text>
+  <text x="115" y="173" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(가장 단순한 형태)</text>
 
   <!-- Card 2: 길이 문제 (blue, x=275..475) -->
   <rect x="275" y="35" width="200" height="150" rx="8" fill="#1a2035" stroke="#38bdf8" stroke-width="1"/>
@@ -38,7 +38,7 @@
   <text x="375" y="96" text-anchor="middle" font-size="10.4" fill="#cbd5e0">입력: G, S, E</text>
   <text x="375" y="116" text-anchor="middle" font-size="10.4" fill="#cbd5e0">출력: 최단 거리 L</text>
   <text x="375" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#38bdf8">G, S, E → L</text>
-  <text x="375" y="173" text-anchor="middle" font-size="8.8" fill="#6b7a99">(수치 최적화 문제)</text>
+  <text x="375" y="173" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(수치 최적화 문제)</text>
 
   <!-- Card 3: 경로 문제 (orange, x=535..735) -->
   <rect x="535" y="35" width="200" height="150" rx="8" fill="#1a2035" stroke="#f97316" stroke-width="1"/>
@@ -48,5 +48,5 @@
   <text x="635" y="96" text-anchor="middle" font-size="10.4" fill="#cbd5e0">입력: G, S, E</text>
   <text x="635" y="116" text-anchor="middle" font-size="10.4" fill="#cbd5e0">출력: 경로 P</text>
   <text x="635" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#f97316">G, S, E → P</text>
-  <text x="635" y="173" text-anchor="middle" font-size="8.8" fill="#6b7a99">(가장 복잡한 형태)</text>
+  <text x="635" y="173" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(가장 복잡한 형태)</text>
 </svg>

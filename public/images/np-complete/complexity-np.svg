@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 355" width="930" height="533">
   <rect width="620" height="355" fill="#0f1117" rx="10"/>
-  <text x="310" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">복잡도 클래스 계층</text>
+  <text x="310" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">복잡도 클래스 계층</text>
 
   <!-- NP-Hard outer region -->
   <rect x="18" y="26" width="584" height="262" rx="8" fill="rgba(251,191,36,0.06)" stroke="#fbbf24" stroke-width="1.5"/>
@@ -35,6 +35,6 @@
   <text x="518" y="152" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#fbbf24">Halting Problem</text>
 
   <!-- P = NP question (below diagram) -->
-  <text x="310" y="310" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#94a3b8">P = NP 이면, NP-Complete ⊂ P</text>
-  <text x="310" y="332" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">컴퓨터 과학 최대의 미해결 문제</text>
+  <text x="310" y="310" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#e2e8f0">P = NP 이면, NP-Complete ⊂ P</text>
+  <text x="310" y="332" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">컴퓨터 과학 최대의 미해결 문제</text>
 </svg>

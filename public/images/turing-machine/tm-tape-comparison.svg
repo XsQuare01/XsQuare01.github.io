@@ -5,7 +5,7 @@
     </marker>
   </defs>
   <rect width="780" height="220" fill="#0f1117" rx="10"/>
-  <text x="390" y="20" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">1-Tape DTM vs 2-Tape DTM</text>
+  <text x="390" y="20" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">1-Tape DTM vs 2-Tape DTM</text>
   <rect x="10" y="30" width="355" height="175" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
   <rect x="10" y="30" width="355" height="38" rx="8" fill="rgba(96,165,250,0.15)"/>
   <text x="187" y="55" text-anchor="middle" fill="#60a5fa" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">1-Tape DTM</text>
@@ -20,8 +20,8 @@
   <rect x="233" y="90" width="52" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
   <text x="259" y="115" text-anchor="middle" fill="#4a5568" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">⊔</text>
   <text x="187" y="145" text-anchor="middle" fill="#60a5fa" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">Tape 1</text>
-  <text x="187" y="168" text-anchor="middle" fill="#6b7a99" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">한 방향으로 무한한 테이프 1개</text>
-  <text x="187" y="185" text-anchor="middle" fill="#6b7a99" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">두 구역으로 나눠 사용 가능</text>
+  <text x="187" y="168" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">한 방향으로 무한한 테이프 1개</text>
+  <text x="187" y="185" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">두 구역으로 나눠 사용 가능</text>
   <rect x="415" y="30" width="355" height="175" rx="8" fill="#1a2035" stroke="#a78bfa" stroke-width="1.5"/>
   <rect x="415" y="30" width="355" height="38" rx="8" fill="rgba(167,139,250,0.15)"/>
   <text x="592" y="55" text-anchor="middle" fill="#a78bfa" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">2-Tape DTM</text>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 242" width="930" height="363">
   <rect width="620" height="242" fill="#0f1117" rx="10"/>
-  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">NFA &#xC608;&#xC2DC; &#x2014; &#x2018;101&#x2019;&#xC744; &#xD3EC;&#xD568;&#xD558;&#xB294; &#xBB38;&#xC790;&#xC5F4;</text>
+  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">NFA &#xC608;&#xC2DC; &#x2014; &#x2018;101&#x2019;&#xC744; &#xD3EC;&#xD568;&#xD558;&#xB294; &#xBB38;&#xC790;&#xC5F4;</text>
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
       <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
@@ -26,5 +26,5 @@
   <text x="315" y="97" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">0</text>
   <line x1="420" y1="105" x2="508" y2="105" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="465" y="97" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">1</text>
-  <text x="310" y="213" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#94a3b8">이중 원 = Accepting State  ·  → = 초기 상태</text>
+  <text x="310" y="213" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#e2e8f0">이중 원 = Accepting State  ·  → = 초기 상태</text>
 </svg>

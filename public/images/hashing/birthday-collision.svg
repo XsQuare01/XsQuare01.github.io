@@ -12,43 +12,43 @@
   </defs>
 
   <rect width="700" height="440" fill="#0f1117" rx="10"/>
-  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">Birthday Paradox와 해시 충돌 확률</text>
+  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">Birthday Paradox와 해시 충돌 확률</text>
 
   <!-- ===== Left: Birthday Paradox Analogy ===== -->
   <rect x="12" y="26" width="320" height="218" rx="8" fill="rgba(251,191,36,0.03)" stroke="#fbbf24" stroke-width="1.5"/>
   <text x="172" y="47" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">생일 역설 (365일)</text>
 
-  <text x="30" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#94a3b8">사람 수  k</text>
-  <text x="140" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#94a3b8">충돌 확률 P(k)</text>
-  <text x="248" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#94a3b8">비고</text>
+  <text x="30" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">사람 수  k</text>
+  <text x="140" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">충돌 확률 P(k)</text>
+  <text x="248" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">비고</text>
   <line x1="22" y1="80" x2="322" y2="80" stroke="#2d3748" stroke-width="1"/>
 
-  <text x="30" y="102" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">10명</text>
-  <text x="140" y="102" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">11.7%</text>
+  <text x="30" y="102" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">10명</text>
+  <text x="140" y="102" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">11.7%</text>
 
   <text x="30" y="124" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">23명</text>
   <text x="140" y="124" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">50.7%</text>
   <text x="248" y="124" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#fbbf24">← 50% 돌파</text>
 
-  <text x="30" y="146" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">50명</text>
-  <text x="140" y="146" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">97%</text>
+  <text x="30" y="146" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">50명</text>
+  <text x="140" y="146" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">97%</text>
 
   <text x="30" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">253명</text>
   <text x="140" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">50%</text>
   <text x="248" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f87171">← 특정인과 같은 생일</text>
 
   <line x1="22" y1="176" x2="322" y2="176" stroke="#2d3748" stroke-width="1"/>
-  <text x="172" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">임의 충돌: √365 ≈ 19명  vs  특정 충돌: 365/2 = 183명</text>
+  <text x="172" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">임의 충돌: √365 ≈ 19명  vs  특정 충돌: 365/2 = 183명</text>
   <text x="172" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">임의 충돌이 특정 충돌보다 √N 배 쉽다</text>
-  <text x="172" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">P(충돌) ≈ 1 − e<tspan baseline-shift="super" font-size="70%">−k²/2N</tspan>  →  k ≈ 1.18√N 에서 50%</text>
+  <text x="172" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">P(충돌) ≈ 1 − e<tspan baseline-shift="super" font-size="70%">−k²/2N</tspan>  →  k ≈ 1.18√N 에서 50%</text>
 
   <!-- ===== Right: Hash Collision Impact ===== -->
   <rect x="348" y="26" width="340" height="218" rx="8" fill="rgba(248,113,113,0.03)" stroke="#f87171" stroke-width="1.5"/>
   <text x="518" y="47" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#f87171">해시 충돌 난이도</text>
 
-  <text x="362" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#94a3b8">해시 크기</text>
-  <text x="468" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#94a3b8">역상 공격</text>
-  <text x="560" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#94a3b8">충돌 공격 ★</text>
+  <text x="362" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">해시 크기</text>
+  <text x="468" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">역상 공격</text>
+  <text x="560" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">충돌 공격 ★</text>
   <line x1="354" y1="80" x2="680" y2="80" stroke="#2d3748" stroke-width="1"/>
 
   <text x="362" y="102" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">MD5 (128 bit)</text>
@@ -68,27 +68,27 @@
   <text x="560" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#4ade80">2²⁵⁶ — 초장기 안전</text>
 
   <line x1="354" y1="176" x2="680" y2="176" stroke="#2d3748" stroke-width="1"/>
-  <text x="518" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">충돌 공격 복잡도 = 2<tspan baseline-shift="super" font-size="70%">n/2</tspan>  (n = 해시 비트 수)</text>
+  <text x="518" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">충돌 공격 복잡도 = 2<tspan baseline-shift="super" font-size="70%">n/2</tspan>  (n = 해시 비트 수)</text>
   <text x="518" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">→ 안전성 목표 128 bit 이상이면 SHA-256 필요</text>
-  <text x="518" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">양자 컴퓨터: Grover 알고리즘 → 안전성 절반 → SHA-384+</text>
+  <text x="518" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">양자 컴퓨터: Grover 알고리즘 → 안전성 절반 → SHA-384+</text>
 
   <!-- ===== Bottom: Why MD5/SHA-1 are broken ===== -->
   <line x1="12" y1="262" x2="688" y2="262" stroke="#2d3748" stroke-width="1"/>
-  <text x="350" y="282" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">MD5 · SHA-1이 왜 더 이상 안전하지 않은가</text>
+  <text x="350" y="282" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">MD5 · SHA-1이 왜 더 이상 안전하지 않은가</text>
 
   <!-- MD5 column -->
   <rect x="14" y="294" width="320" height="118" rx="6" fill="rgba(248,113,113,0.04)" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
   <text x="174" y="314" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#f87171">MD5 (128 bit) — 폐기</text>
-  <text x="24" y="332" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">· 이론적 충돌: 2004년 Wang 등 (2⁴⁰ 연산)</text>
+  <text x="24" y="332" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">· 이론적 충돌: 2004년 Wang 등 (2⁴⁰ 연산)</text>
   <text x="24" y="350" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">· 실용 충돌: 가정용 PC로 수 초 내 생성 가능</text>
   <text x="24" y="368" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">· Flame 악성코드: MD5 충돌로 MS 인증서 위조 (2012)</text>
-  <text x="24" y="386" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#475569">→ 디지털 서명·인증서에 절대 사용 금지</text>
+  <text x="24" y="386" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#cbd5e1">→ 디지털 서명·인증서에 절대 사용 금지</text>
 
   <!-- SHA-1 column -->
   <rect x="350" y="294" width="338" height="118" rx="6" fill="rgba(248,113,113,0.04)" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
   <text x="519" y="314" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#f87171">SHA-1 (160 bit) — 폐기</text>
-  <text x="360" y="332" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#6b7a99">· 이론적 취약: 2005년 Wang 등 (2⁶³ 연산)</text>
+  <text x="360" y="332" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">· 이론적 취약: 2005년 Wang 등 (2⁶³ 연산)</text>
   <text x="360" y="350" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">· SHAttered: 동일 SHA-1 해시 PDF 2개 공개 (2017, Google)</text>
   <text x="360" y="368" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#f87171">· 실제 비용: 약 $45,000 (2019년 GPU 클러스터)</text>
-  <text x="360" y="386" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#475569">→ CA/브라우저 2017년부터 SHA-1 인증서 거부</text>
+  <text x="360" y="386" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#cbd5e1">→ CA/브라우저 2017년부터 SHA-1 인증서 거부</text>
 </svg>

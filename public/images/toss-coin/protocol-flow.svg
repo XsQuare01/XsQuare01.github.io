@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 390" width="1170" height="585">
   <rect width="780" height="390" fill="#0f1117" rx="10"/>
-  <text x="390" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">프로토콜 흐름 — Alice &amp; Bob</text>
+  <text x="390" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">프로토콜 흐름 — Alice &amp; Bob</text>
 
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
@@ -52,5 +52,5 @@
   <!-- Step 4: Bob determines result -->
   <rect x="480" y="334" width="280" height="46" rx="6" fill="#1a2035" stroke="#38bdf8" stroke-width="1"/>
   <text x="620" y="355" text-anchor="middle" font-size="10.4" font-weight="700" fill="#38bdf8">④ 소인수분해 가능 여부로</text>
-  <text x="620" y="372" text-anchor="middle" font-size="9.6" fill="#6b7a99">gcd(x − 근, n) = p or q?  →  승패 결정</text>
+  <text x="620" y="372" text-anchor="middle" font-size="9.6" fill="#e2e8f0">gcd(x − 근, n) = p or q?  →  승패 결정</text>
 </svg>

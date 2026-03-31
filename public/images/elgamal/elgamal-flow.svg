@@ -15,10 +15,10 @@
   </defs>
 
   <rect width="680" height="340" fill="#0f1117" rx="10"/>
-  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">ElGamal 암호화 흐름 — p=11, g=2</text>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">ElGamal 암호화 흐름 — p=11, g=2</text>
 
   <!-- ===== PHASE 1: Key Generation (Alice) ===== -->
-  <text x="120" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">① 키 생성 (Alice)</text>
+  <text x="120" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">① 키 생성 (Alice)</text>
 
   <rect x="18" y="44" width="204" height="112" rx="8" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
 
@@ -27,7 +27,7 @@
   <text x="120" y="74" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">🔒  비밀키  x = 3</text>
 
   <!-- Public params -->
-  <text x="30" y="104" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">공개 파라미터: p=11, g=2</text>
+  <text x="30" y="104" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">공개 파라미터: p=11, g=2</text>
 
   <!-- Public key -->
   <rect x="30" y="114" width="180" height="28" rx="4" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1"/>
@@ -36,7 +36,7 @@
   <!-- Alice avatar -->
   <circle cx="120" cy="178" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
   <text x="120" y="183" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👩</text>
-  <text x="120" y="200" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">Alice</text>
+  <text x="120" y="200" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">Alice</text>
 
   <!-- Public key broadcast arrow -->
   <line x1="222" y1="126" x2="290" y2="126" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ga)"/>
@@ -44,12 +44,12 @@
   <text x="256" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">(p, g, h)</text>
 
   <!-- ===== PHASE 2: Encryption (Bob) ===== -->
-  <text x="390" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">② 암호화 (Bob)</text>
+  <text x="390" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">② 암호화 (Bob)</text>
 
   <rect x="290" y="44" width="224" height="148" rx="8" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
 
-  <text x="302" y="62" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">평문  m = 5</text>
-  <text x="302" y="79" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">임시 비밀  k = 2  (랜덤 선택)</text>
+  <text x="302" y="62" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">평문  m = 5</text>
+  <text x="302" y="79" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">임시 비밀  k = 2  (랜덤 선택)</text>
 
   <line x1="302" y1="88" x2="502" y2="88" stroke="#1e2738" stroke-width="1"/>
 
@@ -61,12 +61,12 @@
 
   <!-- Ciphertext box -->
   <rect x="302" y="170" width="200" height="12" rx="3" fill="rgba(96,165,250,0.06)"/>
-  <text x="402" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#475569">암호문 = (A, B) = (4, 1)</text>
+  <text x="402" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#cbd5e1">암호문 = (A, B) = (4, 1)</text>
 
   <!-- Bob avatar -->
   <circle cx="402" cy="224" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
   <text x="402" y="229" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👨</text>
-  <text x="402" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">Bob</text>
+  <text x="402" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">Bob</text>
 
   <!-- Send ciphertext arrow -->
   <line x1="514" y1="180" x2="576" y2="180" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
@@ -74,12 +74,12 @@
   <text x="545" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#60a5fa">(A=4, B=1)</text>
 
   <!-- ===== PHASE 3: Decryption (Alice) ===== -->
-  <text x="624" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">③ 복호화 (Alice)</text>
+  <text x="624" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">③ 복호화 (Alice)</text>
 
   <rect x="576" y="44" width="88" height="148" rx="8" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
 
-  <text x="620" y="68" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">A=4, B=1</text>
-  <text x="620" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">비밀키 x=3</text>
+  <text x="620" y="68" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">A=4, B=1</text>
+  <text x="620" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">비밀키 x=3</text>
 
   <line x1="584" y1="92" x2="656" y2="92" stroke="#1e2738" stroke-width="1"/>
 
@@ -96,9 +96,9 @@
   <!-- ===== BOTTOM: Why it works ===== -->
   <line x1="18" y1="270" x2="662" y2="270" stroke="#2d3748" stroke-width="1"/>
 
-  <text x="340" y="289" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#94a3b8">왜 복호화가 성립하는가</text>
+  <text x="340" y="289" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">왜 복호화가 성립하는가</text>
 
-  <text x="340" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">s = A<tspan baseline-shift="super" font-size="70%">x</tspan> = (g<tspan baseline-shift="super" font-size="70%">k</tspan>)<tspan baseline-shift="super" font-size="70%">x</tspan> = g<tspan baseline-shift="super" font-size="70%">kx</tspan>     h<tspan baseline-shift="super" font-size="70%">k</tspan> = (g<tspan baseline-shift="super" font-size="70%">x</tspan>)<tspan baseline-shift="super" font-size="70%">k</tspan> = g<tspan baseline-shift="super" font-size="70%">kx</tspan></text>
+  <text x="340" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">s = A<tspan baseline-shift="super" font-size="70%">x</tspan> = (g<tspan baseline-shift="super" font-size="70%">k</tspan>)<tspan baseline-shift="super" font-size="70%">x</tspan> = g<tspan baseline-shift="super" font-size="70%">kx</tspan>     h<tspan baseline-shift="super" font-size="70%">k</tspan> = (g<tspan baseline-shift="super" font-size="70%">x</tspan>)<tspan baseline-shift="super" font-size="70%">k</tspan> = g<tspan baseline-shift="super" font-size="70%">kx</tspan></text>
   <text x="340" y="326" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">∴  B · s⁻¹ = m · h<tspan baseline-shift="super" font-size="70%">k</tspan> · (h<tspan baseline-shift="super" font-size="70%">k</tspan>)⁻¹ = m</text>
 
   <!-- Shared secret label -->

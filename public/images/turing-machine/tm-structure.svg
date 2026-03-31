@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 215" width="1140" height="323">
   <rect width="760" height="215" fill="#0f1117" rx="10"/>
-  <text x="380" y="20" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">튜링 머신 구조 — 테이프, 헤드, 상태</text>
+  <text x="380" y="20" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">튜링 머신 구조 — 테이프, 헤드, 상태</text>
   <rect x="107" y="80" width="78" height="52" fill="#1a2035" stroke="#4a5568" stroke-width="1.5"/>
   <text x="146" y="110" text-anchor="middle" fill="#4a5568" font-size="12.8" font-family="system-ui,-apple-system,sans-serif">⊔</text>
   <rect x="185" y="80" width="78" height="52" fill="#1a2035" stroke="#4a5568" stroke-width="1.5"/>
@@ -21,11 +21,11 @@
   <rect x="355" y="28" width="50" height="26" rx="5" fill="#1e2d4a" stroke="#60a5fa" stroke-width="1.5"/>
   <text x="380" y="46" text-anchor="middle" fill="#60a5fa" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">q₂</text>
   <line x1="380" y1="54" x2="380" y2="55" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="290" y="155" text-anchor="middle" fill="#6b7a99" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">읽은 기호</text>
+  <text x="290" y="155" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">읽은 기호</text>
   <text x="290" y="172" text-anchor="middle" fill="#60a5fa" font-size="9.6" font-family="'JetBrains Mono',monospace">1</text>
-  <text x="380" y="155" text-anchor="middle" fill="#6b7a99" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">쓸 기호</text>
+  <text x="380" y="155" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">쓸 기호</text>
   <text x="380" y="172" text-anchor="middle" fill="#fb923c" font-size="9.6" font-family="'JetBrains Mono',monospace">b</text>
-  <text x="470" y="155" text-anchor="middle" fill="#6b7a99" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">이동 방향</text>
+  <text x="470" y="155" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">이동 방향</text>
   <text x="470" y="172" text-anchor="middle" fill="#4ade80" font-size="9.6" font-family="'JetBrains Mono',monospace">R →</text>
-  <text x="380" y="200" text-anchor="middle" fill="#6b7a99" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">파란 셀 = 헤드 현재 위치  ·  ⊔ = 공백(blank)</text>
+  <text x="380" y="200" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">파란 셀 = 헤드 현재 위치  ·  ⊔ = 공백(blank)</text>
 </svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 270" width="930" height="405">
   <rect width="620" height="270" fill="#0f1117" rx="10"/>
-  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">유클리드 호제법 — gcd(48, 18) 예시</text>
+  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">유클리드 호제법 — gcd(48, 18) 예시</text>
 
   <!-- Main table box -->
   <rect x="20" y="24" width="580" height="152" rx="6" fill="rgba(30,41,59,0.5)" stroke="#2d3748" stroke-width="1"/>
@@ -33,6 +33,6 @@
   <text x="310" y="208" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12.8" font-weight="700" fill="#4ade80">gcd(48, 18) = 6</text>
 
   <!-- Captions -->
-  <text x="310" y="238" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#94a3b8">b = qa + r 이면  gcd(b, a) = gcd(a, r)</text>
-  <text x="310" y="257" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">나머지가 0이 되면 직전 단계의 나머지가 GCD</text>
+  <text x="310" y="238" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#e2e8f0">b = qa + r 이면  gcd(b, a) = gcd(a, r)</text>
+  <text x="310" y="257" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">나머지가 0이 되면 직전 단계의 나머지가 GCD</text>
 </svg>

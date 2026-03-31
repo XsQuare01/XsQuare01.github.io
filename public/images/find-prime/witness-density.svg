@@ -7,21 +7,21 @@
 
   <rect width="540" height="248" fill="#0f1117" rx="10"/>
 
-  <text x="270" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Witness 밀도 — f(b) = ab 는 B → A 단사함수</text>
+  <text x="270" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Witness 밀도 — f(b) = ab 는 B → A 단사함수</text>
 
   <!-- ℤₙ* outer frame -->
   <rect x="18" y="24" width="504" height="186" rx="8" fill="none" stroke="#2d3748" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="29" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#475569">ℤₙ*</text>
+  <text x="29" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e1">ℤₙ*</text>
 
   <!-- B ellipse: center (135, 118), rx=105, ry=73 -->
   <ellipse cx="135" cy="118" rx="105" ry="73" fill="rgba(99,102,241,0.08)" stroke="#6366f1" stroke-width="1.5"/>
   <text x="135" y="55" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#818cf8">B</text>
-  <text x="135" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">non-Witness</text>
+  <text x="135" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">non-Witness</text>
 
   <!-- A ellipse: center (390, 118), rx=120, ry=73 -->
   <ellipse cx="390" cy="118" rx="120" ry="73" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="1.5"/>
   <text x="390" y="55" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#fb923c">A</text>
-  <text x="390" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">Witness</text>
+  <text x="390" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Witness</text>
 
   <!-- B elements -->
   <circle cx="90"  cy="92"  r="3.5" fill="#818cf8"/>
@@ -54,6 +54,6 @@
   <text x="256" y="145" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">×a</text>
 
   <!-- Conclusion -->
-  <text x="270" y="222" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">f : B → A,  f(b) = ab 는 단사(injective)  →  |B| ≤ |A|</text>
+  <text x="270" y="222" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">f : B → A,  f(b) = ab 는 단사(injective)  →  |B| ≤ |A|</text>
   <text x="270" y="240" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="600" fill="#e2e8f0">∴  |Witness| ≥ |ℤₙ*| / 2</text>
 </svg>

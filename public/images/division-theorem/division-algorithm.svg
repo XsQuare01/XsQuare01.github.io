@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 268" width="930" height="402">
   <rect width="620" height="268" fill="#0f1117" rx="10"/>
-  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">b = qa + r 의 시각화 (예: b=14, a=4, q=3, r=2)</text>
+  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">b = qa + r 의 시각화 (예: b=14, a=4, q=3, r=2)</text>
 
   <defs>
     <marker id="arr-line" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
@@ -57,6 +57,6 @@
   <text x="385" y="175" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">r</text>
 
   <!-- Formula -->
-  <text x="310" y="232" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#94a3b8">b  =  qa  +  r</text>
-  <text x="310" y="254" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">0 ≤ r &lt; a  (나머지는 제수보다 작다)</text>
+  <text x="310" y="232" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">b  =  qa  +  r</text>
+  <text x="310" y="254" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">0 ≤ r &lt; a  (나머지는 제수보다 작다)</text>
 </svg>

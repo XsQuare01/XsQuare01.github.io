@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 215" width="1290" height="323">
   <rect width="860" height="215" fill="#0f1117" rx="10"/>
-  <text x="430" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Powerset Construction &#x2014; NFA &#xC0C1;&#xD0DC; &#xC9D1;&#xD569; &#x2192; DFA &#xB2E8;&#xC77C; &#xC0C1;&#xD0DC;</text>
+  <text x="430" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Powerset Construction &#x2014; NFA &#xC0C1;&#xD0DC; &#xC9D1;&#xD569; &#x2192; DFA &#xB2E8;&#xC77C; &#xC0C1;&#xD0DC;</text>
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
       <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
@@ -12,10 +12,10 @@
   <text x="120" y="82" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">&#xD65C;&#xC131; &#xC0C1;&#xD0DC;: {1, 3}</text>
   <text x="120" y="106" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#e2e8f0">1: &#x394;(1,1) = {1,2}</text>
   <text x="120" y="126" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#e2e8f0">3: &#x394;(3,1) = {4}</text>
-  <text x="120" y="150" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">&#xC785;&#xB825; 1 &#x2192;</text>
+  <text x="120" y="150" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">&#xC785;&#xB825; 1 &#x2192;</text>
   <text x="120" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#fb923c">&#xD569;&#xC9D1;&#xD569;: {1,2,4}</text>
   <line x1="230" y1="115" x2="280" y2="115" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="255" y="109" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">&#xD569;&#xC9D1;&#xD569;</text>
+  <text x="255" y="109" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">&#xD569;&#xC9D1;&#xD569;</text>
   <rect x="280" y="30" width="220" height="168" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
   <rect x="280" y="30" width="220" height="36" rx="8" fill="rgba(96,165,250,0.15)"/>
   <text x="390" y="54" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#60a5fa">DFA &#xC0C1;&#xD0DC;</text>
@@ -25,13 +25,13 @@
   <text x="390" y="155" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">4 &#x2208; F (Accepting state)</text>
   <text x="390" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">&#x2192; Accepting DFA state</text>
   <line x1="500" y1="115" x2="550" y2="115" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="525" y="109" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">&#xBCC0;&#xD658;</text>
+  <text x="525" y="109" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">&#xBCC0;&#xD658;</text>
   <rect x="550" y="30" width="290" height="168" rx="8" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <rect x="550" y="30" width="290" height="36" rx="8" fill="rgba(74,222,128,0.15)"/>
   <text x="695" y="54" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#4ade80">&#xACB0;&#xACFC; DFA &#xC0C1;&#xD0DC;</text>
   <text x="695" y="82" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">Initial: {1}</text>
   <text x="695" y="106" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#cbd5e0">Accepting: 4&#xB97C; &#xD3EC;&#xD568;&#xD558;&#xB294; &#xBD80;&#xBD84;&#xC9D1;&#xD569;</text>
   <text x="695" y="128" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#4ade80">{4}, {1,4}, {2,4}, {1,2,4}, &#x2026;</text>
-  <text x="695" y="155" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">&#xCD5C;&#xB300; 2&#x207F;&#xAC1C;&#xC758; DFA &#xC0C1;&#xD0DC; &#xAC00;&#xB2A5;</text>
-  <text x="695" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">(n = NFA &#xC0C1;&#xD0DC; &#xC218;)</text>
+  <text x="695" y="155" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">&#xCD5C;&#xB300; 2&#x207F;&#xAC1C;&#xC758; DFA &#xC0C1;&#xD0DC; &#xAC00;&#xB2A5;</text>
+  <text x="695" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">(n = NFA &#xC0C1;&#xD0DC; &#xC218;)</text>
 </svg>

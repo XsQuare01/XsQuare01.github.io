@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 215" width="1320" height="323">
   <rect width="880" height="215" fill="#0f1117" rx="10"/>
-  <text x="440" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">가산 무한 — 자연수와의 일대일 대응</text>
+  <text x="440" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">가산 무한 — 자연수와의 일대일 대응</text>
 
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
@@ -57,7 +57,7 @@
   <text x="396" y="147" text-anchor="middle" font-size="12" fill="#4a5568">…</text>
 
   <!-- Result -->
-  <text x="221" y="191" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" font-weight="700" fill="#6b7a99">|ℕ| = |ℤ| = ℵ₀</text>
+  <text x="221" y="191" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" font-weight="700" fill="#e2e8f0">|ℕ| = |ℤ| = ℵ₀</text>
 
   <!-- ─── RIGHT CARD: ℕ ↔ ℚ⁺ ─── -->
   <rect x="453" y="30" width="412" height="174" rx="8" fill="#1a2035" stroke="#38bdf8" stroke-width="1"/>
@@ -66,15 +66,15 @@
   <text x="659" y="56" text-anchor="middle" font-size="11.2" font-weight="700" fill="#38bdf8">ℕ  ↔  ℚ⁺  (대각선 열거)</text>
 
   <!-- Column headers (q=분모) -->
-  <text x="521" y="82" text-anchor="middle" font-size="8.8" fill="#6b7a99">q=1</text>
-  <text x="611" y="82" text-anchor="middle" font-size="8.8" fill="#6b7a99">q=2</text>
-  <text x="701" y="82" text-anchor="middle" font-size="8.8" fill="#6b7a99">q=3</text>
-  <text x="791" y="82" text-anchor="middle" font-size="8.8" fill="#6b7a99">q=4</text>
+  <text x="521" y="82" text-anchor="middle" font-size="8.8" fill="#e2e8f0">q=1</text>
+  <text x="611" y="82" text-anchor="middle" font-size="8.8" fill="#e2e8f0">q=2</text>
+  <text x="701" y="82" text-anchor="middle" font-size="8.8" fill="#e2e8f0">q=3</text>
+  <text x="791" y="82" text-anchor="middle" font-size="8.8" fill="#e2e8f0">q=4</text>
 
   <!-- Row headers (p=분자) -->
-  <text x="465" y="102" text-anchor="middle" font-size="8.8" fill="#6b7a99">p=1</text>
-  <text x="465" y="138" text-anchor="middle" font-size="8.8" fill="#6b7a99">p=2</text>
-  <text x="465" y="174" text-anchor="middle" font-size="8.8" fill="#6b7a99">p=3</text>
+  <text x="465" y="102" text-anchor="middle" font-size="8.8" fill="#e2e8f0">p=1</text>
+  <text x="465" y="138" text-anchor="middle" font-size="8.8" fill="#e2e8f0">p=2</text>
+  <text x="465" y="174" text-anchor="middle" font-size="8.8" fill="#e2e8f0">p=3</text>
 
   <!-- Grid cells (row p, col q) — box 44×24, centers at col×row -->
   <!-- Row 1 (y=90..114, center 102) -->
@@ -123,5 +123,5 @@
   <text x="591" y="165" font-size="8" font-weight="700" fill="#a78bfa">⑧</text>
 
   <!-- Result -->
-  <text x="659" y="200" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" font-weight="700" fill="#6b7a99">|ℕ| = |ℚ⁺| = ℵ₀  (중복 제외 후)</text>
+  <text x="659" y="200" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" font-weight="700" fill="#e2e8f0">|ℕ| = |ℚ⁺| = ℵ₀  (중복 제외 후)</text>
 </svg>
