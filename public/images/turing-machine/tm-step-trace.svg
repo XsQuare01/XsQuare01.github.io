@@ -1,32 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 215" width="780" height="215">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 215" width="1170" height="323">
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
       <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
     </marker>
   </defs>
   <rect width="780" height="215" fill="#0f1117" rx="10"/>
-  <text x="390" y="20" text-anchor="middle" fill="#6b7a99" font-size="12" font-family="system-ui,-apple-system,sans-serif">튜링 머신 한 스텝 실행 trace</text>
+  <text x="390" y="20" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">튜링 머신 한 스텝 실행 trace</text>
   <rect x="10" y="30" width="215" height="170" rx="8" fill="#1a2035" stroke="#fb923c" stroke-width="1.5"/>
   <rect x="10" y="30" width="215" height="38" rx="8" fill="rgba(251,146,60,0.15)"/>
-  <text x="117" y="55" text-anchor="middle" fill="#fb923c" font-size="13" font-weight="700" font-family="system-ui,-apple-system,sans-serif">현재 구성</text>
-  <text x="117" y="88" text-anchor="middle" fill="#cbd5e0" font-size="13" font-family="system-ui,-apple-system,sans-serif">상태: q</text>
-  <text x="117" y="112" text-anchor="middle" fill="#cbd5e0" font-size="13" font-family="system-ui,-apple-system,sans-serif">헤드 위치: 셀 3</text>
-  <text x="117" y="136" text-anchor="middle" fill="#cbd5e0" font-size="13" font-family="system-ui,-apple-system,sans-serif">읽은 기호: a</text>
-  <text x="117" y="175" text-anchor="middle" fill="#fb923c" font-size="12" font-family="'JetBrains Mono',monospace">(q, a)</text>
+  <text x="117" y="55" text-anchor="middle" fill="#fb923c" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">현재 구성</text>
+  <text x="117" y="88" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">상태: q</text>
+  <text x="117" y="112" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">헤드 위치: 셀 3</text>
+  <text x="117" y="136" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">읽은 기호: a</text>
+  <text x="117" y="175" text-anchor="middle" fill="#fb923c" font-size="9.6" font-family="'JetBrains Mono',monospace">(q, a)</text>
   <line x1="225" y1="116" x2="273" y2="116" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <rect x="275" y="30" width="225" height="170" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
   <rect x="275" y="30" width="225" height="38" rx="8" fill="rgba(96,165,250,0.15)"/>
-  <text x="387" y="55" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700" font-family="system-ui,-apple-system,sans-serif">전이 함수</text>
-  <text x="387" y="95" text-anchor="middle" fill="#e2e8f0" font-size="14" font-family="'JetBrains Mono',monospace">(q, a) → (r, b, R)</text>
-  <text x="387" y="125" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">상태 q에서 a를 읽으면</text>
-  <text x="387" y="145" text-anchor="middle" fill="#cbd5e0" font-size="12" font-family="system-ui,-apple-system,sans-serif">b를 쓰고 오른쪽으로 이동</text>
-  <text x="387" y="168" text-anchor="middle" fill="#60a5fa" font-size="12" font-family="system-ui,-apple-system,sans-serif">새 상태: r</text>
+  <text x="387" y="55" text-anchor="middle" fill="#60a5fa" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">전이 함수</text>
+  <text x="387" y="95" text-anchor="middle" fill="#e2e8f0" font-size="11.2" font-family="'JetBrains Mono',monospace">(q, a) → (r, b, R)</text>
+  <text x="387" y="125" text-anchor="middle" fill="#cbd5e0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">상태 q에서 a를 읽으면</text>
+  <text x="387" y="145" text-anchor="middle" fill="#cbd5e0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">b를 쓰고 오른쪽으로 이동</text>
+  <text x="387" y="168" text-anchor="middle" fill="#60a5fa" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">새 상태: r</text>
   <line x1="500" y1="116" x2="548" y2="116" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <rect x="550" y="30" width="215" height="170" rx="8" fill="#1a2035" stroke="#4ade80" stroke-width="1.5"/>
   <rect x="550" y="30" width="215" height="38" rx="8" fill="rgba(74,222,128,0.15)"/>
-  <text x="657" y="55" text-anchor="middle" fill="#4ade80" font-size="13" font-weight="700" font-family="system-ui,-apple-system,sans-serif">다음 구성</text>
-  <text x="657" y="88" text-anchor="middle" fill="#cbd5e0" font-size="13" font-family="system-ui,-apple-system,sans-serif">상태: r</text>
-  <text x="657" y="112" text-anchor="middle" fill="#cbd5e0" font-size="13" font-family="system-ui,-apple-system,sans-serif">헤드 위치: 셀 4</text>
-  <text x="657" y="136" text-anchor="middle" fill="#cbd5e0" font-size="13" font-family="system-ui,-apple-system,sans-serif">테이프: a → b로 갱신</text>
-  <text x="657" y="175" text-anchor="middle" fill="#4ade80" font-size="12" font-family="'JetBrains Mono',monospace">(r, b, R)</text>
+  <text x="657" y="55" text-anchor="middle" fill="#4ade80" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">다음 구성</text>
+  <text x="657" y="88" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">상태: r</text>
+  <text x="657" y="112" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">헤드 위치: 셀 4</text>
+  <text x="657" y="136" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">테이프: a → b로 갱신</text>
+  <text x="657" y="175" text-anchor="middle" fill="#4ade80" font-size="9.6" font-family="'JetBrains Mono',monospace">(r, b, R)</text>
 </svg>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 250" width="780" height="250">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 250" width="1170" height="375">
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
       <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
@@ -11,32 +11,32 @@
     </marker>
   </defs>
   <rect width="780" height="250" fill="#0f1117" rx="10"/>
-  <text x="390" y="18" text-anchor="middle" fill="#6b7a99" font-size="12" font-family="system-ui,-apple-system,sans-serif">NTM 시뮬레이션 — UTM의 BFS 트리 탐색</text>
+  <text x="390" y="18" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">NTM 시뮬레이션 — UTM의 BFS 트리 탐색</text>
   <circle cx="390" cy="60" r="22" fill="#1a2035" stroke="#a78bfa" stroke-width="2"/>
-  <text x="390" y="64" text-anchor="middle" fill="#a78bfa" font-size="11" font-family="'JetBrains Mono',monospace">(q₀,a)</text>
+  <text x="390" y="64" text-anchor="middle" fill="#a78bfa" font-size="8.8" font-family="'JetBrains Mono',monospace">(q₀,a)</text>
   <circle cx="260" cy="120" r="20" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="260" y="124" text-anchor="middle" fill="#cbd5e0" font-size="10" font-family="'JetBrains Mono',monospace">(r,b,R)</text>
+  <text x="260" y="124" text-anchor="middle" fill="#cbd5e0" font-size="8" font-family="'JetBrains Mono',monospace">(r,b,R)</text>
   <circle cx="520" cy="120" r="20" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="520" y="124" text-anchor="middle" fill="#cbd5e0" font-size="10" font-family="'JetBrains Mono',monospace">(r,c,R)</text>
+  <text x="520" y="124" text-anchor="middle" fill="#cbd5e0" font-size="8" font-family="'JetBrains Mono',monospace">(r,c,R)</text>
   <path d="M 374,78 C 340,100 290,105 278,103" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <path d="M 406,78 C 440,100 500,105 502,103" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="390" y="90" text-anchor="middle" fill="#6b7a99" font-size="10" font-family="system-ui,-apple-system,sans-serif">BFS 탐색</text>
+  <text x="390" y="90" text-anchor="middle" fill="#6b7a99" font-size="8" font-family="system-ui,-apple-system,sans-serif">BFS 탐색</text>
   <circle cx="170" cy="185" r="18" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="170" cy="185" r="12" fill="none" stroke="#4ade80" stroke-width="1"/>
-  <text x="170" y="189" text-anchor="middle" fill="#4ade80" font-size="9" font-family="system-ui,-apple-system,sans-serif">Accept</text>
+  <text x="170" y="189" text-anchor="middle" fill="#4ade80" font-size="7.2" font-family="system-ui,-apple-system,sans-serif">Accept</text>
   <circle cx="295" cy="185" r="18" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
-  <text x="295" y="189" text-anchor="middle" fill="#f87171" font-size="9" font-family="system-ui,-apple-system,sans-serif">Reject</text>
+  <text x="295" y="189" text-anchor="middle" fill="#f87171" font-size="7.2" font-family="system-ui,-apple-system,sans-serif">Reject</text>
   <circle cx="445" cy="185" r="18" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="445" y="189" text-anchor="middle" fill="#6b7a99" font-size="12" font-family="system-ui,-apple-system,sans-serif">...</text>
+  <text x="445" y="189" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">...</text>
   <circle cx="570" cy="185" r="18" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="570" y="189" text-anchor="middle" fill="#6b7a99" font-size="12" font-family="system-ui,-apple-system,sans-serif">...</text>
+  <text x="570" y="189" text-anchor="middle" fill="#6b7a99" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">...</text>
   <line x1="250" y1="140" x2="183" y2="168" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
   <line x1="268" y1="140" x2="285" y2="168" stroke="#f87171" stroke-width="1.5" marker-end="url(#arr-red)"/>
   <line x1="512" y1="140" x2="458" y2="168" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <line x1="530" y1="140" x2="558" y2="168" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <rect x="620" y="140" width="148" height="48" rx="8" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="694" y="162" text-anchor="middle" fill="#4ade80" font-size="12" font-weight="700" font-family="system-ui,-apple-system,sans-serif">하나라도</text>
-  <text x="694" y="180" text-anchor="middle" fill="#4ade80" font-size="11" font-family="system-ui,-apple-system,sans-serif">Accept → ACCEPT</text>
+  <text x="694" y="162" text-anchor="middle" fill="#4ade80" font-size="9.6" font-weight="700" font-family="system-ui,-apple-system,sans-serif">하나라도</text>
+  <text x="694" y="180" text-anchor="middle" fill="#4ade80" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">Accept → ACCEPT</text>
   <path d="M 188,188 C 340,215 580,188 618,170" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-green)"/>
-  <text x="390" y="235" text-anchor="middle" fill="#6b7a99" font-size="10" font-family="system-ui,-apple-system,sans-serif">BFS로 모든 경로를 동시에 탐색  ·  하나라도 Accept이면 전체 Accept  ·  NTM → DTM(UTM)으로 시뮬레이션 가능</text>
+  <text x="390" y="235" text-anchor="middle" fill="#6b7a99" font-size="8" font-family="system-ui,-apple-system,sans-serif">BFS로 모든 경로를 동시에 탐색  ·  하나라도 Accept이면 전체 Accept  ·  NTM → DTM(UTM)으로 시뮬레이션 가능</text>
 </svg>
