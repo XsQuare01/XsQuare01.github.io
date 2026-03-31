@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="680" height="320">
+  <defs>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="320" fill="#0f1117" rx="10"/>
+  <text x="340" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">Hash + Signature — 크기 문제 해결</text>
+
+  <!-- ===== ALICE: 서명 생성 (상단) ===== -->
+  <text x="20" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">① Alice: 서명 생성</text>
+
+  <!-- m (large) -->
+  <rect x="18" y="46" width="90" height="40" rx="6" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
+  <text x="63" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#4ade80">평문 m</text>
+  <text x="63" y="78" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">(수 MB)</text>
+
+  <!-- arrow → SHA -->
+  <line x1="108" y1="66" x2="138" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+
+  <!-- SHA box -->
+  <rect x="142" y="46" width="80" height="40" rx="6" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="182" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fbbf24">SHA</text>
+  <text x="182" y="78" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">해시 함수</text>
+
+  <!-- arrow → h -->
+  <line x1="222" y1="66" x2="252" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+
+  <!-- h (small) -->
+  <rect x="256" y="46" width="90" height="40" rx="6" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="301" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fbbf24">해시값 h</text>
+  <text x="301" y="78" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">(256 bit)</text>
+
+  <!-- arrow → RSA sign -->
+  <line x1="346" y1="66" x2="376" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="361" y="60" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">비밀키 d</text>
+
+  <!-- RSA sign box -->
+  <rect x="380" y="46" width="100" height="40" rx="6" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="430" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#f97316">RSA 서명</text>
+  <text x="430" y="78" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f97316">s = h^d mod n</text>
+
+  <!-- arrow → s -->
+  <line x1="480" y1="66" x2="510" y2="66" stroke="#f97316" stroke-width="1.3" marker-end="url(#oa)"/>
+
+  <!-- s -->
+  <rect x="514" y="46" width="80" height="40" rx="6" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="2"/>
+  <text x="554" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#f97316">서명 s</text>
+  <text x="554" y="78" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f97316">(고정 크기)</text>
+
+  <!-- send (m, s) -->
+  <rect x="210" y="106" width="260" height="28" rx="5" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
+  <text x="340" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">전송: (m,  s)  →  Bob</text>
+  <line x1="301" y1="86" x2="301" y2="105" stroke="#4ade80" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#ga)"/>
+  <line x1="554" y1="86" x2="554" y2="98" stroke="#f97316" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#oa)"/>
+  <line x1="554" y1="98" x2="420" y2="105" stroke="#f97316" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Separator -->
+  <line x1="18" y1="148" x2="662" y2="148" stroke="#2d3748" stroke-width="1.5"/>
+
+  <!-- ===== BOB: 서명 검증 (하단) ===== -->
+  <text x="20" y="168" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8" text-anchor="start">② Bob: 서명 검증</text>
+
+  <!-- Bob receives (m, s) — two paths -->
+  <!-- Left path: m → SHA → h' -->
+  <rect x="18" y="180" width="90" height="40" rx="6" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
+  <text x="63" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#4ade80">수신 m</text>
+  <text x="63" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">그대로</text>
+
+  <line x1="108" y1="200" x2="138" y2="200" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+
+  <rect x="142" y="180" width="80" height="40" rx="6" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="182" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fbbf24">SHA</text>
+  <text x="182" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">동일 함수</text>
+
+  <line x1="222" y1="200" x2="252" y2="200" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+
+  <rect x="256" y="180" width="90" height="40" rx="6" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" stroke-width="2"/>
+  <text x="301" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fbbf24">h'  계산</text>
+  <text x="301" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">SHA(m)</text>
+
+  <!-- Right path: s → RSA verify → h -->
+  <rect x="400" y="180" width="80" height="40" rx="6" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="2"/>
+  <text x="440" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#f97316">수신 s</text>
+
+  <line x1="480" y1="200" x2="510" y2="200" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="495" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">공개키 e</text>
+
+  <rect x="514" y="180" width="100" height="40" rx="6" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="564" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#a78bfa">RSA 복원</text>
+  <text x="564" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a78bfa">h = s^e mod n</text>
+
+  <!-- Both converge to compare -->
+  <line x1="301" y1="220" x2="301" y2="248" stroke="#fbbf24" stroke-width="1.3" marker-end="url(#ra)"/>
+  <line x1="564" y1="220" x2="564" y2="238" stroke="#a78bfa" stroke-width="1.3"/>
+  <line x1="564" y1="238" x2="396" y2="248" stroke="#a78bfa" stroke-width="1.3" marker-end="url(#ba)"/>
+
+  <!-- Compare box -->
+  <rect x="256" y="252" width="180" height="40" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="2"/>
+  <text x="346" y="268" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#94a3b8">h'  ==  h  ?</text>
+  <text x="346" y="284" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">같으면 → 서명 유효  ✓</text>
+
+  <!-- Why hash -->
+  <rect x="18" y="252" width="224" height="54" rx="6" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="130" y="270" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#fbbf24">왜 해시를 쓰는가?</text>
+  <text x="130" y="286" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">m이 수 MB여도 h는 256 bit 고정</text>
+  <text x="130" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">→ 서명 크기 = h 크기, 속도 빠름</text>
+
+  <!-- Not convertible note -->
+  <rect x="454" y="252" width="208" height="54" rx="6" fill="rgba(248,113,113,0.05)" stroke="#f87171" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="558" y="270" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#f87171">Not Convertible</text>
+  <text x="558" y="286" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">서명 s는 m에 종속 (h에 기반)</text>
+  <text x="558" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">→ 다른 문서에 재사용 불가</text>
+</svg>

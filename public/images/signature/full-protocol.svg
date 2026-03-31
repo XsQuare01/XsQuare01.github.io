@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400">
+  <defs>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+    <marker id="ya" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#fbbf24"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="400" fill="#0f1117" rx="10"/>
+  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">최종 암호화 + 서명 프로토콜 (AES + RSA + SHA)</text>
+
+  <!-- ======= ALICE SIDE ======= -->
+  <rect x="12" y="26" width="316" height="260" rx="8" fill="rgba(74,222,128,0.03)" stroke="#1e3a2f" stroke-width="1.5"/>
+  <text x="170" y="44" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#4ade80">Alice (송신자)</text>
+
+  <!-- 평문 m -->
+  <rect x="110" y="52" width="120" height="30" rx="5" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
+  <text x="170" y="72" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#4ade80">평문  m</text>
+
+  <!-- m splits into two paths -->
+  <!-- Left path: m → AES → C -->
+  <line x1="140" y1="82" x2="90" y2="106" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="24" y="110" width="130" height="36" rx="5" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="89" y="125" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#60a5fa">① AES 암호화</text>
+  <text x="89" y="139" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#60a5fa">C = AES_k(m)</text>
+
+  <!-- Right path: m → SHA → h → RSA sign → s -->
+  <line x1="200" y1="82" x2="248" y2="106" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="190" y="110" width="118" height="36" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="249" y="125" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#fbbf24">② SHA 해시</text>
+  <text x="249" y="139" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">h = SHA(m)</text>
+
+  <!-- AES key k → RSA encrypt → k' -->
+  <line x1="89" y1="146" x2="89" y2="168" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+  <text x="45" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">AES 키 k</text>
+
+  <rect x="24" y="172" width="130" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="89" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#f97316">③ RSA 키 암호화</text>
+  <text x="89" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f97316">k' = k^e_b mod n</text>
+
+  <!-- h → RSA sign with d_a → s -->
+  <line x1="249" y1="146" x2="249" y2="168" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+  <text x="263" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#6b7a99">비밀키 d_a</text>
+
+  <rect x="190" y="172" width="118" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="249" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#f97316">④ RSA 서명</text>
+  <text x="249" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f97316">s = h^d_a mod n</text>
+
+  <!-- Final bundle: (C, k', s) -->
+  <line x1="89" y1="208" x2="89" y2="232" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+  <line x1="249" y1="208" x2="249" y2="232" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="24" y="236" width="284" height="34" rx="6" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="2"/>
+  <text x="166" y="258" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#4ade80">전송 패킷: (C, k', s)</text>
+
+  <!-- ======= CHANNEL ======= -->
+  <line x1="340" y1="253" x2="358" y2="253" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ra)"/>
+  <text x="349" y="245" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#374151">전송</text>
+
+  <!-- ======= BOB SIDE ======= -->
+  <rect x="372" y="26" width="316" height="260" rx="8" fill="rgba(96,165,250,0.03)" stroke="#1e2d3a" stroke-width="1.5"/>
+  <text x="530" y="44" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#60a5fa">Bob (수신자)</text>
+
+  <!-- Receive (C, k', s) -->
+  <rect x="386" y="236" width="284" height="34" rx="6" fill="rgba(96,165,250,0.08)" stroke="#60a5fa" stroke-width="2"/>
+  <text x="528" y="258" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#60a5fa">수신 패킷: (C, k', s)</text>
+
+  <!-- Bob's steps - bottom to top -->
+  <!-- k' → RSA decrypt → k -->
+  <line x1="450" y1="236" x2="450" y2="212" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="386" y="172" width="128" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="450" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#f97316">⑤ RSA 키 복호화</text>
+  <text x="450" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f97316">k = k'^d_b mod n</text>
+
+  <!-- C → AES decrypt → m -->
+  <line x1="450" y1="172" x2="450" y2="148" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="386" y="110" width="128" height="36" rx="5" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="450" y="125" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#60a5fa">⑥ AES 복호화</text>
+  <text x="450" y="139" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#60a5fa">m = AES_k(C)</text>
+
+  <!-- s → RSA verify → h, m → SHA → h', compare -->
+  <line x1="608" y1="236" x2="608" y2="212" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="550" y="172" width="128" height="36" rx="5" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="614" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#a78bfa">⑦ 서명 복원</text>
+  <text x="614" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a78bfa">h = s^e_a mod n</text>
+
+  <line x1="450" y1="110" x2="530" y2="86" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+  <line x1="614" y1="172" x2="614" y2="100" stroke="#94a3b8" stroke-width="1.2"/>
+  <line x1="614" y1="100" x2="582" y2="86" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
+
+  <rect x="488" y="52" width="170" height="30" rx="5" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="2"/>
+  <text x="573" y="67" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">⑧ SHA(m) == h ?  →  서명 검증  ✓</text>
+
+  <!-- ======= BOTTOM LEGEND ======= -->
+  <line x1="18" y1="302" x2="682" y2="302" stroke="#2d3748" stroke-width="1"/>
+  <text x="350" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#94a3b8">역할 분담</text>
+  <text x="175" y="338" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#60a5fa">AES: 대용량 메시지 고속 암호화</text>
+  <text x="175" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f97316">RSA: AES 키 암호화 + 서명 생성/검증</text>
+  <text x="175" y="370" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#fbbf24">SHA: 메시지 → 고정 크기 해시 (서명 효율화)</text>
+  <text x="530" y="338" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#94a3b8">기밀성: AES 암호화  (C)</text>
+  <text x="530" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#94a3b8">무결성: SHA 해시    (h)</text>
+  <text x="530" y="370" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#94a3b8">인증:   RSA 서명    (s)</text>
+  <text x="530" y="386" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#94a3b8">키 전달: RSA 암호화 (k')</text>
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300">
+  <defs>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="300" fill="#0f1117" rx="10"/>
+  <text x="340" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">RSA 전자 서명 — 서명 생성과 검증</text>
+
+  <!-- Alice side -->
+  <text x="148" y="40" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#94a3b8">Alice (서명자)</text>
+  <text x="148" y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#475569">비밀키 d 보유 / 공개키 e 공개</text>
+
+  <!-- m box -->
+  <rect x="88" y="64" width="120" height="34" rx="6" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
+  <text x="148" y="86" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="700" fill="#4ade80">평문  m</text>
+
+  <!-- arrow down -->
+  <line x1="148" y1="98" x2="148" y2="120" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="168" y="113" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">비밀키 d 사용</text>
+
+  <!-- Sign box -->
+  <rect x="74" y="124" width="148" height="44" rx="6" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="2"/>
+  <text x="148" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#f97316">서명 생성</text>
+  <text x="148" y="160" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f97316">s = m^d mod n</text>
+
+  <!-- avatar -->
+  <circle cx="148" cy="214" r="20" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="148" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17">👩</text>
+  <text x="148" y="242" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">Alice</text>
+
+  <!-- Send: (m, s) → Bob -->
+  <rect x="240" y="128" width="200" height="36" rx="6" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
+  <text x="340" y="150" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#94a3b8">전송: (m, s)</text>
+
+  <line x1="222" y1="146" x2="238" y2="146" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ga)"/>
+  <line x1="440" y1="146" x2="456" y2="146" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ga)"/>
+
+  <!-- Eavesdropper note -->
+  <text x="340" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#374151">공격자가 가로채도</text>
+  <text x="340" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#374151">d 없이는 위조 불가</text>
+
+  <!-- Bob side -->
+  <text x="532" y="40" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#94a3b8">Bob (검증자)</text>
+  <text x="532" y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#475569">Alice의 공개키 e 사용</text>
+
+  <!-- (m, s) received -->
+  <rect x="458" y="64" width="148" height="34" rx="6" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="532" y="86" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#60a5fa">수신: (m, s)</text>
+
+  <!-- arrow down -->
+  <line x1="532" y1="98" x2="532" y2="120" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="554" y="113" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">공개키 e 사용</text>
+
+  <!-- Verify box -->
+  <rect x="458" y="124" width="148" height="44" rx="6" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="532" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#a78bfa">서명 검증</text>
+  <text x="532" y="160" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#a78bfa">s^e mod n == m ?</text>
+
+  <!-- Result -->
+  <rect x="472" y="184" width="120" height="32" rx="6" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
+  <text x="532" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">(m^d)^e = m^(de)</text>
+  <text x="532" y="210" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#4ade80">= m mod n  ✓</text>
+
+  <!-- Bob avatar -->
+  <circle cx="532" cy="248" r="20" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="532" y="254" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17">👨</text>
+  <text x="532" y="276" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#94a3b8">Bob</text>
+
+  <!-- Bottom: why it works -->
+  <line x1="18" y1="260" x2="408" y2="260" stroke="#1e2738" stroke-width="1"/>
+  <text x="148" y="276" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#475569">ed ≡ 1 (mod φ(n))  →  m^(ed) ≡ m (mod n)</text>
+  <text x="148" y="291" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#475569">서명은 d 없이는 생성 불가 — 본인만 서명 가능</text>
+</svg>
