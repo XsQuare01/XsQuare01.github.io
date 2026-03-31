@@ -129,3 +129,8 @@ Carmichael 수 때문에 페르마 테스트 단독으로는 소수를 완전히
 <li>RSA에서 복호화 정확성(m^(de) ≡ m (mod n))은 페르마의 소정리(혹은 오일러 정리)에 직접 의존한다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Chinese Remainder Theorem — 중국인의 나머지 정리</strong> — 서로소인 여러 모듈러스의 연립 합동식이 항상 유일한 해를 가짐을 증명하고, RSA-CRT 속도 최적화까지 다룬다.</p>
+</div>

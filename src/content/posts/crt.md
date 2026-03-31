@@ -162,3 +162,8 @@ $m_p$와 $m_q$를 구한 뒤 CRT로 $m \bmod n$을 복원한다.
 <li>RSA-CRT는 n=pq 구조를 활용해 복호화 속도를 약 4배 향상시키는 실용적 최적화 기법이다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Find Prime — 소수 판별과 확률적 소수 탐색</strong> — 소수 밀도 추정, Fermat 테스트의 한계, Witness와 Miller-Rabin 테스트까지 — RSA에서 큰 소수를 어떻게 찾는지 다룬다.</p>
+</div>
