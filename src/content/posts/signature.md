@@ -187,5 +187,5 @@ $$
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Diffie-Hellman 키 교환</strong> — 공개 채널에서 비밀 공유 없이 대칭키를 합의하는 방법. ElGamal과 TLS의 수학적 토대이며, 현대 인터넷 보안의 핵심 프리미티브다.</p>
+<p><strong>Cryptographic Hashing — 암호화 해시 함수</strong> — SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, 그리고 MD5/SHA-1이 왜 더 이상 안전하지 않은지까지 다룬다.</p>
 </div>
