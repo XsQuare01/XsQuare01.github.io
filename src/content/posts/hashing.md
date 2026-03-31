@@ -1,6 +1,6 @@
 ---
 title: "Cryptographic Hashing — 암호화 해시 함수"
-date: 2026-04-07T10:00:00
+date: 2026-03-31T10:00:00
 description: "SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, MD5·SHA-1이 왜 더 이상 안전하지 않은지, 그리고 HMAC과 패스워드 해시까지 — 암호화 해시 함수의 전체를 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
