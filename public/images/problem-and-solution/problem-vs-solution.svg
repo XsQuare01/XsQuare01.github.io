@@ -1,27 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 190" width="760" height="190">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 190" width="1140" height="285">
   <rect width="760" height="190" fill="#0f1117" rx="10"/>
-  <text x="380" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">Problems vs Solutions — 크기 비교</text>
+  <text x="380" y="20" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Problems vs Solutions — 크기 비교</text>
 
   <!-- LEFT: Problems (red) -->
   <rect x="15" y="32" width="340" height="138" rx="8" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
   <rect x="15" y="32" width="340" height="40" rx="8" fill="rgba(248,113,113,0.15)"/>
   <rect x="15" y="60" width="340" height="12" rx="0" fill="rgba(248,113,113,0.15)"/>
-  <text x="185" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#f87171">Problems</text>
-  <text x="185" y="88" text-anchor="middle" font-size="13" fill="#cbd5e0">모든 Decision Problem의 집합</text>
-  <text x="185" y="110" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="14" font-weight="700" fill="#f87171">|2^Σ*| = |ℝ| = ℵ₁</text>
-  <text x="185" y="133" text-anchor="middle" font-size="13" fill="#6b7a99">불가산 무한 (Uncountable)</text>
-  <text x="185" y="157" text-anchor="middle" font-size="12" fill="#f87171" opacity="0.8">→ 셀 수 없이 많다</text>
+  <text x="185" y="58" text-anchor="middle" font-size="11.2" font-weight="700" fill="#f87171">Problems</text>
+  <text x="185" y="88" text-anchor="middle" font-size="10.4" fill="#cbd5e0">모든 Decision Problem의 집합</text>
+  <text x="185" y="110" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11.2" font-weight="700" fill="#f87171">|2^Σ*| = |ℝ| = ℵ₁</text>
+  <text x="185" y="133" text-anchor="middle" font-size="10.4" fill="#6b7a99">불가산 무한 (Uncountable)</text>
+  <text x="185" y="157" text-anchor="middle" font-size="9.6" fill="#f87171" opacity="0.8">→ 셀 수 없이 많다</text>
 
   <!-- CENTER: comparison symbol -->
-  <text x="380" y="120" text-anchor="middle" font-size="28" font-weight="700" fill="#4a5568">≫</text>
+  <text x="380" y="120" text-anchor="middle" font-size="22.4" font-weight="700" fill="#4a5568">≫</text>
 
   <!-- RIGHT: Solutions (blue) -->
   <rect x="405" y="32" width="340" height="138" rx="8" fill="#1a2035" stroke="#38bdf8" stroke-width="1"/>
   <rect x="405" y="32" width="340" height="40" rx="8" fill="rgba(56,189,248,0.15)"/>
   <rect x="405" y="60" width="340" height="12" rx="0" fill="rgba(56,189,248,0.15)"/>
-  <text x="575" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#38bdf8">Solutions</text>
-  <text x="575" y="88" text-anchor="middle" font-size="13" fill="#cbd5e0">튜링 머신의 집합</text>
-  <text x="575" y="110" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="14" font-weight="700" fill="#38bdf8">|ℕ| = ℵ₀</text>
-  <text x="575" y="133" text-anchor="middle" font-size="13" fill="#6b7a99">가산 무한 (Countable)</text>
-  <text x="575" y="157" text-anchor="middle" font-size="12" fill="#38bdf8" opacity="0.8">→ 자연수로 번호를 매길 수 있다</text>
+  <text x="575" y="58" text-anchor="middle" font-size="11.2" font-weight="700" fill="#38bdf8">Solutions</text>
+  <text x="575" y="88" text-anchor="middle" font-size="10.4" fill="#cbd5e0">튜링 머신의 집합</text>
+  <text x="575" y="110" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11.2" font-weight="700" fill="#38bdf8">|ℕ| = ℵ₀</text>
+  <text x="575" y="133" text-anchor="middle" font-size="10.4" fill="#6b7a99">가산 무한 (Countable)</text>
+  <text x="575" y="157" text-anchor="middle" font-size="9.6" fill="#38bdf8" opacity="0.8">→ 자연수로 번호를 매길 수 있다</text>
 </svg>
