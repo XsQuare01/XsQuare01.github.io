@@ -1,28 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 192" width="740" height="192">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 192" width="1110" height="288">
   <rect width="740" height="192" fill="#0f1117" rx="10"/>
-  <text x="370" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">직관적 정의 vs 수학적 정의</text>
+  <text x="370" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">직관적 정의 vs 수학적 정의</text>
 
   <!-- LEFT: 직관적 정의 -->
   <rect x="20" y="36" width="330" height="140" rx="8" fill="#1a2035" stroke="#fbbf24" stroke-width="1"/>
   <rect x="20" y="36" width="330" height="38" rx="8" fill="rgba(251,191,36,0.12)"/>
   <rect x="20" y="62" width="330" height="12" rx="0" fill="rgba(251,191,36,0.12)"/>
-  <text x="185" y="61" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#fbbf24">직관적 정의  (Informal)</text>
-  <text x="185" y="96" text-anchor="middle" font-size="13" fill="#cbd5e0">"특별하거나 기억에 남는 수"</text>
-  <text x="185" y="117" text-anchor="middle" font-size="13" fill="#6b7a99">듣는 사람마다 다름 · 주관적</text>
-  <text x="185" y="138" text-anchor="middle" font-size="13" fill="#6b7a99">수학적 증명에 사용 불가</text>
-  <text x="185" y="161" text-anchor="middle" font-size="12" fill="#fbbf24" opacity="0.8">→ 패러독스의 원인</text>
+  <text x="185" y="61" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11.2" font-weight="700" fill="#fbbf24">직관적 정의  (Informal)</text>
+  <text x="185" y="96" text-anchor="middle" font-size="10.4" fill="#cbd5e0">"특별하거나 기억에 남는 수"</text>
+  <text x="185" y="117" text-anchor="middle" font-size="10.4" fill="#6b7a99">듣는 사람마다 다름 · 주관적</text>
+  <text x="185" y="138" text-anchor="middle" font-size="10.4" fill="#6b7a99">수학적 증명에 사용 불가</text>
+  <text x="185" y="161" text-anchor="middle" font-size="9.6" fill="#fbbf24" opacity="0.8">→ 패러독스의 원인</text>
 
   <!-- Divider -->
   <line x1="372" y1="42" x2="372" y2="182" stroke="#2d3748" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="370" y="118" text-anchor="middle" font-size="22" fill="#4a5568">≠</text>
+  <text x="370" y="118" text-anchor="middle" font-size="17.6" fill="#4a5568">≠</text>
 
   <!-- RIGHT: 수학적 정의 -->
   <rect x="390" y="36" width="330" height="140" rx="8" fill="#1a2035" stroke="#a78bfa" stroke-width="1"/>
   <rect x="390" y="36" width="330" height="38" rx="8" fill="rgba(167,139,250,0.12)"/>
   <rect x="390" y="62" width="330" height="12" rx="0" fill="rgba(167,139,250,0.12)"/>
-  <text x="555" y="61" text-anchor="middle" font-size="14" font-weight="700" fill="#a78bfa">수학적 정의  (Formal)</text>
-  <text x="555" y="96" text-anchor="middle" font-size="13" fill="#cbd5e0">"명확히 정의된 술어 P(n)"</text>
-  <text x="555" y="117" text-anchor="middle" font-size="13" fill="#6b7a99">명제 참/거짓 판별 가능 · 객관적</text>
-  <text x="555" y="138" text-anchor="middle" font-size="13" fill="#6b7a99">수학적 증명에 사용 가능</text>
-  <text x="555" y="161" text-anchor="middle" font-size="12" fill="#a78bfa" opacity="0.8">→ 엄밀한 증명의 기반</text>
+  <text x="555" y="61" text-anchor="middle" font-size="11.2" font-weight="700" fill="#a78bfa">수학적 정의  (Formal)</text>
+  <text x="555" y="96" text-anchor="middle" font-size="10.4" fill="#cbd5e0">"명확히 정의된 술어 P(n)"</text>
+  <text x="555" y="117" text-anchor="middle" font-size="10.4" fill="#6b7a99">명제 참/거짓 판별 가능 · 객관적</text>
+  <text x="555" y="138" text-anchor="middle" font-size="10.4" fill="#6b7a99">수학적 증명에 사용 가능</text>
+  <text x="555" y="161" text-anchor="middle" font-size="9.6" fill="#a78bfa" opacity="0.8">→ 엄밀한 증명의 기반</text>
 </svg>
