@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" width="500" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" width="750" height="300">
   <rect width="500" height="200" fill="#0f1117" rx="10"/>
-  <text x="250" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">L₁ DFA — 마지막 비트가 0 (짝수)</text>
+  <text x="250" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">L₁ DFA — 마지막 비트가 0 (짝수)</text>
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
       <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
@@ -9,16 +9,16 @@
   <line x1="55" y1="108" x2="97" y2="108" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <circle cx="130" cy="108" r="30" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="130" cy="108" r="22" fill="none" stroke="#4ade80" stroke-width="1.2"/>
-  <text x="130" y="113" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">q_even</text>
+  <text x="130" y="113" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">q_even</text>
   <circle cx="370" cy="108" r="30" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="370" y="113" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q_odd</text>
+  <text x="370" y="113" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#cbd5e0">q_odd</text>
   <path d="M 115,82 C 82,38 178,38 145,82" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="130" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#e2e8f0">0</text>
+  <text x="130" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">0</text>
   <path d="M 355,82 C 322,38 418,38 385,82" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="370" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#e2e8f0">1</text>
+  <text x="370" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">1</text>
   <path d="M 157,94 C 210,62 290,62 343,94" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="250" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#e2e8f0">1</text>
+  <text x="250" y="62" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">1</text>
   <path d="M 343,122 C 290,154 210,154 157,122" fill="none" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="250" y="158" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#e2e8f0">0</text>
-  <text x="250" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">이중 원 = Accepting State  ·  → = 초기 상태</text>
+  <text x="250" y="158" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">0</text>
+  <text x="250" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">이중 원 = Accepting State  ·  → = 초기 상태</text>
 </svg>

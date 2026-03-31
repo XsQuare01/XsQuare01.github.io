@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 345" width="720" height="345">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 345" width="1080" height="518">
   <rect width="720" height="345" fill="#0f1117" rx="10"/>
-  <text x="360" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6b7a99">L₅ DFA (일부) — 0ⁱ1ⁱ: 상태가 무한히 필요하다</text>
+  <text x="360" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">L₅ DFA (일부) — 0ⁱ1ⁱ: 상태가 무한히 필요하다</text>
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
       <polygon points="0,0 7,4 0,8" fill="#4a5568"/>
@@ -11,70 +11,70 @@
   </defs>
 
   <circle cx="620" cy="107" r="28" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
-  <text x="620" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">q_d</text>
-  <text x="620" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#f87171">reject</text>
+  <text x="620" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">q_d</text>
+  <text x="620" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">reject</text>
   <path d="M 607,79 C 576,42 668,42 635,79" fill="none" stroke="#f87171" stroke-width="1.2" marker-end="url(#arr-red)"/>
-  <text x="620" y="40" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">0,1</text>
+  <text x="620" y="40" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">0,1</text>
 
   <line x1="22" y1="107" x2="50" y2="107" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <circle cx="82" cy="107" r="28" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="82" cy="107" r="20" fill="none" stroke="#4ade80" stroke-width="1.2"/>
-  <text x="82" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">q₀</text>
-  <text x="82" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">λ ★</text>
+  <text x="82" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">q₀</text>
+  <text x="82" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">λ ★</text>
 
   <circle cx="230" cy="107" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="230" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q₁</text>
-  <text x="230" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">0 하나</text>
+  <text x="230" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#cbd5e0">q₁</text>
+  <text x="230" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">0 하나</text>
 
   <circle cx="378" cy="107" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="378" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q₂</text>
-  <text x="378" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">0 둘</text>
+  <text x="378" y="103" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#cbd5e0">q₂</text>
+  <text x="378" y="116" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">0 둘</text>
 
-  <text x="500" y="112" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="22" fill="#4a5568">…</text>
+  <text x="500" y="112" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17.6" fill="#4a5568">…</text>
 
   <circle cx="230" cy="213" r="28" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="230" cy="213" r="20" fill="none" stroke="#4ade80" stroke-width="1.2"/>
-  <text x="230" y="209" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#4ade80">q₁a</text>
-  <text x="230" y="222" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">01 ★</text>
+  <text x="230" y="209" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">q₁a</text>
+  <text x="230" y="222" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">01 ★</text>
 
   <circle cx="378" cy="213" r="28" fill="#1a2035" stroke="#94a3b8" stroke-width="1.5"/>
-  <text x="378" y="209" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#cbd5e0">q₂₁</text>
-  <text x="378" y="222" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#6b7a99">001</text>
+  <text x="378" y="209" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#cbd5e0">q₂₁</text>
+  <text x="378" y="222" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">001</text>
 
   <circle cx="378" cy="287" r="24" fill="#1a2035" stroke="#4ade80" stroke-width="2"/>
   <circle cx="378" cy="287" r="17" fill="none" stroke="#4ade80" stroke-width="1.2"/>
-  <text x="378" y="283" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#4ade80">q₂a</text>
-  <text x="378" y="295" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#4ade80">0011 ★</text>
+  <text x="378" y="283" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">q₂a</text>
+  <text x="378" y="295" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">0011 ★</text>
 
   <line x1="110" y1="107" x2="200" y2="107" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="155" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0</text>
+  <text x="155" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">0</text>
 
   <line x1="258" y1="107" x2="348" y2="107" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="303" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">0</text>
+  <text x="303" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">0</text>
 
   <line x1="406" y1="107" x2="468" y2="107" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-  <text x="437" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#6b7a99">0</text>
+  <text x="437" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#6b7a99">0</text>
 
   <line x1="230" y1="135" x2="230" y2="183" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="218" y="163" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
+  <text x="218" y="163" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">1</text>
 
   <line x1="378" y1="135" x2="378" y2="183" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="366" y="163" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
+  <text x="366" y="163" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">1</text>
 
   <line x1="378" y1="241" x2="378" y2="261" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="366" y="255" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#e2e8f0">1</text>
+  <text x="366" y="255" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">1</text>
 
   <path d="M 105,92 C 200,52 530,52 592,82" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
-  <text x="340" y="50" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#f87171">1</text>
+  <text x="340" y="50" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">1</text>
 
   <path d="M 255,200 C 380,170 530,132 593,121" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
-  <text x="430" y="175" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">0,1</text>
+  <text x="430" y="175" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f87171">0,1</text>
 
   <path d="M 403,201 C 480,182 555,150 594,128" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
-  <text x="512" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">0</text>
+  <text x="512" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f87171">0</text>
 
   <path d="M 400,276 C 488,258 572,188 607,135" fill="none" stroke="#f87171" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
-  <text x="532" y="260" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#f87171">0,1</text>
+  <text x="532" y="260" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f87171">0,1</text>
 
-  <text x="360" y="333" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6b7a99">★ = Accepting State  ·  빨간 점선 = dead state로의 전이  ·  각 깊이마다 새 상태 필요 → 무한 상태</text>
+  <text x="360" y="333" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">★ = Accepting State  ·  빨간 점선 = dead state로의 전이  ·  각 깊이마다 새 상태 필요 → 무한 상태</text>
 </svg>
