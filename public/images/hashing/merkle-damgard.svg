@@ -12,150 +12,150 @@
   </defs>
 
   <rect width="700" height="430" fill="#0f1117" rx="10"/>
-  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">Merkle-Damgård 구조 — SHA의 내부 동작</text>
+  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">Merkle-Damgård 구조 — SHA의 내부 동작</text>
 
   <!-- ============================================================ -->
   <!-- ① 패딩 (Padding)  y=28 ~ 88                                  -->
   <!-- ============================================================ -->
-  <text x="20" y="42" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#e2e8f0">① 패딩 (Padding)</text>
+  <text x="20" y="42" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#e2e8f0">① 패딩 (Padding)</text>
 
   <!-- 원본 메시지 -->
   <rect x="20" y="50" width="140" height="30" rx="4" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="90" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#4ade80">원본 메시지 m</text>
+  <text x="90" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">원본 메시지 m</text>
 
   <!-- 1 bit -->
   <rect x="164" y="50" width="32" height="30" rx="4" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="180" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#60a5fa">1</text>
+  <text x="180" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#60a5fa">1</text>
 
   <!-- 0 padding -->
   <rect x="200" y="50" width="64" height="30" rx="4" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="232" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#60a5fa">0 0 … 0</text>
+  <text x="232" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#60a5fa">0 0 … 0</text>
 
   <!-- 길이 필드 -->
   <rect x="268" y="50" width="80" height="30" rx="4" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="308" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">|m| (64 bit)</text>
+  <text x="308" y="70" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">|m| (64 bit)</text>
 
-  <text x="370" y="70" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">← 512 bit 블록 경계로 패딩</text>
+  <text x="370" y="70" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#cbd5e1">← 512 bit 블록 경계로 패딩</text>
 
   <!-- ============================================================ -->
   <!-- ② 블록 분할 → 순차 압축  y=98 ~ 202                          -->
   <!--   메시지 블록(라벨): y=120 ~ 144                              -->
   <!--   체인 박스(IV/f/h): y=154 ~ 198                             -->
   <!-- ============================================================ -->
-  <text x="20" y="112" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#e2e8f0">② 블록 분할 → 순차 압축</text>
+  <text x="20" y="112" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#e2e8f0">② 블록 분할 → 순차 압축</text>
 
   <!-- IV 박스 (체인 행) -->
   <rect x="20" y="154" width="72" height="44" rx="5" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="2"/>
-  <text x="56" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#a78bfa">IV</text>
-  <text x="56" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#a78bfa">초기값</text>
+  <text x="56" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#a78bfa">IV</text>
+  <text x="56" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#a78bfa">초기값</text>
 
   <!-- 화살표 IV → f₁ -->
   <line x1="92" y1="176" x2="112" y2="176" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#ra)"/>
 
   <!-- 블록 m₁ (메시지 라벨, 위쪽 행) -->
   <rect x="116" y="120" width="80" height="26" rx="4" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="156" y="137" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#60a5fa">블록 m₁</text>
+  <text x="156" y="137" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#60a5fa">블록 m₁</text>
   <!-- 아래 화살표: 메시지 블록 → 압축 f -->
   <line x1="156" y1="146" x2="156" y2="152" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
 
   <!-- 압축 f₁ (체인 행) -->
   <rect x="116" y="154" width="80" height="44" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
-  <text x="156" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">압축 f</text>
-  <text x="156" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#fbbf24">(256→256)</text>
+  <text x="156" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">압축 f</text>
+  <text x="156" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256→256)</text>
 
   <!-- 화살표 f₁ → h₁ -->
   <line x1="196" y1="176" x2="224" y2="176" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ra)"/>
 
   <!-- h₁ 중간값 -->
   <rect x="228" y="154" width="56" height="44" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="256" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#4ade80">h₁</text>
-  <text x="256" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">중간값</text>
+  <text x="256" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">h₁</text>
+  <text x="256" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#4ade80">중간값</text>
 
   <!-- 화살표 h₁ → f₂ -->
   <line x1="284" y1="176" x2="304" y2="176" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ra)"/>
 
   <!-- 블록 m₂ -->
   <rect x="308" y="120" width="80" height="26" rx="4" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="348" y="137" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#60a5fa">블록 m₂</text>
+  <text x="348" y="137" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#60a5fa">블록 m₂</text>
   <line x1="348" y1="146" x2="348" y2="152" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
 
   <!-- 압축 f₂ -->
   <rect x="308" y="154" width="80" height="44" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
-  <text x="348" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">압축 f</text>
-  <text x="348" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#fbbf24">(256→256)</text>
+  <text x="348" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">압축 f</text>
+  <text x="348" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256→256)</text>
 
   <!-- 화살표 f₂ → h₂ -->
   <line x1="388" y1="176" x2="408" y2="176" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ra)"/>
 
   <!-- h₂ 중간값 -->
   <rect x="412" y="154" width="56" height="44" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="440" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#4ade80">h₂</text>
-  <text x="440" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">중간값</text>
+  <text x="440" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">h₂</text>
+  <text x="440" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#4ade80">중간값</text>
 
   <!-- 점선 (···) -->
-  <text x="482" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#cbd5e1">···</text>
+  <text x="482" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="11.4" fill="#cbd5e1">···</text>
 
   <!-- 블록 mₙ -->
   <rect x="524" y="120" width="80" height="26" rx="4" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="564" y="137" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#60a5fa">블록 mₙ</text>
+  <text x="564" y="137" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#60a5fa">블록 mₙ</text>
   <line x1="564" y1="146" x2="564" y2="152" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
 
   <!-- 압축 fₙ -->
   <rect x="524" y="154" width="80" height="44" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
-  <text x="564" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">압축 f</text>
-  <text x="564" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#fbbf24">(256→256)</text>
+  <text x="564" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">압축 f</text>
+  <text x="564" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256→256)</text>
 
   <!-- 화살표 fₙ → Hash -->
   <line x1="604" y1="176" x2="624" y2="176" stroke="#4ade80" stroke-width="2" marker-end="url(#ga)"/>
 
   <!-- 최종 Hash 출력 -->
   <rect x="628" y="154" width="56" height="44" rx="5" fill="rgba(74,222,128,0.2)" stroke="#4ade80" stroke-width="2.5"/>
-  <text x="656" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#4ade80">Hash</text>
-  <text x="656" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">256 bit</text>
+  <text x="656" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">Hash</text>
+  <text x="656" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#4ade80">256 bit</text>
 
   <!-- ============================================================ -->
   <!-- ③ SHA-256 압축 함수 내부  y=214 ~ 290                        -->
   <!-- ============================================================ -->
   <line x1="16" y1="214" x2="684" y2="214" stroke="#2d3748" stroke-width="1"/>
-  <text x="350" y="234" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#e2e8f0">③ SHA-256 압축 함수 내부 — 64라운드 반복</text>
+  <text x="350" y="234" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#e2e8f0">③ SHA-256 압축 함수 내부 — 64라운드 반복</text>
 
   <!-- 8×32-bit 레지스터 -->
   <rect x="20" y="244" width="200" height="44" rx="5" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.5"/>
-  <text x="120" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#a78bfa">8 × 32-bit 상태 레지스터</text>
-  <text x="120" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">A  B  C  D  E  F  G  H</text>
+  <text x="120" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#a78bfa">8 × 32-bit 상태 레지스터</text>
+  <text x="120" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#e2e8f0">A  B  C  D  E  F  G  H</text>
 
   <!-- 화살표 → 라운드 -->
   <line x1="220" y1="266" x2="248" y2="266" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
-  <text x="234" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">×64</text>
+  <text x="234" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">×64</text>
 
   <!-- 라운드 박스 -->
   <rect x="252" y="244" width="196" height="44" rx="5" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.5"/>
-  <text x="350" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">라운드 연산 (Ch, Maj, Σ, σ)</text>
-  <text x="350" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">+ 메시지 스케줄 Wᵢ + 상수 Kᵢ</text>
+  <text x="350" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">라운드 연산 (Ch, Maj, Σ, σ)</text>
+  <text x="350" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#e2e8f0">+ 메시지 스케줄 Wᵢ + 상수 Kᵢ</text>
 
   <!-- 화살표 → Davies-Meyer -->
   <line x1="448" y1="266" x2="468" y2="266" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#ra)"/>
 
   <!-- Davies-Meyer 박스 -->
   <rect x="472" y="244" width="210" height="44" rx="5" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="577" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" font-weight="700" fill="#4ade80">Davies-Meyer 구조</text>
-  <text x="577" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#e2e8f0">hᵢ = f(hᵢ₋₁, mᵢ) ⊕ hᵢ₋₁</text>
+  <text x="577" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" font-weight="700" fill="#4ade80">Davies-Meyer 구조</text>
+  <text x="577" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">hᵢ = f(hᵢ₋₁, mᵢ) ⊕ hᵢ₋₁</text>
 
   <!-- ============================================================ -->
   <!-- ④ Length Extension 취약점  y=304 ~ 408                       -->
   <!-- ============================================================ -->
   <line x1="16" y1="304" x2="684" y2="304" stroke="#2d3748" stroke-width="1"/>
-  <text x="350" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#e2e8f0">④ Length Extension 취약점</text>
+  <text x="350" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#e2e8f0">④ Length Extension 취약점</text>
 
   <!-- MD 취약점 박스 -->
   <rect x="20" y="334" width="320" height="76" rx="6" fill="rgba(248,113,113,0.05)" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <text x="180" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#f87171">MD 구조의 취약점</text>
-  <text x="30" y="372" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">H(m) 만 알면 H(m ‖ padding ‖ m') 계산 가능</text>
-  <text x="30" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f87171">→ MAC에 SHA-256 직접 사용 금지 → HMAC 사용</text>
+  <text x="180" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#f87171">MD 구조의 취약점</text>
+  <text x="30" y="372" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#e2e8f0">H(m) 만 알면 H(m ‖ padding ‖ m') 계산 가능</text>
+  <text x="30" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#f87171">→ MAC에 SHA-256 직접 사용 금지 → HMAC 사용</text>
 
   <!-- SHA-3 해결책 박스 -->
   <rect x="360" y="334" width="322" height="76" rx="6" fill="rgba(74,222,128,0.05)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="521" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#4ade80">SHA-3 (Keccak) 해결책</text>
-  <text x="370" y="372" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">스펀지 구조(Sponge) 사용 — MD 구조 아님</text>
-  <text x="370" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">→ Length Extension 취약점 근본적 해소</text>
+  <text x="521" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">SHA-3 (Keccak) 해결책</text>
+  <text x="370" y="372" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#e2e8f0">스펀지 구조(Sponge) 사용 — MD 구조 아님</text>
+  <text x="370" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#4ade80">→ Length Extension 취약점 근본적 해소</text>
 </svg>
