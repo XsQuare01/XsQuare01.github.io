@@ -100,7 +100,7 @@ $$
 
 ## 응용 2 — 페르마 소수 판별법 (Fermat Primality Test)
 
-$n$이 소수이면 $a^{n-1} \equiv 1 \pmod{n}$이 성립한다. 대우명제: **이 합동이 성립하지 않으면 $n$은 합성수**이다.
+$n$이 소수이면 $a^{n-1} \equiv 1 \pmod{n}$이 성립한다. 대우명제: **이 합동이 성립하지 않으면 $n$은 합성수** 이다.
 
 **절차**: 랜덤하게 $a$ ($1 < a < n$)를 선택해 $a^{n-1} \bmod n$을 계산한다.
 - $a^{n-1} \not\equiv 1$ → $n$은 합성수 (확정)
@@ -110,7 +110,7 @@ $n$이 소수이면 $a^{n-1} \equiv 1 \pmod{n}$이 성립한다. 대우명제: *
 
 ## 한계 — Carmichael 수
 
-합성수임에도 **모든** $\gcd(a, n) = 1$인 $a$에 대해 $a^{n-1} \equiv 1 \pmod{n}$을 만족하는 수가 존재한다. 이를 **Carmichael 수(카마이클 수)**라 한다.
+합성수임에도 **모든** $\gcd(a, n) = 1$인 $a$에 대해 $a^{n-1} \equiv 1 \pmod{n}$을 만족하는 수가 존재한다. 이를 **Carmichael 수(카마이클 수)** 라 한다.
 
 가장 작은 예: $n = 561 = 3 \times 11 \times 17$
 
@@ -118,7 +118,7 @@ $$
 a^{560} \equiv 1 \pmod{561} \quad \text{for all } \gcd(a, 561) = 1
 $$
 
-Carmichael 수 때문에 페르마 테스트 단독으로는 소수를 완전히 판별할 수 없다. 실용적인 소수 판별에는 **밀러-라빈 테스트(Miller-Rabin)**를 사용한다.
+Carmichael 수 때문에 페르마 테스트 단독으로는 소수를 완전히 판별할 수 없다. 실용적인 소수 판별에는 **밀러-라빈 테스트(Miller-Rabin)** 를 사용한다.
 
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>

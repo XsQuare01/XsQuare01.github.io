@@ -24,7 +24,7 @@ category: cryptography
 
 소수의 개수는 무한하다. 유클리드의 고전적인 증명부터 알려져 있다.
 
-더 나아가, 소수의 **밀도**에 대한 정량적인 추정도 존재한다.
+더 나아가, 소수의 **밀도** 에 대한 정량적인 추정도 존재한다.
 
 <div class="callout callout-info">
 <div class="callout-title">소수 정리 (Prime Number Theorem)</div>
@@ -48,7 +48,7 @@ $$\frac{1{,}000{,}000}{\ln 1{,}000{,}000} \approx \frac{1{,}000{,}000}{13.8} \ap
 
 가장 단순한 방법은 $2$부터 $\sqrt{n}$까지 모든 수로 나누어 보는 것이지만, $n$이 수백 자리에 달하면 현실적으로 불가능하다. RSA에서 사용하는 소수는 통상 1024비트 이상이다.
 
-여기서 **Fermat의 소정리**를 활용한 확률적 판별법이 등장한다.
+여기서 **Fermat의 소정리** 를 활용한 확률적 판별법이 등장한다.
 
 ## Fermat 소수 판별법
 
@@ -64,7 +64,7 @@ $$a^{n-1} \not\equiv 1 \pmod{n} \implies n \text{은 합성수}$$
 
 1. $1 < a < n$이고 $\gcd(a, n) = 1$인 임의의 $a$를 선택한다.
 2. $a^{n-1} \bmod n$을 계산한다.
-3. 결과가 $1$이 아니면 $n$은 **확실히 합성수**이다.
+3. 결과가 $1$이 아니면 $n$은 **확실히 합성수** 이다.
 4. 결과가 $1$이면 $n$이 소수일 **가능성이 있다** — 확정은 아니다.
 
 **예시: 8379 판별**
@@ -75,14 +75,14 @@ $2989 \neq 1$이므로 $8379$는 합성수이다. (실제로 $8379 = 3 \times 27
 
 ## Witness
 
-$a^{n-1} \not\equiv 1 \pmod{n}$을 만족하는 $a$를 $n$의 **Witness**라 부른다 — $n$이 합성수임을 증언하는 값이라는 의미다.
+$a^{n-1} \not\equiv 1 \pmod{n}$을 만족하는 $a$를 $n$의 **Witness** 라 부른다 — $n$이 합성수임을 증언하는 값이라는 의미다.
 
 Witness가 하나라도 존재하면 $n$이 합성수임이 확정된다. 반대로 Witness를 찾지 못했다고 해서 $n$이 소수라는 보장은 없다.
 
 <div class="callout callout-tip">
 <div class="callout-title">여담 — Twin Prime (쌍둥이 소수)</div>
 
-두 소수의 차이가 2인 쌍을 **쌍둥이 소수(Twin Prime)**라 한다: $(3, 5),\ (5, 7),\ (11, 13),\ (17, 19), \ldots$
+두 소수의 차이가 2인 쌍을 **쌍둥이 소수(Twin Prime)** 라 한다: $(3, 5),\ (5, 7),\ (11, 13),\ (17, 19), \ldots$
 
 차이가 1일 수는 없다 — 연속한 두 정수 중 하나는 반드시 짝수이므로. 3보다 큰 쌍둥이 소수는 모두 $(6k-1,\ 6k+1)$ 형태를 띤다.
 </div>
@@ -91,7 +91,7 @@ Witness가 하나라도 존재하면 $n$이 합성수임이 확정된다. 반대
 
 문제가 있다. 합성수임에도 **모든** $\gcd(a, n) = 1$인 $a$에 대해 $a^{n-1} \equiv 1 \pmod{n}$을 만족하는 수가 존재한다.
 
-이런 수들을 **Carmichael 수**라 한다. 즉, Carmichael 수는 Witness를 하나도 갖지 않는 합성수다.
+이런 수들을 **Carmichael 수** 라 한다. 즉, Carmichael 수는 Witness를 하나도 갖지 않는 합성수다.
 
 가장 작은 Carmichael 수: $561 = 3 \times 11 \times 17$
 
@@ -103,7 +103,7 @@ Carmichael 수에 대해서는 Fermat 테스트가 전혀 동작하지 않는다
 
 Carmichael 수를 제외한 합성수에서는 Witness가 얼마나 많은가?
 
-**주장**: Carmichael 수가 아닌 합성수 $n$에서 Witness의 수는 $\mathbb{Z}_n^*$의 **절반 이상**이다.
+**주장**: Carmichael 수가 아닌 합성수 $n$에서 Witness의 수는 $\mathbb{Z}_n^*$의 **절반 이상** 이다.
 
 ![Witness 밀도 — B에서 A로의 단사함수 시각화](/images/find-prime/witness-density.svg)
 

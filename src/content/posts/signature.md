@@ -66,10 +66,10 @@ RSA 서명에는 한 가지 취약점이 있다. Bob이 사용하는 공개키 $
 
 공격자 Eve가 자신의 공개키 $e'$를 Alice의 것인 척 배포하면, Bob은 Eve의 서명을 Alice의 서명으로 착각할 수 있다.
 
-이를 해결하는 것이 **인증기관(CA, Certificate Authority)**이다.
+이를 해결하는 것이 **인증기관(CA, Certificate Authority)** 이다.
 
 1. Alice가 자신의 공개키와 신원 정보를 CA에 제출한다.
-2. CA는 이를 검토한 뒤 **(공개키 + 신원 정보)**에 CA 자신의 서명을 붙인다 → **인증서(Certificate)**
+2. CA는 이를 검토한 뒤 **(공개키 + 신원 정보)** 에 CA 자신의 서명을 붙인다 → **인증서(Certificate)**
 3. Bob은 CA의 서명을 검증해 Alice의 공개키가 진짜임을 확인한다.
 
 CA는 "누구나 신뢰하는 기관"이라는 전제 위에 작동한다. 공인인증서와 HTTPS 인증서가 이 구조로 동작한다.
@@ -102,13 +102,13 @@ $$
 
 $k$와 $k^{-1}$이 상쇄되고, $a$는 공개키 $y = g^a$ 형태로만 검증에 사용된다 — 비밀키 $a$ 없이는 서명 생성 불가능, 공개키 $y$만으로 검증 가능.
 
-ElGamal 서명을 표준화한 것이 **DSS(Digital Signature Standard)**이다.
+ElGamal 서명을 표준화한 것이 **DSS(Digital Signature Standard)** 이다.
 
 ## 서명 크기 문제: 암호화 해시
 
 RSA 서명의 문제는 크기이다. $m$이 100MB라면 서명 $s = m^d \bmod n$ 역시 비슷한 크기가 된다. 목적(누가 보냈는가 확인)에 비해 과도하게 크다.
 
-해결책은 **암호화 해시 함수(Cryptographic Hash Function)**다.
+해결책은 **암호화 해시 함수(Cryptographic Hash Function)** 다.
 
 $$
 h = \text{SHA}(m)

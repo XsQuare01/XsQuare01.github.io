@@ -24,7 +24,7 @@ category: cryptography
 
 ## 나누어 떨어짐 (Divisibility)
 
-정수 $a, b, c$에 대해, $b = ca$가 성립할 때 (나머지가 0일 때) $a$가 $b$를 **나누어 떨어뜨린다**고 하며, 다음과 같이 표기한다.
+정수 $a, b, c$에 대해, $b = ca$가 성립할 때 (나머지가 0일 때) $a$가 $b$를 **나누어 떨어뜨린다** 고 하며, 다음과 같이 표기한다.
 
 $$a \mid b \quad (a \text{ divides } b)$$
 
@@ -81,7 +81,7 @@ $$a \mid b, \quad b \mid c \implies a \mid c$$
 
 ![Division Theorem 시각화](/images/division-theorem/division-algorithm.svg)
 
-증명은 **존재성**과 **유일성** 두 부분으로 나뉜다.
+증명은 **존재성** 과 **유일성** 두 부분으로 나뉜다.
 
 ### 1. 존재성 (Existence)
 

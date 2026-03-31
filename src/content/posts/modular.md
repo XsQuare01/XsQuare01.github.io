@@ -39,7 +39,7 @@ $$
 
 ## 모듈러 산술과 동치 관계
 
-**모듈러 산술(Modular Arithmetic)**은 다음과 같이 정의한다.
+**모듈러 산술(Modular Arithmetic)** 은 다음과 같이 정의한다.
 
 $$
 a \equiv b \pmod{m} \iff m \mid (b - a)
@@ -47,7 +47,7 @@ $$
 
 직관적으로 $a$와 $b$를 $m$으로 나눴을 때 나머지가 같다는 의미이다.
 
-이 관계는 **동치 관계(Equivalence Relation)**이다 — 다음 세 성질을 만족한다.
+이 관계는 **동치 관계(Equivalence Relation)** 이다 — 다음 세 성질을 만족한다.
 
 ![mod 7 시계 다이어그램 — 동치류 시각화](/images/modular/clock-equivalence.svg)
 
@@ -144,7 +144,7 @@ $$
 \mathbb{Z}_m^* = \mathbb{Z}_m \setminus \{0\}, \quad \mathbb{Z}_m = \mathbb{Z}_m^* \cup \{0\}
 $$
 
-이 경우 $\mathbb{Z}_m$은 사칙연산이 모두 잘 정의된 **체(Field)**가 된다.
+이 경우 $\mathbb{Z}_m$은 사칙연산이 모두 잘 정의된 **체(Field)** 가 된다.
 
 ## 오일러 정리
 
@@ -152,7 +152,7 @@ $$
 a \in \mathbb{Z}_m^* \implies a^{\phi(m)} \equiv 1 \pmod{m}
 $$
 
-여기서 $\phi(m) = |\mathbb{Z}_m^*|$는 **오일러 피함수(Euler's totient function)**이다.
+여기서 $\phi(m) = |\mathbb{Z}_m^*|$는 **오일러 피함수(Euler's totient function)** 이다.
 
 예: $m = 10$이면 $\mathbb{Z}_{10}^* = \{1, 3, 7, 9\}$이므로 $\phi(10) = 4$.
 
@@ -188,7 +188,7 @@ $$
 a \in \mathbb{Z}_p^* \implies a^{p-1} \equiv 1 \pmod{p}
 $$
 
-이것이 **페르마의 소정리(Fermat's Little Theorem)**이다. RSA에서 복호화 정확성을 보장하는 핵심 정리이다.
+이것이 **페르마의 소정리(Fermat's Little Theorem)** 이다. RSA에서 복호화 정확성을 보장하는 핵심 정리이다.
 
 <div class="callout">
 <div class="callout-title">참고</div>
