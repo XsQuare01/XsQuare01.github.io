@@ -18,7 +18,7 @@
   </defs>
 
   <rect width="700" height="400" fill="#0f1117" rx="10"/>
-  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">최종 암호화 + 서명 프로토콜 (AES + RSA + SHA)</text>
+  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">최종 암호화 + 서명 프로토콜 (AES + RSA + SHA)</text>
 
   <!-- ======= ALICE SIDE ======= -->
   <rect x="12" y="26" width="316" height="260" rx="8" fill="rgba(74,222,128,0.03)" stroke="#1e3a2f" stroke-width="1.5"/>
@@ -45,7 +45,7 @@
 
   <!-- AES key k → RSA encrypt → k' -->
   <line x1="89" y1="146" x2="89" y2="168" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
-  <text x="45" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">AES 키 k</text>
+  <text x="45" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">AES 키 k</text>
 
   <rect x="24" y="172" width="130" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
   <text x="89" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">③ RSA 키 암호화</text>
@@ -53,7 +53,7 @@
 
   <!-- h → RSA sign with d_a → s -->
   <line x1="249" y1="146" x2="249" y2="168" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
-  <text x="263" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">비밀키 d_a</text>
+  <text x="263" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#e2e8f0">비밀키 d_a</text>
 
   <rect x="190" y="172" width="118" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
   <text x="249" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">④ RSA 서명</text>
@@ -68,7 +68,7 @@
 
   <!-- ======= CHANNEL ======= -->
   <line x1="340" y1="253" x2="358" y2="253" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ra)"/>
-  <text x="349" y="245" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#374151">전송</text>
+  <text x="349" y="245" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">전송</text>
 
   <!-- ======= BOB SIDE ======= -->
   <rect x="372" y="26" width="316" height="260" rx="8" fill="rgba(96,165,250,0.03)" stroke="#1e2d3a" stroke-width="1.5"/>
@@ -109,12 +109,12 @@
 
   <!-- ======= BOTTOM LEGEND ======= -->
   <line x1="18" y1="302" x2="682" y2="302" stroke="#2d3748" stroke-width="1"/>
-  <text x="350" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">역할 분담</text>
+  <text x="350" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">역할 분담</text>
   <text x="175" y="338" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">AES: 대용량 메시지 고속 암호화</text>
   <text x="175" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">RSA: AES 키 암호화 + 서명 생성/검증</text>
   <text x="175" y="370" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#fbbf24">SHA: 메시지 → 고정 크기 해시 (서명 효율화)</text>
-  <text x="530" y="338" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">기밀성: AES 암호화  (C)</text>
-  <text x="530" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">무결성: SHA 해시    (h)</text>
-  <text x="530" y="370" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">인증:   RSA 서명    (s)</text>
-  <text x="530" y="386" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">키 전달: RSA 암호화 (k')</text>
+  <text x="530" y="338" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">기밀성: AES 암호화  (C)</text>
+  <text x="530" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">무결성: SHA 해시    (h)</text>
+  <text x="530" y="370" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">인증:   RSA 서명    (s)</text>
+  <text x="530" y="386" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">키 전달: RSA 암호화 (k')</text>
 </svg>
