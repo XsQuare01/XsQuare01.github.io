@@ -49,7 +49,7 @@
 
   <rect x="24" y="172" width="130" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
   <text x="89" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">③ RSA 키 암호화</text>
-  <text x="89" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">k' = k^e_b mod n</text>
+  <text x="89" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">k' = k<tspan baseline-shift="super" font-size="70%">e_b</tspan> mod n</text>
 
   <!-- h → RSA sign with d_a → s -->
   <line x1="249" y1="146" x2="249" y2="168" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
@@ -57,7 +57,7 @@
 
   <rect x="190" y="172" width="118" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
   <text x="249" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">④ RSA 서명</text>
-  <text x="249" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">s = h^d_a mod n</text>
+  <text x="249" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">s = h<tspan baseline-shift="super" font-size="70%">d_a</tspan> mod n</text>
 
   <!-- Final bundle: (C, k', s) -->
   <line x1="89" y1="208" x2="89" y2="232" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
@@ -84,7 +84,7 @@
 
   <rect x="386" y="172" width="128" height="36" rx="5" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
   <text x="450" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">⑤ RSA 키 복호화</text>
-  <text x="450" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">k = k'^d_b mod n</text>
+  <text x="450" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">k = k'<tspan baseline-shift="super" font-size="70%">d_b</tspan> mod n</text>
 
   <!-- C → AES decrypt → m -->
   <line x1="450" y1="172" x2="450" y2="148" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
@@ -98,7 +98,7 @@
 
   <rect x="550" y="172" width="128" height="36" rx="5" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="1.5"/>
   <text x="614" y="187" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#a78bfa">⑦ 서명 복원</text>
-  <text x="614" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">h = s^e_a mod n</text>
+  <text x="614" y="201" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">h = s<tspan baseline-shift="super" font-size="70%">e_a</tspan> mod n</text>
 
   <line x1="450" y1="110" x2="530" y2="86" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ra)"/>
   <line x1="614" y1="172" x2="614" y2="100" stroke="#94a3b8" stroke-width="1.2"/>

@@ -40,7 +40,7 @@
   <line x1="22" y1="176" x2="322" y2="176" stroke="#2d3748" stroke-width="1"/>
   <text x="172" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">임의 충돌: √365 ≈ 19명  vs  특정 충돌: 365/2 = 183명</text>
   <text x="172" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">임의 충돌이 특정 충돌보다 √N 배 쉽다</text>
-  <text x="172" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">P(충돌) ≈ 1 − e^(−k²/2N)  →  k ≈ 1.18√N 에서 50%</text>
+  <text x="172" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">P(충돌) ≈ 1 − e<tspan baseline-shift="super" font-size="70%">−k²/2N</tspan>  →  k ≈ 1.18√N 에서 50%</text>
 
   <!-- ===== Right: Hash Collision Impact ===== -->
   <rect x="348" y="26" width="340" height="218" rx="8" fill="rgba(248,113,113,0.03)" stroke="#f87171" stroke-width="1.5"/>
@@ -68,7 +68,7 @@
   <text x="560" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#4ade80">2²⁵⁶ — 초장기 안전</text>
 
   <line x1="354" y1="176" x2="680" y2="176" stroke="#2d3748" stroke-width="1"/>
-  <text x="518" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">충돌 공격 복잡도 = 2^(n/2)  (n = 해시 비트 수)</text>
+  <text x="518" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#6b7a99">충돌 공격 복잡도 = 2<tspan baseline-shift="super" font-size="70%">n/2</tspan>  (n = 해시 비트 수)</text>
   <text x="518" y="212" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#fbbf24">→ 안전성 목표 128 bit 이상이면 SHA-256 필요</text>
   <text x="518" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">양자 컴퓨터: Grover 알고리즘 → 안전성 절반 → SHA-384+</text>
 

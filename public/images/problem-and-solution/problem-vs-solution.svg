@@ -8,7 +8,7 @@
   <rect x="15" y="60" width="340" height="12" rx="0" fill="rgba(248,113,113,0.15)"/>
   <text x="185" y="58" text-anchor="middle" font-size="11.2" font-weight="700" fill="#f87171">Problems</text>
   <text x="185" y="88" text-anchor="middle" font-size="10.4" fill="#cbd5e0">모든 Decision Problem의 집합</text>
-  <text x="185" y="110" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11.2" font-weight="700" fill="#f87171">|2^Σ*| = |ℝ| = ℵ₁</text>
+  <text x="185" y="110" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11.2" font-weight="700" fill="#f87171">|2<tspan baseline-shift="super" font-size="70%">Σ*</tspan>| = |ℝ| = ℵ₁</text>
   <text x="185" y="133" text-anchor="middle" font-size="10.4" fill="#6b7a99">불가산 무한 (Uncountable)</text>
   <text x="185" y="157" text-anchor="middle" font-size="9.6" fill="#f87171" opacity="0.8">→ 셀 수 없이 많다</text>
 

@@ -31,7 +31,7 @@
 
   <!-- Public key -->
   <rect x="30" y="114" width="180" height="28" rx="4" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1"/>
-  <text x="120" y="132" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">🔑  공개키  h = g^x = 2³ = 8</text>
+  <text x="120" y="132" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">🔑  공개키  h = g<tspan baseline-shift="super" font-size="70%">x</tspan> = 2³ = 8</text>
 
   <!-- Alice avatar -->
   <circle cx="120" cy="178" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
@@ -53,10 +53,10 @@
 
   <line x1="302" y1="88" x2="502" y2="88" stroke="#1e2738" stroke-width="1"/>
 
-  <text x="302" y="106" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#60a5fa">A = g^k mod p</text>
+  <text x="302" y="106" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#60a5fa">A = g<tspan baseline-shift="super" font-size="70%">k</tspan> mod p</text>
   <text x="302" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#60a5fa">  = 2² mod 11 = 4</text>
 
-  <text x="302" y="143" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#a78bfa">B = m · h^k mod p</text>
+  <text x="302" y="143" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#a78bfa">B = m · h<tspan baseline-shift="super" font-size="70%">k</tspan> mod p</text>
   <text x="302" y="159" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#a78bfa">  = 5 · 8² mod 11 = 5·9 = 1</text>
 
   <!-- Ciphertext box -->
@@ -83,7 +83,7 @@
 
   <line x1="584" y1="92" x2="656" y2="92" stroke="#1e2738" stroke-width="1"/>
 
-  <text x="620" y="108" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">s = A^x</text>
+  <text x="620" y="108" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">s = A<tspan baseline-shift="super" font-size="70%">x</tspan></text>
   <text x="620" y="123" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">= 4³ = 9</text>
 
   <text x="620" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">s⁻¹ mod 11</text>
@@ -98,10 +98,10 @@
 
   <text x="340" y="289" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#94a3b8">왜 복호화가 성립하는가</text>
 
-  <text x="340" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">s = A^x = (g^k)^x = g^(kx)     h^k = (g^x)^k = g^(kx)</text>
-  <text x="340" y="326" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">∴  B · s⁻¹ = m · h^k · (h^k)⁻¹ = m</text>
+  <text x="340" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">s = A<tspan baseline-shift="super" font-size="70%">x</tspan> = (g<tspan baseline-shift="super" font-size="70%">k</tspan>)<tspan baseline-shift="super" font-size="70%">x</tspan> = g<tspan baseline-shift="super" font-size="70%">kx</tspan>     h<tspan baseline-shift="super" font-size="70%">k</tspan> = (g<tspan baseline-shift="super" font-size="70%">x</tspan>)<tspan baseline-shift="super" font-size="70%">k</tspan> = g<tspan baseline-shift="super" font-size="70%">kx</tspan></text>
+  <text x="340" y="326" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">∴  B · s⁻¹ = m · h<tspan baseline-shift="super" font-size="70%">k</tspan> · (h<tspan baseline-shift="super" font-size="70%">k</tspan>)⁻¹ = m</text>
 
   <!-- Shared secret label -->
   <rect x="226" y="256" width="228" height="16" rx="3" fill="rgba(249,115,22,0.08)"/>
-  <text x="340" y="268" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">공유 비밀: g^(kx) — Alice와 Bob만 계산 가능</text>
+  <text x="340" y="268" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">공유 비밀: g<tspan baseline-shift="super" font-size="70%">kx</tspan> — Alice와 Bob만 계산 가능</text>
 </svg>

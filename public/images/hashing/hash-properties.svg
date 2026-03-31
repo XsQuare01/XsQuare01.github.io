@@ -78,7 +78,7 @@
   <rect x="582" y="88" width="46" height="28" rx="5" fill="rgba(248,113,113,0.12)" stroke="#f87171" stroke-width="1.5"/>
   <text x="605" y="107" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" font-weight="700" fill="#f87171">같은 h</text>
 
-  <text x="546" y="144" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#fbbf24">2^(n/2) — Birthday Paradox</text>
+  <text x="546" y="144" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.4" fill="#fbbf24">2<tspan baseline-shift="super" font-size="70%">n/2</tspan> — Birthday Paradox</text>
   <text x="546" y="162" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">①②보다 찾기 쉬움 → 해시 길이 결정</text>
   <text x="546" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#475569">SHA-256 실질 안전성 = 2¹²⁸</text>
 

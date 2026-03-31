@@ -81,7 +81,7 @@
 
   <!-- 암호문 -->
   <rect x="210" y="392" width="220" height="42" rx="5" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="1.5"/>
-  <text x="320" y="410" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f87171">C = m^e mod n</text>
+  <text x="320" y="410" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f87171">C = m<tspan baseline-shift="super" font-size="70%">e</tspan> mod n</text>
   <text x="320" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">항상 동일한 암호문</text>
 
   <!-- 경고 박스 -->

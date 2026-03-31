@@ -109,21 +109,21 @@
   <!-- Easy direction -->
   <rect x="358" y="56" width="264" height="72" rx="6" fill="rgba(74,222,128,0.07)" stroke="#4ade80" stroke-width="1.5"/>
   <text x="490" y="74" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">쉬운 방향  O(log k)</text>
-  <text x="490" y="91" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">k → g^k mod p</text>
+  <text x="490" y="91" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">k → g<tspan baseline-shift="super" font-size="70%">k</tspan> mod p</text>
   <text x="490" y="108" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#475569">Square-and-Multiply 사용</text>
   <text x="490" y="122" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#475569">예: k=3 → 2³ mod 11 = 8</text>
 
   <!-- Hard direction -->
   <rect x="358" y="140" width="264" height="72" rx="6" fill="rgba(248,113,113,0.07)" stroke="#f87171" stroke-width="1.5"/>
   <text x="490" y="158" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f87171">어려운 방향  지수적 시간</text>
-  <text x="490" y="175" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">g^k mod p → k</text>
+  <text x="490" y="175" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">g<tspan baseline-shift="super" font-size="70%">k</tspan> mod p → k</text>
   <text x="490" y="192" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#475569">알려진 다항식 알고리즘 없음</text>
   <text x="490" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#475569">예: 8 → k=? (mod 11, g=2)</text>
 
   <!-- Security note -->
   <rect x="358" y="224" width="264" height="50" rx="6" fill="#0f1929" stroke="#2d3748" stroke-width="1.5"/>
   <text x="490" y="244" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">ElGamal 보안 근거</text>
-  <text x="490" y="260" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">g^x (공개)로부터 x (비밀)를</text>
+  <text x="490" y="260" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">g<tspan baseline-shift="super" font-size="70%">x</tspan> (공개)로부터 x (비밀)를</text>
   <text x="490" y="274" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">구하는 것 = DLP 풀기</text>
 
   <!-- Generator label in center -->

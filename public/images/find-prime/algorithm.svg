@@ -45,7 +45,7 @@
 
   <!-- ── Node 4: Fermat test (center 260,311, hw=100, hh=28) ── -->
   <polygon points="260,283 360,311 260,339 160,311" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="306" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">a^(n−1) ≡ 1 (mod n) ?</text>
+  <text x="260" y="306" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">a<tspan baseline-shift="super" font-size="70%">n−1</tspan> ≡ 1 (mod n) ?</text>
   <text x="260" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">Fermat 테스트</text>
 
   <!-- Arrow 4 → 5 (Yes) -->

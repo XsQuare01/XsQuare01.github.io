@@ -51,7 +51,7 @@
   <rect x="270" y="28" width="575" height="139" rx="6" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1.5"/>
   <text x="557" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#60a5fa">암호화 (Encryption)</text>
   <line x1="270" y1="55" x2="845" y2="55" stroke="#60a5fa" stroke-width="0.8" stroke-opacity="0.5"/>
-  <text x="557" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14.4" font-weight="700" fill="#93c5fd">C = m^e  mod n</text>
+  <text x="557" y="100" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14.4" font-weight="700" fill="#93c5fd">C = m<tspan baseline-shift="super" font-size="70%">e</tspan>  mod n</text>
   <text x="557" y="120" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">공개키 (n, e) 사용 — 누구나 암호화 가능</text>
   <text x="557" y="138" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#60a5fa">평문 m  →  암호문 C</text>
 
@@ -63,7 +63,7 @@
   <rect x="270" y="197" width="575" height="126" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1.5"/>
   <text x="557" y="217" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#4ade80">복호화 (Decryption)</text>
   <line x1="270" y1="224" x2="845" y2="224" stroke="#4ade80" stroke-width="0.8" stroke-opacity="0.5"/>
-  <text x="557" y="265" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14.4" font-weight="700" fill="#86efac">m = C^d  mod n</text>
+  <text x="557" y="265" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14.4" font-weight="700" fill="#86efac">m = C<tspan baseline-shift="super" font-size="70%">d</tspan>  mod n</text>
   <text x="557" y="285" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">개인키 d 사용 — 수신자만 복호화 가능</text>
   <text x="557" y="303" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">암호문 C  →  평문 m</text>
 

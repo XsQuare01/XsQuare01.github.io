@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 295" width="930" height="443">
   <rect width="620" height="295" fill="#0f1117" rx="10"/>
-  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Square-and-Multiply — 17^23 예시  (23 = 10111₂)</text>
+  <text x="310" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">Square-and-Multiply — 17<tspan baseline-shift="super" font-size="70%">23</tspan> 예시  (23 = 10111₂)</text>
 
   <!-- Binary bit display -->
   <text x="20" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#6b7a99">지수 비트:</text>
@@ -76,5 +76,5 @@
 
   <!-- Captions -->
   <text x="310" y="254" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#94a3b8">총 7회 곱셈 (4 제곱 + 3 ×m)  —  지수 길이 O(log e)에 비례</text>
-  <text x="310" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">e ≈ 2000비트  →  직접 2^2000번  vs  Square-and-Multiply 약 3000번</text>
+  <text x="310" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#6b7a99">e ≈ 2000비트  →  직접 2<tspan baseline-shift="super" font-size="70%">2000</tspan>번  vs  Square-and-Multiply 약 3000번</text>
 </svg>

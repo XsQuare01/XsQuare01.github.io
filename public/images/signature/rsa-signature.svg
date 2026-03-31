@@ -29,7 +29,7 @@
   <!-- Sign box -->
   <rect x="74" y="124" width="148" height="44" rx="6" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="2"/>
   <text x="148" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">서명 생성</text>
-  <text x="148" y="160" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f97316">s = m^d mod n</text>
+  <text x="148" y="160" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f97316">s = m<tspan baseline-shift="super" font-size="70%">d</tspan> mod n</text>
 
   <!-- avatar -->
   <circle cx="148" cy="214" r="20" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
@@ -62,11 +62,11 @@
   <!-- Verify box -->
   <rect x="458" y="124" width="148" height="44" rx="6" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="2"/>
   <text x="532" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#a78bfa">서명 검증</text>
-  <text x="532" y="160" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#a78bfa">s^e mod n == m ?</text>
+  <text x="532" y="160" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#a78bfa">s<tspan baseline-shift="super" font-size="70%">e</tspan> mod n == m ?</text>
 
   <!-- Result -->
   <rect x="472" y="184" width="120" height="32" rx="6" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
-  <text x="532" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#4ade80">(m^d)^e = m^(de)</text>
+  <text x="532" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#4ade80">(m<tspan baseline-shift="super" font-size="70%">d</tspan>)<tspan baseline-shift="super" font-size="70%">e</tspan> = m<tspan baseline-shift="super" font-size="70%">de</tspan></text>
   <text x="532" y="210" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#4ade80">= m mod n  ✓</text>
 
   <!-- Bob avatar -->
@@ -76,6 +76,6 @@
 
   <!-- Bottom: why it works -->
   <line x1="18" y1="260" x2="408" y2="260" stroke="#1e2738" stroke-width="1"/>
-  <text x="148" y="276" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#475569">ed ≡ 1 (mod φ(n))  →  m^(ed) ≡ m (mod n)</text>
+  <text x="148" y="276" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#475569">ed ≡ 1 (mod φ(n))  →  m<tspan baseline-shift="super" font-size="70%">ed</tspan> ≡ m (mod n)</text>
   <text x="148" y="291" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#475569">서명은 d 없이는 생성 불가 — 본인만 서명 가능</text>
 </svg>

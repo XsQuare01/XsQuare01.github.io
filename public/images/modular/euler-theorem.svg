@@ -104,5 +104,5 @@
   <rect x="476" y="256" width="150" height="28" rx="4" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1.5"/>
   <text x="551" y="274" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#4ade80">2⁶ ≡ 1 (mod 9)</text>
 
-  <text x="478" y="298" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">b^φ(m) ≡ 1 (mod m)</text>
+  <text x="478" y="298" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#6b7a99">b<tspan baseline-shift="super" font-size="70%">φ(m)</tspan> ≡ 1 (mod m)</text>
 </svg>
