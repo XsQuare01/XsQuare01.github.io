@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="1050" height="630">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f87171"/>
+    </marker>
+    <marker id="sa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="420" fill="#0f1117" rx="10"/>
+  <text x="350" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">중간자 공격 (Man-in-the-Middle) — DH의 취약점</text>
+
+  <!-- ===== 상단: 정상 DH (기대) ===== -->
+  <text x="350" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">Alice와 Bob이 기대하는 상황</text>
+
+  <!-- Alice -->
+  <circle cx="100" cy="68" r="16" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="100" y="73" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10">👩</text>
+  <text x="100" y="96" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">Alice</text>
+
+  <!-- Bob -->
+  <circle cx="600" cy="68" r="16" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="600" y="73" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10">👨</text>
+  <text x="600" y="96" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">Bob</text>
+
+  <!-- Expected shared secret -->
+  <line x1="132" y1="68" x2="568" y2="68" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <rect x="280" y="56" width="140" height="22" rx="4" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1"/>
+  <text x="350" y="71" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">공유 비밀 g<tspan baseline-shift="super" font-size="70%">ab</tspan></text>
+
+  <!-- ===== 구분선 ===== -->
+  <line x1="18" y1="110" x2="682" y2="110" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- ===== 하단: 실제 MITM ===== -->
+  <text x="350" y="130" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f87171">실제 일어나는 일 — Mallory가 중간에 개입</text>
+
+  <!-- Alice -->
+  <circle cx="80" cy="200" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="80" y="205" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👩</text>
+  <text x="80" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Alice</text>
+  <rect x="24" y="238" width="112" height="22" rx="3" fill="rgba(248,113,113,0.1)" stroke="#f87171" stroke-width="1"/>
+  <text x="80" y="253" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">비밀 a</text>
+
+  <!-- Mallory -->
+  <rect x="268" y="152" width="164" height="126" rx="8" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <circle cx="350" cy="186" r="18" fill="#1a2035" stroke="#f87171" stroke-width="1.5"/>
+  <text x="350" y="191" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">😈</text>
+  <text x="350" y="216" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f87171">Mallory</text>
+  <rect x="292" y="224" width="116" height="22" rx="3" fill="rgba(248,113,113,0.1)" stroke="#f87171" stroke-width="1"/>
+  <text x="350" y="239" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">비밀 m₁, m₂</text>
+  <text x="350" y="268" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">두 세션 모두 도청·복호화 가능</text>
+
+  <!-- Bob -->
+  <circle cx="620" cy="200" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="620" y="205" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👨</text>
+  <text x="620" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Bob</text>
+  <rect x="564" y="238" width="112" height="22" rx="3" fill="rgba(248,113,113,0.1)" stroke="#f87171" stroke-width="1"/>
+  <text x="620" y="253" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">비밀 b</text>
+
+  <!-- Arrow: Alice → Mallory (A = g^a) -->
+  <line x1="110" y1="184" x2="268" y2="184" stroke="#4ade80" stroke-width="1.3" marker-end="url(#ga)"/>
+  <text x="189" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">g<tspan baseline-shift="super" font-size="70%">a</tspan> 전송</text>
+
+  <!-- Arrow: Mallory → Bob (M₁ = g^m₁, 위장) -->
+  <line x1="432" y1="184" x2="590" y2="184" stroke="#f87171" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="511" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f87171">g<tspan baseline-shift="super" font-size="70%">m₁</tspan> 위장 전송</text>
+
+  <!-- Arrow: Bob → Mallory (B = g^b) -->
+  <line x1="590" y1="208" x2="432" y2="208" stroke="#60a5fa" stroke-width="1.3" marker-end="url(#ba)"/>
+  <text x="511" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#60a5fa">g<tspan baseline-shift="super" font-size="70%">b</tspan> 전송</text>
+
+  <!-- Arrow: Mallory → Alice (M₂ = g^m₂, 위장) -->
+  <line x1="268" y1="208" x2="110" y2="208" stroke="#f87171" stroke-width="1.3" marker-end="url(#ra)"/>
+  <text x="189" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f87171">g<tspan baseline-shift="super" font-size="70%">m₂</tspan> 위장 전송</text>
+
+  <!-- ===== 하단: 결과 ===== -->
+  <line x1="18" y1="290" x2="682" y2="290" stroke="#2d3748" stroke-width="1"/>
+
+  <text x="350" y="310" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">결과: 두 개의 독립된 공유 비밀</text>
+
+  <!-- Session 1: Alice-Mallory -->
+  <rect x="40" y="320" width="280" height="48" rx="6" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="180" y="340" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">세션 1:  Alice ↔ Mallory</text>
+  <text x="180" y="358" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">공유 비밀 = g<tspan baseline-shift="super" font-size="70%">a·m₂</tspan>  (Alice는 Bob과 통신 중이라 믿음)</text>
+
+  <!-- Session 2: Mallory-Bob -->
+  <rect x="380" y="320" width="280" height="48" rx="6" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="520" y="340" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#a78bfa">세션 2:  Mallory ↔ Bob</text>
+  <text x="520" y="358" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">공유 비밀 = g<tspan baseline-shift="super" font-size="70%">m₁·b</tspan>  (Bob은 Alice와 통신 중이라 믿음)</text>
+
+  <!-- Warning -->
+  <rect x="120" y="380" width="460" height="26" rx="4" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="350" y="398" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f87171">⚠  DH는 인증을 제공하지 않는다 — 해결책: 전자 서명·인증서(CA)로 상대방 신원 확인</text>
+</svg>
