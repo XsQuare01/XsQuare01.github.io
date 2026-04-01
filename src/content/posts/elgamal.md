@@ -144,5 +144,5 @@ ElGamal의 핵심 이점은 **확률적(randomized)** 암호화다.
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Digital Signature — 전자 서명의 수학적 구조</strong> — RSA·ElGamal 서명의 생성과 검증, 인증기관(CA)의 역할, 암호화 해시와 결합한 최종 프로토콜까지 디지털 서명의 전체 그림을 다룬다.</p>
+<p><strong>Diffie-Hellman — 공개 채널 위의 비밀 키 교환</strong> — ElGamal의 수학적 기반이 된 Diffie-Hellman 키 교환 프로토콜, CDH/DDH 가정, 중간자 공격과 인증 문제, 전방향 안전성, 그리고 DH에서 ElGamal로의 확장까지 다룬다.</p>
 </div>
