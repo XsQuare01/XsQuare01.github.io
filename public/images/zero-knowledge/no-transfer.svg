@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="1020" height="540">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f87171"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="360" fill="#0f1117" rx="10"/>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">No Transfer — 시뮬레이션 논증으로 영지식 증명</text>
+
+  <!-- ===== 좌측: 실제 기록 T ===== -->
+  <rect x="18" y="28" width="310" height="240" rx="8" fill="#0d1524" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="173" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">실제 기록 T (P와 대화)</text>
+
+  <!-- Round 1 -->
+  <rect x="30" y="58" width="286" height="60" rx="4" fill="rgba(74,222,128,0.05)" stroke="#334155" stroke-width="1"/>
+  <text x="38" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#e2e8f0">Round 1</text>
+  <text x="38" y="90" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">P → V:  Gₜ₁ (G₁을 치환)</text>
+  <text x="38" y="104" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">V → P:  "G₁↔Gₜ₁ 매핑은?"</text>
+  <text x="38" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">P → V:  G₁↔Gₜ₁ 매핑 제시  ✓</text>
+
+  <!-- Round 2 -->
+  <rect x="30" y="124" width="286" height="60" rx="4" fill="rgba(74,222,128,0.05)" stroke="#334155" stroke-width="1"/>
+  <text x="38" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#e2e8f0">Round 2</text>
+  <text x="38" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">P → V:  Gₜ₂ (G₂를 치환)</text>
+  <text x="38" y="170" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">V → P:  "G₂↔Gₜ₂ 매핑은?"</text>
+  <text x="38" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">P → V:  G₂↔Gₜ₂ 매핑 제시  ✓</text>
+
+  <!-- Round k -->
+  <text x="173" y="200" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">⋮  (k 라운드 반복)</text>
+
+  <rect x="30" y="210" width="286" height="44" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1"/>
+  <text x="173" y="228" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">T = { (Gₜᵢ, 질문ᵢ, 응답ᵢ) | i=1..k }</text>
+  <text x="173" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">P와의 실제 대화 기록</text>
+
+  <!-- ===== 우측: 시뮬레이션 기록 T' ===== -->
+  <rect x="352" y="28" width="310" height="240" rx="8" fill="#0d1524" stroke="#f97316" stroke-width="1.5"/>
+  <text x="507" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">시뮬레이션 기록 T' (V 혼자)</text>
+
+  <!-- Sim Round 1 -->
+  <rect x="364" y="58" width="286" height="60" rx="4" fill="rgba(249,115,22,0.05)" stroke="#334155" stroke-width="1"/>
+  <text x="372" y="74" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#e2e8f0">시뮬레이션 1</text>
+  <text x="372" y="90" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">① V가 질문을 미리 결정: "G₁↔Gₜ?"</text>
+  <text x="372" y="104" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">② G₁을 치환해 Gₜ₁' 생성</text>
+  <text x="372" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">③ G₁↔Gₜ₁' 매핑을 응답으로 기록</text>
+
+  <!-- Sim Round 2 -->
+  <rect x="364" y="124" width="286" height="60" rx="4" fill="rgba(249,115,22,0.05)" stroke="#334155" stroke-width="1"/>
+  <text x="372" y="140" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#e2e8f0">시뮬레이션 2</text>
+  <text x="372" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">① V가 질문을 미리 결정: "G₂↔Gₜ?"</text>
+  <text x="372" y="170" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">② G₂를 치환해 Gₜ₂' 생성</text>
+  <text x="372" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">③ G₂↔Gₜ₂' 매핑을 응답으로 기록</text>
+
+  <!-- Sim result -->
+  <text x="507" y="200" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">⋮  (k 라운드 반복)</text>
+
+  <rect x="364" y="210" width="286" height="44" rx="4" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="1"/>
+  <text x="507" y="228" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f97316">T' = { (Gₜᵢ', 질문ᵢ', 응답ᵢ') | i=1..k }</text>
+  <text x="507" y="246" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">P 없이 V가 혼자 생성한 기록</text>
+
+  <!-- ===== 하단: 결론 ===== -->
+  <line x1="18" y1="282" x2="662" y2="282" stroke="#2d3748" stroke-width="1"/>
+
+  <!-- Comparison -->
+  <rect x="140" y="292" width="400" height="28" rx="6" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="340" y="311" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#a78bfa">T ≡ T'  (확률 분포가 동일, 구별 불가능)</text>
+
+  <!-- Conclusion -->
+  <rect x="60" y="330" width="560" height="20" rx="4" fill="rgba(148,163,184,0.05)"/>
+  <text x="340" y="345" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">V가 P 없이도 동일한 기록을 만들 수 있으므로, P→V 정보 전달은 없다 (No Transfer)</text>
+</svg>

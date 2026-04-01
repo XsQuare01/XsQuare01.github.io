@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 460" width="1020" height="690">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="pa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#a78bfa"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="460" fill="#0f1117" rx="10"/>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">그래프 동형 영지식 증명 — 대화형 프로토콜</text>
+
+  <!-- ===== 설정 ===== -->
+  <text x="340" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">설정: P는 G₁ ≅ G₂의 매핑 σ를 알고 있음</text>
+
+  <!-- G1 -->
+  <rect x="40" y="48" width="120" height="80" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1"/>
+  <text x="100" y="64" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#4ade80">G₁</text>
+  <!-- Simple graph: triangle with extra node -->
+  <circle cx="72" cy="82" r="4" fill="#4ade80" fill-opacity="0.5"/>
+  <circle cx="128" cy="82" r="4" fill="#4ade80" fill-opacity="0.5"/>
+  <circle cx="100" cy="116" r="4" fill="#4ade80" fill-opacity="0.5"/>
+  <circle cx="72" cy="116" r="4" fill="#4ade80" fill-opacity="0.5"/>
+  <line x1="72" y1="82" x2="128" y2="82" stroke="#4ade80" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="128" y1="82" x2="100" y2="116" stroke="#4ade80" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="72" y1="82" x2="72" y2="116" stroke="#4ade80" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="72" y1="116" x2="100" y2="116" stroke="#4ade80" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="66" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">1</text>
+  <text x="132" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">2</text>
+  <text x="104" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">3</text>
+  <text x="60" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4ade80">4</text>
+
+  <!-- Mapping arrow -->
+  <text x="210" y="92" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">σ: 매핑</text>
+  <line x1="170" y1="96" x2="250" y2="96" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#pa)"/>
+
+  <!-- G2 -->
+  <rect x="260" y="48" width="120" height="80" rx="6" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1"/>
+  <text x="320" y="64" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#60a5fa">G₂</text>
+  <!-- Same graph, different node labels -->
+  <circle cx="292" cy="82" r="4" fill="#60a5fa" fill-opacity="0.5"/>
+  <circle cx="348" cy="82" r="4" fill="#60a5fa" fill-opacity="0.5"/>
+  <circle cx="320" cy="116" r="4" fill="#60a5fa" fill-opacity="0.5"/>
+  <circle cx="292" cy="116" r="4" fill="#60a5fa" fill-opacity="0.5"/>
+  <line x1="292" y1="82" x2="348" y2="82" stroke="#60a5fa" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="348" y1="82" x2="320" y2="116" stroke="#60a5fa" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="292" y1="82" x2="292" y2="116" stroke="#60a5fa" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="292" y1="116" x2="320" y2="116" stroke="#60a5fa" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="286" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#60a5fa">a</text>
+  <text x="352" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#60a5fa">b</text>
+  <text x="324" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#60a5fa">c</text>
+  <text x="280" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#60a5fa">d</text>
+
+  <!-- P and V -->
+  <circle cx="490" cy="72" r="18" fill="#1a2035" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="490" y="77" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">🧑</text>
+  <text x="490" y="102" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">P (증명자)</text>
+  <text x="490" y="115" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">σ를 알고 있음</text>
+
+  <circle cx="620" cy="72" r="18" fill="#1a2035" stroke="#f97316" stroke-width="1.5"/>
+  <text x="620" y="77" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">🔍</text>
+  <text x="620" y="102" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">V (검증자)</text>
+  <text x="620" y="115" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">σ를 모름</text>
+
+  <!-- ===== 라운드 흐름 ===== -->
+  <line x1="18" y1="134" x2="662" y2="134" stroke="#2d3748" stroke-width="1"/>
+
+  <!-- Round box -->
+  <rect x="18" y="142" width="644" height="230" rx="8" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
+  <text x="340" y="162" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">한 라운드의 진행</text>
+
+  <!-- Step 1 -->
+  <rect x="30" y="172" width="280" height="54" rx="4" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1"/>
+  <text x="170" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#a78bfa">Step 1: P가 Gₜ 생성</text>
+  <text x="170" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">G₁(또는 G₂)의 노드를 무작위로 치환(permute)</text>
+  <text x="170" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">P는 G₁↔Gₜ, G₂↔Gₜ 매핑을 모두 알고 있음</text>
+
+  <!-- Arrow: send Gt -->
+  <line x1="310" y1="196" x2="370" y2="196" stroke="#a78bfa" stroke-width="1.3" marker-end="url(#pa)"/>
+  <text x="340" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#a78bfa">Gₜ 전송</text>
+
+  <!-- Step 2 -->
+  <rect x="380" y="172" width="270" height="54" rx="4" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="1"/>
+  <text x="515" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">Step 2: V가 질문 선택</text>
+  <text x="515" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">동전을 던져 G₁↔Gₜ 또는 G₂↔Gₜ</text>
+  <text x="515" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">관계를 물어봄 (랜덤 선택)</text>
+
+  <!-- Arrow: challenge -->
+  <line x1="515" y1="226" x2="515" y2="248" stroke="#f97316" stroke-width="1.3" marker-end="url(#oa)"/>
+
+  <!-- Step 3 -->
+  <rect x="30" y="236" width="620" height="54" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1"/>
+  <text x="340" y="254" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#4ade80">Step 3: P가 응답</text>
+  <text x="340" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">σ를 아는 P는 어느 질문이든 매핑을 제시할 수 있음 → V가 검증</text>
+  <text x="340" y="284" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">σ를 모르는 사칭자는 두 질문 중 하나만 답할 수 있음 → 통과 확률 1/2</text>
+
+  <!-- Repeat -->
+  <rect x="30" y="300" width="620" height="60" rx="4" fill="rgba(148,163,184,0.05)" stroke="#475569" stroke-width="1"/>
+  <text x="340" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">k 라운드 반복</text>
+  <text x="340" y="342" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">매 라운드 새로운 Gₜ 생성 — 사칭자의 통과 확률: 1/2<tspan baseline-shift="super" font-size="70%">k</tspan></text>
+  <text x="340" y="354" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">k=30이면 통과 확률 ≈ 10⁻⁹ — 실질적으로 불가능</text>
+
+  <!-- ===== 하단: 안전성 요약 ===== -->
+  <line x1="18" y1="384" x2="662" y2="384" stroke="#2d3748" stroke-width="1"/>
+
+  <rect x="18" y="394" width="210" height="50" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1"/>
+  <text x="123" y="414" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#4ade80">건전성 (Soundness)</text>
+  <text x="123" y="434" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">σ를 모르면 V를 속일 수 없음</text>
+
+  <rect x="240" y="394" width="200" height="50" rx="6" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1"/>
+  <text x="340" y="414" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#60a5fa">완전성 (Completeness)</text>
+  <text x="340" y="434" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">σ를 알면 항상 통과</text>
+
+  <rect x="452" y="394" width="210" height="50" rx="6" fill="rgba(249,115,22,0.06)" stroke="#f97316" stroke-width="1"/>
+  <text x="557" y="414" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">영지식 (Zero Knowledge)</text>
+  <text x="557" y="434" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">V는 σ에 대한 정보를 얻지 못함</text>
+</svg>
