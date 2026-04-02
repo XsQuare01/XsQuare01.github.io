@@ -1173,14 +1173,37 @@ pre:hover .code-copy-btn { opacity: 1; }
 }
 .post-category-badge:hover { opacity: 0.8; }
 
+/* Sidebar toggle button */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text);
+  line-height: 1;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
+  .sidebar-toggle { display: block; }
   .sidebar {
-    position: relative;
-    width: 100%;
-    min-height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+    position: fixed;
+    width: 260px;
+    min-height: 100vh;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .sidebar.open {
+    transform: translateX(0);
   }
   body { flex-direction: column; }
   .main-wrap { margin-left: 0; padding: 1.5rem; min-height: calc(100vh - 60px); }
