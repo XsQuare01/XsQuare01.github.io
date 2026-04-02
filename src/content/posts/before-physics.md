@@ -119,5 +119,5 @@ $$
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Post-Quantum Cryptography — 양자 시대의 암호학</strong> — 양자 컴퓨터가 RSA·DLP를 위협하는 이유, Shor 알고리즘의 원리, 격자 기반·코드 기반 후양자 암호, 그리고 현재의 대응 전략까지 다룬다.</p>
+<p><strong>Future Cryptography — 양자역학이 바꾸는 암호의 미래</strong> — 마이켈슨 간섭계, 양자 폭탄 검출기, EPR 역설, 벨의 정리, Shor 알고리즘, 그리고 BB84 양자 키 교환까지 — 양자역학이 암호학의 미래를 어떻게 바꾸는지 다룬다.</p>
 </div>
