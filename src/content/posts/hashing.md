@@ -132,3 +132,8 @@ $$
 <li>MAC에는 HMAC을 사용(Length Extension 방지). 패스워드에는 bcrypt/Argon2를 사용(느린 해시).</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Zero Knowledge Proof — 전달 없이 입증하기</strong> — Shamir의 비밀 공유, 그래프 동형 영지식 증명, 시뮬레이션 논증을 통한 No Transfer 증명, 그리고 RSA 기반 실용적 대안까지 다룬다.</p>
+</div>

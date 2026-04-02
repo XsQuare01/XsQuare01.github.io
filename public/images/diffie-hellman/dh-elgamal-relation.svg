@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="1020" height="510">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+    <marker id="pa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#a78bfa"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="340" fill="#0f1117" rx="10"/>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Diffie-Hellman → ElGamal 관계 — 키 교환에서 암호화로</text>
+
+  <!-- ===== 좌측: DH 키 교환 ===== -->
+  <rect x="18" y="28" width="310" height="260" rx="8" fill="#0d1524" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="173" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">Diffie-Hellman 키 교환</text>
+
+  <!-- DH Step 1 -->
+  <text x="30" y="70" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">① Alice: 비밀 a 선택,  A = g<tspan baseline-shift="super" font-size="70%">a</tspan> 공개</text>
+
+  <!-- DH Step 2 -->
+  <text x="30" y="92" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">② Bob: 비밀 b 선택,  B = g<tspan baseline-shift="super" font-size="70%">b</tspan> 공개</text>
+
+  <!-- DH Step 3 -->
+  <text x="30" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">③ 공유 비밀: s = g<tspan baseline-shift="super" font-size="70%">ab</tspan></text>
+
+  <!-- DH Box: shared secret -->
+  <rect x="30" y="128" width="286" height="32" rx="4" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1"/>
+  <text x="173" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">s = g<tspan baseline-shift="super" font-size="70%">ab</tspan> mod p</text>
+
+  <!-- DH limitation -->
+  <rect x="30" y="172" width="286" height="46" rx="4" fill="rgba(148,163,184,0.05)" stroke="#475569" stroke-width="1"/>
+  <text x="173" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#cbd5e1">키만 교환 — 메시지 전송 기능 없음</text>
+  <text x="173" y="208" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">양쪽 모두 온라인이어야 함 (대화형)</text>
+
+  <!-- DH properties -->
+  <text x="30" y="240" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 전방향 안전성 (Forward Secrecy)</text>
+  <text x="30" y="256" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 세션마다 독립적 비밀</text>
+  <text x="30" y="272" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">✗ 인증 없음 (MITM 취약)</text>
+
+  <!-- ===== 화살표: DH → ElGamal ===== -->
+  <line x1="328" y1="158" x2="352" y2="158" stroke="#a78bfa" stroke-width="2" marker-end="url(#pa)"/>
+  <text x="340" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#a78bfa">+</text>
+
+  <!-- ===== 우측: ElGamal ===== -->
+  <rect x="352" y="28" width="310" height="260" rx="8" fill="#0d1524" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="507" y="48" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#60a5fa">ElGamal 암호화</text>
+
+  <!-- Mapping -->
+  <text x="364" y="70" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">① Alice: 비밀키 x,  공개키 h = g<tspan baseline-shift="super" font-size="70%">x</tspan></text>
+  <text x="440" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#a78bfa">(DH의 a → x, A → h로 대응)</text>
+
+  <text x="364" y="108" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">② Bob: 임시 k 선택, A = g<tspan baseline-shift="super" font-size="70%">k</tspan></text>
+  <text x="440" y="124" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#a78bfa">(DH의 b → k, B → A로 대응)</text>
+
+  <text x="364" y="146" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">③ 공유 비밀 s = g<tspan baseline-shift="super" font-size="70%">xk</tspan> 로 메시지 마스킹</text>
+
+  <!-- ElGamal Box: encryption -->
+  <rect x="364" y="158" width="286" height="32" rx="4" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" stroke-width="1"/>
+  <text x="507" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#60a5fa">B = m · g<tspan baseline-shift="super" font-size="70%">xk</tspan> mod p</text>
+
+  <!-- ElGamal advantage -->
+  <rect x="364" y="202" width="286" height="46" rx="4" fill="rgba(148,163,184,0.05)" stroke="#475569" stroke-width="1"/>
+  <text x="507" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#cbd5e1">DH + 메시지 마스킹 = 공개키 암호화</text>
+  <text x="507" y="238" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">수신자가 오프라인이어도 암호화 가능 (비대화형)</text>
+
+  <!-- ElGamal properties -->
+  <text x="364" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 확률적 암호화 (IND-CPA)</text>
+  <text x="364" y="286" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 매 암호화마다 새 k → 새 공유 비밀</text>
+
+  <!-- ===== 하단: 핵심 통찰 ===== -->
+  <rect x="18" y="300" width="644" height="28" rx="6" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="340" y="319" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#a78bfa">핵심: ElGamal은 매 암호화마다 일회성 DH 키 교환을 수행하고, 그 공유 비밀로 메시지를 마스킹한다</text>
+</svg>

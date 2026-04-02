@@ -95,6 +95,9 @@ const currentPath = Astro.url.pathname;
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWXXL2TH"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <button id="sidebar-toggle" class="sidebar-toggle" aria-label="메뉴 열기/닫기">
+    <span class="sidebar-toggle-icon">☰</span>
+  </button>
   <aside class="sidebar">
     <div class="sidebar-profile">
       <img class="sidebar-avatar" src="https://github.com/XsQuare01.png" alt="XsQuare01 프로필 사진" />
@@ -245,7 +248,7 @@ const currentPath = Astro.url.pathname;
       navIdx = -1;
       return;
     }
-    const results = fuse.search(query, { limit: 8 });
+    const results = fuse.search(query, { limit: 20 });
     searchResults.innerHTML = '';
     navIdx = -1;
     if (results.length === 0) {
@@ -322,6 +325,17 @@ const currentPath = Astro.url.pathname;
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
     const isLight = document.documentElement.classList.toggle('light');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+
+  // ── 모바일 사이드바 토글 ──
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  sidebarToggle?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+    const isOpen = sidebar?.classList.contains('open');
+    sidebarToggle.setAttribute('aria-expanded', String(isOpen));
+    const icon = sidebarToggle.querySelector('.sidebar-toggle-icon');
+    if (icon) icon.textContent = isOpen ? '✕' : '☰';
   });
 </script>
 

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 380" width="1020" height="570">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+    <marker id="sa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="380" fill="#0f1117" rx="10"/>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Diffie-Hellman 키 교환 — p=23, g=5</text>
+
+  <!-- Public parameters -->
+  <rect x="230" y="26" width="220" height="20" rx="4" fill="rgba(148,163,184,0.08)" stroke="#475569" stroke-width="1"/>
+  <text x="340" y="40" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">공개 파라미터: p = 23, g = 5</text>
+
+  <!-- ===== Alice (left) ===== -->
+  <circle cx="100" cy="84" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="100" y="89" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👩</text>
+  <text x="100" y="114" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">Alice</text>
+
+  <!-- Alice secret -->
+  <rect x="24" y="124" width="152" height="28" rx="4" fill="rgba(248,113,113,0.1)" stroke="#f87171" stroke-width="1"/>
+  <text x="100" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">🔒  비밀  a = 6</text>
+
+  <!-- Alice computes A -->
+  <rect x="24" y="160" width="152" height="40" rx="4" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1"/>
+  <text x="100" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">A = g<tspan baseline-shift="super" font-size="70%">a</tspan> mod p</text>
+  <text x="100" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">= 5⁶ mod 23 = 8</text>
+
+  <!-- ===== Bob (right) ===== -->
+  <circle cx="580" cy="84" r="18" fill="#1a2035" stroke="#334155" stroke-width="1.5"/>
+  <text x="580" y="89" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👨</text>
+  <text x="580" y="114" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">Bob</text>
+
+  <!-- Bob secret -->
+  <rect x="504" y="124" width="152" height="28" rx="4" fill="rgba(248,113,113,0.1)" stroke="#f87171" stroke-width="1"/>
+  <text x="580" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">🔒  비밀  b = 15</text>
+
+  <!-- Bob computes B -->
+  <rect x="504" y="160" width="152" height="40" rx="4" fill="rgba(96,165,250,0.08)" stroke="#60a5fa" stroke-width="1"/>
+  <text x="580" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#60a5fa">B = g<tspan baseline-shift="super" font-size="70%">b</tspan> mod p</text>
+  <text x="580" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#60a5fa">= 5¹⁵ mod 23 = 19</text>
+
+  <!-- Exchange arrows -->
+  <line x1="176" y1="216" x2="504" y2="236" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ga)"/>
+  <text x="340" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">A = 8 전송 →</text>
+
+  <line x1="504" y1="250" x2="176" y2="270" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
+  <text x="340" y="266" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#60a5fa">← B = 19 전송</text>
+
+  <!-- Eavesdropper -->
+  <text x="340" y="242" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10">👁️</text>
+  <text x="340" y="254" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">도청자: p, g, A, B 획득</text>
+
+  <!-- Alice computes shared secret -->
+  <rect x="24" y="284" width="152" height="40" rx="4" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="100" y="302" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f97316">s = B<tspan baseline-shift="super" font-size="70%">a</tspan> mod p</text>
+  <text x="100" y="318" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">= 19⁶ mod 23 = 2</text>
+
+  <!-- Bob computes shared secret -->
+  <rect x="504" y="284" width="152" height="40" rx="4" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="580" y="302" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f97316">s = A<tspan baseline-shift="super" font-size="70%">b</tspan> mod p</text>
+  <text x="580" y="318" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">= 8¹⁵ mod 23 = 2</text>
+
+  <!-- Shared secret result -->
+  <rect x="220" y="340" width="240" height="28" rx="6" fill="rgba(249,115,22,0.15)" stroke="#f97316" stroke-width="2"/>
+  <text x="340" y="359" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#f97316">공유 비밀 s = g<tspan baseline-shift="super" font-size="70%">ab</tspan> mod p = 2  ✓</text>
+
+  <!-- Connecting lines to shared secret -->
+  <line x1="100" y1="324" x2="246" y2="348" stroke="#f97316" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#oa)"/>
+  <line x1="580" y1="324" x2="434" y2="348" stroke="#f97316" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#oa)"/>
+</svg>

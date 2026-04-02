@@ -1,6 +1,6 @@
 ---
 title: "집합의 크기(Cardinality) — 무한의 크기를 비교하다"
-date: 2026-03-18
+date: 2026-03-18T10:00:00
 description: "무한집합에도 크기가 있을까? 자연수, 정수, 유리수, 실수의 크기를 비교하고, 칸토어의 대각선 논법을 통해 무한에도 '더 큰 무한'이 있음을 증명한다."
 tags: ["Mathematics", "Complexity Theory"]
 category: theory

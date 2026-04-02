@@ -178,6 +178,7 @@ const jsonLd = JSON.stringify({
     const btn = document.createElement('button');
     btn.className = 'code-copy-btn';
     btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', '코드 복사');
     btn.addEventListener('click', async () => {
       const code = pre.querySelector('code');
       if (!code) return;
@@ -201,11 +202,17 @@ const jsonLd = JSON.stringify({
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            tocLinks.forEach((link) => link.classList.remove('active'));
+            tocLinks.forEach((link) => {
+              link.classList.remove('active');
+              link.removeAttribute('aria-current');
+            });
             const active = document.querySelector(
               `.toc-link[href="#${entry.target.id}"]`
             );
-            if (active) active.classList.add('active');
+            if (active) {
+              active.classList.add('active');
+              active.setAttribute('aria-current', 'true');
+            }
           }
         }
       },
