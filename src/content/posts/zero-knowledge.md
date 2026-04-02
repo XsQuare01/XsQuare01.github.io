@@ -179,3 +179,8 @@ B는 $m$에 대한 A의 서명 $m^{d_A}$를 얻었지만, A는 $m$의 내용을 
 <li>RSA 서명은 실용적인 지식 증명으로, 은닉 서명은 서명자가 내용을 모른 채 서명하는 확장이다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+<p><strong>Before Physics — 논리, 불완전성, 그리고 과학의 기반</strong> — 양자역학과 상대성 이론에 들어가기 전, 논리와 물리학의 차이, 괴델의 불완전성 정리, 오컴의 면도날, 과학적 원리까지 다룬다.</p>
+</div>
