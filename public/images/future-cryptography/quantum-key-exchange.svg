@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" width="1050" height="720">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f87171"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="480" fill="#0f1117" rx="10"/>
+  <text x="350" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">BB84 양자 키 교환 프로토콜</text>
+
+  <!-- ===== Alice and Bob ===== -->
+  <circle cx="80" cy="52" r="18" fill="#1a2035" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="80" y="57" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👩</text>
+  <text x="80" y="82" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">Alice</text>
+
+  <circle cx="620" cy="52" r="18" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="620" y="57" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">👨</text>
+  <text x="620" y="82" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#60a5fa">Bob</text>
+
+  <!-- ===== Step 1: Alice sends polarized photons ===== -->
+  <rect x="18" y="96" width="664" height="60" rx="6" fill="#0d1524" stroke="#334155" stroke-width="1"/>
+  <text x="30" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">Step 1: Alice가 편광된 광자를 전송</text>
+
+  <text x="30" y="132" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Alice의 비트:</text>
+  <text x="120" y="132" font-family="monospace" font-size="9.6" font-weight="700" fill="#4ade80">1   0   1   1   0   0   1   0</text>
+  <text x="30" y="148" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Alice의 기저:</text>
+  <text x="120" y="148" font-family="monospace" font-size="9.6" font-weight="700" fill="#a78bfa">+   ×   ×   +   +   ×   +   ×</text>
+
+  <!-- Photon arrow -->
+  <line x1="350" y1="156" x2="350" y2="174" stroke="#f97316" stroke-width="1.3" marker-end="url(#oa)"/>
+  <text x="380" y="169" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">광자 전송 (양자 채널)</text>
+
+  <!-- ===== Step 2: Bob measures ===== -->
+  <rect x="18" y="178" width="664" height="60" rx="6" fill="#0d1524" stroke="#334155" stroke-width="1"/>
+  <text x="30" y="196" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#60a5fa">Step 2: Bob이 랜덤 기저로 측정</text>
+
+  <text x="30" y="214" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Bob의 기저:</text>
+  <text x="120" y="214" font-family="monospace" font-size="9.6" font-weight="700" fill="#a78bfa">+   ×   +   +   ×   ×   +   +</text>
+  <text x="30" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Bob의 결과:</text>
+  <text x="120" y="230" font-family="monospace" font-size="9.6" font-weight="700" fill="#60a5fa">1   0   ?   1   ?   0   1   ?</text>
+
+  <!-- Step 3 arrow -->
+  <line x1="350" y1="238" x2="350" y2="256" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#oa)"/>
+  <text x="380" y="251" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">기저 공개 (공개 채널)</text>
+
+  <!-- ===== Step 3: Compare bases ===== -->
+  <rect x="18" y="260" width="664" height="60" rx="6" fill="#0d1524" stroke="#334155" stroke-width="1"/>
+  <text x="30" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">Step 3: 기저 비교 — 같은 기저만 유지</text>
+
+  <text x="30" y="296" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">기저 일치?</text>
+  <text x="120" y="296" font-family="monospace" font-size="9.6" font-weight="700" fill="#4ade80">✓   ✓   ✗   ✓   ✗   ✓   ✓   ✗</text>
+  <text x="30" y="312" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">공유 비트:</text>
+  <text x="120" y="312" font-family="monospace" font-size="9.6" font-weight="700" fill="#f97316">1   0   -   1   -   0   1   -</text>
+
+  <!-- Step 4 arrow -->
+  <line x1="350" y1="320" x2="350" y2="338" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#oa)"/>
+  <text x="380" y="333" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">일부 비교 (도청 검출)</text>
+
+  <!-- ===== Step 4: Verification ===== -->
+  <rect x="18" y="342" width="664" height="46" rx="6" fill="#0d1524" stroke="#334155" stroke-width="1"/>
+  <text x="30" y="360" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">Step 4: 절반 비교 → 일치하면 나머지를 키로 사용</text>
+  <text x="30" y="378" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">비교용: 1, 0  →  일치 확인 ✓   |   최종 키:</text>
+  <text x="370" y="378" font-family="monospace" font-size="10.4" font-weight="700" fill="#f97316">1  0  1</text>
+
+  <!-- ===== 하단: 도청 시나리오 ===== -->
+  <line x1="18" y1="400" x2="682" y2="400" stroke="#334155" stroke-width="1.5"/>
+
+  <text x="350" y="420" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f87171">도청자 Eve가 개입하면?</text>
+
+  <rect x="18" y="428" width="320" height="40" rx="4" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="1"/>
+  <text x="178" y="444" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f87171">Eve가 측정 → 광자 상태 교란</text>
+  <text x="178" y="460" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#cbd5e1">잘못된 기저 → 편광 방향 변경</text>
+
+  <rect x="362" y="428" width="320" height="40" rx="4" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1"/>
+  <text x="522" y="444" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">Step 4에서 불일치 발생 → 도청 감지</text>
+  <text x="522" y="460" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#cbd5e1">키 폐기 후 재시도 (물리 법칙이 보안 보장)</text>
+</svg>

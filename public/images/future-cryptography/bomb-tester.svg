@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 460" width="1050" height="690">
+  <defs>
+    <marker id="ga" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4ade80"/>
+    </marker>
+    <marker id="ba" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="ra" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f87171"/>
+    </marker>
+    <marker id="oa" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="460" fill="#0f1117" rx="10"/>
+  <text x="350" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">Elitzur-Vaidman 폭탄 검출기 — 관측 없이 관측하기</text>
+
+  <!-- ===== 장치 구조 (same as interferometer + bomb) ===== -->
+  <!-- Photon source -->
+  <circle cx="60" cy="260" r="12" fill="rgba(249,115,22,0.2)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="60" y="264" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">광원</text>
+
+  <!-- Arrow: source → half mirror 1 -->
+  <line x1="76" y1="260" x2="156" y2="260" stroke="#f97316" stroke-width="1.5" marker-end="url(#oa)"/>
+
+  <!-- Half mirror 1 -->
+  <line x1="160" y1="240" x2="190" y2="280" stroke="#a78bfa" stroke-width="3"/>
+
+  <!-- Path 2: up -->
+  <line x1="175" y1="245" x2="175" y2="78" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
+  <text x="155" y="165" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">경로 ②</text>
+
+  <!-- Full mirror (top-left) -->
+  <line x1="155" y1="55" x2="195" y2="75" stroke="#e2e8f0" stroke-width="3"/>
+
+  <!-- Path 2 reflected: right -->
+  <line x1="185" y1="62" x2="375" y2="62" stroke="#60a5fa" stroke-width="1.5" marker-end="url(#ba)"/>
+
+  <!-- Path 1: right with BOMB -->
+  <line x1="190" y1="260" x2="258" y2="260" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ga)"/>
+  <text x="235" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">경로 ①</text>
+
+  <!-- BOMB -->
+  <circle cx="290" cy="260" r="18" fill="rgba(248,113,113,0.15)" stroke="#f87171" stroke-width="2"/>
+  <text x="290" y="264" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12">💣</text>
+  <text x="290" y="290" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f87171">폭탄 (Detector)</text>
+
+  <!-- Path 1 continues after bomb -->
+  <line x1="312" y1="260" x2="375" y2="260" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ga)"/>
+
+  <!-- Full mirror (bottom-right) -->
+  <line x1="380" y1="240" x2="400" y2="280" stroke="#e2e8f0" stroke-width="3"/>
+
+  <!-- Path 1 reflected: up -->
+  <line x1="390" y1="245" x2="390" y2="78" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ga)"/>
+
+  <!-- Half mirror 2 (top-right) -->
+  <line x1="370" y1="48" x2="410" y2="88" stroke="#a78bfa" stroke-width="3"/>
+
+  <!-- Output right -->
+  <line x1="410" y1="62" x2="470" y2="62" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="480" y="58" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">→ 검출기 D₁</text>
+
+  <!-- Output up -->
+  <line x1="390" y1="45" x2="390" y2="24" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="390" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">↑ 검출기 D₂</text>
+
+  <!-- ===== 우측: 3가지 결과 ===== -->
+  <line x1="520" y1="30" x2="520" y2="300" stroke="#2d3748" stroke-width="1"/>
+
+  <text x="610" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">폭탄 상태별 결과</text>
+
+  <!-- Case 1: Dud bomb -->
+  <rect x="530" y="48" width="156" height="72" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1"/>
+  <text x="608" y="66" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#4ade80">불발탄 (Detector ✗)</text>
+  <text x="608" y="84" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">광자는 확률로 존재</text>
+  <text x="608" y="98" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">두 경로 모두 통과 → 간섭</text>
+  <text x="608" y="114" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">D₁에서만 검출 (D₂ 상쇄)</text>
+
+  <!-- Case 2: Live bomb, explodes -->
+  <rect x="530" y="130" width="156" height="72" rx="6" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="1"/>
+  <text x="608" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f87171">정상 폭탄 → 경로 ① 통과</text>
+  <text x="608" y="166" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Detector가 광자 관측</text>
+  <text x="608" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">→ 입자화 → 폭탄 폭발</text>
+  <text x="608" y="196" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">확률 50% — 폭탄 소실</text>
+
+  <!-- Case 3: Live bomb, detected without explosion -->
+  <rect x="530" y="212" width="156" height="80" rx="6" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="608" y="230" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">정상 폭탄 → 경로 ② 통과</text>
+  <text x="608" y="248" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">경로 ①이 차단되어 간섭 없음</text>
+  <text x="608" y="262" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">D₁ 또는 D₂에서 50%씩 검출</text>
+  <text x="608" y="280" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#f97316">D₂ 검출 시 → 정상 폭탄 확인!</text>
+  <text x="608" y="292" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">폭탄을 터뜨리지 않고 검출</text>
+
+  <!-- ===== 하단: 확률 요약 ===== -->
+  <line x1="18" y1="316" x2="682" y2="316" stroke="#2d3748" stroke-width="1"/>
+
+  <text x="350" y="338" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">정상 폭탄에 대한 결과 확률</text>
+
+  <rect x="30" y="348" width="190" height="44" rx="4" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="1"/>
+  <text x="125" y="366" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f87171">50%: 폭발 💥</text>
+  <text x="125" y="384" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#cbd5e1">경로 ①으로 입자 이동</text>
+
+  <rect x="240" y="348" width="190" height="44" rx="4" fill="rgba(148,163,184,0.06)" stroke="#94a3b8" stroke-width="1"/>
+  <text x="335" y="366" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#94a3b8">25%: D₁ 검출 (판별 불가)</text>
+  <text x="335" y="384" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#cbd5e1">경로 ② → D₁ (불발과 구별 안됨)</text>
+
+  <rect x="450" y="348" width="220" height="44" rx="4" fill="rgba(249,115,22,0.1)" stroke="#f97316" stroke-width="1.5"/>
+  <text x="560" y="366" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">25%: D₂ 검출 → 정상 폭탄 확인 ✓</text>
+  <text x="560" y="384" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#cbd5e1">터뜨리지 않고 검출 성공</text>
+
+  <!-- Bottom note -->
+  <rect x="120" y="402" width="460" height="22" rx="4" fill="rgba(167,139,250,0.06)" stroke="#a78bfa" stroke-width="1"/>
+  <text x="350" y="417" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">암호학 응용: 도청자가 관측하면 간섭 패턴이 깨진다 → 도청 여부를 검출할 수 있다</text>
+</svg>
