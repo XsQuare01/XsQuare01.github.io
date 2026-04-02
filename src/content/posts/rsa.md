@@ -11,11 +11,11 @@ category: cryptography
 <div class="callout">
 <div class="callout-title">이 글의 주요 개념</div>
 <ul>
-<li><strong>RSA 키</strong>: $n = pq$ (공개), $e$ (공개 지수), $d$ (개인 지수), $ed \equiv 1 \pmod{\varphi(n)}$</li>
-<li><strong>암복호화</strong>: $C = m^e \bmod n \;\to\; m = C^d \bmod n = m^{ed} \bmod n$</li>
-<li><strong>복호화 정확성</strong>: $m^{ed} \equiv m \pmod{n}$ — $\gcd(m,n)=1$ 이면 오일러 정리, 아니면 페르마+CRT</li>
-<li><strong>보안 근거</strong>: $n = pq$ 소인수분해 → $\text{NP} \cap \text{co-NP}$, 현실적으로 불가능</li>
-<li><strong>고속 지수연산</strong>: Square-and-Multiply — $O(e) \to O(\log e)$</li>
+<li><strong>RSA 키</strong>: n = pq (공개), e (공개 지수), d (개인 지수), ed ≡ 1 (mod φ(n))</li>
+<li><strong>암복호화</strong>: C = m^e mod n → m = C^d mod n = m^(ed) mod n</li>
+<li><strong>복호화 정확성</strong>: m^(ed) ≡ m (mod n) — gcd(m,n)=1이면 오일러 정리, 아니면 페르마+CRT</li>
+<li><strong>보안 근거</strong>: n = pq 소인수분해 → NP ∩ co-NP, 현실적으로 불가능</li>
+<li><strong>고속 지수연산</strong>: Square-and-Multiply — O(e) → O(log e)</li>
 </ul>
 </div>
 
