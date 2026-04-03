@@ -620,7 +620,41 @@ article .prose h2 {
   font-size: inherit;
 }
 .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-.prose img { max-width: 100%; border-radius: 8px; margin: 1.5rem 0; border: 1px solid var(--border); }
+.prose img { max-width: 100%; border-radius: 8px; margin: 1.5rem 0; border: 1px solid var(--border); transition: opacity 0.15s; }
+.prose img:hover { opacity: 0.85; }
+
+/* Image Lightbox */
+#image-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+#image-lightbox.open { display: flex; }
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+.lightbox-content {
+  position: relative;
+  max-width: 95vw;
+  max-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-content img {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: none;
+  margin: 0;
+}
 .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
 .prose th { background: var(--bg-card); font-weight: 600; color: var(--accent-2); }
 .prose th, .prose td { border: 1px solid var(--border); padding: 0.6rem 0.9rem; }

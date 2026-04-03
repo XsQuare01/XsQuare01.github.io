@@ -193,6 +193,39 @@ const jsonLd = JSON.stringify({
     pre.appendChild(btn);
   });
 
+  // ── 이미지 라이트박스 ──
+  const lightbox = document.createElement('div');
+  lightbox.id = 'image-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-label', '이미지 확대');
+  lightbox.innerHTML = '<div class="lightbox-backdrop"></div><div class="lightbox-content"></div>';
+  document.body.appendChild(lightbox);
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.querySelector('.lightbox-content')!.innerHTML = '';
+  }
+
+  lightbox.querySelector('.lightbox-backdrop')!.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+
+  document.querySelectorAll('.prose img').forEach((img) => {
+    (img as HTMLElement).style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      const clone = img.cloneNode(true) as HTMLImageElement;
+      clone.style.cursor = 'zoom-out';
+      clone.removeAttribute('width');
+      clone.removeAttribute('height');
+      clone.addEventListener('click', closeLightbox);
+      const content = lightbox.querySelector('.lightbox-content')!;
+      content.innerHTML = '';
+      content.appendChild(clone);
+      lightbox.classList.add('open');
+    });
+  });
+
   // ── TOC 활성 링크 ──
   const headings = document.querySelectorAll('article h2[id]');
   const tocLinks = document.querySelectorAll('.toc-link');
