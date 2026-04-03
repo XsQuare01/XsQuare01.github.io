@@ -4,6 +4,7 @@ date: 2026-03-16
 description: "수학적 증명에서 '정의(definition)'의 엄밀함이 왜 중요한지를 보여주는 패러독스. 암호학 Complexity Theory 도입부."
 tags: ["Cryptography", "Complexity Theory", "Mathematics"]
 category: theory
+difficulty: 입문
 ---
 
 <div class="callout callout-key">

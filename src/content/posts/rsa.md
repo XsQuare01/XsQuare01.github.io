@@ -4,6 +4,7 @@ date: 2026-03-25T10:00:00
 description: "RSA의 키 생성, 암복호화, 복호화 정확성 증명(오일러·페르마·CRT), 소인수분해 보안 근거, Square-and-Multiply 고속 지수연산까지 — 공개키 암호의 수학 전체를 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > Division Theorem, GCD, Modular Arithmetic, Euler 정리, Fermat 정리, CRT — 지금까지 쌓아온 정수론의 모든 도구가 RSA 하나를 위해 수렴한다. 큰 소수 두 개의 곱을 되돌리는 것이 어렵다는 단 하나의 사실 위에, 전 세계 인터넷 암호화가 서있다.
@@ -118,6 +119,11 @@ $$
 $$
 m^{ed} \equiv m \pmod{n} \quad \checkmark
 $$
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>RSA 복호화가 정확히 원래 메시지를 돌려주는 이유는 "거듭제곱의 주기성" 덕분이다. e번 거듭제곱해서 암호화하고, d번 거듭제곱해서 복호화하면, ed번 거듭제곱한 셈인데 — 오일러 정리에 의해 이것이 정확히 1번 거듭제곱한 것과 같아진다. 즉 원래 메시지로 돌아온다.</p>
+</div>
 
 ## 보안 근거 — 소인수분해 문제
 

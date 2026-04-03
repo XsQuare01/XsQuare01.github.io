@@ -4,6 +4,7 @@ date: 2026-03-31T10:00:00
 description: "SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, MD5·SHA-1이 왜 더 이상 안전하지 않은지, 그리고 HMAC과 패스워드 해시까지 — 암호화 해시 함수의 전체를 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > 전자 서명에서 SHA로 메시지를 압축해 서명 크기를 줄인다고 했다. 그런데 SHA는 어떻게 동작하는가? 왜 역산이 불가능한가? 그리고 MD5나 SHA-1은 왜 더 이상 믿을 수 없는가? 이 글은 그 질문들에 답한다.
@@ -90,6 +91,11 @@ P(\text{충돌}) \approx 1 - e^{-k^2 / 2N}
 $$
 
 50% 확률로 충돌이 발생하는 시도 횟수 $k \approx 1.18\sqrt{N}$이다. $n$비트 해시에서 $N = 2^n$이므로 $k \approx 2^{n/2}$이다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>Birthday Paradox는 "같은 생일인 두 사람을 찾는 것은 생각보다 쉽다"는 직관이다. 365일 중 생일이 겹치는 두 사람을 찾으려면 23명이면 충분하다. 해시 함수에도 같은 원리가 적용되어, n비트 해시의 충돌 쌍을 찾는 데 2^n이 아니라 2^(n/2)번이면 된다. 이 때문에 SHA-256의 실질적 안전성은 2^128이다.</p>
+</div>
 
 따라서:
 

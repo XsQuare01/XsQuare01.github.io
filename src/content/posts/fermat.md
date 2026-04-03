@@ -4,6 +4,7 @@ date: 2026-03-24T11:30:00
 description: "소수 p와 서로소인 a에 대해 a^(p-1) ≡ 1 (mod p)가 성립함을 두 가지 방법으로 증명하고, 모듈러 역원 계산과 RSA 복호화, 페르마 소수 판별법까지 응용을 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > 소수는 '나누어지지 않는다'는 단순한 성질을 갖지만, 모듈러 산술 위에서는 놀라운 주기성을 만들어낸다. a를 소수 p번 거듭제곱하면 반드시 a 자신으로 돌아온다 — 이 필연성이 RSA 암호를 가능하게 한다.
@@ -65,6 +66,11 @@ $\gcd((p-1)!, p) = 1$이므로 양변에서 $(p-1)!$을 소거하면,
 $$
 a^{p-1} \equiv 1 \pmod{p}
 $$
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>오일러 정리와 페르마의 소정리는 "모듈러 세계에서 거듭제곱은 결국 원점으로 돌아온다"는 것이다. 소수 p에 대해 어떤 수를 (p-1)번 거듭제곱하면 반드시 1로 돌아온다. RSA는 이 주기성을 이용해 암호화한 메시지를 정확히 원래대로 복원한다.</p>
+</div>
 
 ## 예시
 

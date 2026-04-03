@@ -4,6 +4,7 @@ date: 2026-03-26T10:00:00
 description: "소수 밀도 추정, Fermat 테스트, Witness와 Carmichael 수의 한계, Witness 밀도 증명 — 임의의 큰 수가 소수인지 확률적으로 판별하는 방법을 단계적으로 구성한다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > RSA는 '두 큰 소수의 곱'에서 시작한다. 그렇다면 큰 소수는 어떻게 찾는가? 소수인지 아닌지조차 어떻게 확인하는가? 이 질문에 답하는 것이 Find Prime 문제다.

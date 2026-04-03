@@ -4,6 +4,7 @@ date: 2026-03-31T10:00:00
 description: "RSA·ElGamal 전자 서명의 생성과 검증, 인증기관(CA)의 역할, 암호화 해시(SHA)와 Birthday Paradox, 그리고 AES+RSA+SHA를 결합한 최종 프로토콜까지 — 디지털 서명의 전체 그림을 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > RSA로 메시지를 암호화하면 기밀성은 확보된다. 하지만 Bob은 여전히 모른다 — 이 메시지가 정말 Alice에게서 왔는가? 전자 서명은 그 질문에 답한다. 비밀키 없이는 위조할 수 없고, 공개키만으로 누구나 검증할 수 있는 수학적 사인이다.
@@ -101,6 +102,11 @@ y^r \cdot r^s = (g^a)^r \cdot (g^k)^s = g^{ar} \cdot g^{k \cdot (m-ar)k^{-1}} = 
 $$
 
 $k$와 $k^{-1}$이 상쇄되고, $a$는 공개키 $y = g^a$ 형태로만 검증에 사용된다 — 비밀키 $a$ 없이는 서명 생성 불가능, 공개키 $y$만으로 검증 가능.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>ElGamal 서명의 검증 수식 g^m = y^r * r^s가 성립하는 이유는, 서명 과정에서 임시 키 k와 비밀키 a를 교묘하게 섞어 넣었기 때문이다. 검증 시 이들이 정확히 상쇄되어 g^m이 복원된다. 비밀키 a를 모르면 이 상쇄가 일어나는 서명 (r, s)를 만들 수 없다.</p>
+</div>
 
 ElGamal 서명을 표준화한 것이 **DSS(Digital Signature Standard)** 이다.
 

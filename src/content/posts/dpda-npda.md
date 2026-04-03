@@ -4,6 +4,7 @@ date: 2026-03-21T09:00:00
 description: "DFA에 스택을 추가한 DPDA가 해결할 수 있는 문제와 없는 문제를 살펴보고, NPDA와의 계산 능력 차이를 분석한다. 스택 2개로 튜링 머신을 시뮬레이션하는 원리까지 다룬다."
 tags: ["Computer Science", "Complexity Theory"]
 category: theory
+difficulty: 심화
 ---
 
 > DFA는 상태만 기억한다. 스택을 하나 추가하면 어디까지 가능해질까? 그리고 비결정론적으로 동작하면 얼마나 더 강력해질까?
@@ -87,6 +88,11 @@ DFA와 NFA의 경우, 모든 DFA는 NFA의 특수한 경우이고 모든 NFA는 
 - **NPDA는 $L_7$을 풀 수 있다.** 가능한 모든 전환점을 동시에 시도해, 그 중 하나라도 올바르게 매칭되면 accept하면 된다.
 
 $$\text{Class DPDA} \subsetneq \text{Class NPDA}$$
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>DPDA와 NPDA의 차이는 "전환점을 알아야 하는가"이다. 회문(abba 같은 거꾸로 읽어도 같은 문자열)을 판별할 때, DPDA는 앞부분과 뒷부분의 경계를 혼자 찾아야 하므로 실패하지만, NPDA는 "모든 가능한 경계를 동시에 시도"할 수 있어 성공한다. PDA 수준에서는 비결정론이 실제로 계산 능력을 높인다.</p>
+</div>
 
 ---
 

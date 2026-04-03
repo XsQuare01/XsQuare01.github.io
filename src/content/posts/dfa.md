@@ -4,6 +4,7 @@ date: 2026-03-20T09:00:00
 description: "튜링 머신을 단순화한 계산 모델인 DFA의 구조와 동작 원리를 살펴보고, Pumping Lemma를 통해 DFA로 풀 수 없는 문제가 존재함을 증명한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: theory
+difficulty: 중급
 ---
 
 > DFA는 계산 이론에서 가장 단순한 형태의 계산 모델이다. 튜링 머신을 극도로 제한한 이 기계는 어떤 문제를 풀 수 있고, 어떤 문제를 풀 수 없을까?
@@ -221,6 +222,11 @@ $$\therefore \text{DFA로는 L5를 풀 수 없다.}$$
 **DFA로 풀 수 있는 Language들의 집합** 을 Class DFA라 한다.
 
 $$L_4 \in \text{DFA}, \quad L_5 \notin \text{DFA}$$
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>정규 언어란 "유한한 메모리(상태)만으로 판별할 수 있는 패턴"이다. "마지막 글자가 0인가?"나 "101이 포함되어 있는가?" 같은 문제는 DFA로 풀 수 있지만, "0과 1의 개수가 같은가?"처럼 무제한 카운팅이 필요한 문제는 DFA의 한계를 넘어선다.</p>
+</div>
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>

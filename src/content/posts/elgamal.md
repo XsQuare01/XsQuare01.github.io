@@ -4,6 +4,7 @@ date: 2026-03-27T11:00:00
 description: "RSA와 달리 이산 대수 문제(DLP)의 어려움에 기반한 ElGamal 암호화 — 키 생성, 암복호화, 정확성 증명, 확률적 암호화의 보안 이점까지 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > RSA가 소인수분해의 어려움 위에 서있다면, ElGamal은 이산 대수 문제(DLP) 위에 서있다. 두 시스템은 서로 다른 수학적 어려움을 활용하지만, 결정적 차이가 하나 있다 — ElGamal은 암호화할 때마다 다른 암호문을 생성한다. 이것이 단순한 특성을 넘어 의미론적 안전성(IND-CPA)의 핵심이 된다.
@@ -98,6 +99,11 @@ ElGamal의 보안은 **계산적 Diffie-Hellman(CDH) 가정** 에 기반한다.
 > $g$, $g^x$, $g^k$ 가 주어졌을 때, $g^{xk}$를 계산하는 다항식 시간 알고리즘이 존재하지 않는다.
 
 공격자가 암호문 $(A, B) = (g^k, m \cdot h^k)$을 가로채더라도, 공유 비밀 $g^{xk}$를 계산하지 못하면 $m$을 복원할 수 없다. CDH를 풀려면 DLP를 풀어야 하므로, CDH $\leq$ DLP — CDH가 쉬우면 DLP도 쉽다. 따라서 DLP가 어려운 한 CDH도 어렵다고 가정한다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>CDH 가정은 "재료 두 개(g^x, g^k)를 알아도 완성품(g^{xk})을 만들 수 없다"는 것이다. 공격자는 Alice의 공개키와 Bob이 보낸 값을 모두 볼 수 있지만, 이 둘을 결합해서 공유 비밀을 계산하는 것이 수학적으로 어렵다. 이 어려움이 ElGamal 암호의 안전성을 보장한다.</p>
+</div>
 
 ## 확률적 암호화와 IND-CPA 안전성
 

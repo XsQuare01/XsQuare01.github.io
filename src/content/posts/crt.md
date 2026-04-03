@@ -4,6 +4,7 @@ date: 2026-03-24T12:00:00
 description: "서로소인 여러 모듈러스에 대한 연립 합동식이 항상 유일한 해를 가짐을 구성적으로 증명하고, 단계별 계산 예시와 RSA-CRT 속도 최적화까지 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > 서로 다른 시계 여러 개가 동시에 특정 시각을 가리키는 순간은 언제인가 — 중국인의 나머지 정리는 이 질문에 항상 유일한 답이 존재함을 보장하고, 그 답을 명시적으로 구성한다.
@@ -80,6 +81,11 @@ $$
 $$
 x \equiv c_j \pmod{m_j} \quad \checkmark
 $$
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>CRT는 "여러 개의 작은 시계를 보고 하나의 큰 시계 시각을 알아내는 방법"이다. 서로소인 여러 수로 나눈 나머지들을 동시에 만족하는 수가 딱 하나 존재하고, 그 수를 명시적으로 구성할 수 있다. RSA에서는 이를 이용해 큰 수의 연산을 작은 수들의 연산으로 쪼개서 약 4배 빠르게 처리한다.</p>
+</div>
 
 ## 단계별 계산 예시
 

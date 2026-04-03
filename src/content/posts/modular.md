@@ -4,6 +4,7 @@ date: 2026-03-24T11:00:00
 description: "모듈러 산술의 동치 관계, 완전·축약 잉여계, 오일러 정리와 페르마의 소정리, 중국인의 나머지 정리(CRT)까지 — RSA를 비롯한 공개키 암호의 수학적 엔진을 완성한다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > GCD가 '두 수의 관계'라면, 모듈러 산술은 '수의 세계 자체를 재정의'한다. 나머지를 공유하는 수들을 하나로 묶는 순간, 덧셈·곱셈·역원이 정의된 대수 구조가 탄생한다 — RSA, ElGamal, Diffie-Hellman의 계산 엔진이 바로 이 위에서 돌아간다.
@@ -135,6 +136,11 @@ $$
 **닫힘(Closure)**: $a, b \in \mathbb{Z}_m^*$이면 $\gcd(a, m) = 1$, $\gcd(b, m) = 1$이므로 GCD 서로소 성질에 의해 $\gcd(ab, m) = 1$. 따라서 $ab \in \mathbb{Z}_m^*$.
 
 **역원 존재**: $\gcd(a, m) = 1$이므로 베주 항등식에 의해 $ax + my = 1$인 정수 $x$, $y$가 존재한다. 이를 $\bmod\ m$으로 취하면 $ax \equiv 1 \pmod{m}$이므로 $x$가 $a$의 곱셈 역원이다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>모듈러 역원이란 "나눗셈의 대체품"이다. 모듈러 세계에서는 직접 나눌 수 없지만, a의 역원 x를 곱하면 나눈 것과 같은 효과를 얻는다. 이 역원은 a와 m이 서로소일 때만 존재하며, 베주 항등식(확장 유클리드 알고리즘)으로 구할 수 있다. RSA에서 비밀키 d를 구하는 과정이 바로 이것이다.</p>
+</div>
 
 반면 **덧셈은 닫혀있지 않다**. 예를 들어 $m = 3$에서 $\gcd(4, 3) = \gcd(8, 3) = 1$이지만, $\gcd(4+8, 3) = \gcd(12, 3) = 3 \neq 1$.
 

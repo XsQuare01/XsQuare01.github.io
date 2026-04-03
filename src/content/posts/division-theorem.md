@@ -4,6 +4,7 @@ date: 2026-03-23T11:04:51
 description: "암호학의 수학적 기반이 되는 Division Theorem(나눗셈 정리)을 엄밀하게 증명한다. 나누어 떨어짐의 정의와 성질, 소수의 정의를 살펴보고, 몫과 나머지의 존재성·유일성을 보인다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 입문
 ---
 
 > 암호학의 수학적 토대는 정수론에서 시작된다. Division Theorem은 그 출발점이다 — 임의의 양의 정수를 다른 양의 정수로 나누면, 몫과 나머지가 유일하게 결정된다. 이 단순한 사실이 모듈러 산술, GCD, RSA의 기초가 된다.
@@ -80,6 +81,11 @@ $$a \mid b, \quad b \mid c \implies a \mid c$$
 </div>
 
 ![Division Theorem 시각화](/images/division-theorem/division-algorithm.svg)
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>어떤 양의 정수든 다른 양의 정수로 나누면, 몫과 나머지가 딱 하나씩 정해진다는 뜻이다. 예를 들어 17을 5로 나누면 몫 3, 나머지 2 — 이 조합은 유일하다. 이 단순한 사실이 모듈러 산술과 RSA 암호의 출발점이다.</p>
+</div>
 
 증명은 **존재성** 과 **유일성** 두 부분으로 나뉜다.
 

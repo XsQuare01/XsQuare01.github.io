@@ -4,6 +4,7 @@ date: 2026-03-28T10:00:00
 description: "ElGamal의 수학적 기반이 된 Diffie-Hellman 키 교환 — 프로토콜 구조, 정확성 증명, CDH/DDH 가정, 중간자 공격과 인증 문제, 그리고 ElGamal·TLS로의 확장까지 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 중급
 ---
 
 > ElGamal에서 복호화가 성립하는 핵심은 Alice와 Bob이 독립적으로 동일한 공유 비밀 $g^{kx}$를 계산한다는 것이었다. 이 아이디어의 원형이 바로 Diffie-Hellman 키 교환이다. 1976년, 공개 채널만으로 비밀 키를 공유할 수 있다는 혁명적 발상이 공개키 암호학 전체의 문을 열었다.
@@ -116,6 +117,11 @@ $$
 $$
 
 DDH 가정이 성립하면, 도청자가 $A$, $B$를 보더라도 공유 비밀 $s$에 대한 어떤 정보도 얻을 수 없다 — $s$가 랜덤 값과 구별 불가능하기 때문이다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>DDH 가정은 CDH보다 한 단계 더 강한 주장이다. CDH는 "공유 비밀을 계산할 수 없다"이고, DDH는 "공유 비밀인지 랜덤 값인지 구별조차 할 수 없다"이다. 도청자가 g^a와 g^b를 모두 보더라도, 실제 공유 비밀 g^{ab}와 아무 관계 없는 랜덤 값을 구별할 방법이 없다는 뜻이다.</p>
+</div>
 
 ## 중간자 공격 (MITM)
 

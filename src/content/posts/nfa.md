@@ -4,6 +4,7 @@ date: 2026-03-20T10:00:00
 description: "DFA를 확장한 계산 모델인 NFA의 구조와 accept 조건을 살펴보고, Powerset Construction을 통해 NFA와 DFA의 계산 능력이 동일함을 설명한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: theory
+difficulty: 중급
 ---
 
 > DFA에서는 하나의 상태에서 하나의 입력에 대해 정확히 하나의 다음 상태만 존재했다. NFA는 이 제약을 풀어, 하나의 입력에 대해 여러 상태로 동시에 전이할 수 있다. 더 강력한 모델처럼 보이지만, 실제 계산 능력은 DFA와 동일하다.
@@ -101,6 +102,11 @@ $$\{4\},\ \{1,4\},\ \{2,4\},\ \{3,4\},\ \{1,2,4\},\ \ldots$$
 모든 NFA는 Powerset Construction으로 동등한 DFA로 변환할 수 있다. 따라서 NFA가 accept하는 모든 언어는 DFA도 accept할 수 있고, 그 역도 성립한다.
 
 $$\text{Class NFA} = \text{Class DFA}$$
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>NFA는 "여러 가능성을 동시에 시도하는 DFA"지만, 결국 풀 수 있는 문제의 범위는 DFA와 같다. NFA의 모든 동시 탐색 경로를 DFA의 상태 조합으로 표현할 수 있기 때문이다. NFA는 설계를 쉽게 해주는 도구이지, 더 강력한 기계가 아니다.</p>
+</div>
 
 <div class="callout callout-key">
 <div class="callout-title">핵심 결론: 표현력은 같지만 설계 감각이 다르다</div>

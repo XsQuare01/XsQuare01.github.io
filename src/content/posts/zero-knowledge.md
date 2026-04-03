@@ -4,6 +4,7 @@ date: 2026-04-01T10:00:00
 description: "Shamir의 비밀 공유, 그래프 동형 영지식 증명, 시뮬레이션 논증을 통한 No Transfer 증명, 그리고 RSA 기반 실용적 대안까지 — 정보를 전달하지 않고 지식을 증명하는 수학적 구조를 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
+difficulty: 심화
 ---
 
 > 비밀번호를 알고 있음을 증명하려면 비밀번호를 입력해야 한다. 하지만 상대방에게 비밀 자체를 건네지 않고도 "나는 이것을 알고 있다"고 증명할 수 있다면? 영지식 증명(Zero Knowledge Proof)은 정보의 전달 없이 지식의 소유를 입증하는 수학적 프로토콜이다.
@@ -139,6 +140,11 @@ V가 혼자 기록을 만드는 방법:
 ![No Transfer — 시뮬레이션 논증](/images/zero-knowledge/no-transfer.svg)
 
 따라서 P와의 대화에서 V가 얻는 정보는, V가 혼자서도 만들 수 있는 정보와 같다. P에서 V로의 **정보 전달(transfer)은 없다**.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>영지식성의 핵심은 "V가 P 없이도 똑같은 대화 기록을 혼자 만들 수 있다"는 것이다. 만약 V가 혼자서도 만들 수 있는 기록이라면, P와의 대화에서 새로운 정보를 얻은 것이 아니다. 마치 시험 답안지를 보여주지 않고도 "나는 답을 안다"고 증명하는 것과 같다.</p>
+</div>
 
 ### 주의: V가 매핑을 알아내는 경우
 

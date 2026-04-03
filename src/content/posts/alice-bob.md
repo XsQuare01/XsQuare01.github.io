@@ -4,6 +4,7 @@ date: 2026-03-22T10:00:00
 description: "암호화의 안전성을 계산 복잡도로 정의한다. P, NP, EXP, PSPACE 클래스를 소개하고, P ⊆ NP ⊆ PSPACE ⊆ EXP 계층 관계와 PSPACE = NPSPACE를 설명한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: cryptography
+difficulty: 입문
 ---
 
 > 정보 이론적으로 완벽하게 안전한 암호는 존재한다. 그러나 실용적이지 않다. 그렇다면 "충분히 안전하다"는 것을 어떻게 정의할까? 답은 계산 복잡도에 있다.

@@ -4,6 +4,7 @@ date: 2026-03-22T14:00:00
 description: "NTM 기반의 NP 정의와 검증자(Verifier) 기반의 NP 정의가 동치임을 보인다. '힌트가 있을 때 빠르게 검증할 수 있는 문제'라는 직관이 어떻게 수학적으로 엄밀해지는지 탐구한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: cryptography
+difficulty: 심화
 ---
 
 > NP를 "NTM이 다항식 시간에 푸는 문제"라 정의했다. 그런데 NP에는 전혀 다른, 더 직관적인 정의가 존재한다. 두 정의는 완전히 동치다.
@@ -74,6 +75,11 @@ $$x \in L \iff \exists h,\ |h| \leq p(|x|) : V(x, h) = \text{Yes}$$
 - **Eve(도청자)**: 암호문 $c$만 가진다. 증명서 없이 NP 문제를 직접 풀어야 한다.
 
 P ≠ NP라면 Eve는 지수 시간 이상이 필요하므로, 현실적인 시간 안에 복호화할 수 없다. 암호학적 안전성이 P ≠ NP 가정 위에 서 있는 이유다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>NP의 검증자 정의는 "답을 찾는 것은 어렵지만, 답이 맞는지 확인하는 것은 쉬운 문제들"이다. 암호학에서 이 비대칭성이 핵심이다 — Bob은 키(힌트)가 있어서 빠르게 복호화하지만, Eve는 키 없이 답을 찾아야 하므로 천문학적 시간이 걸린다.</p>
+</div>
 
 ---
 

@@ -4,6 +4,7 @@ date: 2026-03-17
 description: "전화로 공정하게 동전 던지기를 할 수 있을까? Manuel Blum이 제안한 암호학적 동전 던지기 프로토콜과 그 수학적 배경을 다룬다."
 tags: ["Cryptography", "Complexity Theory", "Mathematics"]
 category: cryptography
+difficulty: 입문
 ---
 
 > 이 프로토콜은 **Manuel Blum(1983)** 이 제안한 암호학적 동전 던지기(Coin Flipping over Telephone) 프로토콜이다. 두 참여자가 물리적으로 만나지 않고도 공정한 내기를 할 수 있음을 보여준다.

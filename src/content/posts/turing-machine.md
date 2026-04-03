@@ -4,6 +4,7 @@ date: 2026-03-21T10:00:00
 description: "현대 컴퓨터의 이론적 모델인 튜링 머신의 구조를 살펴보고, 2-Tape DTM, Universal Turing Machine, 그리고 DTM과 NTM의 계산 능력이 동일함을 정리한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: theory
+difficulty: 심화
 ---
 
 > DFA에 스택을 추가하면 DPDA, 스택을 2개로 늘리면 튜링 머신과 동등해진다. 그렇다면 튜링 머신 자체는 어떤 구조를 가지며, 얼마나 강력할까?
@@ -104,6 +105,11 @@ DPDA에 스택을 1개 더 추가했을 때는 튜링 머신과 동등해질 만
 테이프 1의 내용을 M'의 rule set으로 교체하면 M'을 시뮬레이션할 수 있다. 즉, UTM은 **어떤 튜링 머신이든 시뮬레이션할 수 있는 튜링 머신** 이다.
 
 이것이 현재 컴퓨터의 이론적 기반이다. 폰 노이만(John von Neumann)은 UTM의 개념을 실제 컴퓨터 설계에 적용하여, 프로그램을 메모리에 저장하고 순차적으로 실행하는 **폰 노이만 아키텍처(Von Neumann Architecture)** 를 고안했다. 이는 EDVAC 설계 보고서(1945)에서 처음 제시되었으며, 오늘날 거의 모든 컴퓨터의 구조적 기반이다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>보편 튜링 머신(UTM)은 "모든 프로그램을 실행할 수 있는 프로그램"이다. 다른 튜링 머신의 규칙을 테이프에 적어두고 그대로 따라 실행하면, 어떤 튜링 머신이든 흉내 낼 수 있다. 이것이 바로 우리가 쓰는 컴퓨터의 원리다 — 하드웨어 하나에 소프트웨어(프로그램)를 바꿔 넣으면 무엇이든 할 수 있다.</p>
+</div>
 
 ---
 

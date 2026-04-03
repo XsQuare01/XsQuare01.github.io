@@ -4,6 +4,7 @@ date: 2026-03-23T10:34:21
 description: "NP 내에서 가장 어려운 문제들의 집합인 NP-Complete를 정의하고, Reduction(귀착) 개념과 Cook의 정리를 통해 SAT가 최초의 NP-Complete 문제임을 증명하는 과정을 살펴본다."
 tags: ["Computer Science", "Complexity Theory"]
 category: cryptography
+difficulty: 심화
 ---
 
 > NP에 속하면서도 NP의 모든 문제를 자신으로 귀착시킬 수 있는 문제가 존재한다. 이런 문제를 NP-Complete라 부른다. 1971년 Stephen Cook이 SAT(Boolean Satisfiability) 문제가 NP-Complete임을 최초로 증명했다. 이 발견은 수천 개의 NP-Complete 문제 발견으로 이어졌다.
@@ -38,6 +39,11 @@ category: cryptography
 </div>
 
 두 번째 조건만 만족하고 NP에 속하지 않을 수 있는 문제들을 **NP-Hard** 라 한다. 따라서 NP-Complete = NP ∩ NP-Hard다.
+
+<div class="callout callout-simple">
+<div class="callout-title">쉽게 말하면</div>
+<p>NP-Complete는 "NP 문제들 중 가장 어려운 보스 문제"다. 이 보스를 하나라도 빠르게 풀 수 있다면, NP의 모든 문제를 빠르게 풀 수 있다. 반대로 말하면, 수천 개의 NP-Complete 문제 중 단 하나도 빠른 풀이법이 발견되지 않았다는 사실이 P != NP를 강력하게 시사한다.</p>
+</div>
 
 ---
 
