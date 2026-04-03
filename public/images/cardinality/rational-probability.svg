@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" width="1020" height="390">
+  <rect width="680" height="260" fill="#0f1117" rx="10"/>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">확률적 해석 — [0, 1)에서 유리수를 뽑을 확률</text>
+
+  <!-- ===== Number line ===== -->
+  <text x="340" y="42" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">실수 직선 [0, 1)</text>
+
+  <!-- Base line (reals) -->
+  <rect x="40" y="52" width="600" height="18" rx="3" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="40" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">0</text>
+  <text x="636" y="80" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">1</text>
+  <text x="340" y="64" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">ℝ — 불가산 무한 (ℵ₁)</text>
+
+  <!-- Rational points scattered on the line -->
+  <circle cx="40" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="100" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="140" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="160" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="200" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="240" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="280" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="300" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="340" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="380" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="400" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="440" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="500" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="540" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="580" cy="61" r="2.5" fill="#f97316"/>
+  <circle cx="620" cy="61" r="2.5" fill="#f97316"/>
+  <text x="640" y="56" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">← ℚ</text>
+
+  <!-- ===== Epsilon covering explanation ===== -->
+  <line x1="18" y1="92" x2="662" y2="92" stroke="#2d3748" stroke-width="1"/>
+
+  <text x="340" y="112" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">왜 확률이 0인가 — ε-덮개 논증</text>
+
+  <!-- Step explanation boxes -->
+  <rect x="18" y="122" width="210" height="66" rx="6" fill="rgba(249,115,22,0.06)" stroke="#f97316" stroke-width="1"/>
+  <text x="123" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">유리수는 가산 무한</text>
+  <text x="123" y="158" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">q₁, q₂, q₃, … 로 나열 가능</text>
+  <text x="123" y="174" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">각 qₙ에 길이 ε/2ⁿ 구간 부여</text>
+
+  <text x="240" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#94a3b8">→</text>
+
+  <rect x="258" y="122" width="180" height="66" rx="6" fill="rgba(167,139,250,0.06)" stroke="#a78bfa" stroke-width="1"/>
+  <text x="348" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#a78bfa">전체 덮개의 길이</text>
+  <text x="348" y="158" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#a78bfa">Σ ε/2ⁿ = ε</text>
+  <text x="348" y="174" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">ε → 0 으로 보내면</text>
+
+  <text x="450" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#94a3b8">→</text>
+
+  <rect x="470" y="122" width="210" height="66" rx="6" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="1"/>
+  <text x="575" y="140" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f87171">유리수의 측도 = 0</text>
+  <text x="575" y="158" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#f87171">P(x ∈ ℚ) = 0</text>
+  <text x="575" y="174" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">유리수는 "거의 존재하지 않음"</text>
+
+  <!-- ===== 하단: 비유 ===== -->
+  <rect x="100" y="200" width="480" height="44" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1"/>
+  <text x="340" y="220" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">직관적 비유</text>
+  <text x="340" y="236" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">실수 직선에 유리수가 촘촘히 박혀 있지만, 다트를 던지면 유리수에 맞을 확률은 0이다</text>
+</svg>
