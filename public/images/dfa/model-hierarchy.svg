@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="1020" height="510">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="340" fill="#0f1117" rx="10"/>
+  <text x="340" y="16" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">계산 모델 계층 구조 — 표현력 비교</text>
+
+  <!-- Turing Machine (outermost) -->
+  <rect x="16" y="24" width="486" height="302" rx="12" fill="rgba(167,139,250,0.05)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="30" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#a78bfa">Turing Machine</text>
+  <text x="30" y="58" font-family="system-ui,-apple-system,sans-serif" font-size="7.5" fill="#e2e8f0">무한 테이프 · 읽기/쓰기 · 양방향 이동 · 임의 알고리즘 표현 가능</text>
+  <text x="30" y="304" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">풀 수 없음: 할팅 문제 — "이 프로그램이 멈추는가?"는 어떤 TM으로도 결정 불가</text>
+
+  <!-- Push-Down Automata (middle) -->
+  <rect x="50" y="70" width="418" height="214" rx="10" fill="rgba(96,165,250,0.05)" stroke="#60a5fa" stroke-width="2"/>
+  <text x="64" y="89" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#60a5fa">Push-Down Automata (PDA)</text>
+  <text x="64" y="103" font-family="system-ui,-apple-system,sans-serif" font-size="7.5" fill="#e2e8f0">유한 상태 + 스택(무한 메모리) 추가 → 균형 구조 처리 가능</text>
+  <text x="64" y="264" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">풀 수 없음: 0<tspan baseline-shift="super" font-size="70%">n</tspan>1<tspan baseline-shift="super" font-size="70%">n</tspan>2<tspan baseline-shift="super" font-size="70%">n</tspan> — 카운터가 2개 이상 필요한 구조</text>
+
+  <!-- DFA / NFA (innermost) -->
+  <rect x="84" y="118" width="350" height="132" rx="8" fill="rgba(74,222,128,0.05)" stroke="#4ade80" stroke-width="2"/>
+  <text x="98" y="138" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#4ade80">DFA / NFA</text>
+  <text x="98" y="152" font-family="system-ui,-apple-system,sans-serif" font-size="7.5" fill="#e2e8f0">유한 상태만 · 메모리 없음 · 단방향 읽기</text>
+
+  <line x1="98" y1="161" x2="420" y2="161" stroke="#1e2738" stroke-width="1"/>
+
+  <text x="98" y="175" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">풀 수 있음: 패턴 매칭, 짝수 판별, 특정 문자 포함 여부</text>
+  <text x="98" y="190" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">풀 수 없음: 0<tspan baseline-shift="super" font-size="70%">n</tspan>1<tspan baseline-shift="super" font-size="70%">n</tspan> (균형 구조), 무제한 카운팅이 필요한 언어</text>
+
+  <rect x="98" y="200" width="130" height="18" rx="4" fill="rgba(249,115,22,0.12)" stroke="rgba(249,115,22,0.3)" stroke-width="1"/>
+  <text x="163" y="213" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">← 이 포스트의 범위</text>
+
+  <!-- Right panel -->
+  <rect x="514" y="24" width="150" height="302" rx="10" fill="#0d1524" stroke="#1e2738" stroke-width="1.5"/>
+  <text x="589" y="46" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">언어 클래스</text>
+
+  <!-- RE -->
+  <rect x="524" y="54" width="130" height="66" rx="6" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="589" y="72" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#a78bfa">귀납적 열거 가능</text>
+  <text x="589" y="85" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7" fill="#e2e8f0">Recursively Enumerable</text>
+  <text x="589" y="98" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#cbd5e1">결정 불가 영역 포함</text>
+  <text x="589" y="112" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#cbd5e1">할팅 문제</text>
+
+  <line x1="589" y1="120" x2="589" y2="134" stroke="#334155" stroke-width="1.2" marker-end="url(#arr)"/>
+  <text x="600" y="129" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#475569">⊃</text>
+
+  <!-- CFL -->
+  <rect x="524" y="136" width="130" height="66" rx="6" fill="rgba(96,165,250,0.1)" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="589" y="154" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#60a5fa">문맥 자유 언어</text>
+  <text x="589" y="167" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7" fill="#e2e8f0">Context-Free (CFL)</text>
+  <text x="589" y="180" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#cbd5e1">프로그래밍 언어 문법</text>
+  <text x="589" y="194" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#cbd5e1">균형 괄호, 0<tspan baseline-shift="super" font-size="70%">n</tspan>1<tspan baseline-shift="super" font-size="70%">n</tspan></text>
+
+  <line x1="589" y1="202" x2="589" y2="216" stroke="#334155" stroke-width="1.2" marker-end="url(#arr)"/>
+  <text x="600" y="211" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#475569">⊃</text>
+
+  <!-- RL -->
+  <rect x="524" y="218" width="130" height="66" rx="6" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="589" y="236" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#4ade80">정규 언어</text>
+  <text x="589" y="249" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7" fill="#e2e8f0">Regular Language (RL)</text>
+  <text x="589" y="262" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#cbd5e1">정규 표현식, 패턴 매칭</text>
+  <text x="589" y="276" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="6.5" fill="#f97316">← 이 포스트</text>
+</svg>

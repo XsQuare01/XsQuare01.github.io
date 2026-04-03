@@ -215,6 +215,8 @@ $$\therefore \text{DFA로는 L5를 풀 수 없다.}$$
 
 ## Classes: Problem들의 집합
 
+![계산 모델 계층 구조](/images/dfa/model-hierarchy.svg)
+
 **Class** 는 공통된 성질을 가진 Problem들의 집합이다. Problem의 집합 전체 크기는 약 $2^{2^{|\Sigma^*|}}$개, 즉 $|2^{|\mathbb{R}|}|$개에 달하지만, 실제로 기술(describable) 가능한 Class의 수는 가산 무한(Countable Infinite)이다.
 
 ### Class DFA
