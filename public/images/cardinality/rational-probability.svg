@@ -7,28 +7,33 @@
 
   <!-- Base line (reals) -->
   <rect x="40" y="52" width="600" height="18" rx="3" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="40" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">0</text>
-  <text x="636" y="80" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">1</text>
-  <text x="340" y="64" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">ℝ — 불가산 무한 (ℵ₁)</text>
+  <text x="40" y="82" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">0</text>
+  <text x="636" y="82" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#94a3b8">1</text>
+  <text x="340" y="82" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">ℝ — 불가산 무한 (ℵ₁)</text>
 
-  <!-- Rational points scattered on the line -->
-  <circle cx="40" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="100" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="140" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="160" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="200" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="240" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="280" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="300" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="340" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="380" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="400" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="440" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="500" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="540" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="580" cy="61" r="2.5" fill="#f97316"/>
-  <circle cx="620" cy="61" r="2.5" fill="#f97316"/>
-  <text x="640" y="56" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">← ℚ</text>
+  <!-- Rational points on top of the bar, evenly spaced -->
+  <circle cx="40" cy="55" r="2" fill="#f97316"/>
+  <circle cx="70" cy="55" r="2" fill="#f97316"/>
+  <circle cx="100" cy="55" r="2" fill="#f97316"/>
+  <circle cx="130" cy="55" r="2" fill="#f97316"/>
+  <circle cx="160" cy="55" r="2" fill="#f97316"/>
+  <circle cx="190" cy="55" r="2" fill="#f97316"/>
+  <circle cx="220" cy="55" r="2" fill="#f97316"/>
+  <circle cx="250" cy="55" r="2" fill="#f97316"/>
+  <circle cx="280" cy="55" r="2" fill="#f97316"/>
+  <circle cx="310" cy="55" r="2" fill="#f97316"/>
+  <circle cx="340" cy="55" r="2" fill="#f97316"/>
+  <circle cx="370" cy="55" r="2" fill="#f97316"/>
+  <circle cx="400" cy="55" r="2" fill="#f97316"/>
+  <circle cx="430" cy="55" r="2" fill="#f97316"/>
+  <circle cx="460" cy="55" r="2" fill="#f97316"/>
+  <circle cx="490" cy="55" r="2" fill="#f97316"/>
+  <circle cx="520" cy="55" r="2" fill="#f97316"/>
+  <circle cx="550" cy="55" r="2" fill="#f97316"/>
+  <circle cx="580" cy="55" r="2" fill="#f97316"/>
+  <circle cx="610" cy="55" r="2" fill="#f97316"/>
+  <circle cx="640" cy="55" r="2" fill="#f97316"/>
+  <text x="652" y="56" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">ℚ</text>
 
   <!-- ===== Epsilon covering explanation ===== -->
   <line x1="18" y1="92" x2="662" y2="92" stroke="#2d3748" stroke-width="1"/>
