@@ -31,6 +31,7 @@ interface Props {
   description?: string;
   tags?: string[];
   category?: string;
+  difficulty?: '입문' | '중급' | '심화';
   headings?: Heading[];
   readingTime?: number;
   prevPost?: PostLink;
@@ -43,6 +44,7 @@ const {
   description,
   tags = [],
   category,
+  difficulty,
   headings = [],
   readingTime,
   prevPost,
@@ -119,6 +121,11 @@ const jsonLd = JSON.stringify({
         <span>{formattedDate}</span>
         {readingTime && (
           <span class="reading-time">· 약 {readingTime}분 읽기</span>
+        )}
+        {difficulty && (
+          <span class={`difficulty-badge difficulty-${difficulty}`}>
+            {difficulty === '입문' ? '★☆☆' : difficulty === '중급' ? '★★☆' : '★★★'} {difficulty}
+          </span>
         )}
         {tags.length > 0 && (
           <div class="tags">
