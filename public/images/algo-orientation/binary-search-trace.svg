@@ -113,6 +113,6 @@
   <text x="444" y="251" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">범위 밖</text>
 
   <!-- ── Complexity note ── -->
-  <text x="300" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">탐색 범위: 8 → 4 → 1 &nbsp;·&nbsp; log₂8 = 3번의 비교로 완료 &nbsp;·&nbsp; 시간 복잡도 O(log n)</text>
+  <text x="300" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">탐색 범위: 8 → 4 → 1  ·  log₂8 = 3번의 비교로 완료  ·  시간 복잡도 O(log n)</text>
   <text x="300" y="287" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4b5563">범위가 매 단계 절반씩 감소 — n = 10⁹이어도 30번의 비교로 충분</text>
 </svg>
