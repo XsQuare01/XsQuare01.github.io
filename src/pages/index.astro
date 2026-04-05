@@ -21,8 +21,8 @@ const categoryCounts = categories
 
 const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 
-const FEATURED_ID = 'rsa';
-const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
+const FEATURED_IDS = ['rsa', 'algo-orientation'];
+const featuredPosts = FEATURED_IDS.map((id) => allPosts.find((p) => p.id === id)).filter(Boolean);
 ---
 
 <BaseLayout title="홈">
@@ -62,15 +62,19 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
       ))}
     </nav>
 
-    <!-- Featured Post -->
-    {featuredPost && (
-      <a href={`/blog/${featuredPost.id}`} class="featured">
-        <span class="featured-label">추천 글</span>
-        <div class="featured-title">{featuredPost.data.title}</div>
-        {featuredPost.data.description && (
-          <div class="featured-desc">{featuredPost.data.description}</div>
-        )}
-      </a>
+    <!-- Featured Posts -->
+    {featuredPosts.length > 0 && (
+      <div class="featured-grid">
+        {featuredPosts.map((post) => (
+          <a href={`/blog/${post!.id}`} class="featured">
+            <span class="featured-label">추천 글</span>
+            <div class="featured-title">{post!.data.title}</div>
+            {post!.data.description && (
+              <div class="featured-desc">{post!.data.description}</div>
+            )}
+          </a>
+        ))}
+      </div>
     )}
 
     <!-- 최근 글 피드 -->
@@ -244,7 +248,14 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     color: var(--text-dim);
   }
 
-  /* ── Featured Post ── */
+  /* ── Featured Posts ── */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
   .featured {
     display: block;
     position: relative;
@@ -255,7 +266,6 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     box-shadow:
       -3px 0 0 0 var(--accent),
       0 0 0 1px rgba(74, 85, 104, 0.2);
-    margin-bottom: 1.75rem;
     text-decoration: none;
     transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     touch-action: manipulation;
@@ -505,6 +515,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
   @media (max-width: 480px) {
     .headline { font-size: 1.65rem; }
     .identity-role { display: none; }
+    .featured-grid { grid-template-columns: 1fr; }
     .feed-item { grid-template-columns: 3.5rem 1fr; }
     .feed-cat { display: none; }
   }
