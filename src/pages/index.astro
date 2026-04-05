@@ -204,7 +204,8 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    padding: 0.6rem 1rem;
+    padding: 0.65rem 1rem;
+    min-height: 40px;
     font-size: 0.92rem;
     color: var(--text-dim);
     text-decoration: none;
@@ -214,6 +215,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     white-space: nowrap;
   }
   .cat-item:hover { color: var(--text); border-bottom-color: rgba(249, 115, 22, 0.4); }
+  .cat-item:active { transform: scale(0.96); }
   .cat-active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
   .cat-n {
@@ -228,12 +230,20 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     padding: 1.1rem 1.4rem;
     background: var(--bg-card);
     border-radius: 10px;
-    border-left: 3px solid var(--accent);
+    box-shadow:
+      -3px 0 0 0 var(--accent),
+      0 0 0 1px rgba(74, 85, 104, 0.2);
     margin-bottom: 1.75rem;
     text-decoration: none;
-    transition: background 0.15s;
+    transition: box-shadow 0.15s, background 0.15s;
   }
-  .featured:hover { background: rgba(249, 115, 22, 0.04); }
+  .featured:hover {
+    background: rgba(249, 115, 22, 0.04);
+    box-shadow:
+      -3px 0 0 0 var(--accent),
+      0 0 0 1px rgba(249, 115, 22, 0.25);
+  }
+  .featured:active { transform: scale(0.99); }
 
   .featured-label {
     font-size: 0.68rem;
@@ -271,6 +281,10 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     font-size: 0.78rem;
     color: var(--text-dim);
     text-decoration: none;
+    padding: 0.5rem 0.25rem;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
     transition: color 0.15s;
   }
   .feed-more:hover { color: var(--accent); }
@@ -281,12 +295,16 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     grid-template-columns: 4.5rem auto 1fr;
     align-items: baseline;
     gap: 0.75rem;
-    padding: 1.1rem 0;
+    padding: 1.1rem 0.4rem;
     border-bottom: 1px solid rgba(74, 85, 104, 0.1);
     text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.12s;
   }
   .feed-item:last-child { border-bottom: none; }
+  .feed-item:hover { background: rgba(255, 255, 255, 0.03); }
   .feed-item:hover .feed-title { color: var(--text); }
+  .feed-item:active { transform: scale(0.99); }
 
   .feed-date  {
     font-family: var(--font-mono);
@@ -378,6 +396,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
   @media (prefers-reduced-motion: reduce) {
     .bar-fill { transition: none; }
     .cat-item, .featured, .feed-item, .feed-more { transition: none; }
+    .cat-item:active, .featured:active, .feed-item:active { transform: none; }
   }
 
   /* ── 반응형 ── */
