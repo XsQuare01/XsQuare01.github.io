@@ -104,8 +104,8 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
           <div class="bar-track">
             <div
               class="bar-fill"
-              data-width={`${Math.round((cat.count / maxCount) * 100)}%`}
-              style="width: 0%"
+              data-scale={`${(cat.count / maxCount).toFixed(3)}`}
+              style="transform: scaleX(0)"
             />
           </div>
           <span class="bar-count">{cat.count}</span>
@@ -119,12 +119,17 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 
 <script>
   const bars = document.querySelectorAll<HTMLElement>('.bar-fill');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement;
-          el.style.width = el.dataset.width ?? '0%';
+          const scale = el.dataset.scale ?? '1';
+          if (reduced) {
+            el.style.transition = 'none';
+          }
+          el.style.transform = `scaleX(${scale})`;
           observer.unobserve(el);
         }
       });
@@ -144,6 +149,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     color: var(--text);
     margin: 0 0 0.75rem;
     border: none;
+    text-wrap: balance;
   }
   .headline-hl { color: var(--accent); }
 
@@ -152,6 +158,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     color: var(--text-dim);
     line-height: 1.75;
     margin: 0 0 1.25rem;
+    text-wrap: pretty;
   }
 
   /* ── 기술 태그 ── */
@@ -245,6 +252,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     font-size: 0.82rem;
     color: var(--text-dim);
     line-height: 1.6;
+    text-wrap: pretty;
   }
 
   /* ── 피드 ── */
@@ -352,9 +360,11 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
   }
   .bar-fill {
     height: 100%;
+    width: 100%;
     background: var(--accent);
     border-radius: 3px;
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .bar-count {
     font-size: 0.8rem;
@@ -363,6 +373,11 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     text-align: right;
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar-fill { transition: none; }
+    .cat-item, .featured, .feed-item, .feed-more { transition: none; }
   }
 
   /* ── 반응형 ── */
