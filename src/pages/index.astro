@@ -19,9 +19,6 @@ const categoryCounts = categories
   }))
   .filter((cat) => cat.count > 0);
 
-const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
-
-// Featured Post — 나중에 RSA 포스트로 교체 시 ID만 변경
 const FEATURED_ID = 'rsa';
 const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 ---
@@ -29,592 +26,258 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 <BaseLayout title="홈">
   <div class="prose home">
 
-    <!-- 섹션 1: 프로필 헤더 -->
-    <section class="home-hero">
-      <img
-        src="https://github.com/XsQuare01.png"
-        alt="XsQuare01 프로필 사진"
-        class="home-avatar"
-      />
-      <div class="home-intro">
-        <h1 class="home-name">XsQuare01</h1>
-        <p class="home-tagline">보이는 것에 집중하며, 배운 것을 기록하는 개발자</p>
-        <div class="home-badges">
-          <span class="home-badge">Unity</span>
-          <span class="home-badge">UI/UX</span>
-          <span class="home-badge">Game Client</span>
-          <span class="home-badge">CS</span>
-        </div>
-        <p class="home-desc">
-          사용자 경험이 자연스럽게 느껴지는 화면과 인터랙션을 만드는 데 관심이 있습니다.<br />
-          Unity 기반 클라이언트 개발, UI 설계와 구현, 그리고 문제 해결을 위한 CS 학습 과정을 기록합니다.
-        </p>
-        <div class="home-cta-row">
-          <a href={`/blog/${FEATURED_ID}`} class="home-cta-primary">처음 방문했다면 이 글부터 →</a>
-          <a href="https://github.com/XsQuare01" target="_blank" rel="noopener noreferrer" class="home-cta-secondary">GitHub</a>
-          <a href="mailto:mystic6113@naver.com" class="home-cta-secondary">이메일</a>
-        </div>
-      </div>
-    </section>
+    <!-- 정체성 헤더 -->
+    <div class="identity">
+      <span class="identity-prompt">$</span>
+      <span class="identity-name">XsQuare01</span>
+      <span class="identity-role">// Game Client · UI/UX · CS</span>
+    </div>
 
-    <!-- 섹션: About Me -->
-    <section class="home-section">
-      <h2>About Me</h2>
-      <p class="about-text">
-        저는 사용자 경험을 직접 만드는 클라이언트 개발자를 지향합니다.<br />
-        특히 Unity 기반 개발에서 UI와 상호작용, 화면 흐름, 구조 설계에 관심이 많습니다.
-      </p>
-      <p class="about-text">
-        이 블로그에는 단순한 결과만 남기지 않으려고 합니다.<br />
-        왜 이런 구조를 선택했는지, 어떤 문제를 만났고 어떻게 해결했는지, 그리고 그 과정에서 무엇을 배웠는지를 기록합니다.
-      </p>
-    </section>
+    <!-- 에디토리얼 헤드라인 -->
+    <h1 class="headline">
+      <span class="headline-hl">배운 것</span>을<br />정리하는 개발자
+    </h1>
+    <p class="desc">
+      Unity 클라이언트 개발, CS 이론, UI/UX 구현 과정을 기록합니다.<br />
+      결과보다 과정과 이유를 남기는 것을 중요하게 생각합니다.
+    </p>
 
-    <!-- 섹션 2: What I Do -->
-    <section class="home-section">
-      <h2>What I Do</h2>
-      <div class="what-grid">
-        <div class="what-card">
-          <h3 class="what-title">게임 클라이언트 개발</h3>
-          <p class="what-desc">플레이 경험을 구성하는 기능과 흐름을 구현합니다.<br />입력, 상태 변화, 인터랙션, 연출이 자연스럽게 이어지도록 구조를 고민합니다.</p>
-        </div>
-        <div class="what-card">
-          <h3 class="what-title">UI / UX 구현</h3>
-          <p class="what-desc">화면을 단순히 배치하는 데서 끝내지 않고,<br />사용자가 보기 쉽고 쓰기 편한 흐름을 코드와 연출로 풀어내는 데 집중합니다.</p>
-        </div>
-        <div class="what-card">
-          <h3 class="what-title">CS / 알고리즘 기록</h3>
-          <p class="what-desc">구현의 깊이를 만들기 위해 컴퓨터 사이언스와 알고리즘을 꾸준히 공부합니다.<br />문제를 푸는 과정과 개념을 이해한 방식까지 함께 정리합니다.</p>
-        </div>
-      </div>
-    </section>
+    <!-- 기술 태그 -->
+    <div class="tags">
+      <span class="tag tag--accent">Unity</span>
+      <span class="tag tag--accent">C#</span>
+      <span class="tag tag--accent">UI 설계</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">C++</span>
+      <span class="tag">알고리즘</span>
+      <span class="tag">CS 이론</span>
+    </div>
 
-    <!-- 섹션 3: 기술 스택 -->
-    <section class="home-section">
-      <h2>Tech Stack</h2>
-      <div class="stack-list">
-        <div class="stack-group">
-          <span class="stack-label">Main</span>
-          <div class="stack-chips">
-            <span class="stack-chip stack-chip--main">Unity</span>
-            <span class="stack-chip stack-chip--main">C#</span>
-            <span class="stack-chip stack-chip--main">C++</span>
-            <span class="stack-chip stack-chip--main">UI 설계 및 구현</span>
-          </div>
-        </div>
-        <div class="stack-group">
-          <span class="stack-label">Experienced With</span>
-          <div class="stack-chips">
-            <span class="stack-chip">TypeScript</span>
-            <span class="stack-chip">Python</span>
-            <span class="stack-chip">Git</span>
-            <span class="stack-chip">웹 프론트엔드</span>
-          </div>
-        </div>
-        <div class="stack-group">
-          <span class="stack-label">Interested In</span>
-          <div class="stack-chips">
-            <span class="stack-chip stack-chip--dim">알고리즘</span>
-            <span class="stack-chip stack-chip--dim">CS 이론</span>
-            <span class="stack-chip stack-chip--dim">클라이언트 구조 설계</span>
-            <span class="stack-chip stack-chip--dim">인터랙션 최적화</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="divider"></div>
 
-    <!-- 섹션 3: Featured Post -->
-    {featuredPost && (
-      <section class="home-section">
-        <h2>Featured Post</h2>
-        <a href={`/blog/${featuredPost.id}`} class="featured-card">
-          <span class="featured-label">추천 글</span>
-          <h3 class="featured-title">{featuredPost.data.title}</h3>
-          {featuredPost.data.description && (
-            <p class="featured-desc">{featuredPost.data.description}</p>
-          )}
-          <span class="featured-link">읽어보기 →</span>
+    <!-- 수평 카테고리 탭 -->
+    <nav class="cat-nav" aria-label="카테고리">
+      <a class="cat-item cat-active" href="/blog">
+        전체 <span class="cat-n">{totalPosts}</span>
+      </a>
+      {categoryCounts.map((cat) => (
+        <a class="cat-item" href={`/categories/${cat.slug}`}>
+          {cat.icon} {cat.label} <span class="cat-n">{cat.count}</span>
         </a>
-      </section>
+      ))}
+    </nav>
+
+    <!-- Featured Post -->
+    {featuredPost && (
+      <a href={`/blog/${featuredPost.id}`} class="featured">
+        <span class="featured-label">추천 글</span>
+        <div class="featured-title">{featuredPost.data.title}</div>
+        {featuredPost.data.description && (
+          <div class="featured-desc">{featuredPost.data.description}</div>
+        )}
+      </a>
     )}
 
-    <!-- 섹션 4: 최근 포스트 -->
-    <section class="home-section">
-      <div class="section-header">
-        <h2>Recent Posts</h2>
-        <a href="/blog" class="view-all">대표 글 보기 →</a>
-      </div>
-      <ul class="post-list post-list--bordered" style="margin-top: 1.25rem;">
-        {recentPosts.map((post) => (
-          <li class="post-item">
-            <a href={`/blog/${post.id}`} class="post-item-link" aria-label={post.data.title}></a>
-            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
-              <span class="post-item-date">
-                {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </span>
-              {post.data.category && (
-                <a href={`/categories/${post.data.category}`} class="post-category-badge" style={tagStyle(post.data.category)}>
-                  {getCategoryLabel(post.data.category)}
-                </a>
-              )}
-            </div>
-            <span class="post-item-title">{post.data.title}</span>
-            {post.data.description && (
-              <p class="post-item-desc">{post.data.description}</p>
-            )}
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <!-- 섹션 4: Post Stats -->
-    <section class="home-section">
-      <h2>Post Stats</h2>
-      <p class="stats-desc">카테고리별 포스트 현황입니다.</p>
-      <div class="post-stats-card">
-        <p class="post-stats-total-row">총 <span class="post-stats-total">{totalPosts}</span>개</p>
-        <ul class="post-bar-list">
-          {categoryCounts.map((cat) => (
-            <li class="post-bar-item">
-              <span class="post-bar-label">{cat.label}</span>
-              <div class="post-bar-track">
-                <div
-                  class="post-bar-fill"
-                  data-width={`${Math.round((cat.count / maxCount) * 100)}%`}
-                  style="width: 0%"
-                />
-              </div>
-              <span class="post-bar-count">{cat.count}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
-    <!-- 섹션 5: Activity -->
-    <section class="home-section">
-      <h2>Activity</h2>
-      <p class="stats-desc">학습과 개발 과정에서 쌓인 기록들입니다.<br />세부적인 수치보다 꾸준히 만들고 정리하는 흐름을 중요하게 생각합니다.</p>
-      <div class="stats-row">
-        <img
-          src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
-          alt="XsQuare01's GitHub Stats"
-          loading="lazy"
-          height="150"
-        />
-        <img
-          src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
-          alt="solved.ac 티어"
-          loading="lazy"
-          height="150"
-        />
-      </div>
-    </section>
+    <!-- 최근 글 피드 -->
+    <div class="feed-head">
+      <span class="feed-label">// recent posts</span>
+      <a href="/blog" class="feed-more">모두 보기 →</a>
+    </div>
+    <div class="feed">
+      {recentPosts.map((post) => (
+        <a href={`/blog/${post.id}`} class="feed-item">
+          <span class="feed-date">
+            {post.data.date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })}
+          </span>
+          <span class="feed-cat">{post.data.category ?? '—'}</span>
+          <span class="feed-title">{post.data.title}</span>
+        </a>
+      ))}
+    </div>
 
   </div>
 </BaseLayout>
 
-<script>
-  const bars = document.querySelectorAll<HTMLElement>('.post-bar-fill');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          el.style.width = el.dataset.width ?? '0%';
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  bars.forEach((bar) => observer.observe(bar));
-</script>
-
 <style>
-  .home-hero {
+  /* ── 정체성 헤더 ── */
+  .identity {
     display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
   }
+  .identity-prompt { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); }
+  .identity-name   { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+  .identity-role   { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); }
 
-  .home-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    flex-shrink: 0;
-    object-fit: cover;
-  }
-
-  .home-intro {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .home-name {
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    border: none;
-    margin: 0;
+  /* ── 에디토리얼 헤드라인 ── */
+  .headline {
+    font-size: 2rem;
+    font-weight: 800;
     line-height: 1.2;
-  }
-
-  .home-tagline {
-    font-size: 0.95rem;
-    color: var(--accent);
-    font-weight: 500;
-    margin: 0;
-  }
-
-  .home-desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin: 0.25rem 0 0;
-  }
-
-  .home-links {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin: 0;
-  }
-
-  .home-section {
-    margin-bottom: 3rem;
-  }
-
-  .stack-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-  }
-
-  .stack-row {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-  }
-
-  .stack-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
-    width: 7.5rem;
-    flex-shrink: 0;
-  }
-
-  .stack-items {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  .what-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-  }
-
-  .what-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.25rem;
-    background: var(--bg-card);
-    border: 1px solid rgba(74, 85, 104, 0.35);
-    border-radius: 10px;
-    transition: border-color 0.2s;
-  }
-
-  .what-card:hover {
-    border-color: var(--accent);
-  }
-
-  .what-title {
-    font-size: 0.95rem;
-    font-weight: 700;
+    letter-spacing: -0.04em;
     color: var(--text);
-    margin: 0;
+    margin: 0 0 0.75rem;
+    border: none;
+  }
+  .headline-hl { color: var(--accent); }
+
+  .desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.75;
+    margin: 0 0 1.25rem;
   }
 
-  .what-desc {
-    font-size: 0.83rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  @media (max-width: 768px) {
-    .what-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .section-header {
+  /* ── 기술 태그 ── */
+  .tags {
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 0;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 1.75rem;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
+    background: rgba(74, 85, 104, 0.2);
+    color: var(--text-dim);
+    border: 1px solid rgba(74, 85, 104, 0.3);
+  }
+  .tag--accent {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: rgba(249, 115, 22, 0.3);
   }
 
-  .section-header h2 {
-    margin: 0;
+  .divider {
+    height: 1px;
+    background: rgba(74, 85, 104, 0.2);
+    margin-bottom: 1.5rem;
   }
 
-  .view-all {
+  /* ── 카테고리 탭 ── */
+  .cat-nav {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(74, 85, 104, 0.2);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+
+  .cat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 0.85rem;
     font-size: 0.82rem;
     color: var(--text-dim);
     text-decoration: none;
-    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .cat-item:hover { color: var(--text); border-bottom-color: rgba(249, 115, 22, 0.4); }
+  .cat-active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+  .cat-n {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
   }
 
-  .view-all:hover {
-    color: var(--accent);
-  }
-
-  .stats-desc {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin: 0.75rem 0 0;
-  }
-
-  .stats-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-
-  .featured-card {
+  /* ── Featured Post ── */
+  .featured {
     display: block;
-    margin-top: 1.25rem;
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.4rem;
     background: var(--bg-card);
-    border: 1px solid rgba(74, 85, 104, 0.35);
-    border-left: 3px solid var(--accent);
     border-radius: 10px;
+    border-left: 3px solid var(--accent);
+    margin-bottom: 1.75rem;
     text-decoration: none;
-    transition: border-color 0.2s, background 0.2s;
+    transition: background 0.15s;
   }
-
-  .featured-card:hover {
-    border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.03);
-  }
+  .featured:hover { background: rgba(249, 115, 22, 0.04); }
 
   .featured-label {
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--accent);
+    font-weight: 700;
   }
-
   .featured-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text);
-    margin: 0.4rem 0 0.5rem;
-    border: none;
+    margin: 0.3rem 0 0.35rem;
   }
-
   .featured-desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin: 0 0 0.75rem;
-  }
-
-  .featured-link {
     font-size: 0.82rem;
-    color: var(--accent);
-    font-weight: 500;
+    color: var(--text-dim);
+    line-height: 1.6;
   }
 
-  .about-text {
-    font-size: 0.92rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 0.75rem;
-  }
-
-  .post-stats-card {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    max-width: 65%;
-  }
-
-  .post-stats-total-row {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin: 0;
-  }
-
-  .post-stats-total {
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .post-bar-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .post-bar-item {
+  /* ── 피드 ── */
+  .feed-head {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: space-between;
+    margin-bottom: 0.55rem;
   }
-
-  .post-bar-label {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    width: 5rem;
-    flex-shrink: 0;
-  }
-
-  .post-bar-track {
-    flex: 1;
-    height: 6px;
-    background: rgba(74, 85, 104, 0.25);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .post-bar-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 3px;
-    min-width: 0;
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .post-bar-count {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    width: 2rem;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  /* ── Home badges ── */
-  .home-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 0.25rem 0;
-  }
-
-  .home-badge {
+  .feed-label {
+    font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 600;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    background: rgba(249, 115, 22, 0.12);
-    color: var(--accent);
-    border: 1px solid rgba(249, 115, 22, 0.25);
-    letter-spacing: 0.02em;
+    color: var(--text-dim);
   }
-
-  /* ── CTA buttons ── */
-  .home-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-  }
-
-  .home-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.45rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    background: var(--accent);
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-
-  .home-cta-primary:hover {
-    background: color-mix(in srgb, var(--accent) 82%, #000);
-  }
-
-  .home-cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.45rem 0.9rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    background: var(--bg-hover);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    text-decoration: none;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .home-cta-secondary:hover {
-    color: var(--text);
-    border-color: var(--accent);
-  }
-
-  /* ── Stack chips ── */
-  .stack-group {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .stack-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .stack-chip {
+  .feed-more {
     font-size: 0.78rem;
-    padding: 0.2rem 0.65rem;
-    border-radius: 999px;
-    background: var(--bg-hover);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.15s;
   }
+  .feed-more:hover { color: var(--accent); }
 
-  .stack-chip--main {
-    background: rgba(249, 115, 22, 0.1);
+  .feed { display: flex; flex-direction: column; }
+  .feed-item {
+    display: grid;
+    grid-template-columns: 4.5rem auto 1fr;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(74, 85, 104, 0.1);
+    text-decoration: none;
+  }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-item:hover .feed-title { color: var(--text); }
+
+  .feed-date  {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .feed-cat   {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     color: var(--accent);
-    border-color: rgba(249, 115, 22, 0.25);
-    font-weight: 600;
+    white-space: nowrap;
+  }
+  .feed-title {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    transition: color 0.12s;
   }
 
-  .stack-chip--dim {
-    opacity: 0.65;
-  }
-
-  @media (max-width: 640px) {
-    .home-hero {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+  /* ── 반응형 ── */
+  @media (max-width: 480px) {
+    .headline { font-size: 1.65rem; }
+    .identity-role { display: none; }
+    .feed-item { grid-template-columns: 3.5rem 1fr; }
+    .feed-cat { display: none; }
   }
 </style>
