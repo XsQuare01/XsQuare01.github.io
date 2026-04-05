@@ -26,13 +26,6 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 <BaseLayout title="홈">
   <div class="prose home">
 
-    <!-- 정체성 헤더 -->
-    <div class="identity">
-      <span class="identity-prompt">$</span>
-      <span class="identity-name">XsQuare01</span>
-      <span class="identity-role">// Game Client · UI/UX · CS</span>
-    </div>
-
     <!-- 에디토리얼 헤드라인 -->
     <h1 class="headline">
       <span class="headline-hl">배운 것</span>을<br />정리하는 개발자
@@ -80,7 +73,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 
     <!-- 최근 글 피드 -->
     <div class="feed-head">
-      <span class="feed-label">// recent posts</span>
+      <span class="feed-label">최근 글</span>
       <a href="/blog" class="feed-more">모두 보기 →</a>
     </div>
     <div class="feed">
@@ -99,17 +92,6 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 </BaseLayout>
 
 <style>
-  /* ── 정체성 헤더 ── */
-  .identity {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    margin-bottom: 1.5rem;
-  }
-  .identity-prompt { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); }
-  .identity-name   { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
-  .identity-role   { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); }
-
   /* ── 에디토리얼 헤드라인 ── */
   .headline {
     font-size: 2rem;
@@ -230,8 +212,10 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     margin-bottom: 0.55rem;
   }
   .feed-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
     color: var(--text-dim);
   }
   .feed-more {
