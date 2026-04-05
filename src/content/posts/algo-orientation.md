@@ -138,7 +138,7 @@ def paradox(program):
 
 ### 함의: 알고리즘으로 해결할 수 없는 문제가 존재한다
 
-이 증명의 구조는 칸토어(Cantor)의 대각선 논법과 동일하며, [기수(Cardinality)](../cardinality) 포스트에서 다룬 "실수가 자연수보다 많다"는 증명과 정확히 같은 아이디어다.
+이 증명의 구조는 칸토어(Cantor)의 대각선 논법과 동일하며, [기수(Cardinality)](/blog/cardinality) 포스트에서 다룬 "실수가 자연수보다 많다"는 증명과 정확히 같은 아이디어다.
 
 <div class="callout callout-simple">
 <div class="callout-title">정지 문제가 중요한 이유</div>
