@@ -1,7 +1,7 @@
 ---
 title: "재귀 — 문제를 자기 자신으로 푼다"
 date: 2026-04-05T10:00:00
-description: "재귀(Recursion)의 구조와 올바른 설계 원칙을 이해하고, 팩토리얼·피보나치·하노이의 탑을 통해 재귀적 사고를 익힌다. 재귀 트리와 마스터 정리로 T(n) = aT(n/b) + f(n) 형태의 점화식을 분석한다."
+description: "재귀(Recursion)의 구조와 올바른 설계 원칙을 이해하고, 수학적 귀납법으로 재귀 알고리즘의 올바름을 증명한다. 팩토리얼·피보나치·하노이의 탑을 통해 재귀적 사고를 익히고, 재귀 트리와 마스터 정리로 복잡도를 분석한다."
 tags: ["Algorithm", "Recursion", "Divide and Conquer"]
 category: algorithm
 difficulty: 입문
@@ -13,6 +13,7 @@ difficulty: 입문
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li>재귀의 구조: Base Case와 Recursive Case</li>
+<li>수학적 귀납법으로 재귀 알고리즘의 올바름을 증명하는 방법</li>
 <li>팩토리얼, 피보나치, 하노이의 탑 — 재귀적 사고 훈련</li>
 <li>단순 재귀의 지수적 폭발과 메모이제이션</li>
 <li>재귀 트리와 마스터 정리로 복잡도 분석</li>
@@ -84,6 +85,57 @@ factorial(4)
 $$T(n) = T(n-1) + c = T(n-2) + 2c = \cdots = T(0) + nc = O(n)$$
 
 시간 복잡도: $O(n)$, 공간 복잡도: $O(n)$ (콜 스택 깊이)
+
+---
+
+## 수학적 귀납법으로 재귀 증명하기
+
+재귀 알고리즘의 구조는 수학적 귀납법의 구조와 **완벽히 대응**한다. 이 대응을 이해하면, 재귀 알고리즘의 올바름을 엄밀히 증명할 수 있다.
+
+| 수학적 귀납법 | 재귀 알고리즘 |
+|---|---|
+| 기저 사례 (Base Case) | Base Case: 직접 답을 반환 |
+| 귀납 가정 (Inductive Hypothesis) | "하위 재귀 호출이 올바르다"는 가정 |
+| 귀납 단계 (Inductive Step) | Recursive Case: 하위 결과를 조합해 현재 답 생성 |
+
+재귀 알고리즘의 올바름을 증명하는 핵심 통찰은 이것이다.
+
+> **귀납 가정을 신뢰하라.** `factorial(n-1)`이 올바른 결과를 반환한다고 가정한다. 그 위에서 현재 단계가 올바른지를 보이면 된다.
+
+### 예제: factorial(n)의 올바름 증명
+
+**명제 $P(n)$:** `factorial(n)`은 $n!$을 올바르게 반환한다. ($n \ge 0$)
+
+**Base Case ($P(0)$):** `factorial(0)`은 1을 반환한다. $0! = 1$이므로 성립.
+
+**Inductive Step:** $P(k)$가 참, 즉 `factorial(k)` $= k!$이라고 가정한다. ($k \ge 0$)
+
+`factorial(k+1)`을 실행하면 $(k+1) \ge 1$이므로 Recursive Case가 수행된다.
+
+```
+factorial(k+1)
+  = (k+1) * factorial(k)     ← 코드의 return n * factorial(n-1)
+  = (k+1) * k!               ← 귀납 가정: factorial(k) = k!
+  = (k+1)!                   ← 팩토리얼 정의
+```
+
+따라서 $P(k+1)$이 참이다. 강한 귀납법에 의해 모든 $n \ge 0$에 대해 $P(n)$이 성립한다. $\square$
+
+### 예제: binary_search의 올바름 증명 (강한 귀납법)
+
+이진 탐색을 귀납법으로 증명할 때는 **강한 귀납법**을 사용한다. 탐색 범위의 크기 $m = \text{right} - \text{left} + 1$에 대한 귀납법이다.
+
+**명제 $P(m)$:** 크기 $m$의 정렬된 부분 배열에서 이진 탐색은 올바르게 동작한다.
+
+**Base Case ($m = 0$):** `left > right`이면 루프 진입 없이 `-1` 반환. `target`이 없으므로 올바르다.
+
+**Inductive Step:** 크기 $< m$인 모든 배열에서 올바르다고 가정한다. 크기 $m$인 배열에서:
+
+- `arr[mid] == target` → 올바르게 반환.
+- `arr[mid] < target` → 오른쪽 절반(크기 $\lfloor m/2 \rfloor < m$)에서 탐색. 귀납 가정에 의해 올바르다.
+- `arr[mid] > target` → 왼쪽 절반(크기 $\lfloor (m-1)/2 \rfloor < m$)에서 탐색. 귀납 가정에 의해 올바르다.
+
+모든 경우에 올바르므로 $P(m)$이 성립한다. $\square$
 
 ---
 
@@ -278,6 +330,7 @@ $$f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \l
 <div class="callout-title">핵심 정리</div>
 <ul>
 <li>재귀는 반드시 <strong>Base Case</strong>와 <strong>크기가 감소하는 Recursive Case</strong>를 가져야 올바르게 종료한다.</li>
+<li>재귀 알고리즘의 올바름은 <strong>수학적 귀납법</strong>으로 증명한다. Base Case = 기저 사례, Recursive Case = 귀납 단계, 귀납 가정 = "하위 호출이 올바르다"는 신뢰다.</li>
 <li>단순 재귀 피보나치는 $O(2^n)$이다. <strong>메모이제이션</strong>으로 중복 계산을 제거하면 $O(n)$이 된다.</li>
 <li>하노이의 탑은 $T(n) = 2T(n-1) + 1 = 2^n - 1 = \Theta(2^n)$이다. 이 하한은 더 개선할 수 없다.</li>
 <li>마스터 정리: $T(n) = aT(n/b) + f(n)$의 해는 $n^{\log_b a}$와 $f(n)$의 크기 비교로 결정된다.</li>
