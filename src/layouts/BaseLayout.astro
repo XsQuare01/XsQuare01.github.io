@@ -97,7 +97,19 @@ const currentPath = Astro.url.pathname;
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <button id="sidebar-toggle" class="sidebar-toggle" aria-label="메뉴 열기/닫기">
-    <span class="sidebar-toggle-icon">☰</span>
+    <span class="sidebar-toggle-icon sidebar-icon-open">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <line x1="2" y1="5" x2="16" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="2" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="sidebar-toggle-icon sidebar-icon-close" style="display:none">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <line x1="4" y1="4" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="14" y1="4" x2="4" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
   </button>
   <aside class="sidebar">
     <div class="sidebar-profile">
@@ -107,7 +119,12 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <button id="search-btn" aria-label="검색">
-      <span id="search-btn-icon">🔍</span>
+      <span id="search-btn-icon">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+          <circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="9.65" y1="9.65" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
       검색
       <kbd id="search-btn-kbd">Ctrl K</kbd>
     </button>
@@ -146,8 +163,24 @@ const currentPath = Astro.url.pathname;
 
     <div class="sidebar-footer">
       <button id="theme-toggle" aria-label="테마 전환">
-        <span class="theme-toggle-icon theme-icon-moon">☽</span>
-        <span class="theme-toggle-icon theme-icon-sun">☀</span>
+        <span class="theme-toggle-icon theme-icon-moon">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <path d="M12.5 9A5.5 5.5 0 0 1 6 2.5 5 5 0 1 0 12.5 9z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="theme-toggle-icon theme-icon-sun">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <circle cx="7.5" cy="7.5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="7.5" y1="1" x2="7.5" y2="2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="7.5" y1="12.5" x2="7.5" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="1" y1="7.5" x2="2.5" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="12.5" y1="7.5" x2="14" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3.05" y1="3.05" x2="4.11" y2="4.11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="10.89" y1="10.89" x2="11.95" y2="11.95" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3.05" y1="11.95" x2="4.11" y2="10.89" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="10.89" y1="4.11" x2="11.95" y2="3.05" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
         <span class="theme-label-light">라이트 모드</span>
         <span class="theme-label-dark">다크 모드</span>
       </button>
@@ -169,12 +202,22 @@ const currentPath = Astro.url.pathname;
     </div>
   </div>
 
-  <button id="back-to-top" aria-label="맨 위로">↑</button>
+  <button id="back-to-top" aria-label="맨 위로">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <line x1="8" y1="13" x2="8" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <polyline points="4,7 8,3 12,7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 
   <div id="search-modal" role="dialog" aria-modal="true" aria-label="검색">
     <div class="search-modal-box">
       <div class="search-modal-input-row">
-        <span class="search-modal-icon">🔍</span>
+        <span class="search-modal-icon">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="9.65" y1="9.65" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
         <input
           id="search-input"
           type="text"
@@ -335,8 +378,10 @@ const currentPath = Astro.url.pathname;
     sidebar?.classList.toggle('open');
     const isOpen = sidebar?.classList.contains('open');
     sidebarToggle.setAttribute('aria-expanded', String(isOpen));
-    const icon = sidebarToggle.querySelector('.sidebar-toggle-icon');
-    if (icon) icon.textContent = isOpen ? '✕' : '☰';
+    const iconOpen = sidebarToggle.querySelector('.sidebar-icon-open') as HTMLElement | null;
+    const iconClose = sidebarToggle.querySelector('.sidebar-icon-close') as HTMLElement | null;
+    if (iconOpen) iconOpen.style.display = isOpen ? 'none' : '';
+    if (iconClose) iconClose.style.display = isOpen ? '' : 'none';
   });
 </script>
 

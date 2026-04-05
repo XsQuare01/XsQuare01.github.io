@@ -99,16 +99,18 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     </div>
     <ul class="bar-list">
       {categoryCounts.map((cat) => (
-        <li class="bar-item">
-          <span class="bar-label">{cat.label}</span>
-          <div class="bar-track">
-            <div
-              class="bar-fill"
-              data-scale={`${(cat.count / maxCount).toFixed(3)}`}
-              style="transform: scaleX(0)"
-            />
-          </div>
-          <span class="bar-count">{cat.count}</span>
+        <li>
+          <a href={`/categories/${cat.slug}`} class="bar-item">
+            <span class="bar-label">{cat.label}</span>
+            <div class="bar-track">
+              <div
+                class="bar-fill"
+                data-scale={`${(cat.count / maxCount).toFixed(3)}`}
+                style="transform: scaleX(0)"
+              />
+            </div>
+            <span class="bar-count">{cat.count}</span>
+          </a>
         </li>
       ))}
     </ul>
@@ -140,18 +142,30 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 </script>
 
 <style>
+  /* ── 분위기 배경 ── */
+  .home {
+    position: relative;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 5% 6%, rgba(249, 115, 22, 0.07) 0%, transparent 60%),
+      radial-gradient(rgba(74, 85, 104, 0.1) 1px, transparent 1px);
+    background-size: auto, 22px 22px;
+  }
+
   /* ── 에디토리얼 헤드라인 ── */
   .headline {
     font-size: 2rem;
     font-weight: 800;
     line-height: 1.2;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     color: var(--text);
     margin: 1.5rem 0 0.75rem;
     border: none;
     text-wrap: balance;
   }
-  .headline-hl { color: var(--accent); }
+  .headline-hl {
+    color: var(--accent);
+    text-shadow: 0 0 28px rgba(249, 115, 22, 0.28);
+  }
 
   .desc {
     font-size: 0.9rem;
@@ -205,16 +219,22 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     align-items: center;
     gap: 0.3rem;
     padding: 0.65rem 1rem;
-    min-height: 40px;
+    min-height: 44px;
     font-size: 0.92rem;
     color: var(--text-dim);
     text-decoration: none;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
-    transition: color 0.15s, border-color 0.15s, transform 0.1s;
+    transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
+    touch-action: manipulation;
   }
   .cat-item:hover { color: var(--text); border-bottom-color: rgba(249, 115, 22, 0.4); }
+  .cat-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+    border-radius: 4px;
+  }
   .cat-item:active { transform: scale(0.96); }
   .cat-active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
@@ -227,6 +247,8 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
   /* ── Featured Post ── */
   .featured {
     display: block;
+    position: relative;
+    overflow: hidden;
     padding: 1.1rem 1.4rem;
     background: var(--bg-card);
     border-radius: 10px;
@@ -235,13 +257,34 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
       0 0 0 1px rgba(74, 85, 104, 0.2);
     margin-bottom: 1.75rem;
     text-decoration: none;
-    transition: box-shadow 0.15s, background 0.15s, transform 0.1s;
+    transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    touch-action: manipulation;
   }
+  /* 장식용 원형 워터마크 */
+  .featured::after {
+    content: '';
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    opacity: 0.08;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .featured:hover::after { opacity: 0.16; }
   .featured:hover {
     background: rgba(249, 115, 22, 0.04);
     box-shadow:
       -3px 0 0 0 var(--accent),
       0 0 0 1px rgba(249, 115, 22, 0.25);
+  }
+  .featured:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
   .featured:active { transform: scale(0.99); }
 
@@ -282,14 +325,34 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     color: var(--text-dim);
     text-decoration: none;
     padding: 0.5rem 0.25rem;
-    min-height: 40px;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     transition: color 0.15s;
+    touch-action: manipulation;
   }
   .feed-more:hover { color: var(--accent); }
+  .feed-more:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
   .feed { display: flex; flex-direction: column; }
+  .feed-item {
+    animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .feed-item:nth-child(1) { animation-delay: 0ms; }
+  .feed-item:nth-child(2) { animation-delay: 60ms; }
+  .feed-item:nth-child(3) { animation-delay: 120ms; }
+  .feed-item:nth-child(4) { animation-delay: 180ms; }
+  .feed-item:nth-child(5) { animation-delay: 240ms; }
+  /* actual .feed-item layout: */
   .feed-item {
     display: grid;
     grid-template-columns: 4.5rem auto 1fr;
@@ -299,11 +362,16 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     border-bottom: 1px solid rgba(74, 85, 104, 0.1);
     text-decoration: none;
     border-radius: 6px;
-    transition: background 0.12s, transform 0.1s;
+    transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    touch-action: manipulation;
   }
   .feed-item:last-child { border-bottom: none; }
   .feed-item:hover { background: rgba(255, 255, 255, 0.03); }
   .feed-item:hover .feed-title { color: var(--text); }
+  .feed-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
   .feed-item:active { transform: scale(0.99); }
 
   .feed-date  {
@@ -317,6 +385,7 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     font-size: 0.8rem;
     color: var(--accent);
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
   .feed-title {
     font-size: 1rem;
@@ -367,6 +436,18 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    text-decoration: none;
+    padding: 0.25rem 0.4rem;
+    margin: 0 -0.4rem;
+    border-radius: 6px;
+    transition: background 0.12s;
+    touch-action: manipulation;
+  }
+  .bar-item:hover { background: rgba(255, 255, 255, 0.03); }
+  .bar-item:hover .bar-label { color: var(--text); }
+  .bar-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
   .bar-label {
     font-size: 0.82rem;
@@ -402,6 +483,22 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     .bar-fill { transition: none; }
     .cat-item, .featured, .feed-item, .feed-more { transition: none; }
     .cat-item:active, .featured:active, .feed-item:active { transform: none; }
+    .cat-item:focus-visible, .featured:focus-visible, .feed-item:focus-visible, .feed-more:focus-visible {
+      transition: none;
+    }
+    .feed-item { animation: none; }
+    .featured::after { transition: none; }
+  }
+
+  /* ── 라이트 모드 배경 보정 ── */
+  :global(html.light) .home {
+    background-image:
+      radial-gradient(ellipse 60% 40% at 5% 6%, rgba(249, 115, 22, 0.05) 0%, transparent 60%),
+      radial-gradient(rgba(74, 85, 104, 0.07) 1px, transparent 1px);
+    background-size: auto, 22px 22px;
+  }
+  :global(html.light) .headline-hl {
+    text-shadow: 0 0 24px rgba(249, 115, 22, 0.18);
   }
 
   /* ── 반응형 ── */

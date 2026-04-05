@@ -1012,6 +1012,7 @@ article .prose h2 {
   transition: opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
 }
 pre:hover .code-copy-btn { opacity: 1; }
+@media (hover: none) { .code-copy-btn { opacity: 1; } }
 .code-copy-btn:hover {
   background: var(--accent-dim);
   color: var(--accent);
