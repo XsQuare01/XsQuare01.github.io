@@ -19,6 +19,8 @@ const categoryCounts = categories
   }))
   .filter((cat) => cat.count > 0);
 
+const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
+
 const FEATURED_ID = 'rsa';
 const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
 ---
@@ -88,8 +90,69 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
       ))}
     </div>
 
+    <div class="section-divider"></div>
+
+    <!-- 카테고리별 포스트 통계 -->
+    <div class="section-head">
+      <span class="section-label">주제별 현황</span>
+      <span class="section-total">총 <strong>{totalPosts}</strong>개</span>
+    </div>
+    <ul class="bar-list">
+      {categoryCounts.map((cat) => (
+        <li class="bar-item">
+          <span class="bar-label">{cat.label}</span>
+          <div class="bar-track">
+            <div
+              class="bar-fill"
+              data-width={`${Math.round((cat.count / maxCount) * 100)}%`}
+              style="width: 0%"
+            />
+          </div>
+          <span class="bar-count">{cat.count}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="section-divider"></div>
+
+    <!-- GitHub · solved.ac 활동 -->
+    <div class="section-head">
+      <span class="section-label">활동</span>
+    </div>
+    <div class="activity-row">
+      <img
+        src="https://github-readme-stats.vercel.app/api?username=XsQuare01&show_icons=true&theme=dark&hide_border=true&bg_color=0f1117"
+        alt="GitHub Stats"
+        loading="lazy"
+        height="150"
+      />
+      <img
+        src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mystic6113"
+        alt="solved.ac 티어"
+        loading="lazy"
+        height="150"
+      />
+    </div>
+
   </div>
 </BaseLayout>
+
+<script>
+  const bars = document.querySelectorAll<HTMLElement>('.bar-fill');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          el.style.width = el.dataset.width ?? '0%';
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  bars.forEach((bar) => observer.observe(bar));
+</script>
 
 <style>
   /* ── 에디토리얼 헤드라인 ── */
@@ -255,6 +318,86 @@ const featuredPost = allPosts.find((p) => p.id === FEATURED_ID);
     font-size: 1rem;
     color: var(--text-muted);
     transition: color 0.12s;
+  }
+
+  /* ── 섹션 공통 ── */
+  .section-divider {
+    height: 1px;
+    background: rgba(74, 85, 104, 0.2);
+    margin: 2rem 0 1.5rem;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-dim);
+  }
+  .section-total {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+  .section-total strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ── 바 차트 ── */
+  .bar-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .bar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .bar-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    width: 5.5rem;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(74, 85, 104, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bar-count {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    width: 1.5rem;
+    text-align: right;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── 활동 ── */
+  .activity-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .activity-row img {
+    border-radius: 8px;
+    max-width: 100%;
   }
 
   /* ── 반응형 ── */
