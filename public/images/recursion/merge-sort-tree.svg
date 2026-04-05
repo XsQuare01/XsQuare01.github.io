@@ -34,31 +34,36 @@
   <line x1="658" y1="42" x2="658" y2="288" stroke="#1e293b" stroke-width="1.5"/>
 
   <!-- ===== RIGHT COST COLUMN ===== -->
-  <text x="758" y="43" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">레벨별 비용</text>
-  <line x1="666" y1="48" x2="853" y2="48" stroke="#334155" stroke-width="1"/>
+  <!-- Header -->
+  <text x="759" y="43" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">레벨별 비용</text>
+  <line x1="662" y1="48" x2="856" y2="48" stroke="#334155" stroke-width="1"/>
 
-  <!-- Cost per level -->
-  <text x="758" y="66"  text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">cn</text>
+  <!-- Level 0 (y=63): just cn -->
+  <text x="759" y="67" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">cn</text>
 
-  <text x="758" y="122" text-anchor="middle" fill="#94a3b8" font-size="10">cn/2 + cn/2</text>
-  <text x="758" y="135" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">= cn</text>
+  <line x1="662" y1="96" x2="856" y2="96" stroke="#1e293b" stroke-width="1"/>
 
-  <text x="758" y="187" text-anchor="middle" fill="#94a3b8" font-size="10">4 × cn/4</text>
-  <text x="758" y="200" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">= cn</text>
+  <!-- Level 1 (y=128): cn/2 × 2 = cn -->
+  <text x="759" y="123" text-anchor="middle" fill="#64748b" font-size="10">cn/2 × 2</text>
+  <text x="759" y="136" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">= cn</text>
 
-  <text x="758" y="251" text-anchor="middle" fill="#94a3b8" font-size="10">n × c</text>
-  <text x="758" y="264" text-anchor="middle" fill="#22c55e" font-size="13" font-weight="700">= cn</text>
+  <line x1="662" y1="161" x2="856" y2="161" stroke="#1e293b" stroke-width="1"/>
 
-  <!-- Brace + annotation (right side, inside cost column) -->
-  <line x1="670" y1="55"  x2="670" y2="282" stroke="#475569" stroke-width="1.2"/>
-  <line x1="666" y1="55"  x2="674" y2="55"  stroke="#475569" stroke-width="1.2"/>
-  <line x1="666" y1="282" x2="674" y2="282" stroke="#475569" stroke-width="1.2"/>
-  <text x="680" y="163" fill="#64748b" font-size="10">×</text>
-  <text x="680" y="174" fill="#64748b" font-size="10">log₂n</text>
-  <text x="680" y="185" fill="#64748b" font-size="10">레벨</text>
+  <!-- Level 2 (y=193): cn/4 × 4 = cn -->
+  <text x="759" y="188" text-anchor="middle" fill="#64748b" font-size="10">cn/4 × 4</text>
+  <text x="759" y="201" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">= cn</text>
 
-  <!-- Total -->
-  <text x="758" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">cn × log₂n  =  <tspan fill="#f97316" font-weight="700">O(n log n)</tspan></text>
+  <line x1="662" y1="226" x2="856" y2="226" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Level log₂n (y=258): c × n = cn -->
+  <text x="759" y="252" text-anchor="middle" fill="#64748b" font-size="10">c × n</text>
+  <text x="759" y="265" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">= cn</text>
+
+  <line x1="662" y1="282" x2="856" y2="282" stroke="#334155" stroke-width="1"/>
+
+  <!-- Summary -->
+  <text x="759" y="294" text-anchor="middle" fill="#64748b" font-size="10">log₂n 레벨 × cn</text>
+  <text x="759" y="308" text-anchor="middle" fill="#f97316" font-size="12" font-weight="700">= O(n log n)</text>
 
   <!-- ===== EDGES (drawn before nodes) ===== -->
   <!-- Lv0 → Lv1 -->
