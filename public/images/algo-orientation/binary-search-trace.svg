@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 295" width="900" height="443">
+  <rect width="600" height="295" fill="#0f1117" rx="10"/>
+  <text x="300" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">이진 탐색 — arr = [2, 5, 8, 11, 14, 17, 20, 23],  target = 14</text>
+
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <polygon points="0,0 6,3.5 0,7" fill="#4a5568"/>
+    </marker>
+    <marker id="arr-g" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <polygon points="0,0 6,3.5 0,7" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <!-- ── STEP 1 ── -->
+  <text x="14" y="47" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">Step 1</text>
+  <!-- Index labels -->
+  <text x="78"  y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">0</text>
+  <text x="128" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">1</text>
+  <text x="178" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">2</text>
+  <text x="228" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">3</text>
+  <text x="278" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">4</text>
+  <text x="328" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">5</text>
+  <text x="378" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">6</text>
+  <text x="428" y="38" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#4a5568">7</text>
+  <!-- Cells (L..R highlighted blue, M highlighted orange) -->
+  <rect x="53"  y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="103" y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="153" y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="203" y="42" width="48" height="32" rx="3" fill="rgba(249,115,22,0.22)"  stroke="#f97316" stroke-width="2"/>
+  <rect x="253" y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="303" y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="353" y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="403" y="42" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <!-- Values -->
+  <text x="78"  y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">2</text>
+  <text x="128" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">5</text>
+  <text x="178" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">8</text>
+  <text x="228" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#f97316">11</text>
+  <text x="278" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">14</text>
+  <text x="328" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">17</text>
+  <text x="378" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">20</text>
+  <text x="428" y="63" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">23</text>
+  <!-- Pointer labels -->
+  <text x="78"  y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">L</text>
+  <text x="228" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">M</text>
+  <text x="428" y="83" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">R</text>
+  <!-- Result annotation -->
+  <text x="487" y="62" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">arr[3]=11</text>
+  <text x="487" y="76" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">11 &lt; 14</text>
+  <text x="487" y="90" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="600" fill="#60a5fa">L = 4 →</text>
+
+  <!-- ── STEP 2 ── -->
+  <line x1="14" y1="100" x2="586" y2="100" stroke="#1e293b" stroke-width="1"/>
+  <text x="14" y="117" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">Step 2</text>
+  <!-- Cells (0-3 dim, 4-7 active, M=5 orange) -->
+  <rect x="53"  y="107" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="103" y="107" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="153" y="107" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="203" y="107" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="253" y="107" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="303" y="107" width="48" height="32" rx="3" fill="rgba(249,115,22,0.22)"  stroke="#f97316" stroke-width="2"/>
+  <rect x="353" y="107" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <rect x="403" y="107" width="48" height="32" rx="3" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="78"  y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">2</text>
+  <text x="128" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">5</text>
+  <text x="178" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">8</text>
+  <text x="228" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">11</text>
+  <text x="278" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">14</text>
+  <text x="328" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#f97316">17</text>
+  <text x="378" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">20</text>
+  <text x="428" y="128" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#e2e8f0">23</text>
+  <text x="278" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">L</text>
+  <text x="328" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f97316">M</text>
+  <text x="428" y="148" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#60a5fa">R</text>
+  <text x="487" y="127" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">arr[5]=17</text>
+  <text x="487" y="141" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">17 &gt; 14</text>
+  <text x="487" y="155" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="600" fill="#60a5fa">← R = 4</text>
+
+  <!-- ── STEP 3 ── -->
+  <line x1="14" y1="165" x2="586" y2="165" stroke="#1e293b" stroke-width="1"/>
+  <text x="14" y="182" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">Step 3</text>
+  <!-- Cells (0-3 dim, 5-7 dim, 4 green = found) -->
+  <rect x="53"  y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="103" y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="153" y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="203" y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="253" y="172" width="48" height="32" rx="3" fill="rgba(74,222,128,0.2)"   stroke="#4ade80" stroke-width="2.5"/>
+  <rect x="303" y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="353" y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <rect x="403" y="172" width="48" height="32" rx="3" fill="#0d1424" stroke="#1e293b" stroke-width="1"/>
+  <text x="78"  y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">2</text>
+  <text x="128" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">5</text>
+  <text x="178" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">8</text>
+  <text x="228" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">11</text>
+  <text x="278" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#4ade80">14</text>
+  <text x="328" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">17</text>
+  <text x="378" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">20</text>
+  <text x="428" y="193" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" fill="#2d3748">23</text>
+  <text x="278" y="213" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">L=M=R</text>
+  <text x="487" y="192" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">arr[4]=14</text>
+  <text x="487" y="206" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#9ca3af">14 == 14</text>
+  <text x="487" y="220" font-family="system-ui,-apple-system,sans-serif" font-size="8" font-weight="700" fill="#4ade80">발견! →4</text>
+
+  <!-- ── Legend ── -->
+  <line x1="14" y1="230" x2="586" y2="230" stroke="#1e293b" stroke-width="1"/>
+  <rect x="20"  y="240" width="18" height="12" rx="2" fill="rgba(96,165,250,0.12)"  stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="44"  y="251" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">탐색 범위</text>
+  <rect x="130" y="240" width="18" height="12" rx="2" fill="rgba(249,115,22,0.22)"  stroke="#f97316" stroke-width="1.5"/>
+  <text x="154" y="251" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">mid (현재 비교)</text>
+  <rect x="280" y="240" width="18" height="12" rx="2" fill="rgba(74,222,128,0.2)"   stroke="#4ade80" stroke-width="1.5"/>
+  <text x="304" y="251" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">target 발견</text>
+  <rect x="420" y="240" width="18" height="12" rx="2" fill="#0d1424"                stroke="#1e293b" stroke-width="1"/>
+  <text x="444" y="251" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#94a3b8">범위 밖</text>
+
+  <!-- ── Complexity note ── -->
+  <text x="300" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">탐색 범위: 8 → 4 → 1 &nbsp;·&nbsp; log₂8 = 3번의 비교로 완료 &nbsp;·&nbsp; 시간 복잡도 O(log n)</text>
+  <text x="300" y="287" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4b5563">범위가 매 단계 절반씩 감소 — n = 10⁹이어도 30번의 비교로 충분</text>
+</svg>

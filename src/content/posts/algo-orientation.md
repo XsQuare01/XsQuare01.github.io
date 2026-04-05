@@ -324,6 +324,8 @@ $$n \to \frac{n}{2} \to \frac{n}{4} \to \cdots \to 1 \quad \Rightarrow \quad \fr
 
 $10^9$개 원소의 정렬된 배열에서 이진 탐색은 **30번의 비교**로 끝난다.
 
+![이진 탐색 추적 다이어그램 — arr=[2,5,8,11,14,17,20,23]에서 14를 찾는 3단계 과정](/images/algo-orientation/binary-search-trace.svg)
+
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>

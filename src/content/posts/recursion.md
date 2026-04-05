@@ -170,6 +170,8 @@ fib(5)
     fib(1) = 1
 ```
 
+![fib(5) 재귀 호출 트리 — fib(3) 2회, fib(2) 3회 중복 계산 발생](/images/recursion/fib-tree.svg)
+
 `fib(n)`을 계산하는 데 필요한 호출 횟수를 $T(n)$이라 하면:
 
 $$T(n) = T(n-1) + T(n-2) + O(1)$$
@@ -269,6 +271,8 @@ $n = 64$일 때 필요한 이동 횟수: $2^{64} - 1 \approx 1.8 \times 10^{19}$
        ...   ...       ...   ...
         1    1    ...    1    1       ← 레벨 log n: 총 n개 리프
 ```
+
+![병합 정렬 재귀 트리 — 각 레벨 비용 cn, 총 O(n log n)](/images/recursion/merge-sort-tree.svg)
 
 - 트리의 깊이: $\log_2 n$
 - 각 레벨의 총 작업량: $n$
