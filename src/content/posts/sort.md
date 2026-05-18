@@ -1,6 +1,6 @@
 ---
 title: "정렬 알고리즘 — Selection / Merge / Quick"
-date: 2026-05-18T10:00:00
+date: 2026-05-18T08:00:00
 description: "선택 정렬, 병합 정렬, 퀵 정렬의 동작 원리를 코드 수준에서 살펴보고, 각 정렬의 올바름을 루프 불변식과 수학적 귀납법으로 증명한다. 시간 복잡도 $O(n^2)$, $O(n \\log n)$, 최악 $O(n^2)$/평균 $O(n \\log n)$의 차이가 어디서 오는지 정리한다."
 tags: ["Algorithm", "Sorting", "Selection Sort", "Merge Sort", "Quick Sort"]
 category: algorithm
@@ -183,7 +183,8 @@ $$T(n) = 2T\!\left(\frac{n}{2}\right) + cn$$
 
 전개하면 다음과 같다.
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 T(n) &= 2T(n/2) + cn \\
      &= 2\bigl(2T(n/4) + c(n/2)\bigr) + cn = 4T(n/4) + 2cn \\
      &= 8T(n/8) + 3cn \\
@@ -191,7 +192,8 @@ T(n) &= 2T(n/2) + cn \\
      &= 2^{\log_2 n} T(1) + cn \log_2 n \\
      &= n + cn \log_2 n \\
      &= O(n \log n)
-\end{aligned}$$
+\end{aligned}
+$$
 
 [재귀 트리](/blog/recursion#재귀-트리-분석)로도 같은 결과를 얻는다. 각 레벨의 총 작업량이 $cn$으로 같고, 트리 깊이가 $\log_2 n$이므로 총합 $cn \log_2 n$.
 
