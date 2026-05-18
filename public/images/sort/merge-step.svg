@@ -1,0 +1,69 @@
+<svg viewBox="0 0 720 280" width="1080" height="420" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="280" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Merge 단계 — 두 포인터로 정렬 병합</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">정렬된 두 배열의 작은 값을 차례로 골라 결과 배열에 채운다</text>
+
+  <!-- Left sorted array (blue) -->
+  <text x="60" y="82" fill="#93c5fd" font-size="12" font-weight="600">왼쪽 (정렬됨)</text>
+
+  <rect x="60"  y="92" width="44" height="36" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="82"  y="116" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">2</text>
+  <rect x="104" y="92" width="44" height="36" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="126" y="116" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">5</text>
+  <rect x="148" y="92" width="44" height="36" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+  <text x="170" y="116" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700" opacity="0.4">8</text>
+  <rect x="192" y="92" width="44" height="36" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+  <text x="214" y="116" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700" opacity="0.4">9</text>
+
+  <!-- Pointer i -->
+  <polygon points="170,140 165,150 175,150" fill="#f97316"/>
+  <text x="170" y="166" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700">i</text>
+
+  <!-- Right sorted array (purple) -->
+  <text x="280" y="82" fill="#c4b5fd" font-size="12" font-weight="600">오른쪽 (정렬됨)</text>
+
+  <rect x="280" y="92" width="44" height="36" fill="#4c1d95" stroke="#a855f7" stroke-width="2" opacity="0.4"/>
+  <text x="302" y="116" text-anchor="middle" fill="#ede9fe" font-size="14" font-weight="700" opacity="0.4">3</text>
+  <rect x="324" y="92" width="44" height="36" fill="#4c1d95" stroke="#a855f7" stroke-width="2"/>
+  <text x="346" y="116" text-anchor="middle" fill="#ede9fe" font-size="14" font-weight="700">6</text>
+  <rect x="368" y="92" width="44" height="36" fill="#4c1d95" stroke="#a855f7" stroke-width="2" opacity="0.4"/>
+  <text x="390" y="116" text-anchor="middle" fill="#ede9fe" font-size="14" font-weight="700" opacity="0.4">7</text>
+  <rect x="412" y="92" width="44" height="36" fill="#4c1d95" stroke="#a855f7" stroke-width="2" opacity="0.4"/>
+  <text x="434" y="116" text-anchor="middle" fill="#ede9fe" font-size="14" font-weight="700" opacity="0.4">10</text>
+
+  <!-- Pointer j -->
+  <polygon points="346,140 341,150 351,150" fill="#f97316"/>
+  <text x="346" y="166" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700">j</text>
+
+  <!-- Comparison arrow -->
+  <text x="510" y="116" fill="#fb923c" font-size="14" font-weight="700">5 &lt; 6 → 5 선택</text>
+
+  <!-- Output array (green) -->
+  <text x="60" y="200" fill="#86efac" font-size="12" font-weight="600">결과 배열 b[]</text>
+
+  <rect x="60"  y="210" width="44" height="36" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="82"  y="234" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">2</text>
+  <rect x="104" y="210" width="44" height="36" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="126" y="234" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">3</text>
+  <rect x="148" y="210" width="44" height="36" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="170" y="234" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">5</text>
+  <rect x="192" y="210" width="44" height="36" fill="#1e293b" stroke="#475569" stroke-width="2" stroke-dasharray="3 3"/>
+  <text x="214" y="234" text-anchor="middle" fill="#64748b" font-size="14">?</text>
+  <rect x="236" y="210" width="44" height="36" fill="#1e293b" stroke="#475569" stroke-width="2" stroke-dasharray="3 3"/>
+  <text x="258" y="234" text-anchor="middle" fill="#64748b" font-size="14">?</text>
+  <rect x="280" y="210" width="44" height="36" fill="#1e293b" stroke="#475569" stroke-width="2" stroke-dasharray="3 3"/>
+  <text x="302" y="234" text-anchor="middle" fill="#64748b" font-size="14">?</text>
+  <rect x="324" y="210" width="44" height="36" fill="#1e293b" stroke="#475569" stroke-width="2" stroke-dasharray="3 3"/>
+  <text x="346" y="234" text-anchor="middle" fill="#64748b" font-size="14">?</text>
+  <rect x="368" y="210" width="44" height="36" fill="#1e293b" stroke="#475569" stroke-width="2" stroke-dasharray="3 3"/>
+  <text x="390" y="234" text-anchor="middle" fill="#64748b" font-size="14">?</text>
+
+  <!-- Pointer k -->
+  <polygon points="214,258 209,268 219,268" fill="#f97316"/>
+  <text x="214" y="270" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700">k</text>
+
+  <!-- Note -->
+  <text x="510" y="234" fill="#64748b" font-size="11">각 단계 O(1), 총 O(n)</text>
+</svg>

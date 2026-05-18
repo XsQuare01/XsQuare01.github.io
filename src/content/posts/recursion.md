@@ -333,5 +333,5 @@ $$f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \l
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>정렬 알고리즘 — 비교 기반 정렬의 모든 것</strong> — 삽입 정렬, 병합 정렬, 힙 정렬, 퀵 정렬의 동작 원리와 복잡도를 분석한다. 비교 기반 정렬의 하한이 $\Omega(n \log n)$임을 결정 트리로 증명한다.</p>
+<p><strong>정렬 알고리즘 — Selection / Merge / Quick</strong> — 선택 정렬, 병합 정렬, 퀵 정렬의 동작 원리를 코드 수준에서 살펴보고, 각 정렬의 올바름을 루프 불변식과 수학적 귀납법으로 증명한다. $\Theta(n^2)$, $\Theta(n \log n)$, 최악 $\Theta(n^2)$/평균 $\Theta(n \log n)$의 차이가 어디서 오는지 정리한다.</p>
 </div>

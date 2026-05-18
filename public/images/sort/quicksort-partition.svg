@@ -1,0 +1,68 @@
+<svg viewBox="0 0 720 260" width="1080" height="390" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="260" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Quick Sort — Partition 결과</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">pivot p를 기준으로 작은 값은 왼쪽, 큰 값은 오른쪽으로 재배치</text>
+
+  <!-- Before partition: jumbled array -->
+  <text x="60" y="82" fill="#94a3b8" font-size="12" font-weight="600">Before</text>
+
+  <rect x="60"  y="92" width="44" height="40" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="82"  y="117" text-anchor="middle" fill="#fed7aa" font-size="14" font-weight="700">7</text>
+  <text x="82"  y="148" text-anchor="middle" fill="#fb923c" font-size="10" font-style="italic">pivot</text>
+
+  <rect x="104" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="126" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">3</text>
+  <rect x="148" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="170" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">9</text>
+  <rect x="192" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="214" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">1</text>
+  <rect x="236" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="258" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">8</text>
+  <rect x="280" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="302" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">5</text>
+  <rect x="324" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="346" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">2</text>
+  <rect x="368" y="92" width="44" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="390" y="117" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">6</text>
+
+  <!-- Arrow down -->
+  <text x="490" y="120" fill="#94a3b8" font-size="14">Partition</text>
+  <line x1="500" y1="128" x2="500" y2="170" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- After partition: left < pivot < right -->
+  <text x="60" y="190" fill="#94a3b8" font-size="12" font-weight="600">After</text>
+
+  <!-- Left group: < 7 -->
+  <rect x="60"  y="200" width="44" height="40" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="82"  y="225" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">3</text>
+  <rect x="104" y="200" width="44" height="40" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="126" y="225" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">1</text>
+  <rect x="148" y="200" width="44" height="40" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="170" y="225" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">5</text>
+  <rect x="192" y="200" width="44" height="40" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="214" y="225" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">2</text>
+  <rect x="236" y="200" width="44" height="40" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="258" y="225" text-anchor="middle" fill="#dbeafe" font-size="14" font-weight="700">6</text>
+
+  <!-- Pivot in its place -->
+  <rect x="280" y="200" width="44" height="40" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="302" y="225" text-anchor="middle" fill="#fed7aa" font-size="14" font-weight="700">7</text>
+
+  <!-- Right group: > 7 -->
+  <rect x="324" y="200" width="44" height="40" fill="#4c1d95" stroke="#a855f7" stroke-width="2"/>
+  <text x="346" y="225" text-anchor="middle" fill="#ede9fe" font-size="14" font-weight="700">9</text>
+  <rect x="368" y="200" width="44" height="40" fill="#4c1d95" stroke="#a855f7" stroke-width="2"/>
+  <text x="390" y="225" text-anchor="middle" fill="#ede9fe" font-size="14" font-weight="700">8</text>
+
+  <!-- Group labels -->
+  <text x="159" y="256" text-anchor="middle" fill="#93c5fd" font-size="10" font-style="italic">a[0..d-1] &lt; p</text>
+  <text x="302" y="256" text-anchor="middle" fill="#fb923c" font-size="10" font-style="italic">a[d] = p</text>
+  <text x="368" y="256" text-anchor="middle" fill="#c4b5fd" font-size="10" font-style="italic">a[d+1..n-1] &gt; p</text>
+</svg>
