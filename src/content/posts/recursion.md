@@ -333,5 +333,5 @@ $$f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \l
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>정렬 알고리즘 — 비교 기반 정렬의 모든 것</strong> — 삽입 정렬, 병합 정렬, 힙 정렬, 퀵 정렬의 동작 원리와 복잡도를 분석한다. 비교 기반 정렬의 하한이 $\Omega(n \log n)$임을 결정 트리로 증명한다.</p>
+<p><strong>그리디 알고리즘 — 매 순간 가장 좋아 보이는 선택</strong> — 매 단계에서 가장 좋아 보이는 선택을 하고 번복하지 않는 그리디의 정의를 살펴본다. Selection Sort로 그리디가 통하는 예를, Shortest Path로 그리디가 무너지는 예를 비교한다.</p>
 </div>
