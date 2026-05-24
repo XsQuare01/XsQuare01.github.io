@@ -22,7 +22,7 @@
   <!-- S — C : greedy first pick (highlighted orange) -->
   <line x1="140" y1="200" x2="360" y2="110" stroke="#f97316" stroke-width="3"/>
   <!-- S — D : actual shortest (highlighted green dashed) -->
-  <line x1="140" y1="200" x2="580" y2="200" stroke="#22c55e" stroke-width="3"/>
+  <line x1="140" y1="200" x2="580" y2="200" stroke="#22c55e" stroke-width="3" stroke-dasharray="8 6"/>
   <!-- C — D : completes greedy path -->
   <line x1="360" y1="110" x2="580" y2="200" stroke="#f97316" stroke-width="3"/>
 
@@ -32,7 +32,7 @@
   <rect x="222" y="138" width="32" height="22" rx="4" fill="#0f1117" stroke="#334155" stroke-width="1"/>
   <text x="238" y="154" text-anchor="middle" fill="#fb923c" font-size="13" font-weight="700">5</text>
 
-  <!-- S — D label : midpoint (360, 200), put above the line -->
+  <!-- S — D label : midpoint (360, 200), put below the line -->
   <rect x="344" y="208" width="32" height="22" rx="4" fill="#0f1117" stroke="#334155" stroke-width="1"/>
   <text x="360" y="224" text-anchor="middle" fill="#4ade80" font-size="13" font-weight="700">6</text>
 
@@ -61,7 +61,7 @@
   <text x="130" y="312" fill="#94a3b8" font-size="11">S → C → D : 5 + 2 = 7</text>
 
   <!-- Direct path -->
-  <line x1="380" y1="290" x2="420" y2="290" stroke="#22c55e" stroke-width="3"/>
+  <line x1="380" y1="290" x2="420" y2="290" stroke="#22c55e" stroke-width="3" stroke-dasharray="8 6"/>
   <text x="430" y="295" fill="#4ade80" font-size="12" font-weight="600">실제 최단 경로</text>
   <text x="430" y="312" fill="#94a3b8" font-size="11">S → D : 6</text>
 
