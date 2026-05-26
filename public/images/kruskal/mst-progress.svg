@@ -1,4 +1,7 @@
-<svg viewBox="0 0 760 420" width="1140" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+<svg viewBox="0 0 760 420" width="1140" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif" role="img" aria-labelledby="mst-progress-title mst-progress-desc">
+  <title id="mst-progress-title">Kruskal 알고리즘 단계별 진행</title>
+  <desc id="mst-progress-desc">5개 정점과 7개 엣지를 가진 그래프에서 Kruskal 알고리즘이 가중치 오름차순으로 엣지를 검사하며, 사이클을 만들지 않는 엣지만 추가해 MST를 만드는 과정. n-1=4개 엣지가 추가되면 남은 엣지를 보지 않고 종료한다.</desc>
+
   <!-- Background -->
   <rect width="760" height="420" rx="10" fill="#0f1117"/>
 
