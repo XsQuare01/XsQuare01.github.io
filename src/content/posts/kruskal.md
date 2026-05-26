@@ -181,10 +181,10 @@ class UnionFind:
 | 단계 | 시간 |
 |---|---|
 | 엣지 정렬 | $O(m \log m)$ |
-| Union-Find 연산 $m$회 | $O(m \cdot \alpha(m))$ |
+| Union-Find 연산 $m$회 | $O(m \cdot \alpha(n))$ |
 | **합계** | $O(m \log m + m \cdot \alpha(m)) = O(m \log m)$ |
 
-정렬이 지배적이다. 엣지가 이미 가중치 순서로 주어졌거나 정수 가중치를 카운팅 정렬할 수 있는 특수한 경우라면 $O(m \cdot \alpha(m))$ 까지 줄일 수 있지만, 일반적으로는 $O(m \log m)$.
+정렬이 지배적이다. 엣지가 이미 가중치 순서로 주어졌거나 정수 가중치를 카운팅 정렬할 수 있는 특수한 경우라면 $O(m \cdot \alpha(n))$ 까지 줄일 수 있지만, 일반적으로는 $O(m \log m)$.
 
 ---
 
