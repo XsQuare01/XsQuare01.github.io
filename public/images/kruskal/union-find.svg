@@ -3,114 +3,97 @@
   <rect width="760" height="320" rx="10" fill="#0f1117"/>
 
   <!-- Title -->
-  <text x="380" y="26" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Union-Find — 컴포넌트 합치기</text>
+  <text x="380" y="26" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Union-Find — Kruskal 예시와 일치하는 union 진행</text>
   <text x="730" y="46" text-anchor="end" fill="#64748b" font-size="11">find(x), union(x,y) 모두 amortized O(α(n))</text>
 
   <!-- Stage labels -->
   <text x="125" y="74" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">초기 상태</text>
-  <text x="380" y="74" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">union 두 번 후</text>
-  <text x="635" y="74" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">union 네 번 후</text>
+  <text x="380" y="74" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">union(A,B), union(B,C) 후</text>
+  <text x="635" y="74" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">union(C,D), union(D,E) 후</text>
 
-  <!-- Stage 1: each node is its own root (5 singletons) -->
-  <!-- Five singleton circles in a horizontal row -->
+  <!-- ─── Stage 1: 5 singletons (각 노드 자기 자신 root) ─── -->
   <g transform="translate(40, 110)">
-    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">A</text>
-    <text x="0" y="32" text-anchor="middle" fill="#64748b" font-size="9">A</text>
   </g>
   <g transform="translate(82, 110)">
-    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">B</text>
-    <text x="0" y="32" text-anchor="middle" fill="#64748b" font-size="9">B</text>
   </g>
   <g transform="translate(124, 110)">
-    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">C</text>
-    <text x="0" y="32" text-anchor="middle" fill="#64748b" font-size="9">C</text>
   </g>
   <g transform="translate(166, 110)">
-    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">D</text>
-    <text x="0" y="32" text-anchor="middle" fill="#64748b" font-size="9">D</text>
   </g>
   <g transform="translate(208, 110)">
-    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="0" cy="0" r="16" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">E</text>
-    <text x="0" y="32" text-anchor="middle" fill="#64748b" font-size="9">E</text>
   </g>
-  <text x="125" y="180" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">각자 자기 자신이 root</text>
-  <text x="125" y="196" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">5 disjoint sets</text>
+  <text x="125" y="180" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">5 disjoint sets</text>
+  <text x="125" y="196" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">각자 자기 자신이 root</text>
 
   <!-- Arrow 1 -->
   <line x1="240" y1="135" x2="280" y2="135" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)"/>
   <text x="260" y="125" text-anchor="middle" fill="#94a3b8" font-size="10">union(A,B)</text>
-  <text x="260" y="152" text-anchor="middle" fill="#94a3b8" font-size="10">union(C,D)</text>
+  <text x="260" y="152" text-anchor="middle" fill="#94a3b8" font-size="10">union(B,C)</text>
 
-  <!-- Stage 2: {A,B}, {C,D}, {E} — three small trees -->
-  <!-- Tree {A,B}: B is root, A is child -->
-  <g transform="translate(320, 100)">
-    <line x1="0" y1="0" x2="-20" y2="35" stroke="#475569" stroke-width="1.5"/>
-    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
-    <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">B</text>
-    <circle cx="-20" cy="35" r="14" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-    <text x="-20" y="39" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">A</text>
+  <!-- ─── Stage 2: tree {A,B,C} (A=root), {D}, {E} ─── -->
+  <!-- Tree {A,B,C}: A root with B, C children (rank by union by rank) -->
+  <g transform="translate(330, 100)">
+    <line x1="0" y1="0" x2="-22" y2="38" stroke="#475569" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="22" y2="38" stroke="#475569" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
+    <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">A</text>
+    <circle cx="-22" cy="38" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="-22" y="42" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">B</text>
+    <circle cx="22" cy="38" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="22" y="42" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">C</text>
   </g>
 
-  <!-- Tree {C,D}: D is root -->
-  <g transform="translate(388, 100)">
-    <line x1="0" y1="0" x2="-20" y2="35" stroke="#475569" stroke-width="1.5"/>
-    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+  <!-- Singletons {D}, {E} -->
+  <g transform="translate(410, 119)">
+    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">D</text>
-    <circle cx="-20" cy="35" r="14" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-    <text x="-20" y="39" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">C</text>
   </g>
-
-  <!-- Singleton {E} -->
-  <g transform="translate(440, 115)">
-    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <g transform="translate(450, 119)">
+    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
     <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">E</text>
   </g>
 
-  <text x="380" y="180" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">{A,B}, {C,D}, {E}</text>
-  <text x="380" y="196" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">3 disjoint sets</text>
+  <text x="380" y="180" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">{A, B, C}, {D}, {E} — 3 sets</text>
+  <text x="380" y="196" text-anchor="middle" fill="#94a3b8" font-size="10" font-style="italic">A–C 검사: find(A)=find(C)=A → skip</text>
 
   <!-- Arrow 2 -->
   <line x1="475" y1="135" x2="515" y2="135" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-  <text x="495" y="125" text-anchor="middle" fill="#94a3b8" font-size="10">union(B,D)</text>
+  <text x="495" y="125" text-anchor="middle" fill="#94a3b8" font-size="10">union(C,D)</text>
   <text x="495" y="152" text-anchor="middle" fill="#94a3b8" font-size="10">union(D,E)</text>
 
-  <!-- Stage 3: all unified — one tree (D as root, by rank) -->
-  <!--
-    Final tree shape:
-              D
-            / | \
-           B  C  E
-           |
-           A
-  -->
+  <!-- ─── Stage 3: 최종 — A root with B, C, D, E flat children ─── -->
   <g transform="translate(635, 88)">
-    <!-- root D -->
+    <!-- Edges to four children -->
+    <line x1="0" y1="0" x2="-45" y2="48" stroke="#475569" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="-15" y2="48" stroke="#475569" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="15" y2="48" stroke="#475569" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="45" y2="48" stroke="#475569" stroke-width="1.5"/>
+    <!-- root A -->
     <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
-    <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">D</text>
-    <!-- Edges to children -->
-    <line x1="0" y1="0" x2="-40" y2="40" stroke="#475569" stroke-width="1.5"/>
-    <line x1="0" y1="0" x2="0" y2="40" stroke="#475569" stroke-width="1.5"/>
-    <line x1="0" y1="0" x2="40" y2="40" stroke="#475569" stroke-width="1.5"/>
-    <!-- children: B, C, E -->
-    <circle cx="-40" cy="40" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-    <text x="-40" y="44" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">B</text>
-    <circle cx="0"   cy="40" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-    <text x="0"   y="44" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">C</text>
-    <circle cx="40"  cy="40" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-    <text x="40"  y="44" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">E</text>
-    <!-- grandchild A under B -->
-    <line x1="-40" y1="40" x2="-40" y2="78" stroke="#475569" stroke-width="1.5"/>
-    <circle cx="-40" cy="78" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
-    <text x="-40" y="82" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">A</text>
+    <text x="0" y="4" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">A</text>
+    <!-- children B, C, D, E -->
+    <circle cx="-45" cy="48" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="-45" y="52" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">B</text>
+    <circle cx="-15" cy="48" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="-15" y="52" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">C</text>
+    <circle cx="15" cy="48" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="15" y="52" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">D</text>
+    <circle cx="45" cy="48" r="13" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="45" y="52" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">E</text>
   </g>
 
-  <text x="635" y="200" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">{A,B,C,D,E}</text>
-  <text x="635" y="216" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">1 set, D = root</text>
+  <text x="635" y="190" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">{A, B, C, D, E} — 1 set</text>
+  <text x="635" y="206" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">A가 줄곧 root로 유지 (rank=1)</text>
 
   <!-- Arrowhead marker -->
   <defs>
@@ -120,11 +103,11 @@
   </defs>
 
   <!-- Legend at bottom -->
-  <circle cx="40" cy="270" r="8" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="40" cy="270" r="8" fill="#1e293b" stroke="#22c55e" stroke-width="2.5"/>
   <text x="56" y="274" fill="#94a3b8" font-size="11">root (대표 원소)</text>
 
   <circle cx="200" cy="270" r="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
   <text x="216" y="274" fill="#94a3b8" font-size="11">자식 노드</text>
 
-  <text x="320" y="274" fill="#64748b" font-size="11" font-style="italic">find(x): root까지 거슬러 올라간다 (경로 압축 시 부모를 root로 평탄화)</text>
+  <text x="320" y="274" fill="#64748b" font-size="11" font-style="italic">코드의 union by rank 결과 — A가 첫 union에서 root가 되고 그대로 유지</text>
 </svg>
