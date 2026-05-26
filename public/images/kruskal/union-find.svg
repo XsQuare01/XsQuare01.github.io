@@ -1,4 +1,7 @@
-<svg viewBox="0 0 760 320" width="1140" height="480" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+<svg viewBox="0 0 760 320" width="1140" height="480" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif" role="img" aria-labelledby="union-find-title union-find-desc">
+  <title id="union-find-title">Union-Find 자료구조의 union 진행</title>
+  <desc id="union-find-desc">Kruskal 예시와 같은 순서로 union(A,B), union(B,C), union(C,D), union(D,E)를 적용하면서 disjoint-set이 점차 합쳐지는 과정. union by rank 결과 A가 첫 union에서 root가 되어 끝까지 유지된다.</desc>
+
   <!-- Background -->
   <rect width="760" height="320" rx="10" fill="#0f1117"/>
 
