@@ -198,3 +198,10 @@ $\text{NP} \cap \text{Co-NP}$에 속하는 문제는 "Yes"와 "No" 모두에 대
 <li>P ≠ NP로 추정되지만, 컴퓨터 과학 최대의 미해결 문제로 남아 있다.</li>
 </ul>
 </div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+
+**[Division Theorem — 정수 나눗셈의 기초](/blog/division-theorem)** — NP-Complete까지 살펴본 계산 복잡도 이론 위에서, 이제 암호학의 수학적 기반인 정수론으로 넘어간다. Division Theorem은 임의의 양의 정수를 나누면 몫과 나머지가 유일하게 결정된다는 단순한 사실이며, 이것이 모듈러 산술·GCD·RSA로 이어지는 출발점이다.
+
+</div>
