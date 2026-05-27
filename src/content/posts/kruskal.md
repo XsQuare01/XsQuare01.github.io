@@ -225,6 +225,17 @@ $m \log m$이 지배적이다. 엣지가 이미 가중치 순으로 주어졌거
 
 Kruskal은 그리디가 항상 손해 보지 않는다는 것을 보여주는 좋은 예다. "지금 가장 작은 엣지를 고른다"는 단순한 규칙이, 사이클을 만들지만 않는다면 반드시 어떤 MST의 일부가 된다 — 컷 속성이 그 안전성을 보장한다.
 
+<div class="callout callout-key">
+<div class="callout-title">핵심 정리</div>
+
+- **Kruskal**은 가중치 오름차순으로 간선을 검사하며 사이클을 만들지 않는 것만 추가하는 그리디 알고리즘이다.
+- 사이클 검사는 **Union-Find**(경로 압축 + union by rank)로 amortized $O(\alpha(n))$ — 사실상 상수.
+- 정확성은 **컷 속성(cut property)** 의 표준적 적용으로 증명된다: 현재 forest의 컷을 가르는 가장 가벼운 간선은 반드시 어떤 MST에 속한다.
+- 전체 시간 복잡도는 $O(m \log m)$, **정렬이 지배적**이다. Union-Find 연산은 거의 상수.
+- 그래프가 연결되지 않으면 출력은 엄밀히 말해 **최소 신장 포레스트(MSF)** — 호출 측에서 `len(mst) == n - 1`로 연결성을 검사할 수 있다.
+
+</div>
+
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
 
