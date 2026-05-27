@@ -10,7 +10,7 @@ difficulty: 입문
 > 암호학은 수학 위에 서 있고, 양자 암호학은 물리학 위에 서 있다. 그런데 수학과 물리학은 무엇 위에 서 있는가? 이 글은 양자역학과 상대성 이론으로 나아가기 전, "참이란 무엇인가"라는 질문에서 출발한다. 수학적 참과 물리적 참은 같지 않다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>수학과 논리</strong>: 공리와 논리적 추론만으로 참을 결정 — 현실에 존재하지 않아도 된다</li>
 <li><strong>물리학</strong>: 수학 + 반복 실험 — 실험으로 검증된 것만 참이다</li>

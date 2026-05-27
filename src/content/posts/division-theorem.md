@@ -10,7 +10,7 @@ difficulty: 입문
 > 암호학의 수학적 토대는 정수론에서 시작된다. Division Theorem은 그 출발점이다 — 임의의 양의 정수를 다른 양의 정수로 나누면, 몫과 나머지가 유일하게 결정된다. 이 단순한 사실이 모듈러 산술, GCD, RSA의 기초가 된다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>나누어 떨어짐 (Divisibility)</strong>: a | b — b = ca인 정수 c가 존재할 때 a가 b를 나눈다</li>
 <li><strong>나누어 떨어짐의 성질</strong>: 선형 결합 성질, 추이 성질</li>

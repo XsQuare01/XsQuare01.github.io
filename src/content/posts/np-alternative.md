@@ -10,7 +10,7 @@ difficulty: 심화
 > NP를 "NTM이 다항식 시간에 푸는 문제"라 정의했다. 그런데 NP에는 전혀 다른, 더 직관적인 정의가 존재한다. 두 정의는 완전히 동치다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>NP의 두 정의</strong>: Df1(NTM 기반)과 Df2(검증자/증명서 기반) — 두 정의는 동치</li>
 <li><strong>증명서(Certificate)</strong>: 어떤 입력이 언어에 속함을 증명해주는 힌트. 다항식 길이 이하</li>

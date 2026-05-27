@@ -10,7 +10,7 @@ difficulty: 중급
 > 전자 서명에서 SHA로 메시지를 압축해 서명 크기를 줄인다고 했다. 그런데 SHA는 어떻게 동작하는가? 왜 역산이 불가능한가? 그리고 MD5나 SHA-1은 왜 더 이상 믿을 수 없는가? 이 글은 그 질문들에 답한다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>해시 함수의 3대 보안 성질</strong>: 일방향성(2ⁿ), 2차 역상 저항(2ⁿ), 충돌 저항성(2^(n/2))</li>
 <li><strong>Merkle-Damgård 구조</strong>: SHA-256의 내부 — 패딩, 블록 분할, 64라운드 압축 반복</li>

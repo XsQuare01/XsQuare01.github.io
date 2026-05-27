@@ -10,7 +10,7 @@ difficulty: 중급
 > RSA가 소인수분해의 어려움 위에 서있다면, ElGamal은 이산 대수 문제(DLP) 위에 서있다. 두 시스템은 서로 다른 수학적 어려움을 활용하지만, 결정적 차이가 하나 있다 — ElGamal은 암호화할 때마다 다른 암호문을 생성한다. 이것이 단순한 특성을 넘어 의미론적 안전성(IND-CPA)의 핵심이 된다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>보안 근거</strong>: 이산 대수 문제 (DLP) — g^x mod p에서 x를 구하는 것은 지수적으로 어렵다</li>
 <li><strong>키 생성</strong>: 비밀키 x, 공개키 h = g^x mod p</li>

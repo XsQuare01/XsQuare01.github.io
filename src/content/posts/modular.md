@@ -10,7 +10,7 @@ difficulty: 중급
 > GCD가 '두 수의 관계'라면, 모듈러 산술은 '수의 세계 자체를 재정의'한다. 나머지를 공유하는 수들을 하나로 묶는 순간, 덧셈·곱셈·역원이 정의된 대수 구조가 탄생한다 — RSA, ElGamal, Diffie-Hellman의 계산 엔진이 바로 이 위에서 돌아간다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>모듈러 산술</strong>: a ≡ b (mod m) ↔ m | (b − a) — 동치 관계(반사·대칭·추이) 성립</li>
 <li><strong>완전 잉여계 Zm</strong>: {0, 1, ..., m−1} — 덧셈·뺄셈에 대해 닫혀있음</li>

@@ -10,7 +10,7 @@ difficulty: 심화
 > NP에 속하면서도 NP의 모든 문제를 자신으로 귀착시킬 수 있는 문제가 존재한다. 이런 문제를 NP-Complete라 부른다. 1971년 Stephen Cook이 SAT(Boolean Satisfiability) 문제가 NP-Complete임을 최초로 증명했다. 이 발견은 수천 개의 NP-Complete 문제 발견으로 이어졌다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>NP-Complete</strong>: NP에 속하면서, NP의 모든 문제가 다항식 시간에 귀착되는 가장 어려운 문제들의 집합</li>
 <li><strong>Reduction (귀착)</strong>: 문제 A를 문제 B로 변환하는 방법 — A ≤ₚ B이면 B가 A만큼 어렵다</li>

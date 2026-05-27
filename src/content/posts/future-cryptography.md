@@ -10,7 +10,7 @@ difficulty: 심화
 > RSA는 소인수분해의 어려움, ElGamal은 이산 대수의 어려움 위에 서 있다. 그런데 양자 컴퓨터는 이 두 문제를 다항식 시간에 풀 수 있다. 현재 암호학의 기반이 통째로 흔들리는 것이다. 하지만 양자역학은 암호를 파괴하기만 하는 것이 아니라, **물리 법칙 자체가 보안을 보장하는** 새로운 암호를 가능하게 한다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>간섭계</strong>: 빛의 파동성을 이용해 경로 차이를 검출 — 중력파 관측(LIGO)에 활용</li>
 <li><strong>폭탄 검출기</strong>: 양자 간섭을 이용해 "관측 없이 관측" — 도청 검출의 원리</li>

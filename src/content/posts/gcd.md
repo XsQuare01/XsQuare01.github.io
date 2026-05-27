@@ -10,7 +10,7 @@ difficulty: 입문
 > Division Theorem이 나눗셈의 기초라면, GCD는 그 위에 세워진 정수론의 첫 번째 건물이다. 두 정수가 공유하는 가장 큰 약수는 단순한 수치를 넘어, 베주 항등식을 통해 암호학의 핵심 알고리즘을 뒷받침한다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>GCD 대수적 정의</strong>: d | a, d | b이고, c | a, c | b이면 c | d가 되는 유일한 d ≥ 0</li>
 <li><strong>유클리드 호제법</strong>: gcd(b, a) = gcd(a, r), 나머지가 0이 될 때까지 반복</li>
