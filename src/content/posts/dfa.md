@@ -10,7 +10,7 @@ difficulty: 중급
 > DFA는 계산 이론에서 가장 단순한 형태의 계산 모델이다. 튜링 머신을 극도로 제한한 이 기계는 어떤 문제를 풀 수 있고, 어떤 문제를 풀 수 없을까?
 
 <div class="callout">
-<div class="callout-title">직관적으로 먼저 이해하기</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li>DFA는 <strong>테이프를 딱 한 번, 왼쪽에서 오른쪽으로만</strong> 읽는다. 되돌아갈 수 없다.</li>
 <li>메모리는 오직 <strong>현재 상태(state)</strong> 하나뿐이다. "지금까지 무엇을 봤는지"를 상태로만 기억한다.</li>

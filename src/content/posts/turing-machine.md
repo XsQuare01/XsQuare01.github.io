@@ -10,7 +10,7 @@ difficulty: 심화
 > DFA에 스택을 추가하면 DPDA, 스택을 2개로 늘리면 튜링 머신과 동등해진다. 그렇다면 튜링 머신 자체는 어떤 구조를 가지며, 얼마나 강력할까?
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>DTM</strong>: Deterministic Turing Machine — 결정론적 튜링 머신</li>
 <li><strong>NTM</strong>: Non-deterministic Turing Machine — 비결정론적 튜링 머신</li>

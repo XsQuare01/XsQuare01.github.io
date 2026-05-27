@@ -10,7 +10,7 @@ difficulty: 심화
 > 튜링 머신으로 풀 수 있는 문제를 분류하면 어떤 계층이 만들어질까? Class D, E, co-E는 이 계층의 가장 기본적인 세 층이다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>Class D</strong>: 결정 가능한 언어(Decidable) — TM이 항상 Yes 또는 No로 정지</li>
 <li><strong>Class E</strong>: 열거 가능한 언어(Enumerable, RE) — TM이 x∈L이면 accept로 정지, x∉L이면 루프 가능</li>
