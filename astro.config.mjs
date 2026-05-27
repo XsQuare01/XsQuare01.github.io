@@ -10,7 +10,11 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
     shikiConfig: {
-      theme: 'github-dark-dimmed',
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark-dimmed',
+      },
+      defaultColor: false,
     },
   },
 });
