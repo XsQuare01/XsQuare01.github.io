@@ -1,0 +1,127 @@
+<svg viewBox="0 0 760 380" width="1140" height="570" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif" role="img" aria-labelledby="any-mst-title any-mst-desc">
+  <title id="any-mst-title">같은 그래프에서 가능한 두 MST 비교</title>
+  <desc id="any-mst-desc">4 정점 5 간선 그래프에서 가중치 2로 동률인 간선 B-C와 A-D 중 어느 쪽을 고르느냐에 따라 두 가지 다른 MST가 만들어진다. 두 MST는 가중치 합이 4로 같다.</desc>
+
+  <!-- Background -->
+  <rect width="760" height="380" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">같은 그래프, 두 가능한 MST</text>
+  <text x="380" y="46" text-anchor="middle" fill="#64748b" font-size="11">가중치 2의 간선 B–C와 A–D가 동률 — 어느 쪽을 골라도 가중치 합 4</text>
+
+  <!-- 가운데 구분선 -->
+  <line x1="380" y1="70" x2="380" y2="345" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ════════════ 좌측: MST 1 = {A–B, C–D, B–C} ════════════ -->
+  <text x="180" y="78" text-anchor="middle" fill="#f97316" font-size="12" font-weight="600">MST 1: A–B, C–D, B–C</text>
+
+  <!-- 미선택 간선 먼저 (뒤에 깔림) -->
+  <!-- A-D 미선택 -->
+  <line x1="90" y1="140" x2="90" y2="270" stroke="#475569" stroke-width="1.5"/>
+  <rect x="56" y="195" width="22" height="18" rx="3" fill="#0f1117" stroke="#475569"/>
+  <text x="67" y="208" text-anchor="middle" fill="#64748b" font-size="11" font-weight="700">2</text>
+
+  <!-- B-D 미선택 (대각선) -->
+  <line x1="262" y1="148" x2="98" y2="262" stroke="#475569" stroke-width="1.5"/>
+  <rect x="170" y="195" width="22" height="18" rx="3" fill="#0f1117" stroke="#475569"/>
+  <text x="181" y="208" text-anchor="middle" fill="#64748b" font-size="11" font-weight="700">3</text>
+
+  <!-- MST 간선 (강조) -->
+  <!-- A-B -->
+  <line x1="90" y1="140" x2="270" y2="140" stroke="#f97316" stroke-width="3.2"/>
+  <rect x="169" y="118" width="22" height="18" rx="3" fill="#0f1117" stroke="#f97316"/>
+  <text x="180" y="131" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">1</text>
+
+  <!-- B-C -->
+  <line x1="270" y1="140" x2="270" y2="270" stroke="#f97316" stroke-width="3.2"/>
+  <rect x="282" y="195" width="22" height="18" rx="3" fill="#0f1117" stroke="#f97316"/>
+  <text x="293" y="208" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">2</text>
+
+  <!-- C-D -->
+  <line x1="270" y1="270" x2="90" y2="270" stroke="#f97316" stroke-width="3.2"/>
+  <rect x="169" y="278" width="22" height="18" rx="3" fill="#0f1117" stroke="#f97316"/>
+  <text x="180" y="291" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">1</text>
+
+  <!-- 정점 (좌측) -->
+  <g>
+    <circle cx="90" cy="140" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="90" y="145" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">A</text>
+  </g>
+  <g>
+    <circle cx="270" cy="140" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="270" y="145" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">B</text>
+  </g>
+  <g>
+    <circle cx="270" cy="270" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="270" y="275" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">C</text>
+  </g>
+  <g>
+    <circle cx="90" cy="270" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="90" y="275" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">D</text>
+  </g>
+
+  <text x="180" y="330" text-anchor="middle" fill="#94a3b8" font-size="11" font-style="italic">총 가중치 = 1 + 2 + 1 = 4</text>
+
+  <!-- ════════════ 우측: MST 2 = {A–B, C–D, A–D} ════════════ -->
+  <text x="580" y="78" text-anchor="middle" fill="#f97316" font-size="12" font-weight="600">MST 2: A–B, C–D, A–D</text>
+
+  <!-- 미선택 간선 -->
+  <!-- B-C 미선택 -->
+  <line x1="670" y1="140" x2="670" y2="270" stroke="#475569" stroke-width="1.5"/>
+  <rect x="682" y="195" width="22" height="18" rx="3" fill="#0f1117" stroke="#475569"/>
+  <text x="693" y="208" text-anchor="middle" fill="#64748b" font-size="11" font-weight="700">2</text>
+
+  <!-- B-D 미선택 (대각선) -->
+  <line x1="662" y1="148" x2="498" y2="262" stroke="#475569" stroke-width="1.5"/>
+  <rect x="570" y="195" width="22" height="18" rx="3" fill="#0f1117" stroke="#475569"/>
+  <text x="581" y="208" text-anchor="middle" fill="#64748b" font-size="11" font-weight="700">3</text>
+
+  <!-- MST 간선 -->
+  <!-- A-B -->
+  <line x1="490" y1="140" x2="670" y2="140" stroke="#f97316" stroke-width="3.2"/>
+  <rect x="569" y="118" width="22" height="18" rx="3" fill="#0f1117" stroke="#f97316"/>
+  <text x="580" y="131" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">1</text>
+
+  <!-- A-D -->
+  <line x1="490" y1="140" x2="490" y2="270" stroke="#f97316" stroke-width="3.2"/>
+  <rect x="456" y="195" width="22" height="18" rx="3" fill="#0f1117" stroke="#f97316"/>
+  <text x="467" y="208" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">2</text>
+
+  <!-- C-D -->
+  <line x1="670" y1="270" x2="490" y2="270" stroke="#f97316" stroke-width="3.2"/>
+  <rect x="569" y="278" width="22" height="18" rx="3" fill="#0f1117" stroke="#f97316"/>
+  <text x="580" y="291" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">1</text>
+
+  <!-- 정점 (우측) -->
+  <g>
+    <circle cx="490" cy="140" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="490" y="145" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">A</text>
+  </g>
+  <g>
+    <circle cx="670" cy="140" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="670" y="145" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">B</text>
+  </g>
+  <g>
+    <circle cx="670" cy="270" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="670" y="275" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">C</text>
+  </g>
+  <g>
+    <circle cx="490" cy="270" r="18" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <text x="490" y="275" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="700">D</text>
+  </g>
+
+  <text x="580" y="330" text-anchor="middle" fill="#94a3b8" font-size="11" font-style="italic">총 가중치 = 1 + 2 + 1 = 4</text>
+
+  <!-- Legend -->
+  <line x1="60" y1="365" x2="80" y2="365" stroke="#f97316" stroke-width="3.2"/>
+  <text x="88" y="369" fill="#94a3b8" font-size="11">MST에 포함된 간선</text>
+
+  <line x1="280" y1="365" x2="300" y2="365" stroke="#475569" stroke-width="1.5"/>
+  <text x="308" y="369" fill="#94a3b8" font-size="11">미선택 간선</text>
+
+  <circle cx="460" cy="365" r="6" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+  <text x="472" y="369" fill="#94a3b8" font-size="11">정점</text>
+
+  <text x="540" y="369" fill="#64748b" font-size="11">·</text>
+  <text x="556" y="369" fill="#64748b" font-size="11" font-style="italic">동률 간선이 사이에 사이클(B–C–D–A–B)을 만든다</text>
+</svg>
