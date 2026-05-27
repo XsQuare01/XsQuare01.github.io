@@ -10,7 +10,7 @@ difficulty: 중급
 > RSA로 메시지를 암호화하면 기밀성은 확보된다. 하지만 Bob은 여전히 모른다 — 이 메시지가 정말 Alice에게서 왔는가? 전자 서명은 그 질문에 답한다. 비밀키 없이는 위조할 수 없고, 공개키만으로 누구나 검증할 수 있는 수학적 사인이다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>RSA 서명</strong>: s = m^d mod n, 검증: s^e = m — 비밀키로 서명, 공개키로 검증</li>
 <li><strong>ElGamal 서명</strong>: r = g^k mod p, s = (m − ar)k⁻¹ mod (p−1) — DLP 기반</li>

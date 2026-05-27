@@ -9,6 +9,16 @@ difficulty: 중급
 
 > DFA에서는 하나의 상태에서 하나의 입력에 대해 정확히 하나의 다음 상태만 존재했다. NFA는 이 제약을 풀어, 하나의 입력에 대해 여러 상태로 동시에 전이할 수 있다. 더 강력한 모델처럼 보이지만, 실제 계산 능력은 DFA와 동일하다.
 
+<div class="callout">
+<div class="callout-title">이 포스트에서 다루는 내용</div>
+
+- NFA(Non-deterministic Finite Automata)의 구조와 accept 조건
+- 한 상태에서 같은 입력에 여러 상태로 동시에 전이하는 비결정성의 의미
+- Powerset Construction — NFA를 DFA로 변환하는 방법
+- NFA와 DFA의 계산 능력이 본질적으로 동일하다는 결론
+
+</div>
+
 ## DFA vs NFA
 
 ![DFA vs NFA 비교](/images/nfa/dfa-vs-nfa.svg)

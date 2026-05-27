@@ -10,7 +10,7 @@ difficulty: 심화
 > 비밀번호를 알고 있음을 증명하려면 비밀번호를 입력해야 한다. 하지만 상대방에게 비밀 자체를 건네지 않고도 "나는 이것을 알고 있다"고 증명할 수 있다면? 영지식 증명(Zero Knowledge Proof)은 정보의 전달 없이 지식의 소유를 입증하는 수학적 프로토콜이다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>비밀 공유</strong>: Shamir의 (k, n) 임계 방식 — k명 이상이 협력하면 비밀 복원, k-1명 이하는 정보 없음</li>
 <li><strong>영지식 증명의 3대 성질</strong>: 완전성(Completeness), 건전성(Soundness), 영지식성(Zero Knowledge)</li>

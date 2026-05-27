@@ -10,7 +10,7 @@ difficulty: 중급
 > ElGamal에서 복호화가 성립하는 핵심은 Alice와 Bob이 독립적으로 동일한 공유 비밀 $g^{kx}$를 계산한다는 것이었다. 이 아이디어의 원형이 바로 Diffie-Hellman 키 교환이다. 1976년, 공개 채널만으로 비밀 키를 공유할 수 있다는 혁명적 발상이 공개키 암호학 전체의 문을 열었다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>핵심 문제</strong>: 도청 가능한 공개 채널에서 비밀 키를 공유하는 방법</li>
 <li><strong>프로토콜</strong>: Alice는 g^a, Bob은 g^b를 교환 → 공유 비밀 g^(ab)</li>

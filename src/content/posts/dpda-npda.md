@@ -9,6 +9,16 @@ difficulty: 심화
 
 > DFA는 상태만 기억한다. 스택을 하나 추가하면 어디까지 가능해질까? 그리고 비결정론적으로 동작하면 얼마나 더 강력해질까?
 
+<div class="callout">
+<div class="callout-title">이 포스트에서 다루는 내용</div>
+
+- DFA에 스택을 추가한 DPDA의 구조와 동작 원리
+- DPDA로 풀 수 있는 문제와 풀 수 없는 문제 (예: $L_5 = 0^i 1^i$ vs $L_7 = 0^i 1^j 0^k$)
+- NPDA(비결정론적 PDA)와 DPDA의 계산 능력 차이
+- 스택을 두 개로 늘리면 튜링 머신과 동등해지는 원리
+
+</div>
+
 DFA에 스택(Stack)을 추가한 계산 모델을 **PDA(Pushdown Automata)** 라 부른다. 결정론적으로 동작하면 DPDA, 비결정론적으로 동작하면 NPDA가 된다. 스택이 생기면 DFA로는 불가능했던 문제들을 해결할 수 있지만, DPDA만으로는 여전히 해결하지 못하는 문제가 존재한다.
 
 ![계산 모델별 메모리 구조](/images/dpda/model-expansion.svg)

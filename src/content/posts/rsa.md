@@ -10,7 +10,7 @@ difficulty: 중급
 > Division Theorem, GCD, Modular Arithmetic, Euler 정리, Fermat 정리, CRT — 지금까지 쌓아온 정수론의 모든 도구가 RSA 하나를 위해 수렴한다. 큰 소수 두 개의 곱을 되돌리는 것이 어렵다는 단 하나의 사실 위에, 전 세계 인터넷 암호화가 서있다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>RSA 키</strong>: n = pq (공개), e (공개 지수), d (개인 지수), ed ≡ 1 (mod φ(n))</li>
 <li><strong>암복호화</strong>: C = m^e mod n → m = C^d mod n = m^(ed) mod n</li>

@@ -18,7 +18,7 @@ difficulty: 입문
 </div>
 
 <div class="callout callout-key">
-<div class="callout-title">이 글의 핵심</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li>Complexity Theory에서는 문제를 <strong>Language</strong>로 정의한다.</li>
 <li>Problem의 수는 <strong>불가산 무한 |ℝ|</strong>, Solution의 수는 <strong>가산 무한 |ℕ|</strong>이다.</li>

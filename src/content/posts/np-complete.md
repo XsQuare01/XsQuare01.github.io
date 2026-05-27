@@ -10,7 +10,7 @@ difficulty: 심화
 > NP에 속하면서도 NP의 모든 문제를 자신으로 귀착시킬 수 있는 문제가 존재한다. 이런 문제를 NP-Complete라 부른다. 1971년 Stephen Cook이 SAT(Boolean Satisfiability) 문제가 NP-Complete임을 최초로 증명했다. 이 발견은 수천 개의 NP-Complete 문제 발견으로 이어졌다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>NP-Complete</strong>: NP에 속하면서, NP의 모든 문제가 다항식 시간에 귀착되는 가장 어려운 문제들의 집합</li>
 <li><strong>Reduction (귀착)</strong>: 문제 A를 문제 B로 변환하는 방법 — A ≤ₚ B이면 B가 A만큼 어렵다</li>
@@ -197,4 +197,11 @@ $\text{NP} \cap \text{Co-NP}$에 속하는 문제는 "Yes"와 "No" 모두에 대
 <li>어떤 NP-Complete 문제 하나를 다항식 시간에 풀면, 모든 NP 문제가 다항식 시간에 풀린다 — P = NP 성립</li>
 <li>P ≠ NP로 추정되지만, 컴퓨터 과학 최대의 미해결 문제로 남아 있다.</li>
 </ul>
+</div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+
+**[Division Theorem — 정수 나눗셈의 기초](/blog/division-theorem)** — NP-Complete까지 살펴본 계산 복잡도 이론 위에서, 이제 암호학의 수학적 기반인 정수론으로 넘어간다. Division Theorem은 임의의 양의 정수를 나누면 몫과 나머지가 유일하게 결정된다는 단순한 사실이며, 이것이 모듈러 산술·GCD·RSA로 이어지는 출발점이다.
+
 </div>

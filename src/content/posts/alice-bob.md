@@ -10,7 +10,7 @@ difficulty: 입문
 > 정보 이론적으로 완벽하게 안전한 암호는 존재한다. 그러나 실용적이지 않다. 그렇다면 "충분히 안전하다"는 것을 어떻게 정의할까? 답은 계산 복잡도에 있다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>Alice, Bob, Eve</strong>: 암호학의 표준 3인 등장인물 — 송신자, 수신자, 도청자</li>
 <li><strong>Class P</strong>: 다항식 시간 안에 결정 가능한 언어 (DTM 기준)</li>
