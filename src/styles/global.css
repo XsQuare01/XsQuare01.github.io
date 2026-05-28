@@ -672,7 +672,7 @@ html.light .astro-code span {
   border: none;
   margin: 0;
 }
-.prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
+.prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; display: block; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
 .prose th { background: var(--bg-card); font-weight: 600; color: var(--accent-2); }
 .prose th, .prose td { border: 1px solid var(--border); padding: 0.6rem 0.9rem; }
 .prose tr:hover td { background: var(--bg-hover); }
