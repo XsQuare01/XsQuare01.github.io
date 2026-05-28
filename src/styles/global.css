@@ -1314,6 +1314,12 @@ pre:hover .code-copy-btn { opacity: 1; }
   .main-wrap { margin-left: 0; padding: 1.5rem; min-height: calc(100vh - 60px); }
   .right-panel { display: none; }
   .post-header h1 { font-size: 1.4rem; }
+  .post-nav {
+    grid-template-columns: 1fr;
+  }
+  .post-nav-item.next {
+    text-align: left;
+  }
 }
 
 /* ── Reduced Motion ── */
