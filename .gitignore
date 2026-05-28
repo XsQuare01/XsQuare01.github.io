@@ -3,3 +3,5 @@ node_modules/
 .astro/
 .env
 .superpowers/
+.claude/settings.local.json
+.playwright-mcp/
