@@ -204,16 +204,33 @@ const jsonLd = JSON.stringify({
   const lightbox = document.createElement('div');
   lightbox.id = 'image-lightbox';
   lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
   lightbox.setAttribute('aria-label', '이미지 확대');
-  lightbox.innerHTML = '<div class="lightbox-backdrop"></div><div class="lightbox-content"></div>';
+  lightbox.innerHTML = `
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content"></div>
+    <button class="lightbox-close" type="button" aria-label="닫기">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <line x1="3" y1="3" x2="13" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="13" y1="3" x2="3" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>`;
   document.body.appendChild(lightbox);
+
+  const closeBtn = lightbox.querySelector('.lightbox-close') as HTMLButtonElement;
+  let lastFocused: HTMLElement | null = null;
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     lightbox.querySelector('.lightbox-content')!.innerHTML = '';
+    if (lastFocused) {
+      lastFocused.focus();
+      lastFocused = null;
+    }
   }
 
   lightbox.querySelector('.lightbox-backdrop')!.addEventListener('click', closeLightbox);
+  closeBtn.addEventListener('click', closeLightbox);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
@@ -221,6 +238,7 @@ const jsonLd = JSON.stringify({
   document.querySelectorAll('.prose img').forEach((img) => {
     (img as HTMLElement).style.cursor = 'zoom-in';
     img.addEventListener('click', () => {
+      lastFocused = document.activeElement as HTMLElement;
       const clone = img.cloneNode(true) as HTMLImageElement;
       clone.style.cursor = 'zoom-out';
       clone.removeAttribute('width');
@@ -230,6 +248,7 @@ const jsonLd = JSON.stringify({
       content.innerHTML = '';
       content.appendChild(clone);
       lightbox.classList.add('open');
+      closeBtn.focus();
     });
   });
 
