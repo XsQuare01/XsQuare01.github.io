@@ -116,4 +116,4 @@ $$|P| \ge d_{min}(u') \ge d_{min}(u)$$
 | 가정 | $d_{min}(u)$가 $u$의 최단거리가 아니다 → 더 짧은 경로 $P$ 존재 |
 | 관찰 | $P$는 어느 순간 $R^C$로 빠짐 → 첫 진입점 $u' \in R^C$ 존재 |
 | 관찰 | $u$는 $R^C$ 중 가장 작은 $d_{min}$을 가지므로 $d_{min}(u) \le d_{min}(u')$ |
-| 결론 | $\|P\| \ge d_{min}(u') \ge d_{min}(u)$ → 모순 |
+| 결론 | $\lvert P \rvert \ge d_{min}(u') \ge d_{min}(u)$ → 모순 |
