@@ -1,6 +1,7 @@
 ---
 import PostLayout from '../../layouts/PostLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { extractFirstImage, absoluteImageUrl } from '../../utils/extractFirstImage';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -32,6 +33,11 @@ const h2Headings = headings
 // 읽기 시간 계산 (분)
 const wordCount = post.body?.split(/\s+/).length ?? 0;
 const readingTime = Math.max(1, Math.round(wordCount / 130));
+
+// og:image / JSON-LD image 용도로 본문 첫 이미지 추출 (없으면 undefined → 기본 아바타로 fallback)
+const firstImage = extractFirstImage(post.body ?? '');
+const siteOrigin = Astro.site?.toString() ?? 'https://xsquare01.github.io';
+const ogImageUrl = firstImage ? absoluteImageUrl(firstImage, siteOrigin) : undefined;
 ---
 
 <PostLayout
@@ -43,6 +49,8 @@ const readingTime = Math.max(1, Math.round(wordCount / 130));
   difficulty={post.data.difficulty}
   headings={h2Headings}
   readingTime={readingTime}
+  wordCount={wordCount}
+  ogImageUrl={ogImageUrl}
   prevPost={prevPost ? { slug: prevPost.id, title: prevPost.data.title, description: prevPost.data.description } : undefined}
   nextPost={nextPost ? { slug: nextPost.id, title: nextPost.data.title, description: nextPost.data.description } : undefined}
 >
