@@ -7,9 +7,32 @@ import { getCategoryLabel } from '../../data/categories';
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
+
+const pageDescription = 'XsQuare01 기술 블로그의 전체 글 목록입니다. CS 이론, 암호학, 알고리즘, Unity 개발 과정을 정리합니다.';
+const siteUrl = Astro.site?.toString() ?? 'https://xsquare01.github.io';
+const blogUrl = new URL('/blog/', siteUrl).toString();
+const blogJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'XsQuare01 글 목록',
+  description: pageDescription,
+  url: blogUrl,
+  inLanguage: 'ko',
+  blogPost: posts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    description: post.data.description ?? '',
+    datePublished: post.data.date.toISOString(),
+    url: new URL(`/blog/${post.id}/`, siteUrl).toString(),
+  })),
+});
 ---
 
-<BaseLayout title="글 목록">
+<BaseLayout title="글 목록" description={pageDescription}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={blogJsonLd} />
+  </Fragment>
+
   <h1 class="page-title">글 목록</h1>
   <ul class="post-list">
     {posts.map((post) => (
