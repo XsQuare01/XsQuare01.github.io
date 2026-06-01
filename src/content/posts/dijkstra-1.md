@@ -159,6 +159,6 @@ $$d_{min}(u) + w(u, t) + w(t, v) \ge d_{min}(t) + w(t, v)$$
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
 
-**[다익스트라 알고리즘 2 — 경로 복원, 시간 복잡도, BFS와의 연결 (작성 예정)](/blog/dijkstra-2)** — 거리만이 아니라 **최단 경로 자체**를 복원하는 방법, 우선순위 큐로 $O(m \log n)$ 시간을 달성하는 구현, BFS와 Dijkstra의 관계, 그리고 Prim vs Dijkstra의 본격 비교까지 다룬다.
+**[다익스트라 알고리즘 2 — 최단 경로 복원, 시간 복잡도, 그리고 Prim과의 비교](/blog/dijkstra-2)** — 거리만이 아니라 **최단 경로 자체**를 복원하는 방법, 우선순위 큐로 $O(m \log n)$ 시간을 달성하는 구현, BFS와 Dijkstra의 관계, 그리고 Prim vs Dijkstra의 본격 비교까지 다룬다.
 
 </div>

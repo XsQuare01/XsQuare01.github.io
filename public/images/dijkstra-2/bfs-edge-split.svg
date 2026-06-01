@@ -1,0 +1,53 @@
+<svg viewBox="0 0 720 460" width="1080" height="690" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="460" rx="10" fill="#0f1117"/>
+  <text x="360" y="32" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">BFS로부터의 아이디어 — 가중치 w 간선을 길이 1짜리 w개로 쪼갠다</text>
+  <text x="360" y="52" text-anchor="middle" fill="#64748b" font-size="11">모든 간선 가중치가 1이면 BFS가 곧 최단거리. 가중치 w 간선은 더미 노드 w-1개로 분할</text>
+
+  <!-- Divider -->
+  <line x1="40" y1="250" x2="680" y2="250" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== TOP: original weighted edge ===== -->
+  <text x="360" y="100" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">원본: 가중치 3 간선</text>
+
+  <line x1="220" y1="170" x2="500" y2="170" stroke="#475569" stroke-width="2"/>
+  <rect x="349" y="146" width="22" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="360" y="161" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">3</text>
+
+  <circle cx="220" cy="170" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="220" y="176" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">u</text>
+  <circle cx="500" cy="170" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="500" y="176" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">v</text>
+
+  <text x="360" y="216" text-anchor="middle" fill="#64748b" font-size="11">u에서 v까지 거리 3</text>
+
+  <!-- ===== BOTTOM: split into unit edges ===== -->
+  <text x="360" y="298" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">분할: 더미 노드 2개 삽입 → 가중치 1 간선 3개</text>
+
+  <line x1="130" y1="370" x2="270" y2="370" stroke="#22c55e" stroke-width="2.5"/>
+  <line x1="270" y1="370" x2="410" y2="370" stroke="#22c55e" stroke-width="2.5"/>
+  <line x1="410" y1="370" x2="550" y2="370" stroke="#22c55e" stroke-width="2.5"/>
+
+  <rect x="189" y="348" width="20" height="18" rx="3" fill="#0f1117" stroke="#334155"/>
+  <text x="199" y="362" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700">1</text>
+  <rect x="329" y="348" width="20" height="18" rx="3" fill="#0f1117" stroke="#334155"/>
+  <text x="339" y="362" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700">1</text>
+  <rect x="469" y="348" width="20" height="18" rx="3" fill="#0f1117" stroke="#334155"/>
+  <text x="479" y="362" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700">1</text>
+
+  <!-- real nodes -->
+  <circle cx="130" cy="370" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="130" y="376" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">u</text>
+  <circle cx="550" cy="370" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="550" y="376" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">v</text>
+
+  <!-- dummy nodes (smaller, gray dashed) -->
+  <circle cx="270" cy="370" r="13" fill="#0c1426" stroke="#64748b" stroke-width="2" stroke-dasharray="3 2"/>
+  <text x="270" y="374" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="700">x₁</text>
+  <circle cx="410" cy="370" r="13" fill="#0c1426" stroke="#64748b" stroke-width="2" stroke-dasharray="3 2"/>
+  <text x="410" y="374" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="700">x₂</text>
+
+  <text x="610" y="374" text-anchor="middle" fill="#94a3b8" font-size="10">더미</text>
+
+  <text x="360" y="420" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">BFS가 1칸씩 물결처럼 퍼져 v에 도달 — 거친 간선 수 3 = 최단거리</text>
+  <text x="360" y="442" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">가중치가 크면 그래프가 폭발적으로 커져 느리다 — 다익스트라는 이 분할을 "거리 갱신"으로 압축한 것</text>
+</svg>

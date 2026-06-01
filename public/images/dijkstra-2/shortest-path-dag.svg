@@ -1,0 +1,46 @@
+<svg viewBox="0 0 720 420" width="1080" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="420" rx="10" fill="#0f1117"/>
+  <text x="360" y="32" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">동률(tie)이 있으면 — 부모를 여럿 기억해 DAG가 된다</text>
+  <text x="360" y="52" text-anchor="middle" fill="#64748b" font-size="11">D까지의 최단거리 3을 주는 경로가 둘 (A→B→D, A→C→D) — D는 부모로 B와 C를 모두 저장</text>
+
+  <!--
+    Nodes: A(140,220) B(360,120) C(360,320) D(580,220)
+    Edges: A-B(1) A-C(1) B-D(2) C-D(2)  — all on a shortest path
+    Dist: A=0 B=1 C=1 D=3
+  -->
+
+  <!-- Edges (all are shortest-path edges, red) -->
+  <line x1="140" y1="220" x2="360" y2="120" stroke="#ef4444" stroke-width="3.5"/>
+  <line x1="140" y1="220" x2="360" y2="320" stroke="#ef4444" stroke-width="3.5"/>
+  <line x1="360" y1="120" x2="580" y2="220" stroke="#ef4444" stroke-width="3.5"/>
+  <line x1="360" y1="320" x2="580" y2="220" stroke="#ef4444" stroke-width="3.5"/>
+
+  <!-- Edge weights -->
+  <rect x="239" y="160" width="22" height="18" rx="3" fill="#0f1117" stroke="#ef4444"/>
+  <text x="250" y="174" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">1</text>
+  <rect x="239" y="262" width="22" height="18" rx="3" fill="#0f1117" stroke="#ef4444"/>
+  <text x="250" y="276" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">1</text>
+  <rect x="459" y="160" width="22" height="18" rx="3" fill="#0f1117" stroke="#ef4444"/>
+  <text x="470" y="174" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">2</text>
+  <rect x="459" y="262" width="22" height="18" rx="3" fill="#0f1117" stroke="#ef4444"/>
+  <text x="470" y="276" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">2</text>
+
+  <!-- Nodes -->
+  <circle cx="140" cy="220" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="140" y="226" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">A</text>
+  <circle cx="360" cy="120" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="360" y="126" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">B</text>
+  <circle cx="360" cy="320" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="360" y="326" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">C</text>
+  <circle cx="580" cy="220" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="580" y="226" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700">D</text>
+
+  <!-- Distance + predecessor badges -->
+  <text x="140" y="262" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">d=0</text>
+  <text x="360" y="94" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">d=1, 부모=A</text>
+  <text x="360" y="358" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">d=1, 부모=A</text>
+  <text x="580" y="194" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">d=3</text>
+  <text x="580" y="262" text-anchor="middle" fill="#f0abfc" font-size="11" font-weight="700">부모 = {B, C}</text>
+
+  <text x="360" y="400" text-anchor="middle" fill="#64748b" font-size="11" font-style="italic">"갱신되면 부모 기억, 같으면 둘 다 기억" → 시작점 A를 뿌리로 하는 최단경로 DAG</text>
+</svg>
