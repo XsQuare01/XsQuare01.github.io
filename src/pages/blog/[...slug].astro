@@ -4,7 +4,19 @@ import { getCollection, render } from 'astro:content';
 import { extractFirstImage, absoluteImageUrl } from '../../utils/extractFirstImage';
 
 export async function getStaticPaths() {
+  const SERP_DESCRIPTION_LIMIT = 160;
   const posts = await getCollection('posts');
+
+  // SEO 경고: SERP에서 잘리지 않으려면 description 160자 이하 권장
+  for (const post of posts) {
+    const desc = post.data.description;
+    if (desc && desc.length > SERP_DESCRIPTION_LIMIT) {
+      console.warn(
+        `[SEO] ${post.id}.md: description ${desc.length}자 (권장 ${SERP_DESCRIPTION_LIMIT}자 이하) — SERP에서 잘릴 가능성`
+      );
+    }
+  }
+
   const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   return sorted.map((post, index) => ({
