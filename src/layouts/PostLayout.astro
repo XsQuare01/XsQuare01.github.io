@@ -240,7 +240,10 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-      } catch {}
+      } catch {
+        btn.textContent = '복사 실패';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      }
     });
     (pre as HTMLElement).style.position = 'relative';
     pre.appendChild(btn);
