@@ -199,6 +199,10 @@ def format_report(path, findings):
 
 
 def main(argv):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
     paths = argv[1:]
     if not paths:
         return 0

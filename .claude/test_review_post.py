@@ -216,5 +216,22 @@ class TestIntegration(unittest.TestCase):
         self.assertIn("요약:", report)
 
 
+class TestStdoutEncoding(unittest.TestCase):
+    def test_main_emits_emoji_without_crash(self):
+        import io
+        import contextlib
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as d:
+            post = Path(d) / "p.md"
+            # 깨진 굵게(D1, 🔴) → 보고서에 이모지·줄표 포함
+            post.write_text("---\ntitle: T\n---\n트리가 **DAG)**가 된다\n", encoding="utf-8")
+            # cp949 콘솔을 흉내 낸 stdout (이모지/em-dash 인코딩 불가)
+            buf = io.TextIOWrapper(io.BytesIO(), encoding="cp949")
+            with contextlib.redirect_stdout(buf):
+                rc = rp.main(["review_post.py", str(post)])
+            self.assertEqual(rc, 0)
+
+
 if __name__ == "__main__":
     unittest.main()
