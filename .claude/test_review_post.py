@@ -23,5 +23,28 @@ class TestSkeleton(unittest.TestCase):
         self.assertIn("발견 사항 없음", report)
 
 
+class TestBrokenBold(unittest.TestCase):
+    def test_detects_punct_then_bold_then_letter(self):
+        body = "트리가 아니라 **DAG(방향)**가 된다"
+        out = rp.check_broken_bold(body, 1)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D1")
+        self.assertEqual(out[0].severity, rp.REQUIRED)
+
+    def test_ok_when_space_after(self):
+        body = "**DAG(방향)** 가 된다"
+        self.assertEqual(rp.check_broken_bold(body, 1), [])
+
+    def test_ok_plain_intraword(self):
+        # 구두점 없이 글자만 붙은 경우는 CommonMark에서 정상 렌더 → 잡지 않음
+        body = "도출된 정리는 **참**이다."
+        self.assertEqual(rp.check_broken_bold(body, 1), [])
+
+    def test_line_number_uses_offset(self):
+        body = "첫 줄\n트리가 **DAG)**가"
+        out = rp.check_broken_bold(body, 10)  # 본문이 원본 10번째 줄부터
+        self.assertEqual(out[0].line, 11)
+
+
 if __name__ == "__main__":
     unittest.main()

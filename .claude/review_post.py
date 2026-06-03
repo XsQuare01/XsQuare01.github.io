@@ -30,6 +30,12 @@ POSTS_DIR = REPO_ROOT / "src" / "content" / "posts"
 
 Finding = namedtuple("Finding", "severity code line message")
 
+# 닫는 ** 앞이 구두점이고 바로 뒤가 글자/숫자/한글이면 굵게가 적용되지 않는다.
+_CLOSE_PUNCT = ")].,!?:;'\"”’」』）}"
+BROKEN_BOLD = re.compile(
+    "[" + re.escape(_CLOSE_PUNCT) + r"]\*\*[0-9A-Za-z가-힣]"
+)
+
 
 def split_frontmatter(text):
     """(frontmatter, body, body_start_line) 반환. body_start_line은 1-indexed."""
@@ -49,7 +55,15 @@ def check_frontmatter(fm):
 
 
 def check_broken_bold(body, offset):
-    return []
+    out = []
+    for i, line in enumerate(body.split("\n")):
+        for m in BROKEN_BOLD.finditer(line):
+            snippet = line[max(0, m.start() - 3):m.end()]
+            out.append(Finding(
+                REQUIRED, "D1", i + offset,
+                f"깨진 굵게: '{snippet}' — 닫는 ** 앞 구두점 + 뒤 글자"
+            ))
+    return out
 
 
 def check_emdash(body):
