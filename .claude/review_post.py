@@ -35,6 +35,7 @@ _CLOSE_PUNCT = ")].,!?:;'\"”’」』）}"
 BROKEN_BOLD = re.compile(
     "[" + re.escape(_CLOSE_PUNCT) + r"]\*\*[0-9A-Za-z가-힣]"
 )
+BOLD_RE = re.compile(r"\*\*[^*\n]+\*\*")
 
 
 def split_frontmatter(text):
@@ -67,10 +68,25 @@ def check_broken_bold(body, offset):
 
 
 def check_emdash(body):
+    count = body.count("—")
+    line_count = max(1, len(body.split("\n")))
+    threshold = max(EMDASH_MIN, round(line_count * EMDASH_RATIO))
+    if count > threshold:
+        return [Finding(
+            RECOMMENDED, "D2", None,
+            f"줄표(—) {count}회 — 임계치({threshold}) 초과. AI 문체 신호"
+        )]
     return []
 
 
 def check_emphasis(body):
+    bold = len(BOLD_RE.findall(body))
+    nonempty = max(1, len([ln for ln in body.split("\n") if ln.strip()]))
+    if bold > nonempty * BOLD_RATIO:
+        return [Finding(
+            INFO, "D3", None,
+            f"굵게 강조 {bold}회 (본문 {nonempty}줄) — 강조가 잦아 효과가 떨어질 수 있음"
+        )]
     return []
 
 

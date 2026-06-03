@@ -46,5 +46,29 @@ class TestBrokenBold(unittest.TestCase):
         self.assertEqual(out[0].line, 11)
 
 
+class TestStyleDensity(unittest.TestCase):
+    def test_emdash_over_threshold(self):
+        body = "\n".join(["줄 — 표"] * 10)  # 10개 줄표, 10줄
+        out = rp.check_emdash(body)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D2")
+        self.assertEqual(out[0].severity, rp.RECOMMENDED)
+
+    def test_emdash_under_threshold(self):
+        body = "줄표 하나 — 끝\n" + "보통 줄\n" * 50
+        self.assertEqual(rp.check_emdash(body), [])
+
+    def test_emphasis_dense(self):
+        body = "\n".join(["**굵게**"] * 10)  # 10줄 모두 굵게
+        out = rp.check_emphasis(body)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D3")
+        self.assertEqual(out[0].severity, rp.INFO)
+
+    def test_emphasis_sparse(self):
+        body = "보통 문장\n" * 20 + "**한 번**만 강조\n"
+        self.assertEqual(rp.check_emphasis(body), [])
+
+
 if __name__ == "__main__":
     unittest.main()
