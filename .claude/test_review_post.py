@@ -185,5 +185,36 @@ class TestInternalLinks(unittest.TestCase):
         self.assertEqual(rp.check_internal_links(body, 1), [])
 
 
+class TestIntegration(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        self._pub, self._posts = rp.PUBLIC_DIR, rp.POSTS_DIR
+        rp.PUBLIC_DIR = self.root / "public"
+        rp.POSTS_DIR = self.root / "posts"
+        rp.POSTS_DIR.mkdir(parents=True)
+
+    def tearDown(self):
+        rp.PUBLIC_DIR, rp.POSTS_DIR = self._pub, self._posts
+        self.tmp.cleanup()
+
+    def test_multiple_issues_grouped(self):
+        post = self.root / "posts" / "sample.md"
+        post.write_text(
+            "---\ntitle: T\n---\n"
+            "트리가 **DAG)**가 된다\n"          # D1 (🔴)
+            "![x](/images/none.svg)\n"           # D5 (🔴)
+            "[없음](/blog/nope) 링크\n",          # D6 (🟡)
+            encoding="utf-8",
+        )
+        findings = rp.review_file(str(post))
+        codes = sorted({f.code for f in findings})
+        self.assertEqual(codes, ["D1", "D5", "D6", "D7"])  # D7: tags 등 누락
+        report = rp.format_report(str(post), findings)
+        self.assertIn("🔴 필수", report)
+        self.assertIn("🟡 권장", report)
+        self.assertIn("요약:", report)
+
+
 if __name__ == "__main__":
     unittest.main()
