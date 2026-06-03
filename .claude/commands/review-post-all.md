@@ -18,3 +18,9 @@ allowed-tools: Bash(python .claude/review_post.py:*), Read, Grep, Glob
 
 ## 출력 형식
 `/review-post`와 동일하다. 포스트별로 심각도·출처 코드·위치를 붙이고, 전체 요약을 마지막에 둔다. 자동 수정은 하지 않는다.
+
+## 저장 (문서화)
+리포트를 대화에 출력한 뒤, 전체 결과를 하나의 파일로 남긴다. 규약은 `docs/reviews/README.md`를 따른다.
+- 저장 경로: `docs/reviews/<오늘 날짜>-all.md` (전체 리뷰는 한 파일로 합침).
+- `<오늘 날짜>`는 `date +%Y-%m-%d`로 확인한다. `docs/reviews/` 디렉터리가 없으면 만든다.
+- 저장이 끝나면 저장된 경로를 사용자에게 알린다.
