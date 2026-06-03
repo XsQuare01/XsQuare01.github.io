@@ -36,6 +36,8 @@ BROKEN_BOLD = re.compile(
     "[" + re.escape(_CLOSE_PUNCT) + r"]\*\*[0-9A-Za-z가-힣]"
 )
 BOLD_RE = re.compile(r"\*\*[^*\n]+\*\*")
+REQUIRED_KEYS = ["title", "date", "description", "tags", "category", "difficulty"]
+_FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
 
 
 def split_frontmatter(text):
@@ -52,7 +54,22 @@ def split_frontmatter(text):
 
 # ---- 검사 stub (이후 태스크에서 구현) ----
 def check_frontmatter(fm):
-    return []
+    out = []
+    keys = {}
+    for line in fm.split("\n"):
+        m = _FM_KEY_RE.match(line)
+        if m:
+            keys[m.group(1)] = m.group(2)
+    for k in REQUIRED_KEYS:
+        if k not in keys:
+            out.append(Finding(RECOMMENDED, "D7", None, f"frontmatter 누락: {k}"))
+    if "description" in keys:
+        desc = keys["description"].strip().strip('"').strip("'")
+        if len(desc) < DESC_MIN:
+            out.append(Finding(INFO, "D7", None, f"description 너무 짧음 ({len(desc)}자)"))
+        elif len(desc) > DESC_MAX:
+            out.append(Finding(INFO, "D7", None, f"description 너무 긺 ({len(desc)}자)"))
+    return out
 
 
 def check_broken_bold(body, offset):

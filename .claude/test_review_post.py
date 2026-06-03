@@ -70,5 +70,31 @@ class TestStyleDensity(unittest.TestCase):
         self.assertEqual(rp.check_emphasis(body), [])
 
 
+class TestFrontmatter(unittest.TestCase):
+    FULL = (
+        'title: "글 제목"\n'
+        "date: 2026-06-03T09:00:00\n"
+        'description: "' + ("설명 " * 15).strip() + '"\n'
+        'tags: ["A"]\n'
+        "category: algorithm\n"
+        "difficulty: 입문\n"
+    )
+
+    def test_all_present(self):
+        self.assertEqual(rp.check_frontmatter(self.FULL), [])
+
+    def test_missing_key(self):
+        fm = self.FULL.replace("category: algorithm\n", "")
+        out = rp.check_frontmatter(fm)
+        codes = [(f.code, f.message) for f in out]
+        self.assertTrue(any("category" in m for _, m in codes))
+        self.assertTrue(all(f.code == "D7" for f in out))
+
+    def test_short_description(self):
+        fm = self.FULL.replace(("설명 " * 15).strip(), "짧음")
+        out = rp.check_frontmatter(fm)
+        self.assertTrue(any("짧음" in f.message or "짧" in f.message for f in out))
+
+
 if __name__ == "__main__":
     unittest.main()
