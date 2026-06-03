@@ -41,6 +41,8 @@ _FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
 _FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 _INLINE_CODE_RE = re.compile(r"`[^`]*`")
 IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+# ](/blog/<slug>) 또는 ](/blog/<slug>#anchor) 의 slug 추출
+BLOG_LINK_RE = re.compile(r"\]\(/blog/([^)\s#]+)")
 
 
 def split_frontmatter(text):
@@ -137,7 +139,16 @@ def check_assets(body, offset):
 
 
 def check_internal_links(body, offset):
-    return []
+    out = []
+    for i, line in enumerate(body.split("\n")):
+        for m in BLOG_LINK_RE.finditer(line):
+            slug = m.group(1)
+            if not (POSTS_DIR / f"{slug}.md").exists():
+                out.append(Finding(
+                    RECOMMENDED, "D6", i + offset,
+                    f"내부 링크 대상 없음: /blog/{slug}"
+                ))
+    return out
 
 
 def check_math_delims(body):

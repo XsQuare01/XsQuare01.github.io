@@ -157,5 +157,33 @@ class TestAssets(unittest.TestCase):
         self.assertEqual(rp.check_assets(body, 1), [])
 
 
+class TestInternalLinks(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self._orig = rp.POSTS_DIR
+        rp.POSTS_DIR = Path(self.tmp.name)
+        (Path(self.tmp.name) / "prim.md").write_text("x", encoding="utf-8")
+
+    def tearDown(self):
+        rp.POSTS_DIR = self._orig
+        self.tmp.cleanup()
+
+    def test_existing_link_ok(self):
+        body = "자세한 건 [Prim](/blog/prim) 참고"
+        self.assertEqual(rp.check_internal_links(body, 1), [])
+
+    def test_missing_link(self):
+        body = "[없는 글](/blog/does-not-exist) 링크"
+        out = rp.check_internal_links(body, 1)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D6")
+        self.assertEqual(out[0].severity, rp.RECOMMENDED)
+
+    def test_link_with_anchor_strips_anchor(self):
+        # 앵커가 붙어도 slug(prim)만 보고 존재 판정 (앵커 자체는 v1에서 검증 안 함)
+        body = "[Prim 증명](/blog/prim#정확성-증명)"
+        self.assertEqual(rp.check_internal_links(body, 1), [])
+
+
 if __name__ == "__main__":
     unittest.main()
