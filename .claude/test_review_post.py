@@ -96,5 +96,25 @@ class TestFrontmatter(unittest.TestCase):
         self.assertTrue(any("짧음" in f.message or "짧" in f.message for f in out))
 
 
+class TestMathDelims(unittest.TestCase):
+    def test_balanced(self):
+        body = "인라인 $a+b$ 와 블록\n$$\nx=1\n$$\n끝"
+        self.assertEqual(rp.check_math_delims(body), [])
+
+    def test_odd_inline(self):
+        body = "여기 $a+b 가 안 닫힘"
+        out = rp.check_math_delims(body)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D8")
+
+    def test_ignores_code_block(self):
+        body = "```bash\necho $HOME $PATH\n```\n본문 $x$ 정상"
+        self.assertEqual(rp.check_math_delims(body), [])
+
+    def test_ignores_inline_code(self):
+        body = "`$5` 와 `$10` 은 코드\n수식 $y$ 정상"
+        self.assertEqual(rp.check_math_delims(body), [])
+
+
 if __name__ == "__main__":
     unittest.main()

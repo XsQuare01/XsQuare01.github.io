@@ -38,6 +38,8 @@ BROKEN_BOLD = re.compile(
 BOLD_RE = re.compile(r"\*\*[^*\n]+\*\*")
 REQUIRED_KEYS = ["title", "date", "description", "tags", "category", "difficulty"]
 _FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
+_FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
+_INLINE_CODE_RE = re.compile(r"`[^`]*`")
 
 
 def split_frontmatter(text):
@@ -116,7 +118,17 @@ def check_internal_links(body, offset):
 
 
 def check_math_delims(body):
-    return []
+    stripped = _FENCE_RE.sub("", body)
+    stripped = _INLINE_CODE_RE.sub("", stripped)
+    stripped = stripped.replace(r"\$", "")  # 이스케이프된 달러는 제외
+    out = []
+    block = stripped.count("$$")
+    if block % 2 != 0:
+        out.append(Finding(RECOMMENDED, "D8", None, f"$$ 블록 구분자 짝이 안 맞음 ({block}개)"))
+    inline = stripped.replace("$$", "").count("$")
+    if inline % 2 != 0:
+        out.append(Finding(RECOMMENDED, "D8", None, f"$ 인라인 수식 구분자 짝이 안 맞음 ({inline}개)"))
+    return out
 
 
 def review_file(path):
