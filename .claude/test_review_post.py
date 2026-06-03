@@ -1,4 +1,6 @@
 import unittest
+import tempfile
+from pathlib import Path
 import review_post as rp
 
 
@@ -114,6 +116,45 @@ class TestMathDelims(unittest.TestCase):
     def test_ignores_inline_code(self):
         body = "`$5` 와 `$10` 은 코드\n수식 $y$ 정상"
         self.assertEqual(rp.check_math_delims(body), [])
+
+
+class TestAssets(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self._orig = rp.PUBLIC_DIR
+        rp.PUBLIC_DIR = Path(self.tmp.name)
+
+    def tearDown(self):
+        rp.PUBLIC_DIR = self._orig
+        self.tmp.cleanup()
+
+    def _write(self, rel, content):
+        p = Path(self.tmp.name) / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(content, encoding="utf-8")
+
+    def test_missing_asset(self):
+        body = "![alt](/images/x/none.svg)"
+        out = rp.check_assets(body, 1)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D5")
+        self.assertEqual(out[0].severity, rp.REQUIRED)
+
+    def test_valid_svg(self):
+        self._write("images/x/ok.svg", "<svg><rect/></svg>")
+        body = "![alt](/images/x/ok.svg)"
+        self.assertEqual(rp.check_assets(body, 1), [])
+
+    def test_broken_svg(self):
+        self._write("images/x/bad.svg", "<svg><rect></svg>")  # 닫히지 않은 태그
+        body = "![alt](/images/x/bad.svg)"
+        out = rp.check_assets(body, 1)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].code, "D4")
+
+    def test_external_url_ignored(self):
+        body = "![alt](https://example.com/a.png)"
+        self.assertEqual(rp.check_assets(body, 1), [])
 
 
 if __name__ == "__main__":

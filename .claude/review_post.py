@@ -40,6 +40,7 @@ REQUIRED_KEYS = ["title", "date", "description", "tags", "category", "difficulty
 _FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
 _FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 _INLINE_CODE_RE = re.compile(r"`[^`]*`")
+IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 
 
 def split_frontmatter(text):
@@ -109,8 +110,30 @@ def check_emphasis(body):
     return []
 
 
+def svg_error(path):
+    """SVG가 well-formed면 None, 아니면 첫 줄 오류 메시지."""
+    try:
+        minidom.parse(str(path))
+        return None
+    except Exception as e:  # noqa: BLE001 - 파싱 실패 사유를 그대로 보고
+        return str(e).splitlines()[0][:80]
+
+
 def check_assets(body, offset):
-    return []
+    out = []
+    for i, line in enumerate(body.split("\n")):
+        for m in IMG_RE.finditer(line):
+            url = m.group(1).split()[0].strip()  # "(/path \"title\")" 의 title 제거
+            if not url.startswith("/"):
+                continue
+            asset = PUBLIC_DIR / url.lstrip("/")
+            if not asset.exists():
+                out.append(Finding(REQUIRED, "D5", i + offset, f"에셋 없음: {url}"))
+            elif url.lower().endswith(".svg"):
+                err = svg_error(asset)
+                if err:
+                    out.append(Finding(REQUIRED, "D4", i + offset, f"SVG 파싱 오류: {url} ({err})"))
+    return out
 
 
 def check_internal_links(body, offset):
