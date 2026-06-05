@@ -7,7 +7,7 @@ category: cryptography
 difficulty: 중급
 ---
 
-> 소수는 '나누어지지 않는다'는 단순한 성질을 갖지만, 모듈러 산술 위에서는 일정한 주기성을 만들어낸다. a를 소수 p번 거듭제곱하면 반드시 a 자신으로 돌아온다. 이 성질이 RSA 암호를 가능하게 한다.
+> 소수는 '나누어지지 않는다'는 단순한 성질을 갖지만, 모듈러 산술 위에서는 일정한 주기성을 만들어낸다. 모든 정수 $a$에 대해 $a^p \equiv a \pmod p$가 성립한다는 말은, $\gcd(a,p)=1$일 때 $a$로 나누어 $a^{p-1}\equiv1\pmod p$가 된다는 뜻이다. 이 성질이 RSA 암호를 가능하게 한다.
 
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
