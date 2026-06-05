@@ -157,7 +157,7 @@ ElGamal 포스트에서 "복호화 정확성은 Diffie-Hellman 키 교환의 직
 | Bob의 공개값 $g^b$ | 암호문의 $A = g^k$ |
 | 공유 비밀 $g^{ab}$ | 공유 비밀 $g^{xk}$ |
 
-DH는 공유 비밀을 만드는 것에서 끝나지만, ElGamal은 여기에 메시지 마스킹이라는 한 단계를 추가한다. 공유 비밀 $g^{xk}$를 사용해 평문 $m$을 $B = m \cdot g^{xk}$로 마스킹한다.
+DH는 공유 비밀을 만드는 것에서 끝나지만, ElGamal은 여기에 메시지 마스킹이라는 한 단계를 추가한다. 이 흐름에서 ElGamal 암호화를 수행하는 송신자는 Bob이고, Alice는 자신의 비밀키로 복호화하는 수신자다. 공유 비밀 $g^{xk}$를 사용해 평문 $m$을 $B = m \cdot g^{xk}$로 마스킹한다.
 
 ![Diffie-Hellman에서 ElGamal으로의 확장 — 키 교환에서 암호화로](/images/diffie-hellman/dh-elgamal-relation.svg)
 
