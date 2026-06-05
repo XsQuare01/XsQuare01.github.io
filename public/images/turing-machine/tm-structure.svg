@@ -8,7 +8,7 @@
   <rect x="263" y="80" width="78" height="52" fill="#1a2035" stroke="#4a5568" stroke-width="1.5"/>
   <text x="302" y="110" text-anchor="middle" fill="#cbd5e0" font-size="12.8" font-family="system-ui,-apple-system,sans-serif">1</text>
   <rect x="341" y="80" width="78" height="52" fill="#1e2d4a" stroke="#60a5fa" stroke-width="2.5"/>
-  <text x="380" y="112" text-anchor="middle" fill="#60a5fa" font-size="14.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <text x="380" y="112" text-anchor="middle" fill="#60a5fa" font-size="14.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">a</text>
   <rect x="419" y="80" width="78" height="52" fill="#1a2035" stroke="#4a5568" stroke-width="1.5"/>
   <text x="458" y="110" text-anchor="middle" fill="#cbd5e0" font-size="12.8" font-family="system-ui,-apple-system,sans-serif">0</text>
   <rect x="497" y="80" width="78" height="52" fill="#1a2035" stroke="#4a5568" stroke-width="1.5"/>
@@ -22,7 +22,7 @@
   <text x="380" y="46" text-anchor="middle" fill="#60a5fa" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">q₂</text>
   <line x1="380" y1="54" x2="380" y2="55" stroke="#60a5fa" stroke-width="1.5"/>
   <text x="290" y="155" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">읽은 기호</text>
-  <text x="290" y="172" text-anchor="middle" fill="#60a5fa" font-size="9.6" font-family="'JetBrains Mono',monospace">1</text>
+  <text x="290" y="172" text-anchor="middle" fill="#60a5fa" font-size="9.6" font-family="'JetBrains Mono',monospace">a</text>
   <text x="380" y="155" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">쓸 기호</text>
   <text x="380" y="172" text-anchor="middle" fill="#fb923c" font-size="9.6" font-family="'JetBrains Mono',monospace">b</text>
   <text x="470" y="155" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">이동 방향</text>

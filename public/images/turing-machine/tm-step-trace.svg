@@ -27,6 +27,6 @@
   <text x="657" y="55" text-anchor="middle" fill="#4ade80" font-size="10.4" font-weight="700" font-family="system-ui,-apple-system,sans-serif">다음 구성</text>
   <text x="657" y="88" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">상태: r</text>
   <text x="657" y="112" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">헤드 위치: 셀 4</text>
-  <text x="657" y="136" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">테이프: a → b로 갱신</text>
+  <text x="657" y="136" text-anchor="middle" fill="#cbd5e0" font-size="10.4" font-family="system-ui,-apple-system,sans-serif">쓴 기호: b</text>
   <text x="657" y="175" text-anchor="middle" fill="#4ade80" font-size="9.6" font-family="'JetBrains Mono',monospace">(r, b, R)</text>
 </svg>
