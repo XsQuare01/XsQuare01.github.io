@@ -126,7 +126,7 @@ $$
 
 **무결성 검사**: 파일 다운로드 후 SHA-256 해시를 확인하는 것은 전송 오류나 우발적 변조를 감지하는 데 적합하다. 단, 해시값 자체가 변조되지 않았다는 전제가 필요하다 — 전자 서명이나 HTTPS로 해시값의 출처를 보증해야 한다.
 
-**전자 서명**: [이전 글](/blog/signature)에서 다뤘듯, SHA-256(m)에 서명하면 서명 크기가 메시지 크기와 무관해진다. 충돌 저항성이 Not Convertible을 보장한다.
+**전자 서명**: [이전 글](/blog/signature)에서 다뤘듯, SHA-256(m)에 서명하면 서명 크기가 메시지 크기와 무관해진다. 충돌 저항성이 Not Convertible을 보장한다. 여기서 Not Convertible은 해시값만 보고 원래 입력을 계산상 복원할 수 없다는 뜻이다.
 
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
