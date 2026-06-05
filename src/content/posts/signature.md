@@ -149,8 +149,8 @@ $$
 실제 보안 통신은 세 알고리즘을 역할에 따라 조합한다.
 
 **설정**:
-- Alice: RSA 키쌍 $(e_a, d_a)$
-- Bob: RSA 키쌍 $(e_b, d_b)$
+- Alice: RSA 키쌍 $(e_a, d_a)$, 모듈러스 $n_A$
+- Bob: RSA 키쌍 $(e_b, d_b)$, 모듈러스 $n_B$
 - 대칭키 $k$: Alice가 임의 생성
 
 ![AES + RSA + SHA 최종 프로토콜 — 기밀성·무결성·인증 통합](/images/signature/full-protocol.svg)
@@ -159,15 +159,15 @@ $$
 
 1. 임의의 대칭키 $k$ 생성
 2. $C = \text{AES}_k(m)$: 평문을 AES로 암호화 (속도)
-3. $k' = k^{e_b} \bmod n$: 대칭키를 Bob의 공개키로 암호화
-4. $h = \text{SHA}(m)$, $s = h^{d_a} \bmod n$: 해시에 Alice의 서명 생성
+3. $k' = k^{e_b} \bmod n_B$: 대칭키를 Bob의 공개키로 암호화
+4. $h = \text{SHA}(m)$, $s = h^{d_a} \bmod n_A$: 해시에 Alice의 서명 생성
 5. 전송 패킷: $(C,\ k',\ s)$
 
 **Bob의 복호화 및 검증**:
 
-1. $k = k'^{d_b} \bmod n$: RSA로 대칭키 복원
+1. $k = k'^{d_b} \bmod n_B$: RSA로 대칭키 복원
 2. $m = \text{AES}_k^{-1}(C)$: AES로 평문 복원
-3. $h = s^{e_a} \bmod n$: Alice의 공개키로 서명 복원
+3. $h = s^{e_a} \bmod n_A$: Alice의 공개키로 서명 복원
 4. $h' = \text{SHA}(m)$, $h' \stackrel{?}{=} h$: 직접 해시와 비교
 
 각 구성 요소의 역할:
