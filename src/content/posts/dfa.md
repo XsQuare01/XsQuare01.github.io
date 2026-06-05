@@ -75,7 +75,7 @@ $$L_1 = \{0, 00, 10, 010, \ldots\}$$
 | 1 | q_even | 1 | q_odd |
 | 2 | q_odd | 1 | q_odd |
 | 3 | q_odd | 0 | q_even |
-| 종료 | **q_even ∈ F** | — | O Accept |
+| 종료 | **q_even ∈ F** | — | Yes (Accept) |
 
 ---
 
