@@ -86,7 +86,7 @@
   <text x="478" y="82" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">두 집합의 곱 비교</text>
 
   <text x="478" y="104" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">∏ ℤ₉* = 1·2·4·5·7·8</text>
-  <text x="478" y="120" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">= 2240 ≡ 1 (mod 9)</text>
+  <text x="478" y="120" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">= 2240 ≡ 8 (mod 9)</text>
 
   <line x1="478" y1="132" x2="628" y2="132" stroke="#2d3748" stroke-width="1"/>
 
