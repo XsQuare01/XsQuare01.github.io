@@ -63,6 +63,8 @@ difficulty: 입문
 | **Tail** | 다음에 Pop(Dequeue)해야 하는 위치 |
 | **Head** | 다음에 Push(Enqueue)할 위치 |
 
+이 글의 Head/Tail 이름은 아래 그림의 방향을 따른다. 구현마다 Head와 Tail의 이름을 반대로 쓰기도 하므로, 실제 코드에서는 enqueue/dequeue 역할을 기준으로 확인해야 한다.
+
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
 Stack은 접시를 쌓는 것과 같다. 맨 위에 올리고 맨 위에서 꺼낸다. Queue는 줄 서기와 같아서, 먼저 온 사람이 먼저 나간다. 포인터 정의는 구현에 따라 달라질 수 있으며, Circular Queue로 확장할 수도 있다.
