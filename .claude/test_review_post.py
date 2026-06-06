@@ -1,7 +1,41 @@
+import contextlib
+import io
 import unittest
 import tempfile
 from pathlib import Path
 import review_post as rp
+
+
+def write_post(path, body="본문", frontmatter=None):
+    if frontmatter is None:
+        frontmatter = (
+            'title: "Fixture Post"\n'
+            "date: 2026-06-07T09:00:00\n"
+            'description: "충분히 긴 설명으로 테스트 fixture의 frontmatter 계약을 만족한다."\n'
+            'tags: ["test"]\n'
+            "category: algorithm\n"
+            "difficulty: 입문\n"
+        )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(f"---\n{frontmatter}---\n{body}\n", encoding="utf-8")
+    return path
+
+
+def write_svg(path, content):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
+def run_main(argv):
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = rp.main(argv)
+    return rc, buf.getvalue()
+
+
+def codes(findings):
+    return {f.code for f in findings}
 
 
 class TestSkeleton(unittest.TestCase):
@@ -214,6 +248,183 @@ class TestIntegration(unittest.TestCase):
         self.assertIn("🔴 필수", report)
         self.assertIn("🟡 권장", report)
         self.assertIn("요약:", report)
+
+
+class TestCliContractsV2(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        self._pub, self._posts = rp.PUBLIC_DIR, rp.POSTS_DIR
+        rp.PUBLIC_DIR = self.root / "public"
+        rp.POSTS_DIR = self.root / "posts"
+        rp.PUBLIC_DIR.mkdir(parents=True)
+        rp.POSTS_DIR.mkdir(parents=True)
+
+    def tearDown(self):
+        rp.PUBLIC_DIR, rp.POSTS_DIR = self._pub, self._posts
+        self.tmp.cleanup()
+
+    def test_json_flag_writes_schema_v2_to_stdout_only(self):
+        post = write_post(self.root / "posts" / "clean.md")
+
+        rc, stdout = run_main(["review_post.py", "--json", str(post)])
+
+        self.assertEqual(rc, 0)
+        self.assertTrue(stdout.lstrip().startswith("{"), stdout)
+        self.assertNotIn("## 결정적 검사", stdout)
+        self.assertIn('"schema_version": "review-report/v2"', stdout)
+        self.assertIn('"target": "clean"', stdout)
+
+    def test_strict_exit_code_zero_when_only_warnings_exist(self):
+        post = write_post(self.root / "posts" / "warn-only.md", "[없음](/blog/missing-anchorless) 링크")
+
+        rc, stdout = run_main(["review_post.py", "--strict", str(post)])
+
+        self.assertEqual(rc, 0, stdout)
+        self.assertNotIn("--strict", stdout)
+
+    def test_strict_exit_code_one_when_required_findings_exist(self):
+        post = write_post(self.root / "posts" / "red.md", "트리가 **DAG)**가 된다")
+
+        rc, stdout = run_main(["review_post.py", "--strict", str(post)])
+
+        self.assertEqual(rc, 1, stdout)
+
+    def test_strict_exit_code_two_for_missing_input(self):
+        missing = self.root / "posts" / "missing.md"
+
+        rc, stdout = run_main(["review_post.py", "--strict", str(missing)])
+
+        self.assertEqual(rc, 2, stdout)
+
+    def test_write_reports_uses_output_dir_and_date_for_each_target(self):
+        first = write_post(self.root / "posts" / "alpha.md", "본문")
+        second = write_post(self.root / "posts" / "beta.md", "트리가 **DAG)**가 된다")
+        output_dir = self.root / "reports"
+
+        rc, stdout = run_main([
+            "review_post.py",
+            "--write-reports",
+            "--output-dir",
+            str(output_dir),
+            "--date",
+            "2026-06-07",
+            str(first),
+            str(second),
+        ])
+
+        self.assertEqual(rc, 0, stdout)
+        alpha_report = output_dir / "2026-06-07-alpha.md"
+        beta_report = output_dir / "2026-06-07-beta.md"
+        self.assertTrue(alpha_report.exists(), stdout)
+        self.assertTrue(beta_report.exists(), stdout)
+        self.assertIn("alpha.md", alpha_report.read_text(encoding="utf-8"))
+        self.assertIn("[D1]", beta_report.read_text(encoding="utf-8"))
+        self.assertFalse((Path("docs") / "reviews" / "2026-06-07-alpha.md").exists())
+
+
+class TestDeterministicValidatorsV2(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        self._pub, self._posts = rp.PUBLIC_DIR, rp.POSTS_DIR
+        rp.PUBLIC_DIR = self.root / "public"
+        rp.POSTS_DIR = self.root / "posts"
+        rp.PUBLIC_DIR.mkdir(parents=True)
+        rp.POSTS_DIR.mkdir(parents=True)
+
+    def tearDown(self):
+        rp.PUBLIC_DIR, rp.POSTS_DIR = self._pub, self._posts
+        self.tmp.cleanup()
+
+    def test_frontmatter_category_and_difficulty_enum(self):
+        valid = TestFrontmatter.FULL.replace("category: algorithm", "category: cryptography").replace("difficulty: 입문", "difficulty: 심화")
+        invalid = TestFrontmatter.FULL.replace("category: algorithm", "category: math").replace("difficulty: 입문", "difficulty: beginner")
+
+        self.assertEqual(rp.check_frontmatter(valid), [])
+        out = rp.check_frontmatter(invalid)
+        messages = "\n".join(f.message for f in out)
+        self.assertIn("category", messages)
+        self.assertIn("difficulty", messages)
+        self.assertIn("enum", messages)
+
+    def test_display_math_placement_flags_text_sharing_delimiter_line(self):
+        invalid = "문장과 $$x=1$$ display math가 한 줄에 있음"
+        valid = "문장\n$$\nx=1\n$$\n끝\n$$y=2$$"
+
+        self.assertIn("D11", codes(rp.check_math_block_lines(invalid, 1)))
+        self.assertEqual(rp.check_math_block_lines(valid, 1), [])
+
+    def test_final_callout_order_requires_key_before_next_post(self):
+        invalid = (
+            '<div class="callout">\n<div class="callout-title">다음 포스트</div>\n</div>\n'
+            '<div class="callout callout-key">\n<div class="callout-title">핵심 정리</div>\n</div>'
+        )
+        valid = (
+            '<div class="callout callout-key">\n<div class="callout-title">핵심 정리</div>\n</div>\n'
+            '<div class="callout">\n<div class="callout-title">다음 포스트</div>\n</div>'
+        )
+
+        self.assertIn("D10", codes(rp.check_callout_order(invalid, 1)))
+        self.assertEqual(rp.check_callout_order(valid, 1), [])
+
+    def test_internal_link_anchor_validation_including_korean_heading_anchor(self):
+        prim = write_post(
+            self.root / "posts" / "prim.md",
+            "## 정확성 증명\n본문\n## English Heading\n본문",
+        )
+        self.assertTrue(prim.exists())
+
+        valid = "[Prim 증명](/blog/prim#정확성-증명) 링크와 [영문](/blog/prim#english-heading) 링크"
+        missing_anchor = "[없는 앵커](/blog/prim#missing-anchor) 링크"
+
+        self.assertEqual(rp.check_internal_links(valid, 1), [])
+        out = rp.check_internal_links(missing_anchor, 1)
+        self.assertIn("D6", codes(out))
+        self.assertIn("missing anchor", "\n".join(f.message for f in out))
+
+    def test_svg_text_baseline_flags_clipped_top_edge(self):
+        bad_svg = self.root / "public" / "images" / "x" / "baseline-bad.svg"
+        good_svg = self.root / "public" / "images" / "x" / "baseline-good.svg"
+        write_svg(bad_svg, '<svg viewBox="0 0 100 20"><text x="5" y="0">Label</text></svg>')
+        write_svg(good_svg, '<svg viewBox="0 0 100 20"><text x="5" y="15">Label</text></svg>')
+
+        self.assertIn("D13", codes(rp.check_assets("![x](/images/x/baseline-bad.svg)", 1)))
+        self.assertEqual(rp.check_assets("![x](/images/x/baseline-good.svg)", 1), [])
+
+
+class TestReportSchemaV2(unittest.TestCase):
+    def test_migrated_report_schema_preserves_placeholders(self):
+        self.assertTrue(hasattr(rp, "migrate_legacy_finding"), "migrated report schema helper is missing")
+        migrated = rp.migrate_legacy_finding("- [D7] — legacy message")
+
+        self.assertEqual(migrated["schema_version"], "review-report/v2")
+        self.assertEqual(migrated["source"], "MIGRATED")
+        self.assertEqual(migrated["location"], "not-recorded")
+        self.assertEqual(migrated["quote"], "not-recorded")
+        self.assertEqual(migrated["gate_effect"], "warn")
+
+    def test_json_schema_contains_required_finding_fields(self):
+        self.assertTrue(hasattr(rp, "finding_to_report_v2"), "review-report/v2 finding serializer is missing")
+        finding = rp.Finding(rp.REQUIRED, "D1", 7, "깨진 굵게")
+
+        row = rp.finding_to_report_v2("sample.md", finding, quote="트리가 **DAG)**가")
+
+        self.assertEqual(set(row), {
+            "severity",
+            "source",
+            "rule_id",
+            "location",
+            "quote",
+            "message",
+            "recommendation",
+            "gate_effect",
+        })
+        self.assertEqual(row["severity"], "🔴")
+        self.assertEqual(row["source"], "D")
+        self.assertEqual(row["rule_id"], "D1")
+        self.assertEqual(row["location"], "sample.md:7")
+        self.assertEqual(row["gate_effect"], "fail")
 
 
 class TestStdoutEncoding(unittest.TestCase):
