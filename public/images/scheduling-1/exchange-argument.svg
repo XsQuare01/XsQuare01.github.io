@@ -1,0 +1,44 @@
+<svg viewBox="0 0 720 350" width="1080" height="525" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="350" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="34" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">교환 논증 — 최적해 S를 알고리즘 A에 맞춰 바꾼다</text>
+  <text x="360" y="56" text-anchor="middle" fill="#64748b" font-size="11.5">A가 J(i+1)을 시간 t에 놓았다. S의 같은 자리(시간 t)를 본다.</text>
+
+  <!-- row labels -->
+  <text x="55" y="116" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">A</text>
+  <text x="55" y="216" text-anchor="middle" fill="#fb923c" font-size="14" font-weight="700">S</text>
+  <text x="55" y="132" text-anchor="middle" fill="#64748b" font-size="9">알고리즘</text>
+  <text x="55" y="232" text-anchor="middle" fill="#64748b" font-size="9">최적해</text>
+
+  <!-- ===== Row A : slots ===== -->
+  <!-- side slot (j <= i, identical) -->
+  <rect x="110" y="92" width="150" height="48" rx="7" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="185" y="121" text-anchor="middle" fill="#64748b" font-size="11">동일 (j ≤ i)</text>
+  <!-- slot t : J(i+1) -->
+  <rect x="285" y="92" width="150" height="48" rx="7" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="360" y="121" text-anchor="middle" fill="#4ade80" font-size="13" font-weight="700">J(i+1)</text>
+  <!-- side slot -->
+  <rect x="460" y="92" width="150" height="48" rx="7" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="535" y="121" text-anchor="middle" fill="#64748b" font-size="11">동일 (j ≤ i)</text>
+
+  <!-- ===== Row S : slots ===== -->
+  <rect x="110" y="192" width="150" height="48" rx="7" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="185" y="221" text-anchor="middle" fill="#64748b" font-size="11">동일 (j ≤ i)</text>
+  <!-- slot t : J_x -->
+  <rect x="285" y="192" width="150" height="48" rx="7" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="360" y="221" text-anchor="middle" fill="#fdba74" font-size="13" font-weight="700">J_x  (x &gt; i+1)</text>
+  <rect x="460" y="192" width="150" height="48" rx="7" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="535" y="221" text-anchor="middle" fill="#64748b" font-size="11">동일 (j ≤ i)</text>
+
+  <!-- time t marker connecting the two highlighted slots -->
+  <line x1="360" y1="140" x2="360" y2="192" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <rect x="338" y="158" width="44" height="18" rx="4" fill="#0f1117" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="171" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">시간 t</text>
+
+  <!-- conclusion box -->
+  <rect x="110" y="270" width="500" height="56" rx="8" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="360" y="293" text-anchor="middle" fill="#cbd5e1" font-size="11.5">x &gt; i+1 이고 이익은 내림차순이므로  P_x ≤ P(i+1).</text>
+  <text x="360" y="313" text-anchor="middle" fill="#4ade80" font-size="11.5" font-weight="600">J_x를 J(i+1)로 바꿔도 이익은 줄지 않는다 → S를 A에 맞출 수 있다.</text>
+</svg>
