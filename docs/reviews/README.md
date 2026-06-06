@@ -21,8 +21,8 @@
 
 ## 검사 항목 요약
 
-결정적(D): D1 깨진 굵게 · D2 줄표 남발 · D3 강조 과다 · D4 SVG 유효성 · D5 에셋 경로 · D6 내부 링크 · D7 frontmatter · D8 수식 짝
-LLM 비평(L): L1 문체(AI 신호) · L2 설명 흐름 · L3 용어·어체 일관성 · L4 SVG↔본문 일치 · L5 제목·description 적합성
+결정적(D): D1 깨진 굵게 · D2 줄표 남발 · D3 강조 과다 · D4 SVG 유효성 · D5 에셋 경로 · D6 내부 링크 · D7 frontmatter · D8 수식 짝 · D9 이모지 금지 · D10 callout 순서 · D11 수식 블록 줄 분리
+LLM 비평(L): L1 문체(AI 신호) · L2 설명 흐름 · L3 용어·어체 일관성 · L4 SVG↔본문 일치 · L5 제목·description 적합성 · L6 소스 자료 충실성 · L7 논증·복잡도 정확성
 
 자세한 설계는 `docs/superpowers/specs/2026-06-03-review-post-command-design.md` 참고.
 

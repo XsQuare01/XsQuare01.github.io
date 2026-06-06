@@ -14,12 +14,14 @@ allowed-tools: Bash(python .claude/review_post.py:*), Read, Grep, Glob
 `python .claude/review_post.py src/content/posts/*.md`
 
 ## 2단계 — LLM 비평
-각 포스트와 참조 SVG를 읽고, `/review-post` 커맨드와 **동일한 루브릭(L1~L5)** 으로 점검한다. (문체 AI 신호, 설명 흐름, 용어·어체 일관성, SVG↔본문 일치, 제목·description 적합성)
+각 포스트와 참조 SVG를 읽고, `/review-post` 커맨드와 **동일한 루브릭(L1~L7)** 으로 점검한다. (문체 AI 신호, 설명 흐름, 용어·어체 일관성, SVG↔본문 일치, 제목·description 적합성, 소스 자료 충실성, 논증·복잡도 정확성)
 
 ## 출력 형식
 `/review-post`와 동일하다. 포스트별로 심각도·출처 코드·위치를 붙이고, 전체 요약을 마지막에 둔다. 자동 수정은 하지 않는다.
 
-## 저장 (문서화)
+## 저장 (문서화) — 필수
+**리뷰가 끝나면 반드시 결과를 문서화해서 `docs/reviews/`에 저장한다. 이 단계는 건너뛰지 않는다.**
+
 리포트를 대화에 출력한 뒤, 전체 결과를 하나의 파일로 남긴다. 규약은 `docs/reviews/README.md`를 따른다.
 - 저장 경로: `docs/reviews/<오늘 날짜>-all.md` (전체 리뷰는 한 파일로 합침).
 - `<오늘 날짜>`는 `date +%Y-%m-%d`로 확인한다. `docs/reviews/` 디렉터리가 없으면 만든다.
