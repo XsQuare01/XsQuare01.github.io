@@ -52,6 +52,8 @@ _BANNED_EMOJI = set("✅❌✔✖❎⚠☑❗❓❣❤➕➖➗") | {"️"}
 # 말미 callout 구조 검사용
 CALLOUT_OPEN_RE = re.compile(r'<div class="(callout[^"]*)">')
 CALLOUT_TITLE_RE = re.compile(r'<div class="callout-title">(.*?)</div>')
+# 번호가 붙은 시리즈 slug: <base>-<n>
+SERIES_RE = re.compile(r"^(.*)-(\d+)$")
 
 
 def split_frontmatter(text):
@@ -144,7 +146,110 @@ def check_assets(body, offset):
                 err = svg_error(asset)
                 if err:
                     out.append(Finding(REQUIRED, "D4", i + offset, f"SVG 파싱 오류: {url} ({err})"))
+                    continue
+                # D13: 명백한 세로 클리핑만 잡는다. ">25px 여백" 같은 작법 권고는
+                # 기존 코퍼스가 대부분 따르지 않아(타이트한 푸터 관행) 결정적 검사로는 오탐이 된다.
+                ext = svg_bottom_extent(asset)
+                if ext:
+                    vb_h, mb = ext
+                    if mb > vb_h + 2:
+                        out.append(Finding(
+                            REQUIRED, "D13", i + offset,
+                            f"SVG 세로 클리핑: 최하단 요소 y≈{mb:.0f}이 viewBox 높이 {vb_h:.0f}를 넘어 잘림 — {url}"
+                        ))
     return out
+
+
+def check_series_links(path, body):
+    """D12 — 번호 시리즈(<base>-<n>)는 인접 편 포스트가 존재하면 본문에서 /blog/로 상호 링크한다."""
+    out = []
+    slug = Path(path).stem
+    m = SERIES_RE.match(slug)
+    if not m:
+        return out
+    base, n = m.group(1), int(m.group(2))
+    linked = {bm.group(1) for bm in BLOG_LINK_RE.finditer(body)}
+    for adj, label in ((n - 1, "이전"), (n + 1, "다음")):
+        if adj < 1:
+            continue
+        sib = f"{base}-{adj}"
+        if (POSTS_DIR / f"{sib}.md").exists() and sib not in linked:
+            out.append(Finding(
+                RECOMMENDED, "D12", None,
+                f"시리즈 {label} 편 링크 누락: /blog/{sib}(`{sib}.md` 존재)을 본문에서 참조하지 않음"
+            ))
+    return out
+
+
+def _fnum(el, name, default=None):
+    v = el.getAttribute(name)
+    if not v:
+        return default
+    try:
+        return float(re.sub(r"[^0-9.\-]", "", v))
+    except ValueError:
+        return default
+
+
+def svg_bottom_extent(path):
+    """(viewBox 높이, 요소 최하단 y)를 반환. 구하지 못하거나 transform이 있으면 None.
+
+    transform이 있으면 좌표 보정이 어려워 오탐 위험이 커지므로 검사를 건너뛴다.
+    """
+    try:
+        doc = minidom.parse(str(path))
+    except Exception:  # noqa: BLE001
+        return None
+    svgs = doc.getElementsByTagName("svg")
+    if not svgs:
+        return None
+    root = svgs[0]
+    vb_h = None
+    vb = root.getAttribute("viewBox").strip()
+    if vb:
+        parts = re.split(r"[ ,]+", vb)
+        if len(parts) == 4:
+            vb_h = _fnum_str(parts[3])
+    if vb_h is None:
+        vb_h = _fnum(root, "height")
+    if vb_h is None:
+        return None
+    max_bottom = 0.0
+    for el in doc.getElementsByTagName("*"):
+        if el.getAttribute("transform"):
+            return None  # 변환 좌표계 — 안전하게 검사 생략
+        tag = el.tagName
+        b = None
+        if tag == "text":
+            # 텍스트는 베이스라인(y) 기준. 베이스라인이 캔버스를 벗어나야 실제 클리핑이다.
+            # (베이스라인이 모서리에 걸친 정도는 어센더가 위로 그려져 시각적으로 멀쩡함)
+            b = _fnum(el, "y")
+        elif tag == "rect":
+            y, h = _fnum(el, "y"), _fnum(el, "height")
+            if y is not None and h is not None:
+                b = y + h
+        elif tag == "circle":
+            cy, r = _fnum(el, "cy"), _fnum(el, "r")
+            if cy is not None and r is not None:
+                b = cy + r
+        elif tag == "ellipse":
+            cy, ry = _fnum(el, "cy"), _fnum(el, "ry")
+            if cy is not None and ry is not None:
+                b = cy + ry
+        elif tag == "line":
+            ys = [v for v in (_fnum(el, "y1"), _fnum(el, "y2")) if v is not None]
+            if ys:
+                b = max(ys)
+        if b is not None and b > max_bottom:
+            max_bottom = b
+    return vb_h, max_bottom
+
+
+def _fnum_str(s):
+    try:
+        return float(s)
+    except (ValueError, TypeError):
+        return None
 
 
 def check_internal_links(body, offset):
@@ -256,6 +361,7 @@ def review_file(path):
     findings += check_emphasis(body)
     findings += check_assets(body, offset)
     findings += check_internal_links(body, offset)
+    findings += check_series_links(path, body)
     findings += check_math_delims(body)
     findings += check_emoji(body, offset)
     findings += check_callout_order(body, offset)
