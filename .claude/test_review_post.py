@@ -387,13 +387,21 @@ class TestDeterministicValidatorsV2(unittest.TestCase):
         self.assertIn("category", messages)
         self.assertIn("difficulty", messages)
         self.assertIn("enum", messages)
+        self.assertTrue(all(f.severity == rp.REQUIRED for f in out))
 
     def test_display_math_placement_flags_text_sharing_delimiter_line(self):
         invalid = "문장과 $$x=1$$ display math가 한 줄에 있음"
-        valid = "문장\n$$\nx=1\n$$\n끝\n$$y=2$$"
+        valid = "문장\n$$\nx=1\n$$\n끝\n인라인 $x$ 정상"
 
-        self.assertIn("D11", codes(rp.check_math_block_lines(invalid, 1)))
+        out = rp.check_math_block_lines(invalid, 1)
+        self.assertIn("D11", codes(out))
+        self.assertTrue(all(f.severity == rp.REQUIRED for f in out))
         self.assertEqual(rp.check_math_block_lines(valid, 1), [])
+
+    def test_display_math_placement_ignores_code_fences_and_inline_code(self):
+        body = "```md\n문장 $$x=1$$\n```\n인라인 코드 `$$x=1$$` 는 무시\n본문 $x$ 정상"
+
+        self.assertEqual(rp.check_math_block_lines(body, 1), [])
 
     def test_final_callout_order_requires_key_before_next_post(self):
         invalid = (
@@ -405,7 +413,9 @@ class TestDeterministicValidatorsV2(unittest.TestCase):
             '<div class="callout">\n<div class="callout-title">다음 포스트</div>\n</div>'
         )
 
-        self.assertIn("D10", codes(rp.check_callout_order(invalid, 1)))
+        out = rp.check_callout_order(invalid, 1)
+        self.assertIn("D10", codes(out))
+        self.assertTrue(all(f.severity == rp.RECOMMENDED for f in out))
         self.assertEqual(rp.check_callout_order(valid, 1), [])
 
     def test_internal_link_anchor_validation_including_korean_heading_anchor(self):

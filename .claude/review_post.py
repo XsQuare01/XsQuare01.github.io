@@ -49,6 +49,8 @@ BROKEN_BOLD = re.compile(
 )
 BOLD_RE = re.compile(r"\*\*[^*\n]+\*\*")
 REQUIRED_KEYS = ["title", "date", "description", "tags", "category", "difficulty"]
+CANONICAL_CATEGORIES = {"theory", "cryptography", "algorithm", "os", "unity", "web-dev"}
+CANONICAL_DIFFICULTIES = {"입문", "중급", "심화"}
 _FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
 _FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 _INLINE_CODE_RE = re.compile(r"`[^`]*`")
@@ -97,7 +99,27 @@ def check_frontmatter(fm):
             out.append(Finding(INFO, "D7", None, f"description 너무 짧음 ({len(desc)}자)"))
         elif len(desc) > DESC_MAX:
             out.append(Finding(INFO, "D7", None, f"description 너무 긺 ({len(desc)}자)"))
+    if "category" in keys:
+        category = _frontmatter_scalar(keys["category"])
+        if category not in CANONICAL_CATEGORIES:
+            allowed = ", ".join(sorted(CANONICAL_CATEGORIES))
+            out.append(Finding(
+                REQUIRED, "D7", None,
+                f"frontmatter enum 불일치: category='{category}' — 허용값: {allowed}"
+            ))
+    if "difficulty" in keys:
+        difficulty = _frontmatter_scalar(keys["difficulty"])
+        if difficulty not in CANONICAL_DIFFICULTIES:
+            allowed = ", ".join(sorted(CANONICAL_DIFFICULTIES))
+            out.append(Finding(
+                REQUIRED, "D7", None,
+                f"frontmatter enum 불일치: difficulty='{difficulty}' — 허용값: {allowed}"
+            ))
     return out
+
+
+def _frontmatter_scalar(value):
+    return value.strip().strip('"').strip("'")
 
 
 def check_broken_bold(body, offset):
@@ -365,7 +387,7 @@ def check_callout_order(body, offset):
     next_pos = next((i for i, (_, _, t) in enumerate(callouts) if t == "다음 포스트"), None)
     if next_pos is not None and (key_pos is None or key_pos > next_pos):
         return [Finding(
-            REQUIRED, "D10", callouts[next_pos][0],
+            RECOMMENDED, "D10", callouts[next_pos][0],
             "callout 순서: '핵심 정리'(callout-key)가 '다음 포스트'보다 앞에 와야 함"
         )]
     return []
@@ -375,15 +397,14 @@ def check_math_block_lines(body, offset):
     """D11 — display 수식의 `$$`는 자체 줄에 둔다(텍스트와 같은 줄 금지). KaTeX display 인식용."""
     out = []
     for lineno, line in iter_body_lines(body, offset):
-        if "$$" not in line:
+        line_without_code = _INLINE_CODE_RE.sub("", line)
+        if "$$" not in line_without_code:
             continue
-        s = line.strip()
+        s = line_without_code.strip()
         if s == "$$":
             continue  # 구분자만 단독으로 있는 줄 — OK
-        if s.startswith("$$") and s.endswith("$$") and s.count("$$") == 2:
-            continue  # 한 줄짜리 $$...$$ 단독 — 허용
         out.append(Finding(
-            RECOMMENDED, "D11", lineno,
+            REQUIRED, "D11", lineno,
             "`$$`가 텍스트와 같은 줄에 있음 — display 수식은 `$$`를 자체 줄에 둘 것"
         ))
     return out
