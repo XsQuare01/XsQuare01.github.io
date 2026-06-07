@@ -336,6 +336,27 @@ class TestIntegration(unittest.TestCase):
         self.assertIn("🟡 권장", report)
         self.assertIn("요약:", report)
 
+    def test_format_report_sorts_each_severity_group_by_stable_key(self):
+        post = self.root / "posts" / "stable.md"
+        findings = [
+            rp.Finding(rp.INFO, "D3", None, "굵게 강조가 잦음"),
+            rp.Finding(rp.REQUIRED, "D7", None, "frontmatter 누락: tags"),
+            rp.Finding(rp.REQUIRED, "D1", 20, "깨진 굵게 늦은 줄"),
+            rp.Finding(rp.REQUIRED, "D5", 4, "에셋 없음"),
+            rp.Finding(rp.REQUIRED, "D1", 3, "깨진 굵게 이른 줄"),
+            rp.Finding(rp.RECOMMENDED, "D2", None, "줄표 과다"),
+        ]
+
+        report = rp.format_report(str(post), findings)
+        finding_lines = [line for line in report.splitlines() if line.startswith("- [")]
+
+        self.assertEqual(
+            [line.split("]", 1)[0] + "]" for line in finding_lines],
+            ["- [D1]", "- [D1]", "- [D5]", "- [D7]", "- [D2]", "- [D3]"],
+        )
+        self.assertIn(f"{post}:3", finding_lines[0])
+        self.assertIn(f"{post}:20", finding_lines[1])
+
 
 class TestCliContractsV2(unittest.TestCase):
     def setUp(self):
@@ -407,6 +428,8 @@ class TestCliContractsV2(unittest.TestCase):
         self.assertTrue(beta_report.exists(), stdout)
         self.assertIn("alpha.md", alpha_report.read_text(encoding="utf-8"))
         self.assertIn("[D1]", beta_report.read_text(encoding="utf-8"))
+        self.assertIn(str(alpha_report), stdout)
+        self.assertIn(str(beta_report), stdout)
         self.assertFalse((Path("docs") / "reviews" / "2026-06-07-alpha.md").exists())
 
     def test_strict_multi_target_writes_reports_before_returning_failure(self):
@@ -440,6 +463,29 @@ class TestCliContractsV2(unittest.TestCase):
         self.assertTrue(stdout.lstrip().startswith("{"), stdout)
         self.assertNotIn("입력 파일 처리 실패", stdout)
         self.assertIn("입력 파일 처리 실패", stderr)
+
+    def test_json_write_reports_keeps_stdout_json_only_and_prints_paths_to_stderr(self):
+        post = write_post(self.root / "posts" / "json-report.md", "본문")
+        output_dir = self.root / "reports"
+
+        rc, stdout, stderr = run_main_streams([
+            "review_post.py",
+            "--json",
+            "--write-reports",
+            "--output-dir",
+            str(output_dir),
+            "--date",
+            "2026-06-07",
+            str(post),
+        ])
+
+        self.assertEqual(rc, 0, stderr)
+        payload = json.loads(stdout)
+        assert_review_json_schema(self, payload, expected_post_count=1)
+        report_path = output_dir / "2026-06-07-json-report.md"
+        self.assertTrue(report_path.exists(), stderr)
+        self.assertNotIn(str(report_path), stdout)
+        self.assertIn(str(report_path), stderr)
 
 
 class TestDeterministicValidatorsV2(unittest.TestCase):

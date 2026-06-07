@@ -659,7 +659,10 @@ def format_report(path, findings):
         return "\n".join(out)
     by_sev = {s: [f for f in findings if f.severity == s] for s in SEVERITY_ORDER}
     for s in SEVERITY_ORDER:
-        fs = by_sev[s]
+        fs = sorted(
+            by_sev[s],
+            key=lambda f: _finding_sort_key(finding_to_report_v2(path, f)),
+        )
         if not fs:
             continue
         out.append(f"\n{s} ({len(fs)})")
@@ -740,6 +743,7 @@ def main(argv):
     output_dir = opts["output_dir"] or "docs/reviews"
     report_date = opts["date"] or date.today().isoformat()
     reports = []
+    written_report_paths = []
     results = []
     infra_failed = False
     required_failed = False
@@ -760,17 +764,20 @@ def main(argv):
             reports.append(report)
         if opts["write_reports"]:
             try:
-                write_markdown_report(output_dir, report_date, p, findings)
+                written_report_paths.append(write_markdown_report(output_dir, report_date, p, findings))
             except OSError as e:
                 infra_failed = True
                 print(f"리포트 쓰기 실패: {p}: {e}", file=sys.stderr)
     if opts["json"]:
+        for path in written_report_paths:
+            print(f"리포트 저장: {path}", file=sys.stderr)
         try:
             print(json.dumps(report_to_json_v2(paths, results, strict=opts["strict"]), ensure_ascii=False, indent=2))
         except (TypeError, ValueError) as e:
             print(f"JSON 렌더링 실패: {e}", file=sys.stderr)
             return 2
     else:
+        reports.extend(f"리포트 저장: {path}" for path in written_report_paths)
         print("\n\n".join(reports))
     if infra_failed:
         return 2
