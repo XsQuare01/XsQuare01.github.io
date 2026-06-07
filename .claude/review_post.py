@@ -9,6 +9,7 @@ import re
 import json
 import xml.dom.minidom as minidom
 from collections import namedtuple
+from datetime import date
 from pathlib import Path
 
 # ---- 심각도 ----
@@ -535,6 +536,21 @@ def format_report(path, findings):
     return "\n".join(out)
 
 
+def has_required_findings(findings):
+    return any(f.severity == REQUIRED for f in findings)
+
+
+def report_path_for(output_dir, report_date, path):
+    return Path(output_dir) / f"{report_date}-{Path(path).stem}.md"
+
+
+def write_markdown_report(output_dir, report_date, path, findings):
+    out_path = report_path_for(output_dir, report_date, path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(format_report(path, findings) + "\n", encoding="utf-8")
+    return out_path
+
+
 def parse_args(argv):
     opts = {
         "json": False,
@@ -543,6 +559,7 @@ def parse_args(argv):
         "output_dir": None,
         "date": None,
         "paths": [],
+        "errors": [],
     }
     args = list(argv[1:])
     i = 0
@@ -558,10 +575,14 @@ def parse_args(argv):
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
                 i += 1
+            else:
+                opts["errors"].append("--output-dir requires a value")
         elif arg == "--date":
             if i + 1 < len(args):
                 opts["date"] = args[i + 1]
                 i += 1
+            else:
+                opts["errors"].append("--date requires a value")
         else:
             opts["paths"].append(arg)
         i += 1
@@ -574,24 +595,52 @@ def main(argv):
     except (AttributeError, ValueError):
         pass
     opts = parse_args(argv)
+    if opts["errors"]:
+        for error in opts["errors"]:
+            print(error, file=sys.stderr)
+        return 2
     paths = opts["paths"]
     if not paths:
         return 0
+    output_dir = opts["output_dir"] or "docs/reviews"
+    report_date = opts["date"] or date.today().isoformat()
     reports = []
     results = []
+    infra_failed = False
+    required_failed = False
     for p in paths:
         try:
             findings = review_file(p)
-        except FileNotFoundError:
-            reports.append(f"## 결정적 검사: {p}\n파일을 찾을 수 없음")
+        except OSError as e:
+            infra_failed = True
+            print(f"입력 파일 처리 실패: {p}: {e}", file=sys.stderr)
+            if not opts["json"]:
+                reports.append(f"## 결정적 검사: {p}\n파일을 읽을 수 없음")
             continue
         results.append((p, findings))
+        if has_required_findings(findings):
+            required_failed = True
         if not opts["json"]:
-            reports.append(format_report(p, findings))
+            report = format_report(p, findings)
+            reports.append(report)
+        if opts["write_reports"]:
+            try:
+                write_markdown_report(output_dir, report_date, p, findings)
+            except OSError as e:
+                infra_failed = True
+                print(f"리포트 쓰기 실패: {p}: {e}", file=sys.stderr)
     if opts["json"]:
-        print(json.dumps(report_to_json_v2(paths, results, strict=opts["strict"]), ensure_ascii=False, indent=2))
+        try:
+            print(json.dumps(report_to_json_v2(paths, results, strict=opts["strict"]), ensure_ascii=False, indent=2))
+        except (TypeError, ValueError) as e:
+            print(f"JSON 렌더링 실패: {e}", file=sys.stderr)
+            return 2
     else:
         print("\n\n".join(reports))
+    if infra_failed:
+        return 2
+    if opts["strict"] and required_failed:
+        return 1
     return 0
 
 

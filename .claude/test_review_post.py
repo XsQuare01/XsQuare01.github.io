@@ -34,6 +34,14 @@ def run_main(argv):
     return rc, buf.getvalue()
 
 
+def run_main_streams(argv):
+    stdout = io.StringIO()
+    stderr = io.StringIO()
+    with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+        rc = rp.main(argv)
+    return rc, stdout.getvalue(), stderr.getvalue()
+
+
 def codes(findings):
     return {f.code for f in findings}
 
@@ -321,6 +329,38 @@ class TestCliContractsV2(unittest.TestCase):
         self.assertIn("alpha.md", alpha_report.read_text(encoding="utf-8"))
         self.assertIn("[D1]", beta_report.read_text(encoding="utf-8"))
         self.assertFalse((Path("docs") / "reviews" / "2026-06-07-alpha.md").exists())
+
+    def test_strict_multi_target_writes_reports_before_returning_failure(self):
+        clean = write_post(self.root / "posts" / "clean.md", "본문")
+        red = write_post(self.root / "posts" / "red.md", "트리가 **DAG)**가 된다")
+        output_dir = self.root / "reports"
+
+        rc, stdout = run_main([
+            "review_post.py",
+            "--strict",
+            "--write-reports",
+            "--output-dir",
+            str(output_dir),
+            "--date",
+            "2026-06-07",
+            str(clean),
+            str(red),
+        ])
+
+        self.assertEqual(rc, 1, stdout)
+        self.assertTrue((output_dir / "2026-06-07-clean.md").exists(), stdout)
+        self.assertTrue((output_dir / "2026-06-07-red.md").exists(), stdout)
+
+    def test_json_keeps_stdout_machine_readable_and_errors_on_stderr(self):
+        valid = write_post(self.root / "posts" / "valid.md", "본문")
+        missing = self.root / "posts" / "missing.md"
+
+        rc, stdout, stderr = run_main_streams(["review_post.py", "--json", str(missing), str(valid)])
+
+        self.assertEqual(rc, 2)
+        self.assertTrue(stdout.lstrip().startswith("{"), stdout)
+        self.assertNotIn("입력 파일 처리 실패", stdout)
+        self.assertIn("입력 파일 처리 실패", stderr)
 
 
 class TestDeterministicValidatorsV2(unittest.TestCase):
