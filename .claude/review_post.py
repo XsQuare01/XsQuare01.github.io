@@ -6,6 +6,7 @@
 """
 import sys
 import re
+import json
 import xml.dom.minidom as minidom
 from collections import namedtuple
 from pathlib import Path
@@ -15,6 +16,16 @@ REQUIRED = "🔴 필수"
 RECOMMENDED = "🟡 권장"
 INFO = "🟢 참고"
 SEVERITY_ORDER = [REQUIRED, RECOMMENDED, INFO]
+SEVERITY_ICON = {
+    REQUIRED: "🔴",
+    RECOMMENDED: "🟡",
+    INFO: "🟢",
+}
+GATE_EFFECT = {
+    REQUIRED: "fail",
+    RECOMMENDED: "warn",
+    INFO: "info",
+}
 
 # ---- 임계치 ----
 EMDASH_RATIO = 0.08
@@ -100,14 +111,40 @@ def check_broken_bold(body, offset):
     return out
 
 
-def check_emdash(body):
+def _line_at(path, line):
+    if not line:
+        return "not-recorded"
+    try:
+        lines = Path(path).read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return "not-recorded"
+    if 1 <= line <= len(lines):
+        return lines[line - 1].strip() or "not-recorded"
+    return "not-recorded"
+
+
+def _sample_emdash_locations(path, body, offset, limit=3):
+    if offset is None:
+        return []
+    samples = []
+    for i, line in enumerate(body.split("\n")):
+        if "—" in line:
+            samples.append(f"{path}:{i + offset}")
+            if len(samples) >= limit:
+                break
+    return samples
+
+
+def check_emdash(body, path=None, offset=None):
     count = body.count("—")
     line_count = max(1, len(body.split("\n")))
     threshold = max(EMDASH_MIN, round(line_count * EMDASH_RATIO))
     if count > threshold:
+        samples = _sample_emdash_locations(path, body, offset) if path else []
+        sample_msg = f" 샘플 위치: {', '.join(samples)}" if samples else ""
         return [Finding(
             RECOMMENDED, "D2", None,
-            f"줄표(—) {count}회 — 임계치({threshold}) 초과. AI 문체 신호"
+            f"줄표(—) {count}회 — 임계치({threshold}) 초과. AI 문체 신호{sample_msg}"
         )]
     return []
 
@@ -357,7 +394,7 @@ def review_file(path):
     findings = []
     findings += check_frontmatter(fm)
     findings += check_broken_bold(body, offset)
-    findings += check_emdash(body)
+    findings += check_emdash(body, path, offset)
     findings += check_emphasis(body)
     findings += check_assets(body, offset)
     findings += check_internal_links(body, offset)
@@ -367,6 +404,116 @@ def review_file(path):
     findings += check_callout_order(body, offset)
     findings += check_math_block_lines(body, offset)
     return findings
+
+
+def _location(path, finding):
+    if finding.line:
+        return f"{path}:{finding.line}"
+    if finding.code == "D2" and "샘플 위치:" in finding.message:
+        return finding.message.split("샘플 위치:", 1)[1].strip()
+    return "not-recorded"
+
+
+def _recommendation(finding):
+    if "—" in finding.message:
+        parts = finding.message.rsplit("—", 1)
+        if len(parts) == 2 and parts[1].strip():
+            return parts[1].strip()
+    return "메시지에 따라 원문을 검토하고 필요한 경우 수정"
+
+
+def severity_icon(severity):
+    return SEVERITY_ICON.get(severity, str(severity).split()[0])
+
+
+def gate_effect(severity):
+    return GATE_EFFECT.get(severity, "warn")
+
+
+def finding_to_report_v2(path, finding, quote=None):
+    return {
+        "severity": severity_icon(finding.severity),
+        "source": "D",
+        "rule_id": finding.code,
+        "location": _location(path, finding),
+        "quote": quote if quote is not None else _line_at(path, finding.line),
+        "message": finding.message,
+        "recommendation": _recommendation(finding),
+        "gate_effect": gate_effect(finding.severity),
+    }
+
+
+def migrate_legacy_finding(text):
+    m = re.search(r"\[(D\d+|L\d+)\]", text)
+    rule_id = m.group(1) if m else "MIGRATED"
+    severity = "🟡"
+    effect = "warn"
+    if "🔴" in text or "필수" in text:
+        severity, effect = "🔴", "fail"
+    elif "🟢" in text or "참고" in text:
+        severity, effect = "🟢", "info"
+    return {
+        "schema_version": "review-report/v2",
+        "severity": severity,
+        "source": "MIGRATED",
+        "rule_id": rule_id,
+        "location": "not-recorded",
+        "quote": "not-recorded",
+        "message": text.strip(),
+        "recommendation": "not-recorded",
+        "gate_effect": effect,
+    }
+
+
+def _summary(findings):
+    return {severity_icon(s): len([f for f in findings if f.severity == s]) for s in SEVERITY_ORDER}
+
+
+def _finding_sort_key(row):
+    sev_order = {"🔴": 0, "🟡": 1, "🟢": 2}
+    source_order = {"D": 0, "L": 1, "MIGRATED": 2}
+    loc = row["location"]
+    file_part, line_part = loc, 0
+    if ":" in loc:
+        file_part, maybe_line = loc.rsplit(":", 1)
+        if maybe_line.isdigit():
+            line_part = int(maybe_line)
+    return (
+        sev_order.get(row["severity"], 99),
+        source_order.get(row["source"], 99),
+        row["rule_id"],
+        file_part,
+        line_part,
+    )
+
+
+def report_to_json_v2(paths, results, strict=False):
+    posts = []
+    all_findings = []
+    all_rows = []
+    for path, findings in results:
+        rows = [finding_to_report_v2(path, f) for f in findings]
+        rows.sort(key=_finding_sort_key)
+        posts.append({
+            "schema_version": "review-report/v2",
+            "target": Path(path).stem,
+            "generated_at": "not-recorded",
+            "strict": strict,
+            "summary": _summary(findings),
+            "findings": rows,
+        })
+        all_findings.extend(findings)
+        all_rows.extend(rows)
+    all_rows.sort(key=_finding_sort_key)
+    return {
+        "schema_version": "review-report/v2",
+        "posts": posts,
+        "findings": all_rows,
+        "aggregate": {
+            "target": "all" if len(paths) != 1 else Path(paths[0]).stem,
+            "summary": _summary(all_findings),
+        },
+    }
 
 
 def format_report(path, findings):
@@ -381,11 +528,44 @@ def format_report(path, findings):
             continue
         out.append(f"\n{s} ({len(fs)})")
         for f in fs:
-            loc = f"L{f.line}" if f.line else "—"
+            loc = _location(path, f)
             out.append(f"- [{f.code}] {loc}  {f.message}")
     summary = " · ".join(f"{s.split()[0]} {len(by_sev[s])}" for s in SEVERITY_ORDER)
     out.append("\n요약: " + summary)
     return "\n".join(out)
+
+
+def parse_args(argv):
+    opts = {
+        "json": False,
+        "strict": False,
+        "write_reports": False,
+        "output_dir": None,
+        "date": None,
+        "paths": [],
+    }
+    args = list(argv[1:])
+    i = 0
+    while i < len(args):
+        arg = args[i]
+        if arg == "--json":
+            opts["json"] = True
+        elif arg == "--strict":
+            opts["strict"] = True
+        elif arg == "--write-reports":
+            opts["write_reports"] = True
+        elif arg == "--output-dir":
+            if i + 1 < len(args):
+                opts["output_dir"] = args[i + 1]
+                i += 1
+        elif arg == "--date":
+            if i + 1 < len(args):
+                opts["date"] = args[i + 1]
+                i += 1
+        else:
+            opts["paths"].append(arg)
+        i += 1
+    return opts
 
 
 def main(argv):
@@ -393,18 +573,25 @@ def main(argv):
         sys.stdout.reconfigure(encoding="utf-8")
     except (AttributeError, ValueError):
         pass
-    paths = argv[1:]
+    opts = parse_args(argv)
+    paths = opts["paths"]
     if not paths:
         return 0
     reports = []
+    results = []
     for p in paths:
         try:
             findings = review_file(p)
         except FileNotFoundError:
             reports.append(f"## 결정적 검사: {p}\n파일을 찾을 수 없음")
             continue
-        reports.append(format_report(p, findings))
-    print("\n\n".join(reports))
+        results.append((p, findings))
+        if not opts["json"]:
+            reports.append(format_report(p, findings))
+    if opts["json"]:
+        print(json.dumps(report_to_json_v2(paths, results, strict=opts["strict"]), ensure_ascii=False, indent=2))
+    else:
+        print("\n\n".join(reports))
     return 0
 
 
