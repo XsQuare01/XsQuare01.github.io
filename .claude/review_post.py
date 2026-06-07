@@ -11,6 +11,7 @@ import xml.dom.minidom as minidom
 from collections import namedtuple
 from datetime import date
 from pathlib import Path
+from urllib.parse import unquote
 
 # ---- 심각도 ----
 REQUIRED = "🔴 필수"
@@ -55,8 +56,9 @@ _FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
 _FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 _INLINE_CODE_RE = re.compile(r"`[^`]*`")
 IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
-# ](/blog/<slug>) 또는 ](/blog/<slug>#anchor) 의 slug 추출
-BLOG_LINK_RE = re.compile(r"\]\(/blog/([^)\s#]+)")
+# ](/blog/<slug>) 또는 ](/blog/<slug>#anchor) 의 slug/anchor 추출
+BLOG_LINK_RE = re.compile(r"\]\(/blog/([^)\s#]+)(?:#([^\)\s]+))?")
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 
 # D9 이모지 검사: 규칙은 ✅/❌ 같은 "이모지"를 금하고 O/X·텍스트를 쓰라는 것.
 #   - U+1F000~1FAFF 이모지 블록은 모두 금지.
@@ -192,6 +194,50 @@ def svg_error(path):
         return str(e).splitlines()[0][:80]
 
 
+def extract_svg_text_labels(path):
+    """LLM 비교 보조용 SVG <text> 라벨 목록을 추출한다. 결정적 의미 비교는 하지 않는다."""
+    try:
+        doc = minidom.parse(str(path))
+    except Exception:  # noqa: BLE001 - 호출자는 svg_error/svg_baseline_findings로 오류를 보고한다.
+        return []
+    labels = []
+    for el in doc.getElementsByTagName("text"):
+        text = "".join(
+            node.data for node in el.childNodes
+            if node.nodeType == node.TEXT_NODE
+        ).strip()
+        if text:
+            labels.append(text)
+    return labels
+
+
+def svg_baseline_findings(path, url):
+    """SVG 구조 기준선 검사. 색/품질/본문과의 의미 일치는 판단하지 않는다."""
+    out = []
+    try:
+        doc = minidom.parse(str(path))
+    except Exception as e:  # noqa: BLE001 - 파싱 실패 사유를 그대로 보고
+        return [f"SVG 파싱 오류: {url} ({str(e).splitlines()[0][:80]})"]
+    root = doc.documentElement
+    if root is None or root.tagName != "svg":
+        return [f"SVG 루트 오류: {url} (root <svg> 아님)"]
+    view_box = root.getAttribute("viewBox").strip()
+    if not view_box:
+        out.append(f"SVG viewBox 누락: {url}")
+    else:
+        parts = [p for p in re.split(r"[ ,]+", view_box) if p]
+        nums = [_fnum_str(p) for p in parts]
+        if len(nums) != 4 or any(n is None for n in nums):
+            out.append(f"SVG viewBox 형식 오류: {url} (viewBox='{view_box}')")
+        else:
+            _, _, width, height = nums
+            if width < 0 or height < 0:
+                out.append(f"SVG viewBox 크기 음수: {url} (viewBox='{view_box}')")
+    if not root.getAttribute("width").strip() or not root.getAttribute("height").strip():
+        out.append(f"SVG width/height 누락: {url}")
+    return out
+
+
 def check_assets(body, offset):
     out = []
     for i, line in enumerate(body.split("\n")):
@@ -203,19 +249,25 @@ def check_assets(body, offset):
             if not asset.exists():
                 out.append(Finding(REQUIRED, "D5", i + offset, f"에셋 없음: {url}"))
             elif url.lower().endswith(".svg"):
-                err = svg_error(asset)
-                if err:
-                    out.append(Finding(REQUIRED, "D4", i + offset, f"SVG 파싱 오류: {url} ({err})"))
+                baseline_errors = svg_baseline_findings(asset, url)
+                if baseline_errors:
+                    for err in baseline_errors:
+                        out.append(Finding(REQUIRED, "D4", i + offset, err))
                     continue
                 # D13: 명백한 세로 클리핑만 잡는다. ">25px 여백" 같은 작법 권고는
                 # 기존 코퍼스가 대부분 따르지 않아(타이트한 푸터 관행) 결정적 검사로는 오탐이 된다.
-                ext = svg_bottom_extent(asset)
+                ext = svg_vertical_extent(asset)
                 if ext:
-                    vb_h, mb = ext
-                    if mb > vb_h + 2:
+                    vb_y, vb_h, mt, mb = ext
+                    if mt < vb_y - 2:
                         out.append(Finding(
                             REQUIRED, "D13", i + offset,
-                            f"SVG 세로 클리핑: 최하단 요소 y≈{mb:.0f}이 viewBox 높이 {vb_h:.0f}를 넘어 잘림 — {url}"
+                            f"SVG 세로 클리핑: 최상단 요소 y≈{mt:.0f}이 viewBox 시작 {vb_y:.0f}보다 위에 있어 잘림 — {url}"
+                        ))
+                    if mb > vb_y + vb_h + 2:
+                        out.append(Finding(
+                            REQUIRED, "D13", i + offset,
+                            f"SVG 세로 클리핑: 최하단 요소 y≈{mb:.0f}이 viewBox 끝 {vb_y + vb_h:.0f}를 넘어 잘림 — {url}"
                         ))
     return out
 
@@ -251,8 +303,8 @@ def _fnum(el, name, default=None):
         return default
 
 
-def svg_bottom_extent(path):
-    """(viewBox 높이, 요소 최하단 y)를 반환. 구하지 못하거나 transform이 있으면 None.
+def svg_vertical_extent(path):
+    """(viewBox y, 높이, 요소 최상단 y, 최하단 y)를 반환. 구하지 못하거나 transform이 있으면 None.
 
     transform이 있으면 좌표 보정이 어려워 오탐 위험이 커지므로 검사를 건너뛴다.
     """
@@ -264,45 +316,63 @@ def svg_bottom_extent(path):
     if not svgs:
         return None
     root = svgs[0]
+    vb_y = 0.0
     vb_h = None
     vb = root.getAttribute("viewBox").strip()
     if vb:
         parts = re.split(r"[ ,]+", vb)
         if len(parts) == 4:
+            parsed_y = _fnum_str(parts[1])
+            if parsed_y is not None:
+                vb_y = parsed_y
             vb_h = _fnum_str(parts[3])
     if vb_h is None:
         vb_h = _fnum(root, "height")
     if vb_h is None:
         return None
+    min_top = None
     max_bottom = 0.0
     for el in doc.getElementsByTagName("*"):
         if el.getAttribute("transform"):
             return None  # 변환 좌표계 — 안전하게 검사 생략
         tag = el.tagName
+        t = None
         b = None
         if tag == "text":
             # 텍스트는 베이스라인(y) 기준. 베이스라인이 캔버스를 벗어나야 실제 클리핑이다.
             # (베이스라인이 모서리에 걸친 정도는 어센더가 위로 그려져 시각적으로 멀쩡함)
-            b = _fnum(el, "y")
+            y = _fnum(el, "y")
+            if y is not None:
+                font_size = _fnum(el, "font-size", 16)
+                t = y - font_size
+                b = y
         elif tag == "rect":
             y, h = _fnum(el, "y"), _fnum(el, "height")
             if y is not None and h is not None:
+                t = y
                 b = y + h
         elif tag == "circle":
             cy, r = _fnum(el, "cy"), _fnum(el, "r")
             if cy is not None and r is not None:
+                t = cy - r
                 b = cy + r
         elif tag == "ellipse":
             cy, ry = _fnum(el, "cy"), _fnum(el, "ry")
             if cy is not None and ry is not None:
+                t = cy - ry
                 b = cy + ry
         elif tag == "line":
             ys = [v for v in (_fnum(el, "y1"), _fnum(el, "y2")) if v is not None]
             if ys:
+                t = min(ys)
                 b = max(ys)
+        if t is not None and (min_top is None or t < min_top):
+            min_top = t
         if b is not None and b > max_bottom:
             max_bottom = b
-    return vb_h, max_bottom
+    if min_top is None:
+        min_top = vb_y
+    return vb_y, vb_h, min_top, max_bottom
 
 
 def _fnum_str(s):
@@ -312,15 +382,59 @@ def _fnum_str(s):
         return None
 
 
+def markdown_heading_slug(text):
+    """Astro/GitHub 계열 heading slug에 맞춘 간단한 Unicode 보존 정규화."""
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"`([^`]*)`", r"\1", text)
+    text = re.sub(r"\{#[-\w가-힣]+\}\s*$", "", text)
+    text = text.strip().lower()
+    chars = []
+    prev_sep = False
+    for ch in text:
+        if ch.isalnum():
+            chars.append(ch)
+            prev_sep = False
+        elif ch.isspace() or ch in "-_":
+            if chars and not prev_sep:
+                chars.append("-")
+                prev_sep = True
+        else:
+            continue
+    return "".join(chars).strip("-")
+
+
+def post_heading_slugs(path):
+    try:
+        text = Path(path).read_text(encoding="utf-8")
+    except OSError:
+        return set()
+    _, body, _ = split_frontmatter(text)
+    slugs = set()
+    for _, line in iter_body_lines(body, 1):
+        m = HEADING_RE.match(line)
+        if m:
+            slug = markdown_heading_slug(m.group(2))
+            if slug:
+                slugs.add(slug)
+    return slugs
+
+
 def check_internal_links(body, offset):
     out = []
     for i, line in enumerate(body.split("\n")):
         for m in BLOG_LINK_RE.finditer(line):
             slug = m.group(1)
-            if not (POSTS_DIR / f"{slug}.md").exists():
+            anchor = unquote(m.group(2) or "")
+            target = POSTS_DIR / f"{slug}.md"
+            if not target.exists():
+                out.append(Finding(
+                    REQUIRED, "D6", i + offset,
+                    f"내부 링크 대상 없음: /blog/{slug}"
+                ))
+            elif anchor and anchor not in post_heading_slugs(target):
                 out.append(Finding(
                     RECOMMENDED, "D6", i + offset,
-                    f"내부 링크 대상 없음: /blog/{slug}"
+                    f"내부 링크 앵커 없음: /blog/{slug}#{anchor} — target={target} anchor={anchor}"
                 ))
     return out
 

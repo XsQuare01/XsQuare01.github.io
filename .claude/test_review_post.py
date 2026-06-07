@@ -183,7 +183,7 @@ class TestAssets(unittest.TestCase):
         self.assertEqual(out[0].severity, rp.REQUIRED)
 
     def test_valid_svg(self):
-        self._write("images/x/ok.svg", "<svg><rect/></svg>")
+        self._write("images/x/ok.svg", '<svg viewBox="0 0 10 10" width="10" height="10"><rect/></svg>')
         body = "![alt](/images/x/ok.svg)"
         self.assertEqual(rp.check_assets(body, 1), [])
 
@@ -219,10 +219,11 @@ class TestInternalLinks(unittest.TestCase):
         out = rp.check_internal_links(body, 1)
         self.assertEqual(len(out), 1)
         self.assertEqual(out[0].code, "D6")
-        self.assertEqual(out[0].severity, rp.RECOMMENDED)
+        self.assertEqual(out[0].severity, rp.REQUIRED)
+        self.assertIn("/blog/does-not-exist", out[0].message)
 
-    def test_link_with_anchor_strips_anchor(self):
-        # 앵커가 붙어도 slug(prim)만 보고 존재 판정 (앵커 자체는 v1에서 검증 안 함)
+    def test_link_with_existing_anchor_ok(self):
+        (Path(self.tmp.name) / "prim.md").write_text("## 정확성 증명\n", encoding="utf-8")
         body = "[Prim 증명](/blog/prim#정확성-증명)"
         self.assertEqual(rp.check_internal_links(body, 1), [])
 
@@ -246,7 +247,7 @@ class TestIntegration(unittest.TestCase):
             "---\ntitle: T\n---\n"
             "트리가 **DAG)**가 된다\n"          # D1 (🔴)
             "![x](/images/none.svg)\n"           # D5 (🔴)
-            "[없음](/blog/nope) 링크\n",          # D6 (🟡)
+            "[없음](/blog/nope) 링크\n",          # D6 (🔴)
             encoding="utf-8",
         )
         findings = rp.review_file(str(post))
@@ -283,12 +284,12 @@ class TestCliContractsV2(unittest.TestCase):
         self.assertIn('"schema_version": "review-report/v2"', stdout)
         self.assertIn('"target": "clean"', stdout)
 
-    def test_strict_exit_code_zero_when_only_warnings_exist(self):
-        post = write_post(self.root / "posts" / "warn-only.md", "[없음](/blog/missing-anchorless) 링크")
+    def test_strict_exit_code_one_when_missing_internal_slug_exists(self):
+        post = write_post(self.root / "posts" / "missing-slug.md", "[없음](/blog/missing-anchorless) 링크")
 
         rc, stdout = run_main(["review_post.py", "--strict", str(post)])
 
-        self.assertEqual(rc, 0, stdout)
+        self.assertEqual(rc, 1, stdout)
         self.assertNotIn("--strict", stdout)
 
     def test_strict_exit_code_one_when_required_findings_exist(self):
@@ -431,16 +432,51 @@ class TestDeterministicValidatorsV2(unittest.TestCase):
         self.assertEqual(rp.check_internal_links(valid, 1), [])
         out = rp.check_internal_links(missing_anchor, 1)
         self.assertIn("D6", codes(out))
-        self.assertIn("missing anchor", "\n".join(f.message for f in out))
+        self.assertEqual(out[0].severity, rp.RECOMMENDED)
+        self.assertEqual(out[0].line, 1)
+        self.assertIn("/blog/prim#missing-anchor", out[0].message)
+        self.assertIn(str(self.root / "posts" / "prim.md"), out[0].message)
+        self.assertIn("anchor=missing-anchor", out[0].message)
+
+    def test_markdown_heading_slug_preserves_korean_and_normalizes_spacing(self):
+        self.assertEqual(rp.markdown_heading_slug("정확성 증명"), "정확성-증명")
+        self.assertEqual(rp.markdown_heading_slug("English Heading!"), "english-heading")
 
     def test_svg_text_baseline_flags_clipped_top_edge(self):
         bad_svg = self.root / "public" / "images" / "x" / "baseline-bad.svg"
         good_svg = self.root / "public" / "images" / "x" / "baseline-good.svg"
-        write_svg(bad_svg, '<svg viewBox="0 0 100 20"><text x="5" y="0">Label</text></svg>')
-        write_svg(good_svg, '<svg viewBox="0 0 100 20"><text x="5" y="15">Label</text></svg>')
+        write_svg(bad_svg, '<svg viewBox="0 0 100 20" width="100" height="20"><text x="5" y="0">Label</text></svg>')
+        write_svg(good_svg, '<svg viewBox="0 0 100 20" width="100" height="20"><text x="5" y="15">Label</text></svg>')
 
         self.assertIn("D13", codes(rp.check_assets("![x](/images/x/baseline-bad.svg)", 1)))
         self.assertEqual(rp.check_assets("![x](/images/x/baseline-good.svg)", 1), [])
+
+    def test_svg_structural_baseline_flags_viewbox_dimensions_and_root(self):
+        missing_viewbox = self.root / "public" / "images" / "x" / "missing-viewbox.svg"
+        missing_size = self.root / "public" / "images" / "x" / "missing-size.svg"
+        negative_viewbox = self.root / "public" / "images" / "x" / "negative-viewbox.svg"
+        wrong_root = self.root / "public" / "images" / "x" / "wrong-root.svg"
+        write_svg(missing_viewbox, '<svg width="100" height="20"><text>Label</text></svg>')
+        write_svg(missing_size, '<svg viewBox="0 0 100 20"><text>Label</text></svg>')
+        write_svg(negative_viewbox, '<svg viewBox="0 0 -100 20" width="100" height="20"><text>Label</text></svg>')
+        write_svg(wrong_root, '<html><svg viewBox="0 0 100 20" width="100" height="20"/></html>')
+
+        messages = []
+        for name in ("missing-viewbox", "missing-size", "negative-viewbox", "wrong-root"):
+            out = rp.check_assets(f"![x](/images/x/{name}.svg)", 1)
+            self.assertIn("D4", codes(out), name)
+            messages.extend(f.message for f in out)
+        joined = "\n".join(messages)
+        self.assertIn("viewBox 누락", joined)
+        self.assertIn("width/height 누락", joined)
+        self.assertIn("viewBox 크기 음수", joined)
+        self.assertIn("root <svg> 아님", joined)
+
+    def test_svg_text_labels_extractable_for_llm_support(self):
+        svg = self.root / "public" / "images" / "x" / "labels.svg"
+        write_svg(svg, '<svg viewBox="0 0 100 20" width="100" height="20"><text>시작</text><text>End</text></svg>')
+
+        self.assertEqual(rp.extract_svg_text_labels(svg), ["시작", "End"])
 
 
 class TestReportSchemaV2(unittest.TestCase):
