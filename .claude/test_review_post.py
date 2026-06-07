@@ -1,9 +1,29 @@
 import contextlib
 import io
+import json
+import re
 import unittest
 import tempfile
 from pathlib import Path
 import review_post as rp
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+REVIEW_REPORT_DIR = REPO_ROOT / "docs" / "reviews"
+COMMAND_DIR = REPO_ROOT / ".claude" / "commands"
+REQUIRED_REPORT_FIELDS = {
+    "severity",
+    "source",
+    "rule_id",
+    "location",
+    "quote",
+    "message",
+    "recommendation",
+    "gate_effect",
+}
+SEVERITY_VALUES = {"🔴", "🟡", "🟢"}
+SOURCE_VALUES = {"D", "L", "MIGRATED"}
+GATE_EFFECT_VALUES = {"fail", "warn", "info"}
 
 
 def write_post(path, body="본문", frontmatter=None):
@@ -44,6 +64,64 @@ def run_main_streams(argv):
 
 def codes(findings):
     return {f.code for f in findings}
+
+
+def assert_review_json_schema(testcase, payload, expected_post_count=None):
+    testcase.assertEqual(payload["schema_version"], "review-report/v2")
+    testcase.assertIn("posts", payload)
+    testcase.assertIn("aggregate", payload)
+    testcase.assertIn("findings", payload)
+    testcase.assertIsInstance(payload["posts"], list)
+    testcase.assertIsInstance(payload["findings"], list)
+    if expected_post_count is not None:
+        testcase.assertEqual(len(payload["posts"]), expected_post_count)
+
+    for post in payload["posts"]:
+        testcase.assertEqual(post["schema_version"], "review-report/v2")
+        testcase.assertIn("target", post)
+        testcase.assertIn("summary", post)
+        testcase.assertIn("findings", post)
+        testcase.assertIsInstance(post["findings"], list)
+        for finding in post["findings"]:
+            assert_finding_schema(testcase, finding)
+
+    aggregate = payload["aggregate"]
+    testcase.assertIn("target", aggregate)
+    testcase.assertIn("summary", aggregate)
+    testcase.assertEqual(set(aggregate["summary"]), {"🔴", "🟡", "🟢"})
+    for finding in payload["findings"]:
+        assert_finding_schema(testcase, finding)
+
+
+def assert_finding_schema(testcase, finding):
+    testcase.assertEqual(set(finding), REQUIRED_REPORT_FIELDS)
+    testcase.assertIn(finding["severity"], SEVERITY_VALUES)
+    testcase.assertIn(finding["source"], SOURCE_VALUES)
+    testcase.assertTrue(finding["rule_id"], finding)
+    testcase.assertTrue(finding["location"], finding)
+    testcase.assertTrue(finding["quote"], finding)
+    testcase.assertTrue(finding["message"], finding)
+    testcase.assertTrue(finding["recommendation"], finding)
+    testcase.assertIn(finding["gate_effect"], GATE_EFFECT_VALUES)
+
+
+def parse_report_findings(markdown):
+    findings = []
+    current = None
+    for line in markdown.splitlines():
+        if line.startswith("### "):
+            if current is not None:
+                findings.append(current)
+            current = {}
+            continue
+        if current is None or not line.startswith("- "):
+            continue
+        m = re.match(r"- (severity|source|rule_id|location|quote|message|recommendation|gate_effect):\s*(.*)$", line)
+        if m:
+            current[m.group(1)] = m.group(2).strip().strip("`")
+    if current is not None:
+        findings.append(current)
+    return findings
 
 
 class TestSkeleton(unittest.TestCase):
@@ -511,6 +589,96 @@ class TestReportSchemaV2(unittest.TestCase):
         self.assertEqual(row["rule_id"], "D1")
         self.assertEqual(row["location"], "sample.md:7")
         self.assertEqual(row["gate_effect"], "fail")
+
+    def test_all_existing_review_reports_conform_to_v2_schema(self):
+        reports = sorted(
+            path for path in REVIEW_REPORT_DIR.glob("*.md")
+            if path.name != "README.md"
+        )
+        self.assertTrue(reports, "expected at least one stored review report")
+
+        for report in reports:
+            with self.subTest(report=report.name):
+                text = report.read_text(encoding="utf-8")
+                self.assertIn("schema_version: review-report/v2", text)
+                self.assertRegex(text, r"(?m)^target: .+", report.name)
+                self.assertRegex(text, r"(?m)^generated_at: .+", report.name)
+                self.assertRegex(text, r"(?m)^strict: .+", report.name)
+                self.assertRegex(text, r"(?m)^summary: 🔴 \d+ · 🟡 \d+ · 🟢 \d+", report.name)
+                self.assertIn("## Findings", text)
+                findings = parse_report_findings(text)
+                self.assertTrue(findings, f"{report.name} has no parsed findings")
+                for finding in findings:
+                    self.assertEqual(set(finding), REQUIRED_REPORT_FIELDS, finding)
+                    self.assertIn(finding["severity"], SEVERITY_VALUES)
+                    self.assertIn(finding["source"], SOURCE_VALUES)
+                    self.assertIn(finding["gate_effect"], GATE_EFFECT_VALUES)
+
+    def test_review_reports_readme_is_documentation_not_report_artifact(self):
+        readme = REVIEW_REPORT_DIR / "README.md"
+
+        self.assertTrue(readme.exists())
+        self.assertEqual(
+            [p.name for p in REVIEW_REPORT_DIR.glob("*.md") if p.name == "README.md"],
+            ["README.md"],
+        )
+        self.assertNotIn("## Findings", readme.read_text(encoding="utf-8"))
+
+    def test_generated_json_schema_contains_required_top_level_and_finding_fields(self):
+        post = REPO_ROOT / "src" / "content" / "posts" / "dijkstra-2.md"
+
+        rc, stdout = run_main(["review_post.py", "--json", str(post)])
+
+        self.assertEqual(rc, 0, stdout)
+        payload = json.loads(stdout)
+        assert_review_json_schema(self, payload, expected_post_count=1)
+        self.assertEqual(payload["aggregate"]["target"], "dijkstra-2")
+
+    def test_multi_target_json_aggregate_uses_all_target_and_combines_findings(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            old_public, old_posts = rp.PUBLIC_DIR, rp.POSTS_DIR
+            try:
+                rp.PUBLIC_DIR = root / "public"
+                rp.POSTS_DIR = root / "posts"
+                rp.PUBLIC_DIR.mkdir(parents=True)
+                rp.POSTS_DIR.mkdir(parents=True)
+                clean = write_post(root / "posts" / "clean.md", "본문")
+                red = write_post(root / "posts" / "red.md", "트리가 **DAG)**가 된다\n" + "보통 문장\n" * 4)
+
+                rc, stdout = run_main(["review_post.py", "--json", str(clean), str(red)])
+            finally:
+                rp.PUBLIC_DIR, rp.POSTS_DIR = old_public, old_posts
+
+        self.assertEqual(rc, 0, stdout)
+        payload = json.loads(stdout)
+        assert_review_json_schema(self, payload, expected_post_count=2)
+        self.assertEqual(payload["aggregate"]["target"], "all")
+        self.assertEqual(payload["aggregate"]["summary"], {"🔴": 1, "🟡": 0, "🟢": 0})
+        self.assertEqual([post["target"] for post in payload["posts"]], ["clean", "red"])
+        self.assertEqual(payload["posts"][0]["summary"], {"🔴": 0, "🟡": 0, "🟢": 0})
+        self.assertEqual(payload["posts"][1]["summary"], {"🔴": 1, "🟡": 0, "🟢": 0})
+        self.assertEqual([finding["rule_id"] for finding in payload["findings"]], ["D1"])
+
+    def test_command_docs_include_required_storage_and_tool_contract(self):
+        required_terms = [
+            "allowed-tools: Write, Edit",
+            "--write-reports",
+            "docs/reviews/",
+            "review-report/v2",
+            "canonical fields",
+            "Write/Edit",
+            "저장",
+            "검토 완료, 이슈 없음",
+        ]
+
+        for command_name in ("review-post.md", "review-post-all.md"):
+            with self.subTest(command=command_name):
+                text = (COMMAND_DIR / command_name).read_text(encoding="utf-8")
+                for term in required_terms:
+                    self.assertIn(term, text)
+                for field in REQUIRED_REPORT_FIELDS:
+                    self.assertIn(f"`{field}`", text)
 
 
 class TestStdoutEncoding(unittest.TestCase):
