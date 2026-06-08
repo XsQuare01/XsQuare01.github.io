@@ -38,5 +38,5 @@
   <text x="432" y="307" fill="#f87171" font-size="12" font-weight="600">버려진 일</text>
 
   <!-- Footnote -->
-  <text x="360" y="345" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">이익 큰 일부터, 가능한 한 마감기한에 가까운 슬롯에 배치한다</text>
+  <text x="360" y="345" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">이익 큰 일부터, 가능한 한 마감 기한에 가까운 슬롯에 배치한다</text>
 </svg>
