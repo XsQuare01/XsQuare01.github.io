@@ -22,7 +22,7 @@
   <!-- Time axis labels -->
   <text x="180" y="222" text-anchor="middle" fill="#64748b" font-size="11">0</text>
   <text x="360" y="222" text-anchor="middle" fill="#64748b" font-size="11">1</text>
-  <text x="540" y="222" text-anchor="middle" fill="#64748b" font-size="11">2 (= N)</text>
+  <text x="540" y="222" text-anchor="middle" fill="#64748b" font-size="11">2 (= 최대 마감)</text>
   <line x1="180" y1="210" x2="540" y2="210" stroke="#334155" stroke-width="1.5"/>
 
   <!-- ===== DROPPED JOB ===== -->
