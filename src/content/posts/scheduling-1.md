@@ -1,6 +1,6 @@
 ---
 title: "데드라인 스케줄링 — 이익을 최대로 만드는 greedy 배치"
-date: 2026-05-28T09:00:00
+date: 2026-06-08T09:00:00
 description: "마감 기한과 이익이 있는 일들 중에서, 이익의 합을 최대로 만드는 일정을 짜는 문제를 다룬다. 이익이 큰 일부터 마감 기한에 가까운 자리에 넣는 greedy 전략을 세우고, 교환 논증으로 그 최적성을 증명한 뒤, 균형 트리로 O(N log N)까지 줄이는 방법을 살펴본다."
 tags: ["Algorithm", "Greedy", "Scheduling", "Exchange Argument"]
 category: algorithm
