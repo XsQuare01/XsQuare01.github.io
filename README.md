@@ -48,6 +48,25 @@
 | [Before Physics](https://xsquare01.github.io/blog/before-physics) | 양자 컴퓨터 이전에 알아야 할 것들 |
 | [Future Cryptography](https://xsquare01.github.io/blog/future-cryptography) | 양자 이후의 암호학 |
 
+### 알고리즘
+
+자료구조와 분석의 기초부터 그래프·그리디 알고리즘까지
+
+| 글 | 요약 |
+|---|---|
+| [알고리즘 오리엔테이션](https://xsquare01.github.io/blog/algo-orientation) | 알고리즘이란 무엇이며 왜 분석하는가 |
+| [재귀 (Recursion)](https://xsquare01.github.io/blog/recursion) | 문제를 자기 자신으로 푸는 사고법 |
+| [자료구조](https://xsquare01.github.io/blog/data-structure) | 데이터를 담는 그릇의 설계 |
+| [정렬 (Sort)](https://xsquare01.github.io/blog/sort) | Selection · Merge · Quick Sort |
+| [그리디 알고리즘](https://xsquare01.github.io/blog/greedy) | 매 순간 가장 좋아 보이는 선택과 그 한계 |
+| [최소 신장 트리 (MST)](https://xsquare01.github.io/blog/mst) | MST의 정의와 성질 |
+| [프림 (Prim)](https://xsquare01.github.io/blog/prim) | 정점 중심 그리디로 MST 만들기 |
+| [Kruskal](https://xsquare01.github.io/blog/kruskal) | 간선 중심 그리디로 MST 만들기 |
+| [모든 MST를 찾는가](https://xsquare01.github.io/blog/any-mst) | Prim·Kruskal이 임의의 MST를 만들 수 있는지 |
+| [다익스트라 1](https://xsquare01.github.io/blog/dijkstra-1) | 각 노드까지의 최단 거리 구하기 |
+| [다익스트라 2](https://xsquare01.github.io/blog/dijkstra-2) | 최단 경로 복원, 시간 복잡도, Prim과의 비교 |
+| [데드라인 스케줄링](https://xsquare01.github.io/blog/scheduling-1) | 이익을 최대로 만드는 greedy 배치와 정확성 증명 |
+
 ---
 
 ## 기술 스택
