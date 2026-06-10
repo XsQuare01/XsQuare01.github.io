@@ -5,3 +5,6 @@ node_modules/
 .superpowers/
 .claude/settings.local.json
 .playwright-mcp/
+.env.local
+.claude/__pycache__/
+.sisyphus/
