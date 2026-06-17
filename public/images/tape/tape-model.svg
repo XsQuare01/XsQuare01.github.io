@@ -1,0 +1,47 @@
+<svg viewBox="0 0 720 360" width="1080" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="360" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Tape Storage — 테이프 접근 모델</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">데이터를 한 번 적고 여러 번 읽는다 · 읽을 때마다 시작점으로 되돌아온다</text>
+
+  <!-- Return arrow (above the tape) -->
+  <path d="M 400 132 C 400 92, 92 92, 92 130" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <polygon points="92,130 87,120 97,120" fill="#475569"/>
+  <text x="246" y="86" text-anchor="middle" fill="#64748b" font-size="11">읽은 뒤 시작점으로 복귀</text>
+
+  <!-- Read head (start marker) -->
+  <polygon points="78,140 78,200 102,170" fill="#22c55e"/>
+  <text x="80" y="225" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">시작</text>
+
+  <!-- Tape blocks -->
+  <rect x="110" y="140" width="70"  height="60" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="145" y="167" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">D₁</text>
+  <text x="145" y="186" text-anchor="middle" fill="#94a3b8" font-size="11">L₁</text>
+
+  <rect x="180" y="140" width="130" height="60" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="245" y="167" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">D₂</text>
+  <text x="245" y="186" text-anchor="middle" fill="#94a3b8" font-size="11">L₂</text>
+
+  <rect x="310" y="140" width="90"  height="60" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="355" y="167" text-anchor="middle" fill="#fb923c" font-size="14" font-weight="700">D₃</text>
+  <text x="355" y="186" text-anchor="middle" fill="#fdba74" font-size="11">L₃</text>
+
+  <rect x="400" y="140" width="110" height="60" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="455" y="167" text-anchor="middle" fill="#94a3b8" font-size="14" font-weight="700">D₄</text>
+  <text x="455" y="186" text-anchor="middle" fill="#64748b" font-size="11">L₄</text>
+
+  <!-- Access cost bracket for D3 -->
+  <line x1="110" y1="222" x2="400" y2="222" stroke="#f97316" stroke-width="1.5"/>
+  <line x1="110" y1="217" x2="110" y2="227" stroke="#f97316" stroke-width="1.5"/>
+  <line x1="400" y1="217" x2="400" y2="227" stroke="#f97316" stroke-width="1.5"/>
+  <text x="255" y="244" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="600">D₃ 접근 비용 = L₁ + L₂ + L₃</text>
+
+  <!-- Total cost formula -->
+  <text x="360" y="296" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">총 접근 시간  =  Σ Fᵢ · (L₁ + L₂ + ⋯ + Lᵢ)</text>
+  <text x="360" y="318" text-anchor="middle" fill="#64748b" font-size="11">Fᵢ : 사용 빈도 · Lᵢ : 데이터 길이 · 앞에 있을수록 더 자주 지나간다</text>
+
+  <!-- Footnote -->
+  <text x="360" y="345" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">i번째 데이터를 읽으려면 그 앞 데이터들을 모두 지나야 한다</text>
+</svg>
