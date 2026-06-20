@@ -1,0 +1,39 @@
+<svg viewBox="0 0 720 360" width="1080" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="360" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">최적 배치 — F/L 내림차순</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">비율 F/L 이 큰 데이터를 시작점에 가깝게 놓는다</text>
+
+  <!-- start head -->
+  <polygon points="78,150 78,210 102,180" fill="#22c55e"/>
+  <text x="80" y="232" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">시작</text>
+
+  <!-- blocks: F/L decreasing left to right -->
+  <rect x="110" y="150" width="60"  height="60" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="140" y="178" text-anchor="middle" fill="#4ade80" font-size="13" font-weight="700">D₍₁₎</text>
+  <text x="140" y="197" text-anchor="middle" fill="#86efac" font-size="11">F/L 높음</text>
+
+  <rect x="170" y="150" width="110" height="60" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="225" y="178" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">D₍₂₎</text>
+
+  <rect x="280" y="150" width="90"  height="60" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="325" y="178" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">D₍₃₎</text>
+
+  <rect x="370" y="150" width="150" height="60" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="445" y="178" text-anchor="middle" fill="#fb923c" font-size="13" font-weight="700">D₍ₙ₎</text>
+  <text x="445" y="197" text-anchor="middle" fill="#fdba74" font-size="11">F/L 낮음</text>
+
+  <!-- ratio gradient arrow -->
+  <line x1="110" y1="244" x2="520" y2="244" stroke="#475569" stroke-width="1.5"/>
+  <polygon points="520,244 510,239 510,249" fill="#475569"/>
+  <text x="315" y="266" text-anchor="middle" fill="#64748b" font-size="11">F₍₁₎/L₍₁₎  ≥  F₍₂₎/L₍₂₎  ≥  ⋯  ≥  F₍ₙ₎/L₍ₙ₎</text>
+
+  <!-- complexity callout -->
+  <rect x="180" y="288" width="360" height="42" rx="8" fill="#0b1220" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="360" y="314" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">정렬 한 번이면 끝 ·  O(N log N)</text>
+
+  <!-- Footnote -->
+  <text x="360" y="350" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">교환 논증으로 증명된 최적 순서 — 빈도 대비 길이가 효율적인 데이터일수록 앞에</text>
+</svg>

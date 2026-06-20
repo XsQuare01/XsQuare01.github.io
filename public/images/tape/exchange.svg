@@ -1,0 +1,58 @@
+<svg viewBox="0 0 720 360" width="1080" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="360" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">교환 논증 — 이웃한 두 데이터 맞바꾸기</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">앞쪽 공통 구간 S = L₁ + ⋯ + Lᵢ₋₁ 는 그대로, i 와 i+1 의 자리만 바꾼다</text>
+
+  <!-- ===== Before ===== -->
+  <text x="60" y="104" fill="#94a3b8" font-size="12" font-weight="700">P</text>
+  <text x="60" y="120" fill="#64748b" font-size="10">(바꾸기 전)</text>
+
+  <rect x="120" y="86" width="120" height="38" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+  <text x="180" y="110" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">S</text>
+
+  <rect x="240" y="86" width="90" height="38" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="285" y="105" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">i</text>
+  <text x="285" y="119" text-anchor="middle" fill="#94a3b8" font-size="9">Fᵢ , Lᵢ</text>
+
+  <rect x="330" y="86" width="70" height="38" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="365" y="105" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="700">i+1</text>
+  <text x="365" y="119" text-anchor="middle" fill="#fdba74" font-size="9">Fᵢ₊₁ , Lᵢ₊₁</text>
+
+  <rect x="400" y="86" width="80" height="38" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="440" y="110" text-anchor="middle" fill="#64748b" font-size="12">⋯</text>
+
+  <!-- swap arrows (bidirectional: i ⇄ i+1) -->
+  <line x1="302" y1="142" x2="348" y2="142" stroke="#e2e8f0" stroke-width="1.6"/>
+  <polygon points="298,142 308,137 308,147" fill="#e2e8f0"/>
+  <polygon points="352,142 342,137 342,147" fill="#e2e8f0"/>
+  <text x="325" y="166" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="600">맞바꿈</text>
+
+  <!-- ===== After ===== -->
+  <text x="60" y="198" fill="#94a3b8" font-size="12" font-weight="700">P′</text>
+  <text x="60" y="214" fill="#64748b" font-size="10">(바꾼 후)</text>
+
+  <rect x="120" y="180" width="120" height="38" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+  <text x="180" y="204" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">S</text>
+
+  <rect x="240" y="180" width="70" height="38" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="275" y="199" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="700">i+1</text>
+  <text x="275" y="213" text-anchor="middle" fill="#fdba74" font-size="9">Fᵢ₊₁ , Lᵢ₊₁</text>
+
+  <rect x="310" y="180" width="90" height="38" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="355" y="199" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">i</text>
+  <text x="355" y="213" text-anchor="middle" fill="#94a3b8" font-size="9">Fᵢ , Lᵢ</text>
+
+  <rect x="400" y="180" width="80" height="38" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="440" y="204" text-anchor="middle" fill="#64748b" font-size="12">⋯</text>
+
+  <!-- Delta box -->
+  <rect x="90" y="248" width="540" height="76" rx="8" fill="#0b1220" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="360" y="276" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">P − P′  =  Fᵢ₊₁·Lᵢ − Fᵢ·Lᵢ₊₁  =  Lᵢ·Lᵢ₊₁ ( Fᵢ₊₁/Lᵢ₊₁ − Fᵢ/Lᵢ )</text>
+  <text x="360" y="304" text-anchor="middle" fill="#4ade80" font-size="12" font-weight="600">Fᵢ₊₁/Lᵢ₊₁ &gt; Fᵢ/Lᵢ  이면  P − P′ &gt; 0  →  맞바꾸면 더 빨라진다</text>
+
+  <!-- Footnote -->
+  <text x="360" y="346" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">F/L 가 더 큰 데이터가 뒤에 있으면 앞으로 당길 때마다 비용이 줄어든다 → 최적은 F/L 내림차순</text>
+</svg>
