@@ -1,0 +1,70 @@
+<svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="400" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">분할 정복의 구조 — 나누고, 풀고, 합친다</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">내려가며 절반씩 나누고, 바닥에서 직접 풀고, 올라오며 합친다</text>
+
+  <!-- Left labels: phases -->
+  <text x="58" y="96" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="700">나누기</text>
+  <text x="58" y="232" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">풀기</text>
+  <text x="58" y="320" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">합치기</text>
+
+  <!-- Divide arrow (down) -->
+  <line x1="58" y1="104" x2="58" y2="224" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="58,232 53,222 63,222" fill="#3b82f6"/>
+  <!-- Combine arrow (up) -->
+  <line x1="690" y1="312" x2="690" y2="104" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="690,96 685,106 695,106" fill="#f97316"/>
+
+  <!-- Level 0: full problem -->
+  <rect x="290" y="76" width="140" height="34" rx="5" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="360" y="98" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">문제 (크기 n)</text>
+
+  <!-- edges 0 -> 1 -->
+  <line x1="330" y1="110" x2="230" y2="146" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="390" y1="110" x2="490" y2="146" stroke="#3b82f6" stroke-width="1.5"/>
+
+  <!-- Level 1: two halves -->
+  <rect x="160" y="148" width="140" height="32" rx="5" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="230" y="169" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">절반 (n/2)</text>
+  <rect x="420" y="148" width="140" height="32" rx="5" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="490" y="169" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">절반 (n/2)</text>
+
+  <!-- edges 1 -> 2 -->
+  <line x1="195" y1="180" x2="150" y2="214" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="265" y1="180" x2="290" y2="214" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="455" y1="180" x2="430" y2="214" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="525" y1="180" x2="570" y2="214" stroke="#3b82f6" stroke-width="1.5"/>
+
+  <!-- Level 2: base cases (green) -->
+  <rect x="112" y="216" width="76" height="32" rx="5" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="150" y="237" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700">크기 1</text>
+  <rect x="252" y="216" width="76" height="32" rx="5" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="290" y="237" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700">크기 1</text>
+  <rect x="392" y="216" width="76" height="32" rx="5" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="430" y="237" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700">크기 1</text>
+  <rect x="532" y="216" width="76" height="32" rx="5" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="570" y="237" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700">크기 1</text>
+
+  <text x="360" y="268" text-anchor="middle" fill="#4ade80" font-size="11">기저 사례 — 더 나눌 수 없는 작은 문제는 직접 풀린다</text>
+
+  <!-- combine edges (orange, dashed) going up -->
+  <line x1="150" y1="288" x2="222" y2="300" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="290" y1="288" x2="238" y2="300" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="430" y1="288" x2="482" y2="300" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="570" y1="288" x2="498" y2="300" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <!-- combined halves -->
+  <rect x="160" y="302" width="140" height="32" rx="5" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="230" y="323" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700">정렬된 절반</text>
+  <rect x="420" y="302" width="140" height="32" rx="5" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="490" y="323" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="700">정렬된 절반</text>
+
+  <!-- final combine to top-ish -->
+  <line x1="230" y1="334" x2="335" y2="360" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="490" y1="334" x2="385" y2="360" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="290" y="362" width="140" height="30" rx="5" fill="#3a2a14" stroke="#f97316" stroke-width="2"/>
+  <text x="360" y="382" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="700">정렬된 전체</text>
+</svg>
