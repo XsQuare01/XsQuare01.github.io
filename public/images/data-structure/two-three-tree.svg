@@ -1,0 +1,52 @@
+<svg viewBox="0 0 760 280" width="1140" height="420" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="280" rx="10" fill="#0f1117"/>
+  <text x="380" y="28" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">2-3 Tree — 1~2개의 Key, 2~3개의 Children</text>
+
+  <!-- Edges from root -->
+  <line x1="365" y1="76" x2="190" y2="126" stroke="#334155" stroke-width="1.5"/>
+  <line x1="395" y1="76" x2="540" y2="126" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Edges from left child -->
+  <line x1="175" y1="156" x2="95" y2="206" stroke="#334155" stroke-width="1.5"/>
+  <line x1="205" y1="156" x2="280" y2="206" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Edges from right child (3-node) -->
+  <line x1="520" y1="156" x2="430" y2="206" stroke="#334155" stroke-width="1.5"/>
+  <line x1="540" y1="156" x2="540" y2="206" stroke="#334155" stroke-width="1.5"/>
+  <line x1="560" y1="156" x2="650" y2="206" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Root: 2-node with key 20 -->
+  <rect x="348" y="50" width="64" height="28" rx="6" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+  <text x="380" y="69" text-anchor="middle" fill="#fed7aa" font-size="12" font-weight="700">20</text>
+
+  <!-- Left child: 2-node with key 10 -->
+  <rect x="163" y="128" width="64" height="28" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="195" y="147" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">10</text>
+  <text x="195" y="120" text-anchor="middle" fill="#94a3b8" font-size="9">2-node</text>
+
+  <!-- Right child: 3-node with keys 30, 50 -->
+  <rect x="503" y="128" width="74" height="28" rx="6" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+  <line x1="540" y1="130" x2="540" y2="154" stroke="#22c55e" stroke-width="0.8" opacity="0.5"/>
+  <text x="521" y="147" text-anchor="middle" fill="#86efac" font-size="12" font-weight="700">30</text>
+  <text x="559" y="147" text-anchor="middle" fill="#86efac" font-size="12" font-weight="700">50</text>
+  <text x="540" y="120" text-anchor="middle" fill="#94a3b8" font-size="9">3-node</text>
+
+  <!-- Leaves -->
+  <rect x="63" y="208" width="64" height="28" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="95" y="227" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">5</text>
+
+  <rect x="248" y="208" width="64" height="28" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="280" y="227" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">15</text>
+
+  <rect x="398" y="208" width="64" height="28" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="430" y="227" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">25</text>
+
+  <rect x="508" y="208" width="64" height="28" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="540" y="227" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">40</text>
+
+  <rect x="618" y="208" width="64" height="28" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="650" y="227" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">60</text>
+
+  <!-- Bottom note -->
+  <text x="380" y="265" text-anchor="middle" fill="#64748b" font-size="11">모든 leaf까지의 거리가 동일 · Height = O(log n) · Disk 기반 자료구조에서 활용</text>
+</svg>

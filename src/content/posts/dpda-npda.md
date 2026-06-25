@@ -9,6 +9,16 @@ difficulty: 심화
 
 > DFA는 상태만 기억한다. 스택을 하나 추가하면 어디까지 가능해질까? 그리고 비결정론적으로 동작하면 얼마나 더 강력해질까?
 
+<div class="callout">
+<div class="callout-title">이 포스트에서 다루는 내용</div>
+
+- DFA에 스택을 추가한 DPDA의 구조와 동작 원리
+- DPDA로 풀 수 있는 문제와 풀 수 없는 문제 (예: $L_5 = 0^i 1^i$ vs $L_7 = 0^i 1^j 0^k$)
+- NPDA(비결정론적 PDA)와 DPDA의 계산 능력 차이
+- 스택을 두 개로 늘리면 튜링 머신과 동등해지는 원리
+
+</div>
+
 DFA에 스택(Stack)을 추가한 계산 모델을 **PDA(Pushdown Automata)** 라 부른다. 결정론적으로 동작하면 DPDA, 비결정론적으로 동작하면 NPDA가 된다. 스택이 생기면 DFA로는 불가능했던 문제들을 해결할 수 있지만, DPDA만으로는 여전히 해결하지 못하는 문제가 존재한다.
 
 ![계산 모델별 메모리 구조](/images/dpda/model-expansion.svg)
@@ -55,6 +65,8 @@ DPDA가 $L_7$을 accept한다고 가정하자.
 그러면 DPDA는 abba를 accept해야 한다 ($y = \text{ab}$). DPDA가 abba를 처리하다 어떤 시점에 $y$의 끝을 인식하고, 이후 $y^R$과 스택의 내용을 매칭하여 스택이 빈 상태로 도달한다.
 
 이제 abbaabba ($y = \text{abba}$, $y^R = \text{abba}$)를 생각해보자. DPDA는 앞의 abba를 처리할 때 이미 스택이 빈 상태가 된다. 왜냐하면 현재 상황에서 DPDA는 이 abba가 짧은 입력 abba의 전부인지, 긴 입력 abbaabba의 앞부분인지 구분할 수 없기 때문이다.
+
+아래 추적은 스택이 비면 받아들이는 모델, 즉 **빈 스택 수용** 관례를 가정한다.
 
 더 나아가 abaababba를 생각해보자. 이를 abaaba | abba로 나누면, abaaba의 역은 abaaba이므로 abba와 다르다. 즉, abaababba ∉ $L_7$이다. 그러나 DPDA가 abaaba를 처리한 시점에 스택이 빈 상태라면, 이후 어떤 문자열이 오더라도 accept해버리는 상황이 발생한다. abbaabba에서 abba를 처리했을 때와 같은 상태이기 때문이다.
 
@@ -143,7 +155,7 @@ $$L_{11} = \{x \mid x = yy^Ry^Ry^R\}$$
 <div class="callout-title">핵심 정리: DPDA와 NPDA</div>
 <ul>
 <li>비결정론이 계산 능력 자체를 높이는 유일한 모델은 DPDA다 — DFA, DTM에서는 비결정론이 능력 차이를 만들지 않는다.</li>
-<li>DPDA ⊊ NPDA: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: {ww^R}).</li>
+<li>DPDA ⊊ NPDA: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: $yy^R$).</li>
 <li>스택 1개 추가: Regular → CFL로 능력이 확장된다.</li>
 <li>스택 2개 추가: CFL → Recursively Enumerable로 확장 — 튜링 머신과 동등하다.</li>
 </ul>

@@ -7,10 +7,10 @@ category: cryptography
 difficulty: 입문
 ---
 
-> 암호학의 수학적 토대는 정수론에서 시작된다. Division Theorem은 그 출발점이다 — 임의의 양의 정수를 다른 양의 정수로 나누면, 몫과 나머지가 유일하게 결정된다. 이 단순한 사실이 모듈러 산술, GCD, RSA의 기초가 된다.
+> 암호학의 수학적 토대는 정수론에서 시작된다. Division Theorem은 그 출발점이다. 임의의 양의 정수를 다른 양의 정수로 나누면, 몫과 나머지가 유일하게 결정된다. 이 단순한 사실이 모듈러 산술, GCD, RSA의 기초가 된다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>나누어 떨어짐 (Divisibility)</strong>: a | b — b = ca인 정수 c가 존재할 때 a가 b를 나눈다</li>
 <li><strong>나누어 떨어짐의 성질</strong>: 선형 결합 성질, 추이 성질</li>
@@ -84,7 +84,7 @@ $$a \mid b, \quad b \mid c \implies a \mid c$$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>어떤 양의 정수든 다른 양의 정수로 나누면, 몫과 나머지가 딱 하나씩 정해진다는 뜻이다. 예를 들어 17을 5로 나누면 몫 3, 나머지 2 — 이 조합은 유일하다. 이 단순한 사실이 모듈러 산술과 RSA 암호의 출발점이다.</p>
+<p>어떤 양의 정수든 다른 양의 정수로 나누면, 몫과 나머지가 딱 하나씩 정해진다는 뜻이다. 예를 들어 17을 5로 나누면 몫은 3이고 나머지는 2다. 이 조합은 유일하다. 이 단순한 사실이 모듈러 산술과 RSA 암호의 출발점이다.</p>
 </div>
 
 증명은 **존재성** 과 **유일성** 두 부분으로 나뉜다.

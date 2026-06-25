@@ -1,0 +1,69 @@
+<svg viewBox="0 0 720 360" width="1080" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="360" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Interval Scheduling — greedy 선택</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">구간들을 종료 시간 순으로 보며 — 이미 고른 일과 겹치면 버린다</text>
+
+  <!-- ===== TIME GRID ===== -->
+  <!-- x(t) = 110 + t*54, t = 0..10 -->
+  <line x1="110" y1="62" x2="110" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="164" y1="62" x2="164" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="218" y1="62" x2="218" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="272" y1="62" x2="272" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="326" y1="62" x2="326" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="380" y1="62" x2="380" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="434" y1="62" x2="434" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="488" y1="62" x2="488" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="542" y1="62" x2="542" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="596" y1="62" x2="596" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="650" y1="62" x2="650" y2="250" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== INTERVAL BARS (sorted by end time, top to bottom) ===== -->
+
+  <!-- A = (1,3) PICK -->
+  <rect x="164" y="70" width="108" height="24" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="218" y="86" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">A (1, 3)</text>
+
+  <!-- B = (2,5) DROP (A와 겹침) -->
+  <rect x="218" y="104" width="162" height="24" rx="6" fill="#2a1c0e" stroke="#f97316" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="299" y="120" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="700">B (2, 5)</text>
+
+  <!-- C = (4,7) PICK -->
+  <rect x="326" y="138" width="162" height="24" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="407" y="154" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">C (4, 7)</text>
+
+  <!-- D = (6,8) DROP (C와 겹침) -->
+  <rect x="434" y="172" width="108" height="24" rx="6" fill="#2a1c0e" stroke="#f97316" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="488" y="188" text-anchor="middle" fill="#fb923c" font-size="12" font-weight="700">D (6, 8)</text>
+
+  <!-- E = (8,10) PICK -->
+  <rect x="542" y="206" width="108" height="24" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="596" y="222" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">E (8, 10)</text>
+
+  <!-- ===== TIME AXIS ===== -->
+  <line x1="110" y1="250" x2="650" y2="250" stroke="#334155" stroke-width="1.5"/>
+  <text x="110" y="266" text-anchor="middle" fill="#64748b" font-size="11">0</text>
+  <text x="164" y="266" text-anchor="middle" fill="#64748b" font-size="11">1</text>
+  <text x="218" y="266" text-anchor="middle" fill="#64748b" font-size="11">2</text>
+  <text x="272" y="266" text-anchor="middle" fill="#64748b" font-size="11">3</text>
+  <text x="326" y="266" text-anchor="middle" fill="#64748b" font-size="11">4</text>
+  <text x="380" y="266" text-anchor="middle" fill="#64748b" font-size="11">5</text>
+  <text x="434" y="266" text-anchor="middle" fill="#64748b" font-size="11">6</text>
+  <text x="488" y="266" text-anchor="middle" fill="#64748b" font-size="11">7</text>
+  <text x="542" y="266" text-anchor="middle" fill="#64748b" font-size="11">8</text>
+  <text x="596" y="266" text-anchor="middle" fill="#64748b" font-size="11">9</text>
+  <text x="650" y="266" text-anchor="middle" fill="#64748b" font-size="11">10</text>
+  <text x="660" y="240" fill="#475569" font-size="10">시간 →</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="190" y="288" width="22" height="16" rx="3" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="220" y="301" fill="#93c5fd" font-size="12" font-weight="600">채택 (A · C · E = 3개)</text>
+
+  <rect x="400" y="288" width="22" height="16" rx="3" fill="#2a1c0e" stroke="#f97316" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="430" y="301" fill="#fb923c" font-size="12" font-weight="600">버림 (앞선 일과 겹침)</text>
+
+  <!-- Footnote -->
+  <text x="360" y="338" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">종료 시간이 빠른 일부터 본다 — 빨리 끝낼수록 뒤에 더 많은 일을 넣을 여지가 남는다</text>
+</svg>

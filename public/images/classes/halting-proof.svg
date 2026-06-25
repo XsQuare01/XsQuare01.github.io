@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 325" width="930" height="488">
   <rect width="620" height="325" fill="#0f1117" rx="10"/>
-  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">정지 문제 모순 증명 — S(⟨S⟩) 자기 참조</text>
+  <text x="310" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">정지 문제 모순 증명: L_halt ∉ D, S(⟨S⟩) 자기 참조</text>
 
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">

@@ -69,7 +69,7 @@
   <line x1="18" y1="148" x2="662" y2="148" stroke="#2d3748" stroke-width="1.5"/>
 
   <!-- ===== BOB: 서명 검증 (하단) ===== -->
-  <text x="20" y="168" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0" text-anchor="start">② Bob: 서명 검증</text>
+  <text x="20" y="168" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0" text-anchor="start">② Bob: 서명 검증</text>
 
   <!-- Bob receives (m, s) — two paths -->
   <!-- Left path: m → SHA → h' -->

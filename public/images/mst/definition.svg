@@ -1,0 +1,66 @@
+<svg viewBox="0 0 720 480" width="1080" height="720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="480" rx="10" fill="#0f1117"/>
+  <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">최소 신장 트리 (MST)</text>
+  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">모든 정점을 연결하면서 간선 가중치 합이 최소인 부분 그래프</text>
+
+  <!-- Non-MST edges (gray, thin) -->
+  <line x1="130" y1="140" x2="590" y2="140" stroke="#475569" stroke-width="1.5"/>
+  <line x1="590" y1="140" x2="520" y2="380" stroke="#475569" stroke-width="1.5"/>
+  <line x1="200" y1="380" x2="520" y2="380" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- MST edges (red, bold) -->
+  <line x1="130" y1="140" x2="360" y2="250" stroke="#ef4444" stroke-width="3"/>
+  <line x1="590" y1="140" x2="360" y2="250" stroke="#ef4444" stroke-width="3"/>
+  <line x1="130" y1="140" x2="200" y2="380" stroke="#ef4444" stroke-width="3"/>
+  <line x1="360" y1="250" x2="520" y2="380" stroke="#ef4444" stroke-width="3"/>
+
+  <!-- Edge labels (boxed) -->
+  <!-- A-B: 8, midpoint (360, 140) -->
+  <rect x="346" y="130" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="145" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">8</text>
+
+  <!-- A-C: 4 MST, midpoint (245, 195) -->
+  <rect x="231" y="185" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444" stroke-width="1"/>
+  <text x="245" y="200" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">4</text>
+
+  <!-- B-C: 5 MST, midpoint (475, 195) -->
+  <rect x="461" y="185" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444" stroke-width="1"/>
+  <text x="475" y="200" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">5</text>
+
+  <!-- A-D: 3 MST, midpoint (165, 260) -->
+  <rect x="151" y="250" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444" stroke-width="1"/>
+  <text x="165" y="265" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">3</text>
+
+  <!-- B-E: 6, midpoint (555, 260) -->
+  <rect x="541" y="250" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155" stroke-width="1"/>
+  <text x="555" y="265" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">6</text>
+
+  <!-- C-E: 2 MST, midpoint (440, 315) -->
+  <rect x="426" y="305" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444" stroke-width="1"/>
+  <text x="440" y="320" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">2</text>
+
+  <!-- D-E: 9, midpoint (360, 380) -->
+  <rect x="346" y="370" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="385" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">9</text>
+
+  <!-- Nodes -->
+  <circle cx="130" cy="140" r="24" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="130" y="146" text-anchor="middle" fill="#93c5fd" font-size="16" font-weight="700">A</text>
+  <circle cx="590" cy="140" r="24" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="590" y="146" text-anchor="middle" fill="#93c5fd" font-size="16" font-weight="700">B</text>
+  <circle cx="360" cy="250" r="24" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="360" y="256" text-anchor="middle" fill="#93c5fd" font-size="16" font-weight="700">C</text>
+  <circle cx="200" cy="380" r="24" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="200" y="386" text-anchor="middle" fill="#93c5fd" font-size="16" font-weight="700">D</text>
+  <circle cx="520" cy="380" r="24" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="520" y="386" text-anchor="middle" fill="#93c5fd" font-size="16" font-weight="700">E</text>
+
+  <!-- Legend -->
+  <line x1="120" y1="438" x2="160" y2="438" stroke="#ef4444" stroke-width="3"/>
+  <text x="170" y="442" fill="#fca5a5" font-size="12" font-weight="600">MST 간선 (4개, 합 = 14)</text>
+
+  <line x1="400" y1="438" x2="440" y2="438" stroke="#475569" stroke-width="1.5"/>
+  <text x="450" y="442" fill="#94a3b8" font-size="12" font-weight="600">선택되지 않은 간선</text>
+
+  <text x="360" y="465" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">정점 5개를 정확히 n-1 = 4개의 간선으로 연결</text>
+</svg>

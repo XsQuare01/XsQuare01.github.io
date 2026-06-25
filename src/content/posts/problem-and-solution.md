@@ -18,7 +18,7 @@ difficulty: 입문
 </div>
 
 <div class="callout callout-key">
-<div class="callout-title">이 글의 핵심</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li>Complexity Theory에서는 문제를 <strong>Language</strong>로 정의한다.</li>
 <li>Problem의 수는 <strong>불가산 무한 |ℝ|</strong>, Solution의 수는 <strong>가산 무한 |ℕ|</strong>이다.</li>
@@ -61,9 +61,9 @@ Binary Search로 가능하다. $L$의 범위를 최솟값(edge 최소 길이)과
 
 다음 과정으로 가능하다.
 
-1. 임의의 edge 하나를 제거한 그래프 $G'$에서 최단 거리 $L'$을 구한다.
-2. $L' > L$이면 제거한 edge가 최단 경로에 포함된 것이므로 복원한다.
-3. $L' = L$이면 제거한 edge는 최단 경로에 불필요하므로 그대로 제거한다.
+1. 임의의 간선(edge) 하나를 제거한 그래프 $G'$에서 최단 거리 $L'$을 구한다.
+2. $L' > L$이면 제거한 간선이 최단 경로에 포함된 것이므로 복원한다.
+3. $L' = L$이면 제거한 간선은 최단 경로에 불필요하므로 그대로 제거한다.
 4. 이 과정을 반복하면 최종적으로 최단 경로 $P$만 남는다.
 
 따라서 **Decision Problem 하나만으로도 경로 문제의 답을 구할 수 있다.** 물론 시간·공간적으로 비효율적이지만, 핵심은 "Decision Problem만으로 모든 문제를 해결할 수 있다"는 사실이다.

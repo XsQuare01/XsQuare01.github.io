@@ -10,7 +10,7 @@ difficulty: 입문
 > Division Theorem이 나눗셈의 기초라면, GCD는 그 위에 세워진 정수론의 첫 번째 건물이다. 두 정수가 공유하는 가장 큰 약수는 단순한 수치를 넘어, 베주 항등식을 통해 암호학의 핵심 알고리즘을 뒷받침한다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>GCD 대수적 정의</strong>: d | a, d | b이고, c | a, c | b이면 c | d가 되는 유일한 d ≥ 0</li>
 <li><strong>유클리드 호제법</strong>: gcd(b, a) = gcd(a, r), 나머지가 0이 될 때까지 반복</li>
@@ -26,7 +26,7 @@ difficulty: 입문
 1. $d \mid a$ 이고 $d \mid b$
 2. 모든 정수 $c$에 대해 $c \mid a$ 이고 $c \mid b$ 이면, $c \mid d$
 
-두 번째 조건이 핵심이다. 일상적인 정의("공약수 중 가장 큰 수")에서는 $c \leq d$를 요구하지만, $c \mid d$는 이보다 엄밀한(tight한) 조건이다 — $c$가 $d$의 약수이면 자동으로 $c \leq d$이기 때문이다.
+두 번째 조건이 핵심이다. 일상적인 정의("공약수 중 가장 큰 수")에서는 $c \leq d$를 요구하지만, $c \mid d$는 이보다 정확한 조건이다. $c$가 $d$의 약수이면 자동으로 $c \leq d$이기 때문이다.
 
 $a$와 $b$가 **서로소(coprime)** 이면 $\gcd(a, b) = 1$이다.
 

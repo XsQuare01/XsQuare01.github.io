@@ -10,7 +10,7 @@ difficulty: 중급
 > 서로 다른 시계 여러 개가 동시에 특정 시각을 가리키는 순간은 언제인가 — 중국인의 나머지 정리는 이 질문에 항상 유일한 답이 존재함을 보장하고, 그 답을 명시적으로 구성한다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>설정</strong>: m₁,...,mᵣ이 서로 쌍으로 서로소(pairwise coprime)이고 m = m₁···mᵣ</li>
 <li><strong>보장</strong>: 임의의 c₁,...,cᵣ에 대해 x ≡ cᵢ (mod mᵢ)를 동시에 만족하는 x가 mod m에서 유일하게 존재</li>

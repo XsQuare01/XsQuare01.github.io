@@ -10,7 +10,7 @@ difficulty: 심화
 > NP에 속하면서도 NP의 모든 문제를 자신으로 귀착시킬 수 있는 문제가 존재한다. 이런 문제를 NP-Complete라 부른다. 1971년 Stephen Cook이 SAT(Boolean Satisfiability) 문제가 NP-Complete임을 최초로 증명했다. 이 발견은 수천 개의 NP-Complete 문제 발견으로 이어졌다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>NP-Complete</strong>: NP에 속하면서, NP의 모든 문제가 다항식 시간에 귀착되는 가장 어려운 문제들의 집합</li>
 <li><strong>Reduction (귀착)</strong>: 문제 A를 문제 B로 변환하는 방법 — A ≤ₚ B이면 B가 A만큼 어렵다</li>
@@ -111,7 +111,7 @@ NTM으로 모든 변수 배정을 비결정론적으로 탐색한다. 어떤 경
 <p>모든 논리 회로는 Boolean formula로 표현할 수 있다. NTM을 회로로 변환할 수 있다면, 그 회로를 SAT 인스턴스로 바꿀 수 있다.</p>
 </div>
 
-**Step 1: DTM을 논리 회로로**
+**Step 1: 결정적 실행 골격을 논리 회로로**
 
 DTM의 실행을 시간 $t = 0, 1, 2, \ldots, T$에 따라 테이프 내용을 기록하면, 시간의 흐름이 회로의 층(layer)이 된다. 각 셀은 다음 정보를 인코딩한다.
 
@@ -181,7 +181,7 @@ $$L \in \text{Co-NP} \iff L^c \in \text{NP}$$
 
 NP가 **"Yes"에 대한 짧은 증명서** 가 존재하는 언어라면, Co-NP는 **"No"에 대한 짧은 증명서** 가 존재하는 언어다.
 
-$\text{NP} \cap \text{Co-NP}$에 속하는 문제는 "Yes"와 "No" 모두에 대한 효율적인 증명이 존재한다. 대표적인 예로 **소인수분해(Factoring)** 가 있다.
+$\text{NP} \cap \text{Co-NP}$에 속하는 문제는 "Yes"와 "No" 모두에 대한 효율적인 증명이 존재한다. 대표적인 예로 **소인수분해의 결정 버전(Factoring decision version)** 이 있다.
 
 > NP = Co-NP인지는 아직 미해결 문제다. P = NP가 성립하면 NP = Co-NP도 자동으로 성립하지만, 역은 성립하지 않는다.
 
@@ -197,4 +197,11 @@ $\text{NP} \cap \text{Co-NP}$에 속하는 문제는 "Yes"와 "No" 모두에 대
 <li>어떤 NP-Complete 문제 하나를 다항식 시간에 풀면, 모든 NP 문제가 다항식 시간에 풀린다 — P = NP 성립</li>
 <li>P ≠ NP로 추정되지만, 컴퓨터 과학 최대의 미해결 문제로 남아 있다.</li>
 </ul>
+</div>
+
+<div class="callout">
+<div class="callout-title">다음 포스트</div>
+
+**[Division Theorem — 정수 나눗셈의 기초](/blog/division-theorem)** — NP-Complete까지 살펴본 계산 복잡도 이론 위에서, 이제 암호학의 수학적 기반인 정수론으로 넘어간다. Division Theorem은 임의의 양의 정수를 나누면 몫과 나머지가 유일하게 결정된다는 단순한 사실이며, 이것이 모듈러 산술·GCD·RSA로 이어지는 출발점이다.
+
 </div>

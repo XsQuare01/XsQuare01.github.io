@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 492" width="780" height="738">
+  <desc>Carmichael Yes -> n 재선택; No -> 다음 단계</desc>
   <defs>
     <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
@@ -28,10 +29,10 @@
   <polygon points="260,97 353,125 260,153 167,125" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
   <text x="260" y="130" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">Carmichael 수?</text>
 
-  <!-- Arrow 2 → 3 (Yes) -->
+  <!-- Arrow 2 → 3 (No) -->
   <line x1="260" y1="153" x2="260" y2="190" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
   <rect x="224" y="163" width="30" height="16" fill="#0f1117"/>
-  <text x="248" y="176" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">Yes</text>
+  <text x="248" y="176" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">No</text>
 
   <!-- ── Node 3: gcd? (center 260,218, hw=97, hh=28) ── -->
   <polygon points="260,190 357,218 260,246 163,218" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
@@ -66,12 +67,12 @@
   <rect x="175" y="451" width="170" height="34" rx="17" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
   <text x="260" y="473" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#4ade80">n은 소수 ✓</text>
 
-  <!-- ══ Right rejection rail (No → n 재선택) ══ -->
+  <!-- ══ Right rejection rail (Yes → n 재선택) ══ -->
 
-  <!-- Node 2 No: horizontal (353,125) → (455,125) -->
+  <!-- Node 2 Yes: horizontal (353,125) → (455,125) -->
   <line x1="353" y1="125" x2="455" y2="125" stroke="#f87171" stroke-width="1.2"/>
   <rect x="384" y="113" width="26" height="16" fill="#0f1117"/>
-  <text x="397" y="125" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">No</text>
+  <text x="397" y="125" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#f87171">Yes</text>
 
   <!-- Node 3 No: horizontal (357,218) → (455,218) -->
   <line x1="357" y1="218" x2="455" y2="218" stroke="#f87171" stroke-width="1.2"/>

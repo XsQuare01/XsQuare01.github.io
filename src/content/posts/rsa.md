@@ -10,7 +10,7 @@ difficulty: 중급
 > Division Theorem, GCD, Modular Arithmetic, Euler 정리, Fermat 정리, CRT — 지금까지 쌓아온 정수론의 모든 도구가 RSA 하나를 위해 수렴한다. 큰 소수 두 개의 곱을 되돌리는 것이 어렵다는 단 하나의 사실 위에, 전 세계 인터넷 암호화가 서있다.
 
 <div class="callout">
-<div class="callout-title">이 글의 주요 개념</div>
+<div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>RSA 키</strong>: n = pq (공개), e (공개 지수), d (개인 지수), ed ≡ 1 (mod φ(n))</li>
 <li><strong>암복호화</strong>: C = m^e mod n → m = C^d mod n = m^(ed) mod n</li>
@@ -163,7 +163,7 @@ $C = m^e \bmod n$에서 $d$는 수천 비트에 달한다 (2048비트 RSA에서 
 
 예시 $17^{23}$에서 $23 = 10111_2$: 총 **7회** 곱셈 (4회 제곱 + 3회 ×m). 직접 계산의 22회 대비 3배 이상 절약.
 
-$e$가 2000비트이면 직접 계산은 $2^{2000}$번이지만 Square-and-Multiply는 약 $2 \times 2000 = 4000$번으로 충분하다. 각 단계에서 `mod n`을 함께 적용하므로 수의 크기도 $n$으로 제한된다.
+$e$가 2000비트이면 직접 계산은 $2^{2000}$번이지만 Square-and-Multiply는 약 2000번의 제곱과 약 1000번의 곱셈, 즉 약 3000번으로 충분하다. 각 단계에서 `mod n`을 함께 적용하므로 수의 크기도 $n$으로 제한된다.
 
 ## 적절한 p, q 선택
 
@@ -184,7 +184,7 @@ $p$와 $q$를 아무렇게나 선택하면 공격에 취약해진다.
 <li>RSA는 ed ≡ 1 (mod φ(n))을 이용해 m^(ed) ≡ m (mod n)을 성립시킨다 — 오일러 정리가 핵심이다.</li>
 <li>gcd(m, n) ≠ 1인 예외 케이스도 mod p와 mod q를 분리한 페르마+CRT 접근으로 성립함을 증명할 수 있다.</li>
 <li>보안은 n = pq 소인수분해의 어려움에만 의존한다. 현재 다항식 시간 소인수분해 알고리즘은 알려져 있지 않다.</li>
-<li>Square-and-Multiply로 O(e) → O(log e) 지수연산이 가능하다. 2000비트 지수도 약 4000번 곱셈으로 처리된다.</li>
+<li>Square-and-Multiply로 O(e) → O(log e) 지수연산이 가능하다. 2000비트 지수도 약 3000번 연산으로 처리된다.</li>
 </ul>
 </div>
 

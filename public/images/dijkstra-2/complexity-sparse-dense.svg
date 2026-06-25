@@ -1,0 +1,40 @@
+<svg viewBox="0 0 720 360" width="1080" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="360" rx="10" fill="#0f1117"/>
+  <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">구현에 따라 갈리는 다익스트라 시간 복잡도</text>
+  <text x="360" y="52" text-anchor="middle" fill="#64748b" font-size="11">우선순위 큐가 항상 빠르진 않다. 간선 수 m이 얼마냐에 따라 유리한 구현이 달라진다</text>
+
+  <!-- vertical divider -->
+  <line x1="360" y1="78" x2="360" y2="298" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- panel headers -->
+  <text x="180" y="100" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="600">희소 그래프  (m ≈ n)</text>
+  <text x="540" y="100" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="600">밀집 그래프  (m ≈ n²)</text>
+
+  <!-- ===== LEFT: sparse ===== -->
+  <!-- top row: array (loser) -->
+  <rect x="40" y="118" width="280" height="60" rx="8" fill="#161b26" stroke="#334155" stroke-width="1"/>
+  <text x="180" y="142" text-anchor="middle" fill="#94a3b8" font-size="11">단순 배열 · argmin 선형탐색</text>
+  <text x="180" y="168" text-anchor="middle" fill="#cbd5e1" font-size="18" font-weight="700">O(n²)</text>
+
+  <!-- bottom row: priority queue (winner) -->
+  <rect x="40" y="192" width="280" height="60" rx="8" fill="#0e2a1a" stroke="#22c55e" stroke-width="2"/>
+  <text x="180" y="216" text-anchor="middle" fill="#94a3b8" font-size="11">우선순위 큐 · 최소 힙</text>
+  <text x="180" y="242" text-anchor="middle" fill="#4ade80" font-size="15" font-weight="700">O(m log n) ≈ O(n log n)</text>
+  <rect x="246" y="199" width="58" height="16" rx="8" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
+  <text x="275" y="210" text-anchor="middle" fill="#4ade80" font-size="9.5" font-weight="700">✓ 빠름</text>
+
+  <!-- ===== RIGHT: dense ===== -->
+  <!-- top row: array (winner) -->
+  <rect x="400" y="118" width="280" height="60" rx="8" fill="#0e2a1a" stroke="#22c55e" stroke-width="2"/>
+  <text x="540" y="142" text-anchor="middle" fill="#94a3b8" font-size="11">단순 배열 · argmin 선형탐색</text>
+  <text x="540" y="168" text-anchor="middle" fill="#4ade80" font-size="18" font-weight="700">O(n²)</text>
+  <rect x="606" y="125" width="58" height="16" rx="8" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
+  <text x="635" y="136" text-anchor="middle" fill="#4ade80" font-size="9.5" font-weight="700">✓ 빠름</text>
+
+  <!-- bottom row: priority queue (loser) -->
+  <rect x="400" y="192" width="280" height="60" rx="8" fill="#161b26" stroke="#334155" stroke-width="1"/>
+  <text x="540" y="216" text-anchor="middle" fill="#94a3b8" font-size="11">우선순위 큐 · 최소 힙</text>
+  <text x="540" y="242" text-anchor="middle" fill="#cbd5e1" font-size="15" font-weight="700">O(m log n) = O(n² log n)</text>
+
+  <text x="360" y="330" text-anchor="middle" fill="#64748b" font-size="11" font-style="italic">간선이 적을수록 힙의 log n 이득이 크고, 빽빽할수록 단순 배열이 유리하다</text>
+</svg>

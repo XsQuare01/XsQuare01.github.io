@@ -1,0 +1,84 @@
+<svg viewBox="0 0 760 300" width="1140" height="450" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="300" rx="10" fill="#0f1117"/>
+
+  <!-- ===== STACK (Left) ===== -->
+  <text x="190" y="28" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Stack — Last In, First Out</text>
+
+  <!-- Stack cells (bottom to top) -->
+  <rect x="140" y="220" width="100" height="32" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="190" y="241" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">A</text>
+  <rect x="140" y="184" width="100" height="32" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="190" y="205" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">B</text>
+  <rect x="140" y="148" width="100" height="32" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="190" y="169" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">C</text>
+  <rect x="140" y="112" width="100" height="32" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+  <text x="190" y="133" text-anchor="middle" fill="#fed7aa" font-size="12" font-weight="700">D</text>
+
+  <!-- Stack pointer -->
+  <text x="115" y="132" text-anchor="end" fill="#f97316" font-size="11" font-weight="600">SP →</text>
+
+  <!-- Push arrow -->
+  <path d="M280,80 L280,108" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreenS)"/>
+  <text x="280" y="72" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">Push</text>
+  <text x="280" y="56" text-anchor="middle" fill="#64748b" font-size="10">SP + 1</text>
+
+  <!-- Pop arrow -->
+  <path d="M100,108 L100,80" stroke="#ef4444" stroke-width="1.5" fill="none" marker-end="url(#arrowRedS)"/>
+  <text x="100" y="72" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">Pop</text>
+  <text x="100" y="56" text-anchor="middle" fill="#64748b" font-size="10">SP - 1</text>
+
+  <!-- Bottom line -->
+  <line x1="130" y1="256" x2="250" y2="256" stroke="#475569" stroke-width="2"/>
+
+  <!-- ===== QUEUE (Right) ===== -->
+  <text x="540" y="28" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Queue — First In, First Out</text>
+
+  <!-- Queue cells (left to right) -->
+  <rect x="360" y="130" width="70" height="34" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="395" y="152" text-anchor="middle" fill="#475569" font-size="12">empty</text>
+
+  <rect x="435" y="130" width="70" height="34" rx="4" fill="#7f1d1d" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="470" y="152" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">A</text>
+
+  <rect x="510" y="130" width="70" height="34" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="545" y="152" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">B</text>
+
+  <rect x="585" y="130" width="70" height="34" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="620" y="152" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">C</text>
+
+  <rect x="660" y="130" width="70" height="34" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="695" y="152" text-anchor="middle" fill="#86efac" font-size="12" font-weight="700">D</text>
+
+  <!-- Tail pointer (dequeue side) -->
+  <path d="M470,120 L470,100" stroke="#ef4444" stroke-width="1.5" fill="none" marker-end="url(#arrowRedS)"/>
+  <text x="470" y="92" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">Dequeue</text>
+  <text x="470" y="178" text-anchor="middle" fill="#ef4444" font-size="10" font-weight="600">Tail</text>
+
+  <!-- Head pointer (enqueue side) -->
+  <text x="695" y="178" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="600">Head</text>
+  <path d="M695,205 L695,190" stroke="#22c55e" stroke-width="1.5" fill="none" marker-end="url(#arrowGreenS)"/>
+  <text x="695" y="220" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">Enqueue</text>
+
+  <!-- Direction arrow -->
+  <path d="M455,230 L680,230" stroke="#475569" stroke-width="1" fill="none" marker-end="url(#arrowGrayS)" stroke-dasharray="4,3"/>
+  <text x="567" y="248" text-anchor="middle" fill="#64748b" font-size="10">데이터 흐름 방향</text>
+
+  <!-- Divider -->
+  <line x1="330" y1="40" x2="330" y2="270" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Bottom -->
+  <text x="190" y="282" text-anchor="middle" fill="#64748b" font-size="10">후입선출: 가장 최근 삽입 데이터가 먼저 나감</text>
+  <text x="540" y="282" text-anchor="middle" fill="#64748b" font-size="10">선입선출: 가장 먼저 삽입된 데이터가 먼저 나감</text>
+
+  <defs>
+    <marker id="arrowGreenS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrowRedS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowGrayS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

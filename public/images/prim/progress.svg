@@ -1,0 +1,146 @@
+<svg viewBox="0 0 720 700" width="1080" height="1050" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="700" rx="10" fill="#0f1117"/>
+  <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Prim 알고리즘 진행 과정</text>
+  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">A에서 시작 — 매 단계 트리에 인접한 가장 가벼운 간선을 선택</text>
+
+  <!-- Panel separators -->
+  <line x1="360" y1="80" x2="360" y2="680" stroke="#1e293b" stroke-width="1"/>
+  <line x1="40" y1="380" x2="680" y2="380" stroke="#1e293b" stroke-width="1"/>
+
+  <!--
+    Common graph layout (within each panel):
+    A(px+90, py+120), B(px+270, py+120), C(px+90, py+260), D(px+270, py+260)
+    Edges: A-B(2), A-C(3), B-C(1), B-D(4), C-D(5)
+  -->
+
+  <!-- ====== PANEL 1: Initial state (only A in tree) ====== -->
+  <!-- panel origin: (0, 60) -->
+  <text x="180" y="100" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">Step 0 — 시작: 트리 = {A}</text>
+
+  <!-- All edges gray -->
+  <line x1="90" y1="180" x2="270" y2="180" stroke="#475569" stroke-width="1.5"/>
+  <line x1="90" y1="180" x2="90" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="270" y1="180" x2="90" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="270" y1="180" x2="270" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="90" y1="320" x2="270" y2="320" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Edge labels P1 -->
+  <rect x="166" y="170" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="180" y="185" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">2</text>
+  <rect x="60" y="240" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="74" y="255" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">3</text>
+  <rect x="166" y="240" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="180" y="255" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">1</text>
+  <rect x="272" y="240" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="286" y="255" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">4</text>
+  <rect x="166" y="310" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="180" y="325" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">5</text>
+
+  <!-- Nodes P1 -->
+  <circle cx="90" cy="180" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="90" y="185" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">A</text>
+  <circle cx="270" cy="180" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="270" y="185" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">B</text>
+  <circle cx="90" cy="320" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="90" y="325" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">C</text>
+  <circle cx="270" cy="320" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="270" y="325" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">D</text>
+
+  <text x="180" y="365" text-anchor="middle" fill="#64748b" font-size="10">후보: A-B(2), A-C(3) → 최소는 A-B(2)</text>
+
+  <!-- ====== PANEL 2: After picking A-B ====== -->
+  <!-- panel origin: (360, 60) -->
+  <text x="540" y="100" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">Step 1 — A-B 추가: 트리 = {A, B}</text>
+
+  <line x1="450" y1="180" x2="630" y2="180" stroke="#ef4444" stroke-width="3"/>
+  <line x1="450" y1="180" x2="450" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="630" y1="180" x2="450" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="630" y1="180" x2="630" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="450" y1="320" x2="630" y2="320" stroke="#475569" stroke-width="1.5"/>
+
+  <rect x="526" y="170" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
+  <text x="540" y="185" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">2</text>
+  <rect x="420" y="240" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="434" y="255" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">3</text>
+  <rect x="526" y="240" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="540" y="255" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">1</text>
+  <rect x="632" y="240" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="646" y="255" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">4</text>
+  <rect x="526" y="310" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="540" y="325" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">5</text>
+
+  <circle cx="450" cy="180" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="450" y="185" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">A</text>
+  <circle cx="630" cy="180" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="630" y="185" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">B</text>
+  <circle cx="450" cy="320" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="450" y="325" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">C</text>
+  <circle cx="630" cy="320" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="630" y="325" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">D</text>
+
+  <text x="540" y="365" text-anchor="middle" fill="#64748b" font-size="10">후보: A-C(3), B-C(1), B-D(4) → 최소는 B-C(1)</text>
+
+  <!-- ====== PANEL 3: After picking B-C ====== -->
+  <!-- panel origin: (0, 380) -->
+  <text x="180" y="420" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">Step 2 — B-C 추가: 트리 = {A, B, C}</text>
+
+  <line x1="90" y1="500" x2="270" y2="500" stroke="#ef4444" stroke-width="3"/>
+  <line x1="90" y1="500" x2="90" y2="640" stroke="#475569" stroke-width="1.5"/>
+  <line x1="270" y1="500" x2="90" y2="640" stroke="#ef4444" stroke-width="3"/>
+  <line x1="270" y1="500" x2="270" y2="640" stroke="#475569" stroke-width="1.5"/>
+  <line x1="90" y1="640" x2="270" y2="640" stroke="#475569" stroke-width="1.5"/>
+
+  <rect x="166" y="490" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
+  <text x="180" y="505" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">2</text>
+  <rect x="60" y="560" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="74" y="575" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">3</text>
+  <rect x="166" y="560" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
+  <text x="180" y="575" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">1</text>
+  <rect x="272" y="560" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="286" y="575" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">4</text>
+  <rect x="166" y="630" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="180" y="645" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">5</text>
+
+  <circle cx="90" cy="500" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="90" y="505" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">A</text>
+  <circle cx="270" cy="500" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="270" y="505" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">B</text>
+  <circle cx="90" cy="640" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="90" y="645" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">C</text>
+  <circle cx="270" cy="640" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="270" y="645" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">D</text>
+
+  <text x="180" y="685" text-anchor="middle" fill="#64748b" font-size="10">후보: B-D(4), C-D(5) → 최소는 B-D(4) (A-C는 cycle)</text>
+
+  <!-- ====== PANEL 4: After picking B-D (MST complete) ====== -->
+  <!-- panel origin: (360, 380) -->
+  <text x="540" y="420" text-anchor="middle" fill="#4ade80" font-size="12" font-weight="600">Step 3 — B-D 추가: MST 완성</text>
+
+  <line x1="450" y1="500" x2="630" y2="500" stroke="#ef4444" stroke-width="3"/>
+  <line x1="450" y1="500" x2="450" y2="640" stroke="#475569" stroke-width="1.5"/>
+  <line x1="630" y1="500" x2="450" y2="640" stroke="#ef4444" stroke-width="3"/>
+  <line x1="630" y1="500" x2="630" y2="640" stroke="#ef4444" stroke-width="3"/>
+  <line x1="450" y1="640" x2="630" y2="640" stroke="#475569" stroke-width="1.5"/>
+
+  <rect x="526" y="490" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
+  <text x="540" y="505" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">2</text>
+  <rect x="420" y="560" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="434" y="575" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">3</text>
+  <rect x="526" y="560" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
+  <text x="540" y="575" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">1</text>
+  <rect x="632" y="560" width="28" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
+  <text x="646" y="575" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="700">4</text>
+  <rect x="526" y="630" width="28" height="20" rx="4" fill="#0f1117" stroke="#334155"/>
+  <text x="540" y="645" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">5</text>
+
+  <circle cx="450" cy="500" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="450" y="505" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">A</text>
+  <circle cx="630" cy="500" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="630" y="505" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">B</text>
+  <circle cx="450" cy="640" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="450" y="645" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">C</text>
+  <circle cx="630" cy="640" r="20" fill="#ef4444" stroke="#ef4444" stroke-width="2"/>
+  <text x="630" y="645" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">D</text>
+
+  <text x="540" y="685" text-anchor="middle" fill="#4ade80" font-size="10">MST = {A-B, B-C, B-D}, 합 = 2 + 1 + 4 = 7</text>
+</svg>

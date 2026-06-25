@@ -1,0 +1,53 @@
+<svg viewBox="0 0 760 340" width="1140" height="510" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="340" rx="10" fill="#0f1117"/>
+  <text x="380" y="28" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Binary Search Tree — 왼쪽 &lt; 루트 &lt; 오른쪽</text>
+
+  <!-- Edges -->
+  <line x1="380" y1="68" x2="220" y2="128" stroke="#334155" stroke-width="1.5"/>
+  <line x1="380" y1="68" x2="540" y2="128" stroke="#334155" stroke-width="1.5"/>
+  <line x1="220" y1="158" x2="130" y2="208" stroke="#334155" stroke-width="1.5"/>
+  <line x1="220" y1="158" x2="310" y2="208" stroke="#334155" stroke-width="1.5"/>
+  <line x1="540" y1="158" x2="450" y2="208" stroke="#334155" stroke-width="1.5"/>
+  <line x1="540" y1="158" x2="630" y2="208" stroke="#334155" stroke-width="1.5"/>
+  <line x1="130" y1="238" x2="80" y2="278" stroke="#334155" stroke-width="1.5"/>
+  <line x1="130" y1="238" x2="180" y2="278" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Root: 20 -->
+  <rect x="350" y="44" width="60" height="28" rx="14" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+  <text x="380" y="63" text-anchor="middle" fill="#fed7aa" font-size="13" font-weight="700">20</text>
+  <text x="380" y="40" text-anchor="middle" fill="#f97316" font-size="10">root</text>
+
+  <!-- Level 1: 10, 30 -->
+  <rect x="190" y="130" width="60" height="28" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="220" y="149" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">10</text>
+
+  <rect x="510" y="130" width="60" height="28" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="540" y="149" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">30</text>
+
+  <!-- Level 2: 5, 15, 25, 35 -->
+  <rect x="100" y="210" width="60" height="28" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="130" y="229" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">5</text>
+
+  <rect x="280" y="210" width="60" height="28" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="310" y="229" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">15</text>
+
+  <rect x="420" y="210" width="60" height="28" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="450" y="229" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">25</text>
+
+  <rect x="600" y="210" width="60" height="28" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="630" y="229" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">35</text>
+
+  <!-- Level 3: 2, 7 -->
+  <rect x="50" y="280" width="60" height="28" rx="14" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="80" y="299" text-anchor="middle" fill="#86efac" font-size="13" font-weight="700">2</text>
+
+  <rect x="150" y="280" width="60" height="28" rx="14" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="180" y="299" text-anchor="middle" fill="#86efac" font-size="13" font-weight="700">7</text>
+
+  <!-- BST property annotations -->
+  <text x="290" y="100" text-anchor="middle" fill="#94a3b8" font-size="10">왼쪽 &lt; 20</text>
+  <text x="470" y="100" text-anchor="middle" fill="#94a3b8" font-size="10">오른쪽 &gt; 20</text>
+
+  <!-- Bottom note -->
+  <text x="380" y="330" text-anchor="middle" fill="#64748b" font-size="11">모든 서브트리가 재귀적으로 BST 성질을 만족 · Search/Insert/Delete: O(h)</text>
+</svg>

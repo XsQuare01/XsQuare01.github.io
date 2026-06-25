@@ -90,7 +90,7 @@
   <rect x="380" y="172" width="270" height="54" rx="4" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="1"/>
   <text x="515" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f97316">Step 2: V가 질문 선택</text>
   <text x="515" y="206" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">동전을 던져 G₁↔Gₜ 또는 G₂↔Gₜ</text>
-  <text x="515" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">관계를 물어봄 (랜덤 선택)</text>
+  <text x="515" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">관계를 물어봄 (무작위 선택)</text>
 
   <!-- Arrow: challenge -->
   <line x1="515" y1="226" x2="515" y2="248" stroke="#f97316" stroke-width="1.3" marker-end="url(#oa)"/>
