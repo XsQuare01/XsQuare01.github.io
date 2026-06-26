@@ -23,9 +23,35 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 
 const FEATURED_IDS = ['rsa', 'algo-orientation'];
 const featuredPosts = FEATURED_IDS.map((id) => allPosts.find((p) => p.id === id)).filter(Boolean);
+
+// 홈 구조화 데이터 — 사이트(WebSite)와 저자(Person) 엔티티
+const siteUrl = Astro.site?.toString() ?? 'https://xsquare01.github.io/';
+const homeJsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'XsQuare01',
+    alternateName: 'XsQuare01 학습 노트',
+    url: siteUrl,
+    inLanguage: 'ko',
+    description: '계산 이론·암호학·알고리즘을 정의부터 증명까지 정리하는 학습 노트',
+    author: { '@type': 'Person', name: 'XsQuare01', url: siteUrl },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'XsQuare01',
+    url: siteUrl,
+    image: 'https://github.com/XsQuare01.png',
+    knowsAbout: ['계산 이론', '암호학', '알고리즘', '정수론', '복잡도', '그리디'],
+  },
+]);
 ---
 
 <BaseLayout title="홈">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={homeJsonLd} />
+  </Fragment>
   <div class="prose home">
 
     <!-- 에디토리얼 헤드라인 -->
