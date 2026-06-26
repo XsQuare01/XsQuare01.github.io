@@ -8,7 +8,7 @@ const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-const pageDescription = 'XsQuare01 기술 블로그의 전체 글 목록입니다. CS 이론, 암호학, 알고리즘, Unity 개발 과정을 정리합니다.';
+const pageDescription = 'XsQuare01 학습 노트의 전체 글 목록입니다. 계산 이론·암호학·알고리즘을 정의부터 증명까지 정리합니다.';
 const siteUrl = Astro.site?.toString() ?? 'https://xsquare01.github.io';
 const blogUrl = new URL('/blog/', siteUrl).toString();
 const blogJsonLd = JSON.stringify({
