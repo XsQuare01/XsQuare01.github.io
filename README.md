@@ -1,6 +1,6 @@
 # XsQuare01.github.io
 
-> 보이는 것에 집중하며, 배운 것을 기록하는 개발자
+> 배운 것을 정리하는 개발자 — 계산 이론·암호학·알고리즘을 정의부터 증명까지 정리하는 학습 노트
 
 **→ [xsquare01.github.io](https://xsquare01.github.io)**
 
@@ -50,7 +50,7 @@
 
 ### 알고리즘
 
-자료구조와 분석의 기초부터 그래프·그리디 알고리즘까지
+자료구조·정렬·분할 정복부터 그래프·그리디 알고리즘까지
 
 | 글 | 요약 |
 |---|---|
@@ -58,6 +58,7 @@
 | [재귀 (Recursion)](https://xsquare01.github.io/blog/recursion) | 문제를 자기 자신으로 푸는 사고법 |
 | [자료구조](https://xsquare01.github.io/blog/data-structure) | 데이터를 담는 그릇의 설계 |
 | [정렬 (Sort)](https://xsquare01.github.io/blog/sort) | Selection · Merge · Quick Sort |
+| [분할 정복](https://xsquare01.github.io/blog/divide-and-conquer) | 나누어 풀고, 비교 기반 정렬의 하한을 증명 |
 | [그리디 알고리즘](https://xsquare01.github.io/blog/greedy) | 매 순간 가장 좋아 보이는 선택과 그 한계 |
 | [최소 신장 트리 (MST)](https://xsquare01.github.io/blog/mst) | MST의 정의와 성질 |
 | [프림 (Prim)](https://xsquare01.github.io/blog/prim) | 정점 중심 그리디로 MST 만들기 |
@@ -66,6 +67,8 @@
 | [다익스트라 1](https://xsquare01.github.io/blog/dijkstra-1) | 각 노드까지의 최단 거리 구하기 |
 | [다익스트라 2](https://xsquare01.github.io/blog/dijkstra-2) | 최단 경로 복원, 시간 복잡도, Prim과의 비교 |
 | [데드라인 스케줄링](https://xsquare01.github.io/blog/scheduling-1) | 이익을 최대로 만드는 greedy 배치와 정확성 증명 |
+| [구간 스케줄링](https://xsquare01.github.io/blog/scheduling-2) | 겹치지 않게 가장 많은 일 고르기 |
+| [테이프 스토리지](https://xsquare01.github.io/blog/tape-storage) | 접근 시간을 최소로 만드는 greedy 배치 |
 
 ---
 
