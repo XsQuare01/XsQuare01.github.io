@@ -1,0 +1,69 @@
+<svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <!-- Background -->
+  <rect width="720" height="400" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">정렬의 결정 트리 — n=3, 원소 a · b · c</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">내부 노드는 비교 하나, 잎은 가능한 정렬 순서 하나 · 6 = 3! 개</text>
+
+  <!-- ===== edges (drawn first) ===== -->
+  <!-- root -> level1 -->
+  <line x1="345" y1="94" x2="223" y2="143" stroke="#475569" stroke-width="1.5"/>
+  <line x1="375" y1="94" x2="497" y2="143" stroke="#475569" stroke-width="1.5"/>
+  <!-- left b:c -> abc leaf / a:c node -->
+  <line x1="197" y1="175" x2="155" y2="226" stroke="#475569" stroke-width="1.5"/>
+  <line x1="223" y1="175" x2="270" y2="222" stroke="#475569" stroke-width="1.5"/>
+  <!-- right b:c -> a:c node / cba leaf -->
+  <line x1="497" y1="175" x2="450" y2="222" stroke="#475569" stroke-width="1.5"/>
+  <line x1="523" y1="175" x2="565" y2="226" stroke="#475569" stroke-width="1.5"/>
+  <!-- left a:c -> acb / cab -->
+  <line x1="272" y1="255" x2="250" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="288" y1="255" x2="320" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <!-- right a:c -> bac / bca -->
+  <line x1="432" y1="255" x2="408" y2="320" stroke="#475569" stroke-width="1.5"/>
+  <line x1="448" y1="255" x2="478" y2="320" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- ===== branch labels ===== -->
+  <text x="272" y="116" fill="#64748b" font-size="10">a&lt;b</text>
+  <text x="438" y="116" fill="#64748b" font-size="10">a&gt;b</text>
+  <text x="158" y="200" fill="#64748b" font-size="9">b&lt;c</text>
+  <text x="248" y="200" fill="#64748b" font-size="9">b&gt;c</text>
+  <text x="462" y="200" fill="#64748b" font-size="9">b&lt;c</text>
+  <text x="548" y="200" fill="#64748b" font-size="9">b&gt;c</text>
+
+  <!-- ===== comparison nodes ===== -->
+  <circle cx="360" cy="78" r="22" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="360" y="82" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">a:b</text>
+
+  <circle cx="210" cy="158" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="210" y="162" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="700">b:c</text>
+  <circle cx="510" cy="158" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="510" y="162" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="700">b:c</text>
+
+  <circle cx="280" cy="238" r="18" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="280" y="242" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="700">a:c</text>
+  <circle cx="440" cy="238" r="18" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="440" y="242" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="700">a:c</text>
+
+  <!-- ===== leaves (permutations) ===== -->
+  <g font-size="10" font-weight="700">
+    <!-- depth-2 leaves -->
+    <rect x="115" y="228" width="54" height="26" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="142" y="245" text-anchor="middle" fill="#4ade80">abc</text>
+    <rect x="551" y="228" width="54" height="26" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="578" y="245" text-anchor="middle" fill="#4ade80">cba</text>
+    <!-- depth-3 leaves -->
+    <rect x="223" y="320" width="54" height="26" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="250" y="337" text-anchor="middle" fill="#4ade80">acb</text>
+    <rect x="293" y="320" width="54" height="26" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="320" y="337" text-anchor="middle" fill="#4ade80">cab</text>
+    <rect x="381" y="320" width="54" height="26" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="408" y="337" text-anchor="middle" fill="#4ade80">bac</text>
+    <rect x="451" y="320" width="54" height="26" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="478" y="337" text-anchor="middle" fill="#4ade80">bca</text>
+  </g>
+
+  <!-- Bottom takeaway -->
+  <text x="360" y="372" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">잎 ≥ n! 개  ⟹  높이 h ≥ log₂(n!) = Θ(n log n)</text>
+  <text x="360" y="391" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">최악 비교 횟수 = 트리 높이 · 어떤 비교 정렬도 Ω(n log n)보다 빠를 수 없다</text>
+</svg>
