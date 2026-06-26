@@ -66,6 +66,8 @@ DPDA가 $L_7$을 accept한다고 가정하자.
 
 이제 abbaabba ($y = \text{abba}$, $y^R = \text{abba}$)를 생각해보자. DPDA는 앞의 abba를 처리할 때 이미 스택이 빈 상태가 된다. 왜냐하면 현재 상황에서 DPDA는 이 abba가 짧은 입력 abba의 전부인지, 긴 입력 abbaabba의 앞부분인지 구분할 수 없기 때문이다.
 
+아래 추적은 스택이 비면 받아들이는 모델, 즉 **빈 스택 수용** 관례를 가정한다.
+
 더 나아가 abaababba를 생각해보자. 이를 abaaba | abba로 나누면, abaaba의 역은 abaaba이므로 abba와 다르다. 즉, abaababba ∉ $L_7$이다. 그러나 DPDA가 abaaba를 처리한 시점에 스택이 빈 상태라면, 이후 어떤 문자열이 오더라도 accept해버리는 상황이 발생한다. abbaabba에서 abba를 처리했을 때와 같은 상태이기 때문이다.
 
 이처럼 DPDA는 $y$와 $y^R$의 경계 지점, 즉 **전환점(midpoint)** 을 결정론적으로 찾을 수 없기 때문에 $L_7$을 올바르게 accept하지 못한다.
@@ -153,7 +155,7 @@ $$L_{11} = \{x \mid x = yy^Ry^Ry^R\}$$
 <div class="callout-title">핵심 정리: DPDA와 NPDA</div>
 <ul>
 <li>비결정론이 계산 능력 자체를 높이는 유일한 모델은 DPDA다 — DFA, DTM에서는 비결정론이 능력 차이를 만들지 않는다.</li>
-<li>DPDA ⊊ NPDA: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: {ww^R}).</li>
+<li>DPDA ⊊ NPDA: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: $yy^R$).</li>
 <li>스택 1개 추가: Regular → CFL로 능력이 확장된다.</li>
 <li>스택 2개 추가: CFL → Recursively Enumerable로 확장 — 튜링 머신과 동등하다.</li>
 </ul>

@@ -123,5 +123,5 @@
   <text x="472" y="369" fill="#94a3b8" font-size="11">정점</text>
 
   <text x="540" y="369" fill="#64748b" font-size="11">·</text>
-  <text x="556" y="369" fill="#64748b" font-size="11" font-style="italic">동률 간선이 사이에 사이클(B–C–D–A–B)을 만든다</text>
+  <text x="556" y="369" fill="#64748b" font-size="11" font-style="italic">동률 간선이 사이에 사이클(A–B–C–D–A)을 만든다</text>
 </svg>

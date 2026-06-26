@@ -23,7 +23,7 @@ difficulty: 중급
 
 ![DFA vs NFA 비교](/images/nfa/dfa-vs-nfa.svg)
 
-NFA(Non-deterministic Finite Automata)는 **비결정론적 유한 자동기계** 다. DFA와 구조는 유사하지만, 하나의 상태에서 동일한 입력에 대해 여러 상태로 동시에 전이할 수 있다는 점이 근본적으로 다르다. "비결정론적"이란 다음 상태가 하나로 결정되지 않는다는 의미다.
+NFA(Non-deterministic Finite Automata)는 **비결정론적 유한 오토마타** 다. DFA와 구조는 유사하지만, 하나의 상태에서 동일한 입력에 대해 여러 상태로 동시에 전이할 수 있다는 점이 근본적으로 다르다. "비결정론적"이란 다음 상태가 하나로 결정되지 않는다는 의미다.
 
 ---
 

@@ -1,21 +1,21 @@
 ---
 title: "Digital Signature — 전자 서명의 수학적 구조"
 date: 2026-03-31T10:00:00
-description: "RSA·ElGamal 전자 서명의 생성과 검증, 인증기관(CA)의 역할, 암호화 해시(SHA)와 Birthday Paradox, 그리고 AES+RSA+SHA를 결합한 최종 프로토콜까지 — 디지털 서명의 전체 그림을 다룬다."
+description: "RSA·ElGamal 전자 서명의 생성과 검증, 인증기관(CA)의 역할, 암호화 해시(SHA)와 Birthday Paradox, 그리고 AES+RSA+SHA를 결합한 최종 프로토콜까지, 디지털 서명의 전체 그림을 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
 difficulty: 중급
 ---
 
-> RSA로 메시지를 암호화하면 기밀성은 확보된다. 하지만 Bob은 여전히 모른다 — 이 메시지가 정말 Alice에게서 왔는가? 전자 서명은 그 질문에 답한다. 비밀키 없이는 위조할 수 없고, 공개키만으로 누구나 검증할 수 있는 수학적 사인이다.
+> RSA로 메시지를 암호화하면 기밀성은 확보된다. 하지만 Bob은 여전히 한 가지를 모른다. 이 메시지가 정말 Alice에게서 왔는가? 전자 서명은 그 질문에 답한다. 비밀키 없이는 위조할 수 없고, 공개키만으로 누구나 검증할 수 있는 수학적 사인이다.
 
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>RSA 서명</strong>: s = m^d mod n, 검증: s^e = m — 비밀키로 서명, 공개키로 검증</li>
-<li><strong>ElGamal 서명</strong>: r = g^k mod p, s = (m − ar)k⁻¹ mod (p−1) — DLP 기반</li>
+<li><strong>RSA 서명</strong>: s = m^d mod n, 검증: s^e = m (비밀키로 서명, 공개키로 검증)</li>
+<li><strong>ElGamal 서명</strong>: r = g^k mod p, s = (m − ar)k⁻¹ mod (p−1) (DLP 기반)</li>
 <li><strong>인증기관(CA)</strong>: 공개키의 신뢰를 보증하는 신뢰 앵커</li>
-<li><strong>암호화 해시</strong>: SHA로 m → h(고정 크기) — 서명 크기와 속도 문제 해결</li>
+<li><strong>암호화 해시</strong>: SHA로 m → h(고정 크기). 서명 크기와 속도 문제 해결</li>
 <li><strong>최종 프로토콜</strong>: AES(기밀성) + RSA(키 전달·서명) + SHA(무결성) 통합</li>
 </ul>
 </div>
@@ -24,16 +24,16 @@ difficulty: 중급
 
 대칭키 시스템에서는 Alice와 Bob만이 키 $k$를 공유한다. Bob이 $k$로 암호문을 복호화했다면, 그 메시지는 $k$를 아는 Alice가 보냈다고 추론할 수 있다.
 
-하지만 RSA 같은 공개키 시스템에서는 누구나 공개키 $(n, e)$로 암호화할 수 있다. Bob은 암호문을 복호화할 수 있지만, **누가 보냈는지는 알 수 없다**.
+하지만 RSA 같은 공개키 시스템에서는 누구나 공개키 $(n, e)$로 암호화할 수 있다. Bob은 암호문을 복호화할 수 있지만, 누가 보냈는지는 알 수 없다.
 
 전자 서명은 이 문제를 해결한다. 현실의 서명처럼 두 가지 조건을 만족해야 한다.
 
-- **본인만 서명할 수 있다** — 비밀키 없이는 위조 불가
-- **누구나 검증할 수 있다** — 공개키로 누구나 확인
+- **본인만 서명할 수 있다**: 비밀키 없이는 위조할 수 없다
+- **누구나 검증할 수 있다**: 공개키로 누구나 확인한다
 
 디지털 환경에서는 한 가지 조건이 추가된다.
 
-- **Not Convertible** — 서명은 특정 문서에 묶여야 한다. 복사·붙여넣기로 다른 문서에 재사용할 수 없어야 한다.
+- **Not Convertible**: 서명은 특정 문서에 묶여야 한다. 복사·붙여넣기로 다른 문서에 재사용할 수 없어야 한다.
 
 ## RSA 서명
 
@@ -70,7 +70,7 @@ RSA 서명에는 한 가지 취약점이 있다. Bob이 사용하는 공개키 $
 이를 해결하는 것이 **인증기관(CA, Certificate Authority)** 이다.
 
 1. Alice가 자신의 공개키와 신원 정보를 CA에 제출한다.
-2. CA는 이를 검토한 뒤 **(공개키 + 신원 정보)** 에 CA 자신의 서명을 붙인다 → **인증서(Certificate)**
+2. CA는 이를 검토한 뒤 (공개키 + 신원 정보)에 CA 자신의 서명을 붙인다. 이것이 **인증서(Certificate)** 다.
 3. Bob은 CA의 서명을 검증해 Alice의 공개키가 진짜임을 확인한다.
 
 CA는 "누구나 신뢰하는 기관"이라는 전제 위에 작동한다. 공인인증서와 HTTPS 인증서가 이 구조로 동작한다.
@@ -101,7 +101,7 @@ $$
 y^r \cdot r^s = (g^a)^r \cdot (g^k)^s = g^{ar} \cdot g^{k \cdot (m-ar)k^{-1}} = g^{ar} \cdot g^{m-ar} = g^m \pmod{p}
 $$
 
-$k$와 $k^{-1}$이 상쇄되고, $a$는 공개키 $y = g^a$ 형태로만 검증에 사용된다 — 비밀키 $a$ 없이는 서명 생성 불가능, 공개키 $y$만으로 검증 가능.
+$k$와 $k^{-1}$이 상쇄되고, $a$는 공개키 $y = g^a$ 형태로만 검증에 사용된다. 비밀키 $a$ 없이는 서명을 생성할 수 없고, 공개키 $y$만으로 검증할 수 있다.
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
@@ -132,13 +132,13 @@ $$
 
 **일방향성(One-way)**: $h$에서 $m$을 역산할 수 없다. 서명 위조를 위해 특정 해시값을 갖는 메시지를 찾는 것이 불가능해야 한다.
 
-**충돌 저항성(Collision Resistance)**: $\text{SHA}(m_1) = \text{SHA}(m_2)$인 두 메시지 $m_1 \neq m_2$를 찾는 것이 불가능해야 한다. 이를 충족하면 Not Convertible이 자동으로 보장된다 — $m$이 다르면 $h$도 달라지므로, 서명 $s$를 다른 문서에 재사용할 수 없다.
+**충돌 저항성(Collision Resistance)**: $\text{SHA}(m_1) = \text{SHA}(m_2)$인 두 메시지 $m_1 \neq m_2$를 찾는 것이 불가능해야 한다. 이를 충족하면 Not Convertible이 자동으로 보장된다. $m$이 다르면 $h$도 달라지므로, 서명 $s$를 다른 문서에 재사용할 수 없다.
 
 ## Birthday Paradox와 해시 길이
 
 해시가 $n$비트라면, 특정 해시값 $h$와 충돌하는 메시지를 찾으려면 평균 $2^n$번의 시도가 필요하다.
 
-그런데 **특정 값이 아닌 임의의 충돌 쌍** $m_1, m_2$를 찾는 것은 훨씬 쉽다. 생일 역설(Birthday Paradox)에 의해 약 $2^{n/2}$번이면 충분하다.
+그런데 특정 값이 아닌 임의의 충돌 쌍 $m_1, m_2$를 찾는 것은 훨씬 쉽다. 생일 역설(Birthday Paradox)에 의해 약 $2^{n/2}$번이면 충분하다.
 
 > 365일 중 생일이 같은 두 사람을 찾으려면 23명이면 충분하다 ($\approx \sqrt{365}$). 특정인과 생일이 같으려면 253명이 필요하다.
 
@@ -149,8 +149,8 @@ $$
 실제 보안 통신은 세 알고리즘을 역할에 따라 조합한다.
 
 **설정**:
-- Alice: RSA 키쌍 $(e_a, d_a)$
-- Bob: RSA 키쌍 $(e_b, d_b)$
+- Alice: RSA 키쌍 $(e_a, d_a)$, 모듈러스 $n_A$
+- Bob: RSA 키쌍 $(e_b, d_b)$, 모듈러스 $n_B$
 - 대칭키 $k$: Alice가 임의 생성
 
 ![AES + RSA + SHA 최종 프로토콜 — 기밀성·무결성·인증 통합](/images/signature/full-protocol.svg)
@@ -158,17 +158,17 @@ $$
 **Alice → Bob 전송**:
 
 1. 임의의 대칭키 $k$ 생성
-2. $C = \text{AES}_k(m)$ — 평문을 AES로 암호화 (속도)
-3. $k' = k^{e_b} \bmod n$ — 대칭키를 Bob의 공개키로 암호화
-4. $h = \text{SHA}(m)$, $s = h^{d_a} \bmod n$ — 해시에 Alice의 서명 생성
+2. $C = \text{AES}_k(m)$: 평문을 AES로 암호화 (속도)
+3. $k' = k^{e_b} \bmod n_B$: 대칭키를 Bob의 공개키로 암호화
+4. $h = \text{SHA}(m)$, $s = h^{d_a} \bmod n_A$: 해시에 Alice의 서명 생성
 5. 전송 패킷: $(C,\ k',\ s)$
 
 **Bob의 복호화 및 검증**:
 
-1. $k = k'^{d_b} \bmod n$ — RSA로 대칭키 복원
-2. $m = \text{AES}_k^{-1}(C)$ — AES로 평문 복원
-3. $h = s^{e_a} \bmod n$ — Alice의 공개키로 서명 복원
-4. $h' = \text{SHA}(m)$, $h' \stackrel{?}{=} h$ — 직접 해시와 비교
+1. $k = k'^{d_b} \bmod n_B$: RSA로 대칭키 복원
+2. $m = \text{AES}_k^{-1}(C)$: AES로 평문 복원
+3. $h = s^{e_a} \bmod n_A$: Alice의 공개키로 서명 복원
+4. $h' = \text{SHA}(m)$, $h' \stackrel{?}{=} h$: 직접 해시와 비교
 
 각 구성 요소의 역할:
 
@@ -193,5 +193,5 @@ $$
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Cryptographic Hashing — 암호화 해시 함수</strong> — SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, 그리고 MD5/SHA-1이 왜 더 이상 안전하지 않은지까지 다룬다.</p>
+<p><strong>Cryptographic Hashing, 암호화 해시 함수.</strong> SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, 그리고 MD5/SHA-1이 왜 더 이상 안전하지 않은지까지 다룬다.</p>
 </div>

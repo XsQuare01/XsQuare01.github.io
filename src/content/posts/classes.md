@@ -42,11 +42,11 @@ D에 속하는 예시:
 
 **Class E(Enumerable)**, 혹은 **RE(Recursively Enumerable)** 는 TM이 x∈L이면 반드시 accept로 정지하는 언어들의 집합이다. x∉L인 경우에는 reject로 정지할 수도 있고, 무한히 루프할 수도 있다.
 
-> TM M₂가 L의 **열거기(enumerator)** 라는 것은: x∈L이면 M₂(x)가 accept로 정지함을 의미한다. x∉L에 대한 동작은 보장하지 않는다.
+> TM M₂가 L의 **인식기(recognizer)** 라는 것은: x∈L이면 M₂(x)가 accept로 정지함을 의미한다. x∉L에 대한 동작은 보장하지 않는다.
 
 ### 왜 "Enumerable"인가?
 
-이름의 유래는 **L에 속하는 모든 문자열을 열거(enumerate)할 수 있다** 는 것에서 온다. 만약 TM M₂가 L의 열거기라면, M₂를 이용해 L의 원소를 하나씩 출력하는 또 다른 TM을 만들 수 있다.
+이름의 유래는 **L에 속하는 모든 문자열을 열거(enumerate)할 수 있다** 는 것에서 온다. 만약 TM M₂가 L의 인식기라면, M₂ 자체가 곧바로 목록을 출력하는 것은 아니지만 도브테일링을 수행하는 래퍼 TM을 붙여 L의 원소를 하나씩 출력할 수 있다.
 
 어떻게? **Dovetailing** 기법을 사용한다.
 

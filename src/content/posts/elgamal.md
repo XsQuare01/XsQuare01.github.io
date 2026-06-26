@@ -1,18 +1,18 @@
 ---
 title: "ElGamal — 이산 대수 기반 공개키 암호"
 date: 2026-03-27T11:00:00
-description: "RSA와 달리 이산 대수 문제(DLP)의 어려움에 기반한 ElGamal 암호화 — 키 생성, 암복호화, 정확성 증명, 확률적 암호화의 보안 이점까지 다룬다."
+description: "RSA와 달리 이산 대수 문제(DLP)의 어려움에 기반한 ElGamal 암호화. 키 생성, 암복호화, 정확성 증명, 확률적 암호화의 보안 이점까지 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
 difficulty: 중급
 ---
 
-> RSA가 소인수분해의 어려움 위에 서있다면, ElGamal은 이산 대수 문제(DLP) 위에 서있다. 두 시스템은 서로 다른 수학적 어려움을 활용하지만, 결정적 차이가 하나 있다 — ElGamal은 암호화할 때마다 다른 암호문을 생성한다. 이것이 단순한 특성을 넘어 의미론적 안전성(IND-CPA)의 핵심이 된다.
+> RSA가 소인수분해의 어려움에 기반한다면, ElGamal은 이산 대수 문제(DLP)에 기반한다. 두 시스템은 서로 다른 수학적 어려움을 활용하는데, 결정적 차이가 하나 있다. ElGamal은 암호화할 때마다 다른 암호문을 생성한다. 이 점이 의미론적 안전성(IND-CPA)의 핵심이 된다.
 
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>보안 근거</strong>: 이산 대수 문제 (DLP) — g^x mod p에서 x를 구하는 것은 지수적으로 어렵다</li>
+<li><strong>보안 근거</strong>: 이산 대수 문제 (DLP). g^x mod p에서 x를 구하는 것은 지수적으로 어렵다</li>
 <li><strong>키 생성</strong>: 비밀키 x, 공개키 h = g^x mod p</li>
 <li><strong>암호화</strong>: 랜덤 k 선택 → 암호문 (A, B) = (g^k, m·h^k) mod p</li>
 <li><strong>복호화</strong>: 공유 비밀 s = A^x, 평문 m = B·s⁻¹ mod p</li>
@@ -85,12 +85,12 @@ $$
 B \cdot s^{-1} = m \cdot h^k \cdot (h^k)^{-1} = m \pmod{p} \quad \checkmark
 $$
 
-핵심은 Alice와 Bob이 각자 독립적으로 **동일한 공유 비밀 $g^{kx} \bmod p$** 를 계산한다는 것이다.
+핵심은 Alice와 Bob이 각자 독립적으로 동일한 공유 비밀 $g^{kx} \bmod p$를 계산한다는 것이다.
 
-- Bob: $h^k = (g^x)^k$  — Alice의 공개키 $h$와 자신의 임시 키 $k$ 사용
-- Alice: $A^x = (g^k)^x$  — Bob이 보낸 $A$와 자신의 비밀키 $x$ 사용
+- Bob: $h^k = (g^x)^k$ (Alice의 공개키 $h$와 자신의 임시 키 $k$ 사용)
+- Alice: $A^x = (g^k)^x$ (Bob이 보낸 $A$와 자신의 비밀키 $x$ 사용)
 
-이는 **Diffie-Hellman 키 교환** 의 직접적인 응용이다. ElGamal 암호화는 DH 키 교환에 메시지 마스킹($m \cdot h^k$)을 결합한 구조이다.
+이는 Diffie-Hellman 키 교환의 직접적인 응용이다. ElGamal 암호화는 DH 키 교환에 메시지 마스킹($m \cdot h^k$)을 결합한 구조이다.
 
 ## 보안 근거: CDH 가정
 
@@ -98,7 +98,7 @@ ElGamal의 보안은 **계산적 Diffie-Hellman(CDH) 가정** 에 기반한다.
 
 > $g$, $g^x$, $g^k$ 가 주어졌을 때, $g^{xk}$를 계산하는 다항식 시간 알고리즘이 존재하지 않는다.
 
-공격자가 암호문 $(A, B) = (g^k, m \cdot h^k)$을 가로채더라도, 공유 비밀 $g^{xk}$를 계산하지 못하면 $m$을 복원할 수 없다. CDH를 풀려면 DLP를 풀어야 하므로, CDH $\leq$ DLP — CDH가 쉬우면 DLP도 쉽다. 따라서 DLP가 어려운 한 CDH도 어렵다고 가정한다.
+공격자가 암호문 $(A, B) = (g^k, m \cdot h^k)$을 가로채더라도, 공유 비밀 $g^{xk}$를 계산하지 못하면 $m$을 복원할 수 없다. CDH를 풀려면 DLP를 풀어야 하므로 CDH $\leq$ DLP이다. 즉 CDH가 쉬우면 DLP도 쉽다. 따라서 DLP가 어려운 한 CDH도 어렵다고 가정한다.
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
@@ -118,15 +118,15 @@ ElGamal의 핵심 이점은 **확률적(randomized)** 암호화다.
 - **RSA(교과서적)**: $m \to C$가 결정론적. 공격자가 두 후보 $m_0, m_1$을 직접 암호화해 도전 암호문 $C^*$와 비교 가능.
 - **ElGamal**: $m \to (A, B)$가 확률적. 공격자가 $m$을 암호화해도 $k$가 달라 $C^*$와 일치하지 않음.
 
-단, 암호문이 두 개의 군 원소 $(A, B)$로 구성되므로 평문 대비 **암호문 크기가 2배** 로 증가한다. RSA 대비 트레이드오프다.
+단, 암호문이 두 개의 군 원소 $(A, B)$로 구성되므로 평문 대비 암호문 크기가 2배로 증가한다. RSA 대비 트레이드오프다.
 
 <div class="callout">
 <div class="callout-title">ElGamal vs RSA 비교</div>
 <ul>
-<li><strong>보안 근거</strong>: ElGamal — DLP (이산 대수),  RSA — 소인수분해</li>
-<li><strong>암호화 유형</strong>: ElGamal — 확률적 (IND-CPA),  RSA — 결정론적 (교과서적)</li>
-<li><strong>암호문 크기</strong>: ElGamal — 평문의 2배,  RSA — 평문과 동일</li>
-<li><strong>랜덤 비트 사용</strong>: ElGamal — 매번 필요,  RSA — 불필요 (OAEP 적용 시 필요)</li>
+<li><strong>보안 근거</strong>: ElGamal은 DLP (이산 대수), RSA는 소인수분해</li>
+<li><strong>암호화 유형</strong>: ElGamal은 확률적 (IND-CPA), RSA는 결정론적 (교과서적)</li>
+<li><strong>암호문 크기</strong>: ElGamal은 평문의 2배, RSA는 평문과 동일</li>
+<li><strong>랜덤 비트 사용</strong>: ElGamal은 매번 필요, RSA는 불필요 (OAEP 적용 시 필요)</li>
 </ul>
 </div>
 
@@ -143,12 +143,12 @@ ElGamal의 핵심 이점은 **확률적(randomized)** 암호화다.
 <ul>
 <li>ElGamal은 DLP의 어려움에 기반한다. g^x를 알아도 x를 역산하는 다항식 알고리즘은 알려져 있지 않다.</li>
 <li>복호화 정확성은 A^x = h^k = g^(kx)라는 공유 비밀의 동등성에서 비롯된다. Diffie-Hellman 키 교환의 직접 응용이다.</li>
-<li>확률적 암호화 덕분에 동일 평문도 매번 다른 암호문을 생성한다 — IND-CPA 안전성의 핵심이다.</li>
+<li>확률적 암호화 덕분에 동일 평문도 매번 다른 암호문을 생성한다. 이것이 IND-CPA 안전성의 핵심이다.</li>
 <li>임시 키 k를 재사용하면 즉시 평문 비율이 노출된다. k는 반드시 매번 새로 생성해야 한다.</li>
 </ul>
 </div>
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Diffie-Hellman — 공개 채널 위의 비밀 키 교환</strong> — ElGamal의 수학적 기반이 된 Diffie-Hellman 키 교환 프로토콜, CDH/DDH 가정, 중간자 공격과 인증 문제, 전방향 안전성, 그리고 DH에서 ElGamal로의 확장까지 다룬다.</p>
+<p><strong>Diffie-Hellman — 공개 채널 위의 비밀 키 교환</strong>에서는 ElGamal의 수학적 기반이 된 Diffie-Hellman 키 교환 프로토콜, CDH/DDH 가정, 중간자 공격과 인증 문제, 전방향 안전성, 그리고 DH에서 ElGamal로의 확장까지 다룬다.</p>
 </div>

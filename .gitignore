@@ -3,5 +3,11 @@ node_modules/
 .astro/
 .env
 .superpowers/
+.sisyphus/
 .claude/settings.local.json
+.claude/__pycache__/
+__pycache__/
 .playwright-mcp/
+.env.local
+.claude/__pycache__/
+.sisyphus/
