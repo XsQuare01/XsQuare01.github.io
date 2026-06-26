@@ -6,6 +6,7 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
   twitterCardType?: 'summary' | 'summary_large_image';
   articlePublishedTime?: string;
@@ -19,6 +20,7 @@ const {
   title,
   description = '계산 이론·암호학·알고리즘을 정의부터 증명까지 정리하는 학습 노트 — XsQuare01',
   ogImage = 'https://github.com/XsQuare01.png',
+  ogImageAlt = 'XsQuare01 학습 노트',
   ogType = 'website',
   twitterCardType = 'summary',
   articlePublishedTime,
@@ -68,6 +70,7 @@ const currentPath = Astro.url.pathname;
   <meta property="og:title" content={`${title} | XsQuare01`} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImageAbsolute} />
+  <meta property="og:image:alt" content={ogImageAlt} />
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="XsQuare01" />
 
@@ -92,9 +95,11 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:title" content={`${title} | XsQuare01`} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImageAbsolute} />
+  <meta name="twitter:image:alt" content={ogImageAlt} />
 
   <title>{title} | XsQuare01</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="XsQuare01 학습 노트" href="/rss.xml" />
   <script is:inline>
     (function() {
       const stored = localStorage.getItem('theme');
