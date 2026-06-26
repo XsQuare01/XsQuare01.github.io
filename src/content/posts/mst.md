@@ -1,7 +1,7 @@
 ---
 title: "최소 신장 트리 (MST) — 정의와 성질"
 date: 2026-05-23T08:00:00
-description: "최소 신장 트리(Minimum Spanning Tree)는 가중 연결 그래프에서 모든 정점을 연결하면서 간선 가중치의 합이 최소가 되는 부분 그래프다. MST가 왜 트리(cycle 없음)여야 하는지, 정확히 $n-1$개의 간선을 가지는 이유를 증명하고, MST가 유일하지 않을 수 있는 경우와 무차별 대입의 한계를 정리한다."
+description: "최소 신장 트리(Minimum Spanning Tree)는 가중 연결 그래프에서 모든 정점을 연결하면서 간선 가중치의 합이 최소가 되는 부분 그래프다. MST가 왜 트리(cycle 없음)여야 하는지, 정확히 n−1개의 간선을 가지는 이유를 증명하고, MST가 유일하지 않을 수 있는 경우와 무차별 대입의 한계를 정리한다."
 tags: ["Algorithm", "Graph", "MST", "Greedy"]
 category: algorithm
 difficulty: 입문
