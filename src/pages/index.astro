@@ -23,9 +23,35 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 
 const FEATURED_IDS = ['rsa', 'algo-orientation'];
 const featuredPosts = FEATURED_IDS.map((id) => allPosts.find((p) => p.id === id)).filter(Boolean);
+
+// 홈 구조화 데이터 — 사이트(WebSite)와 저자(Person) 엔티티
+const siteUrl = Astro.site?.toString() ?? 'https://xsquare01.github.io/';
+const homeJsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'XsQuare01',
+    alternateName: 'XsQuare01 학습 노트',
+    url: siteUrl,
+    inLanguage: 'ko',
+    description: '계산 이론·암호학·알고리즘을 정의부터 증명까지 정리하는 학습 노트',
+    author: { '@type': 'Person', name: 'XsQuare01', url: siteUrl },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'XsQuare01',
+    url: siteUrl,
+    image: 'https://github.com/XsQuare01.png',
+    knowsAbout: ['계산 이론', '암호학', '알고리즘', '정수론', '복잡도', '그리디'],
+  },
+]);
 ---
 
 <BaseLayout title="홈">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={homeJsonLd} />
+  </Fragment>
   <div class="prose home">
 
     <!-- 에디토리얼 헤드라인 -->
@@ -33,19 +59,18 @@ const featuredPosts = FEATURED_IDS.map((id) => allPosts.find((p) => p.id === id)
       <span class="headline-hl">배운 것</span>을<br />정리하는 개발자
     </h1>
     <p class="desc">
-      Unity 클라이언트 개발, CS 이론, UI/UX 구현 과정을 기록합니다.<br />
-      결과보다 과정과 이유를 남기는 것을 중요하게 생각합니다.
+      계산 이론·암호학·알고리즘을 정의부터 증명까지 풀어 정리하는 노트입니다.<br />
+      정답보다 그 답에 이르는 과정을 우선합니다.
     </p>
 
     <!-- 기술 태그 -->
     <div class="tags">
-      <span class="tag tag--accent">Unity</span>
-      <span class="tag tag--accent">C#</span>
-      <span class="tag tag--accent">UI 설계</span>
-      <span class="tag">TypeScript</span>
-      <span class="tag">C++</span>
-      <span class="tag">알고리즘</span>
-      <span class="tag">CS 이론</span>
+      <span class="tag tag--accent">계산 이론</span>
+      <span class="tag tag--accent">암호학</span>
+      <span class="tag tag--accent">알고리즘</span>
+      <span class="tag">정수론</span>
+      <span class="tag">복잡도</span>
+      <span class="tag">그리디</span>
     </div>
 
     <div class="divider"></div>

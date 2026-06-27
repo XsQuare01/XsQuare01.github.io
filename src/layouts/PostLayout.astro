@@ -34,6 +34,8 @@ interface Props {
   difficulty?: '입문' | '중급' | '심화';
   headings?: Heading[];
   readingTime?: number;
+  wordCount?: number;
+  ogImageUrl?: string;
   prevPost?: PostLink;
   nextPost?: PostLink;
 }
@@ -47,6 +49,8 @@ const {
   difficulty,
   headings = [],
   readingTime,
+  wordCount,
+  ogImageUrl,
   prevPost,
   nextPost,
 } = Astro.props;
@@ -57,35 +61,78 @@ const formattedDate = date.toLocaleDateString('ko-KR', {
   day: 'numeric',
 });
 
+const siteUrl = Astro.site?.toString() ?? '';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const categoryLabel = category ? getCategoryLabel(category) : undefined;
 
-const jsonLd = JSON.stringify({
+const blogPosting: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: title,
   description: description ?? '',
+  inLanguage: 'ko',
   datePublished: date.toISOString(),
   dateModified: date.toISOString(),
   author: {
     '@type': 'Person',
     name: 'XsQuare01',
-    url: Astro.site?.toString() ?? '',
+    url: siteUrl,
   },
   publisher: {
     '@type': 'Person',
     name: 'XsQuare01',
-    url: Astro.site?.toString() ?? '',
+    url: siteUrl,
   },
   url: canonicalURL,
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': canonicalURL,
   },
-  ...(tags.length > 0 && { keywords: tags.join(', ') }),
+};
+if (ogImageUrl) blogPosting.image = ogImageUrl;
+if (wordCount) blogPosting.wordCount = wordCount;
+if (tags.length > 0) blogPosting.keywords = tags.join(', ');
+if (categoryLabel) blogPosting.articleSection = categoryLabel;
+
+const breadcrumbItems: Array<Record<string, unknown>> = [
+  { '@type': 'ListItem', position: 1, name: '홈', item: siteUrl },
+];
+if (category && categoryLabel) {
+  breadcrumbItems.push({
+    '@type': 'ListItem',
+    position: 2,
+    name: categoryLabel,
+    item: new URL(`categories/${category}/`, Astro.site).toString(),
+  });
+}
+breadcrumbItems.push({
+  '@type': 'ListItem',
+  position: breadcrumbItems.length + 1,
+  name: title,
+  item: canonicalURL,
 });
+const breadcrumbList = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems,
+};
+
+const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
 ---
 
-<BaseLayout title={title} description={description} ogType="article">
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={ogImageUrl}
+  ogImageAlt={title}
+  twitterCardType="summary_large_image"
+  articlePublishedTime={date.toISOString()}
+  articleModifiedTime={date.toISOString()}
+  articleAuthor="XsQuare01"
+  articleSection={categoryLabel}
+  articleTags={tags}
+>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={jsonLd} />
   </Fragment>
@@ -194,7 +241,10 @@ const jsonLd = JSON.stringify({
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-      } catch {}
+      } catch {
+        btn.textContent = '복사 실패';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      }
     });
     (pre as HTMLElement).style.position = 'relative';
     pre.appendChild(btn);
