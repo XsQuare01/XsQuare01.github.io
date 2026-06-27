@@ -1,0 +1,41 @@
+<svg viewBox="0 0 720 360" width="1080" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="360" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">평균 분석 — pivot 등수 k의 분배 구조</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">각 등수 k가 확률 1/n로 나오고, 왼쪽 k−1개·오른쪽 n−k개로 갈린다</text>
+
+  <!-- Row 1: k = 1 -->
+  <text x="70" y="98" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">k = 1</text>
+  <text x="70" y="113" text-anchor="middle" fill="#64748b" font-size="9">확률 1/n</text>
+  <rect x="160" y="86" width="20" height="26" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <rect x="180" y="86" width="420" height="26" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="390" y="104" text-anchor="middle" fill="#4ade80" font-size="11">오른쪽 n−1개</text>
+
+  <!-- Row 2: k ~ n/2 -->
+  <text x="70" y="158" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">k ≈ n/2</text>
+  <text x="70" y="173" text-anchor="middle" fill="#64748b" font-size="9">균형</text>
+  <rect x="160" y="146" width="205" height="26" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="262" y="164" text-anchor="middle" fill="#93c5fd" font-size="11">왼쪽 k−1개</text>
+  <rect x="365" y="146" width="20" height="26" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <rect x="385" y="146" width="215" height="26" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="492" y="164" text-anchor="middle" fill="#4ade80" font-size="11">오른쪽 n−k개</text>
+
+  <!-- Row 3: k = n -->
+  <text x="70" y="218" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">k = n</text>
+  <text x="70" y="233" text-anchor="middle" fill="#64748b" font-size="9">확률 1/n</text>
+  <rect x="160" y="206" width="420" height="26" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="370" y="224" text-anchor="middle" fill="#93c5fd" font-size="11">왼쪽 n−1개</text>
+  <rect x="580" y="206" width="20" height="26" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+
+  <!-- pivot legend -->
+  <rect x="285" y="252" width="14" height="14" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="305" y="263" fill="#fb923c" font-size="10">pivot (k등, 최종 위치 확정)</text>
+
+  <!-- divider -->
+  <line x1="60" y1="286" x2="660" y2="286" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- recurrence -->
+  <text x="360" y="312" text-anchor="middle" fill="#cbd5e1" font-size="12">기댓값의 선형성으로 점화식이 선다</text>
+  <text x="360" y="338" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">E(n) = (1/n) · Σ ( E(k−1) + E(n−k) ) + n</text>
+</svg>
