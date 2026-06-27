@@ -34,20 +34,19 @@ difficulty: 심화
 가장 왼쪽 값 $a[0]$을 pivot $p$로 잡고, 두 포인터로 배열을 한 번 훑으며 제자리에서 분할한다.
 
 ```cpp
-int sort(int a[], int n) {
+void sort(int a[], int n) {
+    if (n <= 1) return;     // 기저 사례: 크기 0·1은 이미 정렬됨
     int p = a[0];           // pivot: 맨 왼쪽 값
     int i = 1;              // 왼쪽 → 오른쪽으로 다가가는 포인터
     int j = n - 1;          // 오른쪽 → 왼쪽으로 다가가는 포인터
-    while (i < j) {
-        if (i == n || j == 0) break;
-        while (i < n && a[i] < p) i++;   // p보다 큰 값을 만날 때까지 전진
-        while (j > 0 && a[j] > p) j--;   // p보다 작은 값을 만날 때까지 후진
-        if (i < j) swap(a[i], a[j]);     // 엇갈리지 않았다면 두 값을 교환
+    while (i <= j) {
+        while (i <= j && a[i] < p) i++;  // p보다 작은 동안 전진 → p 이상에서 멈춤
+        while (i <= j && a[j] > p) j--;  // p보다 큰 동안 후진 → p 이하에서 멈춤
+        if (i < j) { swap(a[i], a[j]); i++; j--; }  // 엇갈리기 전이면 교환 후 한 칸씩
     }
-    swap(a[0], a[j]);       // pivot을 경계 자리로 → 최종 위치 확정
-    sort(a, j);             // 왼쪽 영역 재귀
-    sort(a + j + 1, n - j - 1);  // 오른쪽 영역 재귀
-    return 0;
+    swap(a[0], a[j]);       // pivot을 경계 j(a[j] ≤ p)로 → 최종 위치 확정
+    sort(a, j);             // 왼쪽 영역 재귀 (크기 j)
+    sort(a + j + 1, n - j - 1);  // 오른쪽 영역 재귀 (크기 n−j−1)
 }
 ```
 
