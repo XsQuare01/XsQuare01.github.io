@@ -1,0 +1,76 @@
+<svg viewBox="0 0 720 320" width="1080" height="480" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="320" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Quickselect — partition 후 한쪽만 재귀</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">k의 위치와 pivot 등수를 비교해 관계없는 쪽은 버린다</text>
+
+  <!-- ===== Before partition row ===== -->
+  <text x="60" y="90" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">분할 전</text>
+
+  <!-- cells: 8 elements, pivot highlighted -->
+  <!-- pivot cell a[0] = X -->
+  <rect x="100" y="76" width="54" height="36" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="127" y="100" text-anchor="middle" fill="#fed7aa" font-size="15" font-weight="700">X</text>
+  <!-- other cells -->
+  <rect x="160" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="187" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+  <rect x="220" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="247" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+  <rect x="280" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="307" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+  <rect x="340" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="367" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+  <rect x="400" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="427" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+  <rect x="460" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="487" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+  <rect x="520" y="76" width="54" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="547" y="100" text-anchor="middle" fill="#94a3b8" font-size="13">···</text>
+
+  <!-- brace label -->
+  <text x="627" y="100" fill="#64748b" font-size="11">n개</text>
+
+  <!-- down arrow -->
+  <line x1="360" y1="124" x2="360" y2="148" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <polygon points="360,152 354,143 366,143" fill="#64748b"/>
+  <text x="430" y="140" fill="#64748b" font-size="10">partition (O(n))</text>
+
+  <!-- ===== After partition row ===== -->
+  <text x="60" y="186" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">분할 후</text>
+
+  <!-- left region: < X -->
+  <rect x="100" y="168" width="190" height="36" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="195" y="192" text-anchor="middle" fill="#93c5fd" font-size="12">X 미만 — j개</text>
+
+  <!-- pivot cell -->
+  <rect x="296" y="168" width="54" height="36" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="323" y="192" text-anchor="middle" fill="#fed7aa" font-size="15" font-weight="700">X</text>
+
+  <!-- right region: > X -->
+  <rect x="356" y="168" width="218" height="36" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="465" y="192" text-anchor="middle" fill="#4ade80" font-size="12">X 초과 — n−j−1개</text>
+
+  <!-- pivot rank label -->
+  <text x="323" y="222" text-anchor="middle" fill="#fb923c" font-size="10">등수 = j+1</text>
+
+  <!-- ===== Case labels below ===== -->
+  <!-- Case A: k < j+1 -->
+  <text x="185" y="258" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="600">k &lt; j+1 이면</text>
+  <rect x="100" y="264" width="190" height="28" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="195" y="283" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">왼쪽만 재귀 — O(j)</text>
+
+  <!-- Case B: k = j+1 -->
+  <text x="323" y="258" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">k = j+1</text>
+  <rect x="296" y="264" width="54" height="28" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="323" y="283" text-anchor="middle" fill="#fed7aa" font-size="11" font-weight="600">정답 X</text>
+
+  <!-- Case C: k > j+1 -->
+  <text x="465" y="258" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="600">k &gt; j+1 이면</text>
+  <rect x="356" y="264" width="218" height="28" rx="4" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="465" y="283" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">오른쪽만 재귀 — O(n−j−1)</text>
+
+  <!-- discarded label for left case -->
+  <text x="465" y="308" text-anchor="middle" fill="#475569" font-size="10" font-style="italic">← 버려지는 쪽</text>
+  <text x="185" y="308" text-anchor="middle" fill="#475569" font-size="10" font-style="italic">버려지는 쪽 →</text>
+</svg>
