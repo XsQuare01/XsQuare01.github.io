@@ -1,0 +1,183 @@
+<svg viewBox="0 0 720 420" width="1080" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="420" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="26" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">그룹 크기 g=3 vs g=5 — 보장 영역과 재귀 비율 합 비교</text>
+  <text x="360" y="44" text-anchor="middle" fill="#64748b" font-size="11">비율 합 α+β &lt; 1 이어야 선형 — g=3은 등식, g=5는 0.9로 여유가 생긴다</text>
+
+  <!-- ===== LEFT PANEL: g=3 ===== -->
+  <!-- Panel background -->
+  <rect x="30" y="58" width="310" height="230" rx="8" fill="#1a0a0a" stroke="#7f1d1d" stroke-width="1.5"/>
+  <text x="185" y="78" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="700">g = 3  (3개씩 묶기)</text>
+
+  <!-- g=3: 3 rows × 4 columns (representing n/3 groups, showing 4 for space) -->
+  <!-- Row labels -->
+  <text x="50" y="106" text-anchor="middle" fill="#64748b" font-size="9">1행</text>
+  <text x="50" y="136" text-anchor="middle" fill="#64748b" font-size="9">2행</text>
+  <text x="50" y="166" text-anchor="middle" fill="#64748b" font-size="9">3행</text>
+
+  <!-- Column 1 -->
+  <rect x="60" y="92" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="83" y="108" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+  <!-- row 2 = median -->
+  <rect x="60" y="122" width="46" height="24" rx="3" fill="#1a1a0a" stroke="#eab308" stroke-width="1.8"/>
+  <text x="83" y="138" text-anchor="middle" fill="#fde047" font-size="10" font-weight="600">X₁</text>
+  <rect x="60" y="152" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="83" y="168" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+
+  <!-- Column 2 -->
+  <rect x="112" y="92" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="135" y="108" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+  <rect x="112" y="122" width="46" height="24" rx="3" fill="#1a1a0a" stroke="#eab308" stroke-width="1.8"/>
+  <text x="135" y="138" text-anchor="middle" fill="#fde047" font-size="10" font-weight="600">X₂</text>
+  <rect x="112" y="152" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="135" y="168" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+
+  <!-- Column 3 -->
+  <rect x="164" y="92" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="187" y="108" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+  <rect x="164" y="122" width="46" height="24" rx="3" fill="#1a1a0a" stroke="#eab308" stroke-width="1.8"/>
+  <text x="187" y="138" text-anchor="middle" fill="#fde047" font-size="10" font-weight="600">X₃</text>
+  <rect x="164" y="152" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="187" y="168" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+
+  <!-- Column 4 -->
+  <rect x="216" y="92" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="239" y="108" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+  <rect x="216" y="122" width="46" height="24" rx="3" fill="#1a1a0a" stroke="#eab308" stroke-width="1.8"/>
+  <text x="239" y="138" text-anchor="middle" fill="#fde047" font-size="10" font-weight="600">X₄</text>
+  <rect x="216" y="152" width="46" height="24" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="239" y="168" text-anchor="middle" fill="#64748b" font-size="10">·</text>
+
+  <text x="278" y="135" fill="#475569" font-size="14">···</text>
+
+  <!-- Median row bracket -->
+  <line x1="52" y1="122" x2="52" y2="146" stroke="#eab308" stroke-width="2"/>
+  <line x1="48" y1="122" x2="56" y2="122" stroke="#eab308" stroke-width="2"/>
+  <line x1="48" y1="146" x2="56" y2="146" stroke="#eab308" stroke-width="2"/>
+
+  <!-- g=3 guarantee annotation -->
+  <text x="185" y="197" text-anchor="middle" fill="#94a3b8" font-size="10">X′ 이하 그룹: ≈ n/6개, 각 ⌈3/2⌉=2개 보장</text>
+  <text x="185" y="212" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">보장: n/6 × 2 = n/3 ≈ 0.33n</text>
+  <text x="185" y="227" text-anchor="middle" fill="#94a3b8" font-size="10">나머지: n − n/3 = 2n/3 ≈ 0.67n</text>
+
+  <!-- g=3 ratio box (red: fails) -->
+  <rect x="45" y="240" width="280" height="36" rx="6" fill="#3f0000" stroke="#ef4444" stroke-width="2"/>
+  <text x="185" y="254" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700">S(n/3) + S(2n/3)</text>
+  <text x="185" y="270" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="700">1/3 + 2/3 = 1  ✗  선형 보장 안 됨</text>
+
+  <!-- ===== RIGHT PANEL: g=5 ===== -->
+  <rect x="380" y="58" width="310" height="230" rx="8" fill="#0a1a0a" stroke="#14532d" stroke-width="1.5"/>
+  <text x="535" y="78" text-anchor="middle" fill="#86efac" font-size="13" font-weight="700">g = 5  (5개씩 묶기)</text>
+
+  <!-- g=5: 5 rows × 4 columns -->
+  <!-- Row labels -->
+  <text x="400" y="99" text-anchor="middle" fill="#64748b" font-size="9">1행</text>
+  <text x="400" y="119" text-anchor="middle" fill="#64748b" font-size="9">2행</text>
+  <text x="400" y="139" text-anchor="middle" fill="#64748b" font-size="9">3행</text>
+  <text x="400" y="159" text-anchor="middle" fill="#64748b" font-size="9">4행</text>
+  <text x="400" y="179" text-anchor="middle" fill="#64748b" font-size="9">5행</text>
+
+  <!-- Column A -->
+  <rect x="410" y="88" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="432" y="101" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="410" y="108" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="432" y="121" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <!-- row 3 = median -->
+  <rect x="410" y="128" width="44" height="18" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="432" y="141" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="600">X₁</text>
+  <rect x="410" y="148" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="432" y="161" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="410" y="168" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="432" y="181" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+
+  <!-- Column B -->
+  <rect x="460" y="88" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="482" y="101" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="460" y="108" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="482" y="121" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="460" y="128" width="44" height="18" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="482" y="141" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="600">X₂</text>
+  <rect x="460" y="148" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="482" y="161" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="460" y="168" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="482" y="181" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+
+  <!-- Column C -->
+  <rect x="510" y="88" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="532" y="101" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="510" y="108" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="532" y="121" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="510" y="128" width="44" height="18" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="532" y="141" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="600">X₃</text>
+  <rect x="510" y="148" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="532" y="161" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="510" y="168" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="532" y="181" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+
+  <!-- Column D -->
+  <rect x="560" y="88" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="582" y="101" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="560" y="108" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="582" y="121" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="560" y="128" width="44" height="18" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="582" y="141" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="600">X₄</text>
+  <rect x="560" y="148" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="582" y="161" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+  <rect x="560" y="168" width="44" height="18" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="582" y="181" text-anchor="middle" fill="#64748b" font-size="9">·</text>
+
+  <text x="622" y="138" fill="#475569" font-size="14">···</text>
+
+  <!-- Median row bracket -->
+  <line x1="402" y1="128" x2="402" y2="146" stroke="#22c55e" stroke-width="2"/>
+  <line x1="398" y1="128" x2="406" y2="128" stroke="#22c55e" stroke-width="2"/>
+  <line x1="398" y1="146" x2="406" y2="146" stroke="#22c55e" stroke-width="2"/>
+
+  <!-- g=5 guarantee annotation -->
+  <text x="535" y="197" text-anchor="middle" fill="#94a3b8" font-size="10">X′ 이하 그룹: ≈ n/10개, 각 ⌈5/2⌉=3개 보장</text>
+  <text x="535" y="212" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">보장: n/10 × 3 = 0.3n</text>
+  <text x="535" y="227" text-anchor="middle" fill="#94a3b8" font-size="10">나머지: n − 0.3n = 0.7n</text>
+
+  <!-- g=5 ratio box (green: OK) -->
+  <rect x="395" y="240" width="280" height="36" rx="6" fill="#003300" stroke="#22c55e" stroke-width="2"/>
+  <text x="535" y="254" text-anchor="middle" fill="#86efac" font-size="11" font-weight="700">S(n/5) + S(0.7n)  =  S(0.2n) + S(0.7n)</text>
+  <text x="535" y="270" text-anchor="middle" fill="#22c55e" font-size="12" font-weight="700">0.2 + 0.7 = 0.9 &lt; 1  ✓  선형 성립</text>
+
+  <!-- ===== MIDDLE DIVIDER ===== -->
+  <line x1="360" y1="60" x2="360" y2="300" stroke="#1e293b" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- ===== SUMMARY TABLE ===== -->
+  <rect x="30" y="310" width="660" height="98" rx="8" fill="#111827" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="360" y="328" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">그룹 크기별 비교</text>
+
+  <!-- Table header -->
+  <text x="130" y="346" text-anchor="middle" fill="#64748b" font-size="10">그룹 크기 g</text>
+  <text x="265" y="346" text-anchor="middle" fill="#64748b" font-size="10">보장 원소 수</text>
+  <text x="400" y="346" text-anchor="middle" fill="#64748b" font-size="10">나머지(재귀 상한)</text>
+  <text x="535" y="346" text-anchor="middle" fill="#64748b" font-size="10">비율 합 α+β</text>
+  <text x="655" y="346" text-anchor="middle" fill="#64748b" font-size="10">선형?</text>
+
+  <line x1="40" y1="350" x2="680" y2="350" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Row g=3 -->
+  <text x="130" y="368" text-anchor="middle" fill="#fca5a5" font-size="11">g = 3</text>
+  <text x="265" y="368" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ n/3</text>
+  <text x="400" y="368" text-anchor="middle" fill="#cbd5e1" font-size="11">2n/3</text>
+  <text x="535" y="368" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">1/3 + 2/3 = 1</text>
+  <text x="655" y="368" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="700">✗</text>
+
+  <!-- Row g=5 -->
+  <text x="130" y="388" text-anchor="middle" fill="#86efac" font-size="11">g = 5</text>
+  <text x="265" y="388" text-anchor="middle" fill="#cbd5e1" font-size="11">0.3n</text>
+  <text x="400" y="388" text-anchor="middle" fill="#cbd5e1" font-size="11">0.7n</text>
+  <text x="535" y="388" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">0.2 + 0.7 = 0.9</text>
+  <text x="655" y="388" text-anchor="middle" fill="#22c55e" font-size="13" font-weight="700">✓</text>
+
+  <!-- Row g=7 -->
+  <text x="130" y="407" text-anchor="middle" fill="#a78bfa" font-size="11">g = 7</text>
+  <text x="265" y="407" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ 3n/7</text>
+  <text x="400" y="407" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ 4n/7</text>
+  <text x="535" y="407" text-anchor="middle" fill="#a78bfa" font-size="11">1/7 + 4/7 ≈ 0.71</text>
+  <text x="655" y="407" text-anchor="middle" fill="#a78bfa" font-size="11">✓ (비용↑)</text>
+</svg>
