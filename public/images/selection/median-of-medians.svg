@@ -1,0 +1,159 @@
+<svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="400" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="26" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Median of Medians — 5개씩 묶어 approximate median 구하기</text>
+  <text x="360" y="44" text-anchor="middle" fill="#64748b" font-size="11">각 열 정렬 → 중앙값 행(3행) 강조 → 중앙값들의 중앙값 X′ 선택</text>
+
+  <!-- ===== Grid: 5 rows × 7 columns (representing n/5 groups) ===== -->
+  <!-- Column positions: 80, 148, 216, 284, 352, 420, 488 (cell width 52, gap 16) -->
+  <!-- Row positions: 70, 110, 150, 190, 230 (cell height 34, gap 6) -->
+
+  <!-- Step labels on left -->
+  <text x="34" y="92" text-anchor="middle" fill="#64748b" font-size="9">1행</text>
+  <text x="34" y="132" text-anchor="middle" fill="#64748b" font-size="9">2행</text>
+  <text x="34" y="172" text-anchor="middle" fill="#64748b" font-size="9">3행</text>
+  <text x="34" y="212" text-anchor="middle" fill="#64748b" font-size="9">4행</text>
+  <text x="34" y="252" text-anchor="middle" fill="#64748b" font-size="9">5행</text>
+
+  <!-- ===== Column group label at top ===== -->
+  <text x="284" y="62" text-anchor="middle" fill="#64748b" font-size="10">각 열 = 5개씩 묶인 그룹 (총 n/5개)</text>
+
+  <!-- Macro: draw 7 columns × 5 rows. Columns 1–3 and 5–7 are normal groups; column 4 is X' group (highlighted) -->
+
+  <!-- COLUMN 1 -->
+  <rect x="56" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="80" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="56" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="80" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <!-- row 3 median -->
+  <rect x="56" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="80" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₁</text>
+  <rect x="56" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="80" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="56" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="80" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- COLUMN 2 -->
+  <rect x="112" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="136" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="112" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="136" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="112" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="136" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₂</text>
+  <rect x="112" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="136" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="112" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="136" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- COLUMN 3 -->
+  <rect x="168" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="192" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="168" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="192" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="168" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="192" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₃</text>
+  <rect x="168" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="192" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="168" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="192" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- COLUMN 4 — a normal group; its median is X₄ (NOT X') -->
+  <rect x="224" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="248" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="224" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="248" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="224" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="248" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₄</text>
+  <rect x="224" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="248" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="224" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="248" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- COLUMN 5 -->
+  <rect x="280" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="304" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="280" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="304" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="280" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="304" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₅</text>
+  <rect x="280" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="304" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="280" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="304" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- COLUMN 6 -->
+  <rect x="336" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="360" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="336" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="360" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="336" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="360" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₆</text>
+  <rect x="336" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="360" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="336" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="360" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- COLUMN 7 -->
+  <rect x="392" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="416" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="392" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="416" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="392" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="416" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₇</text>
+  <rect x="392" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="416" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+  <rect x="392" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
+  <text x="416" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
+
+  <!-- "···" column indicator -->
+  <text x="458" y="159" fill="#334155" font-size="18">···</text>
+
+  <!-- Row labels on right for sorted groups -->
+  <text x="510" y="88" fill="#475569" font-size="10" text-anchor="start">작은 값 (1~2행)</text>
+  <text x="510" y="156" fill="#22c55e" font-size="10" font-weight="600" text-anchor="start">← 중앙값 행 X₁…X₇</text>
+  <text x="510" y="170" fill="#64748b" font-size="9" text-anchor="start">(그룹 중앙값 n/5개)</text>
+  <text x="510" y="228" fill="#475569" font-size="10" text-anchor="start">큰 값 (4~5행)</text>
+
+  <!-- Median row highlight bracket -->
+  <line x1="48" y1="144" x2="48" y2="174" stroke="#22c55e" stroke-width="2"/>
+  <line x1="44" y1="144" x2="52" y2="144" stroke="#22c55e" stroke-width="2"/>
+  <line x1="44" y1="174" x2="52" y2="174" stroke="#22c55e" stroke-width="2"/>
+
+  <!-- sorted within each column arrow -->
+  <text x="635" y="104" text-anchor="middle" fill="#475569" font-size="9">각 열</text>
+  <text x="635" y="116" text-anchor="middle" fill="#475569" font-size="9">오름차순</text>
+  <text x="635" y="128" text-anchor="middle" fill="#475569" font-size="9">정렬됨</text>
+  <line x1="635" y1="134" x2="635" y2="218" stroke="#334155" stroke-width="1" stroke-dasharray="3 2"/>
+  <polygon points="635,222 631,213 639,213" fill="#334155"/>
+
+  <!-- Annotation: median of the median row = X' -->
+  <text x="284" y="256" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">이 중앙값들(X₁…X<tspan baseline-shift="sub" font-size="8">n/5</tspan>)의 중앙값 = X′  ↓</text>
+
+  <!-- Divider -->
+  <line x1="56" y1="262" x2="664" y2="262" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== Guarantee boxes ===== -->
+  <!-- ≤ X' box (blue) -->
+  <rect x="56" y="272" width="270" height="60" rx="6" fill="#0d1f3c" stroke="#3b82f6" stroke-width="2"/>
+  <text x="191" y="294" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">≤ X′ 보장</text>
+  <text x="191" y="312" text-anchor="middle" fill="#60a5fa" font-size="11">X′ 이하 그룹의 중앙값 이하 원소</text>
+  <text x="191" y="326" text-anchor="middle" fill="#3b82f6" font-size="13" font-weight="700">≥ 0.3n 개</text>
+
+  <!-- X' label in center -->
+  <rect x="340" y="278" width="48" height="48" rx="6" fill="#3a2a14" stroke="#f97316" stroke-width="2.5"/>
+  <text x="364" y="298" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">X′</text>
+  <text x="364" y="314" text-anchor="middle" fill="#fb923c" font-size="9">pivot</text>
+  <text x="364" y="326" text-anchor="middle" fill="#64748b" font-size="9">(approximate</text>
+  <text x="364" y="337" text-anchor="middle" fill="#64748b" font-size="9">median)</text>
+
+  <!-- ≥ X' box (purple) -->
+  <rect x="402" y="272" width="270" height="60" rx="6" fill="#1a0d3c" stroke="#a855f7" stroke-width="2"/>
+  <text x="537" y="294" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="700">≥ X′ 보장</text>
+  <text x="537" y="312" text-anchor="middle" fill="#a78bfa" font-size="11">X′ 이상 그룹의 중앙값 이상 원소</text>
+  <text x="537" y="326" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="700">≥ 0.3n 개</text>
+
+  <!-- Result annotation -->
+  <text x="364" y="364" text-anchor="middle" fill="#cbd5e1" font-size="11">∴ X′를 pivot으로 쓰면 어느 쪽으로 재귀해도 크기 ≤ <tspan fill="#f97316" font-weight="700">0.7n</tspan></text>
+  <text x="364" y="382" text-anchor="middle" fill="#64748b" font-size="10">S(n) = 2n + S(0.2n) + S(0.7n)  →  0.2 + 0.7 = 0.9 &lt; 1  →  S(n) = O(n)</text>
+</svg>
