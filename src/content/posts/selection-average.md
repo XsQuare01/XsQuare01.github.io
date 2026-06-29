@@ -13,7 +13,7 @@ difficulty: 심화
 
 ## 한쪽만 재귀한다는 차이
 
-[퀵 정렬 평균 분석](/blog/quicksort)부터 떠올려 보자. pivot의 등수를 $k$라 하면, 퀵 정렬는 왼쪽 $k-1$개와 오른쪽 $n-k$개 **양쪽 모두**를 재귀해야 한다. 그래서 점화식에 $E(k-1) + E(n-k)$가 더해진다. 두 비용을 **합산**하기 때문에 결국 $\Theta(n \log n)$이 나온다.
+[퀵 정렬 평균 분석](/blog/quicksort)부터 떠올려 보자. pivot의 등수를 $k$라 하면, 퀵 정렬은 왼쪽 $k-1$개와 오른쪽 $n-k$개 **양쪽 모두**를 재귀해야 한다. 그래서 점화식에 $E(k-1) + E(n-k)$가 더해진다. 두 비용을 **합산**하기 때문에 결국 $\Theta(n \log n)$이 나온다.
 
 quickselect는 다르다. 분할 후 $k$번째 원소가 어느 쪽에 있는지 pivot 등수와 비교해 알 수 있으므로, **관계없는 쪽은 버리고 한쪽만 재귀**한다. 그 비용은 $E(k-1)$ 또는 $E(n-k)$ **둘 중 하나**다.
 
@@ -54,13 +54,13 @@ E(n) \le n + \frac{2}{n}\sum_{i=\lfloor n/2 \rfloor}^{n-1} 4i
 = n + \frac{8}{n}\sum_{i=\lfloor n/2 \rfloor}^{n-1} i
 $$
 
-합 $\displaystyle\sum_{i=\lfloor n/2 \rfloor}^{n-1} i$의 상한을 등차수열 공식으로 구한다. 항의 개수는 $n - \lfloor n/2 \rfloor \le n/2$개이고, 첫 항과 끝 항은 각각 $\lfloor n/2 \rfloor$와 $n-1$이다. 따라서:
+합 $\displaystyle\sum_{i=\lfloor n/2 \rfloor}^{n-1} i$의 상한을 등차수열 공식으로 구한다. 항의 개수는 $n - \lfloor n/2 \rfloor = \lceil n/2 \rceil$개이고, 첫 항과 끝 항은 각각 $\lfloor n/2 \rfloor$와 $n-1$이다. 따라서:
 
 $$
-\sum_{i=\lfloor n/2 \rfloor}^{n-1} i = \frac{(n - \lfloor n/2 \rfloor)(\lfloor n/2 \rfloor + (n-1))}{2} \;\le\; \frac{n/2 \cdot (n/2 + n - 1)}{2} \;\le\; \frac{n/2 \cdot \tfrac{3n}{2}}{2} = \frac{3n^2}{8}
+\sum_{i=\lfloor n/2 \rfloor}^{n-1} i = \frac{\lceil n/2 \rceil\,\bigl(\lfloor n/2 \rfloor + (n-1)\bigr)}{2} \;\le\; \frac{3n^2}{8}
 $$
 
-이를 대입하면:
+마지막 부등식은 $n$이 짝수든 홀수든 직접 대입해 확인된다. 홀수 $n$에서는 항의 개수 $\lceil n/2 \rceil$이 $n/2$를 조금 넘지만, 그만큼 첫 항 $\lfloor n/2 \rfloor$이 작아져 곱이 $\tfrac{3n^2}{8}$을 넘지 않는다. 이를 대입하면:
 
 $$
 E(n) \le n + \frac{8}{n} \cdot \frac{3n^2}{8} = n + 3n = 4n
@@ -77,7 +77,7 @@ $$
 
 퀵 정렬이 $\Theta(n \log n)$인 이유는 **양쪽 재귀**의 비용 $E(k-1) + E(n-k)$를 합산하기 때문이다. 합산된 비용들을 텔레스코핑하면 조화수 $H_n \approx \ln n$이 나타나 $n \log n$ 항이 생긴다.
 
-Quickselect는 **한쪽만** 재귀하므로 비용이 $\max\!\bigl(E(k-1),\,E(n-k)\bigr)$로 묶인다. 이 절반 구간의 합은 등비수열처럼 줄어들어 $O(n)$에 수렴한다 — $\sum_{i=n/2}^{n-1} i \le \frac{3n^2}{8}$이 핵심 상한이다.
+Quickselect는 **한쪽만** 재귀하므로 비용이 $\max\!\bigl(E(k-1),\,E(n-k)\bigr)$로 묶인다. 절반 구간의 합이 $\sum_{i=n/2}^{n-1} i \le \frac{3n^2}{8}$으로 억제되는 것이 핵심 상한이며, 덕분에 전체 기댓값이 $O(n)$에 머문다.
 
 단, 이것은 **평균** 분석이다. 최악은 여전히 $O(n^2)$이다. 최악까지 없애려면 pivot을 항상 approximate median으로 고르는 [median of medians](/blog/selection)가 필요하다.
 
