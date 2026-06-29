@@ -58,14 +58,13 @@
   <rect x="168" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
   <text x="192" y="236" text-anchor="middle" fill="#64748b" font-size="11">·</text>
 
-  <!-- COLUMN 4 — X' column (highlighted orange) -->
+  <!-- COLUMN 4 — a normal group; its median is X₄ (NOT X') -->
   <rect x="224" y="72" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
   <text x="248" y="92" text-anchor="middle" fill="#64748b" font-size="11">·</text>
   <rect x="224" y="108" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
   <text x="248" y="128" text-anchor="middle" fill="#64748b" font-size="11">·</text>
-  <!-- X' cell — double highlight -->
-  <rect x="222" y="142" width="52" height="34" rx="4" fill="#3a2a14" stroke="#f97316" stroke-width="2.5"/>
-  <text x="248" y="164" text-anchor="middle" fill="#fed7aa" font-size="13" font-weight="700">X′</text>
+  <rect x="224" y="144" width="48" height="30" rx="3" fill="#1a2a1a" stroke="#22c55e" stroke-width="1.8"/>
+  <text x="248" y="164" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">X₄</text>
   <rect x="224" y="180" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
   <text x="248" y="200" text-anchor="middle" fill="#64748b" font-size="11">·</text>
   <rect x="224" y="216" width="48" height="30" rx="3" fill="#0f1a2e" stroke="#334155" stroke-width="1.2"/>
@@ -112,7 +111,8 @@
 
   <!-- Row labels on right for sorted groups -->
   <text x="510" y="88" fill="#475569" font-size="10" text-anchor="start">작은 값 (1~2행)</text>
-  <text x="510" y="160" fill="#22c55e" font-size="10" font-weight="600" text-anchor="start">← 중앙값 행 (3행)</text>
+  <text x="510" y="156" fill="#22c55e" font-size="10" font-weight="600" text-anchor="start">← 중앙값 행 X₁…X₇</text>
+  <text x="510" y="170" fill="#64748b" font-size="9" text-anchor="start">(그룹 중앙값 n/5개)</text>
   <text x="510" y="228" fill="#475569" font-size="10" text-anchor="start">큰 값 (4~5행)</text>
 
   <!-- Median row highlight bracket -->
@@ -126,6 +126,9 @@
   <text x="635" y="128" text-anchor="middle" fill="#475569" font-size="9">정렬됨</text>
   <line x1="635" y1="134" x2="635" y2="218" stroke="#334155" stroke-width="1" stroke-dasharray="3 2"/>
   <polygon points="635,222 631,213 639,213" fill="#334155"/>
+
+  <!-- Annotation: median of the median row = X' -->
+  <text x="284" y="256" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">이 중앙값들(X₁…X<tspan baseline-shift="sub" font-size="8">n/5</tspan>)의 중앙값 = X′  ↓</text>
 
   <!-- Divider -->
   <line x1="56" y1="262" x2="664" y2="262" stroke="#1e293b" stroke-width="1"/>
