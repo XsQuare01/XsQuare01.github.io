@@ -1,0 +1,85 @@
+<svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="400" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Combine — 분할선 좌우 폭 D 밴드</text>
+  <text x="360" y="48" text-anchor="middle" fill="#64748b" font-size="11">밴드 밖 점은 영향 없음 · 밴드 안 점만 반대편과 비교</text>
+
+  <!-- Main chart area: x 80~640, y 68~360 -->
+
+  <!-- Band background (left D) -->
+  <rect x="282" y="68" width="78" height="292" fill="#1e3a5f" fill-opacity="0.35"/>
+  <!-- Band background (right D) -->
+  <rect x="360" y="68" width="78" height="292" fill="#14331f" fill-opacity="0.35"/>
+
+  <!-- Divider line -->
+  <line x1="360" y1="68" x2="360" y2="360" stroke="#f97316" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="360" y="62" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">분할선 (x = mid)</text>
+
+  <!-- Band boundary lines -->
+  <line x1="282" y1="68" x2="282" y2="360" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <line x1="438" y1="68" x2="438" y2="360" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+  <!-- D labels -->
+  <!-- Left D bracket -->
+  <line x1="282" y1="80" x2="360" y2="80" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="282" y1="76" x2="282" y2="84" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="360" y1="76" x2="360" y2="84" stroke="#3b82f6" stroke-width="1"/>
+  <text x="321" y="76" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">D</text>
+  <!-- Right D bracket -->
+  <line x1="360" y1="80" x2="438" y2="80" stroke="#22c55e" stroke-width="1"/>
+  <line x1="360" y1="76" x2="360" y2="84" stroke="#22c55e" stroke-width="1"/>
+  <line x1="438" y1="76" x2="438" y2="84" stroke="#22c55e" stroke-width="1"/>
+  <text x="399" y="76" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">D</text>
+
+  <!-- Left region label -->
+  <text x="181" y="96" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700">왼쪽 영역</text>
+  <text x="181" y="112" text-anchor="middle" fill="#64748b" font-size="10">최솟거리 D_L</text>
+
+  <!-- Right region label -->
+  <text x="539" y="96" text-anchor="middle" fill="#22c55e" font-size="12" font-weight="700">오른쪽 영역</text>
+  <text x="539" y="112" text-anchor="middle" fill="#64748b" font-size="10">최솟거리 D_R</text>
+
+  <!-- D = min(...) label -->
+  <text x="360" y="388" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">D = min(D_L, D_R)</text>
+
+  <!-- Points outside band (left) — gray/dim -->
+  <circle cx="120" cy="150" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="90"  cy="220" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="155" cy="290" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="200" cy="175" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="230" cy="330" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="140" cy="120" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <!-- Points outside band (right) — gray/dim -->
+  <circle cx="490" cy="140" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="560" cy="200" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="520" cy="280" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="600" cy="150" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="580" cy="330" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Points inside band (left side) — blue -->
+  <circle cx="300" cy="130" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="315" cy="190" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="295" cy="255" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="340" cy="310" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+
+  <!-- Points inside band (right side) — green -->
+  <circle cx="390" cy="155" r="7" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="415" cy="225" r="7" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="400" cy="285" r="7" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="420" cy="340" r="7" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+
+  <!-- Example comparison arrow (one blue point to nearby green points) -->
+  <line x1="315" y1="190" x2="390" y2="155" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.8"/>
+  <line x1="315" y1="190" x2="415" y2="225" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.8"/>
+
+  <!-- Legend -->
+  <circle cx="96" cy="370" r="6" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+  <text x="108" y="374" fill="#64748b" font-size="10">밴드 밖 (비교 불필요)</text>
+  <circle cx="250" cy="370" r="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="262" y="374" fill="#93c5fd" font-size="10">밴드 안 — 왼쪽</text>
+  <circle cx="390" cy="370" r="6" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="402" y="374" fill="#4ade80" font-size="10">밴드 안 — 오른쪽</text>
+  <line x1="530" y1="370" x2="552" y2="370" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.8"/>
+  <text x="558" y="374" fill="#a78bfa" font-size="10">비교</text>
+</svg>

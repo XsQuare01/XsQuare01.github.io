@@ -1,0 +1,96 @@
+<svg viewBox="0 0 760 500" width="1140" height="750" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="500" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">P 위쪽 후보 영역을 (D/2) 칸으로 나눠 세기</text>
+  <text x="380" y="46" text-anchor="middle" fill="#64748b" font-size="11">P에서 위로 2D×D 직사각형 · 8칸 · 칸당 ≤ 1점 → 다음 7개만 검사</text>
+
+  <!-- ── Geometry ──
+       Rectangle: x=220..500 (width 2D=280), y=100..240 (height D=140). Divider at x=360.
+       Cells: D/2=70.  cols 220,290,360,430 ; rows 100,170.
+       P sits at the BOTTOM of the rectangle, just LEFT of the divider (a left-band point). -->
+
+  <!-- 2D width dimension (top) -->
+  <line x1="220" y1="80" x2="500" y2="80" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="220" y1="76" x2="220" y2="84" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="500" y1="76" x2="500" y2="84" stroke="#94a3b8" stroke-width="1"/>
+  <text x="305" y="76" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="600">2D (밴드 폭)</text>
+
+  <!-- Cells: left (blue), right (green) -->
+  <rect x="220" y="100" width="70" height="70" fill="#1e3a5f" fill-opacity="0.22" stroke="#3b82f6" stroke-width="1.1"/>
+  <rect x="290" y="100" width="70" height="70" fill="#1e3a5f" fill-opacity="0.22" stroke="#3b82f6" stroke-width="1.1"/>
+  <rect x="220" y="170" width="70" height="70" fill="#1e3a5f" fill-opacity="0.22" stroke="#3b82f6" stroke-width="1.1"/>
+  <rect x="290" y="170" width="70" height="70" fill="#1e3a5f" fill-opacity="0.22" stroke="#3b82f6" stroke-width="1.1"/>
+  <rect x="360" y="100" width="70" height="70" fill="#14331f" fill-opacity="0.22" stroke="#22c55e" stroke-width="1.1"/>
+  <rect x="430" y="100" width="70" height="70" fill="#14331f" fill-opacity="0.22" stroke="#22c55e" stroke-width="1.1"/>
+  <rect x="360" y="170" width="70" height="70" fill="#14331f" fill-opacity="0.22" stroke="#22c55e" stroke-width="1.1"/>
+  <rect x="430" y="170" width="70" height="70" fill="#14331f" fill-opacity="0.22" stroke="#22c55e" stroke-width="1.1"/>
+
+  <!-- Outer rectangle border -->
+  <rect x="220" y="100" width="280" height="140" fill="none" stroke="#475569" stroke-width="2"/>
+
+  <!-- "≤1" markers in the 7 non-P cells -->
+  <text x="255" y="139" text-anchor="middle" fill="#3b82f6" font-size="11" opacity="0.55">≤1</text>
+  <text x="325" y="139" text-anchor="middle" fill="#3b82f6" font-size="11" opacity="0.55">≤1</text>
+  <text x="255" y="209" text-anchor="middle" fill="#3b82f6" font-size="11" opacity="0.55">≤1</text>
+  <text x="395" y="139" text-anchor="middle" fill="#22c55e" font-size="11" opacity="0.55">≤1</text>
+  <text x="465" y="139" text-anchor="middle" fill="#22c55e" font-size="11" opacity="0.55">≤1</text>
+  <text x="395" y="209" text-anchor="middle" fill="#22c55e" font-size="11" opacity="0.55">≤1</text>
+  <text x="465" y="209" text-anchor="middle" fill="#22c55e" font-size="11" opacity="0.55">≤1</text>
+
+  <!-- Highlighted cell + diagonal (why ≤1 per cell) -->
+  <rect x="430" y="100" width="70" height="70" fill="#a78bfa" fill-opacity="0.10" stroke="#a78bfa" stroke-width="1.3"/>
+  <line x1="430" y1="170" x2="500" y2="100" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="512" y="118" text-anchor="start" fill="#a78bfa" font-size="10">대각선</text>
+  <text x="512" y="131" text-anchor="start" fill="#a78bfa" font-size="10">= D/2·√2 &lt; D</text>
+
+  <!-- Divider line -->
+  <line x1="360" y1="86" x2="360" y2="256" stroke="#f97316" stroke-width="2.5" stroke-dasharray="7 4"/>
+  <text x="360" y="270" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">분할선</text>
+
+  <!-- Distance-D boundary: upper semicircle around P (radius D) -->
+  <path d="M 205 230 A 140 140 0 0 1 485 230" fill="none" stroke="#f97316" stroke-width="1.3" stroke-dasharray="6 4" opacity="0.55"/>
+  <text x="150" y="170" text-anchor="middle" fill="#fb923c" font-size="10" opacity="0.9">P에서 거리 D</text>
+  <text x="150" y="183" text-anchor="middle" fill="#64748b" font-size="9" opacity="0.9">같은 편 점은 이 바깥</text>
+
+  <!-- 기준점 P — bottom of rectangle, just left of divider (a left-band point) -->
+  <circle cx="345" cy="230" r="9" fill="#7c2d12" stroke="#f97316" stroke-width="2.5"/>
+  <text x="345" y="234" text-anchor="middle" fill="#fed7aa" font-size="10" font-weight="700">P</text>
+
+  <!-- D height dimension (right) -->
+  <line x1="516" y1="100" x2="516" y2="240" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="512" y1="100" x2="520" y2="100" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="512" y1="240" x2="520" y2="240" stroke="#94a3b8" stroke-width="1"/>
+  <text x="538" y="174" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="600">D</text>
+
+  <!-- D/2 cell height (left) -->
+  <line x1="206" y1="100" x2="206" y2="170" stroke="#64748b" stroke-width="1"/>
+  <line x1="202" y1="100" x2="210" y2="100" stroke="#64748b" stroke-width="1"/>
+  <line x1="202" y1="170" x2="210" y2="170" stroke="#64748b" stroke-width="1"/>
+  <text x="190" y="139" text-anchor="middle" fill="#94a3b8" font-size="10">D/2</text>
+
+  <!-- D/2 cell width (bottom-left) -->
+  <line x1="220" y1="250" x2="290" y2="250" stroke="#64748b" stroke-width="1"/>
+  <line x1="220" y1="246" x2="220" y2="254" stroke="#64748b" stroke-width="1"/>
+  <line x1="290" y1="246" x2="290" y2="254" stroke="#64748b" stroke-width="1"/>
+  <text x="255" y="263" text-anchor="middle" fill="#94a3b8" font-size="10">D/2</text>
+
+  <!-- Separator -->
+  <line x1="60" y1="395" x2="700" y2="395" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Summary -->
+  <text x="380" y="416" text-anchor="middle" fill="#cbd5e1" font-size="12">8칸 × 칸당 ≤ 1점 = P 포함 최대 8점 → P가 비교할 점은 다음 7개</text>
+  <text x="380" y="434" text-anchor="middle" fill="#64748b" font-size="10">한 칸 대각선 D/2·√2 ≈ 0.71D &lt; D → 한 칸에 같은 편 두 점이면 거리 &lt; D (모순) → 칸당 ≤ 1점</text>
+
+  <!-- Legend -->
+  <circle cx="92" cy="465" r="6" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="104" y="469" fill="#fb923c" font-size="10">기준점 P</text>
+  <rect x="190" y="459" width="12" height="12" fill="#1e3a5f" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1.1"/>
+  <text x="208" y="469" fill="#93c5fd" font-size="10">왼쪽 편 칸</text>
+  <rect x="300" y="459" width="12" height="12" fill="#14331f" fill-opacity="0.5" stroke="#22c55e" stroke-width="1.1"/>
+  <text x="318" y="469" fill="#4ade80" font-size="10">오른쪽 편 칸</text>
+  <line x1="418" y1="465" x2="440" y2="465" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="446" y="469" fill="#a78bfa" font-size="10">칸 대각선</text>
+  <line x1="538" y1="465" x2="560" y2="465" stroke="#f97316" stroke-width="1.3" stroke-dasharray="6 4" opacity="0.7"/>
+  <text x="566" y="469" fill="#fb923c" font-size="10">거리 D 경계</text>
+</svg>

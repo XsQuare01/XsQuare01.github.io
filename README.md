@@ -70,6 +70,7 @@
 | [구간 스케줄링](https://xsquare01.github.io/blog/scheduling-2) | 겹치지 않게 가장 많은 일 고르기 |
 | [테이프 스토리지](https://xsquare01.github.io/blog/tape-storage) | 접근 시간을 최소로 만드는 greedy 배치 |
 | [선택 문제](https://xsquare01.github.io/blog/selection) | k번째 원소를 정렬 없이 O(n)에 찾기 |
+| [가장 가까운 점 쌍 ①](https://xsquare01.github.io/blog/closest-pair-1) | 분할 정복으로 평면 최근접 점 쌍 찾기, O(n log²n) |
 
 ---
 
