@@ -1,0 +1,115 @@
+<svg viewBox="0 0 720 460" width="1080" height="690" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="460" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="360" y="26" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">D×D 정사각형 안에 들어갈 수 있는 점의 수</text>
+  <text x="360" y="44" text-anchor="middle" fill="#64748b" font-size="11">같은 편 두 점은 거리 ≥ D · 정사각형당 최대 3개 · 양쪽 합쳐 최대 5개</text>
+
+  <!-- ── Chart area: divider at x=360, squares from y=70 to y=350 ── -->
+
+  <!-- Left D×D square (y 70–230, x 220–360) -->
+  <rect x="220" y="70" width="140" height="160" fill="#1e3a5f" fill-opacity="0.30" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <!-- Right D×D square (y 70–230, x 360–500) -->
+  <rect x="360" y="70" width="140" height="160" fill="#14331f" fill-opacity="0.30" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <!-- Left D×D square lower (y 230–390, x 220–360) -->
+  <rect x="220" y="230" width="140" height="160" fill="#1e3a5f" fill-opacity="0.15" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+  <!-- Right D×D square lower (y 230–390, x 360–500) -->
+  <rect x="360" y="230" width="140" height="160" fill="#14331f" fill-opacity="0.15" stroke="#22c55e" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+
+  <!-- Divider line -->
+  <line x1="360" y1="58" x2="360" y2="400" stroke="#f97316" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="360" y="54" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">분할선</text>
+
+  <!-- D dimension labels — left square top -->
+  <!-- horizontal D -->
+  <line x1="220" y1="62" x2="360" y2="62" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="220" y1="58" x2="220" y2="66" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="360" y1="58" x2="360" y2="66" stroke="#3b82f6" stroke-width="1"/>
+  <text x="290" y="58" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">D</text>
+  <!-- vertical D left -->
+  <line x1="208" y1="70" x2="208" y2="230" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="204" y1="70" x2="212" y2="70" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="204" y1="230" x2="212" y2="230" stroke="#3b82f6" stroke-width="1"/>
+  <text x="198" y="154" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">D</text>
+
+  <!-- horizontal D right -->
+  <line x1="360" y1="62" x2="500" y2="62" stroke="#22c55e" stroke-width="1"/>
+  <line x1="500" y1="58" x2="500" y2="66" stroke="#22c55e" stroke-width="1"/>
+  <text x="430" y="58" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">D</text>
+  <!-- vertical D right -->
+  <line x1="512" y1="70" x2="512" y2="230" stroke="#22c55e" stroke-width="1"/>
+  <line x1="508" y1="70" x2="516" y2="70" stroke="#22c55e" stroke-width="1"/>
+  <line x1="508" y1="230" x2="516" y2="230" stroke="#22c55e" stroke-width="1"/>
+  <text x="522" y="154" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">D</text>
+
+  <!-- ── 왼쪽 D×D 정사각형 안 점: 서로 D 이상 떨어진 최대 3개 ── -->
+  <!-- 3 points packed in left top square, each ≥ D apart: corners + one edge midpoint style -->
+  <!-- p1: top-left corner area (230, 80) -->
+  <circle cx="232" cy="82" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="232" y="100" text-anchor="middle" fill="#93c5fd" font-size="9">L₁</text>
+  <!-- p2: top-right corner area (348, 82) — near divider -->
+  <circle cx="348" cy="82" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="348" y="100" text-anchor="middle" fill="#93c5fd" font-size="9">L₂</text>
+  <!-- p3: bottom-left corner area (232, 218) -->
+  <circle cx="232" cy="218" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="232" y="236" text-anchor="middle" fill="#93c5fd" font-size="9">L₃</text>
+
+  <!-- distance markers between left points — dashed gray lines -->
+  <line x1="232" y1="82" x2="348" y2="82" stroke="#475569" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="232" y1="82" x2="232" y2="218" stroke="#475569" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="348" y1="82" x2="232" y2="218" stroke="#475569" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <text x="290" y="78" text-anchor="middle" fill="#64748b" font-size="9">≥ D</text>
+  <text x="220" y="154" text-anchor="middle" fill="#64748b" font-size="9" transform="rotate(-90 220 154)">≥ D</text>
+
+  <!-- ── 오른쪽 D×D 정사각형 안 점: 최대 2개 (검사 대상) ── -->
+  <!-- q1 (372, 82) -->
+  <circle cx="372" cy="90" r="7" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="372" y="108" text-anchor="middle" fill="#4ade80" font-size="9">R₁</text>
+  <!-- q2 (488, 218) -->
+  <circle cx="488" cy="218" r="7" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="488" y="236" text-anchor="middle" fill="#4ade80" font-size="9">R₂</text>
+
+  <!-- ── 기준점 P (파랑 별표) — 왼쪽 경계 근처 ── -->
+  <!-- P is the query point in the left band: show it below the top squares -->
+  <circle cx="348" cy="218" r="9" fill="#7c2d12" stroke="#f97316" stroke-width="2.5"/>
+  <text x="348" y="240" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="700">P</text>
+  <text x="310" y="216" text-anchor="end" fill="#fb923c" font-size="10">(기준점)</text>
+
+  <!-- ── 비교 화살표: P → R1, R2 ── -->
+  <line x1="348" y1="218" x2="372" y2="90" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9"/>
+  <line x1="348" y1="218" x2="488" y2="218" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9"/>
+
+  <!-- ── 반지름 D 원 (P 중심, 같은 편엔 점 없음) ── -->
+  <!-- radius D = 140px (square side) -->
+  <circle cx="348" cy="218" r="140" fill="none" stroke="#f97316" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.45"/>
+  <text x="220" y="356" text-anchor="middle" fill="#fb923c" font-size="10" opacity="0.8">반지름 D 원</text>
+  <text x="220" y="368" text-anchor="middle" fill="#64748b" font-size="9" opacity="0.8">(같은 편 점 없음)</text>
+
+  <!-- 왼쪽 정사각형 레이블 -->
+  <text x="290" y="175" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="600">왼쪽 D×D</text>
+  <text x="290" y="190" text-anchor="middle" fill="#64748b" font-size="10">최대 3개</text>
+
+  <!-- 오른쪽 정사각형 레이블 -->
+  <text x="430" y="155" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="600">오른쪽 D×D</text>
+  <text x="430" y="170" text-anchor="middle" fill="#64748b" font-size="10">최대 2개</text>
+  <text x="430" y="183" text-anchor="middle" fill="#64748b" font-size="10">(P 제외)</text>
+
+  <!-- ── 하단 설명: 합계 ── -->
+  <line x1="60" y1="405" x2="660" y2="405" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- 요약 텍스트 -->
+  <text x="360" y="425" text-anchor="middle" fill="#cbd5e1" font-size="12">양쪽 D×D 두 개 합쳐, P를 제외한 후보 점은 최대 5개</text>
+  <text x="360" y="445" text-anchor="middle" fill="#64748b" font-size="10">왼쪽 최대 3 + 오른쪽 최대 2 = 5 (실제 배치에 따라 더 적음)</text>
+
+  <!-- Legend -->
+  <circle cx="90" cy="393" r="6" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+  <text x="102" y="397" fill="#fb923c" font-size="10">기준점 P</text>
+  <circle cx="200" cy="393" r="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="212" y="397" fill="#93c5fd" font-size="10">왼쪽 밴드 점</text>
+  <circle cx="330" cy="393" r="6" fill="#14331f" stroke="#22c55e" stroke-width="2"/>
+  <text x="342" y="397" fill="#4ade80" font-size="10">오른쪽 밴드 점</text>
+  <line x1="460" y1="393" x2="482" y2="393" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.9"/>
+  <text x="488" y="397" fill="#a78bfa" font-size="10">비교</text>
+  <line x1="540" y1="393" x2="562" y2="393" stroke="#f97316" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.7"/>
+  <text x="568" y="397" fill="#fb923c" font-size="10">반지름 D</text>
+</svg>
