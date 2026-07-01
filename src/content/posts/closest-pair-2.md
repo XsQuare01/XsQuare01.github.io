@@ -178,6 +178,13 @@ int main() {
 | 재귀 반환 후 구간 | x정렬 상태 | y정렬 상태 |
 | 분할선 x좌표 | 그때그때 `arr[mid]` | 재귀 전 `midX`에 확보 |
 
+<div class="callout callout-simple">
+<div class="callout-title">`long long`이 안전한 범위</div>
+
+`dist2`가 계산하는 `dx * dx + dy * dy`는 좌표 범위가 정해져 있어야 오버플로 없이 `long long`에 담긴다. 이 문제의 좌표는 $[0,\ 10^9)$이므로 $dx, dy$의 절댓값이 $10^9$ 미만이고, 제곱거리는 최대 $2 \times (10^9)^2 = 2 \times 10^{18}$로 `long long` 상한($\approx 9.2 \times 10^{18}$) 안에 들어간다. 좌표 범위가 이보다 크면 곱셈 단계에서 이미 넘칠 수 있으므로, 중간 계산을 `__int128`로 올리거나 좌표를 적절히 평행이동해 범위를 줄여야 한다.
+
+</div>
+
 ---
 
 ## 복잡도 — O(n log n)
