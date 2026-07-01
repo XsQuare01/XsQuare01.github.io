@@ -1,7 +1,7 @@
 ---
 title: "추가 설명 — quickselect는 왜 평균 O(n)인가"
 date: 2026-06-29T09:01:00
-description: "선택 문제 본문이 '대부분 O(n)'으로 넘어간 quickselect의 평균 시간을 기댓값 점화식으로 엄밀히 따진다. 퀵 정렬과 달리 한쪽으로만 재귀하기 때문에 E(n)에 max 항이 생기고, 이를 상계로 풀면 E(n) ≤ 4n = O(n)이다."
+description: "선택 문제 본문이 '대부분 O(n)'으로 넘어간 quickselect의 평균 시간을 기댓값 점화식으로 엄밀히 따진다. quick sort와 달리 한쪽으로만 재귀하기 때문에 E(n)에 max 항이 생기고, 이를 상계로 풀면 E(n) ≤ 4n = O(n)이다."
 tags: ["Algorithm", "Selection", "Quickselect", "Expected Value", "추가 설명"]
 category: algorithm
 difficulty: 고급
@@ -13,11 +13,11 @@ difficulty: 고급
 
 ## 한쪽만 재귀한다는 차이
 
-[퀵 정렬 평균 분석](/blog/quicksort)부터 떠올려 보자. pivot의 등수를 $k$라 하면, 퀵 정렬은 왼쪽 $k-1$개와 오른쪽 $n-k$개 **양쪽 모두**를 재귀해야 한다. 그래서 점화식에 $E(k-1) + E(n-k)$가 더해진다. 두 비용을 **합산**하기 때문에 결국 $\Theta(n \log n)$이 나온다.
+[quick sort 평균 분석](/blog/quicksort)부터 떠올려 보자. pivot의 등수를 $k$라 하면, quick sort는 왼쪽 $k-1$개와 오른쪽 $n-k$개 **양쪽 모두**를 재귀해야 한다. 그래서 점화식에 $E(k-1) + E(n-k)$가 더해진다. 두 비용을 **합산**하기 때문에 결국 $\Theta(n \log n)$이 나온다.
 
 quickselect는 다르다. 분할 후 $k$번째 원소가 어느 쪽에 있는지 pivot 등수와 비교해 알 수 있으므로, **관계없는 쪽은 버리고 한쪽만 재귀**한다. 그 비용은 $E(k-1)$ 또는 $E(n-k)$ **둘 중 하나**다.
 
-최악의 경우를 상계로 잡으면, 어느 쪽으로 재귀하더라도 비용은 $\max\!\bigl(E(k-1),\,E(n-k)\bigr)$ 이하다. 이것이 퀵 정렬 점화식과 quickselect 점화식의 결정적 차이다.
+최악의 경우를 상계로 잡으면, 어느 쪽으로 재귀하더라도 비용은 $\max\!\bigl(E(k-1),\,E(n-k)\bigr)$ 이하다. 이것이 quick sort 점화식과 quickselect 점화식의 결정적 차이다.
 
 ---
 
@@ -75,7 +75,7 @@ $$
 
 **Quickselect의 평균 시간은 $E(n) \le 4n = O(n)$이다.**
 
-퀵 정렬이 $\Theta(n \log n)$인 이유는 **양쪽 재귀**의 비용 $E(k-1) + E(n-k)$를 합산하기 때문이다. 합산된 비용들을 텔레스코핑하면 조화수 $H_n \approx \ln n$이 나타나 $n \log n$ 항이 생긴다.
+quick sort가 $\Theta(n \log n)$인 이유는 **양쪽 재귀**의 비용 $E(k-1) + E(n-k)$를 합산하기 때문이다. 합산된 비용들을 텔레스코핑하면 조화수 $H_n \approx \ln n$이 나타나 $n \log n$ 항이 생긴다.
 
 Quickselect는 **한쪽만** 재귀하므로 비용이 $\max\!\bigl(E(k-1),\,E(n-k)\bigr)$로 묶인다. 절반 구간의 합이 $\sum_{i=n/2}^{n-1} i \le \frac{3n^2}{8}$으로 억제되는 것이 핵심 상한이며, 덕분에 전체 기댓값이 $O(n)$에 머문다.
 
@@ -85,5 +85,5 @@ Quickselect는 **한쪽만** 재귀하므로 비용이 $\max\!\bigl(E(k-1),\,E(n
 
 <div class="callout">
 <div class="callout-title">이어지는 글</div>
-<p>이 글의 바탕이 되는 quickselect와 median of medians는 <a href="/blog/selection">선택 문제</a>에서 다룬다. 퀵 정렬의 평균이 $\Theta(n \log n)$으로 유도되는 과정은 <a href="/blog/quicksort">퀵 정렬 평균 분석</a>에서 텔레스코핑으로 엄밀히 보인다.</p>
+<p>이 글의 바탕이 되는 quickselect와 median of medians는 <a href="/blog/selection">선택 문제</a>에서 다룬다. quick sort의 평균이 $\Theta(n \log n)$으로 유도되는 과정은 <a href="/blog/quicksort">quick sort 평균 분석</a>에서 텔레스코핑으로 엄밀히 보인다.</p>
 </div>
