@@ -4,7 +4,7 @@ date: 2026-06-30T09:00:00
 description: "2차원 평면에서 가장 가까운 두 점을 찾는 문제. 모든 쌍을 보면 O(n²)이지만, 분할 정복으로 더 빠르게 풀 수 있다. x좌표로 좌우를 나눠 각 영역의 최소 거리 D를 구한 뒤, 경계의 폭 D 밴드만 합치는 과정을 보고 O(n log²n)임을 유도한다."
 tags: ["Algorithm", "Closest Pair", "Divide and Conquer", "Computational Geometry"]
 category: algorithm
-difficulty: 심화
+difficulty: 고급
 ---
 
 > 2차원 평면에 $n$개의 점이 흩어져 있다. 이 중 가장 가까운 두 점을 찾아라. 계산 기하(computational geometry)의 대표적인 문제로, 그림으로 보면 직관적이지만 막상 코드로 풀면 주의할 점이 많다.

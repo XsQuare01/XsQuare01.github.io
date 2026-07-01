@@ -4,7 +4,7 @@ date: 2026-03-24T10:15:00
 description: "암호학의 핵심 도구인 최대공약수(GCD)를 대수적으로 정의하고, 유클리드 호제법과 확장 유클리드 알고리즘(베주 항등식)을 엄밀하게 증명한다. 서로소의 성질과 GCD 정의의 동치 증명까지 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
-difficulty: 입문
+difficulty: 초급
 ---
 
 > Division Theorem이 나눗셈의 기초라면, GCD는 그 위에 세워진 정수론의 첫 번째 건물이다. 두 정수가 공유하는 가장 큰 약수는 단순한 수치를 넘어, 베주 항등식을 통해 암호학의 핵심 알고리즘을 뒷받침한다.

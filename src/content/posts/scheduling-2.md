@@ -4,7 +4,7 @@ date: 2026-06-11T09:00:00
 description: "시작 시간과 종료 시간이 정해진 여러 일이 있고, 한 번에 하나만 할 수 있다. 이익이 모두 같을 때, 겹치지 않게 고를 수 있는 일의 개수를 최대로 만드는 문제를 다룬다. 종료 시간이 빠른 일부터 고르는 greedy 전략을 세우고, 교환 논증으로 그 최적성을 증명한다."
 tags: ["Algorithm", "Greedy", "Scheduling", "Exchange Argument"]
 category: algorithm
-difficulty: 중급
+difficulty: 초급
 ---
 
 > 시작 시간과 종료 시간이 정해진 여러 일이 있다. 한 번에 하나의 일만 할 수 있고, 시간이 겹치는 두 일은 함께 할 수 없다. 가장 많은 일을 해내려면 어떤 일들을 골라야 할까?
