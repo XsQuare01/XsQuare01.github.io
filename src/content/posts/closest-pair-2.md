@@ -4,7 +4,7 @@ date: 2026-07-01T09:00:00
 description: "1편의 O(n log²n)에서 여분의 log n은 combine마다 y정렬을 새로 하는 데서 나온다. 병합 정렬처럼 재귀가 y좌표로 정렬된 결과를 반환하게 만들면, combine은 y정렬 대신 O(n) merge만 하면 된다. 분할은 x로, 순서는 y로 유지하는 미묘한 지점을 짚고 전체를 O(n log n)으로 끌어내린다."
 tags: ["Algorithm", "Closest Pair", "Divide and Conquer", "Computational Geometry"]
 category: algorithm
-difficulty: 심화
+difficulty: 고급
 ---
 
 > [가장 가까운 점 쌍 ①](/blog/closest-pair-1)에서 분할 정복으로 $O(n \log^2 n)$ 풀이를 얻었다. 이제 여분의 $\log n$을 어디서 흘리고 있는지 찾아, 병합 정렬의 아이디어로 이를 $O(n \log n)$까지 끌어내린다.
