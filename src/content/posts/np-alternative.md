@@ -4,7 +4,7 @@ date: 2026-03-22T14:00:00
 description: "NTM 기반의 NP 정의와 검증자(Verifier) 기반의 NP 정의가 동치임을 보인다. '힌트가 있을 때 빠르게 검증할 수 있는 문제'라는 직관이 어떻게 수학적으로 엄밀해지는지 탐구한다."
 tags: ["Computer Science", "Complexity Theory"]
 category: cryptography
-difficulty: 심화
+difficulty: 고급
 ---
 
 > NP를 "NTM이 다항식 시간에 푸는 문제"라 정의했다. 그런데 NP에는 전혀 다른, 더 직관적인 정의가 존재한다. 두 정의는 완전히 동치다.

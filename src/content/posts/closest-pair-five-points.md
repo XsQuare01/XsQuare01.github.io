@@ -4,7 +4,7 @@ date: 2026-06-30T09:01:00
 description: "가장 가까운 점 쌍의 combine에서, 한 점이 옆에 있는 점을 몇 개만 비교해도 되는 이유를 쉽게 풀어 본다. 핵심은 '가까운 점은 좁은 공간에 빽빽이 들어갈 수 없다'는 것. 후보가 들어올 칸을 잘게 쪼개 세면, 비교 대상이 n과 무관한 상수(최대 7개)로 묶인다."
 tags: ["Algorithm", "Closest Pair", "Computational Geometry", "추가 설명"]
 category: algorithm
-difficulty: 심화
+difficulty: 고급
 ---
 
 > [가장 가까운 점 쌍 ①](/blog/closest-pair-1)에서 "한 점은 다음 7개만 비교하면 된다"고 했다. 왜 하필 몇 개로 끝나는지, 그림으로 천천히 따라가 보자.

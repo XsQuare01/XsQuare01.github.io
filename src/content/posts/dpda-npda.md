@@ -4,7 +4,7 @@ date: 2026-03-21T09:00:00
 description: "DFA에 스택을 추가한 DPDA가 해결할 수 있는 문제와 없는 문제를 살펴보고, NPDA와의 계산 능력 차이를 분석한다. 스택 2개로 튜링 머신을 시뮬레이션하는 원리까지 다룬다."
 tags: ["Computer Science", "Complexity Theory"]
 category: theory
-difficulty: 심화
+difficulty: 고급
 ---
 
 > DFA는 상태만 기억한다. 스택을 하나 추가하면 어디까지 가능해질까? 그리고 비결정론적으로 동작하면 얼마나 더 강력해질까?

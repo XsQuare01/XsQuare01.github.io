@@ -4,7 +4,7 @@ date: 2026-04-02T11:00:00
 description: "마이켈슨 간섭계, 양자 폭탄 검출기, EPR 역설, 벨의 정리, 양자 컴퓨터(Shor 알고리즘), 그리고 BB84 양자 키 교환까지 — 양자역학이 암호학의 미래를 어떻게 바꾸는지 다룬다."
 tags: ["Computer Science", "Cryptography", "Physics"]
 category: cryptography
-difficulty: 심화
+difficulty: 중급
 ---
 
 > RSA는 소인수분해의 어려움, ElGamal은 이산 대수의 어려움 위에 서 있다. 그런데 양자 컴퓨터는 이 두 문제를 다항식 시간에 풀 수 있다. 현재 공개키 암호의 기반이 흔들리는 것이다. 동시에 양자역학은 **물리 법칙 자체가 보안의 근거가 되는** 새로운 암호를 가능하게 한다.

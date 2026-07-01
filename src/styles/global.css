@@ -951,10 +951,20 @@ html.light .astro-code span {
   color: #4ade80;
   border: 1px solid rgba(74, 222, 128, 0.3);
 }
+.difficulty-초급 {
+  background: rgba(163, 230, 53, 0.12);
+  color: #a3e635;
+  border: 1px solid rgba(163, 230, 53, 0.3);
+}
 .difficulty-중급 {
   background: rgba(251, 191, 36, 0.12);
   color: #fbbf24;
   border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.difficulty-고급 {
+  background: rgba(251, 146, 60, 0.12);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.3);
 }
 .difficulty-심화 {
   background: rgba(248, 113, 113, 0.12);

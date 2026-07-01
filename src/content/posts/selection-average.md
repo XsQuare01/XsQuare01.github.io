@@ -4,7 +4,7 @@ date: 2026-06-29T09:01:00
 description: "선택 문제 본문이 '대부분 O(n)'으로 넘어간 quickselect의 평균 시간을 기댓값 점화식으로 엄밀히 따진다. 퀵 정렬과 달리 한쪽으로만 재귀하기 때문에 E(n)에 max 항이 생기고, 이를 상계로 풀면 E(n) ≤ 4n = O(n)이다."
 tags: ["Algorithm", "Selection", "Quickselect", "Expected Value", "추가 설명"]
 category: algorithm
-difficulty: 심화
+difficulty: 고급
 ---
 
 [선택 문제](/blog/selection) 본문은 quickselect를 소개하면서 "대부분 $O(n)$"이라는 말로 평균을 넘어갔다. 최선·최악은 간단히 보였지만, **평균이 정말 $O(n)$인지**는 기댓값 점화식을 세우고 직접 풀어야 확인할 수 있다. 이 글이 그 빈칸을 채운다.

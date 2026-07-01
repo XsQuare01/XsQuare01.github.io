@@ -4,7 +4,7 @@ date: 2026-03-25T10:00:00
 description: "RSA의 키 생성, 암복호화, 복호화 정확성 증명(오일러·페르마·CRT), 소인수분해 보안 근거, Square-and-Multiply 고속 지수연산까지 — 공개키 암호의 수학 전체를 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
-difficulty: 중급
+difficulty: 고급
 ---
 
 > Division Theorem, GCD, Modular Arithmetic, Euler 정리, Fermat 정리, CRT — 지금까지 쌓아온 정수론의 모든 도구가 RSA 하나를 위해 수렴한다. 큰 소수 두 개의 곱을 되돌리는 것이 어렵다는 단 하나의 사실 위에, 전 세계 인터넷 암호화가 서있다.

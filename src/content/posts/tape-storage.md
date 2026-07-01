@@ -4,7 +4,7 @@ date: 2026-06-17T09:00:00
 description: "크기와 사용 빈도가 다른 데이터들을 하나의 테이프에 어떤 순서로 배치해야 평균 접근 시간이 최소가 될까? 빈도 대비 길이의 비율 F/L이 큰 데이터부터 앞에 놓는 greedy 전략을 세우고, 이웃한 두 데이터를 맞바꾸는 교환 논증으로 그 최적성을 증명한다."
 tags: ["Algorithm", "Greedy", "Tape Storage", "Exchange Argument"]
 category: algorithm
-difficulty: 중급
+difficulty: 초급
 ---
 
 > 크기도 다르고 얼마나 자주 쓰는지도 다른 데이터들이 있다. 이것들을 하나의 테이프에 차례로 적어 둘 때, 어떤 순서로 놓아야 읽는 데 걸리는 시간이 가장 짧을까?

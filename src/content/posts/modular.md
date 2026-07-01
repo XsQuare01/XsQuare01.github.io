@@ -4,7 +4,7 @@ date: 2026-03-24T11:00:00
 description: "모듈러 산술의 동치 관계, 완전·축약 잉여계, 오일러 정리와 페르마의 소정리, 중국인의 나머지 정리(CRT)까지 — RSA를 비롯한 공개키 암호의 수학적 엔진을 완성한다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
-difficulty: 중급
+difficulty: 초급
 ---
 
 > GCD가 '두 수의 관계'라면, 모듈러 산술은 '수의 세계 자체를 재정의'한다. 나머지를 공유하는 수들을 하나로 묶으면 덧셈·곱셈·역원이 정의된 대수 구조가 생긴다. RSA, ElGamal, Diffie-Hellman의 계산 엔진은 이 구조 위에서 돌아간다.

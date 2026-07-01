@@ -4,7 +4,7 @@ date: 2026-05-18T08:00:00
 description: "선택 정렬, 병합 정렬, 퀵 정렬의 동작 원리를 코드 수준에서 살펴보고, 각 정렬의 올바름을 루프 불변식과 수학적 귀납법으로 증명한다. 시간 복잡도 O(n²), O(n log n), 최악 O(n²)/평균 O(n log n)의 차이가 어디서 오는지 정리한다."
 tags: ["Algorithm", "Sorting", "Selection Sort", "Merge Sort", "Quick Sort"]
 category: algorithm
-difficulty: 입문
+difficulty: 초급
 ---
 
 > 정렬은 알고리즘 수업의 단골 주제다. 같은 문제를 푸는 세 가지 방식이 각각 어떤 가정을 깔고 있고, 왜 복잡도가 갈리는지 들여다본다.

@@ -4,7 +4,7 @@ date: 2026-05-23T09:00:00
 description: "프림 알고리즘은 하나의 정점에서 시작해 현재 트리에 인접한 간선 중 가장 가벼운 것을 반복적으로 추가하여 MST를 만든다. 알고리즘의 동작을 단계별로 살펴보고, 매 단계 선택이 항상 어떤 MST의 부분집합에 포함된다는 사실을 귀납법과 cycle 논증으로 증명한다."
 tags: ["Algorithm", "Graph", "MST", "Prim", "Greedy"]
 category: algorithm
-difficulty: 입문
+difficulty: 초급
 ---
 
 > "지금까지 만든 트리에 가장 싸게 연결할 수 있는 정점을 다음으로 붙인다." 프림은 이 한 줄을 끝까지 반복하는 [그리디 알고리즘](/blog/greedy)이다. 답은 [MST](/blog/mst)에서 보았듯이 정확히 $n - 1$개의 간선으로 이루어진 트리다.

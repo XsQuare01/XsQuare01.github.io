@@ -11,7 +11,7 @@ const posts = defineCollection({
     description: z.string().optional(),
     tags: z.array(z.string()).default([]),
     category: z.enum(CATEGORY_SLUGS).optional(),
-    difficulty: z.enum(['입문', '중급', '심화']).optional(),
+    difficulty: z.enum(['입문', '초급', '중급', '고급', '심화']).optional(),
   }),
 });
 

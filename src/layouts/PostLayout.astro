@@ -31,7 +31,7 @@ interface Props {
   description?: string;
   tags?: string[];
   category?: string;
-  difficulty?: '입문' | '중급' | '심화';
+  difficulty?: '입문' | '초급' | '중급' | '고급' | '심화';
   headings?: Heading[];
   readingTime?: number;
   wordCount?: number;
@@ -171,7 +171,7 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
         )}
         {difficulty && (
           <span class={`difficulty-badge difficulty-${difficulty}`}>
-            {difficulty === '입문' ? '★☆☆' : difficulty === '중급' ? '★★☆' : '★★★'} {difficulty}
+            {difficulty === '입문' ? '★☆☆☆☆' : difficulty === '초급' ? '★★☆☆☆' : difficulty === '중급' ? '★★★☆☆' : difficulty === '고급' ? '★★★★☆' : '★★★★★'} {difficulty}
           </span>
         )}
         {tags.length > 0 && (
