@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import { tagStyle } from '../utils/tagColor';
 import { getCategoryLabel } from '../data/categories';
+import { difficultyStars } from '../utils/difficulty';
 import katex from 'katex';
 
 function renderHeadingText(text: string): string {
@@ -171,7 +172,7 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
         )}
         {difficulty && (
           <span class={`difficulty-badge difficulty-${difficulty}`}>
-            {difficulty === '입문' ? '★☆☆☆☆' : difficulty === '초급' ? '★★☆☆☆' : difficulty === '중급' ? '★★★☆☆' : difficulty === '고급' ? '★★★★☆' : '★★★★★'} {difficulty}
+            {difficultyStars(difficulty)} {difficulty}
           </span>
         )}
         {tags.length > 0 && (

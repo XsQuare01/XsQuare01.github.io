@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { tagStyle } from '../../utils/tagColor';
 import { getCategoryLabel } from '../../data/categories';
+import { difficultyStars } from '../../utils/difficulty';
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -46,6 +47,11 @@ const blogJsonLd = JSON.stringify({
             <a href={`/categories/${post.data.category}`} class="post-category-badge" style={tagStyle(post.data.category)}>
               {getCategoryLabel(post.data.category)}
             </a>
+          )}
+          {post.data.difficulty && (
+            <span class={`difficulty-badge difficulty-${post.data.difficulty}`} style="margin-left:auto;">
+              {difficultyStars(post.data.difficulty)} {post.data.difficulty}
+            </span>
           )}
         </div>
         <span class="post-item-title">
