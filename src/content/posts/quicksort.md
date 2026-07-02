@@ -1,5 +1,5 @@
 ---
-title: "quick sort — 최악 O(n²)인데 평균은 왜 O(n log n)인가"
+title: "Quick Sort — 최악 O(n²)인데 평균은 왜 O(n log n)인가"
 date: 2026-06-27T09:00:00
 description: "quick sort는 pivot 하나로 배열을 가르는 분할 정복이다. 두 포인터로 한 배열 안에서 분할하는 과정을 보고, 최선 O(n log n)과 최악 O(n²)이 갈리는 지점을 짚는다. 핵심은 평균 분석이다 — 모든 pivot이 같은 확률로 뽑힌다고 보고 기댓값 점화식 E(n)을 세워, 직접 풀어 평균이 Θ(n log n)임을 유도한다."
 tags: ["Algorithm", "Quick Sort", "Sorting", "Divide and Conquer", "Average Case", "Expected Value"]

@@ -42,7 +42,7 @@ difficulty: 중급
 
 ---
 
-## merge sort, 다시 보기
+## Merge Sort, 다시 보기
 
 **merge sort**는 분할 정복의 교과서적 예다. 배열을 반으로 나눠 각각 정렬하고, 정렬된 두 조각을 합친다.
 
@@ -134,7 +134,7 @@ $$
 
 ---
 
-## heap sort — 제자리에서 $O(n \log n)$
+## Heap Sort — 제자리에서 $O(n \log n)$
 
 **heap sort**는 배열 안에서 **최대 힙(max-heap)** 을 만들고 허무는 방식으로, 추가 배열 없이 정렬한다.
 
