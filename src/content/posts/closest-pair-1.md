@@ -268,7 +268,7 @@ int main() {
 <div class="callout">
 <div class="callout-title">이어지는 글</div>
 
-이 알고리즘의 $O(n \log^2 n)$ 병목은 Combine마다 y정렬과 x재정렬을 반복하는 데 있다. [2편](/blog/closest-pair-2)에서는 이를 개선한다. 병합 정렬처럼 재귀가 y정렬된 결과를 물려주게 만들면, Combine에서 y정렬 대신 $O(n)$의 merge만 수행하면 된다. 이를 통해 전체 복잡도를 $O(n \log n)$으로 줄이는 과정을 다룬다. 그 다음 글에서는 Plane Sweeping 관점의 해석도 살펴본다.
+이 알고리즘의 $O(n \log^2 n)$ 병목은 Combine마다 y정렬과 x재정렬을 반복하는 데 있다. [2편](/blog/closest-pair-2)에서는 이를 개선한다. merge sort처럼 재귀가 y정렬된 결과를 물려주게 만들면, Combine에서 y정렬 대신 $O(n)$의 merge만 수행하면 된다. 이를 통해 전체 복잡도를 $O(n \log n)$으로 줄이는 과정을 다룬다. 그 다음 글에서는 Plane Sweeping 관점의 해석도 살펴본다.
 
 분할 정복의 일반적인 뼈대와 점화식 분석은 [분할 정복](/blog/divide-and-conquer) 포스트에서, 정렬 알고리즘 전반은 [정렬](/blog/sort) 포스트에서 다룬다.
 

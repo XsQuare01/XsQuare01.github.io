@@ -1,19 +1,19 @@
 ---
 title: "가장 가까운 점 쌍 ② — 정렬을 유지해 O(n log n)으로"
 date: 2026-07-01T09:00:00
-description: "1편의 O(n log²n)에서 여분의 log n은 combine마다 y정렬을 새로 하는 데서 나온다. 병합 정렬처럼 재귀가 y좌표로 정렬된 결과를 반환하게 만들면, combine은 y정렬 대신 O(n) merge만 하면 된다. 분할은 x로, 순서는 y로 유지하는 미묘한 지점을 짚고 전체를 O(n log n)으로 끌어내린다."
+description: "1편의 O(n log²n)에서 여분의 log n은 combine마다 y정렬을 새로 하는 데서 나온다. merge sort처럼 재귀가 y좌표로 정렬된 결과를 반환하게 만들면, combine은 y정렬 대신 O(n) merge만 하면 된다. 분할은 x로, 순서는 y로 유지하는 미묘한 지점을 짚고 전체를 O(n log n)으로 끌어내린다."
 tags: ["Algorithm", "Closest Pair", "Divide and Conquer", "Computational Geometry"]
 category: algorithm
 difficulty: 고급
 ---
 
-> [가장 가까운 점 쌍 ①](/blog/closest-pair-1)에서 분할 정복으로 $O(n \log^2 n)$ 풀이를 얻었다. 이제 여분의 $\log n$을 어디서 흘리고 있는지 찾아, 병합 정렬의 아이디어로 이를 $O(n \log n)$까지 끌어내린다.
+> [가장 가까운 점 쌍 ①](/blog/closest-pair-1)에서 분할 정복으로 $O(n \log^2 n)$ 풀이를 얻었다. 이제 여분의 $\log n$을 어디서 흘리고 있는지 찾아, merge sort의 아이디어로 이를 $O(n \log n)$까지 끌어내린다.
 
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 
 - 1편의 $O(n \log^2 n)$에서 **여분의 $\log n$이 나온 곳** — combine마다 반복하는 정렬
-- 병합 정렬처럼 **재귀가 y정렬된 결과를 반환**하게 만드는 아이디어
+- merge sort처럼 **재귀가 y정렬된 결과를 반환**하게 만드는 아이디어
 - 미묘한 지점: **분할은 x좌표로, 순서는 y좌표로** 유지하기
 - combine의 y정렬을 $O(n)$ **merge**로 대체하기
 - 복잡도 유도: $T(n) = 2T(n/2) + O(n) = O(n \log n)$
@@ -40,9 +40,9 @@ $O(n)$이면 충분할 combine을, 정렬 두 번 때문에 $O(n \log n)$으로 
 
 ---
 
-## 병합 정렬에서 빌려 오는 아이디어
+## Merge Sort에서 빌려 오는 아이디어
 
-[병합 정렬](/blog/divide-and-conquer)을 떠올려 보자. 병합 정렬은 두 절반을 각각 정렬한 뒤, 이미 정렬된 두 배열을 **merge**로 합친다. 이미 정렬된 것끼리는 앞에서부터 훑으며 $O(n)$에 하나로 합칠 수 있다. 새로 정렬할 필요가 없다.
+[merge sort](/blog/divide-and-conquer)을 떠올려 보자. merge sort는 두 절반을 각각 정렬한 뒤, 이미 정렬된 두 배열을 **merge**로 합친다. 이미 정렬된 것끼리는 앞에서부터 훑으며 $O(n)$에 하나로 합칠 수 있다. 새로 정렬할 필요가 없다.
 
 같은 발상을 combine에 적용한다.
 
@@ -201,7 +201,7 @@ $$
 T(n) = 2\,T\!\left(\tfrac{n}{2}\right) + O(n)
 $$
 
-이는 병합 정렬과 **같은 점화식**이고, 대입법으로 풀면 $T(n) = O(n \log n)$이다. (유도 과정은 [분할 정복](/blog/divide-and-conquer) 참고.)
+이는 merge sort와 **같은 점화식**이고, 대입법으로 풀면 $T(n) = O(n \log n)$이다. (유도 과정은 [분할 정복](/blog/divide-and-conquer) 참고.)
 
 ![복잡도 O(n log n) — 재귀 깊이 log n, 각 레벨 combine 비용이 정렬 제거로 O(n)이 되어 레벨 합이 O(n)씩, 전체 O(n log n).](/images/closest-pair-2/complexity.svg)
 
@@ -213,7 +213,7 @@ $$
 <div class="callout-title">핵심 정리</div>
 
 - 1편의 여분의 $\log n$은 combine마다 하는 **y정렬과 x재정렬**에서 나왔다.
-- 병합 정렬처럼 **재귀가 y정렬된 결과를 반환**하게 만들면, combine은 두 절반을 $O(n)$ **merge**로 합칠 뿐이다.
+- merge sort처럼 **재귀가 y정렬된 결과를 반환**하게 만들면, combine은 두 절반을 $O(n)$ **merge**로 합칠 뿐이다.
 - 분할 경계는 x좌표 기준이어야 하므로, 처음 한 번 x정렬로 고정하고 **분할선 x좌표를 재귀 전에 확보**한다. 구간 내부 순서는 y정렬로 유지한다.
 - combine이 $O(n)$이 되어 점화식이 $T(n) = 2T(n/2) + O(n) = O(n \log n)$으로 떨어진다.
 - 이는 정렬의 하한 $\Omega(n \log n)$과 같은 차수로, **이론적으로 최적**이다.
@@ -225,6 +225,6 @@ $$
 
 분할 정복이 아닌 다른 시선으로도 같은 $O(n \log n)$에 닿을 수 있다. 점들을 x좌표 순으로 훑으며 "현재 위치에서 폭 $D$ 안의 점들"만 후보로 관리하는 **Plane Sweeping**(평면 훑기) 관점을, 균형 이진 탐색 트리와 함께 다음 글에서 다룬다.
 
-분할 정복의 뼈대와 병합 정렬의 점화식 분석은 [분할 정복](/blog/divide-and-conquer) 포스트에서, "왜 다음 7개만 비교하면 되는가"는 [별도 글](/blog/closest-pair-five-points)에서 다룬다.
+분할 정복의 뼈대와 merge sort의 점화식 분석은 [분할 정복](/blog/divide-and-conquer) 포스트에서, "왜 다음 7개만 비교하면 되는가"는 [별도 글](/blog/closest-pair-five-points)에서 다룬다.
 
 </div>
