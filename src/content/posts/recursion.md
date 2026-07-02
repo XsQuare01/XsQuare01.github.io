@@ -289,9 +289,9 @@ $n = 64$일 때 필요한 이동 횟수: $2^{64} - 1 \approx 1.8 \times 10^{19}$
 
 재귀 호출의 구조를 트리로 시각화하면 총 수행 시간을 직관적으로 분석할 수 있다.
 
-**병합 정렬(Merge Sort)의 점화식:** $T(n) = 2T(n/2) + O(n)$
+**merge sort의 점화식:** $T(n) = 2T(n/2) + O(n)$
 
-![병합 정렬 재귀 트리 — 각 레벨 비용 cn, 총 O(n log n)](/images/recursion/merge-sort-tree.svg)
+![merge sort 재귀 트리 — 각 레벨 비용 cn, 총 O(n log n)](/images/recursion/merge-sort-tree.svg)
 
 - 트리의 깊이: $\log_2 n$
 - 각 레벨의 총 작업량: $n$
@@ -333,7 +333,7 @@ $$f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \l
 | $T(n) = 9T(n/3) + n^2$ | 9 | 3 | $n^2$ | $n^2$ | Case 2 | $\Theta(n^2 \log n)$ |
 | $T(n) = 2T(n/2) + n^2$ | 2 | 2 | $n$ | $n^2$ | Case 3 | $\Theta(n^2)$ |
 
-**병합 정렬 검증:** $a=2$, $b=2$ → $n^{\log_2 2} = n^1 = n = f(n)$ → Case 2 → $T(n) = \Theta(n \log n)$. 성립.
+**merge sort 검증:** $a=2$, $b=2$ → $n^{\log_2 2} = n^1 = n = f(n)$ → Case 2 → $T(n) = \Theta(n \log n)$. 성립.
 
 <div class="callout callout-simple">
 <div class="callout-title">마스터 정리가 통하지 않는 경우</div>
@@ -373,5 +373,5 @@ $$f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \l
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>정렬 알고리즘 — Selection / Merge / Quick</strong> — 선택 정렬, 병합 정렬, 퀵 정렬의 동작 원리를 코드 수준에서 살펴보고, 각 정렬의 올바름을 루프 불변식과 수학적 귀납법으로 증명한다. $\Theta(n^2)$, $\Theta(n \log n)$, 최악 $\Theta(n^2)$/평균 $\Theta(n \log n)$의 차이가 어디서 오는지 정리한다.</p>
+<p><strong>정렬 알고리즘 — Selection / Merge / Quick</strong> — selection sort, merge sort, quick sort의 동작 원리를 코드 수준에서 살펴보고, 각 정렬의 올바름을 루프 불변식과 수학적 귀납법으로 증명한다. $\Theta(n^2)$, $\Theta(n \log n)$, 최악 $\Theta(n^2)$/평균 $\Theta(n \log n)$의 차이가 어디서 오는지 정리한다.</p>
 </div>
