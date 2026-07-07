@@ -1,0 +1,28 @@
+<svg viewBox="0 0 680 400" width="1020" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="400" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">볼록 vs 오목</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">내부 두 점을 잇는 선분이 다각형을 벗어나는가</text>
+
+  <!-- ===== Convex (left) ===== -->
+  <text x="175" y="85" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">볼록 (convex)</text>
+  <polygon points="80,300 175,340 275,270 260,150 130,120"
+           fill="rgba(52,211,153,0.10)" stroke="#34d399" stroke-width="2.5"/>
+  <!-- inner segment stays inside -->
+  <line x1="110" y1="270" x2="250" y2="180" stroke="#facc15" stroke-width="2" stroke-dasharray="5 3"/>
+  <circle cx="110" cy="270" r="5" fill="#facc15"/>
+  <circle cx="250" cy="180" r="5" fill="#facc15"/>
+  <text x="175" y="378" text-anchor="middle" fill="#94a3b8" font-size="11">선분이 항상 내부에 있다 ✓</text>
+
+  <!-- ===== Concave (right) ===== -->
+  <text x="505" y="85" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="700">오목 (concave)</text>
+  <!-- concave polygon with a dent on the right side -->
+  <polygon points="410,300 505,340 605,270 470,210 590,150 440,120"
+           fill="rgba(248,113,113,0.10)" stroke="#f87171" stroke-width="2.5"/>
+  <!-- inner segment leaves the polygon through the dent -->
+  <line x1="430" y1="270" x2="580" y2="250" stroke="#facc15" stroke-width="2" stroke-dasharray="5 3"/>
+  <circle cx="430" cy="270" r="5" fill="#facc15"/>
+  <circle cx="580" cy="250" r="5" fill="#facc15"/>
+  <text x="505" y="215" text-anchor="middle" fill="#fca5a5" font-size="10">파고든 부분</text>
+  <text x="505" y="378" text-anchor="middle" fill="#94a3b8" font-size="11">선분이 밖으로 나간다 ✗</text>
+</svg>
