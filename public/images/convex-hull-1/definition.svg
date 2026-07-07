@@ -1,0 +1,37 @@
+<svg viewBox="0 0 680 440" width="1020" height="660" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="440" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">볼록 껍질 (Convex Hull)</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">모든 점을 포함하는 가장 작은 볼록 다각형</text>
+
+  <!-- Hull polygon -->
+  <polygon points="130,330 340,370 560,300 580,160 400,80 175,130"
+           fill="rgba(59,130,246,0.12)" stroke="#3b82f6" stroke-width="2.5"/>
+
+  <!-- Interior points (gray) -->
+  <g fill="#64748b">
+    <circle cx="300" cy="210" r="5"/>
+    <circle cx="390" cy="250" r="5"/>
+    <circle cx="255" cy="270" r="5"/>
+    <circle cx="430" cy="190" r="5"/>
+    <circle cx="340" cy="160" r="5"/>
+    <circle cx="470" cy="250" r="5"/>
+  </g>
+  <text x="360" y="300" text-anchor="middle" fill="#475569" font-size="11">내부 점 (껍질에 포함)</text>
+
+  <!-- Hull vertices (blue) -->
+  <g fill="#93c5fd" stroke="#3b82f6" stroke-width="2">
+    <circle cx="130" cy="330" r="7"/>
+    <circle cx="340" cy="370" r="7"/>
+    <circle cx="560" cy="300" r="7"/>
+    <circle cx="580" cy="160" r="7"/>
+    <circle cx="400" cy="80" r="7"/>
+    <circle cx="175" cy="130" r="7"/>
+  </g>
+
+  <!-- Legend -->
+  <circle cx="470" cy="405" r="6" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+  <text x="482" y="409" fill="#94a3b8" font-size="11">껍질 위의 점 (꼭짓점)</text>
+  <circle cx="150" cy="405" r="5" fill="#64748b"/>
+  <text x="162" y="409" fill="#94a3b8" font-size="11">내부 점</text>
+</svg>

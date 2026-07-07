@@ -1,0 +1,59 @@
+<svg viewBox="0 0 680 440" width="1020" height="660" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="440" rx="10" fill="#0f1117"/>
+  <defs>
+    <marker id="f-g" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Package Wrapping — 전체 흐름</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">시작점에서 반시계로 한 변씩 감싸며(나머지 점을 왼쪽에 두며) 돌아온다</text>
+
+  <!-- interior points -->
+  <g fill="#64748b">
+    <circle cx="300" cy="230" r="5"/>
+    <circle cx="390" cy="260" r="5"/>
+    <circle cx="255" cy="280" r="5"/>
+    <circle cx="430" cy="200" r="5"/>
+    <circle cx="345" cy="175" r="5"/>
+    <circle cx="470" cy="255" r="5"/>
+  </g>
+
+  <!-- hull edges (counterclockwise: Y→C→D→E→F→A→Y) -->
+  <g stroke="#34d399" stroke-width="2.5">
+    <line x1="351" y1="376" x2="549" y2="304" marker-end="url(#f-g)"/>
+    <line x1="562" y1="288" x2="578" y2="172" marker-end="url(#f-g)"/>
+    <line x1="569" y1="155" x2="411" y2="85"  marker-end="url(#f-g)"/>
+    <line x1="388" y1="83"  x2="187" y2="127" marker-end="url(#f-g)"/>
+    <line x1="172" y1="142" x2="133" y2="318" marker-end="url(#f-g)"/>
+    <line x1="142" y1="333" x2="328" y2="376" marker-end="url(#f-g)"/>
+  </g>
+
+  <!-- step numbers -->
+  <g fill="#6ee7b7" font-size="12" font-weight="700">
+    <text x="452" y="352">1</text>
+    <text x="588" y="232">2</text>
+    <text x="498" y="108">3</text>
+    <text x="285" y="92">4</text>
+    <text x="126" y="235">5</text>
+    <text x="232" y="372">6</text>
+  </g>
+
+  <!-- hull vertices -->
+  <g fill="#93c5fd" stroke="#3b82f6" stroke-width="2">
+    <circle cx="560" cy="300" r="7"/>
+    <circle cx="580" cy="160" r="7"/>
+    <circle cx="400" cy="80" r="7"/>
+    <circle cx="175" cy="130" r="7"/>
+    <circle cx="130" cy="330" r="7"/>
+  </g>
+  <!-- start point Y -->
+  <circle cx="340" cy="380" r="9" fill="#facc15"/>
+
+  <!-- labels -->
+  <g font-size="13" font-weight="700">
+    <text x="340" y="412" text-anchor="middle" fill="#facc15">Y (시작 · y 최소)</text>
+    <text x="574" y="298" fill="#93c5fd">Y'</text>
+    <text x="590" y="160" fill="#93c5fd">Y''</text>
+  </g>
+</svg>
