@@ -1,69 +1,100 @@
 ## 결정적 검사: src/content/posts/convex-hull-2.md
+발견 사항 없음 ✅
 
-🟡 권장 (1)
-- [D2] src/content/posts/convex-hull-2.md:10, src/content/posts/convex-hull-2.md:15, src/content/posts/convex-hull-2.md:18  줄표(—) 23회 — 임계치(13) 초과. AI 문체 신호 샘플 위치: src/content/posts/convex-hull-2.md:10, src/content/posts/convex-hull-2.md:15, src/content/posts/convex-hull-2.md:18
+## LLM 비평
 
-요약: 🔴 0 · 🟡 1 · 🟢 0
+### 🟡 [L7] src/content/posts/convex-hull-2.md:120
 
-## LLM 비평: src/content/posts/convex-hull-2.md
+- severity: 🟡
+- source: L
+- rule_id: L7
+- location: src/content/posts/convex-hull-2.md:120
+- quote: `정렬할 양수 $v_1, \cdots, v_N$이 있다고 하자.`
+- message: 이어지는 126행의 “모든 각도는 ... 서로 겹치지 않는다”는 결론은 입력값이 서로 다를 때만 성립한다. 중복 양수가 있으면 같은 각도와 같은 원 위의 점으로 매핑되므로, 정렬 하한 환원의 전제가 본문에 빠져 있다.
+- recommendation: 하한 환원을 시작할 때 “서로 다른 양수”를 정렬한다고 명시하라. 비교 정렬 하한은 서로 다른 키의 순열에 대해서도 성립하므로 증명의 힘은 약해지지 않는다.
+- gate_effect: warn
 
-🟡 권장 (3)
-- severity: 🟡 · source: L · rule_id: L1 · location: src/content/posts/convex-hull-2.md:10 · gate_effect: warn
-  - quote: "결과는 $O(N \log N)$ — 그리고 그것이 사실상 한계라는 것까지"
-  - message: 본문 문장 중간의 수사적 줄표가 8곳 안팎으로 많다(D2와 동일 사안). 제목·소제목·이미지 캡션의 구조적 줄표는 1편과 일관되므로 유지해도 되지만, 문장 내부 줄표는 AI 문체 신호다.
-  - recommendation: 문장 중간 줄표를 마침표·접속사로 풀어 임계치 이하로 낮춘다.
-- severity: 🟡 · source: L · rule_id: L7 · location: src/content/posts/convex-hull-2.md:157 · gate_effect: warn
-  - quote: "숫자를 원 위의 점으로 바꾸는 환원으로 **볼록 껍질 $\Rightarrow$ 정렬**이 성립하므로"
-  - message: 화살표 표기가 환원 방향을 모호하게 만든다. 실제 논증은 "정렬이 볼록 껍질로 환원된다(볼록 껍질을 풀면 정렬이 풀린다)"이다.
-  - recommendation: 기호 대신 "볼록 껍질을 풀 수 있으면 정렬도 풀린다"처럼 서술형으로 고친다.
-- severity: 🟡 · source: L · rule_id: L2 · location: src/content/posts/convex-hull-2.md:31 · gate_effect: warn
-  - quote: "1편에서 세 점의 회전 방향을 정수 연산만으로 판정하는 **CCW**를 만들었고"
-  - message: 1편의 세 가지 가정(x·y좌표 서로 다름, 일직선 3점 없음)을 2편에서도 그대로 쓰는데 명시하지 않았다. 특히 CCW 비교자 정렬과 스캔의 `<0`/`>0` 판정은 일직선 배제 가정에 기댄다.
-  - recommendation: 되짚어보기 절에 "1편의 세 가지 가정을 그대로 유지한다" 한 문장을 추가한다.
+### 🟡 [L7] src/content/posts/convex-hull-2.md:123
 
-🟢 참고 (9)
-- severity: 🟢 · source: L · rule_id: L6 · location: src/content/posts/convex-hull-2.md:135 · gate_effect: info
-  - quote: "\theta_i = \frac{v_i}{M+1} \cdot 2\pi"
-  - message: 노션 원본은 $v/\max \cdot 2\pi$로, 최댓값이 각도 $2\pi(=0)$와 겹치는 문제가 있다. 본문은 $M+1$로 나눠 정정했다. 원본에 없는 "비교 기반 모델" callout도 하한 주장의 정확성을 위해 추가한 것이다. 의도된 정정·보강으로 판단.
-  - recommendation: 조치 불요. 노션 원본에 정정 사항을 남기고 싶다면 1편 때처럼 정정 토글 추가를 고려.
-- severity: 🟢 · source: L · rule_id: L6 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 소스 대조 완료 — 노션 `Convex hull 1` 노트의 Graham Scan 섹션(스택 절차, 처음 두 점 보존, push/pop $O(N)$ 논증, 원 위 점 환원)이 모두 반영됨. 핵심 누락 없음.
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L1 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 줄표 외 항목(경구식 마무리, 과한 비유, 대칭 반복) 검토 완료, 이슈 없음.
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L2 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 가정 명시 건 외 흐름·명료성 검토 완료, 이슈 없음.
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L3 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 검토 완료, 이슈 없음. 용어(껍질/꼭짓점/좌회전/우회전/push/pop)와 ~다 평서체 일관.
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L4 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 검토 완료, 이슈 없음. SVG 5장 모두 본문과 일치 — 도판 4장이 같은 점 배치(Y,1~7)를 공유하고, scan-pop의 4→5→6 우회전은 좌표상 실제 CCW 계산과 일치. lower-bound의 각도식 v·2π/5는 본문 예시(M=4)와 일치.
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L5 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 검토 완료, 이슈 없음. 제목·description이 Graham Scan과 하한이라는 실제 내용을 대표.
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L6 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 검토 완료, 이슈 없음 (위 정정·보강 참고 항목 외 자의적 추가 없음).
-  - recommendation: 조치 불요.
-- severity: 🟢 · source: L · rule_id: L7 · location: not-recorded · gate_effect: info
-  - quote: not-recorded
-  - message: 화살표 표기 건 외 논증·복잡도 검토 완료, 이슈 없음. 비교자 부호 해석, 스캔의 분할상환 $O(N)$, 환원의 $O(N)$ 전·후처리와 하한 이전 논리 모두 옳음.
-  - recommendation: 조치 불요.
+- severity: 🟡
+- source: L
+- rule_id: L7
+- location: src/content/posts/convex-hull-2.md:123
+- quote: `$v_i \;\mapsto\; \theta_i = \frac{v_i}{M+1} \cdot 2\pi \;\mapsto\; \left(r\cos\theta_i,\; r\sin\theta_i\right)$`
+- message: 본문은 143행에서 “좌표에 대한 대수적 연산·비교만 허용하는 모델”을 전제한다고 설명하지만, 환원 자체는 좌표 생성에 삼각함수 $\cos, \sin$을 사용한다. 계산 모델을 엄밀히 읽으면 하한 증명의 전처리가 모델 밖 연산에 의존하는 것처럼 보인다.
+- recommendation: 원 위 환원이 직관적 설명임을 명시하거나, 서로 다른 양수 $v_i$를 $(v_i, v_i^2)$처럼 엄밀한 볼록 곡선 위 점으로 보내는 대수적 환원으로 바꾸라.
+- gate_effect: warn
 
-요약(전체): 🔴 0 · 🟡 4 · 🟢 9
+### 🟢 [L1] src/content/posts/convex-hull-2.md
 
-## 반영 결과 (2026-07-08)
+- severity: 🟢
+- source: L
+- rule_id: L1
+- location: src/content/posts/convex-hull-2.md
+- quote: not-recorded
+- message: 검토 완료, 이슈 없음. 제목·섹션·이미지 alt에 줄표가 쓰였지만 구조 표지 용도이며, 본문 문체에서 줄표 남발·경구식 마무리·과한 비유가 두드러지지 않는다.
+- recommendation: 현재처럼 ~다 평서체와 설명 중심 문체를 유지한다.
+- gate_effect: info
 
-- [D2/L1] 문장 중간 줄표 10곳을 마침표·접속사·콤마로 정리. 재검사 결과 "발견 사항 없음 ✅".
-- [L7] 핵심 정리의 "볼록 껍질 ⇒ 정렬" 표기를 "볼록 껍질을 풀 수 있으면 정렬도 풀린다"로 서술형 변경.
-- [L2] 되짚어보기 절에 1편의 세 가지 가정 유지 문장 추가.
-- 반영 후 `npm run build` 통과 (103 pages).
+### 🟢 [L2] src/content/posts/convex-hull-2.md
+
+- severity: 🟢
+- source: L
+- rule_id: L2
+- location: src/content/posts/convex-hull-2.md
+- quote: not-recorded
+- message: 검토 완료, 이슈 없음. Package Wrapping의 반복 낭비에서 각도 정렬, 스택 scan, 정렬 하한으로 넘어가는 설명 흐름이 자연스럽다.
+- recommendation: 현재 흐름을 유지한다.
+- gate_effect: info
+
+### 🟢 [L3] src/content/posts/convex-hull-2.md
+
+- severity: 🟢
+- source: L
+- rule_id: L3
+- location: src/content/posts/convex-hull-2.md
+- quote: not-recorded
+- message: 검토 완료, 이슈 없음. 점, 껍질, 각도 정렬, CCW, push/pop, 환원 등의 용어 사용이 일관된다.
+- recommendation: 현재 용어 체계를 유지한다.
+- gate_effect: info
+
+### 🟢 [L4] src/content/posts/convex-hull-2.md:39
+
+- severity: 🟢
+- source: L
+- rule_id: L4
+- location: src/content/posts/convex-hull-2.md:39
+- quote: `![각도 정렬 — 최하단 점 Y를 기준으로, 수평선에서 반시계 방향으로 훑으며 만나는 순서대로 점에 번호를 매긴다.](/images/convex-hull-2/angle-sort.svg)`
+- message: 검토 완료, 이슈 없음. `angle-sort.svg`, `scan-push.svg`, `scan-pop.svg`, `scan-result.svg`, `lower-bound.svg`의 레이블·점 번호·push/pop 설명이 본문 설명과 일치한다.
+- recommendation: 현재 SVG와 본문 연결을 유지한다.
+- gate_effect: info
+
+### 🟢 [L5] src/content/posts/convex-hull-2.md:2
+
+- severity: 🟢
+- source: L
+- rule_id: L5
+- location: src/content/posts/convex-hull-2.md:2
+- quote: `title: "볼록 껍질 ② — Graham Scan과 정렬 하한"`
+- message: 검토 완료, 이슈 없음. 제목과 description이 실제 본문 범위인 Graham Scan, $O(N \log N)$ 복잡도, 정렬 하한을 대표한다.
+- recommendation: 현재 제목과 description을 유지한다.
+- gate_effect: info
+
+### 🟢 [L6] not-recorded
+
+- severity: 🟢
+- source: L
+- rule_id: L6
+- location: not-recorded
+- quote: not-recorded
+- message: 검토 완료, 이슈 없음. 다만 현재 환경에는 `notion-search`/`notion-fetch` 도구나 로컬 Notion 원문이 없어 원문 대조는 수행하지 못했다. 저장소의 현재 글 구조와 논지를 기준으로만 검토했다.
+- recommendation: 원문 충실성까지 gate로 삼아야 한다면 해당 Notion 원문을 제공하거나 Notion 조회 도구를 연결한 뒤 재검토한다.
+- gate_effect: info
+
+요약: 🔴 0 · 🟡 2 · 🟢 6
+
+## 반영 결과 (2026-07-08, 2차)
+
+- [L7:120] "정렬할 양수" → "**서로 다른** 양수"로 전제 명시. 값이 겹치면 같은 점으로 매핑된다는 이유와, 서로 다른 키로 한정해도 비교 정렬 하한이 성립한다는 근거를 본문에 추가.
+- [L7:123] 계산 모델 callout에 보강 문단 추가: $\cos$/$\sin$은 그림을 위한 선택이며, 엄밀하게는 포물선 위의 점 $(v_i, v_i^2)$으로 보내는 대수적 변환으로 같은 논증이 성립함을 명시. 원 그림(노션 원본 방식)은 직관용으로 유지.
+- 반영 후 결정적 검사 "발견 사항 없음 ✅", `npm run build` 통과 (103 pages).
