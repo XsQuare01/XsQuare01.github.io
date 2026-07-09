@@ -6,44 +6,45 @@
     </marker>
   </defs>
 
-  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">껍질을 균형 트리에 담으면 접선을 이진 탐색으로</text>
-  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">껍질 점을 y좌표 순으로 저장 → 새 점의 접점을 O(log N)에 찾는다</text>
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">사슬을 균형 트리에 담으면 접선을 이진 탐색으로</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">사슬(예: upper hull)을 x좌표 순으로 저장 → 새 점의 접점을 O(log N)에 찾는다</text>
 
-  <!-- left: hull with y-ordered vertices -->
-  <polygon points="90,180 175,95 235,205 150,320 70,255"
-           fill="#1e293b40" stroke="#3b82f6" stroke-width="2"/>
+  <!-- left: an upper-hull chain (open polyline, monotone in x) -->
+  <polyline points="60,235 120,150 195,120 265,150 325,235" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
   <g font-size="12" font-weight="700">
-    <circle cx="175" cy="95" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="188" y="92" fill="#93c5fd">B</text>
-    <circle cx="90" cy="180" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="66" y="178" fill="#93c5fd">A</text>
-    <circle cx="235" cy="205" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="248" y="209" fill="#93c5fd">C</text>
-    <circle cx="70" cy="255" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="46" y="259" fill="#93c5fd">E</text>
-    <circle cx="150" cy="320" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="163" y="336" fill="#93c5fd">D</text>
+    <circle cx="60" cy="235" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="46" y="257" fill="#93c5fd">1</text>
+    <circle cx="120" cy="150" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="110" y="138" fill="#93c5fd">2</text>
+    <circle cx="195" cy="120" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="190" y="107" fill="#93c5fd">3</text>
+    <circle cx="265" cy="150" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="273" y="140" fill="#93c5fd">4</text>
+    <circle cx="325" cy="235" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="335" y="240" fill="#93c5fd">5</text>
   </g>
-  <!-- new point p -->
-  <circle cx="300" cy="150" r="7" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
-  <text x="300" y="138" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">p</text>
+  <text x="192" y="285" text-anchor="middle" fill="#64748b" font-size="11">x좌표 순: 1 → 2 → 3 → 4 → 5</text>
 
-  <!-- right: balanced BST keyed by y -->
-  <text x="500" y="88" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">y좌표 균형 트리</text>
+  <!-- new point p -->
+  <circle cx="405" cy="180" r="7" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+  <text x="405" y="168" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">p</text>
+
+  <!-- right: balanced BST keyed by x (in-order 1..5) -->
+  <text x="540" y="88" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">x좌표 균형 트리</text>
   <!-- edges -->
   <g stroke="#334155" stroke-width="1.6">
-    <line x1="500" y1="120" x2="440" y2="185"/>
-    <line x1="500" y1="120" x2="560" y2="185"/>
-    <line x1="440" y1="185" x2="400" y2="250"/>
-    <line x1="560" y1="185" x2="600" y2="250"/>
+    <line x1="540" y1="120" x2="480" y2="185"/>
+    <line x1="540" y1="120" x2="600" y2="185"/>
+    <line x1="480" y1="185" x2="440" y2="250"/>
+    <line x1="600" y1="185" x2="640" y2="250"/>
   </g>
-  <!-- nodes -->
+  <!-- nodes: root 3, left 2 (child 1), right 4 (child 5) -->
   <g font-size="12" font-weight="700">
-    <circle cx="500" cy="120" r="16" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/><text x="500" y="125" text-anchor="middle" fill="#93c5fd">C</text>
-    <circle cx="440" cy="185" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="440" y="190" text-anchor="middle" fill="#93c5fd">A</text>
-    <circle cx="560" cy="185" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="560" y="190" text-anchor="middle" fill="#93c5fd">E</text>
-    <circle cx="400" cy="250" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="400" y="255" text-anchor="middle" fill="#93c5fd">B</text>
-    <circle cx="600" cy="250" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="600" y="255" text-anchor="middle" fill="#93c5fd">D</text>
+    <circle cx="540" cy="120" r="16" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/><text x="540" y="125" text-anchor="middle" fill="#93c5fd">3</text>
+    <circle cx="480" cy="185" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="480" y="190" text-anchor="middle" fill="#93c5fd">2</text>
+    <circle cx="600" cy="185" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="600" y="190" text-anchor="middle" fill="#93c5fd">4</text>
+    <circle cx="440" cy="250" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="440" y="255" text-anchor="middle" fill="#93c5fd">1</text>
+    <circle cx="640" cy="250" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="640" y="255" text-anchor="middle" fill="#93c5fd">5</text>
   </g>
 
   <!-- binary search path arrow -->
-  <path d="M 318 158 C 400 150 470 110 484 112" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#bi-o)"/>
-  <text x="470" y="300" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">루트에서 CCW로 방향을 정하며 내려간다</text>
+  <path d="M 420 172 C 470 150 505 128 522 124" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#bi-o)"/>
+  <text x="470" y="320" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">루트에서 CCW로 방향을 정하며 내려간다</text>
 
-  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">매 걸음 껍질을 다 훑는 대신, 트리 높이만큼만 내려가면 접점이 나온다</text>
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">매 걸음 사슬을 다 훑는 대신, 트리 높이만큼만 내려가면 접점이 나온다</text>
 </svg>
