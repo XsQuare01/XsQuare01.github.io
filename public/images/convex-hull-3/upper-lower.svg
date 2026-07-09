@@ -1,0 +1,35 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">껍질을 반으로 나누기 — upper hull / lower hull</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">최좌측 점 L과 최우측 점 R이 껍질을 위아래 두 사슬로 가른다</text>
+
+  <!-- filled hull -->
+  <polygon points="120,240 250,125 400,108 525,168 590,248 445,335 255,345"
+           fill="#1e293b40" stroke="none"/>
+
+  <!-- lower hull chain (green) -->
+  <polyline points="120,240 255,345 445,335 590,248" fill="none" stroke="#34d399" stroke-width="3"/>
+  <!-- upper hull chain (blue) -->
+  <polyline points="120,240 250,125 400,108 525,168 590,248" fill="none" stroke="#3b82f6" stroke-width="3"/>
+
+  <!-- intermediate vertices -->
+  <g fill="#0f1117" stroke="#3b82f6" stroke-width="2">
+    <circle cx="250" cy="125" r="5"/><circle cx="400" cy="108" r="5"/><circle cx="525" cy="168" r="5"/>
+  </g>
+  <g fill="#0f1117" stroke="#34d399" stroke-width="2">
+    <circle cx="255" cy="345" r="5"/><circle cx="445" cy="335" r="5"/>
+  </g>
+
+  <!-- L, R -->
+  <circle cx="120" cy="240" r="8" fill="#fbbf24"/>
+  <text x="96" y="262" fill="#fbbf24" font-size="12" font-weight="700">L</text>
+  <circle cx="590" cy="248" r="8" fill="#fbbf24"/>
+  <text x="600" y="252" fill="#fbbf24" font-size="12" font-weight="700">R</text>
+
+  <!-- labels -->
+  <text x="360" y="95" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">upper hull</text>
+  <text x="350" y="372" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">lower hull</text>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">각 사슬은 x좌표에 대해 단조롭다 — 이 성질이 이진 탐색을 가능하게 한다</text>
+</svg>
