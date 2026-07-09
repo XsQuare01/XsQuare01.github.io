@@ -1,0 +1,26 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">갱신된 껍질 — p가 껍질에 들어가고 두 점이 내부로</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">접점 사이 점을 버리고 그 자리에 p를 끼우면 한 걸음이 끝난다</text>
+
+  <!-- new hull -->
+  <polygon points="130,225 235,122 360,108 606,205 360,338 208,322"
+           fill="#34d39914" stroke="#34d399" stroke-width="2.5"/>
+
+  <!-- interior (discarded) points -->
+  <g fill="#64748b">
+    <circle cx="452" cy="168" r="5"/><circle cx="470" cy="262" r="5"/>
+  </g>
+  <text x="486" y="222" fill="#94a3b8" font-size="11">내부가 된 점</text>
+
+  <!-- hull vertices -->
+  <g fill="#0f1117" stroke="#34d399" stroke-width="2">
+    <circle cx="130" cy="225" r="6"/><circle cx="235" cy="122" r="6"/><circle cx="360" cy="108" r="6"/>
+    <circle cx="360" cy="338" r="6"/><circle cx="208" cy="322" r="6"/>
+  </g>
+  <circle cx="606" cy="205" r="8" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+  <text x="618" y="209" fill="#93c5fd" font-size="13" font-weight="700">p</text>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">다음 점이 오면 이 껍질을 상대로 같은 일을 되풀이한다</text>
+</svg>

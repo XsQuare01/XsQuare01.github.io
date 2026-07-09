@@ -1,0 +1,50 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+  <defs>
+    <marker id="st-g" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Plane Sweeping 한 걸음 — 접선 두 개로 새 점 붙이기</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">새 점 p(가장 오른쪽)에서 위·아래 접선을 긋고 사이 점을 버린다</text>
+
+  <!-- sweeping line -->
+  <line x1="545" y1="70" x2="545" y2="360" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/>
+  <text x="545" y="384" text-anchor="middle" fill="#64748b" font-size="10">sweeping line</text>
+
+  <!-- current hull outline (dim) -->
+  <polygon points="130,225 235,122 360,108 452,168 470,262 360,338 208,322"
+           fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
+
+  <!-- tangents -->
+  <line x1="606" y1="205" x2="360" y2="108" stroke="#34d399" stroke-width="2.5" marker-end="url(#st-g)"/>
+  <line x1="606" y1="205" x2="360" y2="338" stroke="#34d399" stroke-width="2.5" marker-end="url(#st-g)"/>
+  <text x="470" y="135" fill="#6ee7b7" font-size="12" font-weight="600">위쪽 접선</text>
+  <text x="470" y="300" fill="#6ee7b7" font-size="12" font-weight="600">아래쪽 접선</text>
+
+  <!-- tangent points -->
+  <circle cx="360" cy="108" r="7" fill="#0f1117" stroke="#34d399" stroke-width="2.5"/>
+  <circle cx="360" cy="338" r="7" fill="#0f1117" stroke="#34d399" stroke-width="2.5"/>
+
+  <!-- kept vertices -->
+  <g fill="#0f1117" stroke="#64748b" stroke-width="2">
+    <circle cx="130" cy="225" r="5"/><circle cx="235" cy="122" r="5"/>
+    <circle cx="208" cy="322" r="5"/>
+  </g>
+
+  <!-- discarded vertices (red X) -->
+  <g stroke="#ef4444" stroke-width="2">
+    <circle cx="452" cy="168" r="7" fill="#1f2937"/>
+    <line x1="446" y1="162" x2="458" y2="174"/><line x1="458" y1="162" x2="446" y2="174"/>
+    <circle cx="470" cy="262" r="7" fill="#1f2937"/>
+    <line x1="464" y1="256" x2="476" y2="268"/><line x1="476" y1="256" x2="464" y2="268"/>
+  </g>
+  <text x="486" y="215" fill="#f87171" font-size="12" font-weight="600">버려지는 점</text>
+
+  <!-- new point p -->
+  <circle cx="606" cy="205" r="8" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+  <text x="618" y="209" fill="#93c5fd" font-size="13" font-weight="700">p</text>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">두 접점 사이, p를 마주 보는 점들은 새 경계 안쪽에 갇혀 버려진다</text>
+</svg>
