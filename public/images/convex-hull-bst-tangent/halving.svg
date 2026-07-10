@@ -1,0 +1,48 @@
+<svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="400" rx="10" fill="#0f1117"/>
+  <defs>
+    <marker id="hv-o" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#fbbf24"/>
+    </marker>
+  </defs>
+
+  <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">왜 이진 탐색인가 — 한 번 판정에 한쪽 서브트리가 사라진다</text>
+  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">후보는 트리의 한 노드 · 판정에 따라 왼/오른 자식으로 내려간다 (예: 오른쪽)</text>
+
+  <!-- edges -->
+  <g stroke="#334155" stroke-width="1.6">
+    <line x1="360" y1="95" x2="220" y2="165"/><line x1="360" y1="95" x2="500" y2="165"/>
+    <line x1="220" y1="165" x2="140" y2="235"/><line x1="220" y1="165" x2="300" y2="235"/>
+    <line x1="500" y1="165" x2="420" y2="235"/><line x1="500" y1="165" x2="580" y2="235"/>
+  </g>
+  <!-- discarded left subtree (dim) -->
+  <g font-size="12" font-weight="700" opacity="0.4">
+    <circle cx="220" cy="165" r="16" fill="#0f1117" stroke="#64748b" stroke-width="2"/><text x="220" y="170" text-anchor="middle" fill="#94a3b8">2</text>
+    <circle cx="140" cy="235" r="16" fill="#0f1117" stroke="#64748b" stroke-width="2"/><text x="140" y="240" text-anchor="middle" fill="#94a3b8">1</text>
+    <circle cx="300" cy="235" r="16" fill="#0f1117" stroke="#64748b" stroke-width="2"/><text x="300" y="240" text-anchor="middle" fill="#94a3b8">3</text>
+  </g>
+  <text x="200" y="290" text-anchor="middle" fill="#64748b" font-size="11">작은 x 쪽 서브트리 — 후보에서 버림</text>
+  <!-- active nodes -->
+  <g font-size="12" font-weight="700">
+    <circle cx="360" cy="95" r="17" fill="#1e3a5f" stroke="#fbbf24" stroke-width="2.5"/><text x="360" y="100" text-anchor="middle" fill="#fbbf24">4</text>
+    <circle cx="500" cy="165" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="500" y="170" text-anchor="middle" fill="#93c5fd">6</text>
+    <circle cx="420" cy="235" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="420" y="240" text-anchor="middle" fill="#93c5fd">5</text>
+    <circle cx="580" cy="235" r="16" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="580" y="240" text-anchor="middle" fill="#93c5fd">7</text>
+  </g>
+  <!-- go-right arrow -->
+  <line x1="382" y1="112" x2="478" y2="150" stroke="#fbbf24" stroke-width="2" marker-end="url(#hv-o)"/>
+  <text x="470" y="120" fill="#fbbf24" font-size="11" font-weight="600">오른쪽으로</text>
+
+  <!-- chain strip -->
+  <text x="60" y="330" fill="#94a3b8" font-size="11" font-weight="600">사슬(x순)</text>
+  <g>
+    <circle cx="150" cy="355" r="7" fill="#0f1117" stroke="#64748b" stroke-width="2" opacity="0.4"/><text x="150" y="378" text-anchor="middle" fill="#64748b" font-size="10" opacity="0.6">1</text>
+    <circle cx="220" cy="355" r="7" fill="#0f1117" stroke="#64748b" stroke-width="2" opacity="0.4"/><text x="220" y="378" text-anchor="middle" fill="#64748b" font-size="10" opacity="0.6">2</text>
+    <circle cx="290" cy="355" r="7" fill="#0f1117" stroke="#64748b" stroke-width="2" opacity="0.4"/><text x="290" y="378" text-anchor="middle" fill="#64748b" font-size="10" opacity="0.6">3</text>
+    <circle cx="360" cy="355" r="8" fill="#fbbf24"/><text x="360" y="378" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">4</text>
+    <circle cx="430" cy="355" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="430" y="378" text-anchor="middle" fill="#93c5fd" font-size="10">5</text>
+    <circle cx="500" cy="355" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="500" y="378" text-anchor="middle" fill="#93c5fd" font-size="10">6</text>
+    <circle cx="570" cy="355" r="7" fill="#0f1117" stroke="#3b82f6" stroke-width="2"/><text x="570" y="378" text-anchor="middle" fill="#93c5fd" font-size="10">7</text>
+  </g>
+  <text x="620" y="330" text-anchor="middle" fill="#64748b" font-size="11">높이 O(log N)</text>
+</svg>
