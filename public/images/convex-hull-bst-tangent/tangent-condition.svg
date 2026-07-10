@@ -1,8 +1,8 @@
 <svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
   <rect width="720" height="400" rx="10" fill="#0f1117"/>
   <defs>
-    <marker id="tc-up" markerWidth="9" markerHeight="9" refX="4.5" refY="8" orient="auto">
-      <path d="M4.5,0 L9,9 L0,9 Z" fill="#f87171"/>
+    <marker id="tc-up" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#f87171"/>
     </marker>
   </defs>
 
@@ -17,9 +17,9 @@
   <!-- tangent line p-4 (green) -->
   <line x1="260" y1="99" x2="650" y2="200" stroke="#34d399" stroke-width="2.5"/>
 
-  <!-- poke arrow at 5 -->
-  <line x1="430" y1="150" x2="430" y2="196" stroke="#f87171" stroke-width="2" marker-end="url(#tc-up)"/>
-  <text x="440" y="182" fill="#f87171" font-size="11" font-weight="600">이웃이 위로 → 뚫음</text>
+  <!-- poke arrow at 5: red line(430,231)에서 점 5(430,150)로 위로 -->
+  <line x1="430" y1="224" x2="430" y2="160" stroke="#f87171" stroke-width="2" marker-end="url(#tc-up)"/>
+  <text x="444" y="196" fill="#f87171" font-size="11" font-weight="600">이웃이 위로 → 뚫음</text>
 
   <!-- vertices -->
   <g fill="#0f1117" stroke="#64748b" stroke-width="2">
