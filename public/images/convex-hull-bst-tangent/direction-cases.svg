@@ -1,0 +1,42 @@
+<svg viewBox="0 0 720 400" width="1080" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="400" rx="10" fill="#0f1117"/>
+  <defs>
+    <marker id="dc-r" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#fbbf24"/>
+    </marker>
+    <marker id="dc-l" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#93c5fd"/>
+    </marker>
+  </defs>
+
+  <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">왼쪽인가 오른쪽인가 — 위로 삐져나온 이웃 쪽으로</text>
+  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">후보의 두 이웃에 CCW를 돌려, 위로 나온 이웃이 있는 방향으로 내려간다</text>
+
+  <!-- chain (dim) -->
+  <polyline points="90,300 170,210 250,150 340,120 430,150 510,220 580,300" fill="none" stroke="#334155" stroke-width="2"/>
+
+  <!-- candidate A: p-3 (amber), next 4 is above -> go right -->
+  <line x1="180" y1="141" x2="650" y2="200" stroke="#fbbf24" stroke-width="2" opacity="0.85"/>
+  <circle cx="250" cy="150" r="7" fill="#1f2937" stroke="#fbbf24" stroke-width="2.5"/>
+  <text x="238" y="172" fill="#fbbf24" font-size="12" font-weight="700">후보 A (3)</text>
+  <line x1="360" y1="118" x2="405" y2="118" stroke="#fbbf24" stroke-width="2" marker-end="url(#dc-r)"/>
+  <text x="350" y="104" fill="#fbbf24" font-size="11" font-weight="600">오른쪽 이웃(4) 위 → 오른쪽 자식</text>
+
+  <!-- candidate B: p-6 (blue), prev 5 is above -> go left -->
+  <line x1="450" y1="229" x2="650" y2="200" stroke="#93c5fd" stroke-width="2"/>
+  <circle cx="510" cy="220" r="7" fill="#1f2937" stroke="#93c5fd" stroke-width="2.5"/>
+  <text x="500" y="242" fill="#93c5fd" font-size="12" font-weight="700">후보 B (6)</text>
+  <line x1="430" y1="150" x2="385" y2="150" stroke="#93c5fd" stroke-width="2" marker-end="url(#dc-l)"/>
+  <text x="358" y="140" fill="#93c5fd" font-size="11" font-weight="600">왼쪽 이웃(5) 위 → 왼쪽 자식</text>
+
+  <!-- other vertices -->
+  <g fill="#0f1117" stroke="#64748b" stroke-width="2">
+    <circle cx="90" cy="300" r="5"/><circle cx="170" cy="210" r="5"/>
+    <circle cx="340" cy="120" r="5"/><circle cx="430" cy="150" r="5"/><circle cx="580" cy="300" r="5"/>
+  </g>
+  <!-- p -->
+  <circle cx="650" cy="200" r="8" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+  <text x="662" y="204" fill="#93c5fd" font-size="13" font-weight="700">p</text>
+
+  <text x="360" y="384" text-anchor="middle" fill="#94a3b8" font-size="12">두 이웃이 다 아래면 그 후보가 접점 — 세 갈래 판정이 겹치지 않는다</text>
+</svg>
