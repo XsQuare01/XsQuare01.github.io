@@ -232,6 +232,7 @@ const currentPath = Astro.url.pathname;
         <slot />
         <footer class="site-footer">
           <span>© {new Date().getFullYear()} XsQuare01. Powered by GitHub Pages.</span>
+          <span class="visit-count"> · 방문자 <span id="vercount_value_site_uv">–</span>명</span>
         </footer>
       </div>
       <aside class="right-panel">
@@ -268,6 +269,10 @@ const currentPath = Astro.url.pathname;
       <div id="search-results"></div>
     </div>
   </div>
+
+  {import.meta.env.PROD && (
+    <script is:inline defer src="https://events.vercount.one/js"></script>
+  )}
 </body>
 </html>
 
