@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '17 18 * * *'
   workflow_dispatch:
 
 permissions:
@@ -23,6 +25,10 @@ jobs:
         with:
           node-version: 22
       - run: npm install
+      - run: node scripts/fetch-ga-stats.mjs
+        env:
+          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
+          GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

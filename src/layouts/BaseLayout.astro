@@ -173,6 +173,7 @@ const currentPath = Astro.url.pathname;
       <a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>글 목록</a>
       <a href="/categories" class={currentPath.startsWith('/categories') ? 'active' : ''}>카테고리</a>
       <a href="/tags" class={currentPath.startsWith('/tags') ? 'active' : ''}>태그</a>
+      <a href="/stats" class={currentPath.startsWith('/stats') ? 'active' : ''}>통계</a>
     </nav>
 
     <div class="sidebar-categories">
@@ -232,6 +233,7 @@ const currentPath = Astro.url.pathname;
         <slot />
         <footer class="site-footer">
           <span>© {new Date().getFullYear()} XsQuare01. Powered by GitHub Pages.</span>
+          <span class="visit-count"> · 방문자 <span id="vercount_value_site_uv">–</span>명</span>
         </footer>
       </div>
       <aside class="right-panel">
@@ -268,6 +270,10 @@ const currentPath = Astro.url.pathname;
       <div id="search-results"></div>
     </div>
   </div>
+
+  {import.meta.env.PROD && (
+    <script is:inline defer src="https://events.vercount.one/js"></script>
+  )}
 </body>
 </html>
 

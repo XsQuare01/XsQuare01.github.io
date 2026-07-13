@@ -11,11 +11,13 @@
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.1",
     "astro": "^6.0.5",
+    "chart.js": "^4.5.1",
     "fuse.js": "^7.1.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@google-analytics/data": "^6.1.0",
     "katex": "^0.16.11"
   }
 }
