@@ -223,6 +223,10 @@ const currentPath = Astro.url.pathname;
         <span class="theme-label-dark">다크 모드</span>
       </button>
       <div style="margin-top:0.5rem;">© {new Date().getFullYear()} XsQuare01</div>
+      <div class="sidebar-visits" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.6;opacity:0.85;">
+        <div>총 방문자 <span id="vercount_value_site_uv">–</span>명</div>
+        <div>총 방문수 <span id="vercount_value_site_pv">–</span>회</div>
+      </div>
     </div>
   </aside>
 
@@ -232,7 +236,7 @@ const currentPath = Astro.url.pathname;
         <slot />
         <footer class="site-footer">
           <span>© {new Date().getFullYear()} XsQuare01. Powered by GitHub Pages.</span>
-          <span class="visit-count"> · 방문자 <span id="vercount_value_site_uv">–</span>명</span>
+          <span class="visit-count"> · 방문자 <span id="footer-visit-uv">–</span>명</span>
         </footer>
       </div>
       <aside class="right-panel">
@@ -273,6 +277,16 @@ const currentPath = Astro.url.pathname;
   {import.meta.env.PROD && (
     <script is:inline defer src="https://events.vercount.one/js"></script>
   )}
+  <script is:inline>
+    (function () {
+      var src = document.getElementById('vercount_value_site_uv');
+      var dst = document.getElementById('footer-visit-uv');
+      if (!src || !dst) return;
+      var sync = function () { dst.textContent = src.textContent; };
+      new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
+      sync();
+    })();
+  </script>
 </body>
 </html>
 

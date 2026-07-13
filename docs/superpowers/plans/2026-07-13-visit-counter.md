@@ -29,26 +29,34 @@
 - Consumes: 없음(외부 서비스 Vercount).
 - Produces: 모든 페이지 푸터의 `#vercount_value_site_uv` 요소와, 배포 빌드에만 포함되는 Vercount 스크립트.
 
-- [ ] **Step 1: 푸터에 방문자 수 표시 추가**
+- [ ] **Step 1: 사이드바(canonical) + 푸터(미러) 표시 추가**
 
-`src/layouts/BaseLayout.astro`의 `.site-footer` 블록을 찾는다:
+(A) 사이드바 `.sidebar-footer`의 © 줄을 찾는다:
+
+```astro
+      <div style="margin-top:0.5rem;">© {new Date().getFullYear()} XsQuare01</div>
+```
+
+그 아래에 canonical 두 줄을 추가한다:
+
+```astro
+      <div style="margin-top:0.5rem;">© {new Date().getFullYear()} XsQuare01</div>
+      <div class="sidebar-visits" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.6;opacity:0.85;">
+        <div>총 방문자 <span id="vercount_value_site_uv">–</span>명</div>
+        <div>총 방문수 <span id="vercount_value_site_pv">–</span>회</div>
+      </div>
+```
+
+(B) 푸터 `.site-footer`는 미러용 id(`footer-visit-uv`)로 둔다:
 
 ```astro
         <footer class="site-footer">
           <span>© {new Date().getFullYear()} XsQuare01. Powered by GitHub Pages.</span>
+          <span class="visit-count"> · 방문자 <span id="footer-visit-uv">–</span>명</span>
         </footer>
 ```
 
-다음으로 바꾼다(© 라인 뒤에 구분자 ` · `와 방문자 수 span 추가):
-
-```astro
-        <footer class="site-footer">
-          <span>© {new Date().getFullYear()} XsQuare01. Powered by GitHub Pages.</span>
-          <span class="visit-count"> · 방문자 <span id="vercount_value_site_uv">–</span>명</span>
-        </footer>
-```
-
-- [ ] **Step 2: 배포 전용 Vercount 스크립트 추가**
+- [ ] **Step 2: 배포 전용 Vercount 스크립트 + 미러 스크립트 추가**
 
 같은 파일에서 검색 모달이 닫히고 `</body>`가 나오는 부분을 찾는다:
 
@@ -59,7 +67,7 @@
 </body>
 ```
 
-`</body>` 직전에 배포 전용 스크립트를 추가한다:
+`</body>` 직전에 배포 전용 Vercount 스크립트와 (항상 렌더되는) 미러 스크립트를 추가한다:
 
 ```astro
       <div id="search-results"></div>
@@ -69,21 +77,33 @@
   {import.meta.env.PROD && (
     <script is:inline defer src="https://events.vercount.one/js"></script>
   )}
+  <script is:inline>
+    (function () {
+      var src = document.getElementById('vercount_value_site_uv');
+      var dst = document.getElementById('footer-visit-uv');
+      if (!src || !dst) return;
+      var sync = function () { dst.textContent = src.textContent; };
+      new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
+      sync();
+    })();
+  </script>
 </body>
 ```
 
-- [ ] **Step 3: 배포 빌드 검증 (스크립트 포함 확인)**
+미러 스크립트는 PROD 조건으로 감싸지 않는다(내용에 `{}`가 있어 JSX 표현식 래핑 시 파싱 충돌 위험). 개발 환경에선 `–`를 복사할 뿐 무해하다.
+
+- [ ] **Step 3: 배포 빌드 검증 (스크립트·표시 포함 확인)**
 
 Run: `npm run build`
 Expected: 빌드 성공("N page(s) built"). 오류 없음.
 
-이어서 산출물에 스크립트와 표시 요소가 들어갔는지 확인한다:
+이어서 산출물 확인:
 
 Run: `grep -rl "events.vercount.one/js" dist/ | head -1`
-Expected: 최소 한 개 HTML 파일 경로 출력(예: `dist/index.html`).
+Expected: HTML 파일 경로 출력.
 
-Run: `grep -rl "vercount_value_site_uv" dist/ | head -1`
-Expected: HTML 파일 경로 출력(표시 span 포함).
+Run: `grep -o "vercount_value_site_uv\|vercount_value_site_pv\|footer-visit-uv" dist/index.html | sort -u`
+Expected: 세 문자열 모두 출력(사이드바 UV·PV canonical + 푸터 미러 id).
 
 - [ ] **Step 4: 개발 환경 비호출 확인 (수동)**
 

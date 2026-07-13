@@ -22,8 +22,14 @@
 - **엔드포인트(명시적 선택)**: **`https://events.vercount.one/js`** 를 사용한다.
   - 근거: Vercount 공식 문서의 현재 canonical 기본 예시가 `events.vercount.one`이다. 구 `cn.vercount.one/js`도 동작할 수 있으나, 공식 canonical 주소를 따르는 편이 유지보수·문서 정합성에 유리하다.
 - **표시 ID(Vercount 전용)**: 호환 계층(`busuanzi_value_*`) 대신 **Vercount 전용 `vercount_value_site_uv`** 를 쓴다. 신규 설치이므로 호환 계층에 의존할 이유가 없다.
-- **표시 지표/범위**: **사이트 전체 UV(방문자 근삿값)** 하나. Vercount/Busuanzi 계열은 글별 UV(per-post unique)를 지원하지 않으므로(글별은 PV만), '방문자' 지표에 맞춰 사이트 전체 UV로 한다.
-- YAGNI: 글별 조회수(PV), PV 총합 등은 이번 범위에서 제외(추후 쉬운 확장으로 남김).
+- **표시 지표/범위(v3 확장)**:
+  - 사이드바 하단(`.sidebar-footer`): **총 방문자(site UV)** + **총 방문수(site PV)** 두 줄.
+  - 푸터(`.site-footer`): **총 방문자(UV)** 한 줄 유지.
+- **"오늘" 지표 제외(불가)**: Vercount는 누적 3지표(site_uv, site_pv, page_pv)만 제공하고 일별/오늘 통계가 없다. 정적 사이트라 어제 값을 저장할 백엔드도 없어 "오늘 방문자"는 이 방식(가입0)으로 구현 불가. 이번 범위에서 제외한다.
+- **Vercount id 유일성 제약 + 미러 방식**: Vercount 스크립트는 `document.getElementById`로 각 지표를 채우므로, 같은 id는 페이지에 하나만 있어야 한다(중복 시 첫 요소만 채워짐). 총 방문자(UV)를 사이드바·푸터 두 곳에 띄우기 위해:
+  - **canonical**(Vercount가 채우는 실제 id `vercount_value_site_uv`, `vercount_value_site_pv`)는 **사이드바**에 둔다.
+  - **푸터**는 미러용 비-Vercount id(`footer-visit-uv`)를 쓰고, 사이드바 UV 값을 작은 스크립트로 복사한다.
+- YAGNI: 글별 조회수(page PV) 등은 이번 범위에서 제외(추후 쉬운 확장으로 남김).
 
 ## 구현 개요
 
@@ -32,10 +38,24 @@
   - 배포: `<script is:inline defer src="https://events.vercount.one/js"></script>`
   - 위치: `</body>` 직전(본문 렌더링을 막지 않도록 `defer`). Astro가 번들·호이스트하지 않도록 `is:inline`을 붙인다.
   - 개발: 외부 스크립트를 로드하지 않고 라벨과 플레이스홀더(`–`)만 렌더링한다.
-- **표시**: `.site-footer`에 방문자 수 노출(개발/배포 공통 렌더).
-  - 예: `<span class="visit-count">방문자 <span id="vercount_value_site_uv">–</span>명</span>`
-  - 초기 텍스트 `–`(플레이스홀더)는 배포 환경에서 스크립트가 값을 채우면 대체된다.
-- **스타일**: 기존 `.site-footer` 톤에 맞춰 옅은 각주색 상속. 이모지 없이 **텍스트 전용 라벨**("방문자 … 명")로 기존 UI 관례에 맞춘다. 최소 스타일만.
+- **표시(사이드바, canonical)**: `.sidebar-footer`의 © 줄 아래에 두 줄 추가.
+  - `총 방문자 <span id="vercount_value_site_uv">–</span>명`
+  - `총 방문수 <span id="vercount_value_site_pv">–</span>회`
+- **표시(푸터, 미러)**: `.site-footer`에 `· 방문자 <span id="footer-visit-uv">–</span>명`.
+- **미러 스크립트(`is:inline`, 항상 렌더)**: `MutationObserver`로 사이드바의 `#vercount_value_site_uv` 텍스트 변화를 감지해 `#footer-visit-uv`에 복사. 개발 환경에선 둘 다 `–`라 복사도 무해. Astro 번들 방지를 위해 `is:inline`.
+  ```html
+  <script is:inline>
+    (function () {
+      var src = document.getElementById('vercount_value_site_uv');
+      var dst = document.getElementById('footer-visit-uv');
+      if (!src || !dst) return;
+      var sync = function () { dst.textContent = src.textContent; };
+      new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
+      sync();
+    })();
+  </script>
+  ```
+- **스타일**: 기존 톤에 맞춰 옅은 색 상속, 이모지 없이 텍스트 전용 라벨. 사이드바 두 줄은 인라인 스타일(작은 글자·행간)로 최소 처리, 별도 CSS 파일 변경 없음.
 
 ## 실패/엣지 처리
 
