@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import stats from '../data/visit-stats.json';
+
+const hasData = stats && Array.isArray(stats.daily) && stats.daily.length > 0;
+const isSample = !!stats?.sample;
+const updated = stats?.generatedAt
+  ? new Date(stats.generatedAt).toISOString().slice(0, 16).replace('T', ' ')
+  : '—';
+---
+
+<BaseLayout title="통계">
+  <h1 class="page-title">방문 통계</h1>
+  <p class="stats-source">GA4 · 최근 {stats?.rangeDays ?? 30}일 · 마지막 갱신: {updated}</p>
+
+  {isSample && (
+    <p class="stats-banner">샘플 데이터입니다 (GA 연결 전 또는 갱신 실패). 실제 수치가 아닙니다.</p>
+  )}
+
+  {hasData ? (
+    <>
+      <div class="stats-total">
+        최근 {stats.rangeDays}일 순 방문자 <strong>{stats.total.toLocaleString()}</strong>명
+      </div>
+      <div class="chart-wrap">
+        <canvas id="visit-chart" aria-label="최근 방문자 꺾은선 그래프" role="img"></canvas>
+      </div>
+      <script type="application/json" id="stats-data" set:html={JSON.stringify(stats)}></script>
+    </>
+  ) : (
+    <p class="stats-empty">통계를 불러올 수 없습니다.</p>
+  )}
+</BaseLayout>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  const el = document.getElementById('stats-data');
+  const canvas = document.getElementById('visit-chart') as HTMLCanvasElement | null;
+  if (el && canvas) {
+    let data: any;
+    try {
+      data = JSON.parse(el.textContent || '{}');
+    } catch {
+      data = null;
+    }
+    if (data && Array.isArray(data.daily) && data.daily.length) {
+      const root = document.documentElement;
+      const colors = () => {
+        const cs = getComputedStyle(root);
+        return {
+          accent: cs.getPropertyValue('--accent').trim() || '#3b82f6',
+          grid: cs.getPropertyValue('--border').trim() || 'rgba(148,163,184,0.2)',
+          tick: cs.getPropertyValue('--text-muted').trim() || '#94a3b8',
+        };
+      };
+      const c0 = colors();
+      const chart = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: data.daily.map((d: any) => d.date),
+          datasets: [{
+            label: '일별 방문자',
+            data: data.daily.map((d: any) => Number(d.visitors) || 0),
+            borderColor: c0.accent,
+            backgroundColor: 'rgba(59,130,246,0.15)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 2,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { maxTicksLimit: 8, color: c0.tick }, grid: { color: c0.grid } },
+            y: { beginAtZero: true, ticks: { precision: 0, color: c0.tick }, grid: { color: c0.grid } },
+          },
+        },
+      });
+      new MutationObserver(() => {
+        const c = colors();
+        chart.data.datasets[0].borderColor = c.accent;
+        chart.options.scales!.x!.ticks!.color = c.tick;
+        chart.options.scales!.y!.ticks!.color = c.tick;
+        (chart.options.scales!.x!.grid as any).color = c.grid;
+        (chart.options.scales!.y!.grid as any).color = c.grid;
+        chart.update();
+      }).observe(root, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+</script>
+
+<style>
+  .stats-source { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem; }
+  .stats-banner {
+    margin-top: 0.75rem; padding: 0.6rem 0.9rem;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-muted); font-size: 0.85rem;
+  }
+  .stats-total { margin: 1.25rem 0; font-size: 1.1rem; color: var(--text); }
+  .stats-total strong { font-size: 1.6rem; color: var(--accent); font-family: var(--font-mono); }
+  .chart-wrap {
+    position: relative; height: 320px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem;
+  }
+  .stats-empty { margin-top: 1.5rem; color: var(--text-muted); }
+  @media (max-width: 640px) { .chart-wrap { height: 260px; } }
+</style>
