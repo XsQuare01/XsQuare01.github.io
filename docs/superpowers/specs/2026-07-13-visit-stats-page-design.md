@@ -94,6 +94,10 @@
 3. 서비스 계정을 GA4 속성에 **뷰어**로 추가.
 4. GitHub Secret `GA_SERVICE_ACCOUNT_KEY`(키 JSON 전체), `GA_PROPERTY_ID`(숫자) 등록.
 
+## 확장 (구현됨)
+
+- **유입 경로(구체적 소스)**: fetch에 GA 쿼리 1개 추가 — 차원 `sessionSource`, 지표 `activeUsers`, 최근 30일 상위 8. JSON에 `sources:[{source,visitors}]` 추가. `/stats`에 "유입 경로" 섹션(소스명 + CSS 비율 막대 + 방문자 수, 순수 SSR). 데이터 없으면 섹션 숨김. (2026-07-13 추가)
+
 ## 확장 포인트 (이번 범위 밖 — 이슈 #33)
 
 - **B: 인기 글 top 5 막대차트**. fetch에 GA 호출 1개(`topPosts`) 추가, `/stats`에 막대차트 블록 추가(Chart.js 재사용). 출처·인증·갱신은 A와 동일.

@@ -12,6 +12,7 @@ const indexHtml = existsSync('dist/index.html') ? readFileSync('dist/index.html'
 must(statsHtml.includes('순 방문자'), 'SSR 총계 문구 존재');
 must(statsHtml.includes('마지막 갱신'), '마지막 갱신 표기 존재');
 must(statsHtml.includes('샘플 데이터'), '샘플 배너 존재(샘플 데이터 기준)');
+must(statsHtml.includes('유입 경로'), '유입 경로 섹션 존재');
 
 // 3) Chart.js 청크 격리: 청크 파일 중 Chart 포함본을 찾아 stats만 참조
 const astroDir = 'dist/_astro';

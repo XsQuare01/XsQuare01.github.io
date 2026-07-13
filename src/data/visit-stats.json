@@ -12,5 +12,10 @@
     { "date": "2026-07-12", "visitors": 14 },
     { "date": "2026-07-13", "visitors": 11 }
   ],
-  "total": 54
+  "total": 54,
+  "sources": [
+    { "source": "google", "visitors": 4 },
+    { "source": "(direct)", "visitors": 3 },
+    { "source": "github.com", "visitors": 1 }
+  ]
 }
