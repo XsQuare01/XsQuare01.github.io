@@ -1,0 +1,33 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">합치기 — 상·하 공통 접선으로 두 껍질을 잇는다</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">접선 바깥 사슬은 살아남고, 사이에서 마주 보는 안쪽 점은 버려진다</text>
+
+  <polygon points="100,240 140,160 225,135 290,215 250,315 150,300" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
+  <polygon points="400,215 455,130 560,155 600,255 540,300 430,320" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
+
+  <line x1="225" y1="135" x2="455" y2="130" stroke="#fbbf24" stroke-width="2.5"/>
+  <line x1="250" y1="315" x2="430" y2="320" stroke="#fbbf24" stroke-width="2.5"/>
+  <text x="335" y="118" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700">상단 공통 접선</text>
+  <text x="340" y="348" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700">하단 공통 접선</text>
+
+  <g fill="#0f1117" stroke="#64748b" stroke-width="2">
+    <circle cx="100" cy="240" r="5"/><circle cx="140" cy="160" r="5"/><circle cx="150" cy="300" r="5"/>
+    <circle cx="560" cy="155" r="5"/><circle cx="600" cy="255" r="5"/><circle cx="540" cy="300" r="5"/>
+  </g>
+  <g fill="#0f1117" stroke="#fbbf24" stroke-width="2.5">
+    <circle cx="225" cy="135" r="6"/><circle cx="455" cy="130" r="6"/>
+    <circle cx="250" cy="315" r="6"/><circle cx="430" cy="320" r="6"/>
+  </g>
+
+  <g stroke="#ef4444" stroke-width="2">
+    <circle cx="290" cy="215" r="7" fill="#1f2937"/>
+    <line x1="284" y1="209" x2="296" y2="221"/><line x1="296" y1="209" x2="284" y2="221"/>
+    <circle cx="400" cy="215" r="7" fill="#1f2937"/>
+    <line x1="394" y1="209" x2="406" y2="221"/><line x1="406" y1="209" x2="394" y2="221"/>
+  </g>
+  <text x="345" y="197" text-anchor="middle" fill="#f87171" font-size="12" font-weight="600">버려지는 안쪽 점</text>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">두 접선만 찾으면 합치기가 끝난다 — 합치기의 전부는 공통 접선 찾기다</text>
+</svg>

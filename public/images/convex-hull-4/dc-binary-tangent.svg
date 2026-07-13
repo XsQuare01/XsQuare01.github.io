@@ -1,0 +1,30 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+  <defs>
+    <marker id="db-a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#93c5fd"/>
+    </marker>
+  </defs>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">이진 탐색 접선 — 고정점에서 접점을 O(log N)에 찾는다</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">단조 사슬이라 후보의 양옆 변 방향(CCW)으로 한쪽을 버리며 내려간다</text>
+
+  <polygon points="400,215 455,130 560,155 600,255 540,300 430,320" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
+  <g fill="#0f1117" stroke="#3b82f6" stroke-width="2">
+    <circle cx="400" cy="215" r="5"/><circle cx="455" cy="130" r="5"/><circle cx="560" cy="155" r="5"/>
+    <circle cx="600" cy="255" r="5"/><circle cx="540" cy="300" r="5"/><circle cx="430" cy="320" r="5"/>
+  </g>
+
+  <line x1="150" y1="240" x2="560" y2="155" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="572" y="150" fill="#64748b" font-size="10" font-weight="600">mid — 더 위로</text>
+
+  <line x1="150" y1="240" x2="455" y2="130" stroke="#93c5fd" stroke-width="2.6" marker-end="url(#db-a)"/>
+
+  <circle cx="150" cy="240" r="8" fill="#34d399"/>
+  <text x="150" y="223" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">고정점 a</text>
+
+  <circle cx="455" cy="130" r="7" fill="#0f1117" stroke="#93c5fd" stroke-width="2.6"/>
+  <text x="455" y="115" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="700">접점</text>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">고정점을 O(log N)번 옮기면 공통 접선이 O(log²N) — 총복잡도는 merge O(N)에 묶여 그대로</text>
+</svg>

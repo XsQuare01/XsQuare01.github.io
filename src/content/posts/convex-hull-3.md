@@ -116,7 +116,7 @@ Plane Sweeping은 점을 모두 안다고 가정하고 껍질을 **한 번** 만
 <div class="callout">
 <div class="callout-title">이어지는 글</div>
 
-4편에서는 같은 $O(N \log N)$을 전혀 다른 길로 얻는다. 점들을 절반으로 갈라 각각의 껍질을 재귀로 구한 뒤, 두 껍질을 **공통 접선(common tangent)** 으로 잇는 **Divide and Conquer**다. 정렬에서 본 merge sort의 재귀 구조가 기하에서 어떻게 다시 나타나는지 살펴본다.
+[4편](/blog/convex-hull-4)에서는 같은 $O(N \log N)$을 전혀 다른 길로 얻는다. 점들을 절반으로 갈라 각각의 껍질을 재귀로 구한 뒤, 두 껍질을 **공통 접선(common tangent)** 으로 잇는 **Divide and Conquer**다. 정렬에서 본 merge sort의 재귀 구조가 기하에서 어떻게 다시 나타나는지 살펴본다.
 
 계산 기하의 다른 문제인 [가장 가까운 점 쌍](/blog/closest-pair-1)도 함께 보면 좋다.
 

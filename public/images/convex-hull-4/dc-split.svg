@@ -1,0 +1,25 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">나누기 — 점을 절반으로 갈라 각각의 껍질을 구한다</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">x좌표 중앙을 기준으로 왼쪽 절반과 오른쪽 절반</text>
+
+  <line x1="345" y1="70" x2="345" y2="360" stroke="#475569" stroke-width="1.3" stroke-dasharray="6 5"/>
+  <text x="345" y="382" text-anchor="middle" fill="#64748b" font-size="10">x 중앙</text>
+
+  <polygon points="100,240 140,160 225,135 290,215 250,315 150,300" fill="#34d39918" stroke="#34d399" stroke-width="2.5"/>
+  <g fill="#0f1117" stroke="#34d399" stroke-width="2">
+    <circle cx="100" cy="240" r="5"/><circle cx="140" cy="160" r="5"/><circle cx="225" cy="135" r="5"/>
+    <circle cx="290" cy="215" r="5"/><circle cx="250" cy="315" r="5"/><circle cx="150" cy="300" r="5"/>
+  </g>
+  <text x="190" y="245" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">왼쪽 껍질</text>
+
+  <polygon points="400,215 455,130 560,155 600,255 540,300 430,320" fill="#3b82f618" stroke="#3b82f6" stroke-width="2.5"/>
+  <g fill="#0f1117" stroke="#3b82f6" stroke-width="2">
+    <circle cx="400" cy="215" r="5"/><circle cx="455" cy="130" r="5"/><circle cx="560" cy="155" r="5"/>
+    <circle cx="600" cy="255" r="5"/><circle cx="540" cy="300" r="5"/><circle cx="430" cy="320" r="5"/>
+  </g>
+  <text x="500" y="250" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">오른쪽 껍질</text>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">두 껍질은 x좌표로 완전히 분리돼 있다 — 이제 하나로 합친다</text>
+</svg>
