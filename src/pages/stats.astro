@@ -7,6 +7,9 @@ const isSample = !!stats?.sample;
 const updated = stats?.generatedAt
   ? new Date(stats.generatedAt).toISOString().slice(0, 16).replace('T', ' ')
   : '—';
+
+const sources = Array.isArray(stats?.sources) ? stats.sources : [];
+const maxSrc = sources.reduce((m, s) => Math.max(m, s.visitors), 0) || 1;
 ---
 
 <BaseLayout title="통계">
@@ -29,6 +32,21 @@ const updated = stats?.generatedAt
     </>
   ) : (
     <p class="stats-empty">통계를 불러올 수 없습니다.</p>
+  )}
+
+  {sources.length > 0 && (
+    <section class="sources">
+      <h2 class="sources-title">유입 경로 <span class="sources-sub">최근 {stats.rangeDays}일 · 방문자 기준</span></h2>
+      <ul class="source-list">
+        {sources.map((s) => (
+          <li class="source-row">
+            <span class="source-name" title={s.source}>{s.source}</span>
+            <span class="source-track"><span class="source-fill" style={`width:${Math.round((s.visitors / maxSrc) * 100)}%`}></span></span>
+            <span class="source-count">{s.visitors}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   )}
 </BaseLayout>
 
@@ -108,5 +126,25 @@ const updated = stats?.generatedAt
     border-radius: 10px; padding: 1rem;
   }
   .stats-empty { margin-top: 1.5rem; color: var(--text-muted); }
+
+  .sources { margin-top: 2rem; }
+  .sources-title { font-size: 1.15rem; color: var(--text); }
+  .sources-sub { font-size: 0.82rem; color: var(--text-muted); font-weight: 400; margin-left: 0.4rem; }
+  .source-list { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .source-row {
+    display: grid; grid-template-columns: minmax(72px, 28%) 1fr auto;
+    align-items: center; gap: 0.75rem; font-size: 0.9rem;
+  }
+  .source-name {
+    color: var(--text); font-family: var(--font-mono);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .source-track {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 6px; height: 12px; overflow: hidden;
+  }
+  .source-fill { display: block; height: 100%; background: var(--accent); }
+  .source-count { color: var(--text-muted); font-family: var(--font-mono); text-align: right; min-width: 2ch; }
+
   @media (max-width: 640px) { .chart-wrap { height: 260px; } }
 </style>

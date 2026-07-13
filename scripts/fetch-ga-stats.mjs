@@ -40,15 +40,30 @@ try {
   });
   const total = Number(totalResp.rows?.[0]?.metricValues?.[0]?.value ?? 0);
 
+  // (3) 유입 경로 — 구체적 소스 상위 8 (방문자 기준)
+  const [srcResp] = await client.runReport({
+    property,
+    dateRanges,
+    dimensions: [{ name: 'sessionSource' }],
+    metrics: [{ name: 'activeUsers' }],
+    orderBys: [{ metric: { metricName: 'activeUsers' }, desc: true }],
+    limit: 8,
+  });
+  const sources = (srcResp.rows ?? []).map((r) => ({
+    source: r.dimensionValues[0].value,
+    visitors: Number(r.metricValues[0].value),
+  }));
+
   const out = {
     source: 'GA4',
     rangeDays: 30,
     generatedAt: new Date().toISOString(),
     daily,
     total,
+    sources,
   };
   writeFileSync(OUT, JSON.stringify(out, null, 2));
-  console.log(`[ga-stats] ${daily.length}일, 30일 순 방문자 ${total} 기록`);
+  console.log(`[ga-stats] ${daily.length}일, 30일 순 방문자 ${total}, 유입 소스 ${sources.length}개 기록`);
 } catch (e) {
   console.warn('[ga-stats] 조회 실패 — 기존 파일 유지:', e.message);
   process.exit(0); // 비치명적: 배포 계속
