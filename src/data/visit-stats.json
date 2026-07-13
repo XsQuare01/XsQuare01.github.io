@@ -17,5 +17,10 @@
     { "source": "google", "visitors": 4 },
     { "source": "(direct)", "visitors": 3 },
     { "source": "github.com", "visitors": 1 }
+  ],
+  "posts": [
+    { "path": "/blog/convex-hull-4", "views": 20 },
+    { "path": "/blog/convex-hull-3", "views": 14 },
+    { "path": "/blog/closest-pair-1", "views": 9 }
   ]
 }

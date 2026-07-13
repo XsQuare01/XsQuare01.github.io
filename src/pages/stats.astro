@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import stats from '../data/visit-stats.json';
+
+const allPosts = await getCollection('posts');
+const titleBySlug = new Map(allPosts.map((p) => [p.id, p.data.title]));
 
 const hasData = stats && Array.isArray(stats.daily) && stats.daily.length > 0;
 const isSample = !!stats?.sample;
@@ -10,6 +14,13 @@ const updated = stats?.generatedAt
 
 const sources = Array.isArray(stats?.sources) ? stats.sources : [];
 const maxSrc = sources.reduce((m, s) => Math.max(m, s.visitors), 0) || 1;
+
+const rawPosts = Array.isArray(stats?.posts) ? stats.posts : [];
+const postRows = rawPosts.map((p) => {
+  const slug = String(p.path).replace(/^\/blog\//, '').replace(/\/$/, '');
+  return { slug, title: titleBySlug.get(slug) || slug, views: p.views };
+});
+const maxPost = postRows.reduce((m, p) => Math.max(m, p.views), 0) || 1;
 ---
 
 <BaseLayout title="통계">
@@ -32,6 +43,21 @@ const maxSrc = sources.reduce((m, s) => Math.max(m, s.visitors), 0) || 1;
     </>
   ) : (
     <p class="stats-empty">통계를 불러올 수 없습니다.</p>
+  )}
+
+  {postRows.length > 0 && (
+    <section class="sources">
+      <h2 class="sources-title">인기 글 <span class="sources-sub">최근 {stats.rangeDays}일 · 조회수 기준</span></h2>
+      <ul class="source-list">
+        {postRows.map((p) => (
+          <li class="source-row">
+            <a class="source-name post-link" href={`/blog/${p.slug}`} title={p.title}>{p.title}</a>
+            <span class="source-track"><span class="source-fill" style={`width:${Math.round((p.views / maxPost) * 100)}%`}></span></span>
+            <span class="source-count">{p.views}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   )}
 
   {sources.length > 0 && (
@@ -139,6 +165,8 @@ const maxSrc = sources.reduce((m, s) => Math.max(m, s.visitors), 0) || 1;
     color: var(--text); font-family: var(--font-mono);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
+  .post-link { color: var(--text); text-decoration: none; }
+  .post-link:hover { color: var(--accent); text-decoration: underline; }
   .source-track {
     background: var(--bg-card); border: 1px solid var(--border);
     border-radius: 6px; height: 12px; overflow: hidden;
