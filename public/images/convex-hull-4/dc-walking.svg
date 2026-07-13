@@ -9,8 +9,8 @@
   <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">선형 워킹 — 포인터를 전진시켜 하단 공통 접선을 좁힌다</text>
   <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">왼쪽 최우점·오른쪽 최좌점에서 시작해 더 내려갈 수 없을 때까지 전진</text>
 
-  <polygon points="100,240 140,160 225,135 290,215 250,315 150,330" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
-  <polygon points="400,215 455,130 560,155 600,255 540,335 430,320" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
+  <polygon points="100,240 140,160 225,135 290,215 250,315 150,300" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
+  <polygon points="400,215 455,130 560,155 600,255 540,300 430,320" fill="#1e293b30" stroke="#334155" stroke-width="1.6"/>
 
   <line x1="290" y1="215" x2="400" y2="215" stroke="#64748b" stroke-width="1.6" stroke-dasharray="5 4"/>
   <text x="345" y="207" text-anchor="middle" fill="#64748b" font-size="10">시작 직선</text>
