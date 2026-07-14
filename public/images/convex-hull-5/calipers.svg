@@ -9,8 +9,8 @@
   <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Rotating Calipers 한 걸음</text>
   <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">더 작은 각도로 벌어진 쪽 포인터를 다음 꼭짓점으로 전진</text>
 
-  <line x1="470" y1="90" x2="650" y2="330" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="70" y1="180" x2="250" y2="420" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <line x1="470" y1="87" x2="650" y2="327" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <line x1="70" y1="193" x2="240" y2="420" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
 
   <polygon points="150,300 120,190 230,110 400,100 540,180 560,300 350,360" fill="#1e293b40" stroke="#334155" stroke-width="1.6"/>
 
