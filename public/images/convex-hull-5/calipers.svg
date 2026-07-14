@@ -1,0 +1,32 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+  <defs>
+    <marker id="cl-a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Rotating Calipers 한 걸음</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">더 작은 각도로 벌어진 쪽 포인터를 다음 꼭짓점으로 전진</text>
+
+  <line x1="470" y1="90" x2="650" y2="330" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <line x1="70" y1="180" x2="250" y2="420" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
+
+  <polygon points="150,300 120,190 230,110 400,100 540,180 560,300 350,360" fill="#1e293b40" stroke="#334155" stroke-width="1.6"/>
+
+  <circle cx="540" cy="180" r="7" fill="#0f1117" stroke="#34d399" stroke-width="2.6"/>
+  <circle cx="150" cy="300" r="7" fill="#0f1117" stroke="#34d399" stroke-width="2.6"/>
+  <text x="556" y="176" fill="#6ee7b7" font-size="12" font-weight="700">포인터 i</text>
+  <text x="150" y="322" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="700">포인터 j</text>
+
+  <path d="M540,180 Q560,245 555,292" fill="none" stroke="#64748b" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <path d="M150,300 Q128,250 123,198" fill="none" stroke="#34d399" stroke-width="2" marker-end="url(#cl-a)" stroke-dasharray="4 3"/>
+  <text x="95" y="235" fill="#6ee7b7" font-size="11" font-weight="600">전진</text>
+
+  <g fill="#0f1117" stroke="#3b82f6" stroke-width="2">
+    <circle cx="120" cy="190" r="5"/><circle cx="230" cy="110" r="5"/><circle cx="400" cy="100" r="5"/>
+    <circle cx="560" cy="300" r="5"/><circle cx="350" cy="360" r="5"/>
+  </g>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">두 포인터가 한 바퀴 도는 동안 만난 대척점 쌍 거리만 비교 — O(N)</text>
+</svg>

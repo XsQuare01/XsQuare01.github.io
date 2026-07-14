@@ -1,0 +1,27 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">평행선 회전과 대척점 쌍 (antipodal pair)</text>
+  <text x="340" y="50" text-anchor="middle" fill="#64748b" font-size="11">평행한 두 지지선이 닿는 두 점. 각도를 돌리며 이 쌍만 훑는다</text>
+
+  <line x1="70" y1="100" x2="610" y2="100" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <line x1="70" y1="360" x2="610" y2="360" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <text x="620" y="104" fill="#93c5fd" font-size="10">지지선</text>
+  <text x="620" y="364" fill="#93c5fd" font-size="10">지지선</text>
+
+  <polygon points="150,300 120,190 230,110 400,100 540,180 560,300 350,360" fill="#1e293b40" stroke="#334155" stroke-width="1.6"/>
+
+  <line x1="400" y1="100" x2="350" y2="360" stroke="#fbbf24" stroke-width="2.4" stroke-dasharray="6 4"/>
+  <g fill="#0f1117" stroke="#fbbf24" stroke-width="2.6">
+    <circle cx="400" cy="100" r="6"/><circle cx="350" cy="360" r="6"/>
+  </g>
+  <text x="300" y="235" text-anchor="end" fill="#fbbf24" font-size="12" font-weight="700">대척점 쌍</text>
+  <text x="300" y="252" text-anchor="end" fill="#94a3b8" font-size="11">(이 각도의 지름 후보)</text>
+
+  <g fill="#0f1117" stroke="#3b82f6" stroke-width="2">
+    <circle cx="150" cy="300" r="5"/><circle cx="120" cy="190" r="5"/>
+    <circle cx="540" cy="180" r="5"/><circle cx="560" cy="300" r="5"/>
+  </g>
+
+  <text x="340" y="404" text-anchor="middle" fill="#94a3b8" font-size="12">가장 먼 쌍은 어떤 각도에서 반드시 대척점 쌍으로 나타난다</text>
+</svg>
