@@ -24,6 +24,9 @@ const maxPost = postRows.reduce((m, p) => Math.max(m, p.views), 0) || 1;
 ---
 
 <BaseLayout title="통계">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
   <h1 class="page-title">방문 통계</h1>
   <p class="stats-source">GA4 · 최근 {stats?.rangeDays ?? 30}일 · 마지막 갱신: {updated}</p>
 

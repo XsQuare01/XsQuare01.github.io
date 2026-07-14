@@ -5,12 +5,29 @@ import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 
 const BLOG_POST_PATH = /^\/blog\/[^/]+\/?$/;
 
+// 본문 이미지에 lazy-load / async decoding을 부여해 로딩 성능(Core Web Vitals) 개선
+function rehypeLazyImages() {
+  return (tree) => {
+    const walk = (node) => {
+      if (node.tagName === 'img') {
+        node.properties = node.properties || {};
+        if (!('loading' in node.properties)) node.properties.loading = 'lazy';
+        if (!('decoding' in node.properties)) node.properties.decoding = 'async';
+      }
+      if (node.children) node.children.forEach(walk);
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://xsquare01.github.io',
   integrations: [
     sitemap({
       changefreq: ChangeFreqEnum.WEEKLY,
       priority: 0.7,
+      // 통계 유틸리티 페이지는 검색 색인 대상이 아니므로 사이트맵에서 제외
+      filter: (page) => !page.endsWith('/stats/') && !page.endsWith('/stats'),
       serialize(item) {
         const { pathname } = new URL(item.url);
 
@@ -35,7 +52,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [rehypeKatex, rehypeLazyImages],
     shikiConfig: {
       themes: {
         light: 'github-light',
