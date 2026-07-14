@@ -1,7 +1,7 @@
 ---
 title: "추가 설명 — 왜 하필 5개로 나누는가"
 date: 2026-06-29T09:02:00
-description: "median of medians가 그룹을 5개로 나누는 이유. 그룹 크기 g를 일반화해 두 부분문제 S(n/g)와 S(보장 못 한 나머지)의 비율 합이 1보다 작아야 선형이 됨을 보인다. g=3은 합이 1이 되어 깨지고, g=5는 0.2+0.7=0.9로 성립하며, g=7은 되지만 그룹 정렬 비용만 는다."
+description: "median of medians가 그룹을 5개로 나누는 이유. 그룹 크기 g를 일반화해 두 부분문제 비율의 합이 1보다 작아야 선형임을 보인다. g=3은 합이 1이라 깨지고, g=5는 0.9로 성립하며, g=7은 되지만 그룹 정렬 비용만 는다."
 tags: ["Algorithm", "Selection", "Median of Medians", "추가 설명"]
 category: algorithm
 difficulty: 고급

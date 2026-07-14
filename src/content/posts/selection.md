@@ -1,7 +1,7 @@
 ---
 title: "선택 문제 — k번째 원소를 정렬 없이 O(n)에 찾기"
 date: 2026-06-29T09:00:00
-description: "k번째로 작은 원소를 찾는 선택 문제. 정렬하면 O(n log n)이지만 선택은 정렬보다 쉬운 문제다. quick sort의 분할을 재활용해 한쪽으로만 재귀하는 quickselect를 보고, 최악 O(n²)을 없애기 위해 approximate median(가운데 40%)을 5개씩 묶어 찾는 median of medians로 최악에도 O(n)임을 증명한다."
+description: "k번째로 작은 원소를 찾는 선택 문제. 정렬은 O(n log n)이지만 선택은 더 쉽다. quick sort의 분할을 재활용한 quickselect를 보고, 최악 O(n²)을 없애려 5개씩 묶는 median of medians로 최악에도 O(n)임을 증명한다."
 tags: ["Algorithm", "Selection", "Quickselect", "Median of Medians", "Linear Time"]
 category: algorithm
 difficulty: 심화

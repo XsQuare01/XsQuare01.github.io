@@ -1,7 +1,7 @@
 ---
 title: "Prim·Kruskal은 모든 MST를 찾을 수 있는가"
 date: 2026-05-27T10:00:00
-description: "같은 그래프에 여러 MST가 존재할 수 있다. 가중치 동률 간선이 있을 때 Prim의 시작점과 tie-breaking, Kruskal의 정렬 순서가 어떻게 다른 MST를 만드는지 살펴본다. Stable Sort 개념을 거쳐 알고리즘이 모든 가능한 MST를 찾을 수 있음을 교환 논법으로 증명하고, 가중치가 모두 다르면 MST가 유일하다는 결론을 끌어낸다."
+description: "같은 그래프에 여러 MST가 나올 수 있다. 가중치 동률 간선에서 Prim의 시작점·tie-breaking과 Kruskal의 정렬 순서가 다른 MST를 만드는 과정을 보고, 가중치가 모두 다르면 MST가 유일함을 교환 논법으로 증명한다."
 tags: ["Algorithm", "Graph", "MST", "Greedy"]
 category: algorithm
 difficulty: 고급

@@ -1,7 +1,7 @@
 ---
 title: "볼록 껍질 ① — 정의, CCW, 그리고 Package Wrapping"
 date: 2026-07-07T09:00:00
-description: "평면에 흩어진 점들을 모두 감싸는 가장 작은 볼록 다각형, 볼록 껍질(convex hull)을 구한다. 모든 선분을 검사하는 O(N³) 브루트포스에서 출발해, 세 점의 회전 방향을 정수 연산만으로 판정하는 CCW를 유도하고, 이를 이용해 포장지로 감싸듯 껍질을 한 변씩 찾아가는 Package Wrapping(O(NH))까지 다룬다."
+description: "평면의 점들을 모두 감싸는 가장 작은 볼록 다각형, 볼록 껍질(convex hull)을 구한다. O(N³) 브루트포스에서 출발해 세 점의 회전 방향을 정수 연산으로 판정하는 CCW를 유도하고, 포장지로 감싸듯 껍질을 찾는 Package Wrapping(O(NH))까지 다룬다."
 tags: ["Algorithm", "Convex Hull", "Computational Geometry", "CCW"]
 category: algorithm
 difficulty: 중급

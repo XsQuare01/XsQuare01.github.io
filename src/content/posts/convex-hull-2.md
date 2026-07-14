@@ -1,7 +1,7 @@
 ---
 title: "볼록 껍질 ② — Graham Scan과 정렬 하한"
 date: 2026-07-08T09:00:00
-description: "Package Wrapping은 걸음마다 남은 점 전체를 다시 훑어 최악 O(N²)이다. Graham Scan은 기준점에서 각도 정렬을 한 번만 한 뒤, 스택으로 좌회전만 남기며 훑어 O(N log N)에 볼록 껍질을 구한다. 나아가 정렬 문제를 볼록 껍질로 환원해, 비교 기반 모델에서는 이보다 빠를 수 없다는 Ω(N log N) 하한까지 확인한다."
+description: "Package Wrapping은 걸음마다 점 전체를 훑어 최악 O(N²)이다. Graham Scan은 각도 정렬 한 번 뒤 스택으로 좌회전만 남겨 O(N log N)에 볼록 껍질을 구한다. 정렬을 볼록 껍질로 환원해 Ω(N log N) 하한까지 확인한다."
 tags: ["Algorithm", "Convex Hull", "Computational Geometry", "Graham Scan"]
 category: algorithm
 difficulty: 중급

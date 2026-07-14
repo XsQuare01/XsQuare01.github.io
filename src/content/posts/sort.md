@@ -1,7 +1,7 @@
 ---
 title: "정렬 알고리즘 — Selection / Merge / Quick"
 date: 2026-05-18T08:00:00
-description: "selection sort, merge sort, quick sort의 동작 원리를 코드 수준에서 살펴보고, 각 정렬의 올바름을 루프 불변식과 수학적 귀납법으로 증명한다. 시간 복잡도 O(n²), O(n log n), 최악 O(n²)/평균 O(n log n)의 차이가 어디서 오는지 정리한다."
+description: "selection·merge·quick sort의 동작 원리를 코드 수준에서 보고, 각 정렬의 올바름을 루프 불변식과 귀납법으로 증명한다. 시간 복잡도 O(n²)·O(n log n)·평균 O(n log n)의 차이가 어디서 오는지 정리한다."
 tags: ["Algorithm", "Sorting", "Selection Sort", "Merge Sort", "Quick Sort"]
 category: algorithm
 difficulty: 초급

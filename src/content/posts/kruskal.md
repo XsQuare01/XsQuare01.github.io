@@ -1,7 +1,7 @@
 ---
 title: "Kruskal 알고리즘 — 그리디로 MST를 만든다"
 date: 2026-05-26T10:00:00
-description: "Kruskal 알고리즘으로 최소 신장 트리(MST)를 구성하는 과정을 따라간다. 가장 작은 엣지부터 그리디하게 선택하는 단순한 전략이 왜 최적해를 보장하는지 컷(cut) 기반 교환 논법으로 증명하고, Union-Find로 사이클 검사를 거의 상수 시간에 처리해 전체 O(m log m)으로 마무리한다."
+description: "Kruskal 알고리즘으로 최소 신장 트리(MST)를 구성한다. 가장 작은 엣지부터 그리디하게 고르는 전략이 왜 최적인지 컷 기반 교환 논법으로 증명하고, Union-Find로 사이클 검사를 거의 상수 시간에 처리해 O(m log m)으로 마무리한다."
 tags: ["Algorithm", "Graph", "MST", "Greedy"]
 category: algorithm
 difficulty: 중급
