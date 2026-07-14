@@ -1,7 +1,7 @@
 ---
 title: "추가 설명 — 균형 이진 탐색 트리는 어떻게 y로 정렬하고 구간을 찾는가"
 date: 2026-07-02T09:01:00
-description: "가장 가까운 점 쌍 ③에서 활성 집합을 떠받친 '균형 이진 탐색 트리'(std::set)의 안을 들여다본다. 왜 정렬 배열·연결 리스트가 아니라 균형 BST인지, y를 키로 두면 왜 트리가 곧 y정렬이 되는지, 그리고 [y-D, y+D] 구간을 어떻게 O(log n + 조회 개수)에 찾아내는지, BST 순서 규칙 하나로 풀어 본다."
+description: "가장 가까운 점 쌍 ③에서 활성 집합을 떠받친 균형 BST(std::set)의 내부를 본다. 왜 정렬 배열·연결 리스트가 아닌 균형 BST인지, y를 키로 두면 왜 트리가 곧 y정렬인지, [y-D, y+D] 구간을 O(log n + 개수)에 찾는 원리를 짚는다."
 tags: ["Algorithm", "Closest Pair", "Binary Search Tree", "추가 설명"]
 category: algorithm
 difficulty: 고급

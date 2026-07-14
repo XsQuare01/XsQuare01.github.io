@@ -1,7 +1,7 @@
 ---
 title: "가장 가까운 점 쌍 ③ — Plane Sweeping과 균형 이진 탐색 트리"
 date: 2026-07-02T09:00:00
-description: "2편과 같은 O(n log n)에 전혀 다른 시선으로 닿는다. 점들을 x좌표 순으로 훑으며, 현재 위치에서 폭 D 안의 점만 균형 이진 탐색 트리(std::set)에 담아 두는 Plane Sweeping. 창의 왼쪽은 밀어내고, y좌표로 [y-D, y+D] 구간만 조회한다. 조회되는 후보가 상수 개임을 보이고, 전체가 O(n log n)임을 유도한다."
+description: "2편과 같은 O(n log n)에 다른 시선으로 닿는다. 점을 x좌표 순으로 훑으며 폭 D 안의 점만 균형 BST(std::set)에 담는 Plane Sweeping으로, y좌표 [y-D, y+D] 구간만 조회한다. 후보가 상수 개임을 보여 전체 O(n log n)을 유도한다."
 tags: ["Algorithm", "Closest Pair", "Plane Sweeping", "Computational Geometry"]
 category: algorithm
 difficulty: 고급

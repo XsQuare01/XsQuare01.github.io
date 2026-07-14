@@ -1,7 +1,7 @@
 ---
 title: "추가 설명 — 균형 트리에서 접선을 O(log N)에 찾기"
 date: 2026-07-10T09:00:00
-description: "볼록 껍질 ③이 미뤄둔 부분을 채운다. x좌표로 정렬된 볼록 사슬을 균형 트리에 담아 두면, 외부 점에서 그은 접선의 접점을 어떻게 O(log N)에 찾는가. 후보 꼭짓점의 두 이웃 변에 CCW를 돌려 왼쪽·오른쪽·여기를 가르는 방향 판정과, 그것이 왜 이진 탐색이 되는지를 그림으로 따라간다."
+description: "볼록 껍질 ③이 미뤄둔 부분. x좌표로 정렬된 볼록 사슬을 균형 트리에 담아, 외부 점에서 그은 접선의 접점을 O(log N)에 찾는 법. 후보 꼭짓점의 두 이웃 변에 CCW를 돌려 방향을 판정하고, 그것이 왜 이진 탐색이 되는지 따라간다."
 tags: ["Algorithm", "Convex Hull", "Computational Geometry", "추가 설명"]
 category: algorithm
 difficulty: 고급
