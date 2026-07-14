@@ -54,6 +54,26 @@ try {
     visitors: Number(r.metricValues[0].value),
   }));
 
+  // (4) 인기 글 — /blog/ 경로 조회수 상위 8
+  const [postResp] = await client.runReport({
+    property,
+    dateRanges,
+    dimensions: [{ name: 'pagePath' }],
+    metrics: [{ name: 'screenPageViews' }],
+    dimensionFilter: {
+      filter: {
+        fieldName: 'pagePath',
+        stringFilter: { matchType: 'BEGINS_WITH', value: '/blog/' },
+      },
+    },
+    orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
+    limit: 8,
+  });
+  const posts = (postResp.rows ?? []).map((r) => ({
+    path: r.dimensionValues[0].value,
+    views: Number(r.metricValues[0].value),
+  }));
+
   const out = {
     source: 'GA4',
     rangeDays: 30,
@@ -61,9 +81,10 @@ try {
     daily,
     total,
     sources,
+    posts,
   };
   writeFileSync(OUT, JSON.stringify(out, null, 2));
-  console.log(`[ga-stats] ${daily.length}일, 30일 순 방문자 ${total}, 유입 소스 ${sources.length}개 기록`);
+  console.log(`[ga-stats] ${daily.length}일, 30일 순 방문자 ${total}, 유입 소스 ${sources.length}개, 인기 글 ${posts.length}개 기록`);
 } catch (e) {
   console.warn('[ga-stats] 조회 실패 — 기존 파일 유지:', e.message);
   process.exit(0); // 비치명적: 배포 계속
