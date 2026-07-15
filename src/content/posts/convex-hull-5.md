@@ -117,6 +117,6 @@ for (int i = 0; i < H; i++) {
 
 다섯 편에 걸쳐 볼록 껍질을 **구하는 네 가지 길**(Package Wrapping · Graham Scan · Plane Sweeping · 분할 정복)과, 그렇게 구한 껍질을 **도구로 쓰는 법**(가장 먼 두 점)을 살펴봤다. 껍질은 그 자체가 답인 동시에, 여러 기하 문제를 푸는 발판이다.
 
-Rotating Calipers의 엣지 케이스(평행 변·대척점 쌍의 정확한 열거)는 곧 이어질 **추가 설명** 글에서 마저 다룬다. 계산 기하의 이웃 문제인 [가장 가까운 점 쌍](/blog/closest-pair-1)도 함께 보면 좋다.
+Rotating Calipers의 엣지 케이스(평행 변·대척점 쌍의 정확한 열거)는 [추가 설명](/blog/convex-hull-calipers-edge) 글에서 마저 다룬다. 계산 기하의 이웃 문제인 [가장 가까운 점 쌍](/blog/closest-pair-1)도 함께 보면 좋다.
 
 </div>
