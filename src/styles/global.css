@@ -2,52 +2,54 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.25);
+  background: var(--amber-soft);
   color: var(--text);
 }
 ::-moz-selection {
-  background: rgba(249, 115, 22, 0.25);
+  background: var(--amber-soft);
   color: var(--text);
 }
 
 :focus { outline: none; }
 :focus-visible {
-  outline: 2px solid rgba(249, 115, 22, 0.6);
+  outline: 2px solid var(--amber);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 :root {
-  --bg: #0f1117;
-  --bg-sidebar: #141720;
-  --bg-card: #1a2035;
-  --bg-hover: rgba(255, 255, 255, 0.04);
-  --text: #f0f6fc;
-  --text-muted: #a0aec0;
-  --text-dim: #6b7a99;
-  --border: #4a5568;
-  --accent: #f97316;
-  --accent-dim: rgba(249, 115, 22, 0.15);
-  --accent-2: #38bdf8;
-  --accent-3: #a78bfa;
+  --paper: #faf8f3;
+  --ink: #22201b;
+  --ink-soft: #5c574d;
+  --ink-faint: #918a7b;
+  --rule: #e2dccf;
+
+  --amber: #b56a1a;
+  --amber-soft: rgba(181, 106, 26, 0.10);
+  --term-amber: #d99b4e;
+
+  --term-bg: #15171c;
+  --term-fg: #cdd3cc;
+  --term-dim: #6a7069;
+  --term-green: #6fc07a;
+
+  /* 하위 호환 별칭: 기존 셀렉터가 참조하던 이름 → 새 팔레트로 매핑 */
+  --bg: var(--paper);
+  --bg-card: #f1ece0;
+  --bg-hover: rgba(34, 32, 27, 0.05);
+  --text: var(--ink);
+  --text-muted: var(--ink-soft);
+  --text-dim: var(--ink-faint);
+  --border: var(--rule);
+  --accent: var(--amber);
+  --accent-dim: var(--amber-soft);
+  --accent-2: var(--amber);
+  --accent-3: var(--amber);
+
   --sidebar-width: 224px;
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
-}
-
-html.light {
-  --bg: #f7f8fc;
-  --bg-sidebar: #eef0f7;
-  --bg-card: #ffffff;
-  --bg-hover: rgba(0, 0, 0, 0.04);
-  --text: #1a1f2e;
-  --text-muted: #4a5568;
-  --text-dim: #8896a8;
-  --border: #c8d0de;
-  --accent: #e8650f;
-  --accent-dim: rgba(232, 101, 15, 0.1);
-  --accent-2: #0284c7;
-  --accent-3: #7c3aed;
+  --font-serif: 'Nanum Myeongjo', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, monospace;
 }
 
 html {
@@ -74,8 +76,6 @@ html {
 body {
   display: flex;
   min-height: 100vh;
-  background-image: radial-gradient(ellipse 80% 60% at 60% 0%, rgba(249, 115, 22, 0.04) 0%, transparent 60%),
-                    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(56, 189, 248, 0.03) 0%, transparent 50%);
 }
 
 a { color: var(--accent-2); text-decoration: none; }
@@ -263,88 +263,6 @@ a:hover { color: var(--accent); }
   text-align: center;
   padding-top: 1rem;
   opacity: 0.6;
-}
-
-/* ── Theme Toggle ── */
-#theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  width: 100%;
-  margin-top: 0.75rem;
-  padding: 0.3rem 0.6rem;
-  min-height: 36px;
-  font-size: 0.75rem;
-  font-family: var(--font-sans);
-  color: var(--text-dim);
-  background: var(--bg-hover);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-  touch-action: manipulation;
-}
-
-#theme-toggle:hover {
-  color: var(--text);
-  border-color: var(--accent);
-}
-
-.theme-toggle-icon {
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-.theme-label-dark,
-.theme-icon-sun { display: none; }
-
-html.light .theme-label-light,
-html.light .theme-icon-moon { display: none; }
-
-html.light .theme-label-dark,
-html.light .theme-icon-sun { display: inline; }
-
-/* ── Light Mode Overrides ── */
-html.light body {
-  background-image:
-    radial-gradient(ellipse 80% 60% at 60% 0%, rgba(249, 115, 22, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(2, 132, 199, 0.04) 0%, transparent 50%);
-}
-
-html.light .sidebar-profile {
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-}
-
-html.light .post-item {
-  border-color: rgba(0, 0, 0, 0.09);
-}
-
-html.light .sidebar-tags .tag {
-  border-color: rgba(0, 0, 0, 0.15);
-  color: var(--text-dim);
-}
-
-html.light .prose pre {
-  background: #f6f8fa !important;
-  border: 1px solid var(--border);
-}
-
-html.light .prose code {
-  background: rgba(0, 0, 0, 0.06);
-  color: #0e6a8f;
-}
-
-html.light .glossary {
-  border-color: rgba(0, 0, 0, 0.12);
-}
-
-html.light .glossary-item {
-  border-bottom-color: rgba(0, 0, 0, 0.07);
-}
-
-html.light #reading-progress {
-  background: linear-gradient(90deg, var(--accent) 0%, #fbbf24 60%, rgba(249, 115, 22, 0.4) 100%);
 }
 
 /* ── Main ── */
