@@ -20,6 +20,39 @@ function rehypeLazyImages() {
   };
 }
 
+// 본문 이미지(alt 있음)를 figure+figcaption으로 감싸 다크 플레이트 + 캡션 렌더
+function rehypeFigureCaption() {
+  return (tree) => {
+    const walk = (node) => {
+      if (!node.children) return;
+      node.children = node.children.flatMap((child) => {
+        // Only wraps a <p> whose SOLE child is an <img alt="...">; a stray whitespace/text
+        // node alongside the image (e.g. a newline in the source) will skip wrapping.
+        if (
+          child.tagName === 'p' &&
+          child.children &&
+          child.children.length === 1 &&
+          child.children[0].tagName === 'img' &&
+          child.children[0].properties &&
+          child.children[0].properties.alt
+        ) {
+          const img = child.children[0];
+          return [{
+            type: 'element', tagName: 'figure', properties: { className: ['post-figure'] },
+            children: [
+              img,
+              { type: 'element', tagName: 'figcaption', properties: {}, children: [{ type: 'text', value: img.properties.alt }] },
+            ],
+          }];
+        }
+        walk(child);
+        return [child];
+      });
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://xsquare01.github.io',
   integrations: [
@@ -52,7 +85,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypeLazyImages],
+    rehypePlugins: [rehypeKatex, rehypeLazyImages, rehypeFigureCaption],
     shikiConfig: {
       themes: {
         light: 'github-light',

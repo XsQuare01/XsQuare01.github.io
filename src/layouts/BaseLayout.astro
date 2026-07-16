@@ -56,11 +56,11 @@ const currentPath = Astro.url.pathname;
 ---
 
 <!DOCTYPE html>
-<html lang="ko" style="color-scheme: dark light">
+<html lang="ko" style="color-scheme: light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f1117" />
+  <meta name="theme-color" content="#15171c" />
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
 
@@ -100,15 +100,9 @@ const currentPath = Astro.url.pathname;
   <title>{title} | XsQuare01</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate" type="application/rss+xml" title="XsQuare01 학습 노트" href="/rss.xml" />
-  <script is:inline>
-    (function() {
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (stored === 'light' || (!stored && !prefersDark)) {
-        document.documentElement.classList.add('light');
-      }
-    })();
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
   <slot name="head" />
 
@@ -151,8 +145,7 @@ const currentPath = Astro.url.pathname;
   </button>
   <aside class="sidebar">
     <div class="sidebar-profile">
-      <img class="sidebar-avatar" src="https://github.com/XsQuare01.png" alt="XsQuare01 프로필 사진" />
-      <div class="sidebar-name">XsQuare01</div>
+      <div class="term-prompt"><span class="term-user">xsquare</span><span class="term-dim">@blog</span></div>
       <div class="sidebar-bio">정리하고 기록하는 개발자</div>
     </div>
 
@@ -201,28 +194,6 @@ const currentPath = Astro.url.pathname;
     )}
 
     <div class="sidebar-footer">
-      <button id="theme-toggle" aria-label="테마 전환">
-        <span class="theme-toggle-icon theme-icon-moon">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-            <path d="M12.5 9A5.5 5.5 0 0 1 6 2.5 5 5 0 1 0 12.5 9z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="theme-toggle-icon theme-icon-sun">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-            <circle cx="7.5" cy="7.5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-            <line x1="7.5" y1="1" x2="7.5" y2="2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="7.5" y1="12.5" x2="7.5" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="1" y1="7.5" x2="2.5" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="12.5" y1="7.5" x2="14" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="3.05" y1="3.05" x2="4.11" y2="4.11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="10.89" y1="10.89" x2="11.95" y2="11.95" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="3.05" y1="11.95" x2="4.11" y2="10.89" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="10.89" y1="4.11" x2="11.95" y2="3.05" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="theme-label-light">라이트 모드</span>
-        <span class="theme-label-dark">다크 모드</span>
-      </button>
       <div style="margin-top:0.5rem;">© {new Date().getFullYear()} XsQuare01</div>
     </div>
   </aside>
@@ -409,11 +380,6 @@ const currentPath = Astro.url.pathname;
     btn?.classList.toggle('visible', window.scrollY > 300);
   }, { passive: true });
   btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    const isLight = document.documentElement.classList.toggle('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  });
 
   // ── 모바일 사이드바 토글 ──
   const sidebarToggle = document.getElementById('sidebar-toggle');

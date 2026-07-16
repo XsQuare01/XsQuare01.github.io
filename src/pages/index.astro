@@ -171,13 +171,8 @@ const homeJsonLd = JSON.stringify([
 </script>
 
 <style>
-  /* ── 분위기 배경 ── */
   .home {
     position: relative;
-    background-image:
-      radial-gradient(ellipse 60% 40% at 5% 6%, rgba(249, 115, 22, 0.07) 0%, transparent 60%),
-      radial-gradient(rgba(74, 85, 104, 0.1) 1px, transparent 1px);
-    background-size: auto, 22px 22px;
   }
 
   /* ── 에디토리얼 헤드라인 ── */
@@ -193,7 +188,6 @@ const homeJsonLd = JSON.stringify([
   }
   .headline-hl {
     color: var(--accent);
-    text-shadow: 0 0 28px rgba(249, 115, 22, 0.28);
   }
 
   .desc {
@@ -212,23 +206,23 @@ const homeJsonLd = JSON.stringify([
     margin-bottom: 1.75rem;
   }
   .tag {
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     padding: 0.2rem 0.65rem;
-    border-radius: 3px;
-    background: rgba(74, 85, 104, 0.2);
-    color: var(--text-dim);
-    border: 1px solid rgba(74, 85, 104, 0.3);
+    border-radius: 4px;
+    background: var(--amber-soft);
+    color: var(--amber);
+    border: 1px solid transparent;
   }
   .tag--accent {
-    background: var(--accent-dim);
-    color: var(--accent);
-    border-color: rgba(249, 115, 22, 0.3);
+    background: var(--amber-soft);
+    color: var(--amber);
+    border-color: var(--amber);
   }
 
   .divider {
     height: 1px;
-    background: rgba(74, 85, 104, 0.2);
+    background: var(--rule);
     margin-bottom: 1.5rem;
   }
 
@@ -237,7 +231,7 @@ const homeJsonLd = JSON.stringify([
     display: flex;
     gap: 0;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(74, 85, 104, 0.2);
+    border-bottom: 1px solid var(--rule);
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -258,7 +252,7 @@ const homeJsonLd = JSON.stringify([
     white-space: nowrap;
     touch-action: manipulation;
   }
-  .cat-item:hover { color: var(--text); border-bottom-color: rgba(249, 115, 22, 0.4); }
+  .cat-item:hover { color: var(--text); border-bottom-color: var(--amber); }
   .cat-item:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: -2px;
@@ -290,7 +284,7 @@ const homeJsonLd = JSON.stringify([
     border-radius: 10px;
     box-shadow:
       -3px 0 0 0 var(--accent),
-      0 0 0 1px rgba(74, 85, 104, 0.2);
+      0 0 0 1px var(--rule);
     text-decoration: none;
     transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     touch-action: manipulation;
@@ -312,10 +306,10 @@ const homeJsonLd = JSON.stringify([
   }
   .featured:hover::after { opacity: 0.16; }
   .featured:hover {
-    background: rgba(249, 115, 22, 0.04);
+    background: var(--amber-soft);
     box-shadow:
       -3px 0 0 0 var(--accent),
-      0 0 0 1px rgba(249, 115, 22, 0.25);
+      0 0 0 1px var(--amber);
   }
   .featured:focus-visible {
     outline: 2px solid var(--accent);
@@ -373,35 +367,21 @@ const homeJsonLd = JSON.stringify([
     border-radius: 3px;
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   .feed { display: flex; flex-direction: column; }
-  .feed-item {
-    animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .feed-item:nth-child(1) { animation-delay: 0ms; }
-  .feed-item:nth-child(2) { animation-delay: 60ms; }
-  .feed-item:nth-child(3) { animation-delay: 120ms; }
-  .feed-item:nth-child(4) { animation-delay: 180ms; }
-  .feed-item:nth-child(5) { animation-delay: 240ms; }
-  /* actual .feed-item layout: */
   .feed-item {
     display: grid;
     grid-template-columns: 4.5rem auto 1fr;
     align-items: baseline;
     gap: 0.75rem;
     padding: 1.1rem 0.4rem;
-    border-bottom: 1px solid rgba(74, 85, 104, 0.1);
+    border-bottom: 1px solid var(--rule);
     text-decoration: none;
     border-radius: 6px;
     transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     touch-action: manipulation;
   }
   .feed-item:last-child { border-bottom: none; }
-  .feed-item:hover { background: rgba(255, 255, 255, 0.03); }
+  .feed-item:hover { background: var(--bg-hover); }
   .feed-item:hover .feed-title { color: var(--text); }
   .feed-item:focus-visible {
     outline: 2px solid var(--accent);
@@ -436,7 +416,7 @@ const homeJsonLd = JSON.stringify([
   /* ── 섹션 공통 ── */
   .section-divider {
     height: 1px;
-    background: rgba(74, 85, 104, 0.2);
+    background: var(--rule);
     margin: 2rem 0 1.5rem;
   }
   .section-head {
@@ -478,7 +458,7 @@ const homeJsonLd = JSON.stringify([
     transition: background 0.12s;
     touch-action: manipulation;
   }
-  .bar-item:hover { background: rgba(255, 255, 255, 0.03); }
+  .bar-item:hover { background: var(--bg-hover); }
   .bar-item:hover .bar-label { color: var(--text); }
   .bar-item:focus-visible {
     outline: 2px solid var(--accent);
@@ -493,7 +473,7 @@ const homeJsonLd = JSON.stringify([
   .bar-track {
     flex: 1;
     height: 6px;
-    background: rgba(74, 85, 104, 0.2);
+    background: var(--rule);
     border-radius: 3px;
     overflow: hidden;
   }
@@ -523,17 +503,6 @@ const homeJsonLd = JSON.stringify([
     }
     .feed-item { animation: none; }
     .featured::after { transition: none; }
-  }
-
-  /* ── 라이트 모드 배경 보정 ── */
-  :global(html.light) .home {
-    background-image:
-      radial-gradient(ellipse 60% 40% at 5% 6%, rgba(249, 115, 22, 0.05) 0%, transparent 60%),
-      radial-gradient(rgba(74, 85, 104, 0.07) 1px, transparent 1px);
-    background-size: auto, 22px 22px;
-  }
-  :global(html.light) .headline-hl {
-    text-shadow: 0 0 24px rgba(249, 115, 22, 0.18);
   }
 
   /* ── 반응형 ── */
