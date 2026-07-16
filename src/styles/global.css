@@ -696,20 +696,22 @@ html.light .astro-code span {
 
 /* ── Callout Boxes ── */
 .callout {
-  margin: 1.75rem 0;
-  padding: 1.25rem 1.5rem;
-  border-radius: 8px;
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  background: rgba(56, 189, 248, 0.05);
+  border-left: 3px solid var(--amber);
+  background: var(--amber-soft);
+  padding: 0.9rem 1.1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 5px 5px 0;
+  font-family: var(--font-serif);
 }
-
+.callout > *:last-child { margin-bottom: 0; }
 .callout-title {
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.75rem;
-  color: var(--accent-2);
+  color: var(--amber);
+  margin-bottom: 0.4rem;
 }
 
 .callout-key {
@@ -767,6 +769,20 @@ html.light .astro-code span {
 
 .callout-simple .callout-title {
   color: #a78bfa;
+}
+
+.margin-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  line-height: 1.5;
+  border-left: 2px solid var(--rule);
+  padding: 0.1rem 0 0.1rem 0.8rem;
+  margin: 0.8rem 0;
+}
+@media (min-width: 1200px) {
+  .prose { position: relative; }
+  .margin-note { position: absolute; right: -180px; width: 160px; border-left: none; border-top: 1px solid var(--rule); padding: 0.4rem 0 0; }
 }
 
 /* ── Difficulty Badge ── */
