@@ -26,6 +26,8 @@ function rehypeFigureCaption() {
     const walk = (node) => {
       if (!node.children) return;
       node.children = node.children.flatMap((child) => {
+        // Only wraps a <p> whose SOLE child is an <img alt="...">; a stray whitespace/text
+        // node alongside the image (e.g. a newline in the source) will skip wrapping.
         if (
           child.tagName === 'p' &&
           child.children &&
