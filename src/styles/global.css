@@ -238,44 +238,27 @@ a:hover { color: var(--accent); }
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.2rem;
   border-radius: 8px;
-  border: 1px solid rgba(74, 85, 104, 0.35);
-  transition: background 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid var(--rule);
+  background: var(--bg-card);
   position: relative;
-  animation: fadeInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  transition: border-color 0.15s;
 }
 
-.post-item:nth-child(1) { animation-delay: 0.05s; }
-.post-item:nth-child(2) { animation-delay: 0.10s; }
-.post-item:nth-child(3) { animation-delay: 0.15s; }
-.post-item:nth-child(4) { animation-delay: 0.20s; }
-.post-item:nth-child(5) { animation-delay: 0.25s; }
-.post-item:nth-child(6) { animation-delay: 0.30s; }
-.post-item:nth-child(7) { animation-delay: 0.35s; }
-.post-item:nth-child(8) { animation-delay: 0.38s; }
-.post-item:nth-child(n+9) { animation-delay: 0.40s; }
-
 .post-item:hover {
-  background: var(--bg-card);
-  border-color: var(--border);
-  border-left: 3px solid var(--accent);
-  padding-left: calc(1.5rem - 2px);
-  transform: translateX(3px);
-  box-shadow: -4px 0 20px rgba(249, 115, 22, 0.08), 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-color: var(--amber);
+  transform: none;
+  box-shadow: none;
 }
 
 .post-list--bordered .post-item {
-  border-color: rgba(74, 85, 104, 0.5);
+  border-color: var(--rule);
 }
 
 .post-item-date {
-  font-size: 0.72rem;
-  color: var(--text-dim);
-  opacity: 0.7;
+  font-size: 0.74rem;
+  color: var(--ink-faint);
   font-variant-numeric: tabular-nums;
   font-family: var(--font-mono);
 }
@@ -283,13 +266,14 @@ a:hover { color: var(--accent); }
 .post-item-title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ink);
+  font-family: var(--font-serif);
   line-height: 1.35;
   letter-spacing: -0.02em;
   transition: color 0.2s;
 }
 
-.post-item:hover .post-item-title { color: var(--accent); }
+.post-item:hover .post-item-title { color: var(--amber); }
 
 .post-item-link {
   position: absolute;
@@ -304,21 +288,13 @@ a:hover { color: var(--accent); }
 
 .post-item-desc {
   font-size: 0.85rem;
-  color: var(--text-dim);
+  color: var(--ink-soft);
   line-height: 1.55;
 }
 
-/* ── Tags (목록 페이지에서는 채도 낮춤) ── */
+/* ── Tags (목록 페이지) ── */
 .post-list .tag {
-  color: var(--text-dim);
-  border-color: rgba(74, 85, 104, 0.45);
-  background: transparent;
-}
-
-.post-list .tag:hover {
-  color: var(--text-muted);
-  border-color: var(--border);
-  background: transparent;
+  background: var(--amber-soft);
 }
 
 /* ── Tags ── */
@@ -330,21 +306,20 @@ a:hover { color: var(--accent); }
 }
 
 .tag {
+  font-family: var(--font-mono);
   font-size: 0.72rem;
-  padding: 0.15rem 0.55rem;
+  color: var(--amber);
+  background: var(--amber-soft);
+  border: 1px solid transparent;
+  padding: 0.1rem 0.5rem;
   border-radius: 4px;
-  background: var(--bg-card);
-  color: var(--accent-3);
-  border: 1px solid rgba(167, 139, 250, 0.3);
-  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: background 0.15s;
 }
 
 .tag:hover {
-  background: rgba(167, 139, 250, 0.15);
-  border-color: var(--accent-3);
-  color: var(--accent-3);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(167, 139, 250, 0.2);
+  transform: none;
+  box-shadow: none;
+  background: rgba(181,106,26,0.18);
 }
 
 /* ── Article ── */
@@ -574,18 +549,17 @@ article .prose h2 {
   font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
-  color: var(--text);
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  animation: fadeInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .page-title::before {
   content: '';
   display: inline-block;
   width: 4px;
   height: 1.4em;
-  background: linear-gradient(180deg, var(--accent) 0%, rgba(249, 115, 22, 0.5) 100%);
+  background: linear-gradient(180deg, var(--amber) 0%, rgba(181, 106, 26, 0.5) 100%);
   border-radius: 2px;
 }
 
@@ -983,8 +957,8 @@ pre:hover .code-copy-btn { opacity: 1; }
 .search-modal-box {
   width: 100%;
   max-width: 520px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--paper);
+  border: 1px solid var(--rule);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
@@ -1001,11 +975,11 @@ pre:hover .code-copy-btn { opacity: 1; }
   align-items: center;
   gap: 0.6rem;
   padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--rule);
 }
 
 .search-modal-icon {
-  color: var(--text-dim);
+  color: var(--ink-faint);
   font-size: 1rem;
   flex-shrink: 0;
 }
@@ -1016,19 +990,19 @@ pre:hover .code-copy-btn { opacity: 1; }
   border: none;
   outline: none;
   font-size: 0.95rem;
-  color: var(--text);
+  color: var(--ink);
   font-family: var(--font-sans);
 }
 
 #search-input::placeholder {
-  color: var(--text-dim);
+  color: var(--ink-faint);
 }
 
 .search-modal-esc {
   font-size: 0.65rem;
-  color: var(--text-dim);
+  color: var(--ink-faint);
   background: var(--bg-hover);
-  border: 1px solid var(--border);
+  border: 1px solid var(--rule);
   border-radius: 4px;
   padding: 0.15rem 0.4rem;
   flex-shrink: 0;
@@ -1052,13 +1026,14 @@ pre:hover .code-copy-btn { opacity: 1; }
   padding: 0.55rem 0.75rem;
   border-radius: 6px;
   text-decoration: none;
-  color: var(--text);
+  color: var(--ink);
   transition: background 0.1s;
 }
 
 .search-result-item:hover,
 .search-result-item.focused {
-  background: var(--accent-dim);
+  background: var(--amber-soft);
+  color: var(--ink);
 }
 
 .search-result-title {
@@ -1073,8 +1048,8 @@ pre:hover .code-copy-btn { opacity: 1; }
   font-size: 0.65rem;
   padding: 0.1rem 0.45rem;
   border-radius: 4px;
-  background: rgba(249, 115, 22, 0.12);
-  color: var(--accent);
+  background: var(--amber-soft);
+  color: var(--amber);
   flex-shrink: 0;
   font-family: var(--font-mono);
 }
@@ -1082,7 +1057,7 @@ pre:hover .code-copy-btn { opacity: 1; }
 .search-empty {
   padding: 1.25rem 1rem;
   font-size: 0.85rem;
-  color: var(--text-dim);
+  color: var(--ink-faint);
   text-align: center;
 }
 
