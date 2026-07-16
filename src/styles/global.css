@@ -1186,3 +1186,7 @@ pre:hover .code-copy-btn { opacity: 1; }
   .sidebar-nav a,
   .sidebar-category-link { transition: none; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
