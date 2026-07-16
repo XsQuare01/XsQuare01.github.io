@@ -48,7 +48,7 @@
 
   --sidebar-width: 224px;
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Nanum Myeongjo', Georgia, 'Times New Roman', serif;
+  --font-serif: 'Noto Serif KR', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, monospace;
 }
 
@@ -390,7 +390,7 @@ article .prose {
 }
 
 /* ── Prose ── */
-.prose { color: var(--ink); font-family: var(--font-serif); font-size: 1.04rem; line-height: 1.75; }
+.prose { color: var(--ink); font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.8; }
 .prose h2 {
   font-family: var(--font-serif);
   font-size: 1.45rem;
