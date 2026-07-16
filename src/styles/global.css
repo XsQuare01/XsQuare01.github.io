@@ -469,8 +469,23 @@ article .prose h2 {
   background-color: transparent !important;
 }
 .prose hr { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
-.prose img { max-width: 100%; border-radius: 8px; margin: 1.5rem 0; border: 1px solid var(--border); transition: opacity 0.15s; }
-.prose img:hover { opacity: 0.85; }
+.post-figure {
+  margin: 1.8rem 0;
+  background: var(--term-bg);
+  border: 1px solid #23262e;
+  border-radius: 10px;
+  padding: 1rem 1rem 0.5rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+.prose img { max-width: 100%; display: block; margin: 0 auto; border-radius: 4px; cursor: zoom-in; }
+.prose figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-top: 0.7rem;
+  line-height: 1.5;
+}
 
 /* Image Lightbox */
 #image-lightbox {
