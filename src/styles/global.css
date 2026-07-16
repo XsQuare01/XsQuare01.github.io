@@ -443,31 +443,30 @@ article .prose h2 {
   border-radius: 4px;
 }
 .prose pre {
-  background: #0d1117 !important;
-  border: 1px solid var(--border);
-  padding: 1.25rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin: 1.5rem 0;
+  background: var(--term-bg);
+  color: var(--term-fg);
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: 0.84rem;
   line-height: 1.7;
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border: 1px solid #23262e;
   position: relative;
 }
 .prose pre code {
-  background: none;
-  border: none;
+  background: transparent;
+  color: inherit;
   padding: 0;
   font-size: inherit;
 }
-/* shiki dual theme — 기본 다크 색, html.light에서 라이트 테마 색으로 전환 */
+/* shiki dual theme — 라이트모드 제거로 항상 다크 테마 색 사용 */
 .astro-code,
 .astro-code span {
-  color: var(--shiki-dark);
-}
-html.light .astro-code,
-html.light .astro-code span {
-  color: var(--shiki-light);
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
 }
 .prose hr { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
 .prose img { max-width: 100%; border-radius: 8px; margin: 1.5rem 0; border: 1px solid var(--border); transition: opacity 0.15s; }
@@ -908,9 +907,9 @@ html.light .astro-code span {
   padding: 0.18rem 0.5rem;
   font-size: 0.68rem;
   font-family: var(--font-mono);
-  background: rgba(74, 85, 104, 0.4);
-  color: var(--text-dim);
-  border: 1px solid rgba(74, 85, 104, 0.4);
+  background: rgba(255,255,255,0.07);
+  color: var(--term-fg);
+  border: 1px solid #3a3f37;
   border-radius: 4px;
   cursor: pointer;
   line-height: 1.4;
@@ -920,13 +919,11 @@ html.light .astro-code span {
 pre:hover .code-copy-btn { opacity: 1; }
 @media (hover: none) { .code-copy-btn { opacity: 1; } }
 .code-copy-btn:hover {
-  background: var(--accent-dim);
-  color: var(--accent);
-  border-color: rgba(249, 115, 22, 0.4);
+  background: rgba(255,255,255,0.14);
 }
 .code-copy-btn.copied {
   opacity: 1;
-  color: #4ade80;
+  color: var(--term-green);
   border-color: rgba(74, 222, 128, 0.4);
   background: rgba(74, 222, 128, 0.1);
 }
