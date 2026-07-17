@@ -24,8 +24,11 @@
   --ink-faint: #918a7b;
   --rule: #e2dccf;
 
-  --amber: #b56a1a;
-  --amber-soft: rgba(181, 106, 26, 0.10);
+  /* 강조는 잉크블루 단색 (#43). --amber* 는 하위호환 별칭 → 잉크블루를 가리킴 */
+  --ink-blue: #1c3d5c;
+  --ink-blue-soft: rgba(28, 61, 92, 0.10);
+  --amber: var(--ink-blue);
+  --amber-soft: var(--ink-blue-soft);
   --term-amber: #d99b4e;
 
   --term-bg: #15171c;
@@ -559,7 +562,7 @@ article .prose h2 {
   display: inline-block;
   width: 4px;
   height: 1.4em;
-  background: linear-gradient(180deg, var(--amber) 0%, rgba(181, 106, 26, 0.5) 100%);
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(28, 61, 92, 0.5) 100%);
   border-radius: 2px;
 }
 
