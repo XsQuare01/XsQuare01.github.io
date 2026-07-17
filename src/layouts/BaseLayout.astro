@@ -100,6 +100,12 @@ const currentPath = Astro.url.pathname;
   <title>{title} | XsQuare01</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate" type="application/rss+xml" title="XsQuare01 학습 노트" href="/rss.xml" />
+  <script is:inline>
+    // 조용한 레일: 고정 상태 무플래시 복원
+    if (localStorage.getItem('rail') === 'pinned') {
+      document.documentElement.classList.add('rail-pinned');
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" />
@@ -143,58 +149,75 @@ const currentPath = Astro.url.pathname;
       </svg>
     </span>
   </button>
-  <aside class="sidebar">
-    <div class="sidebar-profile">
-      <div class="term-prompt"><span class="term-user">xsquare</span><span class="term-dim">@blog</span></div>
-      <div class="sidebar-bio">정리하고 기록하는 개발자</div>
-    </div>
+  <aside class="sidebar" id="sidebar">
+    <a href="/" class="brand" aria-label="XsQuare01 홈">
+      <span class="brand-sq">X²</span>
+      <span class="brand-txt rail-txt">XsQuare01</span>
+    </a>
 
-    <button id="search-btn" aria-label="검색">
-      <span id="search-btn-icon">
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-          <circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="9.65" y1="9.65" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
+    <button id="search-btn" class="rail-item" aria-label="검색">
+      <span class="rail-ic">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21" stroke-linecap="round"/></svg>
       </span>
-      검색
-      <kbd id="search-btn-kbd">Ctrl K</kbd>
+      <span class="rail-txt">검색</span>
+      <kbd id="search-btn-kbd" class="rail-txt">Ctrl K</kbd>
     </button>
 
     <nav class="sidebar-nav">
-      <div class="sidebar-nav-label">메뉴</div>
-      <a href="/" class={currentPath === '/' ? 'active' : ''}>홈</a>
-      <a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>글 목록</a>
-      <a href="/categories" class={currentPath.startsWith('/categories') ? 'active' : ''}>카테고리</a>
-      <a href="/tags" class={currentPath.startsWith('/tags') ? 'active' : ''}>태그</a>
-      <a href="/stats" class={currentPath.startsWith('/stats') ? 'active' : ''}>통계</a>
+      <a href="/" class={`rail-item${currentPath === '/' ? ' active' : ''}`}>
+        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
+        <span class="rail-txt">홈</span>
+      </a>
+      <a href="/blog" class={`rail-item${currentPath.startsWith('/blog') ? ' active' : ''}`}>
+        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 8h6M9 12h6M9 16h4" stroke-linecap="round"/></svg></span>
+        <span class="rail-txt">글 목록</span>
+      </a>
+      <a href="/categories" class={`rail-item${currentPath.startsWith('/categories') ? ' active' : ''}`}>
+        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span>
+        <span class="rail-txt">카테고리</span>
+      </a>
+      <a href="/tags" class={`rail-item${currentPath.startsWith('/tags') ? ' active' : ''}`}>
+        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h8l8 8-8 8-8-8z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
+        <span class="rail-txt">태그</span>
+      </a>
+      <a href="/stats" class={`rail-item${currentPath.startsWith('/stats') ? ' active' : ''}`}>
+        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke-linecap="round"/></svg></span>
+        <span class="rail-txt">통계</span>
+      </a>
     </nav>
 
-    <div class="sidebar-categories">
-      <div class="sidebar-nav-label">카테고리</div>
-      {activeCategories.map((cat) => (
-        <a
-          href={`/categories/${cat.slug}`}
-          class={`sidebar-category-link${currentPath === `/categories/${cat.slug}` ? ' active' : ''}`}
-        >
-          {cat.label}
-          <span class="sidebar-category-count">{categoryCount[cat.slug]}</span>
-        </a>
-      ))}
+    <div class="rail-expand-only">
+      <div class="sidebar-categories">
+        <div class="sidebar-nav-label">카테고리</div>
+        {activeCategories.map((cat) => (
+          <a
+            href={`/categories/${cat.slug}`}
+            class={`sidebar-category-link${currentPath === `/categories/${cat.slug}` ? ' active' : ''}`}
+          >
+            {cat.label}
+            <span class="sidebar-category-count">{categoryCount[cat.slug]}</span>
+          </a>
+        ))}
+      </div>
+
+      {topTags.length > 0 && (
+        <div class="sidebar-tags">
+          <div class="sidebar-nav-label">태그</div>
+          <div class="tag-list">
+            {topTags.map((tag) => (
+              <a href={`/tags/${tag}`} class="tag">{tag}</a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
 
-    {topTags.length > 0 && (
-      <div class="sidebar-tags">
-        <div class="sidebar-nav-label">태그</div>
-        <div class="tag-list">
-          {topTags.map((tag) => (
-            <a href={`/tags/${tag}`} class="tag">{tag}</a>
-          ))}
-        </div>
-      </div>
-    )}
-
-    <div class="sidebar-footer">
-      <div style="margin-top:0.5rem;">© {new Date().getFullYear()} XsQuare01</div>
+    <div class="rail-bottom">
+      <button id="pin-btn" class="rail-item" aria-label="사이드바 고정/접기">
+        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6l-1 6 3 3H7l3-3z"/><path d="M12 16v4" stroke-linecap="round"/></svg></span>
+        <span class="rail-txt">사이드바 고정</span>
+      </button>
+      <div class="sidebar-footer rail-expand-only">© {new Date().getFullYear()} XsQuare01</div>
     </div>
   </aside>
 
@@ -393,6 +416,19 @@ const currentPath = Astro.url.pathname;
     if (iconOpen) iconOpen.style.display = isOpen ? 'none' : '';
     if (iconClose) iconClose.style.display = isOpen ? '' : 'none';
   });
+
+  // ── 조용한 레일 고정/접기 ──
+  const pinBtn = document.getElementById('pin-btn');
+  pinBtn?.addEventListener('click', () => {
+    const pinned = document.documentElement.classList.toggle('rail-pinned');
+    localStorage.setItem('rail', pinned ? 'pinned' : 'collapsed');
+    const label = pinBtn.querySelector('.rail-txt');
+    if (label) label.textContent = pinned ? '사이드바 접기' : '사이드바 고정';
+  });
+  if (document.documentElement.classList.contains('rail-pinned')) {
+    const label = pinBtn?.querySelector('.rail-txt');
+    if (label) label.textContent = '사이드바 접기';
+  }
 </script>
 
 <style is:global>
