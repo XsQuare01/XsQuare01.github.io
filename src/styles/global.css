@@ -481,11 +481,14 @@ article .prose h2 {
   padding: 0;
   font-size: inherit;
 }
-/* shiki dual theme — 라이트모드 제거로 항상 다크 테마 색 사용 */
+/* shiki dual theme — 다크 코드블록 위에 다크 테마 토큰색 사용 */
 .astro-code,
 .astro-code span {
   color: var(--shiki-dark) !important;
-  background-color: transparent !important;
+}
+/* pre(.astro-code) 자체는 어두운 배경을 유지해야 밝은 토큰이 대비된다 */
+.astro-code {
+  background-color: var(--term-bg) !important;
 }
 .prose hr { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
 .post-figure {
