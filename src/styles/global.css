@@ -438,16 +438,6 @@ article .prose {
   color: var(--ink);
   scroll-margin-top: 1.5rem;
 }
-.prose h2::before {
-  content: '##';
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--amber);
-  margin-right: 0.55rem;
-  vertical-align: 0.18em;
-}
-
 article .prose h2 {
   padding-bottom: 0.6rem;
 }
