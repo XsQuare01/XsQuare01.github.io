@@ -5,6 +5,7 @@ description: "2편과 같은 O(n log n)에 다른 시선으로 닿는다. 점을
 tags: ["Algorithm", "Closest Pair", "Plane Sweeping", "Computational Geometry"]
 category: algorithm
 difficulty: 고급
+numbered: true
 ---
 
 > [①](/blog/closest-pair-1)·[②](/blog/closest-pair-2)에서 분할 정복으로 $O(n \log n)$에 닿았다. 이번엔 분할도 재귀도 없이, 점들을 왼쪽에서 오른쪽으로 **한 번 훑으면서** 같은 복잡도에 닿는다. 무기는 균형 이진 탐색 트리다.
