@@ -33,6 +33,7 @@ interface Props {
   tags?: string[];
   category?: string;
   difficulty?: '입문' | '초급' | '중급' | '고급' | '심화';
+  numbered?: boolean;
   headings?: Heading[];
   readingTime?: number;
   wordCount?: number;
@@ -48,6 +49,7 @@ const {
   tags = [],
   category,
   difficulty,
+  numbered = false,
   headings = [],
   readingTime,
   wordCount,
@@ -185,7 +187,7 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
       </div>
     </div>
 
-    <div class="prose">
+    <div class:list={['prose', { numbered }]}>
       <slot />
     </div>
 

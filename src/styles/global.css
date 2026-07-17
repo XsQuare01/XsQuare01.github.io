@@ -30,6 +30,10 @@
   --amber: var(--ink-blue);
   --amber-soft: var(--ink-blue-soft);
   --term-amber: #d99b4e;
+  /* 세만틱 — '주의'에만 쓰는 절제된 적색, 註는 회색 */
+  --warn: #9c4436;
+  --warn-dim: rgba(156, 68, 54, 0.07);
+  --note-dim: rgba(34, 32, 27, 0.04);
 
   --term-bg: #15171c;
   --term-fg: #cdd3cc;
@@ -716,81 +720,78 @@ article .prose h2 {
 }
 
 /* ── Callout Boxes ── */
+/* ── 콜아웃 3종 (단색 규율): 요점=잉크블루 · 註=회색 · 주의=적색 ──
+   기존 5종 클래스는 하위호환 유지: key·tip→요점, info·simple→註, warn→주의 */
 .callout {
-  border-left: 3px solid var(--amber);
-  background: var(--amber-soft);
-  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-dim);
+  padding: 0.9rem 1.15rem;
   margin: 1.5rem 0;
   border-radius: 0 5px 5px 0;
   font-family: var(--font-serif);
 }
 .callout > *:last-child { margin-bottom: 0; }
 .callout-title {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--accent);
   margin-bottom: 0.4rem;
 }
 
-.callout-key {
-  background: var(--amber-soft);
-  border-color: var(--amber);
-}
-
-.callout-key .callout-title {
-  color: var(--amber);
-}
-
-.callout-key ul {
+/* 요점 (key·tip) */
+.callout-key, .callout-tip { background: var(--accent-dim); border-color: var(--accent); }
+.callout-key .callout-title, .callout-tip .callout-title { color: var(--accent); }
+.callout-key ul, .callout-tip ul {
   margin: 0;
   padding-left: 1.25rem;
   color: var(--text-muted);
   font-size: 0.92rem;
   line-height: 1.9;
 }
+.callout-key li::marker, .callout-tip li::marker { color: var(--accent); }
 
-.callout-key li::marker {
+/* 註 (info·simple) — 회색 */
+.callout-info, .callout-simple { background: var(--note-dim); border-color: var(--ink-faint); }
+.callout-info .callout-title, .callout-simple .callout-title { color: var(--ink-soft); }
+
+/* 주의 (warn) — 절제된 적색, 유일한 세만틱 예외 */
+.callout-warn { background: var(--warn-dim); border-color: var(--warn); }
+.callout-warn .callout-title { color: var(--warn); }
+
+/* ── 정리 환경 (정의·정리·보조정리·따름정리) — raw HTML로 저작 ── */
+.thm {
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 5px 5px 0;
+  background: var(--accent-dim);
+  padding: 0.9rem 1.2rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-serif);
+}
+.thm.def { background: transparent; }          /* 정의는 담백하게 선만 */
+.thm > *:last-child { margin-bottom: 0; }
+.thm-head {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9rem;
   color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.thm-head .en {
+  font-weight: 400;
+  color: var(--ink-faint);
+  font-style: italic;
+  font-size: 0.92em;
+  margin-left: 0.3rem;
 }
 
-.callout-info {
-  background: rgba(63,96,121,0.07);
-  border-color: #3f6079;
-}
-
-.callout-info .callout-title {
-  color: #3f6079;
-}
-
-.callout-warn {
-  background: rgba(156,74,52,0.07);
-  border-color: #9c4a34;
-}
-
-.callout-warn .callout-title {
-  color: #9c4a34;
-}
-
-.callout-tip {
-  background: rgba(79,115,85,0.07);
-  border-color: #4f7355;
-}
-
-.callout-tip .callout-title {
-  color: #4f7355;
-}
-
-.callout-simple {
-  background: rgba(34,32,27,0.03);
-  border-color: var(--ink-faint);
-}
-
-.callout-simple .callout-title {
-  color: var(--ink-soft);
-}
+/* ── 증명 (박스 아님, ∎로 종료) ── */
+.proof { font-family: var(--font-serif); margin: 0 0 1.2rem; }
+.proof-lead { font-style: italic; color: var(--ink-soft); margin-right: 0.15rem; }
+.qed { float: right; }
 
 .margin-note {
   font-family: var(--font-mono);
@@ -804,6 +805,25 @@ article .prose h2 {
 @media (min-width: 1200px) {
   .prose { position: relative; }
   .margin-note { position: absolute; right: -180px; width: 160px; border-left: none; border-top: 1px solid var(--rule); padding: 0.4rem 0 0; }
+}
+
+/* ── 섹션·그림 자동 번호 (frontmatter numbered: true 인 글만) ── */
+.prose.numbered { counter-reset: h2sec fig; }
+.prose.numbered h2 { counter-increment: h2sec; counter-reset: h3sub; }
+.prose.numbered h2::before {
+  content: counter(h2sec) "\00a0\00a0";
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+.prose.numbered h3 { counter-increment: h3sub; }
+.prose.numbered h3::before {
+  content: counter(h2sec) "." counter(h3sub) "\00a0\00a0";
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--accent);
 }
 
 /* ── Difficulty Badge ── */
