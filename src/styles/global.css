@@ -403,17 +403,6 @@ html:not(.rail-pinned) .sidebar:hover .rail-expand-only { display: block; }
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.post-cmd {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--ink-faint);
-  margin-bottom: 0.6rem;
-}
-
-.post-cmd-op {
-  color: var(--amber);
-}
-
 .post-header h1 {
   font-family: var(--font-serif);
   font-size: 2rem;
