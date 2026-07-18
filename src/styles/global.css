@@ -108,7 +108,8 @@ html.rail-pinned {
   transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 }
 /* 호버 확장 (고정 아닐 때만) — 오버레이 */
-html:not(.rail-pinned) .sidebar:hover {
+html:not(.rail-pinned) .sidebar:hover,
+html:not(.rail-pinned) .sidebar:focus-within {
   width: 14rem;
   box-shadow: 6px 0 30px rgba(34, 32, 27, 0.10);
 }
@@ -117,9 +118,11 @@ html:not(.rail-pinned) .sidebar:hover {
 .rail-txt { display: none; }
 .rail-expand-only { display: none; }
 html.rail-pinned .rail-txt,
-html:not(.rail-pinned) .sidebar:hover .rail-txt { display: inline; }
+html:not(.rail-pinned) .sidebar:hover .rail-txt,
+html:not(.rail-pinned) .sidebar:focus-within .rail-txt { display: inline; }
 html.rail-pinned .rail-expand-only,
-html:not(.rail-pinned) .sidebar:hover .rail-expand-only { display: block; }
+html:not(.rail-pinned) .sidebar:hover .rail-expand-only,
+html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only { display: block; }
 
 /* 브랜드 마크 */
 .brand {
@@ -578,6 +581,15 @@ article .prose h2 {
   height: 1.4em;
   background: linear-gradient(180deg, var(--accent) 0%, rgba(28, 61, 92, 0.5) 100%);
   border-radius: 2px;
+}
+
+/* 페이지 제목 부제 */
+.page-sub {
+  margin: -1.4rem 0 2rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 44em;
 }
 
 
