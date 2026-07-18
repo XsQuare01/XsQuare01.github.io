@@ -134,8 +134,7 @@ const homeJsonLd = JSON.stringify([
             <div class="bar-track">
               <div
                 class="bar-fill"
-                data-scale={`${(cat.count / maxCount).toFixed(3)}`}
-                style="transform: scaleX(0)"
+                style={`transform: scaleX(${(cat.count / maxCount).toFixed(3)})`}
               />
             </div>
             <span class="bar-count">{cat.count}</span>
@@ -148,28 +147,6 @@ const homeJsonLd = JSON.stringify([
   </div>
 </BaseLayout>
 
-<script>
-  const bars = document.querySelectorAll<HTMLElement>('.bar-fill');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          const scale = el.dataset.scale ?? '1';
-          if (reduced) {
-            el.style.transition = 'none';
-          }
-          el.style.transform = `scaleX(${scale})`;
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-  bars.forEach((bar) => observer.observe(bar));
-</script>
-
 <style>
   .home {
     position: relative;
@@ -177,10 +154,11 @@ const homeJsonLd = JSON.stringify([
 
   /* ── 에디토리얼 헤드라인 ── */
   .headline {
-    font-size: 2rem;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.05em;
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
     color: var(--text);
     margin: 1.5rem 0 0.75rem;
     border: none;
@@ -206,7 +184,7 @@ const homeJsonLd = JSON.stringify([
     margin-bottom: 1.75rem;
   }
   .tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.8rem;
     padding: 0.2rem 0.65rem;
     border-radius: 4px;
@@ -258,7 +236,6 @@ const homeJsonLd = JSON.stringify([
     outline-offset: -2px;
     border-radius: 4px;
   }
-  .cat-item:active { transform: scale(0.96); }
   .cat-active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
   .cat-n {
@@ -289,22 +266,6 @@ const homeJsonLd = JSON.stringify([
     transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     touch-action: manipulation;
   }
-  /* 장식용 원형 워터마크 */
-  .featured::after {
-    content: '';
-    position: absolute;
-    right: 1.25rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent);
-    opacity: 0.08;
-    pointer-events: none;
-    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .featured:hover::after { opacity: 0.16; }
   .featured:hover {
     background: var(--amber-soft);
     box-shadow:
@@ -315,8 +276,6 @@ const homeJsonLd = JSON.stringify([
     outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
-  .featured:active { transform: scale(0.99); }
-
   .featured-label {
     font-size: 0.68rem;
     text-transform: uppercase;
@@ -325,7 +284,8 @@ const homeJsonLd = JSON.stringify([
     font-weight: 700;
   }
   .featured-title {
-    font-size: 1.15rem;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--text);
     margin: 0.3rem 0 0.35rem;
@@ -387,8 +347,6 @@ const homeJsonLd = JSON.stringify([
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
-  .feed-item:active { transform: scale(0.99); }
-
   .feed-date  {
     font-family: var(--font-mono);
     font-size: 0.8rem;
@@ -403,7 +361,8 @@ const homeJsonLd = JSON.stringify([
     font-variant-numeric: tabular-nums;
   }
   .feed-title {
-    font-size: 1rem;
+    font-family: var(--font-serif);
+    font-size: 1.02rem;
     font-weight: 500;
     color: var(--text-muted);
     transition: color 0.12s;
@@ -483,7 +442,6 @@ const homeJsonLd = JSON.stringify([
     background: var(--accent);
     border-radius: 3px;
     transform-origin: left;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .bar-count {
     font-size: 0.8rem;
