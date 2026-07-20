@@ -103,7 +103,6 @@ const homeJsonLd = JSON.stringify([
                 {post!.data.category && <span class="cat">{getCategoryLabel(post!.data.category)}</span>}
                 {post!.data.category && <span class="dot">·</span>}
                 <span class="tnum">{fmtDate(post!.data.date)}</span>
-                {post!.data.difficulty && (<><span class="dot">·</span><span>{post!.data.difficulty}</span></>)}
               </div>
               <div class="feat-title">{post!.data.title}</div>
               {post!.data.description && <div class="feat-desc">{post!.data.description}</div>}
