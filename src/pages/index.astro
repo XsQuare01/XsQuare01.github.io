@@ -23,6 +23,8 @@ const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 
 const FEATURED_IDS = ['rsa', 'algo-orientation'];
 const featuredPosts = FEATURED_IDS.map((id) => allPosts.find((p) => p.id === id)).filter(Boolean);
+const fmtDate = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
 // 홈 구조화 데이터 — 사이트(WebSite)와 저자(Person) 엔티티
 const siteUrl = Astro.site?.toString() ?? 'https://xsquare01.github.io/';
@@ -89,17 +91,26 @@ const homeJsonLd = JSON.stringify([
 
     <!-- Featured Posts -->
     {featuredPosts.length > 0 && (
-      <div class="featured-grid">
-        {featuredPosts.map((post) => (
-          <a href={`/blog/${post!.id}`} class="featured">
-            <span class="featured-label">추천 글</span>
-            <div class="featured-title">{post!.data.title}</div>
-            {post!.data.description && (
-              <div class="featured-desc">{post!.data.description}</div>
-            )}
-          </a>
-        ))}
-      </div>
+      <section class="featured-section">
+        <div class="feed-head">
+          <h2 class="feed-label">추천 글</h2>
+          <span class="feat-sub">주요 카테고리 대표</span>
+        </div>
+        <div class="featured-list">
+          {featuredPosts.map((post) => (
+            <a href={`/blog/${post!.id}`} class="feat">
+              <div class="feat-meta">
+                {post!.data.category && <span class="cat">{getCategoryLabel(post!.data.category)}</span>}
+                <span class="dot">·</span>
+                <span class="tnum">{fmtDate(post!.data.date)}</span>
+                {post!.data.difficulty && (<><span class="dot">·</span><span>{post!.data.difficulty}</span></>)}
+              </div>
+              <div class="feat-title">{post!.data.title}</div>
+              {post!.data.description && <div class="feat-desc">{post!.data.description}</div>}
+            </a>
+          ))}
+        </div>
+      </section>
     )}
 
     <!-- 최근 글 피드 -->
@@ -245,55 +256,35 @@ const homeJsonLd = JSON.stringify([
   }
 
   /* ── Featured Posts ── */
-  .featured-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1.75rem;
-  }
+  .featured-section { margin-bottom: 1.75rem; }
+  .feat-sub { font-size: 0.75rem; color: var(--text-dim); }
 
-  .featured {
+  .featured-list { border-bottom: 1px solid var(--rule); }
+  .feat {
     display: block;
-    position: relative;
-    overflow: hidden;
-    padding: 1.1rem 1.4rem;
-    background: var(--bg-card);
-    border-radius: 10px;
-    box-shadow:
-      -3px 0 0 0 var(--accent),
-      0 0 0 1px var(--rule);
     text-decoration: none;
-    transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-    touch-action: manipulation;
+    border-top: 1px solid var(--rule);
+    padding: 1.15rem 0;
   }
-  .featured:hover {
-    background: var(--amber-soft);
-    box-shadow:
-      -3px 0 0 0 var(--accent),
-      0 0 0 1px var(--amber);
+  .feat-meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem;
+    font-size: 0.76rem; color: var(--text-dim); margin-bottom: 0.45rem;
   }
-  .featured:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-  .featured-label {
-    font-size: 0.68rem;
-    letter-spacing: 0;
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .featured-title {
+  .feat-meta .cat { color: var(--accent); font-weight: 700; }
+  .feat-meta .dot { color: var(--rule); }
+  .feat-meta .tnum { font-variant-numeric: tabular-nums; }
+  .feat-title {
     font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
-    margin: 0.3rem 0 0.35rem;
+    font-size: 1.5rem; font-weight: 700; line-height: 1.22;
+    letter-spacing: -0.01em; color: var(--text);
+    margin-bottom: 0.45rem; text-wrap: balance;
+    transition: color 0.12s;
   }
-  .featured-desc {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-    text-wrap: pretty;
+  .feat:hover .feat-title { color: var(--accent); }
+  .feat:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .feat-desc {
+    font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; text-wrap: pretty;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
 
   /* ── 피드 ── */
@@ -453,20 +444,18 @@ const homeJsonLd = JSON.stringify([
 
   @media (prefers-reduced-motion: reduce) {
     .bar-fill { transition: none; }
-    .cat-item, .featured, .feed-item, .feed-more { transition: none; }
-    .cat-item:active, .featured:active, .feed-item:active { transform: none; }
-    .cat-item:focus-visible, .featured:focus-visible, .feed-item:focus-visible, .feed-more:focus-visible {
+    .cat-item, .feed-item, .feed-more { transition: none; }
+    .cat-item:active, .feed-item:active { transform: none; }
+    .cat-item:focus-visible, .feed-item:focus-visible, .feed-more:focus-visible {
       transition: none;
     }
     .feed-item { animation: none; }
-    .featured::after { transition: none; }
   }
 
   /* ── 반응형 ── */
   @media (max-width: 480px) {
     .headline { font-size: 1.65rem; }
     .identity-role { display: none; }
-    .featured-grid { grid-template-columns: 1fr; }
     .feed-item { grid-template-columns: 3.5rem 1fr; }
     .feed-cat { display: none; }
   }
