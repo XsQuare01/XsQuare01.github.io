@@ -54,7 +54,7 @@
   --accent-3: var(--amber);
 
   --sidebar-width: 224px;
-  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
   --font-serif: 'Noto Serif KR', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, monospace;
 }
@@ -185,7 +185,7 @@ html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only { display: block;
 
 .sidebar-nav { display: flex; flex-direction: column; gap: 0.12rem; margin-bottom: 0.4rem; }
 
-.sidebar-nav-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-faint); margin: 1rem 0 0.4rem 0.55rem; }
+.sidebar-nav-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0; color: var(--ink-faint); margin: 1rem 0 0.4rem 0.55rem; }
 
 .sidebar-categories { display: flex; flex-direction: column; gap: 0.1rem; }
 
@@ -373,7 +373,7 @@ html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only { display: block;
   align-items: center;
   gap: 0.35rem;
   font-size: 0.75rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   color: var(--ink-faint);
   margin-bottom: 1rem;
 }
@@ -415,7 +415,7 @@ html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only { display: block;
   flex-wrap: wrap;
   font-size: 0.78rem;
   color: var(--ink-faint);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 /* ── Prose ── */
@@ -625,10 +625,9 @@ article .prose h2 {
 .toc-title {
   font-size: 0.72rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   color: var(--ink-soft);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   margin-bottom: 0.85rem;
 }
 
@@ -710,9 +709,10 @@ article .prose h2 {
 
 /* ── Reading Time ── */
 .reading-time {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Callout Boxes ── */
@@ -731,8 +731,7 @@ article .prose h2 {
   font-family: var(--font-sans);
   font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--accent);
   margin-bottom: 0.4rem;
 }
@@ -879,8 +878,6 @@ article .prose h2 {
   display: inline-block;
   font-size: 0.68rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   margin-bottom: 0.5rem;
@@ -890,6 +887,8 @@ article .prose h2 {
   color: var(--amber);
   background: var(--amber-soft);
   border: 1px solid var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .section-label-deep {
@@ -1114,8 +1113,6 @@ pre:hover .code-copy-btn { opacity: 1; }
   align-items: center;
   font-size: 0.65rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
   padding: 0.12rem 0.45rem;
   border-radius: 4px;
   border: 1px solid;

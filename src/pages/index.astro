@@ -113,7 +113,7 @@ const homeJsonLd = JSON.stringify([
           <span class="feed-date">
             {post.data.date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })}
           </span>
-          <span class="feed-cat">{post.data.category ?? '—'}</span>
+          <span class="feed-cat">{post.data.category ? getCategoryLabel(post.data.category) : '—'}</span>
           <span class="feed-title">{post.data.title}</span>
         </a>
       ))}
@@ -278,8 +278,7 @@ const homeJsonLd = JSON.stringify([
   }
   .featured-label {
     font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     color: var(--accent);
     font-weight: 700;
   }
@@ -354,11 +353,10 @@ const homeJsonLd = JSON.stringify([
     font-variant-numeric: tabular-nums;
   }
   .feed-cat   {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent);
+    font-family: var(--font-serif);
+    font-size: 0.82rem;
+    color: var(--text-dim);
     white-space: nowrap;
-    font-variant-numeric: tabular-nums;
   }
   .feed-title {
     font-family: var(--font-serif);
@@ -444,9 +442,10 @@ const homeJsonLd = JSON.stringify([
     transform-origin: left;
   }
   .bar-count {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    width: 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    width: 2rem;
     text-align: right;
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
