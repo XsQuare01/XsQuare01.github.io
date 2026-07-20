@@ -16,55 +16,56 @@ const tags = Object.entries(tagCount).sort((a, b) => a[0].localeCompare(b[0]));
 
 <BaseLayout title="태그">
   <h1 class="page-title">태그</h1>
-  <p class="page-sub">모든 태그 색인 — 총 {tags.length}개. 가나다·알파벳 순.</p>
-
-  <ul class="tag-index">
+  <div class="tag-grid">
     {tags.map(([tag, count]) => (
-      <li class="ti-item">
-        <a href={`/tags/${tag}`} class="ti">
-          <span class="ti-name">{tag}</span>
-          <span class="ti-count">{count}</span>
-        </a>
-      </li>
+      <a href={`/tags/${tag}`} class="tag-card">
+        <span class="tag-name">{tag}</span>
+        <span class="tag-count">{count} posts</span>
+      </a>
     ))}
-  </ul>
+  </div>
 </BaseLayout>
 
 <style>
-  .tag-index {
-    list-style: none;
+  .tag-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
     margin-top: 1.5rem;
-    columns: 3;
-    column-gap: 2.5rem;
   }
-  .ti-item { break-inside: avoid; }
 
-  .ti {
+  .tag-card {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.6rem;
-    padding: 0.32rem 0;
-    border-bottom: 1px dotted var(--rule);
-    text-decoration: none;
-  }
-  .ti-name {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .ti:hover .ti-name { color: var(--accent); }
-  .ti-count {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    color: var(--text-dim);
-    flex-shrink: 0;
-    font-variant-numeric: tabular-nums;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all 0.25s;
   }
 
-  @media (max-width: 720px) { .tag-index { columns: 2; column-gap: 1.75rem; } }
-  @media (max-width: 420px) { .tag-index { columns: 1; } }
+  .tag-card:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .tag-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .tag-count {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 640px) {
+    .tag-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
