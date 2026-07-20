@@ -60,11 +60,12 @@ for (let i = 0; i < tags.length; i += COLS) {
   .tag-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    /* auto 레이아웃: 긴 태그가 생기면 해당 열이 자동으로 넓어져 잘리지 않음 */
+    table-layout: auto;
   }
 
   .tag-table td {
-    border: 1px solid var(--border);
+    border: 1px solid var(--ink-faint);
     padding: 0;
     vertical-align: middle;
   }
@@ -76,8 +77,8 @@ for (let i = 0; i < tags.length; i += COLS) {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.6rem;
-    padding: 0.7rem 0.9rem;
+    gap: 1.25rem;
+    padding: 0.7rem 1.15rem;
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
   }
@@ -89,8 +90,6 @@ for (let i = 0; i < tags.length; i += COLS) {
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text);
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
   }
   .tt-cell:hover .tt-name { color: var(--accent); }
@@ -104,7 +103,7 @@ for (let i = 0; i < tags.length; i += COLS) {
   }
 
   @media (max-width: 640px) {
-    .tt-cell { padding: 0.55rem 0.6rem; }
+    .tt-cell { padding: 0.55rem 0.85rem; gap: 0.8rem; }
     .tt-name { font-size: 0.85rem; }
   }
 </style>
