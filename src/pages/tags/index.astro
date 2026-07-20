@@ -12,59 +12,98 @@ for (const post of posts) {
 }
 
 const tags = Object.entries(tagCount).sort((a, b) => a[0].localeCompare(b[0]));
+
+// 격자 셀 표: 태그를 좌→우, 행 단위로 채운다. 마지막 행은 빈 칸으로 채워 직사각형 유지.
+const COLS = 3;
+const rows: (readonly [string, number] | null)[][] = [];
+for (let i = 0; i < tags.length; i += COLS) {
+  const row: (readonly [string, number] | null)[] = tags.slice(i, i + COLS);
+  while (row.length < COLS) row.push(null);
+  rows.push(row);
+}
 ---
 
 <BaseLayout title="태그">
   <h1 class="page-title">태그</h1>
   <p class="page-sub">모든 태그 색인 — 총 {tags.length}개. 가나다·알파벳 순.</p>
 
-  <ul class="tag-index">
-    {tags.map(([tag, count]) => (
-      <li class="ti-item">
-        <a href={`/tags/${tag}`} class="ti">
-          <span class="ti-name">{tag}</span>
-          <span class="ti-count">{count}</span>
-        </a>
-      </li>
-    ))}
-  </ul>
+  <div class="tag-table-wrap">
+    <table class="tag-table">
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            {row.map((cell) => (
+              cell ? (
+                <td>
+                  <a href={`/tags/${cell[0]}`} class="tt-cell">
+                    <span class="tt-name">{cell[0]}</span>
+                    <span class="tt-count">{cell[1]}</span>
+                  </a>
+                </td>
+              ) : (
+                <td class="tt-empty"></td>
+              )
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 </BaseLayout>
 
 <style>
-  .tag-index {
-    list-style: none;
+  .tag-table-wrap {
     margin-top: 1.5rem;
-    columns: 3;
-    column-gap: 2.5rem;
+    overflow-x: auto;
   }
-  .ti-item { break-inside: avoid; }
 
-  .ti {
+  .tag-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* auto 레이아웃: 긴 태그가 생기면 해당 열이 자동으로 넓어져 잘리지 않음 */
+    table-layout: auto;
+  }
+
+  .tag-table td {
+    border: 1px solid var(--ink-faint);
+    padding: 0;
+    vertical-align: middle;
+  }
+  .tag-table td.tt-empty {
+    background: var(--bg-card);
+  }
+
+  .tt-cell {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.6rem;
-    padding: 0.32rem 0;
-    border-bottom: 1px dotted var(--rule);
+    gap: 1.25rem;
+    padding: 0.7rem 1.15rem;
     text-decoration: none;
+    transition: background 0.2s, color 0.2s;
   }
-  .ti-name {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .tt-cell:hover {
+    background: var(--accent-dim);
+  }
+
+  .tt-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
     white-space: nowrap;
   }
-  .ti:hover .ti-name { color: var(--accent); }
-  .ti-count {
+  .tt-cell:hover .tt-name { color: var(--accent); }
+
+  .tt-count {
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.78rem;
     color: var(--text-dim);
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
   }
 
-  @media (max-width: 720px) { .tag-index { columns: 2; column-gap: 1.75rem; } }
-  @media (max-width: 420px) { .tag-index { columns: 1; } }
+  @media (max-width: 640px) {
+    .tt-cell { padding: 0.55rem 0.85rem; gap: 0.8rem; }
+    .tt-name { font-size: 0.85rem; }
+  }
 </style>
