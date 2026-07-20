@@ -101,7 +101,7 @@ const homeJsonLd = JSON.stringify([
             <a href={`/blog/${post!.id}`} class="feat">
               <div class="feat-meta">
                 {post!.data.category && <span class="cat">{getCategoryLabel(post!.data.category)}</span>}
-                <span class="dot">·</span>
+                {post!.data.category && <span class="dot">·</span>}
                 <span class="tnum">{fmtDate(post!.data.date)}</span>
                 {post!.data.difficulty && (<><span class="dot">·</span><span>{post!.data.difficulty}</span></>)}
               </div>
