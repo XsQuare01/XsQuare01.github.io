@@ -180,10 +180,7 @@ const currentPath = Astro.url.pathname;
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h8l8 8-8 8-8-8z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
         <span class="rail-txt">태그</span>
       </a>
-      <a href="/stats" class={`rail-item${currentPath.startsWith('/stats') ? ' active' : ''}`}>
-        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke-linecap="round"/></svg></span>
-        <span class="rail-txt">통계</span>
-      </a>
+      {/* 통계는 숨김 유틸리티 페이지 — 네비게이션에 노출하지 않고 /stats 직접 접근으로만 진입 */}
     </nav>
 
     <div class="rail-expand-only">
