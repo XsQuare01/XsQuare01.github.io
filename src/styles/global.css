@@ -761,11 +761,11 @@ article .prose h2 {
 .callout > *:last-child { margin-bottom: 0; }
 .callout-title {
   font-family: var(--font-sans);
-  font-size: 0.64rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0;
   color: var(--accent);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 /* 요점 (key·tip) */
