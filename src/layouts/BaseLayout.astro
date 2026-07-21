@@ -165,19 +165,19 @@ const currentPath = Astro.url.pathname;
     </button>
 
     <nav class="sidebar-nav">
-      <a href="/" class={`rail-item${currentPath === '/' ? ' active' : ''}`}>
+      <a href="/" aria-label="홈" class={`rail-item${currentPath === '/' ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
         <span class="rail-txt">홈</span>
       </a>
-      <a href="/blog" class={`rail-item${currentPath.startsWith('/blog') ? ' active' : ''}`}>
+      <a href="/blog" aria-label="글 목록" class={`rail-item${currentPath.startsWith('/blog') ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 8h6M9 12h6M9 16h4" stroke-linecap="round"/></svg></span>
         <span class="rail-txt">글 목록</span>
       </a>
-      <a href="/categories" class={`rail-item${currentPath.startsWith('/categories') ? ' active' : ''}`}>
+      <a href="/categories" aria-label="카테고리" class={`rail-item${currentPath.startsWith('/categories') ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span>
         <span class="rail-txt">카테고리</span>
       </a>
-      <a href="/tags" class={`rail-item${currentPath.startsWith('/tags') ? ' active' : ''}`}>
+      <a href="/tags" aria-label="태그" class={`rail-item${currentPath.startsWith('/tags') ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h8l8 8-8 8-8-8z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
         <span class="rail-txt">태그</span>
       </a>
