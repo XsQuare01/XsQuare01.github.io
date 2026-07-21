@@ -12,11 +12,11 @@ difficulty: 초급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>페르마의 소정리</strong>: p가 소수이고 gcd(a, p) = 1이면 a^(p−1) ≡ 1 (mod p)</li>
-<li><strong>동치 형태</strong>: 모든 정수 a에 대해 a^p ≡ a (mod p)</li>
-<li><strong>모듈러 역원</strong>: a^(−1) ≡ a^(p−2) (mod p)</li>
-<li><strong>페르마 소수 판별법</strong>: a^(n−1) ≢ 1 (mod n)이면 n은 합성수</li>
-<li><strong>한계</strong>: Carmichael 수 (합성수이지만 모든 a에 대해 테스트를 통과하는 예외)</li>
+<li><strong>페르마의 소정리</strong>: $p$가 소수이고 $\gcd(a, p) = 1$이면 $a^{p-1} \equiv 1 \pmod{p}$</li>
+<li><strong>동치 형태</strong>: 모든 정수 $a$에 대해 $a^p \equiv a \pmod{p}$</li>
+<li><strong>모듈러 역원</strong>: $a^{-1} \equiv a^{p-2} \pmod{p}$</li>
+<li><strong>페르마 소수 판별법</strong>: $a^{n-1} \not\equiv 1 \pmod{n}$이면 $n$은 합성수</li>
+<li><strong>한계</strong>: Carmichael 수 (합성수이지만 모든 $a$에 대해 테스트를 통과하는 예외)</li>
 </ul>
 </div>
 
@@ -69,7 +69,7 @@ $$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>오일러 정리와 페르마의 소정리는 "모듈러 세계에서 거듭제곱은 결국 원점으로 돌아온다"는 것이다. 소수 p에 대해 어떤 수를 (p-1)번 거듭제곱하면 반드시 1로 돌아온다. RSA는 이 주기성을 이용해 암호화한 메시지를 정확히 원래대로 복원한다.</p>
+<p>오일러 정리와 페르마의 소정리는 "모듈러 세계에서 거듭제곱은 결국 원점으로 돌아온다"는 것이다. 소수 $p$에 대해 어떤 수를 $(p-1)$번 거듭제곱하면 반드시 1로 돌아온다. RSA는 이 주기성을 이용해 암호화한 메시지를 정확히 원래대로 복원한다.</p>
 </div>
 
 ## 예시
@@ -129,10 +129,10 @@ Carmichael 수 때문에 페르마 테스트 단독으로는 소수를 완전히
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>a^(p-1) ≡ 1 (mod p)는 오일러 정리의 특수화이자, 집합 {1,...,p-1}이 곱셈에 대한 군(group)임을 반영한다.</li>
-<li>모듈러 역원 a^(−1) ≡ a^(p−2)는 확장 유클리드 없이 지수연산만으로 역원을 구하는 실용적 공식이다.</li>
+<li>$a^{p-1} \equiv 1 \pmod{p}$는 오일러 정리의 특수화이자, 집합 $\{1,\ldots,p-1\}$이 곱셈에 대한 군(group)임을 반영한다.</li>
+<li>모듈러 역원 $a^{-1} \equiv a^{p-2}$는 확장 유클리드 없이 지수연산만으로 역원을 구하는 실용적 공식이다.</li>
 <li>페르마 소수 판별법은 확률적 테스트다. Carmichael 수라는 반례가 존재하므로 단독으로 완전한 증명이 되지 않는다.</li>
-<li>RSA에서 복호화 정확성(m^(de) ≡ m (mod n))은 페르마의 소정리(혹은 오일러 정리)에 직접 의존한다.</li>
+<li>RSA에서 복호화 정확성($m^{de} \equiv m \pmod{n}$)은 페르마의 소정리(혹은 오일러 정리)에 직접 의존한다.</li>
 </ul>
 </div>
 

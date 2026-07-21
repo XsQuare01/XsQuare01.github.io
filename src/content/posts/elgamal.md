@@ -12,11 +12,11 @@ difficulty: 중급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>보안 근거</strong>: 이산 대수 문제 (DLP). g^x mod p에서 x를 구하는 것은 지수적으로 어렵다</li>
-<li><strong>키 생성</strong>: 비밀키 x, 공개키 h = g^x mod p</li>
-<li><strong>암호화</strong>: 랜덤 k 선택 → 암호문 (A, B) = (g^k, m·h^k) mod p</li>
-<li><strong>복호화</strong>: 공유 비밀 s = A^x, 평문 m = B·s⁻¹ mod p</li>
-<li><strong>확률적 암호화</strong>: 같은 평문도 k가 달라지면 다른 암호문 → IND-CPA 만족</li>
+<li><strong>보안 근거</strong>: 이산 대수 문제 (DLP). $g^x \bmod p$에서 $x$를 구하는 것은 지수적으로 어렵다</li>
+<li><strong>키 생성</strong>: 비밀키 $x$, 공개키 $h = g^x \bmod p$</li>
+<li><strong>암호화</strong>: 랜덤 $k$ 선택 → 암호문 $(A, B) = (g^k, m \cdot h^k) \bmod p$</li>
+<li><strong>복호화</strong>: 공유 비밀 $s = A^x$, 평문 $m = B \cdot s^{-1} \bmod p$</li>
+<li><strong>확률적 암호화</strong>: 같은 평문도 $k$가 달라지면 다른 암호문 → IND-CPA 만족</li>
 </ul>
 </div>
 
@@ -102,7 +102,7 @@ ElGamal의 보안은 **계산적 Diffie-Hellman(CDH) 가정** 에 기반한다.
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>CDH 가정은 "재료 두 개(g^x, g^k)를 알아도 완성품(g^{xk})을 만들 수 없다"는 것이다. 공격자는 Alice의 공개키와 Bob이 보낸 값을 모두 볼 수 있지만, 이 둘을 결합해서 공유 비밀을 계산하는 것이 수학적으로 어렵다. 이 어려움이 ElGamal 암호의 안전성을 보장한다.</p>
+<p>CDH 가정은 "재료 두 개($g^x$, $g^k$)를 알아도 완성품($g^{xk}$)을 만들 수 없다"는 것이다. 공격자는 Alice의 공개키와 Bob이 보낸 값을 모두 볼 수 있지만, 이 둘을 결합해서 공유 비밀을 계산하는 것이 수학적으로 어렵다. 이 어려움이 ElGamal 암호의 안전성을 보장한다.</p>
 </div>
 
 ## 확률적 암호화와 IND-CPA 안전성
@@ -141,10 +141,10 @@ ElGamal의 핵심 이점은 **확률적(randomized)** 암호화다.
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>ElGamal은 DLP의 어려움에 기반한다. g^x를 알아도 x를 역산하는 다항식 알고리즘은 알려져 있지 않다.</li>
-<li>복호화 정확성은 A^x = h^k = g^(kx)라는 공유 비밀의 동등성에서 비롯된다. Diffie-Hellman 키 교환의 직접 응용이다.</li>
+<li>ElGamal은 DLP의 어려움에 기반한다. $g^x$를 알아도 $x$를 역산하는 다항식 알고리즘은 알려져 있지 않다.</li>
+<li>복호화 정확성은 $A^x = h^k = g^{kx}$라는 공유 비밀의 동등성에서 비롯된다. Diffie-Hellman 키 교환의 직접 응용이다.</li>
 <li>확률적 암호화 덕분에 동일 평문도 매번 다른 암호문을 생성한다. 이것이 IND-CPA 안전성의 핵심이다.</li>
-<li>임시 키 k를 재사용하면 즉시 평문 비율이 노출된다. k는 반드시 매번 새로 생성해야 한다.</li>
+<li>임시 키 $k$를 재사용하면 즉시 평문 비율이 노출된다. $k$는 반드시 매번 새로 생성해야 한다.</li>
 </ul>
 </div>
 

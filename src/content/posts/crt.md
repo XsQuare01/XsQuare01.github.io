@@ -12,9 +12,9 @@ difficulty: 중급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>설정</strong>: m₁,...,mᵣ이 서로 쌍으로 서로소(pairwise coprime)이고 m = m₁···mᵣ</li>
-<li><strong>보장</strong>: 임의의 c₁,...,cᵣ에 대해 x ≡ cᵢ (mod mᵢ)를 동시에 만족하는 x가 mod m에서 유일하게 존재</li>
-<li><strong>구성</strong>: Mᵢ = m/mᵢ,  Nᵢ = Mᵢ⁻¹ mod mᵢ,  x = Σ cᵢ·Mᵢ·Nᵢ mod m</li>
+<li><strong>설정</strong>: $m_1, \ldots, m_r$이 서로 쌍으로 서로소(pairwise coprime)이고 $m = m_1 \cdots m_r$</li>
+<li><strong>보장</strong>: 임의의 $c_1, \ldots, c_r$에 대해 $x \equiv c_i \pmod{m_i}$를 동시에 만족하는 $x$가 $\bmod\ m$에서 유일하게 존재</li>
+<li><strong>구성</strong>: $M_i = m/m_i$,  $N_i = M_i^{-1} \bmod m_i$,  $x = \sum c_i M_i N_i \bmod m$</li>
 <li><strong>응용</strong>: RSA-CRT 최적화 (처리 속도 약 4배 향상)</li>
 </ul>
 </div>
@@ -162,10 +162,10 @@ $m_p$와 $m_q$를 구한 뒤 CRT로 $m \bmod n$을 복원한다.
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>CRT는 쌍으로 서로소인 모듈러스들에 대한 연립 합동식이 mod m에서 유일한 해를 가짐을 보장한다.</li>
-<li>유일성: 두 해의 차가 모든 mᵢ의 배수이므로 m의 배수 → mod m에서 동일. 존재성: 구성적 증명으로 해를 명시적으로 구성한다.</li>
+<li>CRT는 쌍으로 서로소인 모듈러스들에 대한 연립 합동식이 $\bmod\ m$에서 유일한 해를 가짐을 보장한다.</li>
+<li>유일성: 두 해의 차가 모든 $m_i$의 배수이므로 $m$의 배수 → $\bmod\ m$에서 동일. 존재성: 구성적 증명으로 해를 명시적으로 구성한다.</li>
 <li>연산 보존 성질 덕분에 큰 모듈러스 연산을 작은 연산들로 분해·병렬화할 수 있다. 이것이 RSA-CRT의 수학적 근거다.</li>
-<li>RSA-CRT는 n=pq 구조를 활용해 복호화 속도를 약 4배 향상시키는 실용적 최적화 기법이다.</li>
+<li>RSA-CRT는 $n = pq$ 구조를 활용해 복호화 속도를 약 4배 향상시키는 실용적 최적화 기법이다.</li>
 </ul>
 </div>
 

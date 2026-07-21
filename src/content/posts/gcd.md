@@ -12,10 +12,10 @@ difficulty: 초급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>GCD 대수적 정의</strong>: d | a, d | b이고, c | a, c | b이면 c | d가 되는 유일한 d ≥ 0</li>
-<li><strong>유클리드 호제법</strong>: gcd(b, a) = gcd(a, r), 나머지가 0이 될 때까지 반복</li>
-<li><strong>확장 유클리드 알고리즘</strong>: gcd(a, b) = xa + yb (베주 항등식)</li>
-<li><strong>서로소 성질</strong>: gcd(a, b) = 1 ↔ ax + by = 1인 정수 x, y가 존재</li>
+<li><strong>GCD 대수적 정의</strong>: $d \mid a$, $d \mid b$이고, $c \mid a$, $c \mid b$이면 $c \mid d$가 되는 유일한 $d \ge 0$</li>
+<li><strong>유클리드 호제법</strong>: $\gcd(b, a) = \gcd(a, r)$, 나머지가 0이 될 때까지 반복</li>
+<li><strong>확장 유클리드 알고리즘</strong>: $\gcd(a, b) = xa + yb$ (베주 항등식)</li>
+<li><strong>서로소 성질</strong>: $\gcd(a, b) = 1 \iff ax + by = 1$인 정수 $x, y$가 존재</li>
 </ul>
 </div>
 
@@ -103,7 +103,7 @@ $$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>확장 유클리드 알고리즘은 "GCD를 구하는 과정을 거꾸로 되감으면, GCD를 두 원래 수의 덧셈·뺄셈 조합으로 표현할 수 있다"는 뜻이다. 예를 들어 gcd(12, 8) = 4이면, 4 = 12 × 1 + 8 × (−1)처럼 쓸 수 있다. 이 성질이 RSA에서 비밀키를 계산하는 핵심 도구가 된다.</p>
+<p>확장 유클리드 알고리즘은 "GCD를 구하는 과정을 거꾸로 되감으면, GCD를 두 원래 수의 덧셈·뺄셈 조합으로 표현할 수 있다"는 뜻이다. 예를 들어 $\gcd(12, 8) = 4$이면, $4 = 12 \times 1 + 8 \times (-1)$처럼 쓸 수 있다. 이 성질이 RSA에서 비밀키를 계산하는 핵심 도구가 된다.</p>
 </div>
 
 ## 서로소의 성질
@@ -166,10 +166,10 @@ $d = \gcd(a, b, c)$는 다음을 만족하는 유일한 정수 $d \geq 0$이다.
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>GCD의 대수적 정의는 "가장 큰 공약수"라는 직관적 정의와 동치이며, c | d 조건이 더 엄밀하고 다루기 쉽다.</li>
-<li>유클리드 호제법은 gcd(b, a) = gcd(a, r)을 반복 적용해 로그 시간에 GCD를 구한다.</li>
-<li>확장 유클리드 알고리즘(베주 항등식)은 gcd(a, b) = xa + yb를 보장한다. 이는 서로소 판별, 모듈러 역원 계산, RSA 키 생성의 수학적 근거가 된다.</li>
-<li>서로소 성질(gcd = 1)은 정수론 전반에서 핵심 도구로 쓰이며, 특히 암호 시스템에서 키와 모듈러스의 관계를 보장하는 데 필수적이다.</li>
+<li>GCD의 대수적 정의는 "가장 큰 공약수"라는 직관적 정의와 동치이며, $c \mid d$ 조건이 더 엄밀하고 다루기 쉽다.</li>
+<li>유클리드 호제법은 $\gcd(b, a) = \gcd(a, r)$을 반복 적용해 로그 시간에 GCD를 구한다.</li>
+<li>확장 유클리드 알고리즘(베주 항등식)은 $\gcd(a, b) = xa + yb$를 보장한다. 이는 서로소 판별, 모듈러 역원 계산, RSA 키 생성의 수학적 근거가 된다.</li>
+<li>서로소 성질($\gcd = 1$)은 정수론 전반에서 핵심 도구로 쓰이며, 특히 암호 시스템에서 키와 모듈러스의 관계를 보장하는 데 필수적이다.</li>
 </ul>
 </div>
 

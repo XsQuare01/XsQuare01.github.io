@@ -155,9 +155,9 @@ $$L_{11} = \{x \mid x = yy^Ry^Ry^R\}$$
 <div class="callout-title">핵심 정리: DPDA와 NPDA</div>
 <ul>
 <li>비결정론이 계산 능력 자체를 높이는 유일한 모델은 DPDA다 — DFA, DTM에서는 비결정론이 능력 차이를 만들지 않는다.</li>
-<li>DPDA ⊊ NPDA: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: $yy^R$).</li>
-<li>스택 1개 추가: Regular → CFL로 능력이 확장된다.</li>
-<li>스택 2개 추가: CFL → Recursively Enumerable로 확장 — 튜링 머신과 동등하다.</li>
+<li>$\text{DPDA} \subsetneq \text{NPDA}$: DPDA로는 인식할 수 없는 CFL이 존재한다 (예: $yy^R$).</li>
+<li>스택 1개 추가: $\text{Regular} \to \text{CFL}$로 능력이 확장된다.</li>
+<li>스택 2개 추가: $\text{CFL} \to \text{Recursively Enumerable}$로 확장 — 튜링 머신과 동등하다.</li>
 </ul>
 </div>
 

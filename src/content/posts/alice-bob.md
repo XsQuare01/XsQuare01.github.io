@@ -17,7 +17,7 @@ difficulty: 입문
 <li><strong>Class NP</strong>: 다항식 시간 안에 결정 가능한 언어 (NTM 기준)</li>
 <li><strong>Class EXP</strong>: 지수 시간 안에 결정 가능한 언어 (DTM 기준)</li>
 <li><strong>Class PSPACE</strong>: 다항식 공간 안에 결정 가능한 언어 (DTM 기준)</li>
-<li><strong>Savitch 정리</strong>: PSPACE = NPSPACE — 공간에서는 비결정론이 결정론보다 강하지 않다</li>
+<li><strong>Savitch 정리</strong>: $PSPACE = NPSPACE$ — 공간에서는 비결정론이 결정론보다 강하지 않다</li>
 </ul>
 </div>
 
@@ -167,13 +167,13 @@ $$PSPACE = NPSPACE$$
 <div class="callout-title">핵심 정리: P, NP, PSPACE, EXP</div>
 <ul>
 <li>암호학적 안전성은 "정보 이론적 불가능"이 아닌 "계산적으로 비현실적"으로 정의한다.</li>
-<li>P ⊆ NP ⊆ PSPACE ⊆ EXP — 각 포함 관계는 증명되어 있으나, 등호 여부는 대부분 미해결이다.</li>
-<li>P ≠ EXP는 증명되어 있다. P = NP인지는 컴퓨터 과학 최대의 미해결 문제다.</li>
-<li>PSPACE = NPSPACE (Savitch 정리) — 공간에서는 비결정론이 결정론보다 본질적으로 강하지 않다.</li>
+<li>$P \subseteq NP \subseteq PSPACE \subseteq EXP$ — 각 포함 관계는 증명되어 있으나, 등호 여부는 대부분 미해결이다.</li>
+<li>$P \neq EXP$는 증명되어 있다. $P = NP$인지는 컴퓨터 과학 최대의 미해결 문제다.</li>
+<li>$PSPACE = NPSPACE$ (Savitch 정리) — 공간에서는 비결정론이 결정론보다 본질적으로 강하지 않다.</li>
 </ul>
 </div>
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>NP의 다른 정의 — 검증자와 증명서</strong> — NP를 "힌트가 있으면 다항식 시간에 검증 가능한 문제"로 재정의한다. 두 정의가 동치임을 증명하고, P ≠ NP 가정이 왜 암호학의 근간인지를 설명한다.</p>
+<p><strong>NP의 다른 정의 — 검증자와 증명서</strong> — NP를 "힌트가 있으면 다항식 시간에 검증 가능한 문제"로 재정의한다. 두 정의가 동치임을 증명하고, $P \neq NP$ 가정이 왜 암호학의 근간인지를 설명한다.</p>
 </div>

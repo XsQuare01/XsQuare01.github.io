@@ -16,7 +16,7 @@ difficulty: 심화
 <li><strong>NTM</strong>: Non-deterministic Turing Machine — 비결정론적 튜링 머신</li>
 <li><strong>UTM</strong>: Universal Turing Machine — 임의의 TM을 시뮬레이션하는 TM</li>
 <li><strong>Configuration</strong>: 현재 상태 + 테이프 내용 + 헤드 위치의 조합</li>
-<li><strong>Tape alphabet Γ</strong>: 테이프에 쓸 수 있는 심볼 집합 (공백 ⊔ 포함)</li>
+<li><strong>Tape alphabet $\Gamma$</strong>: 테이프에 쓸 수 있는 심볼 집합 (공백 $\sqcup$ 포함)</li>
 </ul>
 </div>
 
@@ -163,7 +163,7 @@ $$\text{Class DTM} = \text{Class NTM}$$
 <div class="callout-title">핵심 정리: 계산 가능성 vs 효율성</div>
 <ul>
 <li>비결정론이 항상 계산 능력을 높이는 것은 아니다. DFA, DTM에서는 비결정론을 도입해도 인식하는 언어가 달라지지 않는다.</li>
-<li><strong>계산 가능성(무엇을 풀 수 있는가)</strong>: DTM = NTM</li>
+<li><strong>계산 가능성(무엇을 풀 수 있는가)</strong>: $\text{DTM} = \text{NTM}$</li>
 <li><strong>효율성(얼마나 빠르게 푸는가)</strong>: NTM이 더 빠를 수 있다 — 이것이 P vs NP 문제의 핵심이다.</li>
 <li>DPDA에서만 비결정론이 계산 능력 자체의 차이를 만들어낸다.</li>
 </ul>
@@ -171,5 +171,5 @@ $$\text{Class DTM} = \text{Class NTM}$$
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Classes — 계산 가능성 클래스 D, E, co-E</strong> — 튜링 머신으로 풀 수 있는 문제를 D(결정 가능), E(열거 가능), co-E로 분류하고, Dovetailing 기법과 정지 문제의 모순 증명을 통해 D = E ∩ co-E를 보인다.</p>
+<p><strong>Classes — 계산 가능성 클래스 D, E, co-E</strong> — 튜링 머신으로 풀 수 있는 문제를 D(결정 가능), E(열거 가능), co-E로 분류하고, Dovetailing 기법과 정지 문제의 모순 증명을 통해 $D = E \cap \text{co-E}$를 보인다.</p>
 </div>

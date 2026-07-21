@@ -13,11 +13,11 @@ difficulty: 심화
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li><strong>NP-Complete</strong>: NP에 속하면서, NP의 모든 문제가 다항식 시간에 귀착되는 가장 어려운 문제들의 집합</li>
-<li><strong>Reduction (귀착)</strong>: 문제 A를 문제 B로 변환하는 방법 — A ≤ₚ B이면 B가 A만큼 어렵다</li>
+<li><strong>Reduction (귀착)</strong>: 문제 $A$를 문제 $B$로 변환하는 방법 — $A \le_p B$이면 $B$가 $A$만큼 어렵다</li>
 <li><strong>SAT</strong>: 논리식을 참으로 만드는 변수 배정이 존재하는지 판별하는 문제</li>
 <li><strong>Cook의 정리</strong>: 모든 NP 문제는 SAT로 다항식 시간에 귀착된다 — SAT는 최초의 NP-Complete 문제</li>
 <li><strong>NP-Hard</strong>: 모든 NP 문제가 귀착되지만, NP에 속하지 않을 수 있는 문제들</li>
-<li><strong>Co-NP</strong>: "No"에 대한 증명서가 존재하는 언어 클래스 — L ∈ Co-NP ⟺ Lᶜ ∈ NP</li>
+<li><strong>Co-NP</strong>: "No"에 대한 증명서가 존재하는 언어 클래스 — $L \in \text{Co-NP} \iff L^c \in \text{NP}$</li>
 </ul>
 </div>
 
@@ -31,10 +31,10 @@ difficulty: 심화
 
 <div class="callout callout-key">
 <div class="callout-title">NP-Complete의 정의</div>
-<p>문제 L이 NP-Complete이려면 다음 두 조건을 모두 만족해야 한다.</p>
+<p>문제 $L$이 NP-Complete이려면 다음 두 조건을 모두 만족해야 한다.</p>
 <ol>
-<li><strong>L ∈ NP</strong>: L은 NP에 속한다.</li>
-<li><strong>NP-hardness</strong>: NP의 모든 문제 A에 대해 A ≤ₚ L — 다항식 시간 귀착이 존재한다.</li>
+<li><strong>$L \in \text{NP}$</strong>: $L$은 NP에 속한다.</li>
+<li><strong>NP-hardness</strong>: NP의 모든 문제 $A$에 대해 $A \le_p L$ — 다항식 시간 귀착이 존재한다.</li>
 </ol>
 </div>
 
@@ -42,7 +42,7 @@ difficulty: 심화
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>NP-Complete는 "NP 문제들 중 가장 어려운 보스 문제"다. 이 보스를 하나라도 빠르게 풀 수 있다면, NP의 모든 문제를 빠르게 풀 수 있다. 반대로 말하면, 수천 개의 NP-Complete 문제 중 단 하나도 빠른 풀이법이 발견되지 않았다는 사실이 P != NP를 강력하게 시사한다.</p>
+<p>NP-Complete는 "NP 문제들 중 가장 어려운 보스 문제"다. 이 보스를 하나라도 빠르게 풀 수 있다면, NP의 모든 문제를 빠르게 풀 수 있다. 반대로 말하면, 수천 개의 NP-Complete 문제 중 단 하나도 빠른 풀이법이 발견되지 않았다는 사실이 $P \neq \text{NP}$를 강력하게 시사한다.</p>
 </div>
 
 ---
@@ -150,10 +150,10 @@ $$x \in L \iff \text{(NTM 회로에 대한 SAT 인스턴스가 Satisfiable)}$$
 <div class="callout callout-key">
 <div class="callout-title">Cook의 정리의 의미</div>
 <p>SAT가 NP-Complete임이 증명된 이후, 다른 문제의 NP-Complete 여부를 증명하는 방법이 생겼다.</p>
-<p><strong>어떤 문제 A가 NP-Complete임을 보이려면:</strong></p>
+<p><strong>어떤 문제 $A$가 NP-Complete임을 보이려면:</strong></p>
 <ol>
-<li>A ∈ NP임을 보인다.</li>
-<li>기존에 알려진 NP-Complete 문제 B에서 B ≤ₚ A임을 보인다.</li>
+<li>$A \in \text{NP}$임을 보인다.</li>
+<li>기존에 알려진 NP-Complete 문제 $B$에서 $B \le_p A$임을 보인다.</li>
 </ol>
 <p>이 방식으로 SAT → 3-SAT → Vertex Cover → Independent Set → … 수천 개의 NP-Complete 문제가 연쇄적으로 발견되었다.</p>
 </div>
@@ -192,10 +192,10 @@ $\text{NP} \cap \text{Co-NP}$에 속하는 문제는 "Yes"와 "No" 모두에 대
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>NP-Complete = NP ∩ NP-Hard: NP에 속하면서 모든 NP 문제를 귀착시킬 수 있는 가장 어려운 문제들</li>
+<li>$\text{NP-Complete} = \text{NP} \cap \text{NP-Hard}$: NP에 속하면서 모든 NP 문제를 귀착시킬 수 있는 가장 어려운 문제들</li>
 <li>Cook의 정리: SAT는 최초의 NP-Complete 문제. 임의의 NTM 실행을 SAT 인스턴스로 변환할 수 있다.</li>
-<li>어떤 NP-Complete 문제 하나를 다항식 시간에 풀면, 모든 NP 문제가 다항식 시간에 풀린다 — P = NP 성립</li>
-<li>P ≠ NP로 추정되지만, 컴퓨터 과학 최대의 미해결 문제로 남아 있다.</li>
+<li>어떤 NP-Complete 문제 하나를 다항식 시간에 풀면, 모든 NP 문제가 다항식 시간에 풀린다 — $P = \text{NP}$ 성립</li>
+<li>$P \neq \text{NP}$로 추정되지만, 컴퓨터 과학 최대의 미해결 문제로 남아 있다.</li>
 </ul>
 </div>
 
