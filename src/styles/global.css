@@ -237,6 +237,7 @@ html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only {
   border-radius: 4px;
 }
 .sidebar-tags .tag:hover { background: var(--accent-dim); }
+.sidebar-tags .tag-n { margin-left: 0.3rem; font-family: var(--font-mono); font-size: 0.9em; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
 
 .rail-bottom { margin-top: auto; padding-top: 0.5rem; }
 .sidebar-footer {

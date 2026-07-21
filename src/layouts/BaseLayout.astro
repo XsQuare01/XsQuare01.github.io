@@ -47,9 +47,8 @@ for (const post of posts) {
   }
 }
 const topTags = Object.entries(tagCount)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 8)
-  .map(([tag]) => tag);
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 8);
 const activeCategories = categories.filter((cat) => (categoryCount[cat.slug] ?? 0) > 0);
 
 const currentPath = Astro.url.pathname;
@@ -202,8 +201,8 @@ const currentPath = Astro.url.pathname;
         <div class="sidebar-tags">
           <div class="sidebar-nav-label">태그</div>
           <div class="tag-list">
-            {topTags.map((tag) => (
-              <a href={`/tags/${tag}`} class="tag">{tag}</a>
+            {topTags.map(([tag, count]) => (
+              <a href={`/tags/${tag}`} class="tag">{tag}<span class="tag-n">{count}</span></a>
             ))}
           </div>
         </div>
