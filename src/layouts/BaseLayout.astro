@@ -47,9 +47,8 @@ for (const post of posts) {
   }
 }
 const topTags = Object.entries(tagCount)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 8)
-  .map(([tag]) => tag);
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 8);
 const activeCategories = categories.filter((cat) => (categoryCount[cat.slug] ?? 0) > 0);
 
 const currentPath = Astro.url.pathname;
@@ -150,6 +149,7 @@ const currentPath = Astro.url.pathname;
     </span>
   </button>
   <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
     <a href="/" class="brand" aria-label="XsQuare01 홈">
       <span class="brand-sq">X²</span>
       <span class="brand-txt rail-txt">XsQuare01</span>
@@ -164,28 +164,21 @@ const currentPath = Astro.url.pathname;
     </button>
 
     <nav class="sidebar-nav">
-      <a href="/" class={`rail-item${currentPath === '/' ? ' active' : ''}`}>
+      <a href="/" aria-label="홈" class={`rail-item${currentPath === '/' ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
         <span class="rail-txt">홈</span>
       </a>
-      <a href="/blog" class={`rail-item${currentPath.startsWith('/blog') ? ' active' : ''}`}>
+      <a href="/blog" aria-label="글 목록" class={`rail-item${currentPath.startsWith('/blog') ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 8h6M9 12h6M9 16h4" stroke-linecap="round"/></svg></span>
         <span class="rail-txt">글 목록</span>
       </a>
-      <a href="/categories" class={`rail-item${currentPath.startsWith('/categories') ? ' active' : ''}`}>
-        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span>
-        <span class="rail-txt">카테고리</span>
-      </a>
-      <a href="/tags" class={`rail-item${currentPath.startsWith('/tags') ? ' active' : ''}`}>
-        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h8l8 8-8 8-8-8z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
-        <span class="rail-txt">태그</span>
-      </a>
+      {/* 카테고리·태그는 아래 확장 패널의 섹션 헤더(링크)가 담당 — 아이콘 내비 중복 제거 */}
       {/* 통계는 숨김 유틸리티 페이지 — 네비게이션에 노출하지 않고 /stats 직접 접근으로만 진입 */}
     </nav>
 
     <div class="rail-expand-only">
       <div class="sidebar-categories">
-        <div class="sidebar-nav-label">카테고리</div>
+        <a href="/categories" class={`sidebar-nav-label sidebar-nav-label--link${currentPath.startsWith('/categories') ? ' active' : ''}`}>카테고리</a>
         {activeCategories.map((cat) => (
           <a
             href={`/categories/${cat.slug}`}
@@ -199,10 +192,10 @@ const currentPath = Astro.url.pathname;
 
       {topTags.length > 0 && (
         <div class="sidebar-tags">
-          <div class="sidebar-nav-label">태그</div>
+          <a href="/tags" class={`sidebar-nav-label sidebar-nav-label--link${currentPath.startsWith('/tags') ? ' active' : ''}`}>태그</a>
           <div class="tag-list">
-            {topTags.map((tag) => (
-              <a href={`/tags/${tag}`} class="tag">{tag}</a>
+            {topTags.map(([tag, count]) => (
+              <a href={`/tags/${tag}`} class="tag">{tag}<span class="tag-n">{count}</span></a>
             ))}
           </div>
         </div>
@@ -215,6 +208,7 @@ const currentPath = Astro.url.pathname;
         <span class="rail-txt">사이드바 고정</span>
       </button>
       <div class="sidebar-footer rail-expand-only">© {new Date().getFullYear()} XsQuare01</div>
+    </div>
     </div>
   </aside>
 
@@ -416,11 +410,24 @@ const currentPath = Astro.url.pathname;
 
   // ── 조용한 레일 고정/접기 ──
   const pinBtn = document.getElementById('pin-btn');
+  const sidebarEl = document.getElementById('sidebar');
   pinBtn?.addEventListener('click', () => {
     const pinned = document.documentElement.classList.toggle('rail-pinned');
     localStorage.setItem('rail', pinned ? 'pinned' : 'collapsed');
     const label = pinBtn.querySelector('.rail-txt');
     if (label) label.textContent = pinned ? '사이드바 접기' : '사이드바 고정';
+    // 접기(핀 해제)를 누르면, 마우스가 아직 위에 있어도 즉시 접히게 한다.
+    // 포커스를 풀고 rail-collapsing으로 hover/focus 확장을 무력화한 뒤,
+    // 다음 mouseleave에 클래스를 제거해 이후 hover는 정상 복귀한다. (데스크톱 레일에만 적용)
+    if (!pinned && sidebarEl && window.matchMedia('(min-width: 769px)').matches) {
+      pinBtn.blur();
+      sidebarEl.classList.add('rail-collapsing');
+      sidebarEl.addEventListener(
+        'mouseleave',
+        () => sidebarEl.classList.remove('rail-collapsing'),
+        { once: true }
+      );
+    }
   });
   if (document.documentElement.classList.contains('rail-pinned')) {
     const label = pinBtn?.querySelector('.rail-txt');
