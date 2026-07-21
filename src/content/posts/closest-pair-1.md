@@ -142,7 +142,9 @@ $D$는 왼쪽과 오른쪽 각 영역의 최솟거리다. 같은 편 두 점은 
 
 </div>
 <div class="proof">
+
 <span class="proof-lead">증명.</span> 비용을 항목별로 더한다. **초기 정렬**은 x좌표로 전체를 한 번 정렬하므로 $O(n \log n)$이다. **한 레벨의 Combine**은 밴드 안 점들을 y좌표로 정렬($O(n \log n)$)하고 각 점에서 보조정리 1에 의해 상수(최대 7)개만 비교하므로, 같은 레벨의 여러 서브문제를 모두 합산해도 $2 \cdot O(\tfrac{n}{2} \log \tfrac{n}{2}) = O(n \log n)$이다. **재귀 깊이**는 매 단계 절반씩 나누므로 $\log n$이다. 따라서 재귀 비용은 $O(n \log n) \times \log n = O(n \log^2 n)$이고, 초기 정렬 $O(n \log n)$은 이보다 낮은 차수라 지배항이 아니다. 전체는 $O(n \log^2 n)$이다. <span class="qed">∎</span>
+
 </div>
 
 ![가장 가까운 점 쌍 복잡도 — 재귀 트리 깊이 log n, 각 레벨 combine 비용 O(n log n). 전체 O(n log² n).](/images/closest-pair/complexity.svg)
