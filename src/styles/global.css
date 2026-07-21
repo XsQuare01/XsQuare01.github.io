@@ -84,6 +84,7 @@ a:hover { color: var(--accent); }
   --rail-w: 3.9rem;    /* 접힌 레일 폭 (사이드바 실제 폭) */
   --main-gap: 3.9rem;  /* 본문 왼쪽 여백 (호버로는 안 바뀜) */
   --rail-bg: color-mix(in srgb, var(--ink) 3.5%, var(--paper));
+  --rail-expanded: 14rem;  /* 내부 콘텐츠 고정 폭 */
 }
 html.rail-pinned {
   --rail-w: 14rem;
@@ -97,15 +98,19 @@ html.rail-pinned {
   border-right: 1px solid var(--rule);
   position: fixed;
   top: 0; left: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 100;
   font-family: var(--font-sans);
   color: var(--ink-soft);
   transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+.sidebar-inner {
+  width: var(--rail-expanded);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.5rem;
 }
 /* 호버 확장 (고정 아닐 때만) — 오버레이 */
 html:not(.rail-pinned) .sidebar:hover,
@@ -114,15 +119,25 @@ html:not(.rail-pinned) .sidebar:focus-within {
   box-shadow: 6px 0 30px rgba(34, 32, 27, 0.10);
 }
 
-/* 접힘/펼침에 따른 라벨·확장 전용 영역 표시 */
-.rail-txt { display: none; }
-.rail-expand-only { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .rail-txt, .rail-expand-only { transition: none; }
+}
+
+/* 접힘/펼침 표시 전환: display 대신 opacity/visibility → 레이아웃 불변, 재배열 없음 */
+.rail-txt, .rail-expand-only {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, visibility 0.18s;
+}
 html.rail-pinned .rail-txt,
-html:not(.rail-pinned) .sidebar:hover .rail-txt,
-html:not(.rail-pinned) .sidebar:focus-within .rail-txt { display: inline; }
 html.rail-pinned .rail-expand-only,
+html:not(.rail-pinned) .sidebar:hover .rail-txt,
 html:not(.rail-pinned) .sidebar:hover .rail-expand-only,
-html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only { display: block; }
+html:not(.rail-pinned) .sidebar:focus-within .rail-txt,
+html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* 브랜드 마크 */
 .brand {
@@ -1162,8 +1177,8 @@ pre:hover .code-copy-btn { opacity: 1; }
   }
   .sidebar.open { transform: translateX(0); }
   /* 모바일에선 항상 라벨·확장 영역 표시 */
-  .rail-txt { display: inline; }
-  .rail-expand-only { display: block; }
+  .rail-txt, .rail-expand-only { opacity: 1; visibility: visible; }
+  .sidebar-inner { width: 100%; }
   body { flex-direction: column; }
   .main-wrap { margin-left: 0; padding: 1.5rem; min-height: calc(100vh - 60px); }
   .right-panel { display: none; }
