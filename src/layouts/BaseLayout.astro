@@ -172,20 +172,13 @@ const currentPath = Astro.url.pathname;
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 8h6M9 12h6M9 16h4" stroke-linecap="round"/></svg></span>
         <span class="rail-txt">글 목록</span>
       </a>
-      <a href="/categories" aria-label="카테고리" class={`rail-item${currentPath.startsWith('/categories') ? ' active' : ''}`}>
-        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg></span>
-        <span class="rail-txt">카테고리</span>
-      </a>
-      <a href="/tags" aria-label="태그" class={`rail-item${currentPath.startsWith('/tags') ? ' active' : ''}`}>
-        <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h8l8 8-8 8-8-8z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
-        <span class="rail-txt">태그</span>
-      </a>
+      {/* 카테고리·태그는 아래 확장 패널의 섹션 헤더(링크)가 담당 — 아이콘 내비 중복 제거 */}
       {/* 통계는 숨김 유틸리티 페이지 — 네비게이션에 노출하지 않고 /stats 직접 접근으로만 진입 */}
     </nav>
 
     <div class="rail-expand-only">
       <div class="sidebar-categories">
-        <div class="sidebar-nav-label">카테고리</div>
+        <a href="/categories" class={`sidebar-nav-label sidebar-nav-label--link${currentPath.startsWith('/categories') ? ' active' : ''}`}>카테고리</a>
         {activeCategories.map((cat) => (
           <a
             href={`/categories/${cat.slug}`}
@@ -199,7 +192,7 @@ const currentPath = Astro.url.pathname;
 
       {topTags.length > 0 && (
         <div class="sidebar-tags">
-          <div class="sidebar-nav-label">태그</div>
+          <a href="/tags" class={`sidebar-nav-label sidebar-nav-label--link${currentPath.startsWith('/tags') ? ' active' : ''}`}>태그</a>
           <div class="tag-list">
             {topTags.map(([tag, count]) => (
               <a href={`/tags/${tag}`} class="tag">{tag}<span class="tag-n">{count}</span></a>

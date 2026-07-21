@@ -199,6 +199,8 @@ html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only {
 .sidebar-nav { display: flex; flex-direction: column; gap: 0.12rem; margin-bottom: 0.4rem; }
 
 .sidebar-nav-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0; color: var(--ink-faint); margin: 1rem 0 0.4rem 0.55rem; }
+a.sidebar-nav-label--link { display: block; text-decoration: none; transition: color 0.15s; }
+a.sidebar-nav-label--link:hover, a.sidebar-nav-label--link.active { color: var(--accent); }
 
 .sidebar-categories { display: flex; flex-direction: column; gap: 0.1rem; }
 
