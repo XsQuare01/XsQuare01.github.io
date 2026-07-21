@@ -137,6 +137,22 @@ html:not(.rail-pinned) .sidebar:focus-within .rail-expand-only {
   visibility: visible;
 }
 
+/* 핀 해제 즉시 접힘: 마우스가 위에 있어도(hover/focus) 강제로 접는다.
+   다음 mouseleave 때 JS가 클래스를 제거해 이후 hover는 정상 동작. */
+html:not(.rail-pinned) .sidebar.rail-collapsing,
+html:not(.rail-pinned) .sidebar.rail-collapsing:hover,
+html:not(.rail-pinned) .sidebar.rail-collapsing:focus-within {
+  width: var(--rail-w);
+  box-shadow: none;
+}
+html:not(.rail-pinned) .sidebar.rail-collapsing:hover .rail-txt,
+html:not(.rail-pinned) .sidebar.rail-collapsing:hover .rail-expand-only,
+html:not(.rail-pinned) .sidebar.rail-collapsing:focus-within .rail-txt,
+html:not(.rail-pinned) .sidebar.rail-collapsing:focus-within .rail-expand-only {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* 브랜드 마크 */
 .brand {
   display: flex;

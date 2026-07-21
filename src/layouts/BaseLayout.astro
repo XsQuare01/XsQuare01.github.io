@@ -410,11 +410,24 @@ const currentPath = Astro.url.pathname;
 
   // ── 조용한 레일 고정/접기 ──
   const pinBtn = document.getElementById('pin-btn');
+  const sidebarEl = document.getElementById('sidebar');
   pinBtn?.addEventListener('click', () => {
     const pinned = document.documentElement.classList.toggle('rail-pinned');
     localStorage.setItem('rail', pinned ? 'pinned' : 'collapsed');
     const label = pinBtn.querySelector('.rail-txt');
     if (label) label.textContent = pinned ? '사이드바 접기' : '사이드바 고정';
+    // 접기(핀 해제)를 누르면, 마우스가 아직 위에 있어도 즉시 접히게 한다.
+    // 포커스를 풀고 rail-collapsing으로 hover/focus 확장을 무력화한 뒤,
+    // 다음 mouseleave에 클래스를 제거해 이후 hover는 정상 복귀한다. (데스크톱 레일에만 적용)
+    if (!pinned && sidebarEl && window.matchMedia('(min-width: 769px)').matches) {
+      pinBtn.blur();
+      sidebarEl.classList.add('rail-collapsing');
+      sidebarEl.addEventListener(
+        'mouseleave',
+        () => sidebarEl.classList.remove('rail-collapsing'),
+        { once: true }
+      );
+    }
   });
   if (document.documentElement.classList.contains('rail-pinned')) {
     const label = pinBtn?.querySelector('.rail-txt');
