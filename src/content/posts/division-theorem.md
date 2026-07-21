@@ -12,10 +12,10 @@ difficulty: 입문
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>나누어 떨어짐 (Divisibility)</strong>: a | b — b = ca인 정수 c가 존재할 때 a가 b를 나눈다</li>
+<li><strong>나누어 떨어짐 (Divisibility)</strong>: $a \mid b$ — $b = ca$인 정수 c가 존재할 때 a가 b를 나눈다</li>
 <li><strong>나누어 떨어짐의 성질</strong>: 선형 결합 성질, 추이 성질</li>
-<li><strong>소수 (Prime)</strong>: 1, -1, p, -p만이 약수인 정수 p (p > 1)</li>
-<li><strong>Division Theorem</strong>: a, b > 0에 대해 b = qa + r (0 ≤ r < a)을 만족하는 유일한 정수 q, r이 존재한다</li>
+<li><strong>소수 (Prime)</strong>: $1, -1, p, -p$만이 약수인 정수 $p$ ($p > 1$)</li>
+<li><strong>Division Theorem</strong>: $a, b > 0$에 대해 $b = qa + r$ ($0 \le r < a$)을 만족하는 유일한 정수 $q, r$이 존재한다</li>
 </ul>
 </div>
 
@@ -75,9 +75,9 @@ $$a \mid b, \quad b \mid c \implies a \mid c$$
 
 <div class="callout callout-key">
 <div class="callout-title">Division Theorem</div>
-<p>양의 정수 a, b에 대해, 다음을 만족하는 유일한 정수 q, r이 존재한다.</p>
-<p style="text-align:center"><strong>b = qa + r &nbsp;&nbsp; (0 ≤ r &lt; a)</strong></p>
-<p>q를 <strong>몫(quotient)</strong>, r을 <strong>나머지(remainder)</strong>라 한다.</p>
+<p>양의 정수 $a, b$에 대해, 다음을 만족하는 유일한 정수 $q, r$이 존재한다.</p>
+<p style="text-align:center"><strong>$$b = qa + r \quad (0 \le r < a)$$</strong></p>
+<p>$q$를 <strong>몫(quotient)</strong>, $r$을 <strong>나머지(remainder)</strong>라 한다.</p>
 </div>
 
 ![Division Theorem 시각화](/images/division-theorem/division-algorithm.svg)
@@ -125,9 +125,9 @@ $$\therefore \ r_2 - r_1 = 0 \implies r_1 = r_2, \quad q_1 = q_2$$
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>a | b는 b = ca인 정수 c가 존재함을 뜻한다. 나누어 떨어짐은 선형 결합 성질과 추이 성질을 만족한다.</li>
-<li>Division Theorem: 양의 정수 a, b에 대해 b = qa + r (0 ≤ r < a)을 만족하는 유일한 q, r이 존재한다.</li>
-<li>존재성은 반복 빼기의 최소성 논리로, 유일성은 r₂ - r₁이 a의 배수이면서 a 미만임을 이용한 모순으로 증명한다.</li>
+<li>$a \mid b$는 $b = ca$인 정수 c가 존재함을 뜻한다. 나누어 떨어짐은 선형 결합 성질과 추이 성질을 만족한다.</li>
+<li>Division Theorem: 양의 정수 $a, b$에 대해 $b = qa + r$ ($0 \le r < a$)을 만족하는 유일한 $q, r$이 존재한다.</li>
+<li>존재성은 반복 빼기의 최소성 논리로, 유일성은 $r_2 - r_1$이 $a$의 배수이면서 $a$ 미만임을 이용한 모순으로 증명한다.</li>
 <li>이 정리는 모듈러 산술, GCD(유클리드 호제법), RSA 등 암호학 전반의 수학적 기반이 된다.</li>
 </ul>
 </div>

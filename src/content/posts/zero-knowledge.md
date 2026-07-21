@@ -12,9 +12,9 @@ difficulty: 심화
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>비밀 공유</strong>: Shamir의 (k, n) 임계 방식 — k명 이상이 협력하면 비밀 복원, k-1명 이하는 정보 없음</li>
+<li><strong>비밀 공유</strong>: Shamir의 $(k, n)$ 임계 방식 — $k$명 이상이 협력하면 비밀 복원, $k-1$명 이하는 정보 없음</li>
 <li><strong>영지식 증명의 3대 성질</strong>: 완전성(Completeness), 건전성(Soundness), 영지식성(Zero Knowledge)</li>
-<li><strong>그래프 동형 ZKP</strong>: 대화형 프로토콜로 매핑 σ의 지식을 증명 — 사칭자 통과 확률 1/2ᵏ</li>
+<li><strong>그래프 동형 ZKP</strong>: 대화형 프로토콜로 매핑 $\sigma$의 지식을 증명 — 사칭자 통과 확률 $1/2^k$</li>
 <li><strong>No Transfer</strong>: 시뮬레이션 논증 — V가 혼자 만든 기록과 실제 기록이 구별 불가능</li>
 </ul>
 </div>
@@ -182,9 +182,9 @@ B는 $m$에 대한 A의 서명 $m^{d_A}$를 얻었지만, A는 $m$의 내용을 
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>Shamir의 비밀 공유는 (k-1)차 다항식의 보간법에 기반한다. k명이면 비밀 복원, (k-1)명 이하는 정보 이론적으로 안전하다.</li>
+<li>Shamir의 비밀 공유는 $(k-1)$차 다항식의 보간법에 기반한다. $k$명이면 비밀 복원, $(k-1)$명 이하는 정보 이론적으로 안전하다.</li>
 <li>영지식 증명은 세 성질을 만족한다: 완전성(알면 통과), 건전성(모르면 불통과), 영지식성(정보 전달 없음).</li>
-<li>그래프 동형 ZKP에서 사칭자의 통과 확률은 1/2ᵏ이다. 매 라운드 새로운 Gₜ를 생성하므로 이전 라운드의 정보가 누적되지 않는다.</li>
+<li>그래프 동형 ZKP에서 사칭자의 통과 확률은 $1/2^k$이다. 매 라운드 새로운 $G_t$를 생성하므로 이전 라운드의 정보가 누적되지 않는다.</li>
 <li>시뮬레이션 논증: V가 P 없이도 동일한 분포의 기록을 만들 수 있으므로, P→V 정보 전달은 없다.</li>
 <li>RSA 서명은 실용적인 지식 증명으로, 은닉 서명은 서명자가 내용을 모른 채 서명하는 확장이다.</li>
 </ul>

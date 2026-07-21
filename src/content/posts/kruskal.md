@@ -16,7 +16,7 @@ difficulty: 중급
 <li>Kruskal 알고리즘의 기본 과정 — 정렬 후 사이클 없는 엣지 추가</li>
 <li>Prim 알고리즘과의 차이 — 한 군데에서 자라는가, 여러 군데에서 자라는가</li>
 <li>컷(cut) 기반 교환 논법으로 정확성 증명</li>
-<li>Union-Find로 사이클 검사 — 전체 시간 복잡도 O(m log m)</li>
+<li>Union-Find로 사이클 검사 — 전체 시간 복잡도 $O(m \log m)$</li>
 </ul>
 </div>
 

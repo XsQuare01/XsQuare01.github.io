@@ -13,7 +13,7 @@ difficulty: 초급
 <div class="callout-title">선수지식</div>
 <ul>
 <li>집합의 크기(Cardinality) — 가산/불가산 무한</li>
-<li>자연수 ℕ 와 실수 ℝ 의 크기 차이</li>
+<li>자연수 $\mathbb{N}$ 와 실수 $\mathbb{R}$ 의 크기 차이</li>
 </ul>
 </div>
 
@@ -21,7 +21,7 @@ difficulty: 초급
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
 <li>Complexity Theory에서는 문제를 <strong>Language</strong>로 정의한다.</li>
-<li>Problem의 수는 <strong>불가산 무한 |ℝ|</strong>, Solution의 수는 <strong>가산 무한 |ℕ|</strong>이다.</li>
+<li>Problem의 수는 <strong>불가산 무한 $|\mathbb{R}|$</strong>, Solution의 수는 <strong>가산 무한 $|\mathbb{N}|$</strong>이다.</li>
 <li>따라서 <strong>풀 수 없는 문제가 대부분</strong>이다.</li>
 </ul>
 </div>
@@ -156,8 +156,8 @@ $$|2^{\Sigma^*}| = |\mathbb{R}|$$
 <div class="callout callout-key">
 <div class="callout-title">핵심 크기 비교</div>
 <ul>
-<li>String의 수: |Σ*| = |ℕ| — 가산 무한</li>
-<li>Problem의 수: |2^Σ*| = |ℝ| — <strong>불가산 무한</strong></li>
+<li>String의 수: $|\Sigma^*| = |\mathbb{N}|$ — 가산 무한</li>
+<li>Problem의 수: $|2^{\Sigma^*}| = |\mathbb{R}|$ — <strong>불가산 무한</strong></li>
 </ul>
 </div>
 
@@ -226,8 +226,8 @@ Solution = 튜링 머신이다.
 <div class="callout callout-key">
 <div class="callout-title">최종 결론</div>
 <ul>
-<li>Problems: |2^Σ*| = |ℝ| — 불가산 무한</li>
-<li>Solutions: |ℕ| — 가산 무한</li>
+<li>Problems: $|2^{\Sigma^*}| = |\mathbb{R}|$ — 불가산 무한</li>
+<li>Solutions: $|\mathbb{N}|$ — 가산 무한</li>
 <li><strong>풀 수 없는 문제가 압도적으로 많다.</strong> 풀 수 있는 문제는 전체 중 극히 일부에 불과하다.</li>
 </ul>
 </div>

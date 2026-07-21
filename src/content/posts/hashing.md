@@ -12,9 +12,9 @@ difficulty: 중급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>해시 함수의 3대 보안 성질</strong>: 일방향성(2ⁿ), 2차 역상 저항(2ⁿ), 충돌 저항성(2^(n/2))</li>
+<li><strong>해시 함수의 3대 보안 성질</strong>: 일방향성($2^n$), 2차 역상 저항($2^n$), 충돌 저항성($2^{n/2}$)</li>
 <li><strong>Merkle-Damgård 구조</strong>: SHA-256의 내부 — 패딩, 블록 분할, 64라운드 압축 반복</li>
-<li><strong>Birthday Paradox</strong>: 충돌 공격이 역상 공격보다 √N 배 쉬운 이유</li>
+<li><strong>Birthday Paradox</strong>: 충돌 공격이 역상 공격보다 $\sqrt{N}$ 배 쉬운 이유</li>
 <li><strong>MD5·SHA-1 폐기</strong>: 실제 충돌 사례와 현재 권장 기준</li>
 <li><strong>HMAC·패스워드 해시</strong>: 해시 함수의 올바른 응용</li>
 </ul>
@@ -94,7 +94,7 @@ $$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>Birthday Paradox는 "같은 생일인 두 사람을 찾는 것은 생각보다 쉽다"는 직관이다. 365일 중 생일이 겹치는 두 사람을 찾으려면 23명이면 충분하다. 해시 함수에도 같은 원리가 적용되어, n비트 해시의 충돌 쌍을 찾는 데 2^n이 아니라 2^(n/2)번이면 된다. 이 때문에 SHA-256의 실질적 안전성은 2^128이다.</p>
+<p>Birthday Paradox는 "같은 생일인 두 사람을 찾는 것은 생각보다 쉽다"는 직관이다. 365일 중 생일이 겹치는 두 사람을 찾으려면 23명이면 충분하다. 해시 함수에도 같은 원리가 적용되어, n비트 해시의 충돌 쌍을 찾는 데 $2^n$이 아니라 $2^{n/2}$번이면 된다. 이 때문에 SHA-256의 실질적 안전성은 $2^{128}$이다.</p>
 </div>
 
 따라서:
@@ -131,9 +131,9 @@ $$
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>해시 함수의 3대 성질: 일방향성(2ⁿ), 2차 역상 저항(2ⁿ), 충돌 저항성(2^(n/2)). 충돌 저항성이 가장 약하므로 해시 길이를 결정한다.</li>
-<li>SHA-256은 Merkle-Damgård 구조: 패딩 → 블록 분할 → IV에서 시작해 압축 함수 f를 블록마다 적용 → 최종 256 bit 해시 출력.</li>
-<li>Birthday Paradox: n비트 해시의 충돌 공격 복잡도는 2^(n/2). SHA-256의 실질 충돌 저항성은 2¹²⁸.</li>
+<li>해시 함수의 3대 성질: 일방향성($2^n$), 2차 역상 저항($2^n$), 충돌 저항성($2^{n/2}$). 충돌 저항성이 가장 약하므로 해시 길이를 결정한다.</li>
+<li>SHA-256은 Merkle-Damgård 구조: 패딩 → 블록 분할 → IV에서 시작해 압축 함수 $f$를 블록마다 적용 → 최종 256 bit 해시 출력.</li>
+<li>Birthday Paradox: n비트 해시의 충돌 공격 복잡도는 $2^{n/2}$. SHA-256의 실질 충돌 저항성은 $2^{128}$.</li>
 <li>MD5·SHA-1은 실제 충돌이 발생했다. 서명·인증서에 사용 금지. 현재 표준은 SHA-256 이상.</li>
 <li>MAC에는 HMAC을 사용(Length Extension 방지). 패스워드에는 bcrypt/Argon2를 사용(느린 해시).</li>
 </ul>

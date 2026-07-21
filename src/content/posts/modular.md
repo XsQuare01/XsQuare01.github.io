@@ -12,11 +12,11 @@ difficulty: 초급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>모듈러 산술</strong>: a ≡ b (mod m) ↔ m | (b − a) — 동치 관계(반사·대칭·추이) 성립</li>
-<li><strong>완전 잉여계 Zm</strong>: {0, 1, ..., m−1} — 덧셈·뺄셈에 대해 닫혀있음</li>
-<li><strong>축약 잉여계 Zm*</strong>: {a | gcd(a, m) = 1} — 곱셈에 대해 닫혀있고 역원 존재</li>
-<li><strong>오일러 정리</strong>: a^φ(m) ≡ 1 (mod m) (a ∈ Zm*, φ(m) = |Zm*|)</li>
-<li><strong>중국인의 나머지 정리</strong>: 서로소인 m1,...,mr에 대해 연립 합동식의 해 존재·유일</li>
+<li><strong>모듈러 산술</strong>: $a \equiv b \pmod{m} \iff m \mid (b - a)$ — 동치 관계(반사·대칭·추이) 성립</li>
+<li><strong>완전 잉여계 $\mathbb{Z}_m$</strong>: $\{0, 1, \ldots, m-1\}$ — 덧셈·뺄셈에 대해 닫혀있음</li>
+<li><strong>축약 잉여계 $\mathbb{Z}_m^*$</strong>: $\{a \mid \gcd(a, m) = 1\}$ — 곱셈에 대해 닫혀있고 역원 존재</li>
+<li><strong>오일러 정리</strong>: $a^{\varphi(m)} \equiv 1 \pmod{m}$ ($a \in \mathbb{Z}_m^*$, $\varphi(m) = |\mathbb{Z}_m^*|$)</li>
+<li><strong>중국인의 나머지 정리</strong>: 서로소인 $m_1, \ldots, m_r$에 대해 연립 합동식의 해 존재·유일</li>
 </ul>
 </div>
 
@@ -139,7 +139,7 @@ $$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>모듈러 역원이란 "나눗셈의 대체품"이다. 모듈러 세계에서는 직접 나눌 수 없지만, a의 역원 x를 곱하면 나눈 것과 같은 효과를 얻는다. 이 역원은 a와 m이 서로소일 때만 존재하며, 베주 항등식(확장 유클리드 알고리즘)으로 구할 수 있다. RSA에서 비밀키 d를 구하는 과정이 바로 이것이다.</p>
+<p>모듈러 역원이란 "나눗셈의 대체품"이다. 모듈러 세계에서는 직접 나눌 수 없지만, $a$의 역원 $x$를 곱하면 나눈 것과 같은 효과를 얻는다. 이 역원은 $a$와 $m$이 서로소일 때만 존재하며, 베주 항등식(확장 유클리드 알고리즘)으로 구할 수 있다. RSA에서 비밀키 $d$를 구하는 과정이 바로 이것이다.</p>
 </div>
 
 반면 **덧셈은 닫혀있지 않다**. 예를 들어 $m = 3$에서 $\gcd(4, 3) = \gcd(8, 3) = 1$이지만, $\gcd(4+8, 3) = \gcd(12, 3) = 3 \neq 1$.
@@ -198,7 +198,7 @@ $$
 
 <div class="callout">
 <div class="callout-title">참고</div>
-<p>페르마의 소정리의 두 가지 증명, 모듈러 역원 공식(a^(p−2)), 페르마 소수 판별법, Carmichael 수의 한계까지 자세히 다룬다. → <strong>Fermat's Little Theorem — 페르마의 소정리</strong></p>
+<p>페르마의 소정리의 두 가지 증명, 모듈러 역원 공식($a^{p-2}$), 페르마 소수 판별법, Carmichael 수의 한계까지 자세히 다룬다. → <strong>Fermat's Little Theorem — 페르마의 소정리</strong></p>
 </div>
 
 ## 중국인의 나머지 정리 (CRT)
@@ -244,15 +244,15 @@ $$
 
 <div class="callout">
 <div class="callout-title">참고</div>
-<p>유일성 증명, 단계별 수치 계산 예시(x≡2(mod 3), x≡3(mod 5), x≡2(mod 7) → x=23), RSA-CRT 4배 속도 향상까지 자세히 다룬다. → <strong>Chinese Remainder Theorem — 중국인의 나머지 정리</strong></p>
+<p>유일성 증명, 단계별 수치 계산 예시($x \equiv 2 \pmod{3}$, $x \equiv 3 \pmod{5}$, $x \equiv 2 \pmod{7}$ → $x = 23$), RSA-CRT 4배 속도 향상까지 자세히 다룬다. → <strong>Chinese Remainder Theorem — 중국인의 나머지 정리</strong></p>
 </div>
 
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
 <li>모듈러 산술은 동치 관계를 형성한다. 덧셈·뺄셈·곱셈·지수 연산에 대해 닫혀있지만, 나눗셈은 일반적으로 성립하지 않는다.</li>
-<li>Zm*는 gcd(a, m) = 1인 원소들로 이루어지며, 곱셈 역원이 모든 원소에 존재한다. m이 소수이면 Zm은 완전한 체(Field)가 된다.</li>
-<li>오일러 정리(a^φ(m) ≡ 1)와 페르마의 소정리(a^(p−1) ≡ 1, p 소수)는 RSA 복호화의 수학적 근거이다.</li>
+<li>$\mathbb{Z}_m^*$는 $\gcd(a, m) = 1$인 원소들로 이루어지며, 곱셈 역원이 모든 원소에 존재한다. $m$이 소수이면 $\mathbb{Z}_m$은 완전한 체(Field)가 된다.</li>
+<li>오일러 정리($a^{\varphi(m)} \equiv 1$)와 페르마의 소정리($a^{p-1} \equiv 1$, $p$ 소수)는 RSA 복호화의 수학적 근거이다.</li>
 <li>CRT는 큰 모듈러 연산을 작은 연산들로 분해해 병렬 처리를 가능하게 한다. RSA-CRT 최적화의 핵심이다.</li>
 </ul>
 </div>

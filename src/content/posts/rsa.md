@@ -12,11 +12,11 @@ difficulty: 고급
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
 <ul>
-<li><strong>RSA 키</strong>: n = pq (공개), e (공개 지수), d (개인 지수), ed ≡ 1 (mod φ(n))</li>
-<li><strong>암복호화</strong>: C = m^e mod n → m = C^d mod n = m^(ed) mod n</li>
-<li><strong>복호화 정확성</strong>: m^(ed) ≡ m (mod n) — gcd(m,n)=1이면 오일러 정리, 아니면 페르마+CRT</li>
-<li><strong>보안 근거</strong>: n = pq 소인수분해 → NP ∩ co-NP, 현실적으로 불가능</li>
-<li><strong>고속 지수연산</strong>: Square-and-Multiply — O(e) → O(log e)</li>
+<li><strong>RSA 키</strong>: $n = pq$ (공개), $e$ (공개 지수), $d$ (개인 지수), $ed \equiv 1 \pmod{\varphi(n)}$</li>
+<li><strong>암복호화</strong>: $C = m^e \bmod n$ → $m = C^d \bmod n = m^{ed} \bmod n$</li>
+<li><strong>복호화 정확성</strong>: $m^{ed} \equiv m \pmod{n}$ — $\gcd(m,n)=1$이면 오일러 정리, 아니면 페르마+CRT</li>
+<li><strong>보안 근거</strong>: $n = pq$ 소인수분해 → $\text{NP} \cap \text{co-NP}$, 현실적으로 불가능</li>
+<li><strong>고속 지수연산</strong>: Square-and-Multiply — $O(e)$ → $O(\log e)$</li>
 </ul>
 </div>
 
@@ -122,7 +122,7 @@ $$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
-<p>RSA 복호화가 정확히 원래 메시지를 돌려주는 이유는 "거듭제곱의 주기성" 덕분이다. e번 거듭제곱해서 암호화하고, d번 거듭제곱해서 복호화하면, ed번 거듭제곱한 셈인데 — 오일러 정리에 의해 이것이 정확히 1번 거듭제곱한 것과 같아진다. 즉 원래 메시지로 돌아온다.</p>
+<p>RSA 복호화가 정확히 원래 메시지를 돌려주는 이유는 "거듭제곱의 주기성" 덕분이다. $e$번 거듭제곱해서 암호화하고, $d$번 거듭제곱해서 복호화하면, $ed$번 거듭제곱한 셈인데 — 오일러 정리에 의해 이것이 정확히 1번 거듭제곱한 것과 같아진다. 즉 원래 메시지로 돌아온다.</p>
 </div>
 
 ## 보안 근거 — 소인수분해 문제
@@ -181,10 +181,10 @@ $p$와 $q$를 아무렇게나 선택하면 공격에 취약해진다.
 <div class="callout callout-key">
 <div class="callout-title">핵심 정리</div>
 <ul>
-<li>RSA는 ed ≡ 1 (mod φ(n))을 이용해 m^(ed) ≡ m (mod n)을 성립시킨다 — 오일러 정리가 핵심이다.</li>
-<li>gcd(m, n) ≠ 1인 예외 케이스도 mod p와 mod q를 분리한 페르마+CRT 접근으로 성립함을 증명할 수 있다.</li>
-<li>보안은 n = pq 소인수분해의 어려움에만 의존한다. 현재 다항식 시간 소인수분해 알고리즘은 알려져 있지 않다.</li>
-<li>Square-and-Multiply로 O(e) → O(log e) 지수연산이 가능하다. 2000비트 지수도 약 3000번 연산으로 처리된다.</li>
+<li>RSA는 $ed \equiv 1 \pmod{\varphi(n)}$을 이용해 $m^{ed} \equiv m \pmod{n}$을 성립시킨다 — 오일러 정리가 핵심이다.</li>
+<li>$\gcd(m, n) \neq 1$인 예외 케이스도 $\bmod p$와 $\bmod q$를 분리한 페르마+CRT 접근으로 성립함을 증명할 수 있다.</li>
+<li>보안은 $n = pq$ 소인수분해의 어려움에만 의존한다. 현재 다항식 시간 소인수분해 알고리즘은 알려져 있지 않다.</li>
+<li>Square-and-Multiply로 $O(e)$ → $O(\log e)$ 지수연산이 가능하다. 2000비트 지수도 약 3000번 연산으로 처리된다.</li>
 </ul>
 </div>
 
