@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import katex from 'katex';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 
 const BLOG_POST_PATH = /^\/blog\/[^/]+\/?$/;
@@ -53,6 +54,38 @@ function rehypeFigureCaption() {
   };
 }
 
+// 콜아웃은 raw HTML 블록(<div class="callout">…)이라 remark-math가 내부 $…$를
+// 파싱하지 못한다. Astro는 rehype-raw를 사용자 플러그인 이후에 돌리므로, 이 단계에서
+// 콜아웃은 아직 'raw' 문자열 노드다. 그 문자열 안의 $…$·$$…$$를 빌드 시 KaTeX로
+// 렌더해 넣으면(이후 rehype-raw가 그 HTML을 파싱) 본문 수식과 동일하게 표시된다.
+function rehypeCalloutMath() {
+  const render = (tex, displayMode) => {
+    try {
+      return katex.renderToString(tex.trim(), { displayMode, throwOnError: false });
+    } catch {
+      return null; // 실패 시 원문 유지
+    }
+  };
+  const replaceMath = (s) => {
+    let out = s.replace(/\$\$([^$]+?)\$\$/g, (w, t) => render(t, true) ?? w);
+    out = out.replace(/\$([^$\n]+?)\$/g, (w, t) => render(t, false) ?? w);
+    return out;
+  };
+  // <code>…</code> / <pre>…</pre> 내부의 $ 는 수식이 아니므로 건드리지 않는다
+  const processValue = (value) =>
+    value
+      .split(/(<code[\s\S]*?<\/code>|<pre[\s\S]*?<\/pre>)/i)
+      .map((part, i) => (i % 2 === 1 ? part : replaceMath(part)))
+      .join('');
+  const walk = (node) => {
+    if (node.type === 'raw' && typeof node.value === 'string' && node.value.includes('class="callout')) {
+      node.value = processValue(node.value);
+    }
+    if (node.children) node.children.forEach(walk);
+  };
+  return (tree) => walk(tree);
+}
+
 export default defineConfig({
   site: 'https://xsquare01.github.io',
   integrations: [
@@ -85,7 +118,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypeLazyImages, rehypeFigureCaption],
+    rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption],
     shikiConfig: {
       themes: {
         light: 'github-light',
