@@ -119,9 +119,7 @@ html:not(.rail-pinned) .sidebar:focus-within {
   box-shadow: 6px 0 30px rgba(34, 32, 27, 0.10);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sidebar, .rail-txt, .rail-expand-only { transition: none; }
-}
+/* reduced-motion은 파일 하단의 전역 규칙(*{transition:none!important})이 이미 커버 */
 
 /* 접힘/펼침 표시 전환: display 대신 opacity/visibility → 레이아웃 불변, 재배열 없음 */
 .rail-txt, .rail-expand-only {
