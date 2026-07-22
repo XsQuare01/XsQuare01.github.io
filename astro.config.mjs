@@ -66,8 +66,11 @@ function rehypeCalloutMath() {
       return null; // 실패 시 원문 유지
     }
   };
+  const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const replaceMath = (s) => {
-    let out = s.replace(/\$\$([^$]+?)\$\$/g, (w, t) => render(t, true) ?? w);
+    // 인라인 코드 `…` → <code> (내부 $ 가 수식으로 오인되지 않도록 먼저 처리)
+    let out = s.replace(/`([^`\n]+?)`/g, (_w, code) => `<code>${escapeHtml(code)}</code>`);
+    out = out.replace(/\$\$([^$]+?)\$\$/g, (w, t) => render(t, true) ?? w);
     out = out.replace(/\$([^$\n]+?)\$/g, (w, t) => render(t, false) ?? w);
     return out;
   };
