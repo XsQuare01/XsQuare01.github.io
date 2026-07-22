@@ -93,7 +93,9 @@ html.rail-pinned {
 
 .sidebar {
   width: var(--rail-w);
-  min-height: 100vh;
+  /* height 고정(뷰포트) — min-height면 내용이 길 때 요소가 늘어나 fixed 아래로 삐져나가고
+     overflow가 작동하지 않아 하단 '태그' 섹션에 스크롤로도 닿지 못한다. (#47 리뷰 중 발견) */
+  height: 100vh;
   background: var(--rail-bg);
   border-right: 1px solid var(--rule);
   position: fixed;
@@ -308,29 +310,21 @@ a.sidebar-nav-label--link:hover, a.sidebar-nav-label--link.active { color: var(-
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
+/* 목록은 카드가 아니라 색인 — 하단 괘선으로 구분하고 hover는 잉크 틴트로 (#47) */
 .post-item {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding: 1rem 1.2rem;
-  border-radius: 8px;
-  border: 1px solid var(--rule);
-  background: var(--bg-card);
+  padding: 1.1rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
   position: relative;
-  transition: border-color 0.15s;
+  transition: background 0.15s;
 }
 
 .post-item:hover {
-  border-color: var(--amber);
-  transform: none;
-  box-shadow: none;
-}
-
-.post-list--bordered .post-item {
-  border-color: var(--rule);
+  background: var(--accent-dim);
 }
 
 .post-item-date {
@@ -369,9 +363,23 @@ a.sidebar-nav-label--link:hover, a.sidebar-nav-label--link.active { color: var(-
   line-height: 1.55;
 }
 
-/* ── Tags (목록 페이지) ── */
+/* ── Tags (목록 페이지) ──
+   목록은 색인이므로 태그를 칩이 아니라 옅은 모노 '#태그' 텍스트로 둔다.
+   칩 배경이 항목 hover 틴트(--accent-dim)와 같은 색이라 hover 시 묻히는 문제도 함께 해소 (#47) */
 .post-list .tag {
-  background: var(--amber-soft);
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+.post-list .tag::before {
+  content: "#";
+  opacity: 0.55;
+}
+.post-list .tag:hover {
+  background: transparent;
+  color: var(--accent);
 }
 
 /* ── Tags ── */
@@ -856,32 +864,34 @@ article .prose h2 {
 .post-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
   margin-top: 3rem;
   margin-bottom: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--rule);
 }
 
+/* 이전·다음도 카드가 아니라 선/여백 — 가운데 세로 괘선으로 나누고 hover는 잉크 틴트 (#47) */
 .post-nav-item {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding: 1rem 1.25rem;
-  border-radius: 8px;
-  border: 1px solid var(--rule);
-  background: var(--bg-card);
-  transition: border-color 0.15s;
+  padding: 0.75rem 0.9rem;
+  transition: background 0.15s;
   min-width: 0;
   touch-action: manipulation;
 }
 
 .post-nav-item:hover {
-  border-color: var(--amber);
+  background: var(--accent-dim);
+}
+
+.post-nav-item:hover .post-nav-title {
+  color: var(--accent);
 }
 
 .post-nav-item.next {
   text-align: right;
+  border-left: 1px solid var(--rule);
 }
 
 .post-nav-label {
@@ -1349,7 +1359,7 @@ pre:hover .code-copy-btn { opacity: 1; }
   .sidebar {
     position: fixed;
     width: 15rem;
-    min-height: 100vh;
+    height: 100vh;
     border-right: 1px solid var(--rule);
     border-bottom: none;
     transform: translateX(-100%);
@@ -1366,8 +1376,11 @@ pre:hover .code-copy-btn { opacity: 1; }
   .post-nav {
     grid-template-columns: 1fr;
   }
+  /* 세로로 쌓이면 세로 괘선 대신 가로 괘선으로 구분 */
   .post-nav-item.next {
     text-align: left;
+    border-left: none;
+    border-top: 1px solid var(--rule);
   }
 }
 
