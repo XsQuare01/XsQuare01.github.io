@@ -303,11 +303,15 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
   document.body.appendChild(lightbox);
 
   const closeBtn = lightbox.querySelector('.lightbox-close') as HTMLButtonElement;
+  const content = lightbox.querySelector('.lightbox-content') as HTMLElement;
   let lastFocused: HTMLElement | null = null;
+  let zoomAbort: AbortController | null = null;
 
   function closeLightbox() {
     lightbox.classList.remove('open');
-    lightbox.querySelector('.lightbox-content')!.innerHTML = '';
+    if (zoomAbort) { zoomAbort.abort(); zoomAbort = null; }
+    content.classList.remove('zoom', 'grabbing');
+    content.innerHTML = '';
     if (lastFocused) {
       lastFocused.focus();
       lastFocused = null;
@@ -320,19 +324,118 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
     if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
 
-  document.querySelectorAll('.prose img').forEach((img) => {
-    (img as HTMLElement).style.cursor = 'zoom-in';
+  // SVG 다이어그램(벡터)은 화면 맞춤만으로 라벨이 작아 읽기 어렵다.
+  // 확대 시 선명한 특성을 살려, SVG에 한해 줌/팬(휠·드래그 / 핀치·1지 이동·더블탭) 엔진을 붙인다.
+  const isSvgSrc = (url: string) => /\.svg(?:[?#]|$)/i.test(url);
+
+  type Pt = { x: number; y: number };
+  function setupZoom(stage: HTMLElement, image: HTMLImageElement, fallbackW: number, fallbackH: number) {
+    const ac = new AbortController();
+    const { signal } = ac;
+    const MIN = 1, MAX = 6;
+    let s = 1, tx = 0, ty = 0, baseW = 0, baseH = 0;
+
+    const apply = () => {
+      const SW = stage.clientWidth, SH = stage.clientHeight;
+      const sw = baseW * s, sh = baseH * s;
+      tx = sw <= SW ? (SW - sw) / 2 : Math.min(0, Math.max(SW - sw, tx));
+      ty = sh <= SH ? (SH - sh) / 2 : Math.min(0, Math.max(SH - sh, ty));
+      image.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+    };
+    const fit = () => {
+      const SW = stage.clientWidth, SH = stage.clientHeight;
+      const iw = fallbackW || image.naturalWidth || 900;
+      const ih = fallbackH || image.naturalHeight || 380;
+      const k = Math.min((SW * 0.94) / iw, (SH * 0.94) / ih);
+      baseW = iw * k; baseH = ih * k;
+      image.style.width = `${baseW}px`; image.style.height = `${baseH}px`;
+      s = 1; tx = (SW - baseW) / 2; ty = (SH - baseH) / 2; apply();
+    };
+    const zoomAt = (cx: number, cy: number, factor: number) => {
+      const s2 = Math.min(MAX, Math.max(MIN, s * factor)); const k = s2 / s;
+      tx = cx - k * (cx - tx); ty = cy - k * (cy - ty); s = s2; apply();
+    };
+    const rel = (clientX: number, clientY: number): Pt => {
+      const r = stage.getBoundingClientRect(); return { x: clientX - r.left, y: clientY - r.top };
+    };
+
+    if (image.complete) fit(); else image.addEventListener('load', fit, { signal });
+    window.addEventListener('resize', fit, { signal });
+
+    stage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const p = rel(e.clientX, e.clientY);
+      zoomAt(p.x, p.y, e.deltaY < 0 ? 1.15 : 1 / 1.15);
+    }, { passive: false, signal });
+
+    let dragging = false, px = 0, py = 0;
+    stage.addEventListener('mousedown', (e) => { dragging = true; px = e.clientX; py = e.clientY; stage.classList.add('grabbing'); }, { signal });
+    window.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      tx += e.clientX - px; ty += e.clientY - py; px = e.clientX; py = e.clientY; apply();
+    }, { signal });
+    window.addEventListener('mouseup', () => { dragging = false; stage.classList.remove('grabbing'); }, { signal });
+
+    stage.addEventListener('dblclick', (e) => {
+      const p = rel(e.clientX, e.clientY);
+      if (s > 1.05) fit(); else zoomAt(p.x, p.y, 2.6 / s);
+    }, { signal });
+
+    const pts = new Map<number, Pt>();
+    let pinchDist = 0, pinchMid: Pt = { x: 0, y: 0 }, lastTap = 0, panPrev: Pt | null = null;
+    const dist = (a: Pt, b: Pt) => Math.hypot(a.x - b.x, a.y - b.y);
+    stage.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      for (const t of Array.from(e.changedTouches)) pts.set(t.identifier, rel(t.clientX, t.clientY));
+      const v = Array.from(pts.values());
+      if (v.length === 2) { pinchDist = dist(v[0], v[1]); pinchMid = { x: (v[0].x + v[1].x) / 2, y: (v[0].y + v[1].y) / 2 }; }
+      else if (v.length === 1) {
+        const now = Date.now();
+        if (now - lastTap < 300) { if (s > 1.05) fit(); else zoomAt(v[0].x, v[0].y, 2.6 / s); }
+        lastTap = now; panPrev = v[0];
+      }
+    }, { passive: false, signal });
+    stage.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      for (const t of Array.from(e.changedTouches)) if (pts.has(t.identifier)) pts.set(t.identifier, rel(t.clientX, t.clientY));
+      const v = Array.from(pts.values());
+      if (v.length === 2) {
+        const nd = dist(v[0], v[1]); const mid: Pt = { x: (v[0].x + v[1].x) / 2, y: (v[0].y + v[1].y) / 2 };
+        if (pinchDist > 0) zoomAt(mid.x, mid.y, nd / pinchDist);
+        tx += mid.x - pinchMid.x; ty += mid.y - pinchMid.y; apply();
+        pinchDist = nd; pinchMid = mid;
+      } else if (v.length === 1 && s > 1) {
+        if (panPrev) { tx += v[0].x - panPrev.x; ty += v[0].y - panPrev.y; apply(); }
+        panPrev = v[0];
+      }
+    }, { passive: false, signal });
+    stage.addEventListener('touchend', (e) => {
+      for (const t of Array.from(e.changedTouches)) pts.delete(t.identifier);
+      if (pts.size < 2) { pinchDist = 0; panPrev = null; }
+    }, { signal });
+
+    return ac;
+  }
+
+  document.querySelectorAll('.prose img').forEach((el) => {
+    const img = el as HTMLImageElement;
+    img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => {
       lastFocused = document.activeElement as HTMLElement;
       const clone = img.cloneNode(true) as HTMLImageElement;
-      clone.style.cursor = 'zoom-out';
       clone.removeAttribute('width');
       clone.removeAttribute('height');
-      clone.addEventListener('click', closeLightbox);
-      const content = lightbox.querySelector('.lightbox-content')!;
+      const origRect = img.getBoundingClientRect();
       content.innerHTML = '';
       content.appendChild(clone);
       lightbox.classList.add('open');
+      if (isSvgSrc(clone.currentSrc || clone.src)) {
+        content.classList.add('zoom');
+        zoomAbort = setupZoom(content, clone, origRect.width, origRect.height);
+      } else {
+        clone.style.cursor = 'zoom-out';
+        clone.addEventListener('click', closeLightbox);
+      }
       closeBtn.focus();
     });
   });

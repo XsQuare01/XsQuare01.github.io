@@ -583,6 +583,32 @@ article .prose h2 {
   border: none;
   margin: 0;
 }
+/* SVG 줌/팬 모드: 스테이지가 화면을 채우고 이미지에 transform 적용 */
+#image-lightbox .lightbox-content.zoom {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  max-height: none;
+  display: block;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+}
+#image-lightbox .lightbox-content.zoom.grabbing { cursor: grabbing; }
+#image-lightbox .lightbox-content.zoom img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  max-height: none;
+  object-fit: fill;
+  border-radius: 0;
+  transform-origin: 0 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+  cursor: inherit;
+}
 .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; display: block; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
 .prose th { background: var(--bg-card); font-weight: 700; color: var(--ink); }
 .prose th, .prose td { border: 1px solid var(--rule); padding: 0.6rem 0.9rem; }
