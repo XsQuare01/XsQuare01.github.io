@@ -689,6 +689,143 @@ article .prose h2 {
   text-shadow: none;
 }
 
+/* ── 모바일 목차 (FAB + 바텀시트) — 데스크톱 미만(≤768px)에서만 노출 ── */
+.mtoc { display: none; }
+
+.mtoc-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(20, 19, 15, 0.22);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+.mtoc-fab.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* CSS로 그린 3선(≡) 아이콘 (이모지 미사용) */
+.mtoc-bars {
+  position: relative;
+  width: 18px;
+  height: 1.6px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.mtoc-bars::before,
+.mtoc-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 1.6px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.mtoc-bars::before { top: -5.5px; }
+.mtoc-bars::after { top: 5.5px; }
+
+.mtoc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 19, 15, 0.38);
+  z-index: 95;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s;
+}
+.mtoc-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mtoc-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.22);
+  max-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(101%);
+  transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mtoc-sheet.is-open { transform: translateY(0); }
+.mtoc-grip {
+  width: 38px;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  margin: 9px auto 4px;
+  flex-shrink: 0;
+}
+.mtoc-head {
+  padding: 6px 1.4rem 8px;
+  border-bottom: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+.mtoc-cap {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.mtoc-body {
+  overflow-y: auto;
+  padding: 2px 1.4rem 1.6rem;
+  -webkit-overflow-scrolling: touch;
+}
+.mtoc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mtoc-link {
+  display: flex;
+  gap: 11px;
+  align-items: baseline;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 10px 2px;
+  line-height: 1.45;
+  border-bottom: 1px solid rgba(226, 220, 207, 0.55);
+}
+.mtoc-list li:last-child .mtoc-link { border-bottom: none; }
+.mtoc-n {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+  min-width: 1.1em;
+}
+.mtoc-link.active { color: var(--accent); font-weight: 600; }
+.mtoc-link.active .mtoc-n { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .mtoc { display: block; }
+}
+
 /* ── Post Navigation ── */
 .post-nav {
   display: grid;

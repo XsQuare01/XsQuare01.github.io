@@ -210,6 +210,38 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
       </nav>
     )}
   </article>
+
+  {headings.length > 0 && (
+    <div class="mtoc" data-mtoc>
+      <button
+        class="mtoc-fab"
+        type="button"
+        aria-label="목차 열기"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="mtoc-sheet"
+      >
+        <span class="mtoc-bars" aria-hidden="true"></span>
+      </button>
+      <div class="mtoc-backdrop" data-mtoc-backdrop></div>
+      <div class="mtoc-sheet" id="mtoc-sheet" role="dialog" aria-modal="true" aria-label="목차" tabindex="-1">
+        <div class="mtoc-grip" aria-hidden="true"></div>
+        <div class="mtoc-head"><span class="mtoc-cap">목차</span></div>
+        <nav class="mtoc-body" aria-label="목차">
+          <ul class="mtoc-list">
+            {headings.map((h, i) => (
+              <li>
+                <a class="mtoc-link" href={`#${h.slug}`}>
+                  <span class="mtoc-n">{i + 1}</span>
+                  <span set:html={renderHeadingText(h.text)} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  )}
 </BaseLayout>
 
 <script>
@@ -331,5 +363,68 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
       { rootMargin: '0px 0px -80% 0px' }
     );
     headings.forEach((h) => observer.observe(h));
+  }
+
+  // ── 모바일 목차 (FAB + 바텀시트, ≤768px) ──
+  const mtoc = document.querySelector('[data-mtoc]');
+  if (mtoc) {
+    const fab = mtoc.querySelector('.mtoc-fab') as HTMLButtonElement;
+    const backdrop = mtoc.querySelector('.mtoc-backdrop') as HTMLElement;
+    const sheet = mtoc.querySelector('.mtoc-sheet') as HTMLElement;
+    const links = Array.from(mtoc.querySelectorAll('.mtoc-link')) as HTMLAnchorElement[];
+    const h2s = Array.from(document.querySelectorAll('article h2[id]')) as HTMLElement[];
+    let mtocReturn: HTMLElement | null = null;
+
+    // 닫힘 상태에선 시트를 접근성 트리·탭 순서에서 제외
+    sheet.setAttribute('inert', '');
+
+    const currentIndex = () => {
+      let idx = 0;
+      h2s.forEach((h, i) => { if (h.getBoundingClientRect().top < 90) idx = i; });
+      return idx;
+    };
+    const markCurrent = () => {
+      const c = currentIndex();
+      links.forEach((a, i) => a.classList.toggle('active', i === c));
+      return c;
+    };
+    const openSheet = () => {
+      const c = markCurrent();
+      sheet.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      sheet.removeAttribute('inert');
+      fab.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      mtocReturn = document.activeElement as HTMLElement;
+      const cur = links[c];
+      if (cur) cur.scrollIntoView({ block: 'center' });
+      sheet.focus();
+    };
+    const closeSheet = (restoreFocus = true) => {
+      sheet.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      sheet.setAttribute('inert', '');
+      fab.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (restoreFocus && mtocReturn) mtocReturn.focus();
+      mtocReturn = null;
+    };
+
+    fab.addEventListener('click', openSheet);
+    backdrop.addEventListener('click', () => closeSheet());
+    // 항목 선택 시: 시트를 닫되 포커스는 본문 대상 절로 넘어가도록 복귀 생략
+    links.forEach((a) => a.addEventListener('click', () => closeSheet(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sheet.classList.contains('is-open')) closeSheet();
+    });
+
+    // FAB 등장/숨김: 헤더를 지나면 등장, 최하단(다음글·푸터)에선 숨김
+    const onScroll = () => {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      fab.classList.toggle('is-visible', y > 140 && y < max - 160);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 </script>
