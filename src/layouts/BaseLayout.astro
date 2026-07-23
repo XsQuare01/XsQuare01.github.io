@@ -172,13 +172,11 @@ const currentPath = Astro.url.pathname;
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 8h6M9 12h6M9 16h4" stroke-linecap="round"/></svg></span>
         <span class="rail-txt">글 목록</span>
       </a>
-      {/* 카테고리·태그는 접힘 전용 진입점: 접히면 아이콘으로 노출되고,
-          펼치면 아래 확장 패널의 섹션 헤더(링크)가 대체하므로 CSS로 숨겨 중복을 피한다. */}
-      <a href="/categories" aria-label="카테고리" class={`rail-item rail-item--collapse-only${currentPath.startsWith('/categories') ? ' active' : ''}`}>
+      <a href="/categories" aria-label="카테고리" class={`rail-item${currentPath.startsWith('/categories') ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="rail-txt">카테고리</span>
       </a>
-      <a href="/tags" aria-label="태그" class={`rail-item rail-item--collapse-only${currentPath.startsWith('/tags') ? ' active' : ''}`}>
+      <a href="/tags" aria-label="태그" class={`rail-item${currentPath.startsWith('/tags') ? ' active' : ''}`}>
         <span class="rail-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7l9 9-7 7-9-9z" stroke-linejoin="round"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></span>
         <span class="rail-txt">태그</span>
       </a>
