@@ -1,0 +1,52 @@
+<svg viewBox="0 0 860 300" width="1290" height="450" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="300" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">각 값을 한 번만 계산한다 — 트리가 사슬로 접힌다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">F(i)는 F(i-1)과 F(i-2)에만 기댄다. 왼쪽에서 오른쪽으로 채우면 필요한 값은 이미 준비돼 있다</text>
+
+  <defs>
+    <marker id="arw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- boxes F0..F6 -->
+  <g font-size="14" text-anchor="middle">
+    <rect x="40"  y="150" width="86" height="48" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+    <text x="83"  y="172" fill="#94a3b8">F0</text><text x="83" y="190" fill="#e2e8f0" font-size="12">0</text>
+    <rect x="156" y="150" width="86" height="48" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+    <text x="199" y="172" fill="#94a3b8">F1</text><text x="199" y="190" fill="#e2e8f0" font-size="12">1</text>
+    <rect x="272" y="150" width="86" height="48" rx="8" fill="#14352b" stroke="#34d399" stroke-width="1.5"/>
+    <text x="315" y="172" fill="#6ee7b7">F2</text><text x="315" y="190" fill="#e2e8f0" font-size="12">1</text>
+    <rect x="388" y="150" width="86" height="48" rx="8" fill="#14352b" stroke="#34d399" stroke-width="1.5"/>
+    <text x="431" y="172" fill="#6ee7b7">F3</text><text x="431" y="190" fill="#e2e8f0" font-size="12">2</text>
+    <rect x="504" y="150" width="86" height="48" rx="8" fill="#14352b" stroke="#34d399" stroke-width="1.5"/>
+    <text x="547" y="172" fill="#6ee7b7">F4</text><text x="547" y="190" fill="#e2e8f0" font-size="12">3</text>
+    <rect x="620" y="150" width="86" height="48" rx="8" fill="#14352b" stroke="#34d399" stroke-width="1.5"/>
+    <text x="663" y="172" fill="#6ee7b7">F5</text><text x="663" y="190" fill="#e2e8f0" font-size="12">5</text>
+    <rect x="736" y="150" width="86" height="48" rx="8" fill="#14352b" stroke="#34d399" stroke-width="1.5"/>
+    <text x="779" y="172" fill="#6ee7b7">F6</text><text x="779" y="190" fill="#e2e8f0" font-size="12">8</text>
+  </g>
+
+  <!-- adjacency arrows (i-1 -> i), along the bottom -->
+  <g stroke="#475569" stroke-width="1.5" fill="none" marker-end="url(#arw)">
+    <line x1="126" y1="184" x2="154" y2="184"/>
+    <line x1="242" y1="184" x2="270" y2="184"/>
+    <line x1="358" y1="184" x2="386" y2="184"/>
+    <line x1="474" y1="184" x2="502" y2="184"/>
+    <line x1="590" y1="184" x2="618" y2="184"/>
+    <line x1="706" y1="184" x2="734" y2="184"/>
+  </g>
+
+  <!-- skip arrows (i-2 -> i), arced over the top -->
+  <g stroke="#475569" stroke-width="1.5" fill="none" marker-end="url(#arw)" stroke-dasharray="4 3">
+    <path d="M83,150 C140,110 258,110 315,148"/>
+    <path d="M199,150 C256,110 374,110 431,148"/>
+    <path d="M315,150 C372,110 490,110 547,148"/>
+    <path d="M431,150 C488,110 606,110 663,148"/>
+    <path d="M547,150 C604,110 722,110 779,148"/>
+  </g>
+
+  <text x="430" y="250" text-anchor="middle" fill="#94a3b8" font-size="12">실선 = F(i-1) → F(i), 점선 = F(i-2) → F(i)</text>
+  <text x="430" y="276" text-anchor="middle" fill="#34d399" font-size="12.5">계산은 n+1번뿐 → Θ(N). 재귀 트리의 지수 폭발이 사라진다</text>
+</svg>
