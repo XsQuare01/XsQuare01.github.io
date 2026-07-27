@@ -1,0 +1,73 @@
+<svg viewBox="0 0 860 430" width="1290" height="645" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="430" rx="10" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="430" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">n자리 수를 위쪽 m자리와 아래쪽 m자리로 가른다</text>
+  <text x="430" y="51" text-anchor="middle" fill="#64748b" font-size="11">x = x₁·10ᵐ + x₂ — 세 조각은 서로 다른 자리에 놓인다 (m = n/2)</text>
+
+  <!-- ===== x bar ===== -->
+  <text x="122" y="99" text-anchor="end" fill="#93c5fd" font-size="14" font-weight="700">x</text>
+  <g stroke="#3b82f6" stroke-width="1.5" fill="#1e3a5f">
+    <rect x="150" y="74" width="160" height="34"/>
+    <rect x="310" y="74" width="160" height="34"/>
+  </g>
+  <text x="230" y="97" text-anchor="middle" fill="#dbeafe" font-size="14">x₁</text>
+  <text x="390" y="97" text-anchor="middle" fill="#dbeafe" font-size="14">x₂</text>
+
+  <!-- ===== y bar ===== -->
+  <text x="122" y="147" text-anchor="end" fill="#6ee7b7" font-size="14" font-weight="700">y</text>
+  <g stroke="#34d399" stroke-width="1.5" fill="#14352b">
+    <rect x="150" y="122" width="160" height="34"/>
+    <rect x="310" y="122" width="160" height="34"/>
+  </g>
+  <text x="230" y="145" text-anchor="middle" fill="#d1fae5" font-size="14">y₁</text>
+  <text x="390" y="145" text-anchor="middle" fill="#d1fae5" font-size="14">y₂</text>
+
+  <text x="230" y="176" text-anchor="middle" fill="#64748b" font-size="11">위쪽 m자리</text>
+  <text x="390" y="176" text-anchor="middle" fill="#64748b" font-size="11">아래쪽 m자리</text>
+
+  <!-- side note -->
+  <text x="510" y="97" fill="#94a3b8" font-size="12.5">x = x₁·10ᵐ + x₂</text>
+  <text x="510" y="145" fill="#94a3b8" font-size="12.5">y = y₁·10ᵐ + y₂</text>
+
+  <!-- Divider -->
+  <line x1="90" y1="198" x2="770" y2="198" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== positional recombination ===== -->
+  <text x="90" y="222" fill="#94a3b8" font-size="12" font-weight="600">곱은 자리가 어긋난 세 조각의 합이다 — 조각마다 놓이는 자리가 다르다</text>
+
+  <!-- x1y1 : offset 2m -->
+  <rect x="110" y="236" width="320" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.3"/>
+  <text x="270" y="254" text-anchor="middle" fill="#fef3c7" font-size="13">x₁y₁</text>
+  <text x="444" y="254" fill="#64748b" font-size="11">·10²ᵐ  (2m칸 위로)</text>
+
+  <!-- mid : offset m -->
+  <rect x="270" y="268" width="320" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.3"/>
+  <text x="430" y="286" text-anchor="middle" fill="#fef3c7" font-size="13">x₁y₂ + x₂y₁</text>
+  <text x="604" y="286" fill="#64748b" font-size="11">·10ᵐ  (m칸 위로)</text>
+
+  <!-- x2y2 : offset 0 -->
+  <rect x="430" y="300" width="320" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.3"/>
+  <text x="590" y="318" text-anchor="middle" fill="#fef3c7" font-size="13">x₂y₂</text>
+  <text x="764" y="318" fill="#64748b" font-size="11">(제자리)</text>
+
+  <!-- digit ruler -->
+  <line x1="110" y1="338" x2="750" y2="338" stroke="#334155" stroke-width="1"/>
+  <g stroke="#334155" stroke-width="1">
+    <line x1="110" y1="334" x2="110" y2="342"/>
+    <line x1="270" y1="334" x2="270" y2="342"/>
+    <line x1="430" y1="334" x2="430" y2="342"/>
+    <line x1="590" y1="334" x2="590" y2="342"/>
+    <line x1="750" y1="334" x2="750" y2="342"/>
+  </g>
+  <g fill="#475569" font-size="10" text-anchor="middle">
+    <text x="110" y="355">4m</text>
+    <text x="270" y="355">3m</text>
+    <text x="430" y="355">2m</text>
+    <text x="590" y="355">m</text>
+    <text x="750" y="355">0</text>
+  </g>
+  <text x="430" y="371" text-anchor="middle" fill="#475569" font-size="10">← 자릿수(높은 자리)                    (낮은 자리) →</text>
+
+  <text x="430" y="398" text-anchor="middle" fill="#f87171" font-size="12.5">진짜 곱셈은 x₁y₁, x₁y₂, x₂y₁, x₂y₂ 네 번 → T(n) = 4·T(n/2) + Θ(n) → Θ(n²)</text>
+</svg>

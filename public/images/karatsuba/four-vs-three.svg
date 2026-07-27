@@ -1,0 +1,70 @@
+<svg viewBox="0 0 860 430" width="1290" height="645" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="430" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">곱셈 한 번이 재귀 가지 하나 — 4개를 3개로 줄이면 지수가 바뀐다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">덧셈은 Θ(n)이라 재귀 항에 흡수된다 — 지수를 정하는 것은 오직 가지의 수다</text>
+
+  <line x1="430" y1="80" x2="430" y2="410" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== Left: naive split, branch 4 ===== -->
+  <text x="215" y="100" text-anchor="middle" fill="#f87171" font-size="13" font-weight="700">순진한 분할 — 곱 4번</text>
+
+  <rect x="185" y="112" width="60" height="30" rx="5" fill="#3a1518" stroke="#f87171" stroke-width="1.5"/>
+  <text x="215" y="132" text-anchor="middle" fill="#fecaca" font-size="12">n</text>
+
+  <g stroke="#7f1d1d" stroke-width="1">
+    <line x1="215" y1="142" x2="95" y2="180"/>
+    <line x1="215" y1="142" x2="175" y2="180"/>
+    <line x1="215" y1="142" x2="255" y2="180"/>
+    <line x1="215" y1="142" x2="335" y2="180"/>
+  </g>
+  <g fill="#3a1518" stroke="#f87171" stroke-width="1.2">
+    <rect x="66" y="180" width="58" height="24" rx="4"/>
+    <rect x="146" y="180" width="58" height="24" rx="4"/>
+    <rect x="226" y="180" width="58" height="24" rx="4"/>
+    <rect x="306" y="180" width="58" height="24" rx="4"/>
+  </g>
+  <g fill="#fca5a5" font-size="10.5" text-anchor="middle">
+    <text x="95" y="197">x₁y₁</text>
+    <text x="175" y="197">x₁y₂</text>
+    <text x="255" y="197">x₂y₁</text>
+    <text x="335" y="197">x₂y₂</text>
+  </g>
+  <text x="215" y="222" text-anchor="middle" fill="#94a3b8" font-size="11">가지 4개 · 크기 절반</text>
+
+  <text x="215" y="290" text-anchor="middle" fill="#e2e8f0" font-size="15">T(n) = 4·T(n/2) + Θ(n)</text>
+  <text x="215" y="322" text-anchor="middle" fill="#94a3b8" font-size="12">지수 = log₂4 = 2</text>
+  <text x="215" y="360" text-anchor="middle" fill="#f87171" font-size="20" font-weight="700">Θ(n²)</text>
+  <text x="215" y="388" text-anchor="middle" fill="#64748b" font-size="11">초등학교식과 똑같다</text>
+
+  <!-- ===== Right: Karatsuba, branch 3 ===== -->
+  <text x="645" y="100" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">카라츠바 — 곱 3번</text>
+
+  <rect x="615" y="112" width="60" height="30" rx="5" fill="#14352b" stroke="#34d399" stroke-width="1.5"/>
+  <text x="645" y="132" text-anchor="middle" fill="#d1fae5" font-size="12">n</text>
+
+  <g stroke="#065f46" stroke-width="1">
+    <line x1="645" y1="142" x2="535" y2="180"/>
+    <line x1="645" y1="142" x2="645" y2="180"/>
+    <line x1="645" y1="142" x2="757" y2="180"/>
+  </g>
+  <g fill="#14352b" stroke="#34d399" stroke-width="1.2">
+    <rect x="496" y="180" width="78" height="24" rx="4"/>
+    <rect x="606" y="180" width="78" height="24" rx="4"/>
+    <rect x="712" y="180" width="90" height="24" rx="4"/>
+  </g>
+  <g fill="#6ee7b7" font-size="10.5" text-anchor="middle">
+    <text x="535" y="197">x₁y₁</text>
+    <text x="645" y="197">x₂y₂</text>
+    <text x="757" y="197">(x₁+x₂)(y₁+y₂)</text>
+  </g>
+  <text x="645" y="222" text-anchor="middle" fill="#94a3b8" font-size="11">가지 3개 · 크기 절반</text>
+
+  <text x="645" y="248" text-anchor="middle" fill="#fcd34d" font-size="11">가운데 항 = (x₁+x₂)(y₁+y₂) − x₁y₁ − x₂y₂</text>
+  <text x="645" y="264" text-anchor="middle" fill="#64748b" font-size="10.5">세 가지를 재활용한 뺄셈뿐 — 곱셈이 없다</text>
+
+  <text x="645" y="290" text-anchor="middle" fill="#e2e8f0" font-size="15">T(n) = 3·T(n/2) + Θ(n)</text>
+  <text x="645" y="322" text-anchor="middle" fill="#94a3b8" font-size="12">지수 = log₂3 = 1.585…</text>
+  <text x="645" y="360" text-anchor="middle" fill="#34d399" font-size="20" font-weight="700">Θ(n¹·⁵⁸⁵)</text>
+  <text x="645" y="388" text-anchor="middle" fill="#64748b" font-size="11">가지 하나가 판을 바꾼다</text>
+</svg>
