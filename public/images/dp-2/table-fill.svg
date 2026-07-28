@@ -1,0 +1,82 @@
+<svg viewBox="0 0 860 430" width="1290" height="645" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="dp2-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="430" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">표를 왼쪽에서 오른쪽으로 채운다 — 안 함 행과 함 행이 서로를 참조한다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">선택된 전이만 따라가면 왜 2일·4일에 일했는지 보인다</text>
+
+  <!-- selected-day highlight boxes behind day 2 and day 4 headers -->
+  <rect x="325" y="76" width="110" height="58" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <rect x="625" y="76" width="110" height="58" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+  <!-- ===== header rows: 일자 / 일급 ===== -->
+  <text x="150" y="94" text-anchor="end" fill="#94a3b8" font-size="12">일자</text>
+  <g fill="#cbd5e1" font-size="13" text-anchor="middle">
+    <text x="230" y="94">1</text>
+    <text x="380" y="94">2</text>
+    <text x="530" y="94">3</text>
+    <text x="680" y="94">4</text>
+  </g>
+
+  <text x="150" y="122" text-anchor="end" fill="#94a3b8" font-size="12">일급 (aᵢ)</text>
+  <g fill="#e2e8f0" font-size="13" text-anchor="middle">
+    <text x="230" y="122">3</text>
+    <text x="380" y="122">5</text>
+    <text x="530" y="122">6</text>
+    <text x="680" y="122">10</text>
+  </g>
+
+  <line x1="60" y1="134" x2="760" y2="134" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== row: 안 함 r[i][0] ===== -->
+  <text x="150" y="170" text-anchor="end" fill="#94a3b8" font-size="11.5">안 함</text>
+  <text x="150" y="183" text-anchor="end" fill="#64748b" font-size="10">r[i][0]</text>
+
+  <rect x="175" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="230" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">0</text>
+
+  <rect x="325" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="380" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">3</text>
+
+  <rect x="475" y="156" width="110" height="36" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.6"/>
+  <text x="530" y="178" text-anchor="middle" fill="#fef3c7" font-size="14" font-weight="700">5</text>
+
+  <rect x="625" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="680" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">9</text>
+
+  <!-- ===== row: 함 r[i][1] ===== -->
+  <text x="150" y="236" text-anchor="end" fill="#94a3b8" font-size="11.5">함</text>
+  <text x="150" y="249" text-anchor="end" fill="#64748b" font-size="10">r[i][1]</text>
+
+  <rect x="175" y="222" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="230" y="244" text-anchor="middle" fill="#cbd5e1" font-size="14">3</text>
+
+  <rect x="325" y="222" width="110" height="36" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.6"/>
+  <text x="380" y="244" text-anchor="middle" fill="#fef3c7" font-size="14" font-weight="700">5</text>
+
+  <rect x="475" y="222" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="530" y="244" text-anchor="middle" fill="#cbd5e1" font-size="14">9</text>
+
+  <rect x="625" y="222" width="110" height="36" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="2"/>
+  <text x="680" y="244" text-anchor="middle" fill="#fef3c7" font-size="15" font-weight="700">15</text>
+
+  <!-- ===== selected transition arrows ===== -->
+  <!-- r[2][1]=5 -> r[3][0]=5 (2일 근무 선택) -->
+  <path d="M 380,222 Q 455,193 528,193" fill="none" stroke="#f59e0b" stroke-width="1.6" marker-end="url(#dp2-arrow)"/>
+  <text x="455" y="209" text-anchor="middle" fill="#fcd34d" font-size="10">r[2][1]=5 (2일 근무)</text>
+
+  <!-- r[3][0]=5 -> r[4][1]=15 (+a4=10) -->
+  <path d="M 585,175 Q 632,183 678,220" fill="none" stroke="#f59e0b" stroke-width="1.6" marker-end="url(#dp2-arrow)"/>
+  <text x="632" y="205" text-anchor="middle" fill="#fcd34d" font-size="10.5">+a₄=10</text>
+
+  <line x1="60" y1="270" x2="760" y2="270" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="300" text-anchor="middle" fill="#fbbf24" font-size="20" font-weight="700">max = 15</text>
+  <text x="430" y="324" text-anchor="middle" fill="#94a3b8" font-size="12">선택: 2일 + 4일 근무 → 5 + 10 = 15</text>
+  <text x="430" y="346" text-anchor="middle" fill="#64748b" font-size="11">안 하면 최댓값을 이어받고, 하면 이틀 전 값에 오늘 급여를 더한다</text>
+</svg>
