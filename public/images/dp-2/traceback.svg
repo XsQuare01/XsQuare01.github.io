@@ -1,0 +1,86 @@
+<svg viewBox="0 0 860 430" width="1290" height="645" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="dp2-arrow-rev" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="430" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">표를 오른쪽에서 왼쪽으로 되짚는다 — 마지막 칸에서 거꾸로 일한 날을 찾는다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">값이 흘러온 칸만 골라내면 왜 2일·4일에 일했는지 드러난다</text>
+
+  <!-- selected-day highlight boxes behind day 2 and day 4 headers -->
+  <rect x="325" y="76" width="110" height="58" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <rect x="625" y="76" width="110" height="58" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+  <!-- ===== header rows: 일자 / 일급 ===== -->
+  <text x="150" y="94" text-anchor="end" fill="#94a3b8" font-size="12">일자</text>
+  <g fill="#cbd5e1" font-size="13" text-anchor="middle">
+    <text x="230" y="94">1</text>
+    <text x="380" y="94">2</text>
+    <text x="530" y="94">3</text>
+    <text x="680" y="94">4</text>
+  </g>
+
+  <text x="150" y="122" text-anchor="end" fill="#94a3b8" font-size="12">일급 (aᵢ)</text>
+  <g fill="#e2e8f0" font-size="13" text-anchor="middle">
+    <text x="230" y="122">3</text>
+    <text x="380" y="122">5</text>
+    <text x="530" y="122">6</text>
+    <text x="680" y="122">10</text>
+  </g>
+
+  <line x1="60" y1="134" x2="760" y2="134" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== row: 안 함 r[i][0] ===== -->
+  <text x="150" y="170" text-anchor="end" fill="#94a3b8" font-size="11.5">안 함</text>
+  <text x="150" y="183" text-anchor="end" fill="#64748b" font-size="10">r[i][0]</text>
+
+  <!-- traceback endpoint marker: r[1][0]=0 (시작 이전, 되짚기가 끝나는 곳) -->
+  <rect x="171" y="152" width="118" height="44" rx="7" fill="none" stroke="#38bdf8" stroke-width="1.4" stroke-dasharray="3 3"/>
+  <rect x="175" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="230" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">0</text>
+
+  <rect x="325" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="380" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">3</text>
+
+  <rect x="475" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="530" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">5</text>
+
+  <rect x="625" y="156" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="680" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">9</text>
+
+  <!-- ===== row: 함 r[i][1] ===== -->
+  <text x="150" y="236" text-anchor="end" fill="#94a3b8" font-size="11.5">함</text>
+  <text x="150" y="249" text-anchor="end" fill="#64748b" font-size="10">r[i][1]</text>
+
+  <rect x="175" y="222" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="230" y="244" text-anchor="middle" fill="#cbd5e1" font-size="14">3</text>
+
+  <!-- chosen cell: r[2][1]=5 (2일 근무) -->
+  <rect x="325" y="222" width="110" height="36" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.6"/>
+  <text x="380" y="244" text-anchor="middle" fill="#fef3c7" font-size="14" font-weight="700">5</text>
+
+  <rect x="475" y="222" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="530" y="244" text-anchor="middle" fill="#cbd5e1" font-size="14">9</text>
+
+  <!-- chosen cell: r[4][1]=15 (4일 근무, 되짚기 시작점) -->
+  <rect x="625" y="222" width="110" height="36" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="2"/>
+  <text x="680" y="244" text-anchor="middle" fill="#fef3c7" font-size="15" font-weight="700">15</text>
+
+  <!-- ===== traceback arrows (오른쪽 → 왼쪽) ===== -->
+  <!-- r[4][1]=15 -> r[2][1]=5, r[3][0]=5 경유 (같은 행 사이 간격에서 활 모양으로) -->
+  <path d="M 625,222 Q 530,202 435,222" fill="none" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#dp2-arrow-rev)"/>
+  <text x="530" y="200" text-anchor="middle" fill="#7dd3fc" font-size="10">r[3][0]=5 경유</text>
+
+  <!-- r[2][1]=5 -> r[1][0]=0, 시작 이전(되짚기 종료) -->
+  <path d="M 325,222 Q 255,175 290,193" fill="none" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#dp2-arrow-rev)"/>
+  <text x="255" y="208" text-anchor="middle" fill="#7dd3fc" font-size="10">r[1][0]=0 (시작 이전)</text>
+
+  <line x1="60" y1="270" x2="760" y2="270" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="300" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="700">선택 = {2일, 4일},  합 5 + 10 = 15</text>
+  <text x="430" y="324" text-anchor="middle" fill="#94a3b8" font-size="12">함 칸에서 시작해 값이 흘러온 칸만 남기면 실제로 일한 날이 남는다</text>
+  <text x="430" y="346" text-anchor="middle" fill="#64748b" font-size="11">r[1][0]=0에 닿으면 더 되짚을 것이 없다 — 되짚기 종료</text>
+</svg>
