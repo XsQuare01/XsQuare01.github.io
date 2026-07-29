@@ -11,8 +11,8 @@
   <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">값이 흘러온 칸만 골라내면 왜 2일·4일에 일했는지 드러난다</text>
 
   <!-- selected-day highlight boxes behind day 2 and day 4 headers -->
-  <rect x="325" y="76" width="110" height="58" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
-  <rect x="625" y="76" width="110" height="58" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <rect x="325" y="76" width="110" height="50" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <rect x="625" y="76" width="110" height="50" rx="6" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/>
 
   <!-- ===== header rows: 일자 / 일급 ===== -->
   <text x="150" y="94" text-anchor="end" fill="#94a3b8" font-size="12">일자</text>
@@ -34,7 +34,7 @@
   <line x1="60" y1="134" x2="760" y2="134" stroke="#1e293b" stroke-width="1"/>
 
   <!-- ===== row: 안 함 r[i][0] ===== -->
-  <text x="150" y="170" text-anchor="end" fill="#94a3b8" font-size="11.5">안 함</text>
+  <text x="150" y="170" text-anchor="end" fill="#94a3b8" font-size="11.5">일 안함</text>
   <text x="150" y="183" text-anchor="end" fill="#64748b" font-size="10">r[i][0]</text>
 
   <!-- traceback endpoint marker: r[1][0]=0 (시작 이전, 되짚기가 끝나는 곳) -->
@@ -52,7 +52,7 @@
   <text x="680" y="178" text-anchor="middle" fill="#cbd5e1" font-size="14">9</text>
 
   <!-- ===== row: 함 r[i][1] ===== -->
-  <text x="150" y="236" text-anchor="end" fill="#94a3b8" font-size="11.5">함</text>
+  <text x="150" y="236" text-anchor="end" fill="#94a3b8" font-size="11.5">일 함</text>
   <text x="150" y="249" text-anchor="end" fill="#64748b" font-size="10">r[i][1]</text>
 
   <rect x="175" y="222" width="110" height="36" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
@@ -69,18 +69,18 @@
   <rect x="625" y="222" width="110" height="36" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="2"/>
   <text x="680" y="244" text-anchor="middle" fill="#fef3c7" font-size="15" font-weight="700">15</text>
 
-  <!-- ===== traceback arrows (오른쪽 → 왼쪽) ===== -->
-  <!-- r[4][1]=15 -> r[2][1]=5, r[3][0]=5 경유 (같은 행 사이 간격에서 활 모양으로) -->
-  <path d="M 625,222 Q 530,202 435,222" fill="none" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#dp2-arrow-rev)"/>
-  <text x="530" y="200" text-anchor="middle" fill="#7dd3fc" font-size="10">r[3][0]=5 경유</text>
+  <!-- ===== traceback arrows (오른쪽 → 왼쪽, 모두 대상 칸의 오른쪽 변으로 수평 진입) ===== -->
+  <!-- r[4][1]=15 -> r[2][1]=5 (r[3][0]=5 경유): 행 위 간격으로 우회해 오른쪽 변으로 진입 -->
+  <path d="M 625,240 L 625,212 L 460,212 L 460,240 L 435,240" fill="none" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#dp2-arrow-rev)"/>
+  <text x="530" y="203" text-anchor="middle" fill="#7dd3fc" font-size="10">r[3][0]=5 경유</text>
 
-  <!-- r[2][1]=5 -> r[1][0]=0, 시작 이전(되짚기 종료) -->
-  <path d="M 325,222 Q 255,175 290,193" fill="none" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#dp2-arrow-rev)"/>
-  <text x="255" y="208" text-anchor="middle" fill="#7dd3fc" font-size="10">r[1][0]=0 (시작 이전)</text>
+  <!-- r[2][1]=5 -> r[1][0]=0: 열 사이 간격으로 올라가 오른쪽 변으로 진입(되짚기 종료) -->
+  <path d="M 325,240 L 310,240 L 310,174 L 285,174" fill="none" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#dp2-arrow-rev)"/>
+  <text x="230" y="214" text-anchor="middle" fill="#7dd3fc" font-size="10">r[1][0]=0</text>
 
   <line x1="60" y1="270" x2="760" y2="270" stroke="#1e293b" stroke-width="1"/>
 
   <text x="430" y="300" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="700">선택 = {2일, 4일},  합 5 + 10 = 15</text>
-  <text x="430" y="324" text-anchor="middle" fill="#94a3b8" font-size="12">함 칸에서 시작해 값이 흘러온 칸만 남기면 실제로 일한 날이 남는다</text>
+  <text x="430" y="324" text-anchor="middle" fill="#94a3b8" font-size="12">'일 함' 칸에서 시작해 값이 흘러온 칸만 남기면 실제로 일한 날이 남는다</text>
   <text x="430" y="346" text-anchor="middle" fill="#64748b" font-size="11">r[1][0]=0에 닿으면 더 되짚을 것이 없다 — 되짚기 종료</text>
 </svg>
