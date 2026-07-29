@@ -727,6 +727,102 @@ class TestReportSchemaV2(unittest.TestCase):
                     self.assertIn(f"`{field}`", text)
 
 
+class TestAuthoringGuideContracts(unittest.TestCase):
+    def test_agents_and_review_commands_share_canonical_authority_and_ownership(self):
+        agents_text = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        for term in (
+            "`docs/writing-rules.md`",
+            "핵심 줄기",
+            "증명/논증 흐름",
+            "의도한 주장",
+        ):
+            self.assertIn(term, agents_text)
+
+        required_command_terms = (
+            "## 작성 가이드와 책임 경계",
+            "docs/writing-rules.md",
+            "AGENTS.md",
+            "작성자는 구조·문체·provenance 분류와 검증 근거 준비를 맡는다.",
+            "리뷰어는 원문 충실성·사실 및 기술 정확성·증명 타당성을 판정한다.",
+        )
+        responsibility_sections = []
+        for command_name in ("review-post.md", "review-post-all.md"):
+            with self.subTest(command=command_name):
+                text = (COMMAND_DIR / command_name).read_text(encoding="utf-8")
+                for term in required_command_terms:
+                    self.assertIn(term, text)
+                section = text.split("## 작성 가이드와 책임 경계", 1)[1].split("\n## ", 1)[0]
+                responsibility_sections.append(section)
+
+        self.assertEqual(responsibility_sections[0], responsibility_sections[1])
+
+    def test_canonical_guide_has_six_stages_in_order(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        stage_headings = [
+            "### 1. 원문 확인",
+            "### 2. 글 설계",
+            "### 3. 초안",
+            "### 4. 기술 검증 준비",
+            "### 5. 문장 퇴고",
+            "### 6. 리뷰 인계",
+        ]
+        actual_stage_headings = []
+        in_fence = False
+
+        for line in text.splitlines():
+            if line.lstrip().startswith("```"):
+                in_fence = not in_fence
+            elif not in_fence and re.fullmatch(r"### [1-6]\. .+", line):
+                actual_stage_headings.append(line)
+
+        self.assertEqual(actual_stage_headings, stage_headings)
+
+    def test_canonical_guide_preserves_sentence_rules_and_sources(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        required_terms = [
+            "접속어 최소화",
+            "grep -oE",
+            "George Orwell",
+            "William Strunk Jr.",
+            "William Zinsser",
+            "Joan Didion",
+            "Kurt Vonnegut",
+        ]
+
+        for term in required_terms:
+            self.assertIn(term, text)
+
+    def test_canonical_guide_has_three_annotated_examples_and_split_policy(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        annotation_counts = {
+            "**결함:**": 0,
+            "**수정 후**": 0,
+            "**개선 이유:**": 0,
+        }
+        in_fence = False
+
+        for line in text.splitlines():
+            if line.lstrip().startswith("```"):
+                in_fence = not in_fence
+            elif not in_fence:
+                for annotation in annotation_counts:
+                    if line == annotation:
+                        annotation_counts[annotation] += 1
+
+        self.assertEqual(
+            annotation_counts,
+            {"**결함:**": 3, "**수정 후**": 3, "**개선 이유:**": 3},
+        )
+        for term in (
+            "개념 설명 문단",
+            "증명 진행 문단",
+            "코드 및 예시 설명 문단",
+            "독립된 질문",
+            "고정 템플릿을 요구하지 않는다",
+        ):
+            self.assertIn(term, text)
+
+
 class TestStdoutEncoding(unittest.TestCase):
     def test_main_emits_emoji_without_crash(self):
         import io
