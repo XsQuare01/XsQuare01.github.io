@@ -1,0 +1,54 @@
+<svg viewBox="0 0 860 400" width="1290" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="400" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">마지막 곱셈을 어디서 하는가</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">구간 [i,j]를 k에서 자른다 — 왼쪽·오른쪽은 이미 풀린 부분 문제</text>
+
+  <text x="430" y="84" text-anchor="middle" fill="#94a3b8" font-size="11.5">마지막 곱을 k에서</text>
+
+  <!-- ===== Top: single chain box split at k ===== -->
+  <rect x="250" y="96" width="360" height="40" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <line x1="430" y1="96" x2="430" y2="136" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="340" y="120" text-anchor="middle" fill="#cbd5e1" font-size="13">Mᵢ ⋯ Mₖ</text>
+  <text x="520" y="120" text-anchor="middle" fill="#cbd5e1" font-size="13">Mₖ₊₁ ⋯ Mⱼ</text>
+
+  <!-- branch lines down to the three terms -->
+  <g stroke="#334155" stroke-width="1">
+    <line x1="340" y1="136" x2="165" y2="170"/>
+    <line x1="430" y1="136" x2="430" y2="170"/>
+    <line x1="520" y1="136" x2="695" y2="170"/>
+  </g>
+
+  <!-- left: M[i,k] (blue, already solved) -->
+  <rect x="90" y="170" width="150" height="34" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="165" y="191" text-anchor="middle" fill="#dbeafe" font-size="13">M[i, k]</text>
+
+  <!-- center: combine cost (green) -->
+  <rect x="340" y="170" width="180" height="34" rx="4" fill="#14352b" stroke="#34d399" stroke-width="1.2"/>
+  <text x="430" y="191" text-anchor="middle" fill="#d1fae5" font-size="12">dᵢ₋₁ · dₖ · dⱼ</text>
+
+  <!-- right: M[k+1,j] (blue, already solved) -->
+  <rect x="620" y="170" width="150" height="34" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="695" y="191" text-anchor="middle" fill="#dbeafe" font-size="13">M[k+1, j]</text>
+
+  <!-- converge into the sum -->
+  <g stroke="#475569" stroke-width="1">
+    <line x1="165" y1="204" x2="350" y2="238"/>
+    <line x1="430" y1="204" x2="430" y2="238"/>
+    <line x1="695" y1="204" x2="510" y2="238"/>
+  </g>
+  <text x="300" y="224" text-anchor="middle" fill="#64748b" font-size="12">+</text>
+  <text x="560" y="224" text-anchor="middle" fill="#64748b" font-size="12">+</text>
+
+  <rect x="230" y="238" width="400" height="36" rx="5" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="430" y="261" text-anchor="middle" fill="#fef3c7" font-size="13" font-weight="700">M[i,k] + M[k+1,j] + dᵢ₋₁ dₖ dⱼ</text>
+  <text x="430" y="286" text-anchor="middle" fill="#fbbf24" font-size="11.5" font-weight="600">모든 k 중 최소가 M[i,j]</text>
+
+  <!-- ===== Bottom recurrence ===== -->
+  <line x1="70" y1="310" x2="790" y2="310" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="338" text-anchor="middle" font-size="15" font-weight="600">
+    <tspan fill="#e2e8f0">M[i,j] = </tspan><tspan fill="#fbbf24">min</tspan><tspan fill="#fbbf24" font-size="10" dy="5">i≤k&lt;j</tspan><tspan fill="#e2e8f0" dy="-5"> ( </tspan><tspan fill="#93c5fd">M[i,k]</tspan><tspan fill="#e2e8f0"> + </tspan><tspan fill="#93c5fd">M[k+1,j]</tspan><tspan fill="#e2e8f0"> + </tspan><tspan fill="#6ee7b7">dᵢ₋₁ dₖ dⱼ</tspan><tspan fill="#e2e8f0"> )</tspan>
+  </text>
+  <text x="430" y="362" text-anchor="middle" fill="#94a3b8" font-size="12">k를 모든 후보로 시도해 가장 작은 값만 남긴다</text>
+</svg>
