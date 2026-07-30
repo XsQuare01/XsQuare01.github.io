@@ -176,6 +176,7 @@ greedy 해 $A$는 현재까지 공통으로 선택한 prefix 뒤에서 그 prefi
 - **과형식화·과교정 금지.** 의미·수식·코드·용어·직관 설명의 자연스러움은 건드리지 않는다. 문체만 조인다.
 - **강박 금지.** 접속어를 0으로 만들거나 '것/의'를 전부 없애려 하지 않는다. 논리 전환에 꼭 필요한 것은 남긴다. 목적은 명료함이지 획일화가 아니다.
 - **기술적 정확성 우선.** 아래 문학적 조언은 수학적 정확성, 안정된 용어, 출처와 증명 구조, 수식, 코드, 자연스러운 한국어보다 앞서지 않는다. 짧게 쓰려다 조건이나 논증 단계를 없애지 않는다.
+- **문장 배열이 의미를 바꾸지 않게.** 문장을 짧게 쪼개거나 어순을 바꿀 때 조건은 결론 가까이에, 원인과 결과는 대응하는 자리에 두어 조건·인과 관계가 뒤틀리지 않게 한다. 이는 문체가 아니라 정확성 문제다.
 - 코드 주석·인용·수식 내부 텍스트는 대상이 아니다.
 
 #### 군더더기 없애기
@@ -245,5 +246,5 @@ grep -oE '[가-힣]들' <파일> | wc -l
 - George Orwell, [“Politics and the English Language”](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/), The Orwell Foundation. 직접 인용: “Let the meaning choose the word, and not the other way about.” Orwell 자신도 규칙보다 명백히 부당한 표현을 피하는 일이 우선이라고 단서를 둔다.
 - William Strunk Jr., [*The Elements of Style*](https://www.gutenberg.org/files/37134/37134-h/37134-h.htm), 1920년판, §13, Project Gutenberg. 직접 인용: “Omit needless words.” 이 문서에서는 조건·근거까지 생략하라는 뜻이 아니라 불필요한 말만 덜어내라는 원칙으로 적용한다.
 - William Zinsser, [“Simplicity”](https://websites.umass.edu/wwclement/simplicity/), *On Writing Well*, UMass Amherst 게재본. 처음 접하는 독자의 명료성, 논리적 사고, 반복 퇴고에 관한 조언을 적용했다.
-- Joan Didion, [“Why I Write”](https://www.nytimes.com/1976/12/05/archives/why-i-write-why-i-write.html), *The New York Times*, 1976. 초안으로 생각을 발견하고 문장 배열로 의미를 정한다는 설명을 적용했다.
-- Kurt Vonnegut, “Creative Writing 101,” *Bagombo Snuff Box* (1999). 독자의 시간을 존중하라는 소설 쓰기 조언에서 기술 글에도 맞는 부분만 적용했으며, 소설의 다른 규칙을 보편 법칙으로 삼지 않는다.
+- Joan Didion, [“Why I Write”](https://www.nytimes.com/1976/12/05/archives/why-i-write-why-i-write.html), *The New York Times*, 1976. 문장 배열이 조건·인과의 의미를 바꾸지 않게 한다는 설명을 적용했다(5단계 대원칙). 초안으로 생각을 발견한다는 읽힘 성격의 조언은 #92로 분리했다.
+- Kurt Vonnegut, “Creative Writing 101,” *Bagombo Snuff Box* (1999). 불필요한 우회·반복을 덜어내는 간결 원칙에 닿는 부분만 적용했다. 독자의 시간·몰입(engagement) 관점은 #92로 분리했으며, 소설의 다른 규칙을 보편 법칙으로 삼지 않는다.
