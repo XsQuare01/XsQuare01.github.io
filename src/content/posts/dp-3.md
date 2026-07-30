@@ -15,8 +15,8 @@ numbered: true
 
 - **곱셈 순서가 비용을 바꾼다**: 같은 결과, 다른 곱셈 횟수
 - **구간을 자르는 결정**에서 점화식 $M[i,j]=\min_k(\cdots)$ 유도
-- **짧은 구간부터 채우는 2차원 표**
-- (더 나가면) 어떤 괄호 순서인지 **복원**, 복잡도
+- **짧은 구간부터 채우는 2차원 표**로 $O(n^3)$에 풀기
+- (더 나가면) 어떤 괄호 순서인지 **복원**
 
 </div>
 
@@ -100,18 +100,20 @@ $M[i,j]$는 자기보다 **짧은** 구간 $M[i,k]$, $M[k+1,j]$만 참조한다(
 
 ```cpp
 // d[0..n]: Mᵢ 는 d[i-1] x d[i] 행렬.  M₁ x … x Mₙ 의 최소 곱셈 횟수.
-int matrixChain(const vector<int>& d, int n) {
-    vector<vector<int>> m(n + 1, vector<int>(n + 1, 0));  // m[i][i]=0: 한 행렬은 곱 불필요
+long long matrixChain(const vector<int>& d, int n) {
+    vector<vector<long long>> m(n + 1, vector<long long>(n + 1, 0));  // m[i][i]=0: 한 행렬은 곱 불필요
     for (int len = 2; len <= n; len++)              // 구간 길이 2..n
         for (int i = 1; i + len - 1 <= n; i++) {    // 구간 [i, j]
             int j = i + len - 1;
-            m[i][j] = INT_MAX;
+            m[i][j] = LLONG_MAX;
             for (int k = i; k < j; k++)             // 마지막 곱을 (i..k)(k+1..j)로
-                m[i][j] = min(m[i][j], m[i][k] + m[k+1][j] + d[i-1]*d[k]*d[j]);
+                m[i][j] = min(m[i][j], m[i][k] + m[k+1][j] + 1LL*d[i-1]*d[k]*d[j]);
         }
     return m[1][n];
 }
 ```
+
+곱 $d_{i-1}d_k d_j$ 가 구간마다 쌓이면 값이 32비트 정수를 넘기 쉬워, 표와 반환형을 64비트(`long long`)로 둔다.
 
 $d=[3,2,4,2]$로 표를 채워 본다. 길이 2 — $M[1,2]=3\cdot2\cdot4=24$, $M[2,3]=2\cdot4\cdot2=16$. 길이 3 — $M[1,3]=\min(M[1,1]+M[2,3]+3\cdot2\cdot2,\; M[1,2]+M[3,3]+3\cdot4\cdot2)=\min(0+16+12,\;24+0+24)=\min(28,48)=28$. 정답 $M[1,3]=28$이다.
 
