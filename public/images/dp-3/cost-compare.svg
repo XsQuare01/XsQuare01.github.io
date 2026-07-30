@@ -1,0 +1,65 @@
+<svg viewBox="0 0 860 366" width="1290" height="549" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="366" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">곱셈 순서가 비용을 바꾼다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">(3×2)(2×4)(4×2) — 같은 세 행렬, 다른 묶음</text>
+
+  <line x1="430" y1="76" x2="430" y2="310" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== Left: ((3x2)(2x4))(4x2) — 48 ===== -->
+  <text x="215" y="98" text-anchor="middle" fill="#cbd5e1" font-size="12.5" font-weight="600">((3×2)(2×4))(4×2)</text>
+
+  <rect x="101" y="112" width="68" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="135" y="131" text-anchor="middle" fill="#cbd5e1" font-size="12">3×2</text>
+
+  <rect x="181" y="112" width="68" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="215" y="131" text-anchor="middle" fill="#cbd5e1" font-size="12">2×4</text>
+
+  <rect x="261" y="112" width="68" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="295" y="131" text-anchor="middle" fill="#cbd5e1" font-size="12">4×2</text>
+
+  <!-- step 1: (3x2)(2x4) first -->
+  <path d="M101,145 L101,152 L249,152 L249,145" fill="none" stroke="#3b82f6" stroke-width="1.4"/>
+  <text x="175" y="168" text-anchor="middle" fill="#93c5fd" font-size="11">① 3·2·4 = 24</text>
+
+  <!-- step 2: combine with remaining matrix -->
+  <path d="M101,182 L101,196 L329,196 L329,182" fill="none" stroke="#34d399" stroke-width="1.4"/>
+  <text x="215" y="212" text-anchor="middle" fill="#6ee7b7" font-size="11">② 3·4·2 = 24</text>
+
+  <line x1="215" y1="220" x2="215" y2="236" stroke="#475569" stroke-width="1"/>
+
+  <rect x="145" y="236" width="140" height="34" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="215" y="258" text-anchor="middle" fill="#cbd5e1" font-size="14" font-weight="700">24 + 24 = 48</text>
+  <text x="215" y="286" text-anchor="middle" fill="#64748b" font-size="11">48회 곱셈</text>
+
+  <!-- ===== Right: (3x2)((2x4)(4x2)) — 28 ===== -->
+  <text x="645" y="98" text-anchor="middle" fill="#cbd5e1" font-size="12.5" font-weight="600">(3×2)((2×4)(4×2))</text>
+
+  <rect x="531" y="112" width="68" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="565" y="131" text-anchor="middle" fill="#cbd5e1" font-size="12">3×2</text>
+
+  <rect x="611" y="112" width="68" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="645" y="131" text-anchor="middle" fill="#cbd5e1" font-size="12">2×4</text>
+
+  <rect x="691" y="112" width="68" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="725" y="131" text-anchor="middle" fill="#cbd5e1" font-size="12">4×2</text>
+
+  <!-- step 1: (2x4)(4x2) first -->
+  <path d="M611,145 L611,152 L759,152 L759,145" fill="none" stroke="#3b82f6" stroke-width="1.4"/>
+  <text x="685" y="168" text-anchor="middle" fill="#93c5fd" font-size="11">① 2·4·2 = 16</text>
+
+  <!-- step 2: combine with remaining matrix -->
+  <path d="M531,182 L531,196 L759,196 L759,182" fill="none" stroke="#34d399" stroke-width="1.4"/>
+  <text x="645" y="212" text-anchor="middle" fill="#6ee7b7" font-size="11">② 3·2·2 = 12</text>
+
+  <line x1="645" y1="220" x2="645" y2="236" stroke="#475569" stroke-width="1"/>
+
+  <rect x="575" y="236" width="140" height="34" rx="5" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.6"/>
+  <text x="645" y="258" text-anchor="middle" fill="#fef3c7" font-size="14" font-weight="700">16 + 12 = 28</text>
+  <text x="645" y="286" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">28회 곱셈 — 더 저렴</text>
+
+  <!-- ===== Shared caption ===== -->
+  <line x1="70" y1="310" x2="790" y2="310" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="336" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">결과 행렬은 같다. 곱셈 횟수만 다르다.</text>
+</svg>
