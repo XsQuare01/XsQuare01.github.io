@@ -47,8 +47,6 @@
   <!-- ===== Bottom recurrence ===== -->
   <line x1="70" y1="310" x2="790" y2="310" stroke="#1e293b" stroke-width="1"/>
 
-  <text x="430" y="338" text-anchor="middle" font-size="15" font-weight="600">
-    <tspan fill="#e2e8f0">M[i,j] = </tspan><tspan fill="#fbbf24">min</tspan><tspan fill="#fbbf24" font-size="10" dy="5">i≤k&lt;j</tspan><tspan fill="#e2e8f0" dy="-5"> ( </tspan><tspan fill="#93c5fd">M[i,k]</tspan><tspan fill="#e2e8f0"> + </tspan><tspan fill="#93c5fd">M[k+1,j]</tspan><tspan fill="#e2e8f0"> + </tspan><tspan fill="#6ee7b7">dᵢ₋₁ dₖ dⱼ</tspan><tspan fill="#e2e8f0"> )</tspan>
-  </text>
+  <text x="430" y="338" text-anchor="middle" font-size="15" font-weight="600" xml:space="preserve"><tspan fill="#e2e8f0">M[i,j] = </tspan><tspan fill="#fbbf24">min</tspan><tspan fill="#fbbf24" font-size="10" dy="5">i≤k&lt;j</tspan><tspan fill="#e2e8f0" dy="-5"> ( </tspan><tspan fill="#93c5fd">M[i,k]</tspan><tspan fill="#e2e8f0"> + </tspan><tspan fill="#93c5fd">M[k+1,j]</tspan><tspan fill="#e2e8f0"> + </tspan><tspan fill="#6ee7b7">dᵢ₋₁ dₖ dⱼ</tspan><tspan fill="#e2e8f0"> )</tspan></text>
   <text x="430" y="362" text-anchor="middle" fill="#94a3b8" font-size="12">k를 모든 후보로 시도해 가장 작은 값만 남긴다</text>
 </svg>
