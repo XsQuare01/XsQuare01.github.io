@@ -1,0 +1,65 @@
+<svg viewBox="0 0 900 540" width="1350" height="810" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="900" height="540" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600" xml:space="preserve">표의 분할점을 따라 괄호화를 되짚는다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11" xml:space="preserve">내부 노드는 분할점 k, 잎은 개별 행렬 — 뿌리에서 잎까지 내려가면 괄호가 나온다</text>
+
+  <!-- ===== split table (aligned above the nodes it produced) ===== -->
+  <text x="430" y="76" text-anchor="middle" fill="#64748b" font-size="11" font-weight="600" xml:space="preserve">분할점 표 (split table)</text>
+
+  <rect x="260" y="82" width="180" height="32" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="350" y="103" text-anchor="middle" fill="#cbd5e1" font-size="13" xml:space="preserve">split[1][3] = 1</text>
+
+  <rect x="470" y="82" width="180" height="32" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <text x="560" y="103" text-anchor="middle" fill="#cbd5e1" font-size="13" xml:space="preserve">split[2][3] = 2</text>
+
+  <!-- dashed guide lines: split table entry -> the node it determines -->
+  <line x1="350" y1="114" x2="350" y2="145" stroke="#334155" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="560" y1="114" x2="560" y2="260" stroke="#334155" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- ===== tree edges (drawn under the boxes) ===== -->
+  <g stroke="#475569" stroke-width="1.6">
+    <line x1="350" y1="205" x2="185" y2="263"/>
+    <line x1="350" y1="205" x2="560" y2="260"/>
+    <line x1="560" y1="320" x2="480" y2="378"/>
+    <line x1="560" y1="320" x2="650" y2="378"/>
+  </g>
+
+  <!-- ===== root: internal node, split point k=1 (구간 [1,3]) ===== -->
+  <rect x="295" y="145" width="110" height="60" rx="10" fill="#14352b" stroke="#34d399" stroke-width="1.4"/>
+  <text x="350" y="163" text-anchor="middle" fill="#6ee7b7" font-size="10.5" xml:space="preserve">[1,3]</text>
+  <text x="350" y="189" text-anchor="middle" fill="#d1fae5" font-size="20" font-weight="700">k=1</text>
+
+  <!-- ===== left child: leaf M1 ===== -->
+  <rect x="140" y="263" width="90" height="54" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.4"/>
+  <text x="185" y="297" text-anchor="middle" fill="#dbeafe" font-size="20" font-weight="600">M₁</text>
+
+  <!-- ===== right child: internal node, split point k=2 (구간 [2,3]) ===== -->
+  <rect x="505" y="260" width="110" height="60" rx="10" fill="#14352b" stroke="#34d399" stroke-width="1.4"/>
+  <text x="560" y="278" text-anchor="middle" fill="#6ee7b7" font-size="10.5" xml:space="preserve">[2,3]</text>
+  <text x="560" y="304" text-anchor="middle" fill="#d1fae5" font-size="20" font-weight="700">k=2</text>
+
+  <!-- ===== k=2's children: leaves M2, M3 ===== -->
+  <rect x="435" y="378" width="90" height="54" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.4"/>
+  <text x="480" y="412" text-anchor="middle" fill="#dbeafe" font-size="20" font-weight="600">M₂</text>
+
+  <rect x="605" y="378" width="90" height="54" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.4"/>
+  <text x="650" y="412" text-anchor="middle" fill="#dbeafe" font-size="20" font-weight="600">M₃</text>
+
+  <!-- ===== legend ===== -->
+  <text x="790" y="170" text-anchor="middle" fill="#64748b" font-size="11" font-weight="600" xml:space="preserve">범례</text>
+
+  <rect x="712" y="190" width="16" height="16" rx="3" fill="#14352b" stroke="#34d399" stroke-width="1.2"/>
+  <text x="736" y="202" fill="#94a3b8" font-size="10.5" xml:space="preserve">내부 노드 = 마지막 곱</text>
+  <text x="736" y="215" fill="#94a3b8" font-size="10.5" xml:space="preserve">(분할점 k)</text>
+
+  <rect x="712" y="234" width="16" height="16" rx="3" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="736" y="246" fill="#94a3b8" font-size="10.5" xml:space="preserve">잎 = 개별 행렬 (Mᵢ)</text>
+
+  <!-- ===== bottom: reconstructed parenthesization ===== -->
+  <line x1="70" y1="452" x2="830" y2="452" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="476" text-anchor="middle" fill="#94a3b8" font-size="12" xml:space="preserve">뿌리에서 잎까지 내려가며 괄호를 조립하면</text>
+  <text x="430" y="503" text-anchor="middle" fill="#fbbf24" font-size="21" font-weight="700" xml:space="preserve">(M₁(M₂M₃))  ·  cost 28</text>
+  <text x="430" y="524" text-anchor="middle" fill="#64748b" font-size="11" xml:space="preserve">곱셈 횟수가 최소(28)가 되는 괄호화다</text>
+</svg>
