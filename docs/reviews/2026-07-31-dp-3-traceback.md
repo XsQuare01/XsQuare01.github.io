@@ -1,93 +1,123 @@
+schema_version: review-report/v2
+target: dp-3-traceback
+generated_at: 2026-07-31
+strict: false
+summary: 🔴 1 · 🟡 4 · 🟢 4
+
+## Findings
+
 ## 결정적 검사: src/content/posts/dp-3-traceback.md
 발견 사항 없음 ✅
 
-## LLM 비평: src/content/posts/dp-3-traceback.md
+## LLM 비평
 
-### 🟡 [L7] "완전 이진 트리"는 이 트리의 성질을 가리키는 용어가 아니다
+### 🔴 [L7] src/content/posts/dp-3-traceback.md:106
 
-- severity: 🟡
+- severity: 🔴
 - source: L
 - rule_id: L7
 - location: src/content/posts/dp-3-traceback.md:106
-- quote: "이렇게 복원된 괄호화는 잎이 $n$개, 내부 노드가 $n-1$개인 완전 이진 트리다."
-- message: 잎이 $n$개, 내부 노드가 $n-1$개이고 모든 내부 노드가 자식을 정확히 둘 가진다는 서술 자체는 맞다. 예시 트리(SVG, 62-64행)로 확인하면 루트($k=1$)는 왼쪽에 잎 $M_1$(깊이 1), 오른쪽에 내부 노드 $k=2$(깊이 1, 그 자식 $M_2$·$M_3$는 깊이 2)를 두어 균형이 맞지 않는다. "완전 이진 트리"(complete binary tree)는 마지막 레벨을 제외한 모든 레벨이 가득 차고 마지막 레벨은 왼쪽부터 채워지는 균형 성질을 가리키는 용어이고, 이 저장소의 `src/content/posts/data-structure.md:146,152`도 힙을 설명하며 이 뜻으로만 "완전 이진 트리"를 쓴다. 이 글이 묘사하는 성질(모든 내부 노드가 자식을 0개 또는 2개만 가짐)은 완전성과 무관한 별개의 트리 성질이라 같은 용어로 부르면 독자가 이 예시 트리도 균형 트리라고 오해할 수 있다.
+- quote: 복원은 `split` 표를 요구한다. 비용값 `m[i][j]`만으로는 그 비용을 낸 분할점을 되짚을 수 없으므로, $O(n^2)$개 구간마다 분할점 하나씩을 따로 저장해 둬야 한다.
+- message: 제시한 방법에서 `split`은 분할점을 상수 시간에 찾는 데 필요하지만, 복원 자체의 필수 조건은 아니다. `m`과 차원 배열 `d`가 있으면 방문한 각 구간에서 점화식을 만족하는 `k`를 다시 탐색할 수 있다. 따라서 $O(n^2)$ 추가 저장 공간은 필수 하한이 아니라 시간과 공간의 절충이다.
+- recommendation: 주장을 한정하고, 저장 공간을 줄이는 대안으로 `m`과 `d`에서 `k`를 다시 계산할 수 있다고 설명한다.
+- gate_effect: fail
 
-  이 항목 검증 과정에서 재귀·동점·복잡도 전체를 독립 재계산했다: dp-3.md의 계산 $M[1,3]=\min(M[1,1]+M[2,3]+3\cdot2\cdot2,\;M[1,2]+M[3,3]+3\cdot4\cdot2)=\min(0+16+12,\;24+0+24)=\min(28,48)=28$에서 최솟값을 낸 항은 $k=1$이므로 $split[1][3]=1$이 맞고, $[2,3]$ 구간은 $k=2$ 하나뿐이라 $split[2][3]=2$도 자명하다. $build(1,3)=$ "(" + $build(1,1)$ + $build(2,3)$ + ")" = "(" + "M₁" + "(M₂M₃)" + ")" = "(M₁(M₂M₃))"$$이고, 이는 dp-3.md가 "오른쪽부터 묶기"로 계산한 비용 28의 괄호화와 일치한다. 조각 A의 갱신 조건 `cost < m[i][j]`(등호 없음)와 오름차순 `k` 순회로 동점에서 가장 작은 $k$가 남고 `<=`로 바꾸면 가장 나중에(가장 큰 $k$) 찾은 값이 남는다는 설명도 코드와 맞는다. 이 L7 범주에서 확인한 유일한 어긋남이 위 "완전 이진 트리" 용어였다.
-- recommendation: 수정 완료(아래 참고). "완전 이진 트리"라는 이름 대신 "모든 내부 노드가 자식을 두 개씩 갖는 이진 트리"처럼 성질을 직접 서술해 완전 이진 트리(균형)와 혼동하지 않게 한다. 그 외 재귀·동점·복잡도 논리는 추가 조치 불필요.
-- gate_effect: warn
+### 🟡 [L1] src/content/posts/dp-3-traceback.md:73
 
-### 🟢 [L1] 문체와 바른 문장 규칙 점검 완료
-
-- severity: 🟢
+- severity: 🟡
 - source: L
 - rule_id: L1
-- location: src/content/posts/dp-3-traceback.md:11-116
-- quote: "값과 구성은 다른 질문이다."
-- message: 검토 완료, 이슈 없음. 문두 접속어(그리고/그런데/그러나/따라서/하지만/그래서/그러니) 기계 검출 0건, 복수 표지 '-들' 0건을 확인했다(`grep` 재현: 문두 접속어 0, `[가-힣]들` 0). 의존명사 '것'은 16행("표가 담는 것은")과 63행("바로 이것이다") 2건뿐이며 16행은 dp-2-traceback과 동일한 승인된 템플릿 문구, 63행은 지시 대상이 분명해 남겨도 되는 자리다. 줄표(—)는 frontmatter 제목에만 있고(dp-2-traceback과 동일 관례) 본문 문장 안에서 남발하지 않는다. 과한 비유·수사·대칭 문장 반복·경구식 마무리는 찾지 못했고 평서체(~다)를 끝까지 유지한다.
-- recommendation: 수정 없음.
-- gate_effect: info
+- location: src/content/posts/dp-3-traceback.md:73
+- quote: 먼저 **조각 A** — 분할점 기록이다.
+- message: 강조 표기와 줄표를 결합한 문장이 설명의 흐름보다 형식적인 구획을 앞세운다.
+- recommendation: 줄표 없이 조각 A가 분할점 기록 코드라는 사실을 평서문으로 쓴다.
+- gate_effect: warn
 
-### 🟢 [L2] 설명 흐름 점검 완료
+### 🟡 [L1] src/content/posts/dp-3-traceback.md:88
 
-- severity: 🟢
+- severity: 🟡
+- source: L
+- rule_id: L1
+- location: src/content/posts/dp-3-traceback.md:88
+- quote: 다음은 **조각 B** — 재귀 복원이다.
+- message: 앞 문장과 대칭인 강조 및 줄표 구성이 반복되어 문장이 도식적으로 들린다.
+- recommendation: 줄표 없이 조각 B가 재귀 복원 코드라는 사실을 평서문으로 쓴다.
+- gate_effect: warn
+
+### 🟡 [L1] src/content/posts/dp-3-traceback.md:114
+
+- severity: 🟡
+- source: L
+- rule_id: L1
+- location: src/content/posts/dp-3-traceback.md:114
+- quote: $m[1][3]=28$이라는 값 뒤에는 $(M_1(M_2M_3))$이라는 구체적인 구성이 항상 함께 있었다.
+- message: 비유적이고 경구적인 표현이며, 비용값 자체에 구성이 본래 들어 있는 것처럼 과장한다. 앞서 설명했듯 `m`만 저장하면 그 구성을 바로 알 수 없다.
+- recommendation: 저장한 분할점 정보로 해당 괄호화를 복원할 수 있다는 사실 중심의 문장으로 바꾼다.
+- gate_effect: warn
+
+### 🟡 [L2] src/content/posts/dp-3-traceback.md:29
+
+- severity: 🟡
 - source: L
 - rule_id: L2
-- location: src/content/posts/dp-3-traceback.md:25-114
-- quote: "표를 지우지만 않으면 그 정보는 그대로 남아 있다. 문제는 이를 어떻게 꺼내느냐다."
-- message: 검토 완료, 이슈 없음. 값과 구성의 구분 → 분할점 기록(조각 A) → 재귀 복원 정의(build) → 예시로 단계별 복원 → 코드(조각 A·B) → 동점·공간 미묘함 → 마치며의 순서가 논리 도약 없이 이어진다. `build(i,j)`의 기저(`i=j`)와 재귀 케이스를 먼저 정의한 뒤 곧바로 $d=[3,2,4,2]$ 예시에 적용해 앞서 정의한 재귀를 구체적으로 확인시키고, 코드 절에서 같은 재귀를 `reconstruct`로 다시 연결한다. 문장 길이도 끊어 읽기 어려운 장문이 없다.
-- recommendation: 수정 없음.
-- gate_effect: info
+- location: src/content/posts/dp-3-traceback.md:29
+- quote: 표를 지우지만 않으면 그 정보는 그대로 남아 있다.
+- message: 바로 앞에서 `m`은 비용만 저장한다고 설명했으므로 이 문장은 설명과 모순된다. 이긴 `k`는 따로 기록하지 않으면 비교가 끝날 때 사라진다.
+- recommendation: 분할점은 계산 과정에서 결정되지만 별도 표에 기록해야 남는다고 명확히 쓴다.
+- gate_effect: warn
 
-### 🟢 [L3] 용어·어체 일관성 점검 완료
+### 🟢 [L3] src/content/posts/dp-3-traceback.md:43
 
 - severity: 🟢
 - source: L
 - rule_id: L3
-- location: src/content/posts/dp-3-traceback.md:27-98, src/content/posts/dp-3.md:43-118
-- quote: "`m[i][j]`가 갱신되는 바로 그 자리에서, 그 갱신을 낸 분할점 $k$를 함께 적어 두면 된다." / "이 재귀를 reconstruct로 옮기면 앞서 본 $build(i,j)$ 그대로다."
-- message: 검토 완료, 이슈 없음(단 위 L7 지적 용어 제외). 본편 dp-3.md의 `m[i][j]`, `d_{i-1}d_k d_j`, `matrixChain` 표기를 그대로 이어받고, 설명용 재귀는 `build`, 코드 함수명은 `reconstruct`로 구분해 쓰되 "이 재귀를 reconstruct로 옮기면"이라는 문장으로 둘을 명시적으로 연결해 헷갈리지 않게 했다. `split[i][j]`, `분할점 k`, `괄호화`, `잎`, `내부 노드`, `이진 파스 트리` 같은 핵심 용어도 절 사이에서 흔들리지 않는다. dp-2-traceback(선행 추가 설명 글)과 구조·어체(오프닝 인용구, 콜아웃 구성, 마치며 끝줄 링크)도 일치한다.
-- recommendation: 수정 없음.
+- location: src/content/posts/dp-3-traceback.md:43
+- quote: 분할점을 모두 적어 두면, 그 표를 따라 실제 괄호화를 거꾸로 짜맞출 수 있다. 구간 $[i,j]$에 대해 $build(i,j)$를 정의하자.
+- message: 검토 완료, 이슈 없음
+- recommendation: 조치 없음.
 - gate_effect: info
 
-### 🟢 [L4] SVG와 본문·캡션 일치 점검 완료
+### 🟢 [L4] public/images/dp-3/traceback.svg:11
 
 - severity: 🟢
 - source: L
 - rule_id: L4
-- location: public/images/dp-3/traceback.svg:1-65, src/content/posts/dp-3-traceback.md:54-65
-- quote: "$split[1][3] = 1$, $split[2][3] = 2$다." / "split 표를 따라 (1,3)부터 재귀로 되짚으면 파스 트리 (M₁(M₂M₃))가 나온다. 루트는 k=1, 오른쪽 내부 노드는 k=2."
-- message: 검토 완료, 이슈 없음. SVG의 분할점 표 박스가 `split[1][3] = 1`, `split[2][3] = 2`를 그대로 보여주고, 점선 가이드로 각 표 항목을 그 항목이 결정한 노드(루트 `k=1`, 오른쪽 내부 노드 `k=2`)에 연결한다. 루트의 왼쪽 자식은 잎 `M₁`, 오른쪽 내부 노드(`k=2`)의 두 자식은 잎 `M₂`·`M₃`로, 본문이 서술한 `build(1,3) = "(" + build(1,1) + build(2,3) + ")"` → `"(M₁(M₂M₃))"` 분해와 정확히 대응한다. 하단 결과 텍스트 `(M₁(M₂M₃)) · cost 28`도 본문이 확인한 비용 28과 일치하고, 범례(내부 노드=분할점 k, 잎=개별 행렬)도 본문 정의와 맞는다. viewBox(0 0 900 540) 안에 모든 도형이 들어간다.
-- recommendation: 수정 없음.
+- location: public/images/dp-3/traceback.svg:11
+- quote: `split[1][3] = 1`, `split[2][3] = 2`, `(M₁(M₂M₃))  ·  cost 28`
+- message: 검토 완료, 이슈 없음
+- recommendation: 조치 없음. SVG의 분할값, 트리 경로, 괄호화, 비용 28이 본문과 일치한다.
 - gate_effect: info
 
-### 🟢 [L5] 제목·description 적합성 점검 완료
+### 🟢 [L5] src/content/posts/dp-3-traceback.md:2
 
 - severity: 🟢
 - source: L
 - rule_id: L5
-- location: src/content/posts/dp-3-traceback.md:2-4
-- quote: "동적 계획법 ③의 표는 최소 비용만 담는다. 어떤 괄호 순서로 곱해야 그 비용이 나오는지는 표에 없다. 채우는 동안 이긴 분할점 k를 함께 적어 두면 (1,n)에서 재귀로 (M₁(M₂M₃)) 같은 괄호화를 복원한다. d=[3,2,4,2] 예시로 되짚고, 파스 트리와 동점의 미묘함까지 짚는다."
-- message: 검토 완료, 이슈 없음. 제목 "추가 설명 — 어떤 순서로 곱했는지 되짚기"는 이 글의 유일한 주제(분할점 기반 재귀 복원)를 정확히 가리키고, description은 실제 본문 순서(값·구성 구분 → 분할점 기록 → 재귀 복원 → 예시 → 파스 트리 → 동점)를 빠짐없이 요약하며 범위를 넘거나 못 미치지 않는다.
-- recommendation: 수정 없음.
+- location: src/content/posts/dp-3-traceback.md:2
+- quote: title: "추가 설명 — 어떤 순서로 곱했는지 되짚기"
+- message: 검토 완료, 이슈 없음
+- recommendation: 조치 없음. 제목과 description이 복원, 분할점 저장, 예시, 트리, 동점을 정확히 나타낸다.
 - gate_effect: info
 
-### 🟢 [L6] 노션 원문 대조 불가 — 전 범위가 승인된 강의 노트 밖 확장으로 분류됨
+### 🟢 [L6] src/content/posts/dp-3-traceback.md:11
 
 - severity: 🟢
 - source: L
 - rule_id: L6
-- location: src/content/posts/dp-3-traceback.md:11, src/content/posts/dp-3.md:132-136, .superpowers/sdd/2026-07-31-dp-3-traceback/task-1-brief.md:1-84
-- quote: "이 글은 강의 노트 밖 확장으로, 채운 표에 분할점을 함께 적어 그 순서까지 복원하는 방법을 다룬다." / "여기서부터는 강의 노트에 없는 확장이다."
-- message: 검토 완료, 이슈 없음. 이 실행 환경에는 `notion-search`/`notion-fetch`가 없어 노션 원문과의 직접 대조는 수행하지 못했다. 다만 이 페이지는 원문에서 파생·대조할 대상이 아니라 dp-3 본편이 스스로 "강의 노트에 없는 확장"이라 표시한 절(`더 나가면`)을 이어받아 만든 **전면적인 강의 노트 밖 확장**이며, 페이지 자신도 오프닝에서 동일하게 명시한다. 따라서 provenance 분류는 "원문 파생"이 아니라 "beyond-source(강의 노트 밖) 확장, 승인된 태스크 브리프(task-1-brief.md) 범위 내"로 기록한다. 본문의 절 구성, frontmatter, 수치 예시(`split[1][3]=1`, `split[2][3]=2`, `build(1,3)`, 비용 28), 코드 조각 A·B는 승인된 브리프(task-1-brief.md 13-64행)와 문구 단위로 일치해 승인 범위를 벗어난 hallucination은 찾지 못했다. 이 구조 일치 확인은 노션 원문 충실성의 증거를 대신하지 않는다(애초에 대조 대상 노션 원문이 없는 확장이므로 해당 없음).
-- recommendation: 향후 노션 접근이 가능한 세션에서, dp-3 본편이 실제로 참조한 노션 노트에 이 복원 기법에 대응하는 언급이 있는지(대개는 없을 것으로 예상됨) 재확인하고, 있다면 그 출처를 밝힌다.
+- location: src/content/posts/dp-3-traceback.md:11
+- quote: 이 글은 강의 노트 밖 확장으로, 채운 표에 분할점을 함께 적어 그 순서까지 복원하는 방법을 다룬다.
+- message: 검토 완료, 이슈 없음
+- recommendation: 조치 없음. 글이 강의 노트 밖 확장임을 명시하고 저장소 설계 문서가 이 provenance를 승인한다. 이 확장에 대응하는 Notion 원문이 있다고 주장하지 않는다.
 - gate_effect: info
 
-요약: 🔴 0 · 🟡 1 · 🟢 6
-
-행 집계: 결정적 검사 0 · LLM 비평 7 · 전체 7
+요약: 🔴 1 · 🟡 4 · 🟢 4
 
 ---
 
 ## 후속 처리
 
-- 🟡 [L7] "완전 이진 트리" 용어 오류(dp-3-traceback.md:106) → 이번 세션에서 "모든 내부 노드가 자식을 두 개씩 갖는 이진 트리"로 즉시 수정. 잎 $n$개·내부 노드 $n-1$개라는 카운트 자체는 그대로 두고 성질을 직접 서술하는 방식으로 바꿔 균형 성질(완전 이진 트리)과의 혼동을 없앴다.
+- 🔴 [L7] :106 복원이 `split` 표를 요구한다는 과한 단정 → `split`은 분할점을 $O(1)$에 돌려주는 최적화일 뿐이며, `m`과 `d`에서 $m[i][k]+m[k+1][j]+d_{i-1}d_k d_j = m[i][j]$인 $k$를 재탐색해도 복원되므로 $O(n^2)$ 저장은 필수 하한이 아니라 시간·공간 절충임을 명시하도록 수정.
+- 🟡 [L2] :29 "표를 지우지만 않으면 그 정보는 그대로 남아 있다"가 `m`은 비용만 담는다는 앞 설명과 모순 → 이긴 $k$는 표를 채우는 동안 정해지지만 `m`에 함께 저장되지 않으므로 따로 붙잡아 둬야 한다고 정정.
+- 🟡 [L1] :114 마치며의 "값 뒤에는 구성이 항상 함께 있었다"는 경구·과장 → 표는 비용만 돌려주며, 저장한(또는 재계산한) 분할점으로 괄호 순서를 복원한다는 사실 중심 문장으로 교체.
+- 🟡 [L1] :73·:88 조각 A·B 라벨의 `강조 + 줄표` 구획 → 줄표 없이 "조각 A는 분할점을 기록한다 / 조각 B는 재귀로 복원한다"는 평서문으로.
+- 반영 후 `npm run build` 성공(130 페이지). 예시 수치(`split[1][3]=1`, `split[2][3]=2`, `(M₁(M₂M₃))`, 비용 28)·SVG 불변. 🟢 4(L3·L4·L5·L6)는 조치 없음.
