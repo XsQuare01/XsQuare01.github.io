@@ -936,6 +936,141 @@ class TestAuthoringGuideContracts(unittest.TestCase):
             self.assertIn(term, text)
 
 
+class TestLegacyMigration(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _write(self, name, text):
+        path = self.root / name
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def test_class_a_bold_fields_are_reformatted_without_losing_evidence(self):
+        import review_report as rr
+
+        report = self._write("2026-07-28-karatsuba.md", (
+            "## LLM 비평: src/content/posts/karatsuba.md\n\n"
+            "## Findings\n\n"
+            "### 🟡 [L4] src/content/posts/karatsuba.md:73\n\n"
+            "- **severity**: 🟡\n- **source**: L\n- **rule_id**: L4\n"
+            "- **location**: `src/content/posts/karatsuba.md:73`\n"
+            "- **quote**: 서로 겹치지 않고\n"
+            "- **message**: 본문과 SVG가 어긋난다\n"
+            "- **recommendation**: 문장을 고친다\n"
+            "- **gate_effect**: warn\n"
+        ))
+
+        rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        text = report.read_text(encoding="utf-8")
+        self.assertEqual(rr.validate_report(text), [])
+        self.assertIn("- source: L", text)
+        self.assertNotIn("- **severity**:", text)
+        self.assertIn("- quote: 서로 겹치지 않고", text)
+        self.assertIn("generated_at: 2026-07-28", text)
+        self.assertIn("target: karatsuba", text)
+        self.assertNotIn("migrated_from:", text)
+
+    def test_class_b_legacy_prose_uses_migrated_source_and_placeholders(self):
+        import review_report as rr
+
+        report = self._write("2026-07-24-dp-1.md", (
+            "## 결정적 검사: src/content/posts/dp-1.md\n발견 사항 없음 ✅\n\n"
+            "🟢 참고 (2)\n\n"
+            "- [L6] not-recorded · gate: info — 노션 원본과 대조했다.\n"
+            "- [L7] not-recorded · gate: info — 지수 범위 증명을 검증했다.\n\n"
+            "요약: 🔴 0 · 🟡 0 · 🟢 2\n"
+        ))
+
+        rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        text = report.read_text(encoding="utf-8")
+        self.assertEqual(rr.validate_report(text), [])
+        self.assertIn("migrated_from: legacy-prose", text)
+        self.assertIn("- source: MIGRATED", text)
+        self.assertIn("- quote: not-recorded", text)
+        self.assertIn("- location: not-recorded", text)
+        self.assertIn("target: dp-1", text)
+        self.assertIn("strict: not-recorded", text)
+        parsed = rr.parse_report(text)
+        self.assertEqual([f["rule_id"] for f in parsed["findings"]], ["L6", "L7"])
+
+    def test_legacy_severity_comes_from_section_heading_not_default(self):
+        report = self._write("2026-07-24-dp-1.md", (
+            "🔴 필수 (1)\n\n- [D7] frontmatter enum 불일치\n\n"
+            "🟢 참고 (1)\n\n- [L6] 노션 원본과 대조했다.\n\n"
+            "요약: 🔴 1 · 🟡 0 · 🟢 1\n"
+        ))
+
+        rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        text = report.read_text(encoding="utf-8")
+        self.assertIn("summary: 🔴 1 · 🟡 0 · 🟢 1", text)
+        self.assertIn("### 🔴 [D7] not-recorded", text)
+        self.assertIn("### 🟢 [L6] not-recorded", text)
+        self.assertIn("- gate_effect: fail", text)
+        self.assertIn("- gate_effect: info", text)
+
+    def test_inline_gate_marker_wins_over_section_heading(self):
+        report = self._write("2026-07-24-dp-1.md", (
+            "🟡 권장 (1)\n\n- [L7] not-recorded · gate: info — 검증 기록이다.\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        text = report.read_text(encoding="utf-8")
+        self.assertIn("- severity: 🟢", text)
+        self.assertIn("- gate_effect: info", text)
+        self.assertIn("summary: 🔴 0 · 🟡 0 · 🟢 1", text)
+
+    def test_migration_never_invents_evidence(self):
+        report = self._write("2026-07-24-dp-1.md", (
+            "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        parsed_text = report.read_text(encoding="utf-8")
+        self.assertNotIn("src/content/posts/dp-1.md:", parsed_text)
+
+    def test_migration_is_idempotent(self):
+        report = self._write("2026-07-24-dp-1.md", (
+            "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+        first = report.read_text(encoding="utf-8")
+        run_main(["review_post.py", "--migrate", str(report)])
+        second = report.read_text(encoding="utf-8")
+
+        self.assertEqual(first, second)
+
+    def test_already_canonical_report_is_left_byte_identical(self):
+        import review_report as rr
+
+        canonical = rr.serialize_report(
+            target="a", generated_at="2026-08-02", strict=False,
+            findings=[{
+                "severity": "🟢", "source": "L", "rule_id": "L1",
+                "location": "not-recorded", "quote": "not-recorded",
+                "message": "검토 완료, 이슈 없음", "recommendation": "not-recorded",
+                "gate_effect": "info",
+            }],
+        )
+        report = self._write("2026-08-02-a.md", canonical)
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(report.read_text(encoding="utf-8"), canonical)
+
+
 class TestStdoutEncoding(unittest.TestCase):
     def test_main_emits_emoji_without_crash(self):
         import io

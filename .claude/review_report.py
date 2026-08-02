@@ -81,7 +81,7 @@ def _strict_text(strict):
     return text or NOT_RECORDED
 
 
-def serialize_report(*, target, generated_at, strict, findings, sources=()):
+def serialize_report(*, target, generated_at, strict, findings, sources=(), migrated_from=None):
     rows = sorted(findings, key=finding_sort_key)
     header = [
         f"schema_version: {SCHEMA_VERSION}",
@@ -91,6 +91,8 @@ def serialize_report(*, target, generated_at, strict, findings, sources=()):
     ]
     if sources:
         header.append("sources: " + ", ".join(sources))
+    if migrated_from:
+        header.append(f"migrated_from: {migrated_from}")
     header.append(f"summary: {format_summary(summary_counts(rows))}")
 
     blocks = ["\n".join(header), FINDINGS_HEADING]
@@ -98,7 +100,8 @@ def serialize_report(*, target, generated_at, strict, findings, sources=()):
     return "\n\n".join(blocks) + "\n"
 
 
-_HEADER_KEYS = ("schema_version", "target", "generated_at", "strict", "sources", "summary")
+_HEADER_KEYS = ("schema_version", "target", "generated_at", "strict",
+                "sources", "migrated_from", "summary")
 _HEADER_RE = re.compile(r"^(" + "|".join(_HEADER_KEYS) + r"): (.*)$")
 _FIELD_RE = re.compile(
     r"^- \*{0,2}(" + "|".join(FINDING_FIELDS) + r")\*{0,2}: ?(.*)$"

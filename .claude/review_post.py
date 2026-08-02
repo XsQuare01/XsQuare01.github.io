@@ -603,6 +603,102 @@ def migrate_legacy_finding(text):
     }
 
 
+_REPORT_NAME_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(.+)$")
+_LEGACY_BULLET_RE = re.compile(r"^- \[(D\d+|L\d+)\]\s")
+_LEGACY_SECTION_RE = re.compile(r"^(🔴|🟡|🟢) (필수|권장|참고) \(\d+\)\s*$")
+_LEGACY_GATE_RE = re.compile(r"gate:\s*(fail|warn|info)\b")
+_SEVERITY_BY_GATE = {"fail": "🔴", "warn": "🟡", "info": "🟢"}
+_GATE_BY_SEVERITY = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
+
+
+def report_identity(path):
+    """파일명 `YYYY-MM-DD-<slug>.md`에서 날짜와 target을 읽는다."""
+    match = _REPORT_NAME_RE.match(Path(path).stem)
+    if not match:
+        return rr.NOT_RECORDED, Path(path).stem
+    return match.group(1), match.group(2)
+
+
+def _legacy_rows(text):
+    """레거시 산문 불릿을 v2 finding으로 옮긴다.
+
+    심각도는 불릿 한 줄에만 있지 않다. 인라인 `gate:` 표시가 가장 정확하고,
+    없으면 위쪽 섹션 제목(`🟢 참고 (9)`)이 그 불릿의 심각도다. 둘 다 없을 때만
+    migrate_legacy_finding()의 문자열 휴리스틱에 맡긴다.
+    """
+    rows = []
+    section_severity = None
+    for line in text.splitlines():
+        section = _LEGACY_SECTION_RE.match(line)
+        if section:
+            section_severity = section.group(1)
+            continue
+        if not _LEGACY_BULLET_RE.match(line):
+            continue
+
+        row = migrate_legacy_finding(line)
+        row.pop("schema_version", None)
+        gate = _LEGACY_GATE_RE.search(line)
+        if gate:
+            row["gate_effect"] = gate.group(1)
+            row["severity"] = _SEVERITY_BY_GATE[gate.group(1)]
+        elif section_severity:
+            row["severity"] = section_severity
+            row["gate_effect"] = _GATE_BY_SEVERITY[section_severity]
+        rows.append(row)
+    return rows
+
+
+def migrate_reports(report_paths):
+    """과거 리포트를 v2 정본으로 전환한다. 없는 근거는 만들어 내지 않는다."""
+    failed = False
+    for report_path in report_paths:
+        path = Path(report_path)
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
+
+        generated_at, target = report_identity(path)
+        parsed = rr.parse_report(text)
+        header = parsed["header"]
+        complete = [f for f in parsed["findings"]
+                    if all(field in f for field in rr.FINDING_FIELDS)]
+
+        if complete:  # 부류 A: 근거를 그대로 보존한다
+            findings, migrated_from = complete, None
+        else:         # 부류 B: 손실 있는 전환임을 표시한다
+            findings = _legacy_rows(text)
+            migrated_from = "legacy-prose"
+
+        if not findings:
+            print(f"{path}: 마이그레이션할 finding이 없다", file=sys.stderr)
+            failed = True
+            continue
+
+        canonical = rr.serialize_report(
+            target=header.get("target") or target,
+            generated_at=header.get("generated_at") or generated_at,
+            strict=header.get("strict") or rr.NOT_RECORDED,
+            findings=findings,
+            sources=header.get("sources", []),
+            # 이미 전환된 리포트를 다시 돌려도 손실 표시가 사라지지 않아야 한다.
+            migrated_from=migrated_from or header.get("migrated_from"),
+        )
+        errors = rr.validate_report(canonical, state="complete")
+        if errors:
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            failed = True
+            continue
+
+        path.write_text(canonical, encoding="utf-8")
+        print(f"마이그레이션 완료: {path}")
+    return 2 if failed else 0
+
+
 def _summary(findings):
     return rr.summary_counts([{"severity": severity_icon(f.severity)} for f in findings])
 
@@ -693,6 +789,7 @@ def parse_args(argv):
         "strict": False,
         "write_reports": False,
         "finalize": [],
+        "migrate": [],
         "output_dir": None,
         "date": None,
         "paths": [],
@@ -714,6 +811,12 @@ def parse_args(argv):
                 i += 1
             else:
                 opts["errors"].append("--finalize requires a value")
+        elif arg == "--migrate":
+            if i + 1 < len(args):
+                opts["migrate"].append(args[i + 1])
+                i += 1
+            else:
+                opts["errors"].append("--migrate requires a value")
         elif arg == "--output-dir":
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
@@ -786,6 +889,8 @@ def main(argv):
         return 2
     if opts["finalize"]:
         return finalize_reports(opts["finalize"])
+    if opts["migrate"]:
+        return migrate_reports(opts["migrate"])
     paths = opts["paths"]
     if not paths:
         return 0
