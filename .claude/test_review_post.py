@@ -1030,6 +1030,114 @@ class TestLegacyMigration(unittest.TestCase):
         self.assertIn("- gate_effect: info", text)
         self.assertIn("summary: 🔴 0 · 🟡 0 · 🟢 1", text)
 
+    def test_report_without_findings_heading_still_migrates(self):
+        import review_report as rr
+
+        report = self._write("2026-07-30-dp-3.md", (
+            "## 결정적 검사: src/content/posts/dp-3.md\n발견 사항 없음 ✅\n\n"
+            "## LLM 비평: src/content/posts/dp-3.md\n\n"
+            "### 🟡 [L2] src/content/posts/dp-3.md:19\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L2\n"
+            "- location: src/content/posts/dp-3.md:19\n"
+            "- quote: `(더 나가면) 복원, 복잡도`\n"
+            "- message: 개요 항목이 본문 구성과 어긋난다\n"
+            "- recommendation: 항목을 나눈다\n- gate_effect: warn\n"
+        ))
+
+        rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        text = report.read_text(encoding="utf-8")
+        self.assertEqual(rr.validate_report(text), [])
+        self.assertIn("## Findings", text)
+        self.assertIn("- source: L", text)
+        self.assertNotIn("migrated_from:", text)
+
+    def test_descriptive_heading_is_preserved_in_message(self):
+        report = self._write("2026-07-30-dp-3.md", (
+            "### 🟡 [L2] 개요의 항목 구분이 실제 본문 구성과 어긋남\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L2\n"
+            "- location: src/content/posts/dp-3.md:19\n"
+            "- quote: `복원, 복잡도`\n"
+            "- message: 복잡도는 독립된 절에서 다룬다\n"
+            "- recommendation: 항목을 나눈다\n- gate_effect: warn\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        text = report.read_text(encoding="utf-8")
+        self.assertIn("개요의 항목 구분이 실제 본문 구성과 어긋남", text)
+        self.assertIn("복잡도는 독립된 절에서 다룬다", text)
+        self.assertIn("### 🟡 [L2] src/content/posts/dp-3.md:19", text)
+
+    def test_heading_that_only_repeats_location_adds_no_title(self):
+        report = self._write("2026-06-27-quicksort.md", (
+            "### 🔴 [L7] src/content/posts/quicksort.md:42\n\n"
+            "- severity: 🔴\n- source: L\n- rule_id: L7\n"
+            "- location: src/content/posts/quicksort.md:42\n"
+            "- quote: `while (i <= j) {`\n"
+            "- message: 분할 코드가 멈추지 않을 수 있다\n"
+            "- recommendation: 전제를 명시한다\n- gate_effect: fail\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertIn("- message: 분할 코드가 멈추지 않을 수 있다",
+                      report.read_text(encoding="utf-8"))
+
+    def test_legacy_bullet_location_and_subfields_are_recovered(self):
+        report = self._write("2026-07-24-dp-1.md", (
+            "🟢 참고 (1)\n\n"
+            "- [L7] src/content/posts/dp-1.md:88 · gate: info\n"
+            "  - quote: \"$2^{n/2-1} \\le F(n) < 2^n$\"\n"
+            "  - message: 지수 범위 증명 검증. 상한 F(n)≤2F(n-1)\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        text = report.read_text(encoding="utf-8")
+        self.assertIn("- location: src/content/posts/dp-1.md:88", text)
+        self.assertIn("$2^{n/2-1} \\le F(n) < 2^n$", text)
+        self.assertIn("- message: 지수 범위 증명 검증. 상한 F(n)≤2F(n-1)", text)
+        self.assertNotIn("- location: not-recorded", text)
+
+    def test_legacy_message_drops_redundant_bullet_prefix(self):
+        report = self._write("2026-07-24-dp-1.md", (
+            "🟢 참고 (1)\n\n"
+            "- [L2] not-recorded · gate: info — 흐름 검토 완료, 이슈 없음.\n"
+        ))
+
+        run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertIn("- message: 흐름 검토 완료, 이슈 없음.",
+                      report.read_text(encoding="utf-8"))
+
+    def test_bullet_heading_with_indented_fields_is_class_a(self):
+        import review_report as rr
+
+        report = self._write("2026-07-01-closest-pair-2.md", (
+            "## 결정적 검사: src/content/posts/closest-pair-2.md\n발견 사항 없음 ✅\n\n"
+            "## LLM 비평\n\n"
+            "- 🟡 [L7] src/content/posts/closest-pair-2.md:95\n"
+            "  - severity: 🟡\n  - source: L\n  - rule_id: L7\n"
+            "  - location: src/content/posts/closest-pair-2.md:95\n"
+            "  - quote: \"// 두 점 사이 거리의 제곱\"\n"
+            "  - message: signed overflow가 날 수 있다\n"
+            "  - recommendation: 입력 범위를 명시한다\n"
+            "  - gate_effect: warn\n"
+        ))
+
+        rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        text = report.read_text(encoding="utf-8")
+        self.assertEqual(rr.validate_report(text), [])
+        self.assertIn("- source: L", text)
+        self.assertNotIn("- source: MIGRATED", text)
+        self.assertNotIn("migrated_from:", text)
+        self.assertIn("- message: signed overflow가 날 수 있다", text)
+        self.assertIn("- quote: \"// 두 점 사이 거리의 제곱\"", text)
+
     def test_migration_never_invents_evidence(self):
         report = self._write("2026-07-24-dp-1.md", (
             "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n"

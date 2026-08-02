@@ -104,8 +104,28 @@ _HEADER_KEYS = ("schema_version", "target", "generated_at", "strict",
                 "sources", "migrated_from", "summary")
 _HEADER_RE = re.compile(r"^(" + "|".join(_HEADER_KEYS) + r"): (.*)$")
 _FIELD_RE = re.compile(
-    r"^- \*{0,2}(" + "|".join(FINDING_FIELDS) + r")\*{0,2}: ?(.*)$"
+    r"^\s*- \*{0,2}(" + "|".join(FINDING_FIELDS) + r")\*{0,2}: ?(.*)$"
 )
+# 과거 리포트 일부는 `### ` 대신 `- 🟢 [L1] <위치>` 불릿을 finding 제목으로 썼고
+# 8개 필드를 그 아래 들여쓰기로 달았다. 근거가 온전하므로 제목으로 인정한다.
+_BULLET_HEADING_RE = re.compile(r"^- ((?:🔴|🟡|🟢) \[(?:D\d+|L\d+)\].*)$")
+# 제목 없이 `- severity:`부터 시작하는 블록도 있다.
+_SEVERITY_START_RE = re.compile(r"^- \*{0,2}severity\*{0,2}: ?(.*)$")
+# 8개 필드를 정본 순서 그대로 표 한 줄에 담은 리포트도 있다.
+_TABLE_ROW_RE = re.compile(r"^\|(.+)\|\s*$")
+
+
+def _table_row_finding(line):
+    """`| 🔴 | L | L7 | ... | fail |` 표 한 줄을 finding으로 읽는다."""
+    match = _TABLE_ROW_RE.match(line)
+    if not match:
+        return None
+    cells = [c.strip() for c in match.group(1).split("|")]
+    if len(cells) != len(FINDING_FIELDS) or cells[0] not in SEVERITY_VALUES:
+        return None
+    if cells[1] not in SOURCE_VALUES or cells[-1] not in GATE_EFFECT_VALUES:
+        return None
+    return {field: _clean_field_value(cell) for field, cell in zip(FINDING_FIELDS, cells)}
 
 
 def _clean_field_value(raw):
@@ -116,12 +136,51 @@ def _clean_field_value(raw):
 
 
 def parse_report(text):
+    """리포트를 헤더와 finding으로 읽는다.
+
+    입력에는 관대하다. `## Findings` 헤딩이 없어도 첫 `### ` 줄부터 finding으로
+    보고, 굵게 표기(`- **severity**:`)도 필드로 인정한다. 과거 리포트를 근거
+    손실 없이 되읽기 위해서다. 출력은 언제나 정본 형식 하나뿐이다.
+
+    각 finding의 `_heading` 키에는 `### ` 뒤 원문을 그대로 담는다. 스키마 필드가
+    아니라 마이그레이션이 설명형 제목을 되살릴 때만 쓰는 내부 값이다.
+    """
     header = {}
     findings = []
     current = None
     in_findings = False
 
     for line in text.splitlines():
+        heading = None
+        if line.startswith("### "):
+            heading = line[len("### "):].strip()
+        else:
+            bullet = _BULLET_HEADING_RE.match(line)
+            if bullet:
+                heading = bullet.group(1).strip()
+        if heading is not None:
+            in_findings = True
+            if current:
+                findings.append(current)
+            current = {"_heading": heading}
+            continue
+
+        row = _table_row_finding(line)
+        if row is not None:
+            in_findings = True
+            if current:
+                findings.append(current)
+            findings.append(row)
+            current = None
+            continue
+
+        # 제목 없이 `- severity:`로 시작하는 블록: 이미 severity를 채운 뒤라면 다음 finding이다.
+        if _SEVERITY_START_RE.match(line) and (current is None or "severity" in current):
+            in_findings = True
+            if current:
+                findings.append(current)
+            current = {}
+
         if not in_findings:
             match = _HEADER_RE.match(line)
             if match:
@@ -133,11 +192,6 @@ def parse_report(text):
                 in_findings = True
             continue
 
-        if line.startswith("### "):
-            if current:
-                findings.append(current)
-            current = {}
-            continue
         if current is None:
             continue
         match = _FIELD_RE.match(line)
