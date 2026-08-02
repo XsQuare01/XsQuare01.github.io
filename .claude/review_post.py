@@ -13,6 +13,8 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import unquote
 
+import review_report as rr
+
 # ---- 심각도 ----
 REQUIRED = "🔴 필수"
 RECOMMENDED = "🟡 권장"
@@ -602,28 +604,14 @@ def migrate_legacy_finding(text):
 
 
 def _summary(findings):
-    return {severity_icon(s): len([f for f in findings if f.severity == s]) for s in SEVERITY_ORDER}
+    return rr.summary_counts([{"severity": severity_icon(f.severity)} for f in findings])
 
 
 def _finding_sort_key(row):
-    sev_order = {"🔴": 0, "🟡": 1, "🟢": 2}
-    source_order = {"D": 0, "L": 1, "MIGRATED": 2}
-    loc = row["location"]
-    file_part, line_part = loc, 0
-    if ":" in loc:
-        file_part, maybe_line = loc.rsplit(":", 1)
-        if maybe_line.isdigit():
-            line_part = int(maybe_line)
-    return (
-        sev_order.get(row["severity"], 99),
-        source_order.get(row["source"], 99),
-        row["rule_id"],
-        file_part,
-        line_part,
-    )
+    return rr.finding_sort_key(row)
 
 
-def report_to_json_v2(paths, results, strict=False):
+def report_to_json_v2(paths, results, strict=False, generated_at=rr.NOT_RECORDED):
     posts = []
     all_findings = []
     all_rows = []
@@ -633,7 +621,7 @@ def report_to_json_v2(paths, results, strict=False):
         posts.append({
             "schema_version": "review-report/v2",
             "target": Path(path).stem,
-            "generated_at": "not-recorded",
+            "generated_at": generated_at,
             "strict": strict,
             "summary": _summary(findings),
             "findings": rows,
@@ -682,10 +670,20 @@ def report_path_for(output_dir, report_date, path):
     return Path(output_dir) / f"{report_date}-{Path(path).stem}.md"
 
 
-def write_markdown_report(output_dir, report_date, path, findings):
+def write_markdown_report(output_dir, report_date, path, findings, strict=False):
     out_path = report_path_for(output_dir, report_date, path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(format_report(path, findings) + "\n", encoding="utf-8")
+    rows = [finding_to_report_v2(path, f) for f in findings]
+    out_path.write_text(
+        rr.serialize_report(
+            target=Path(path).stem,
+            generated_at=report_date,
+            strict=strict,
+            findings=rows,
+            sources=[str(path)],
+        ),
+        encoding="utf-8",
+    )
     return out_path
 
 
@@ -764,7 +762,9 @@ def main(argv):
             reports.append(report)
         if opts["write_reports"]:
             try:
-                written_report_paths.append(write_markdown_report(output_dir, report_date, p, findings))
+                written_report_paths.append(
+                    write_markdown_report(output_dir, report_date, p, findings, strict=opts["strict"])
+                )
             except OSError as e:
                 infra_failed = True
                 print(f"리포트 쓰기 실패: {p}: {e}", file=sys.stderr)
@@ -772,7 +772,10 @@ def main(argv):
         for path in written_report_paths:
             print(f"리포트 저장: {path}", file=sys.stderr)
         try:
-            print(json.dumps(report_to_json_v2(paths, results, strict=opts["strict"]), ensure_ascii=False, indent=2))
+            print(json.dumps(
+                report_to_json_v2(paths, results, strict=opts["strict"], generated_at=report_date),
+                ensure_ascii=False, indent=2,
+            ))
         except (TypeError, ValueError) as e:
             print(f"JSON 렌더링 실패: {e}", file=sys.stderr)
             return 2

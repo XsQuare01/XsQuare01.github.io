@@ -432,6 +432,40 @@ class TestCliContractsV2(unittest.TestCase):
         self.assertIn(str(beta_report), stdout)
         self.assertFalse((Path("docs") / "reviews" / "2026-06-07-alpha.md").exists())
 
+    def test_scaffold_output_is_canonical_and_validates_as_scaffold(self):
+        import review_report as rr
+
+        post = write_post(self.root / "posts" / "beta.md", "트리가 **DAG)**가 된다")
+        output_dir = self.root / "reports"
+
+        rc, _ = run_main([
+            "review_post.py", "--write-reports",
+            "--output-dir", str(output_dir),
+            "--date", "2026-06-07", str(post),
+        ])
+
+        self.assertEqual(rc, 0)
+        text = (output_dir / "2026-06-07-beta.md").read_text(encoding="utf-8")
+        self.assertEqual(rr.validate_report(text, state="scaffold"), [])
+        self.assertEqual(text.splitlines()[0], "schema_version: review-report/v2")
+        # 이 fixture는 D1(🔴 깨진 굵게)과 D3(🟢 굵게 강조 밀도)을 함께 낸다.
+        self.assertIn("summary: 🔴 1 · 🟡 0 · 🟢 1", text)
+        self.assertIn("- gate_effect: fail", text)
+        self.assertNotIn("- **severity**:", text)
+
+    def test_scaffold_rewrite_is_deterministic_for_same_input(self):
+        post = write_post(self.root / "posts" / "beta.md", "트리가 **DAG)**가 된다")
+        output_dir = self.root / "reports"
+        argv = ["review_post.py", "--write-reports", "--output-dir", str(output_dir),
+                "--date", "2026-06-07", str(post)]
+
+        run_main(argv)
+        first = (output_dir / "2026-06-07-beta.md").read_text(encoding="utf-8")
+        run_main(argv)
+        second = (output_dir / "2026-06-07-beta.md").read_text(encoding="utf-8")
+
+        self.assertEqual(first, second)
+
     def test_strict_multi_target_writes_reports_before_returning_failure(self):
         clean = write_post(self.root / "posts" / "clean.md", "본문")
         red = write_post(self.root / "posts" / "red.md", "트리가 **DAG)**가 된다")
