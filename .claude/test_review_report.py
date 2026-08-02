@@ -108,5 +108,110 @@ class TestSerializeReport(unittest.TestCase):
         self.assertIn("## Findings", text)
 
 
+class TestParseReport(unittest.TestCase):
+    def test_round_trip_is_byte_identical(self):
+        original = rr.serialize_report(
+            target="a", generated_at="2026-08-02", strict=False,
+            findings=[finding(), finding(severity="🟡", rule_id="L1",
+                                         source="L", gate_effect="warn")],
+            sources=["src/content/posts/a.md"],
+        )
+
+        parsed = rr.parse_report(original)
+        again = rr.serialize_report(
+            target=parsed["header"]["target"],
+            generated_at=parsed["header"]["generated_at"],
+            strict=parsed["header"]["strict"],
+            findings=parsed["findings"],
+            sources=parsed["header"].get("sources", []),
+        )
+
+        self.assertEqual(original, again)
+
+    def test_accepts_bold_field_markup_on_input(self):
+        text = (
+            "schema_version: review-report/v2\n"
+            "target: a\ngenerated_at: 2026-07-28\nstrict: false\n"
+            "summary: 🔴 0 · 🟡 1 · 🟢 0\n\n"
+            "## Findings\n\n"
+            "### 🟡 [L4] src/content/posts/a.md:73\n\n"
+            "- **severity**: 🟡\n"
+            "- **source**: L\n"
+            "- **rule_id**: L4\n"
+            "- **location**: `src/content/posts/a.md:73`\n"
+            "- **quote**: \"겹치지 않고\"\n"
+            "- **message**: 본문과 SVG가 어긋난다\n"
+            "- **recommendation**: 문장을 고친다\n"
+            "- **gate_effect**: warn\n"
+        )
+
+        parsed = rr.parse_report(text)
+
+        self.assertEqual(len(parsed["findings"]), 1)
+        self.assertEqual(parsed["findings"][0]["severity"], "🟡")
+        self.assertEqual(parsed["findings"][0]["location"], "src/content/posts/a.md:73")
+        self.assertEqual(parsed["findings"][0]["gate_effect"], "warn")
+
+    def test_legacy_prose_report_parses_to_zero_findings(self):
+        text = (
+            "## 결정적 검사: src/content/posts/dp-1.md\n발견 사항 없음 ✅\n\n"
+            "🟢 참고 (1)\n\n"
+            "- [L6] not-recorded · gate: info — 노션 원본과 대조했다.\n\n"
+            "요약: 🔴 0 · 🟡 0 · 🟢 1\n"
+        )
+
+        parsed = rr.parse_report(text)
+
+        self.assertEqual(parsed["findings"], [])
+        self.assertEqual(parsed["header"], {})
+
+
+class TestValidateReport(unittest.TestCase):
+    def test_canonical_complete_report_has_no_errors(self):
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=[finding()])
+
+        self.assertEqual(rr.validate_report(text), [])
+
+    def test_complete_state_rejects_zero_findings(self):
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=[])
+
+        errors = rr.validate_report(text, state="complete")
+
+        self.assertTrue(any("finding" in e for e in errors), errors)
+
+    def test_scaffold_state_allows_zero_findings(self):
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=[])
+
+        self.assertEqual(rr.validate_report(text, state="scaffold"), [])
+
+    def test_reports_missing_header_fields(self):
+        errors = rr.validate_report("## Findings\n", state="scaffold")
+
+        self.assertTrue(any("schema_version" in e for e in errors), errors)
+        self.assertTrue(any("target" in e for e in errors), errors)
+
+    def test_reports_stale_summary_line(self):
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=[finding()])
+        stale = text.replace("summary: 🔴 1 · 🟡 0 · 🟢 0",
+                             "summary: 🔴 0 · 🟡 0 · 🟢 0")
+
+        errors = rr.validate_report(stale)
+
+        self.assertTrue(any("summary" in e for e in errors), errors)
+
+    def test_reports_invalid_enum_values(self):
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=[finding()])
+        broken = text.replace("- gate_effect: fail", "- gate_effect: explode")
+
+        errors = rr.validate_report(broken)
+
+        self.assertTrue(any("gate_effect" in e for e in errors), errors)
+
+
 if __name__ == "__main__":
     unittest.main()
