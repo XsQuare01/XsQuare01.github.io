@@ -487,6 +487,85 @@ class TestCliContractsV2(unittest.TestCase):
         self.assertTrue((output_dir / "2026-06-07-clean.md").exists(), stdout)
         self.assertTrue((output_dir / "2026-06-07-red.md").exists(), stdout)
 
+    def _write_report_with_llm_rows(self):
+        import review_report as rr
+
+        report = self.root / "reports" / "2026-06-07-beta.md"
+        report.parent.mkdir(parents=True, exist_ok=True)
+        scaffold = rr.serialize_report(
+            target="beta", generated_at="2026-06-07", strict=False,
+            findings=[{
+                "severity": "🔴", "source": "D", "rule_id": "D1",
+                "location": "src/content/posts/beta.md:7", "quote": "트리가 **DAG)**가",
+                "message": "깨진 굵게", "recommendation": "구두점을 옮긴다",
+                "gate_effect": "fail",
+            }],
+            sources=["src/content/posts/beta.md"],
+        )
+        llm_block = (
+            "\n### 🟡 [L1] src/content/posts/beta.md:12\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L1\n"
+            "- location: src/content/posts/beta.md:12\n"
+            "- quote: 줄표가 남발된다\n- message: 줄표 남발\n"
+            "- recommendation: 마침표로 끊는다\n- gate_effect: warn\n"
+        )
+        report.write_text(scaffold + llm_block, encoding="utf-8")
+        return report
+
+    def test_finalize_recomputes_summary_from_all_findings(self):
+        report = self._write_report_with_llm_rows()
+
+        rc, stdout = run_main(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        text = report.read_text(encoding="utf-8")
+        self.assertIn("summary: 🔴 1 · 🟡 1 · 🟢 0", text)
+
+    def test_finalize_reorders_findings_canonically(self):
+        report = self._write_report_with_llm_rows()
+
+        run_main(["review_post.py", "--finalize", str(report)])
+
+        headings = [l for l in report.read_text(encoding="utf-8").splitlines()
+                    if l.startswith("### ")]
+        self.assertEqual(headings, [
+            "### 🔴 [D1] src/content/posts/beta.md:7",
+            "### 🟡 [L1] src/content/posts/beta.md:12",
+        ])
+
+    def test_finalize_is_idempotent(self):
+        report = self._write_report_with_llm_rows()
+
+        run_main(["review_post.py", "--finalize", str(report)])
+        first = report.read_text(encoding="utf-8")
+        run_main(["review_post.py", "--finalize", str(report)])
+        second = report.read_text(encoding="utf-8")
+
+        self.assertEqual(first, second)
+
+    def test_finalize_returns_two_when_report_has_no_findings(self):
+        import review_report as rr
+
+        report = self.root / "reports" / "2026-06-07-empty.md"
+        report.parent.mkdir(parents=True, exist_ok=True)
+        report.write_text(
+            rr.serialize_report(target="empty", generated_at="2026-06-07",
+                                strict=False, findings=[]),
+            encoding="utf-8",
+        )
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("finding", stderr)
+
+    def test_finalize_returns_two_for_missing_file(self):
+        rc, _, stderr = run_main_streams([
+            "review_post.py", "--finalize", str(self.root / "nope.md"),
+        ])
+
+        self.assertEqual(rc, 2)
+
     def test_json_keeps_stdout_machine_readable_and_errors_on_stderr(self):
         valid = write_post(self.root / "posts" / "valid.md", "본문")
         missing = self.root / "posts" / "missing.md"

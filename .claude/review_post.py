@@ -692,6 +692,7 @@ def parse_args(argv):
         "json": False,
         "strict": False,
         "write_reports": False,
+        "finalize": [],
         "output_dir": None,
         "date": None,
         "paths": [],
@@ -707,6 +708,12 @@ def parse_args(argv):
             opts["strict"] = True
         elif arg == "--write-reports":
             opts["write_reports"] = True
+        elif arg == "--finalize":
+            if i + 1 < len(args):
+                opts["finalize"].append(args[i + 1])
+                i += 1
+            else:
+                opts["errors"].append("--finalize requires a value")
         elif arg == "--output-dir":
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
@@ -725,6 +732,48 @@ def parse_args(argv):
     return opts
 
 
+def finalize_reports(report_paths):
+    """LLM 비평 행이 추가된 리포트를 정본 형식으로 다시 직렬화한다.
+
+    요약을 finding에서 다시 계산하고 정본 순서로 재정렬한다. 멱등이다.
+    품질 gate 판정은 하지 않는다.
+    """
+    failed = False
+    for report_path in report_paths:
+        path = Path(report_path)
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
+
+        parsed = rr.parse_report(text)
+        header = parsed["header"]
+        canonical = rr.serialize_report(
+            target=header.get("target", rr.NOT_RECORDED),
+            generated_at=header.get("generated_at", rr.NOT_RECORDED),
+            strict=header.get("strict", "false"),
+            findings=parsed["findings"],
+            sources=header.get("sources", []),
+        )
+        errors = rr.validate_report(canonical, state="complete")
+        if errors:
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            failed = True
+            continue
+
+        try:
+            path.write_text(canonical, encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 쓰기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
+        print(f"정본화 완료: {path}")
+    return 2 if failed else 0
+
+
 def main(argv):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -735,6 +784,8 @@ def main(argv):
         for error in opts["errors"]:
             print(error, file=sys.stderr)
         return 2
+    if opts["finalize"]:
+        return finalize_reports(opts["finalize"])
     paths = opts["paths"]
     if not paths:
         return 0
