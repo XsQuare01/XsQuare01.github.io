@@ -1267,6 +1267,46 @@ class TestLegacyMigration(unittest.TestCase):
         self.assertEqual(report.read_text(encoding="utf-8"), canonical)
 
 
+class TestLlmCoverage(unittest.TestCase):
+    def _rows(self, rule_ids, source="L"):
+        return [{
+            "severity": "🟢", "source": source, "rule_id": rule_id,
+            "location": "not-recorded", "quote": "not-recorded",
+            "message": "검토 완료, 이슈 없음", "recommendation": "not-recorded",
+            "gate_effect": "info",
+        } for rule_id in rule_ids]
+
+    def test_full_l1_to_l7_coverage_has_no_gaps(self):
+        rows = self._rows(["L1", "L2", "L3", "L4", "L5", "L6", "L7"])
+
+        self.assertEqual(rp.missing_llm_coverage(rows), [])
+
+    def test_reports_each_missing_category(self):
+        rows = self._rows(["L1", "L2", "L4", "L7"])
+
+        self.assertEqual(rp.missing_llm_coverage(rows), ["L3", "L5", "L6"])
+
+    def test_deterministic_only_report_is_missing_every_category(self):
+        rows = [{
+            "severity": "🔴", "source": "D", "rule_id": "D1",
+            "location": "a.md:7", "quote": "q", "message": "m",
+            "recommendation": "r", "gate_effect": "fail",
+        }]
+
+        self.assertEqual(
+            rp.missing_llm_coverage(rows),
+            ["L1", "L2", "L3", "L4", "L5", "L6", "L7"],
+        )
+
+    def test_migrated_rows_do_not_count_as_llm_coverage(self):
+        rows = self._rows(["L1", "L2", "L3", "L4", "L5", "L6", "L7"], source="MIGRATED")
+
+        self.assertEqual(
+            rp.missing_llm_coverage(rows),
+            ["L1", "L2", "L3", "L4", "L5", "L6", "L7"],
+        )
+
+
 class TestStdoutEncoding(unittest.TestCase):
     def test_main_emits_emoji_without_crash(self):
         import io

@@ -921,6 +921,17 @@ def parse_args(argv):
     return opts
 
 
+# 두 리뷰 커맨드는 문제가 없는 범주도 explicit coverage row로 남기도록 규정한다.
+# 따라서 이 중 하나라도 비면 LLM 비평이 끝나지 않은 것이다.
+REQUIRED_LLM_RULES = ("L1", "L2", "L3", "L4", "L5", "L6", "L7")
+
+
+def missing_llm_coverage(findings):
+    """LLM 비평이 덮지 않은 L 범주를 돌려준다. 빈 목록이면 전 범주가 덮였다."""
+    covered = {f.get("rule_id") for f in findings if f.get("source") == "L"}
+    return [rule for rule in REQUIRED_LLM_RULES if rule not in covered]
+
+
 def finalize_reports(report_paths):
     """LLM 비평 행이 추가된 리포트를 정본 형식으로 다시 직렬화한다.
 
