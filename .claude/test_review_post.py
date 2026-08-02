@@ -105,6 +105,29 @@ def assert_finding_schema(testcase, finding):
     testcase.assertIn(finding["gate_effect"], GATE_EFFECT_VALUES)
 
 
+# 이 날짜 이후 생성된 리포트는 정본 계약을 지켜야 한다. 그 이전 리포트는 정본
+# serializer가 없던 시절 손으로 쓴 산물이라 형식이 최소 일곱 가지로 갈린다.
+# 일괄 재작성은 근거 손실 위험이 커서 하지 않는다(#84). 대신 검증 가능한 건만
+# `--migrate`로 옮기고, 옮겨진 리포트는 아래 조건에 걸려 자동으로 검사 대상이 된다.
+CANONICAL_FROM = "2026-08-01"
+
+
+def stored_reports():
+    return sorted(p for p in REVIEW_REPORT_DIR.glob("*.md") if p.name != "README.md")
+
+
+def report_must_conform(path):
+    """정본 계약을 강제할 리포트인지 판단한다.
+
+    기준일 이후 생성분은 전부 강제한다. 그 이전 리포트라도 이미 정본을 선언했다면
+    되돌아가지 않도록 함께 검사한다.
+    """
+    if path.name[:10] >= CANONICAL_FROM:
+        return True
+    first_line = path.read_text(encoding="utf-8").split("\n", 1)[0].strip()
+    return first_line == "schema_version: review-report/v2"
+
+
 def parse_report_findings(markdown):
     findings = []
     current = None
@@ -749,14 +772,13 @@ class TestReportSchemaV2(unittest.TestCase):
         self.assertEqual(row["location"], "sample.md:7")
         self.assertEqual(row["gate_effect"], "fail")
 
-    def test_all_existing_review_reports_conform_to_v2_schema(self):
-        reports = sorted(
-            path for path in REVIEW_REPORT_DIR.glob("*.md")
-            if path.name != "README.md"
-        )
+    def test_reports_under_canonical_contract_conform_to_v2_schema(self):
+        reports = stored_reports()
         self.assertTrue(reports, "expected at least one stored review report")
+        checked = [path for path in reports if report_must_conform(path)]
+        self.assertTrue(checked, "expected at least one report under the canonical contract")
 
-        for report in reports:
+        for report in checked:
             with self.subTest(report=report.name):
                 text = report.read_text(encoding="utf-8")
                 self.assertIn("schema_version: review-report/v2", text)
@@ -772,6 +794,26 @@ class TestReportSchemaV2(unittest.TestCase):
                     self.assertIn(finding["severity"], SEVERITY_VALUES)
                     self.assertIn(finding["source"], SOURCE_VALUES)
                     self.assertIn(finding["gate_effect"], GATE_EFFECT_VALUES)
+
+    def test_legacy_exemption_is_explicit_and_documented(self):
+        """면제 대상은 조용히 빠지지 않고 목록과 문서로 남아야 한다."""
+        exempt = [p.name for p in stored_reports() if not report_must_conform(p)]
+        readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn(CANONICAL_FROM, readme,
+                      "README가 정본 강제 기준일을 밝혀야 한다")
+        for name in exempt:
+            with self.subTest(report=name):
+                self.assertLess(name[:10], CANONICAL_FROM,
+                                "기준일 이후 리포트는 면제될 수 없다")
+
+    def test_readme_documents_canonical_order_and_two_valid_states(self):
+        text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        for term in ("scaffold", "complete", "--finalize", "--migrate",
+                     "migrated_from", "sources"):
+            with self.subTest(term=term):
+                self.assertIn(term, text)
 
     def test_review_reports_readme_is_documentation_not_report_artifact(self):
         readme = REVIEW_REPORT_DIR / "README.md"
@@ -823,6 +865,7 @@ class TestReportSchemaV2(unittest.TestCase):
         required_terms = [
             "allowed-tools: Write, Edit",
             "--write-reports",
+            "--finalize",
             "docs/reviews/",
             "review-report/v2",
             "canonical fields",
@@ -944,7 +987,14 @@ class TestLegacyMigration(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def _write(self, name, text):
+    def _write(self, name, text, summary=None):
+        """리포트 fixture를 쓴다.
+
+        --migrate는 원본이 밝힌 심각도 총계와 대조되지 않으면 전환하지 않으므로,
+        요약 줄이 없는 fixture에는 기대 총계를 붙여 준다.
+        """
+        if summary is not None:
+            text = f"{text}\n요약: {summary}\n"
         path = self.root / name
         path.write_text(text, encoding="utf-8")
         return path
@@ -962,7 +1012,7 @@ class TestLegacyMigration(unittest.TestCase):
             "- **message**: 본문과 SVG가 어긋난다\n"
             "- **recommendation**: 문장을 고친다\n"
             "- **gate_effect**: warn\n"
-        ))
+        ), summary="🔴 0 · 🟡 1 · 🟢 0")
 
         rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1021,7 +1071,7 @@ class TestLegacyMigration(unittest.TestCase):
     def test_inline_gate_marker_wins_over_section_heading(self):
         report = self._write("2026-07-24-dp-1.md", (
             "🟡 권장 (1)\n\n- [L7] not-recorded · gate: info — 검증 기록이다.\n"
-        ))
+        ), summary="🔴 0 · 🟡 0 · 🟢 1")
 
         run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1042,7 +1092,7 @@ class TestLegacyMigration(unittest.TestCase):
             "- quote: `(더 나가면) 복원, 복잡도`\n"
             "- message: 개요 항목이 본문 구성과 어긋난다\n"
             "- recommendation: 항목을 나눈다\n- gate_effect: warn\n"
-        ))
+        ), summary="🔴 0 · 🟡 1 · 🟢 0")
 
         rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1061,7 +1111,7 @@ class TestLegacyMigration(unittest.TestCase):
             "- quote: `복원, 복잡도`\n"
             "- message: 복잡도는 독립된 절에서 다룬다\n"
             "- recommendation: 항목을 나눈다\n- gate_effect: warn\n"
-        ))
+        ), summary="🔴 0 · 🟡 1 · 🟢 0")
 
         run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1078,7 +1128,7 @@ class TestLegacyMigration(unittest.TestCase):
             "- quote: `while (i <= j) {`\n"
             "- message: 분할 코드가 멈추지 않을 수 있다\n"
             "- recommendation: 전제를 명시한다\n- gate_effect: fail\n"
-        ))
+        ), summary="🔴 1 · 🟡 0 · 🟢 0")
 
         run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1091,7 +1141,7 @@ class TestLegacyMigration(unittest.TestCase):
             "- [L7] src/content/posts/dp-1.md:88 · gate: info\n"
             "  - quote: \"$2^{n/2-1} \\le F(n) < 2^n$\"\n"
             "  - message: 지수 범위 증명 검증. 상한 F(n)≤2F(n-1)\n"
-        ))
+        ), summary="🔴 0 · 🟡 0 · 🟢 1")
 
         run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1105,7 +1155,7 @@ class TestLegacyMigration(unittest.TestCase):
         report = self._write("2026-07-24-dp-1.md", (
             "🟢 참고 (1)\n\n"
             "- [L2] not-recorded · gate: info — 흐름 검토 완료, 이슈 없음.\n"
-        ))
+        ), summary="🔴 0 · 🟡 0 · 🟢 1")
 
         run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1125,7 +1175,7 @@ class TestLegacyMigration(unittest.TestCase):
             "  - message: signed overflow가 날 수 있다\n"
             "  - recommendation: 입력 범위를 명시한다\n"
             "  - gate_effect: warn\n"
-        ))
+        ), summary="🔴 0 · 🟡 1 · 🟢 0")
 
         rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1141,7 +1191,7 @@ class TestLegacyMigration(unittest.TestCase):
     def test_migration_never_invents_evidence(self):
         report = self._write("2026-07-24-dp-1.md", (
             "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n"
-        ))
+        ), summary="🔴 0 · 🟡 0 · 🟢 1")
 
         run_main(["review_post.py", "--migrate", str(report)])
 
@@ -1151,7 +1201,7 @@ class TestLegacyMigration(unittest.TestCase):
     def test_migration_is_idempotent(self):
         report = self._write("2026-07-24-dp-1.md", (
             "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n"
-        ))
+        ), summary="🔴 0 · 🟡 0 · 🟢 1")
 
         run_main(["review_post.py", "--migrate", str(report)])
         first = report.read_text(encoding="utf-8")
@@ -1159,6 +1209,44 @@ class TestLegacyMigration(unittest.TestCase):
         second = report.read_text(encoding="utf-8")
 
         self.assertEqual(first, second)
+
+    def test_refuses_to_write_when_severity_totals_disagree(self):
+        """파서가 형식을 놓쳐 finding이 사라지면 원본을 건드리지 않는다."""
+        original = (
+            "🟢 참고 (3)\n\n- [L6] not-recorded · gate: info — 대조했다.\n\n"
+            "요약: 🔴 0 · 🟡 0 · 🟢 3\n"
+        )
+        report = self._write("2026-07-24-dp-1.md", original)
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("심각도 총계 불일치", stderr)
+        self.assertEqual(report.read_text(encoding="utf-8"), original)
+
+    def test_refuses_to_write_when_source_declares_no_totals(self):
+        original = "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n"
+        report = self._write("2026-07-24-dp-1.md", original)
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("대조할 심각도 총계가 없어", stderr)
+        self.assertEqual(report.read_text(encoding="utf-8"), original)
+
+    def test_partial_deterministic_summary_line_is_not_used_for_comparison(self):
+        """`요약(결정적):`은 일부만 센 줄이라 대조 기준이 아니다."""
+        report = self._write("2026-07-03-closest-pair-3.md", (
+            "요약(결정적): 🔴 1 · 🟡 0 · 🟢 0\n\n"
+            "🟢 참고 (1)\n\n- [L6] not-recorded · gate: info — 대조했다.\n\n"
+            "요약: 🔴 0 · 🟡 0 · 🟢 1\n"
+        ))
+
+        rc, stdout = run_main(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+        self.assertIn("summary: 🔴 0 · 🟡 0 · 🟢 1",
+                      report.read_text(encoding="utf-8"))
 
     def test_already_canonical_report_is_left_byte_identical(self):
         import review_report as rr

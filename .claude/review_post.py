@@ -611,6 +611,10 @@ _LEGACY_GATE_SPLIT_RE = re.compile(
     r"^(?P<loc>.*?)\s*·\s*gate:\s*(?P<gate>fail|warn|info)\b\s*(?:—\s*(?P<msg>.*))?$"
 )
 _HEADING_PREFIX_RE = re.compile(r"^(🔴|🟡|🟢)\s+\[(D\d+|L\d+)\]\s*(.*)$")
+# 원본이 스스로 밝힌 심각도 총계. `요약(결정적):`처럼 일부만 센 줄은 제외한다.
+_DECLARED_SUMMARY_RE = re.compile(
+    r"^(?:요약|summary): (🔴 \d+ · 🟡 \d+ · 🟢 \d+)\s*$", re.MULTILINE
+)
 _SEVERITY_BY_GATE = {"fail": "🔴", "warn": "🟡", "info": "🟢"}
 _GATE_BY_SEVERITY = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
 
@@ -739,6 +743,24 @@ def migrate_reports(report_paths):
 
         if not findings:
             print(f"{path}: 마이그레이션할 finding이 없다", file=sys.stderr)
+            failed = True
+            continue
+
+        # 과거 리포트는 손으로 쓴 형식이 제각각이라, 파서가 한 종류를 놓치면
+        # finding이 조용히 사라진다. 원본이 밝힌 총계와 대조해 확인되지 않으면
+        # 쓰지 않는다. 확인할 수 없는 전환은 하지 않는 편이 낫다.
+        declared = _DECLARED_SUMMARY_RE.findall(text)
+        computed = rr.format_summary(rr.summary_counts(findings))
+        if not declared:
+            print(f"{path}: 원본에 대조할 심각도 총계가 없어 전환하지 않는다", file=sys.stderr)
+            failed = True
+            continue
+        if declared[-1] != computed:
+            print(
+                f"{path}: 심각도 총계 불일치 — 원본 [{declared[-1]}] 전환 [{computed}]. "
+                "형식을 놓쳐 finding이 사라졌을 수 있어 전환하지 않는다",
+                file=sys.stderr,
+            )
             failed = True
             continue
 

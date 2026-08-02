@@ -26,6 +26,7 @@ allowed-tools: Write, Edit, Bash(python:*), Bash(git diff:*), Read, Grep, Glob
 - stdout의 결정적 검사 결과는 리포트의 결정적 검사 섹션에 그대로 포함한다.
 - `--write-reports`가 만든 `docs/reviews/<오늘 날짜>-<slug>.md` 파일은 이후 LLM 비평 행을 추가할 저장 대상이다.
 - Python scaffold와 LLM 비평 행을 섞어 쓰지 않는다. LLM 비평은 아래 2단계 후 Write/Edit로 명시적으로 추가한다.
+- scaffold는 정본 헤더(`schema_version`·`target`·`generated_at`·`strict`·`sources`·`summary`)와 `## Findings` 섹션을 이미 포함한다. 헤더를 손으로 고치지 않는다.
 
 ## 2단계: LLM 비평
 각 대상 포스트의 본문과, 본문이 참조하는 모든 SVG(`/images/...svg`)를 Read로 읽고 아래를 점검한다. 문제는 가능한 한 **파일:줄 위치와 인용 문장**으로 구체적으로 지적한다.
@@ -65,4 +66,6 @@ SVG와 L1-L7 범주 중 문제가 없는 범주는 생략하지 말고, 각 포�
 - `<slug>`는 리뷰한 포스트 파일명(확장자 제외).
 - `docs/reviews/` 디렉터리가 없으면 Python scaffold가 만든다.
 - LLM 비평 결과와 `검토 완료, 이슈 없음` coverage row는 scaffold 생성 뒤 Write/Edit로 같은 파일에 추가한다.
+- finding 필드는 `- severity: 🔴`처럼 **굵게 표기 없이** 쓴다. `- **severity**:`는 정본 형식이 아니다. 각 finding은 `### <심각도> [<rule_id>] <위치>` 제목으로 시작한다.
+- 비평 행을 모두 추가한 뒤 `python .claude/review_post.py --finalize docs/reviews/<오늘 날짜>-<slug>.md`를 실행한다. 이 단계가 `summary`를 다시 계산하고 finding을 정본 순서로 재정렬한다. 건너뛰면 리포트가 미완료 상태로 남는다.
 - 저장이 끝나면 저장된 경로를 사용자에게 알린다.
