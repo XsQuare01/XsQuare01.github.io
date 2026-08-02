@@ -23,6 +23,9 @@ FINDING_FIELDS = (
 SEVERITY_VALUES = ("🔴", "🟡", "🟢")
 SOURCE_VALUES = ("D", "L", "MIGRATED")
 GATE_EFFECT_VALUES = ("fail", "warn", "info")
+# 정본 대응. 이 대응을 검증하지 않으면 🔴 finding에 gate_effect: info를 적어
+# 품질 게이트를 우회할 수 있다.
+CANONICAL_GATE_EFFECT = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
 
 _SEVERITY_RANK = {value: i for i, value in enumerate(SEVERITY_VALUES)}
 _SOURCE_RANK = {value: i for i, value in enumerate(SOURCE_VALUES)}
@@ -230,6 +233,12 @@ def validate_report(text, *, state="complete"):
             errors.append(f"finding #{index + 1} invalid source: {finding['source']}")
         if finding["gate_effect"] not in GATE_EFFECT_VALUES:
             errors.append(f"finding #{index + 1} invalid gate_effect: {finding['gate_effect']}")
+        expected_gate = CANONICAL_GATE_EFFECT.get(finding["severity"])
+        if expected_gate and finding["gate_effect"] != expected_gate:
+            errors.append(
+                f"finding #{index + 1} severity {finding['severity']}는 "
+                f"gate_effect {expected_gate}여야 하는데 {finding['gate_effect']}다"
+            )
 
     expected = format_summary(summary_counts(findings))
     if header.get("summary") and header["summary"] != expected:

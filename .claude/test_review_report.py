@@ -203,6 +203,26 @@ class TestValidateReport(unittest.TestCase):
 
         self.assertTrue(any("summary" in e for e in errors), errors)
 
+    def test_rejects_severity_and_gate_effect_mismatch(self):
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=[finding()])
+        sneaky = text.replace("- gate_effect: fail", "- gate_effect: info")
+
+        errors = rr.validate_report(sneaky)
+
+        self.assertTrue(any("gate_effect" in e and "severity" in e for e in errors), errors)
+
+    def test_accepts_canonical_severity_gate_pairs(self):
+        findings = [
+            finding(severity="🔴", gate_effect="fail"),
+            finding(severity="🟡", rule_id="L1", source="L", gate_effect="warn"),
+            finding(severity="🟢", rule_id="L2", source="L", gate_effect="info"),
+        ]
+        text = rr.serialize_report(target="a", generated_at="2026-08-02",
+                                   strict=False, findings=findings)
+
+        self.assertEqual(rr.validate_report(text), [])
+
     def test_reports_invalid_enum_values(self):
         text = rr.serialize_report(target="a", generated_at="2026-08-02",
                                    strict=False, findings=[finding()])
