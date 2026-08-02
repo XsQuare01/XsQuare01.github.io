@@ -589,6 +589,156 @@ class TestCliContractsV2(unittest.TestCase):
 
         self.assertEqual(rc, 2)
 
+    def _gate_report(self, findings, name="2026-08-02-gate.md"):
+        import review_report as rr
+
+        report = self.root / "reports" / name
+        report.parent.mkdir(parents=True, exist_ok=True)
+        report.write_text(
+            rr.serialize_report(target="gate", generated_at="2026-08-02",
+                                strict=True, findings=findings),
+            encoding="utf-8",
+        )
+        return report
+
+    def _coverage(self, rule_ids=("L1", "L2", "L3", "L4", "L5", "L6", "L7")):
+        return [{
+            "severity": "🟢", "source": "L", "rule_id": rule_id,
+            "location": "not-recorded", "quote": "not-recorded",
+            "message": "검토 완료, 이슈 없음", "recommendation": "not-recorded",
+            "gate_effect": "info",
+        } for rule_id in rule_ids]
+
+    def _problem(self, severity, source, rule_id, gate_effect):
+        return {
+            "severity": severity, "source": source, "rule_id": rule_id,
+            "location": "src/content/posts/gate.md:12", "quote": "인용",
+            "message": "문제 설명", "recommendation": "권장 조치",
+            "gate_effect": gate_effect,
+        }
+
+    def test_strict_gate_fails_on_deterministic_red(self):
+        report = self._gate_report(
+            self._coverage() + [self._problem("🔴", "D", "D1", "fail")])
+
+        rc, _ = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 1)
+
+    def test_strict_gate_fails_on_llm_red(self):
+        report = self._gate_report(
+            self._coverage() + [self._problem("🔴", "L", "L7", "fail")])
+
+        rc, _ = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 1)
+
+    def test_strict_gate_fails_when_red_and_yellow_mixed(self):
+        report = self._gate_report(self._coverage() + [
+            self._problem("🔴", "L", "L7", "fail"),
+            self._problem("🟡", "L", "L1", "warn"),
+        ])
+
+        rc, _ = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 1)
+
+    def test_strict_gate_passes_on_yellow_only(self):
+        report = self._gate_report(
+            self._coverage() + [self._problem("🟡", "L", "L1", "warn")])
+
+        rc, stdout = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+
+    def test_strict_gate_passes_when_only_coverage_rows_exist(self):
+        report = self._gate_report(self._coverage())
+
+        rc, stdout = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 0, stdout)
+
+    def test_strict_gate_returns_two_on_malformed_llm_output(self):
+        report = self._gate_report(self._coverage())
+        broken = report.read_text(encoding="utf-8").replace(
+            "- gate_effect: info", "- gate_effect: explode", 1)
+        report.write_text(broken, encoding="utf-8")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("gate_effect", stderr)
+
+    def test_strict_gate_returns_two_when_llm_phase_missing(self):
+        report = self._gate_report([self._problem("🟡", "D", "D3", "warn")])
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("L1", stderr)
+
+    def test_strict_gate_returns_two_when_one_category_missing(self):
+        report = self._gate_report(
+            self._coverage(("L1", "L2", "L3", "L4", "L5", "L7")))
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("L6", stderr)
+
+    def test_strict_gate_cannot_be_bypassed_by_downgrading_gate_effect(self):
+        """🔴인데 gate_effect: info로 적어 게이트를 빠져나갈 수 없다."""
+        report = self._gate_report(self._coverage())
+        sneaky = report.read_text(encoding="utf-8").replace(
+            "- severity: 🟢\n- source: L\n- rule_id: L1",
+            "- severity: 🔴\n- source: L\n- rule_id: L1", 1)
+        report.write_text(sneaky, encoding="utf-8")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("severity", stderr)
+
+    def test_strict_gate_writes_report_before_returning_failure(self):
+        report = self._gate_report(
+            self._coverage() + [self._problem("🔴", "L", "L7", "fail")])
+
+        rc, _ = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 1)
+        text = report.read_text(encoding="utf-8")
+        self.assertIn("summary: 🔴 1 · 🟡 0 · 🟢 7", text)
+        self.assertIn("strict: true", text)
+
+    def test_report_summary_and_exit_code_come_from_same_aggregation(self):
+        import review_report as rr
+
+        report = self._gate_report(self._coverage() + [
+            self._problem("🔴", "D", "D1", "fail"),
+            self._problem("🔴", "L", "L7", "fail"),
+            self._problem("🟡", "L", "L1", "warn"),
+        ])
+
+        rc, _ = run_main(["review_post.py", "--finalize", "--strict", str(report)])
+
+        parsed = rr.parse_report(report.read_text(encoding="utf-8"))
+        failing = [f for f in parsed["findings"] if f["gate_effect"] == "fail"]
+        self.assertEqual(rc, 1 if failing else 0)
+        self.assertEqual(parsed["header"]["summary"], "🔴 2 · 🟡 1 · 🟢 7")
+
+    def test_finalize_without_strict_still_returns_zero_on_red(self):
+        """게이트 판정은 --strict를 붙였을 때만 한다."""
+        report = self._gate_report(
+            self._coverage() + [self._problem("🔴", "L", "L7", "fail")])
+
+        rc, _ = run_main(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 0)
+
     def test_json_keeps_stdout_machine_readable_and_errors_on_stderr(self):
         valid = write_post(self.root / "posts" / "valid.md", "본문")
         missing = self.root / "posts" / "missing.md"

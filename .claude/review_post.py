@@ -874,8 +874,8 @@ def parse_args(argv):
         "json": False,
         "strict": False,
         "write_reports": False,
-        "finalize": [],
-        "migrate": [],
+        "finalize": False,
+        "migrate": False,
         "output_dir": None,
         "date": None,
         "paths": [],
@@ -892,17 +892,9 @@ def parse_args(argv):
         elif arg == "--write-reports":
             opts["write_reports"] = True
         elif arg == "--finalize":
-            if i + 1 < len(args):
-                opts["finalize"].append(args[i + 1])
-                i += 1
-            else:
-                opts["errors"].append("--finalize requires a value")
+            opts["finalize"] = True
         elif arg == "--migrate":
-            if i + 1 < len(args):
-                opts["migrate"].append(args[i + 1])
-                i += 1
-            else:
-                opts["errors"].append("--migrate requires a value")
+            opts["migrate"] = True
         elif arg == "--output-dir":
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
@@ -932,46 +924,74 @@ def missing_llm_coverage(findings):
     return [rule for rule in REQUIRED_LLM_RULES if rule not in covered]
 
 
-def finalize_reports(report_paths):
+def finalize_reports(report_paths, strict=False):
     """LLM 비평 행이 추가된 리포트를 정본 형식으로 다시 직렬화한다.
 
     요약을 finding에서 다시 계산하고 정본 순서로 재정렬한다. 멱등이다.
-    품질 gate 판정은 하지 않는다.
+
+    strict면 재직렬화에 쓴 바로 그 finding 목록으로 최종 품질 게이트를 판정한다.
+    보고서에 남은 실패 finding과 exit code가 같은 집계에서 나오게 하기 위해서다.
     """
-    failed = False
+    infra_failed = False
+    quality_failed = False
     for report_path in report_paths:
         path = Path(report_path)
         try:
             text = path.read_text(encoding="utf-8")
         except OSError as e:
             print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
-            failed = True
+            infra_failed = True
             continue
 
         parsed = rr.parse_report(text)
         header = parsed["header"]
+        findings = parsed["findings"]
         canonical = rr.serialize_report(
             target=header.get("target", rr.NOT_RECORDED),
             generated_at=header.get("generated_at", rr.NOT_RECORDED),
-            strict=header.get("strict", "false"),
-            findings=parsed["findings"],
+            strict=True if strict else header.get("strict", "false"),
+            findings=findings,
             sources=header.get("sources", []),
         )
         errors = rr.validate_report(canonical, state="complete")
         if errors:
             for error in errors:
                 print(f"{path}: {error}", file=sys.stderr)
-            failed = True
+            infra_failed = True
             continue
+
+        if strict:
+            missing = missing_llm_coverage(findings)
+            if missing:
+                print(
+                    f"{path}: LLM 비평 coverage 누락 — {', '.join(missing)}. "
+                    "비평 단계가 끝나지 않았으므로 품질 통과로 처리하지 않는다",
+                    file=sys.stderr,
+                )
+                infra_failed = True
+                continue
 
         try:
             path.write_text(canonical, encoding="utf-8")
         except OSError as e:
             print(f"리포트 쓰기 실패: {path}: {e}", file=sys.stderr)
-            failed = True
+            infra_failed = True
             continue
         print(f"정본화 완료: {path}")
-    return 2 if failed else 0
+
+        if strict:
+            failing = [f for f in findings if f.get("gate_effect") == "fail"]
+            if failing:
+                quality_failed = True
+                for f in failing:
+                    print(
+                        f"{path}: 품질 게이트 실패 — [{f['rule_id']}] {f['location']}",
+                        file=sys.stderr,
+                    )
+
+    if infra_failed:
+        return 2
+    return 1 if quality_failed else 0
 
 
 def main(argv):
@@ -984,10 +1004,14 @@ def main(argv):
         for error in opts["errors"]:
             print(error, file=sys.stderr)
         return 2
-    if opts["finalize"]:
-        return finalize_reports(opts["finalize"])
-    if opts["migrate"]:
-        return migrate_reports(opts["migrate"])
+    if opts["finalize"] or opts["migrate"]:
+        if not opts["paths"]:
+            mode = "--finalize" if opts["finalize"] else "--migrate"
+            print(f"{mode}는 리포트 경로가 필요하다", file=sys.stderr)
+            return 2
+        if opts["finalize"]:
+            return finalize_reports(opts["paths"], strict=opts["strict"])
+        return migrate_reports(opts["paths"])
     paths = opts["paths"]
     if not paths:
         return 0
