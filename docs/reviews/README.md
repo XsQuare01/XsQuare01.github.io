@@ -27,30 +27,72 @@
 
 리포트는 다음 역할을 나눈다.
 
-- Markdown: 기본 human output이다. 사람이 읽는 리뷰 기록이며 JSON을 Markdown 안에 넣지 않는다.
-- JSON: `--json`을 지정했을 때 stdout으로만 내보내는 machine-readable output이다.
+- Markdown: 기본 human output이다. 구조·필드 순서·공백은 `.claude/review_report.py`의 `serialize_report()`가 **단독으로** 결정한다. 손으로 형식을 맞추지 않는다.
+- JSON: `--json`을 지정했을 때 stdout으로만 내보내는 machine-readable output이다. Markdown과 별도 산출물이지만 같은 필드 의미와 정렬 계약을 따른다.
 
-상위 report 필드는 다음 값을 갖는다.
+### 최상위 필드 (이 순서로 출력한다)
 
-- `schema_version`: 항상 `review-report/v2`
-- `target`: 리뷰 대상 slug 또는 `all`
-- `generated_at`: 리포트 생성 시각. 알 수 없으면 `not-recorded`
-- `strict`: strict mode 적용 여부
-- `summary`: 심각도별 집계
-- `findings`: finding 목록
+| 필드 | 필수 | 값 |
+|---|---|---|
+| `schema_version` | 필수 | 항상 `review-report/v2` |
+| `target` | 필수 | 리뷰 대상 slug 또는 `all` |
+| `generated_at` | 필수 | 생성 날짜. 알 수 없으면 `not-recorded` |
+| `strict` | 필수 | `true`, `false`, 또는 `not-recorded` |
+| `sources` | 선택 | 검토한 포스트 경로 목록(쉼표 구분) |
+| `migrated_from` | 선택 | 손실 있는 전환일 때만 `legacy-prose` |
+| `summary` | 필수 | `🔴 n · 🟡 n · 🟢 n` — finding에서 계산한 값과 반드시 일치 |
 
-각 finding은 다음 필드를 반드시 포함한다.
+헤더 다음에 빈 줄 하나, `Findings` 섹션 헤딩(h2), 빈 줄 하나, 그리고 finding 블록이 온다.
+
+### finding 필드 (이 순서로, 굵게 표기 없이 출력한다)
+
+`severity` · `source` · `rule_id` · `location` · `quote` · `message` · `recommendation` · `gate_effect`
 
 - `severity`: `🔴`, `🟡`, `🟢` 중 하나
 - `source`: `D`, `L`, `MIGRATED` 중 하나
 - `rule_id`: 예: `D1`, `L7`, `MIGRATED`
 - `location`: `파일:줄` 형식. 알 수 없으면 `not-recorded`
-- `quote`: 판단 근거가 되는 원문. 과거 리포트 마이그레이션에서 근거가 없으면 `not-recorded`
+- `quote`: 판단 근거가 되는 원문. 없으면 `not-recorded`
 - `message`: 문제 설명
 - `recommendation`: 권장 조치
 - `gate_effect`: `fail`, `warn`, `info` 중 하나
 
-finding 정렬은 항상 안정적이어야 한다. 정렬 순서는 severity(`🔴`, `🟡`, `🟢`) 다음 source(`D`, `L`, `MIGRATED`) 다음 rule id 다음 file path 다음 line이다.
+각 finding은 `### <severity> [<rule_id>] <location>` 제목으로 시작한다.
+
+정렬은 severity(`🔴`, `🟡`, `🟢`) → source(`D`, `L`, `MIGRATED`) → rule id → file path → line 순이며 항상 안정적이다. 블록 사이 빈 줄은 하나, 파일은 개행 하나로 끝난다. 같은 입력은 항상 같은 바이트를 만든다.
+
+### 두 가지 유효 상태
+
+| 상태 | 만드는 명령 | finding 개수 | 검증 |
+|---|---|---|---|
+| scaffold | `--write-reports` | 0건 허용 | `validate_report(text, state="scaffold")` |
+| complete | LLM 행 추가 후 `--finalize` | 1건 이상 필수 | `validate_report(text, state="complete")` |
+
+`docs/reviews/`에 남는 최종 산출물은 complete 상태다. `--finalize`는 finding을 정본 순서로 재정렬하고 `summary`를 다시 계산한다. 멱등이므로 여러 번 실행해도 결과가 같다.
+
+## 정본 강제 범위와 과거 리포트
+
+**`2026-08-01` 이후 날짜의 리포트는 정본 계약을 반드시 지킨다.** 그 이전 리포트는 정본 serializer가 없던 시절 손으로 쓴 산물이라 형식이 최소 일곱 가지로 갈린다.
+
+- 레거시 산문 불릿 (`- [L6] not-recorded · gate: info — …`)
+- `### ` 제목 + 평문 필드 (`Findings` 섹션 헤딩 없음)
+- `- 🟢 [L1] <위치>` 불릿 제목 + 들여쓴 필드
+- 8열 마크다운 표
+- 제목 없이 `- severity:`로 시작하는 블록
+- `#### ` 제목 + 한글 라벨 (`- 심각도:`, `- 위치:`)
+- 한 줄에 여러 필드 (`- severity: 🟢 · source: L · rule_id: L6`)
+
+이 리포트들을 일괄 재작성하지 않는다. 형식을 하나라도 놓치면 finding이 조용히 사라지기 때문이다. 이미 정본을 선언한 과거 리포트는 되돌아가지 않도록 함께 검사한다.
+
+### 마이그레이션
+
+과거 리포트는 `python .claude/review_post.py --migrate <report.md>`로만 전환한다.
+
+- 8개 필드가 이미 있는 리포트는 근거를 그대로 보존하고 표기만 정본화한다. `source`는 원래 값을 유지한다. 정본 제목에 자리가 없는 설명형 `###` 제목은 버리지 않고 `message` 앞으로 옮긴다.
+- 산문 불릿만 있는 리포트는 `source: MIGRATED`로 전환하고, 확보할 수 없는 `location`·`quote`·`recommendation`은 `not-recorded`로 남긴다. 헤더에 `migrated_from: legacy-prose`를 붙여 손실 있는 전환임을 표시한다. 불릿에 박힌 위치와 들여쓴 하위 `- quote:`/`- message:` 줄은 되살린다.
+- `generated_at`은 파일명의 날짜에서 가져온다. 없는 근거를 새로 만들어 내지 않는다.
+
+**안전 장치:** `--migrate`는 원본이 스스로 밝힌 `요약: 🔴 n · 🟡 n · 🟢 n` 줄과 전환 결과의 총계를 대조한다. 총계가 어긋나거나 대조할 줄이 아예 없으면 **파일을 쓰지 않고 exit 2로 끝난다.** 파서가 형식 하나를 놓쳐 finding이 사라지는 일을 사람 검수에 맡기지 않기 위해서다. `요약(결정적):`처럼 일부만 센 줄은 대조 기준으로 쓰지 않는다.
 
 마이그레이션 placeholder는 기존 리포트에 증거가 없을 때만 `not-recorded`를 쓴다. 없는 quote, 위치, 생성 시각을 새로 꾸며내지 않는다.
 

@@ -13,6 +13,8 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import unquote
 
+import review_report as rr
+
 # ---- 심각도 ----
 REQUIRED = "🔴 필수"
 RECOMMENDED = "🟡 권장"
@@ -601,29 +603,197 @@ def migrate_legacy_finding(text):
     }
 
 
+_REPORT_NAME_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(.+)$")
+_LEGACY_BULLET_RE = re.compile(r"^- \[(D\d+|L\d+)\]\s+(.*)$")
+_LEGACY_SECTION_RE = re.compile(r"^(🔴|🟡|🟢) (필수|권장|참고) \(\d+\)\s*$")
+_LEGACY_SUBFIELD_RE = re.compile(r"^\s+- (quote|message|recommendation|location):\s*(.*)$")
+_LEGACY_GATE_SPLIT_RE = re.compile(
+    r"^(?P<loc>.*?)\s*·\s*gate:\s*(?P<gate>fail|warn|info)\b\s*(?:—\s*(?P<msg>.*))?$"
+)
+_HEADING_PREFIX_RE = re.compile(r"^(🔴|🟡|🟢)\s+\[(D\d+|L\d+)\]\s*(.*)$")
+# 원본이 스스로 밝힌 심각도 총계. `요약(결정적):`처럼 일부만 센 줄은 제외한다.
+_DECLARED_SUMMARY_RE = re.compile(
+    r"^(?:요약|summary): (🔴 \d+ · 🟡 \d+ · 🟢 \d+)\s*$", re.MULTILINE
+)
+_SEVERITY_BY_GATE = {"fail": "🔴", "warn": "🟡", "info": "🟢"}
+_GATE_BY_SEVERITY = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
+
+
+def report_identity(path):
+    """파일명 `YYYY-MM-DD-<slug>.md`에서 날짜와 target을 읽는다."""
+    match = _REPORT_NAME_RE.match(Path(path).stem)
+    if not match:
+        return rr.NOT_RECORDED, Path(path).stem
+    return match.group(1), match.group(2)
+
+
+def _split_legacy_bullet(rest):
+    """`<위치> · gate: <효력> — <설명>` 꼴을 위치·효력·설명으로 가른다."""
+    match = _LEGACY_GATE_SPLIT_RE.match(rest)
+    if not match:
+        return None, None, rest.strip()
+    location = match.group("loc").strip().strip("`")
+    return (location or None), match.group("gate"), (match.group("msg") or "").strip()
+
+
+def heading_title(heading, location, rule_id):
+    """`### ` 제목에서 위치 표기를 뺀 사람이 쓴 요약만 남긴다.
+
+    제목이 `<심각도> [<규칙>] <위치>`뿐이면 살릴 요약이 없으므로 빈 문자열이다.
+    """
+    match = _HEADING_PREFIX_RE.match(heading or "")
+    body = match.group(3).strip() if match else (heading or "").strip()
+    if match and match.group(2) != rule_id:
+        body = (heading or "").strip()
+    if location and body.startswith(location):
+        body = body[len(location):]
+    return body.strip().lstrip("—-:").strip()
+
+
+def _merge_title_into_message(row):
+    """정본 헤딩에는 자리가 없는 설명형 제목을 message 앞으로 옮긴다."""
+    title = heading_title(row.pop("_heading", ""), row.get("location"), row.get("rule_id"))
+    message = (row.get("message") or "").strip()
+    if title and title not in message:
+        row["message"] = f"{title} — {message}" if message else title
+    return row
+
+
+def _legacy_rows(text):
+    """레거시 산문 불릿을 v2 finding으로 옮긴다.
+
+    심각도는 불릿 한 줄에만 있지 않다. 인라인 `gate:` 표시가 가장 정확하고,
+    없으면 위쪽 섹션 제목(`🟢 참고 (9)`)이 그 불릿의 심각도다. 둘 다 없을 때만
+    migrate_legacy_finding()의 문자열 휴리스틱에 맡긴다.
+
+    불릿에 박힌 위치와 들여쓴 하위 `- quote:`/`- message:` 줄도 되살린다.
+    확보할 수 있는 근거를 not-recorded로 버리지 않기 위해서다.
+    """
+    lines = text.splitlines()
+    rows = []
+    section_severity = None
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        section = _LEGACY_SECTION_RE.match(line)
+        if section:
+            section_severity = section.group(1)
+            i += 1
+            continue
+        bullet = _LEGACY_BULLET_RE.match(line)
+        if not bullet:
+            i += 1
+            continue
+
+        rule_id, rest = bullet.group(1), bullet.group(2)
+        location, gate, message = _split_legacy_bullet(rest)
+        row = {
+            "source": "MIGRATED",
+            "rule_id": rule_id,
+            "location": location or rr.NOT_RECORDED,
+            "quote": rr.NOT_RECORDED,
+            "message": message or rr.NOT_RECORDED,
+            "recommendation": rr.NOT_RECORDED,
+        }
+
+        i += 1
+        while i < len(lines):
+            sub = _LEGACY_SUBFIELD_RE.match(lines[i])
+            if not sub:
+                break
+            row[sub.group(1)] = sub.group(2).strip() or rr.NOT_RECORDED
+            i += 1
+
+        if gate:
+            row["severity"], row["gate_effect"] = _SEVERITY_BY_GATE[gate], gate
+        elif section_severity:
+            row["severity"] = section_severity
+            row["gate_effect"] = _GATE_BY_SEVERITY[section_severity]
+        else:
+            fallback = migrate_legacy_finding(line)
+            row["severity"], row["gate_effect"] = fallback["severity"], fallback["gate_effect"]
+        rows.append(row)
+    return rows
+
+
+def migrate_reports(report_paths):
+    """과거 리포트를 v2 정본으로 전환한다. 없는 근거는 만들어 내지 않는다."""
+    failed = False
+    for report_path in report_paths:
+        path = Path(report_path)
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
+
+        generated_at, target = report_identity(path)
+        parsed = rr.parse_report(text)
+        header = parsed["header"]
+        complete = [f for f in parsed["findings"]
+                    if all(field in f for field in rr.FINDING_FIELDS)]
+
+        if complete:  # 부류 A: 근거를 그대로 보존한다
+            findings = [_merge_title_into_message(f) for f in complete]
+            migrated_from = None
+        else:         # 부류 B: 손실 있는 전환임을 표시한다
+            findings = _legacy_rows(text)
+            migrated_from = "legacy-prose"
+
+        if not findings:
+            print(f"{path}: 마이그레이션할 finding이 없다", file=sys.stderr)
+            failed = True
+            continue
+
+        # 과거 리포트는 손으로 쓴 형식이 제각각이라, 파서가 한 종류를 놓치면
+        # finding이 조용히 사라진다. 원본이 밝힌 총계와 대조해 확인되지 않으면
+        # 쓰지 않는다. 확인할 수 없는 전환은 하지 않는 편이 낫다.
+        declared = _DECLARED_SUMMARY_RE.findall(text)
+        computed = rr.format_summary(rr.summary_counts(findings))
+        if not declared:
+            print(f"{path}: 원본에 대조할 심각도 총계가 없어 전환하지 않는다", file=sys.stderr)
+            failed = True
+            continue
+        if declared[-1] != computed:
+            print(
+                f"{path}: 심각도 총계 불일치 — 원본 [{declared[-1]}] 전환 [{computed}]. "
+                "형식을 놓쳐 finding이 사라졌을 수 있어 전환하지 않는다",
+                file=sys.stderr,
+            )
+            failed = True
+            continue
+
+        canonical = rr.serialize_report(
+            target=header.get("target") or target,
+            generated_at=header.get("generated_at") or generated_at,
+            strict=header.get("strict") or rr.NOT_RECORDED,
+            findings=findings,
+            sources=header.get("sources", []),
+            # 이미 전환된 리포트를 다시 돌려도 손실 표시가 사라지지 않아야 한다.
+            migrated_from=migrated_from or header.get("migrated_from"),
+        )
+        errors = rr.validate_report(canonical, state="complete")
+        if errors:
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            failed = True
+            continue
+
+        path.write_text(canonical, encoding="utf-8")
+        print(f"마이그레이션 완료: {path}")
+    return 2 if failed else 0
+
+
 def _summary(findings):
-    return {severity_icon(s): len([f for f in findings if f.severity == s]) for s in SEVERITY_ORDER}
+    return rr.summary_counts([{"severity": severity_icon(f.severity)} for f in findings])
 
 
 def _finding_sort_key(row):
-    sev_order = {"🔴": 0, "🟡": 1, "🟢": 2}
-    source_order = {"D": 0, "L": 1, "MIGRATED": 2}
-    loc = row["location"]
-    file_part, line_part = loc, 0
-    if ":" in loc:
-        file_part, maybe_line = loc.rsplit(":", 1)
-        if maybe_line.isdigit():
-            line_part = int(maybe_line)
-    return (
-        sev_order.get(row["severity"], 99),
-        source_order.get(row["source"], 99),
-        row["rule_id"],
-        file_part,
-        line_part,
-    )
+    return rr.finding_sort_key(row)
 
 
-def report_to_json_v2(paths, results, strict=False):
+def report_to_json_v2(paths, results, strict=False, generated_at=rr.NOT_RECORDED):
     posts = []
     all_findings = []
     all_rows = []
@@ -633,7 +803,7 @@ def report_to_json_v2(paths, results, strict=False):
         posts.append({
             "schema_version": "review-report/v2",
             "target": Path(path).stem,
-            "generated_at": "not-recorded",
+            "generated_at": generated_at,
             "strict": strict,
             "summary": _summary(findings),
             "findings": rows,
@@ -682,10 +852,20 @@ def report_path_for(output_dir, report_date, path):
     return Path(output_dir) / f"{report_date}-{Path(path).stem}.md"
 
 
-def write_markdown_report(output_dir, report_date, path, findings):
+def write_markdown_report(output_dir, report_date, path, findings, strict=False):
     out_path = report_path_for(output_dir, report_date, path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(format_report(path, findings) + "\n", encoding="utf-8")
+    rows = [finding_to_report_v2(path, f) for f in findings]
+    out_path.write_text(
+        rr.serialize_report(
+            target=Path(path).stem,
+            generated_at=report_date,
+            strict=strict,
+            findings=rows,
+            sources=[str(path)],
+        ),
+        encoding="utf-8",
+    )
     return out_path
 
 
@@ -694,6 +874,8 @@ def parse_args(argv):
         "json": False,
         "strict": False,
         "write_reports": False,
+        "finalize": [],
+        "migrate": [],
         "output_dir": None,
         "date": None,
         "paths": [],
@@ -709,6 +891,18 @@ def parse_args(argv):
             opts["strict"] = True
         elif arg == "--write-reports":
             opts["write_reports"] = True
+        elif arg == "--finalize":
+            if i + 1 < len(args):
+                opts["finalize"].append(args[i + 1])
+                i += 1
+            else:
+                opts["errors"].append("--finalize requires a value")
+        elif arg == "--migrate":
+            if i + 1 < len(args):
+                opts["migrate"].append(args[i + 1])
+                i += 1
+            else:
+                opts["errors"].append("--migrate requires a value")
         elif arg == "--output-dir":
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
@@ -727,6 +921,48 @@ def parse_args(argv):
     return opts
 
 
+def finalize_reports(report_paths):
+    """LLM 비평 행이 추가된 리포트를 정본 형식으로 다시 직렬화한다.
+
+    요약을 finding에서 다시 계산하고 정본 순서로 재정렬한다. 멱등이다.
+    품질 gate 판정은 하지 않는다.
+    """
+    failed = False
+    for report_path in report_paths:
+        path = Path(report_path)
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
+
+        parsed = rr.parse_report(text)
+        header = parsed["header"]
+        canonical = rr.serialize_report(
+            target=header.get("target", rr.NOT_RECORDED),
+            generated_at=header.get("generated_at", rr.NOT_RECORDED),
+            strict=header.get("strict", "false"),
+            findings=parsed["findings"],
+            sources=header.get("sources", []),
+        )
+        errors = rr.validate_report(canonical, state="complete")
+        if errors:
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            failed = True
+            continue
+
+        try:
+            path.write_text(canonical, encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 쓰기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
+        print(f"정본화 완료: {path}")
+    return 2 if failed else 0
+
+
 def main(argv):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -737,6 +973,10 @@ def main(argv):
         for error in opts["errors"]:
             print(error, file=sys.stderr)
         return 2
+    if opts["finalize"]:
+        return finalize_reports(opts["finalize"])
+    if opts["migrate"]:
+        return migrate_reports(opts["migrate"])
     paths = opts["paths"]
     if not paths:
         return 0
@@ -764,7 +1004,9 @@ def main(argv):
             reports.append(report)
         if opts["write_reports"]:
             try:
-                written_report_paths.append(write_markdown_report(output_dir, report_date, p, findings))
+                written_report_paths.append(
+                    write_markdown_report(output_dir, report_date, p, findings, strict=opts["strict"])
+                )
             except OSError as e:
                 infra_failed = True
                 print(f"리포트 쓰기 실패: {p}: {e}", file=sys.stderr)
@@ -772,7 +1014,10 @@ def main(argv):
         for path in written_report_paths:
             print(f"리포트 저장: {path}", file=sys.stderr)
         try:
-            print(json.dumps(report_to_json_v2(paths, results, strict=opts["strict"]), ensure_ascii=False, indent=2))
+            print(json.dumps(
+                report_to_json_v2(paths, results, strict=opts["strict"], generated_at=report_date),
+                ensure_ascii=False, indent=2,
+            ))
         except (TypeError, ValueError) as e:
             print(f"JSON 렌더링 실패: {e}", file=sys.stderr)
             return 2
