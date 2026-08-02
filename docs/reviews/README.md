@@ -98,13 +98,46 @@
 
 ## Gate 계약
 
-strict mode는 schema, 입력, deterministic 검사, LLM 비평 결과를 gate 판정에 맞춰 검증하는 모드다.
+strict mode는 schema, 입력, deterministic 검사, LLM 비평 결과를 gate 판정에 맞춰 검증하는 모드다. 최종 판정은 두 단계가 **모두 끝난 뒤 한 번만** 내린다.
 
-- exit code `0`: 통과
-- exit code `1`: `🔴` finding 때문에 quality gate 실패
-- exit code `2`: infrastructure, schema, input 실패
+```
+python .claude/review_post.py --finalize --strict <report.md>
+```
+
+- exit code `0`: 통과. `gate_effect: fail`인 finding이 없다.
+- exit code `1`: 품질 실패. `gate_effect: fail`인 finding이 하나 이상 있다. 출처가 결정적 검사(`D`)든 LLM 비평(`L`)이든 같다.
+- exit code `2`: infrastructure, schema, input 실패. 파싱 실패, 스키마 위반, severity와 gate_effect 불일치, LLM 비평 단계 누락을 포함한다.
 
 `🟡` finding은 권장 사항이며 gate를 실패시키지 않는다. `🔴`만 quality gate 실패로 이어진다.
+
+판정에 쓰는 finding 목록은 리포트를 직렬화할 때 쓴 목록과 같다. 보고서에 남은 실패 finding과 exit code가 어긋날 수 없다.
+
+리포트는 판정 전에 먼저 저장한다. 게이트가 실패해도 근거가 남아야 하기 때문이다.
+
+### 두 가지 strict 경로
+
+| 명령 | 보는 것 | 쓰임 |
+|---|---|---|
+| `--strict <post.md>` | 결정적 검사만 | scaffold 단계의 조기 실패 검출 |
+| `--finalize --strict <report.md>` | 결정적 + LLM 비평 | **최종 품질 게이트** |
+
+앞쪽은 LLM 비평이 붙기 전에 끝나므로 최종 판정이 아니다. CI 게이트로 쓸 것은 뒤쪽이다.
+
+### severity와 gate_effect 대응
+
+| severity | gate_effect |
+|---|---|
+| `🔴` | `fail` |
+| `🟡` | `warn` |
+| `🟢` | `info` |
+
+이 대응은 검증 대상이다. `🔴` finding에 `gate_effect: info`를 적어 게이트를 우회할 수 없다. 어긋나면 exit code `2`다.
+
+### LLM 비평 coverage 누락
+
+두 리뷰 커맨드는 문제가 없는 범주도 생략하지 말고 explicit coverage row를 남기도록 규정한다. 따라서 `source: L`인 finding이 L1–L7을 모두 덮지 않으면 비평 단계가 끝나지 않은 것이다.
+
+strict는 이를 품질 통과로 처리하지 않고 exit code `2`로 끝낸다. LLM 단계의 인프라 실패나 출력 계약 위반이 조용히 통과하는 것을 막기 위해서다. 누락된 범주는 stderr에 나열된다.
 
 ## Frontmatter enum
 

@@ -62,4 +62,5 @@ SVG와 L1-L7 범주 중 문제가 없는 범주는 생략하지 말고, 각 포�
 - 전체 리뷰 파일은 Write/Edit로 만든다. 모든 포스트의 LLM 비평 결과, `검토 완료, 이슈 없음` coverage row, 포스트별 요약, 전체 aggregate summary를 포함한다.
 - finding 필드는 `- severity: 🔴`처럼 **굵게 표기 없이** 쓴다. `- **severity**:`는 정본 형식이 아니다. 각 finding은 `### <심각도> [<rule_id>] <위치>` 제목으로 시작한다.
 - 비평 행을 모두 추가한 뒤 `python .claude/review_post.py --finalize docs/reviews/<오늘 날짜>-all.md`를 실행한다. 이 단계가 `summary`를 다시 계산하고 finding을 정본 순서로 재정렬한다. 건너뛰면 리포트가 미완료 상태로 남는다.
+- 품질 게이트까지 확인하려면 `--strict`를 함께 준다. `gate_effect: fail`인 finding이 있으면 exit 1, L1–L7 coverage가 비면 exit 2다. 자세한 계약은 `docs/reviews/README.md`의 Gate 계약 절에 있다.
 - 저장이 끝나면 저장된 경로를 사용자에게 알린다.

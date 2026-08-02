@@ -957,6 +957,14 @@ class TestReportSchemaV2(unittest.TestCase):
                 self.assertLess(name[:10], CANONICAL_FROM,
                                 "기준일 이후 리포트는 면제될 수 없다")
 
+    def test_readme_documents_strict_gate_contract(self):
+        text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        for term in ("--finalize --strict", "exit code `1`", "exit code `2`",
+                     "L1–L7", "coverage 누락"):
+            with self.subTest(term=term):
+                self.assertIn(term, text)
+
     def test_readme_documents_canonical_order_and_two_valid_states(self):
         text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
 
