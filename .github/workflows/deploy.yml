@@ -21,6 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # 🔴가 남은 리뷰 리포트가 있으면 배포하지 않는다(#99).
+      - name: 리뷰 품질 게이트
+        run: python .claude/review_post.py --gate
       - uses: actions/setup-node@v4
         with:
           node-version: 22

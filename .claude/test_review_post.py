@@ -1632,6 +1632,202 @@ class TestLlmCoverage(unittest.TestCase):
         self.assertEqual(rp.missing_llm_coverage_by_target(rows), {})
 
 
+class TestRepositoryGate(unittest.TestCase):
+    """대상별 최신 리포트만 보는 읽기 전용 게이트."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    def _report(self, name, findings, strict=True, target=None, migrated_from=None):
+        import review_report as rr
+
+        path = self.root / name
+        path.write_text(
+            rr.serialize_report(
+                target=target or name[11:-3], generated_at=name[:10],
+                strict=strict, findings=findings, migrated_from=migrated_from),
+            encoding="utf-8",
+        )
+        return path
+
+    def _coverage(self, slug, rule_ids=("L1", "L2", "L3", "L4", "L5", "L6", "L7")):
+        return [{
+            "severity": "🟢", "source": "L", "rule_id": rule_id,
+            "location": f"src/content/posts/{slug}.md:1-100", "quote": "not-recorded",
+            "message": "검토 완료, 이슈 없음", "recommendation": "not-recorded",
+            "gate_effect": "info",
+        } for rule_id in rule_ids]
+
+    def _red(self, slug):
+        return {
+            "severity": "🔴", "source": "L", "rule_id": "L7",
+            "location": f"src/content/posts/{slug}.md:12", "quote": "인용",
+            "message": "문제", "recommendation": "조치", "gate_effect": "fail",
+        }
+
+    def test_superseded_red_report_does_not_fail_the_gate(self):
+        """과거 스냅샷의 🔴은 더 최신 리뷰가 초록이면 게이트를 막지 않는다."""
+        self._report("2026-08-01-alpha.md", self._coverage("alpha") + [self._red("alpha")])
+        self._report("2026-08-03-alpha.md", self._coverage("alpha"))
+
+        rc, stdout, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 0, stdout + stderr)
+
+    def test_latest_report_with_red_fails_the_gate(self):
+        self._report("2026-08-01-alpha.md", self._coverage("alpha"))
+        self._report("2026-08-03-alpha.md", self._coverage("alpha") + [self._red("alpha")])
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 1)
+        self.assertIn("2026-08-03-alpha.md", stderr)
+
+    def test_legacy_report_is_skipped_and_reported(self):
+        """기준일 이전의 비정본 리포트는 면제하되 조용히 넘기지 않는다."""
+        (self.root / "2026-06-01-legacy.md").write_text(
+            "# 리뷰 리포트: legacy\n\n- [L7] 뭔가 문제\n", encoding="utf-8")
+
+        rc, stdout, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 0, stderr)
+        self.assertIn("2026-06-01-legacy.md", stdout + stderr)
+
+    def test_v2_declaring_report_before_cutoff_is_still_enforced(self):
+        """정본을 선언한 리포트는 기준일 이전이어도 되돌아갈 수 없다."""
+        self._report("2026-06-01-beta.md", self._coverage("beta") + [self._red("beta")])
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 1)
+        self.assertIn("2026-06-01-beta.md", stderr)
+
+    def test_report_that_was_not_finalized_is_an_infra_failure(self):
+        """summary가 낡은 리포트는 --finalize를 돌리지 않은 것이므로 exit 2다."""
+        path = self._report("2026-08-03-alpha.md", self._coverage("alpha"))
+        path.write_text(
+            path.read_text(encoding="utf-8").replace(
+                "summary: 🔴 0 · 🟡 0 · 🟢 7", "summary: 🔴 0 · 🟡 0 · 🟢 3"),
+            encoding="utf-8",
+        )
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("정본", stderr)
+
+    def test_missing_coverage_in_latest_report_is_an_infra_failure(self):
+        self._report("2026-08-03-alpha.md",
+                     self._coverage("alpha", ("L1", "L2", "L3", "L4", "L5", "L7")))
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("L6", stderr)
+
+    def test_gate_never_writes_to_reports(self):
+        path = self._report("2026-08-03-alpha.md", self._coverage("alpha"))
+        before = path.read_bytes()
+
+        run_main_streams(["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(path.read_bytes(), before)
+
+    def test_migrated_from_survives_finalize_and_the_gate(self):
+        """provenance 헤더가 정본화에서 사라지면 게이트가 정본이 아니라고 판정한다."""
+        path = self._report("2026-08-03-alpha.md", self._coverage("alpha"),
+                            strict=False, migrated_from="legacy-prose")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(path)])
+        self.assertEqual(rc, 0, stderr)
+        self.assertIn("migrated_from: legacy-prose", path.read_text(encoding="utf-8"))
+
+        rc, stdout, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+        self.assertEqual(rc, 0, stdout + stderr)
+
+    def _migrated_rows(self, slug, severity="🟢", gate_effect="info"):
+        return [{
+            "severity": severity, "source": "MIGRATED", "rule_id": "L7",
+            "location": f"src/content/posts/{slug}.md:9", "quote": "not-recorded",
+            "message": "전환된 지적", "recommendation": "not-recorded",
+            "gate_effect": gate_effect,
+        }]
+
+    def test_migrated_report_is_exempt_from_the_coverage_requirement(self):
+        """레거시 전환분에는 L 비평 행이 없다. coverage를 요구하면 재리뷰를 강제한다."""
+        self._report("2026-08-03-alpha.md", self._migrated_rows("alpha"),
+                     strict=False, migrated_from="legacy-prose")
+
+        rc, stdout, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 0, stdout + stderr)
+
+    def test_migrated_report_is_not_exempt_from_the_red_check(self):
+        """coverage만 면제한다. 🔴는 전환분에서도 게이트를 막는다."""
+        self._report("2026-08-03-alpha.md",
+                     self._migrated_rows("alpha", severity="🔴", gate_effect="fail"),
+                     strict=False, migrated_from="legacy-prose")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--gate", "--reports-dir", str(self.root)])
+
+        self.assertEqual(rc, 1)
+        self.assertIn("2026-08-03-alpha.md", stderr)
+
+    def test_gate_passes_on_the_repository_reports(self):
+        """저장소의 실제 리포트에 게이트를 걸어 둔다. 🔴가 들어오면 여기서 먼저 깨진다."""
+        rc, stdout, stderr = run_main_streams([
+            "review_post.py", "--gate", "--reports-dir", str(REVIEW_REPORT_DIR),
+        ])
+
+        self.assertEqual(rc, 0, stdout + stderr)
+
+
+class TestGateIsWiredIntoCI(unittest.TestCase):
+    """게이트가 실행되는 곳이 없으면 신호가 아무것도 막지 못한다(#99)."""
+
+    def _workflow_texts(self):
+        workflows = REPO_ROOT / ".github" / "workflows"
+        return {p.name: p.read_text(encoding="utf-8") for p in workflows.glob("*.yml")}
+
+    def test_some_workflow_runs_the_gate(self):
+        texts = self._workflow_texts()
+
+        running = [name for name, text in texts.items() if "--gate" in text]
+        self.assertTrue(running, f"워크플로 어디에도 --gate가 없다: {sorted(texts)}")
+
+    def test_deploy_is_blocked_by_the_gate(self):
+        text = self._workflow_texts().get("deploy.yml", "")
+
+        self.assertIn("--gate", text, "배포 워크플로가 게이트를 통과하지 않는다")
+        self.assertLess(text.index("--gate"), text.index("npm run build"),
+                        "게이트는 빌드 전에 돌아야 한다")
+
+    def test_pull_requests_run_the_gate(self):
+        wired = [text for text in self._workflow_texts().values()
+                 if "--gate" in text and "pull_request" in text]
+
+        self.assertTrue(wired, "PR에서 게이트를 돌리는 워크플로가 없다")
+
+    def test_package_json_exposes_the_gate_locally(self):
+        package = json.loads((REPO_ROOT / "package.json").read_text(encoding="utf-8"))
+
+        scripts = package.get("scripts", {})
+        self.assertTrue(any("--gate" in command for command in scripts.values()),
+                        f"package.json에 게이트 실행 스크립트가 없다: {sorted(scripts)}")
+
+
 class TestGateEffectSingleSource(unittest.TestCase):
     def test_severity_to_gate_effect_has_one_definition(self):
         """대응이 갈라지면 validator가 migrate 산출물을 거부한다. 사본을 두지 않는다."""
