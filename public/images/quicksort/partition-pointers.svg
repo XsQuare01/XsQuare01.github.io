@@ -48,7 +48,7 @@
   <text x="385" y="34" text-anchor="middle" fill="#fde047" font-size="11" font-weight="600">swap</text>
 
   <!-- annotations -->
-  <text x="360" y="226" text-anchor="middle" fill="#93c5fd" font-size="11">i는 a[i] &lt; p 인 동안 전진 → p보다 큰 값 8에서 멈춘다</text>
-  <text x="360" y="246" text-anchor="middle" fill="#4ade80" font-size="11">j는 a[j] &gt; p 인 동안 후진 → p보다 작은 값 2에서 멈춘다</text>
+  <text x="360" y="226" text-anchor="middle" fill="#93c5fd" font-size="11">i는 a[i] &lt; p 인 동안 전진 → p 이상인 값 8에서 멈춘다</text>
+  <text x="360" y="246" text-anchor="middle" fill="#4ade80" font-size="11">j는 a[j] &gt;= p 인 동안 후진 → p 미만인 값 2에서 멈춘다</text>
   <text x="360" y="270" text-anchor="middle" fill="#cbd5e1" font-size="11">8과 2를 맞바꾸고 계속 좁혀 간다. 엇갈리는 순간 pivot을 경계로 보내 최종 위치를 확정</text>
 </svg>
