@@ -882,6 +882,8 @@ def parse_args(argv):
         "write_reports": False,
         "finalize": False,
         "migrate": False,
+        "gate": False,
+        "reports_dir": None,
         "output_dir": None,
         "date": None,
         "paths": [],
@@ -901,6 +903,14 @@ def parse_args(argv):
             opts["finalize"] = True
         elif arg == "--migrate":
             opts["migrate"] = True
+        elif arg == "--gate":
+            opts["gate"] = True
+        elif arg == "--reports-dir":
+            if i + 1 < len(args):
+                opts["reports_dir"] = args[i + 1]
+                i += 1
+            else:
+                opts["errors"].append("--reports-dir requires a value")
         elif arg == "--output-dir":
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
@@ -1007,6 +1017,8 @@ def finalize_reports(report_paths, strict=False):
             strict=True if strict else header.get("strict", "false"),
             findings=findings,
             sources=header.get("sources", []),
+            # 손실 있는 전환이었다는 표시는 정본화에서 살아남아야 한다.
+            migrated_from=header.get("migrated_from"),
         )
         errors = rr.validate_report(canonical, state="complete")
         if errors:
@@ -1057,6 +1069,135 @@ def finalize_reports(report_paths, strict=False):
     return 1 if quality_failed else 0
 
 
+# 이 날짜 이후 생성된 리포트는 정본 계약을 무조건 강제한다. 그 이전 리포트는
+# serializer가 없던 시절 손으로 쓴 산물이라 형식이 여러 가지로 갈리고, 일괄 재작성은
+# 근거 손실 위험이 커서 하지 않는다(#84). 대신 정본을 선언한 리포트는 날짜와 무관하게
+# 강제해 되돌아가지 못하게 한다.
+CANONICAL_CONTRACT_FROM = "2026-08-01"
+DEFAULT_REPORTS_DIR = "docs/reviews"
+
+
+def report_under_canonical_contract(path):
+    """정본 계약을 강제할 리포트인지 판단한다."""
+    if Path(path).name[:10] >= CANONICAL_CONTRACT_FROM:
+        return True
+    try:
+        first_line = Path(path).read_text(encoding="utf-8").split("\n", 1)[0].strip()
+    except OSError:
+        return True
+    return first_line == f"schema_version: {rr.SCHEMA_VERSION}"
+
+
+def latest_reports(reports_dir):
+    """대상별로 가장 최근 날짜의 리포트 하나씩만 돌려준다.
+
+    리포트는 날짜가 박힌 스냅샷이라 글을 고쳐도 과거 파일의 판정은 그대로다.
+    그래서 게이트는 대상별 최신 리포트만 본다. 과거 스냅샷은 이력으로 남긴다.
+    """
+    newest = {}
+    for path in sorted(Path(reports_dir).glob("*.md")):
+        if path.name == "README.md":
+            continue
+        date, target = report_identity(path)
+        if date == rr.NOT_RECORDED:
+            continue
+        if target not in newest or date > newest[target][0]:
+            newest[target] = (date, path)
+    return [path for _, path in sorted(newest.values())]
+
+
+def gate_reports(reports_dir=DEFAULT_REPORTS_DIR):
+    """대상별 최신 리포트에 최종 품질 게이트를 건다. 파일은 고치지 않는다.
+
+    CI에서 부르는 진입점이라 읽기 전용이다. 정본화가 끝났는지도 함께 보는데,
+    이는 `--finalize`를 돌리지 않아 요약과 판정이 어긋난 리포트를 통과시키지
+    않기 위해서다.
+    """
+    infra_failed = False
+    quality_failed = False
+    checked, skipped = [], []
+
+    for path in latest_reports(reports_dir):
+        if not report_under_canonical_contract(path):
+            skipped.append(path)
+            continue
+        checked.append(path)
+
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as e:
+            print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
+            infra_failed = True
+            continue
+
+        parsed = rr.parse_report(text)
+        header, findings = parsed["header"], parsed["findings"]
+        source_errors = rr.validate_source_findings(findings)
+        if source_errors:
+            for error in source_errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            infra_failed = True
+            continue
+
+        canonical = rr.serialize_report(
+            target=header.get("target", rr.NOT_RECORDED),
+            generated_at=header.get("generated_at", rr.NOT_RECORDED),
+            strict=header.get("strict", "false"),
+            findings=findings,
+            sources=header.get("sources", []),
+            migrated_from=header.get("migrated_from"),
+        )
+        errors = rr.validate_report(canonical, state="complete")
+        if errors:
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            infra_failed = True
+            continue
+        if text != canonical:
+            print(
+                f"{path}: 정본 형식이 아니다 — `--finalize --strict`를 돌려야 한다",
+                file=sys.stderr,
+            )
+            infra_failed = True
+            continue
+
+        # 레거시 산문을 옮긴 리포트에는 L 비평 행이 없다(source: MIGRATED).
+        # coverage를 요구하면 과거 글 전체의 재리뷰를 강제하게 되므로 이 요구만 면제한다.
+        # 🔴 판정은 면제하지 않는다.
+        if not header.get("migrated_from"):
+            gaps = missing_llm_coverage_by_target(findings)
+            if gaps:
+                for target, missing in gaps.items():
+                    print(
+                        f"{path}: LLM 비평 coverage 누락 — {target}: {', '.join(missing)}",
+                        file=sys.stderr,
+                    )
+                infra_failed = True
+                continue
+
+        for f in findings:
+            if f.get("gate_effect") == "fail":
+                quality_failed = True
+                print(
+                    "{}: 품질 게이트 실패 — [{}] {}".format(
+                        path,
+                        f.get("rule_id", rr.NOT_RECORDED),
+                        f.get("location", rr.NOT_RECORDED),
+                    ),
+                    file=sys.stderr,
+                )
+
+    print(f"게이트 대상 {len(checked)}개 (대상별 최신 리포트)")
+    if skipped:
+        # 면제를 조용히 넘기면 검사한 것처럼 읽힌다.
+        print(f"정본 계약 면제 {len(skipped)}개 — {CANONICAL_CONTRACT_FROM} 이전 비정본 리포트:")
+        for path in skipped:
+            print(f"  - {path.name}")
+    if infra_failed:
+        return 2
+    return 1 if quality_failed else 0
+
+
 def main(argv):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -1067,6 +1208,12 @@ def main(argv):
         for error in opts["errors"]:
             print(error, file=sys.stderr)
         return 2
+    if opts["gate"]:
+        if opts["finalize"] or opts["migrate"]:
+            print("--gate는 읽기 전용이라 --finalize·--migrate와 함께 쓸 수 없다",
+                  file=sys.stderr)
+            return 2
+        return gate_reports(opts["reports_dir"] or DEFAULT_REPORTS_DIR)
     if opts["finalize"] or opts["migrate"]:
         if opts["finalize"] and opts["migrate"]:
             # 조용히 한쪽을 고르면 --migrate가 거부한 입력을 --finalize로 덮어쓸 수 있다.

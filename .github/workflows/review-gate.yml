@@ -1,0 +1,30 @@
+name: Review Gate
+
+# 리뷰 리포트의 🔴를 실제 실패로 만드는 곳. 이 워크플로가 없으면 게이트는
+# 사람이 기억해서 손으로 돌려야 하는 자문에 머문다(#99).
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 대상별 최신 리포트만 판정한다. exit 1 = 🔴 남음, exit 2 = 스키마·정본화·coverage 실패.
+      - name: 리뷰 품질 게이트
+        run: python .claude/review_post.py --gate
+
+      # 게이트 자체의 계약을 지키는 테스트. 표준 라이브러리만 쓰므로 설치가 없다.
+      - name: 리뷰 도구 테스트
+        working-directory: .claude
+        run: python -m unittest discover -p "test_*.py" -v
