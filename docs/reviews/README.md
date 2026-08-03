@@ -98,13 +98,63 @@
 
 ## Gate 계약
 
-strict mode는 schema, 입력, deterministic 검사, LLM 비평 결과를 gate 판정에 맞춰 검증하는 모드다.
+strict mode는 schema, 입력, deterministic 검사, LLM 비평 결과를 gate 판정에 맞춰 검증하는 모드다. 최종 판정은 두 단계가 **모두 끝난 뒤 한 번만** 내린다.
 
-- exit code `0`: 통과
-- exit code `1`: `🔴` finding 때문에 quality gate 실패
-- exit code `2`: infrastructure, schema, input 실패
+```
+python .claude/review_post.py --finalize --strict <report.md>
+```
+
+- exit code `0`: 통과. `gate_effect: fail`인 finding이 없다.
+- exit code `1`: 품질 실패. `gate_effect: fail`인 finding이 하나 이상 있다. 출처가 결정적 검사(`D`)든 LLM 비평(`L`)이든 같다.
+- exit code `2`: infrastructure, schema, input 실패. 파싱 실패, 스키마 위반, severity와 gate_effect 불일치, LLM 비평 단계 누락을 포함한다.
 
 `🟡` finding은 권장 사항이며 gate를 실패시키지 않는다. `🔴`만 quality gate 실패로 이어진다.
+
+판정에 쓰는 finding 목록은 리포트를 직렬화할 때 쓴 목록과 같다. 보고서에 남은 실패 finding과 exit code가 어긋날 수 없다.
+
+`--finalize`와 `--migrate`는 함께 쓸 수 없다. 함께 주면 파일을 쓰기 전에 exit code `2`로 끝난다. 조용히 한쪽을 고르면 `--migrate`가 총계 불일치로 거부한 입력을 `--finalize`가 덮어써 안전 장치가 무력해지기 때문이다.
+
+### 검증 → 저장 → 판정
+
+순서는 이 셋으로 고정한다.
+
+1. **검증(저장 전)**: 원본 finding의 8개 필드 존재와 제목↔필드 일치를 본다. 정본화는 빠진 필드를 `not-recorded`로 채우고 제목을 필드 값으로 다시 만들기 때문에, 저장한 뒤에 보면 원본의 결함이 이미 덮인 뒤다. `### 🔴 [L7]` 제목에 `severity: 🟢` 필드가 붙은 리포트는 정본화하면 빨간 제목이 사라진 채 통과한다. 어긋나면 파일을 쓰지 않고 exit code `2`다.
+2. **저장**: 정본화한 내용을 쓴다. `--strict`를 붙였다고 정본화를 건너뛰지 않는다.
+3. **판정**: coverage 누락과 `gate_effect: fail`을 본다. 게이트가 실패해도 근거가 남아야 하므로 판정은 저장 뒤에 한다.
+
+### 두 가지 strict 경로
+
+| 명령 | 보는 것 | 쓰임 |
+|---|---|---|
+| `--strict <post.md>` | 결정적 검사만 | scaffold 단계의 조기 실패 검출 |
+| `--finalize --strict <report.md>` | 결정적 + LLM 비평 | **최종 품질 게이트** |
+
+앞쪽은 LLM 비평이 붙기 전에 끝나므로 최종 판정이 아니다. CI 게이트로 쓸 것은 뒤쪽이다.
+
+헤더의 `strict: true`는 **실행 모드 표시이지 게이트 결과가 아니다.** 두 경로 모두 같은 값을 남기고, 게이트가 실패한 리포트에도 붙는다. 판정 결과는 exit code와 stderr로만 읽는다.
+
+### severity와 gate_effect 대응
+
+| severity | gate_effect |
+|---|---|
+| `🔴` | `fail` |
+| `🟡` | `warn` |
+| `🟢` | `info` |
+
+이 대응은 검증 대상이다. `🔴` finding에 `gate_effect: info`를 적어 게이트를 우회할 수 없다. 어긋나면 exit code `2`다.
+
+### LLM 비평 coverage 누락
+
+두 리뷰 커맨드는 문제가 없는 범주도 생략하지 말고 explicit coverage row를 남기도록 규정한다. 따라서 `source: L`인 finding이 L1–L7을 모두 덮지 않으면 비평 단계가 끝나지 않은 것이다.
+
+strict는 이를 품질 통과로 처리하지 않고 exit code `2`로 끝낸다. LLM 단계의 인프라 실패나 출력 계약 위반이 조용히 통과하는 것을 막기 위해서다. 누락된 범주는 stderr에 나열된다.
+
+**판정 단위는 포스트다.** `/review-post-all`은 포스트 여럿을 한 파일에 담으므로, 리포트 전체를 한 묶음으로 세면 한 포스트의 coverage가 나머지를 대신한다. 비평하지 않은 포스트가 그대로 통과하는 구멍이다. 그래서 대상이 둘 이상이면 포스트별로 나눠 L1–L7을 확인한다.
+
+- 대상은 finding의 `location`에 나온 `src/content/posts/*.md` 경로에서 모은다. L4가 가리키는 SVG 경로는 포스트가 아니므로 대상이 아니다.
+- 따라서 `-all` 리포트의 coverage row는 `location`에 해당 포스트 경로를 반드시 적는다. `not-recorded`로 남기면 어느 포스트를 덮었는지 알 수 없어 그 포스트는 미비평으로 판정된다.
+- 포스트가 하나인 `/review-post` 리포트는 리포트 전체가 곧 그 포스트이므로 리포트 단위로 본다. coverage row의 `location`이 `not-recorded`여도 판정이 달라지지 않는다.
+- finding이 한 줄도 가리키지 않는 포스트는 리포트만 보고 알 수 없다. 대상 목록 자체의 누락은 이 게이트가 잡지 못한다.
 
 ## Frontmatter enum
 

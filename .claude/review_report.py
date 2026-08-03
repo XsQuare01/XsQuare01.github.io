@@ -23,6 +23,9 @@ FINDING_FIELDS = (
 SEVERITY_VALUES = ("🔴", "🟡", "🟢")
 SOURCE_VALUES = ("D", "L", "MIGRATED")
 GATE_EFFECT_VALUES = ("fail", "warn", "info")
+# 정본 대응. 이 대응을 검증하지 않으면 🔴 finding에 gate_effect: info를 적어
+# 품질 게이트를 우회할 수 있다.
+CANONICAL_GATE_EFFECT = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
 
 _SEVERITY_RANK = {value: i for i, value in enumerate(SEVERITY_VALUES)}
 _SOURCE_RANK = {value: i for i, value in enumerate(SOURCE_VALUES)}
@@ -203,6 +206,48 @@ def parse_report(text):
     return {"header": header, "findings": findings}
 
 
+_CANONICAL_HEADING_RE = re.compile(r"^(🔴|🟡|🟢) \[([^\]]+)\] ?(.*)$")
+
+
+def validate_source_findings(findings):
+    """정본화 **전** 원본 finding을 검사한다.
+
+    serialize_report()는 빠진 필드를 not-recorded로 채우고 제목을 필드 값으로
+    다시 만든다. 그래서 정본화한 텍스트만 검증하면 원본의 필드 누락과 제목↔필드
+    불일치가 조용히 덮인다. `### 🔴 [L7]` 제목에 `severity: 🟢` 필드가 붙어도
+    빨간 제목이 사라진 채 통과한다. 원본을 먼저 봐야 막을 수 있다.
+
+    제목이 정본 꼴(`<심각도> [<규칙>] <위치>`)일 때만 대조한다. 레거시 리포트의
+    설명형 제목은 마이그레이션이 message로 옮기므로 여기서 판정하지 않는다.
+    """
+    errors = []
+    for index, finding in enumerate(findings):
+        label = f"finding #{index + 1}"
+        missing = [field for field in FINDING_FIELDS if field not in finding]
+        if missing:
+            errors.append(f"{label} missing fields: {', '.join(missing)}")
+
+        match = _CANONICAL_HEADING_RE.match((finding.get("_heading") or "").strip())
+        if not match:
+            continue
+        heading_severity, heading_rule, heading_rest = match.groups()
+        for name, in_heading, in_field in (
+            ("severity", heading_severity, finding.get("severity")),
+            ("rule_id", heading_rule, finding.get("rule_id")),
+        ):
+            if in_field is not None and in_heading != in_field:
+                errors.append(
+                    f"{label} 제목의 {name} {in_heading}가 필드 {in_field}와 다르다"
+                )
+        location = finding.get("location")
+        # 제목에 위치 뒤로 사람이 쓴 요약이 더 붙는 리포트가 있어 접두 일치까지 인정한다.
+        if location and heading_rest and not heading_rest.startswith(location):
+            errors.append(
+                f"{label} 제목의 위치 {heading_rest}가 필드 {location}와 다르다"
+            )
+    return errors
+
+
 def validate_report(text, *, state="complete"):
     errors = []
     parsed = parse_report(text)
@@ -230,6 +275,12 @@ def validate_report(text, *, state="complete"):
             errors.append(f"finding #{index + 1} invalid source: {finding['source']}")
         if finding["gate_effect"] not in GATE_EFFECT_VALUES:
             errors.append(f"finding #{index + 1} invalid gate_effect: {finding['gate_effect']}")
+        expected_gate = CANONICAL_GATE_EFFECT.get(finding["severity"])
+        if expected_gate and finding["gate_effect"] != expected_gate:
+            errors.append(
+                f"finding #{index + 1} severity {finding['severity']}는 "
+                f"gate_effect {expected_gate}여야 하는데 {finding['gate_effect']}다"
+            )
 
     expected = format_summary(summary_counts(findings))
     if header.get("summary") and header["summary"] != expected:

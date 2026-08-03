@@ -25,10 +25,11 @@ SEVERITY_ICON = {
     RECOMMENDED: "🟡",
     INFO: "🟢",
 }
+# 심각도↔게이트 효력 대응의 단일 출처는 review_report.CANONICAL_GATE_EFFECT다.
+# validator가 이 대응을 강제하므로, 사본을 따로 두면 갈라지는 순간 여기서 만든
+# finding이 validate_report()에 거부된다.
 GATE_EFFECT = {
-    REQUIRED: "fail",
-    RECOMMENDED: "warn",
-    INFO: "info",
+    label: rr.CANONICAL_GATE_EFFECT[icon] for label, icon in SEVERITY_ICON.items()
 }
 
 # ---- 임계치 ----
@@ -615,8 +616,8 @@ _HEADING_PREFIX_RE = re.compile(r"^(🔴|🟡|🟢)\s+\[(D\d+|L\d+)\]\s*(.*)$")
 _DECLARED_SUMMARY_RE = re.compile(
     r"^(?:요약|summary): (🔴 \d+ · 🟡 \d+ · 🟢 \d+)\s*$", re.MULTILINE
 )
-_SEVERITY_BY_GATE = {"fail": "🔴", "warn": "🟡", "info": "🟢"}
-_GATE_BY_SEVERITY = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
+_GATE_BY_SEVERITY = rr.CANONICAL_GATE_EFFECT
+_SEVERITY_BY_GATE = {gate: severity for severity, gate in _GATE_BY_SEVERITY.items()}
 
 
 def report_identity(path):
@@ -870,12 +871,17 @@ def write_markdown_report(output_dir, report_date, path, findings, strict=False)
 
 
 def parse_args(argv):
+    """`--finalize`/`--migrate`는 값을 받지 않는 flag이고 리포트 경로는 positional이다.
+
+    두 옵션이 뒤 토큰을 값으로 삼으면 문서가 규정한 `--finalize --strict <report.md>`
+    에서 `--strict`가 파일명으로 먹힌다. 그래서 경로를 positional로 공유한다.
+    """
     opts = {
         "json": False,
         "strict": False,
         "write_reports": False,
-        "finalize": [],
-        "migrate": [],
+        "finalize": False,
+        "migrate": False,
         "output_dir": None,
         "date": None,
         "paths": [],
@@ -892,17 +898,9 @@ def parse_args(argv):
         elif arg == "--write-reports":
             opts["write_reports"] = True
         elif arg == "--finalize":
-            if i + 1 < len(args):
-                opts["finalize"].append(args[i + 1])
-                i += 1
-            else:
-                opts["errors"].append("--finalize requires a value")
+            opts["finalize"] = True
         elif arg == "--migrate":
-            if i + 1 < len(args):
-                opts["migrate"].append(args[i + 1])
-                i += 1
-            else:
-                opts["errors"].append("--migrate requires a value")
+            opts["migrate"] = True
         elif arg == "--output-dir":
             if i + 1 < len(args):
                 opts["output_dir"] = args[i + 1]
@@ -921,46 +919,142 @@ def parse_args(argv):
     return opts
 
 
-def finalize_reports(report_paths):
+# 두 리뷰 커맨드는 문제가 없는 범주도 explicit coverage row로 남기도록 규정한다.
+# 따라서 이 중 하나라도 비면 LLM 비평이 끝나지 않은 것이다.
+REQUIRED_LLM_RULES = ("L1", "L2", "L3", "L4", "L5", "L6", "L7")
+
+
+def missing_llm_coverage(findings):
+    """LLM 비평이 덮지 않은 L 범주를 돌려준다. 빈 목록이면 전 범주가 덮였다."""
+    covered = {f.get("rule_id") for f in findings if f.get("source") == "L"}
+    return [rule for rule in REQUIRED_LLM_RULES if rule not in covered]
+
+
+# L4는 SVG 경로를 가리킬 수 있어 location에 포스트가 아닌 파일도 온다.
+# coverage를 요구할 대상은 포스트뿐이다.
+_POST_LOCATION_RE = re.compile(r"src/content/posts/[^\s,:]+\.md")
+
+
+def coverage_targets(findings):
+    """finding location이 가리키는 포스트 경로를 모은다."""
+    targets = set()
+    for finding in findings:
+        targets.update(_POST_LOCATION_RE.findall(finding.get("location") or ""))
+    return sorted(targets)
+
+
+def missing_llm_coverage_by_target(findings):
+    """포스트별로 덮이지 않은 L 범주를 돌려준다. 빈 dict면 전 대상이 온전하다.
+
+    `/review-post-all`은 포스트 여럿을 한 파일에 담는다. 리포트 전체를 한 묶음으로
+    보면 한 포스트의 coverage가 나머지를 대신해, 비평하지 않은 포스트가 그대로
+    통과한다. 그래서 대상이 둘 이상이면 포스트별로 나눠 본다.
+
+    포스트가 하나뿐인 `/review-post` 리포트는 리포트 전체가 곧 그 포스트다.
+    coverage row가 위치를 not-recorded로 남겨도 판정이 달라지지 않으므로
+    리포트 단위로 본다.
+    """
+    targets = coverage_targets(findings)
+    if len(targets) <= 1:
+        missing = missing_llm_coverage(findings)
+        return {targets[0] if targets else rr.NOT_RECORDED: missing} if missing else {}
+
+    gaps = {}
+    for target in targets:
+        rows = [f for f in findings if target in (f.get("location") or "")]
+        missing = missing_llm_coverage(rows)
+        if missing:
+            gaps[target] = missing
+    return gaps
+
+
+def finalize_reports(report_paths, strict=False):
     """LLM 비평 행이 추가된 리포트를 정본 형식으로 다시 직렬화한다.
 
     요약을 finding에서 다시 계산하고 정본 순서로 재정렬한다. 멱등이다.
-    품질 gate 판정은 하지 않는다.
+
+    strict면 재직렬화에 쓴 바로 그 finding 목록으로 최종 품질 게이트를 판정한다.
+    보고서에 남은 실패 finding과 exit code가 같은 집계에서 나오게 하기 위해서다.
+
+    순서는 검증 → 저장 → 판정이다. 정본화가 원본의 필드 누락과 제목↔필드 불일치를
+    덮어 쓰기 때문에 검증은 쓰기 전에 해야 하고, 게이트가 실패해도 근거는 남아야
+    하므로 품질 판정은 쓰기 뒤에 한다.
     """
-    failed = False
+    infra_failed = False
+    quality_failed = False
     for report_path in report_paths:
         path = Path(report_path)
         try:
             text = path.read_text(encoding="utf-8")
         except OSError as e:
             print(f"리포트 읽기 실패: {path}: {e}", file=sys.stderr)
-            failed = True
+            infra_failed = True
             continue
 
         parsed = rr.parse_report(text)
         header = parsed["header"]
+        findings = parsed["findings"]
+        source_errors = rr.validate_source_findings(findings)
+        if source_errors:
+            for error in source_errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            infra_failed = True
+            continue
+
         canonical = rr.serialize_report(
             target=header.get("target", rr.NOT_RECORDED),
             generated_at=header.get("generated_at", rr.NOT_RECORDED),
-            strict=header.get("strict", "false"),
-            findings=parsed["findings"],
+            strict=True if strict else header.get("strict", "false"),
+            findings=findings,
             sources=header.get("sources", []),
         )
         errors = rr.validate_report(canonical, state="complete")
         if errors:
             for error in errors:
                 print(f"{path}: {error}", file=sys.stderr)
-            failed = True
+            infra_failed = True
             continue
 
         try:
             path.write_text(canonical, encoding="utf-8")
         except OSError as e:
             print(f"리포트 쓰기 실패: {path}: {e}", file=sys.stderr)
-            failed = True
+            infra_failed = True
             continue
         print(f"정본화 완료: {path}")
-    return 2 if failed else 0
+
+        if not strict:
+            continue
+
+        gaps = missing_llm_coverage_by_target(findings)
+        if gaps:
+            for target, missing in gaps.items():
+                print(
+                    f"{path}: LLM 비평 coverage 누락 — {target}: {', '.join(missing)}. "
+                    "비평 단계가 끝나지 않았으므로 품질 통과로 처리하지 않는다",
+                    file=sys.stderr,
+                )
+            infra_failed = True
+            continue
+
+        failing = [f for f in findings if f.get("gate_effect") == "fail"]
+        if failing:
+            quality_failed = True
+            for f in failing:
+                # 게이트는 어떤 입력에도 크래시하면 안 된다. 크래시가 exit 1로 새면
+                # CI가 품질 실패와 인프라 실패를 구분할 수 없다.
+                print(
+                    "{}: 품질 게이트 실패 — [{}] {}".format(
+                        path,
+                        f.get("rule_id", rr.NOT_RECORDED),
+                        f.get("location", rr.NOT_RECORDED),
+                    ),
+                    file=sys.stderr,
+                )
+
+    if infra_failed:
+        return 2
+    return 1 if quality_failed else 0
 
 
 def main(argv):
@@ -973,10 +1067,18 @@ def main(argv):
         for error in opts["errors"]:
             print(error, file=sys.stderr)
         return 2
-    if opts["finalize"]:
-        return finalize_reports(opts["finalize"])
-    if opts["migrate"]:
-        return migrate_reports(opts["migrate"])
+    if opts["finalize"] or opts["migrate"]:
+        if opts["finalize"] and opts["migrate"]:
+            # 조용히 한쪽을 고르면 --migrate가 거부한 입력을 --finalize로 덮어쓸 수 있다.
+            print("--finalize와 --migrate는 함께 쓸 수 없다", file=sys.stderr)
+            return 2
+        if not opts["paths"]:
+            mode = "--finalize" if opts["finalize"] else "--migrate"
+            print(f"{mode}는 리포트 경로가 필요하다", file=sys.stderr)
+            return 2
+        if opts["finalize"]:
+            return finalize_reports(opts["paths"], strict=opts["strict"])
+        return migrate_reports(opts["paths"])
     paths = opts["paths"]
     if not paths:
         return 0

@@ -50,6 +50,8 @@ allowed-tools: Write, Edit, Bash(python:*), Bash(git diff:*), Read, Grep, Glob
 
 SVG와 L1-L7 범주 중 문제가 없는 범주는 생략하지 말고, 각 포스트마다 explicit coverage row를 남긴다. 문구는 `검토 완료, 이슈 없음`을 사용하고 `rule_id`는 해당 범주(`L1`~`L7`, SVG는 `L4`)로 기록한다. 이 coverage row는 `severity: 🟢`, `source: L`, `gate_effect: info`를 쓴다.
 
+`location`에는 그 범주를 덮은 포스트 경로(`src/content/posts/<slug>.md:<줄>`)를 반드시 적는다. 여러 포스트가 한 파일에 들어가므로, `not-recorded`로 남기면 어느 포스트를 덮었는지 알 수 없어 게이트가 그 포스트를 미비평으로 판정한다.
+
 **자동 수정 금지. 자동 수정은 하지 않는다.** 지적과 권고만 제시한다.
 
 ## 저장 (문서화): 필수
@@ -61,5 +63,7 @@ SVG와 L1-L7 범주 중 문제가 없는 범주는 생략하지 말고, 각 포�
 - `docs/reviews/` 디렉터리가 없으면 Python scaffold가 만든다.
 - 전체 리뷰 파일은 Write/Edit로 만든다. 모든 포스트의 LLM 비평 결과, `검토 완료, 이슈 없음` coverage row, 포스트별 요약, 전체 aggregate summary를 포함한다.
 - finding 필드는 `- severity: 🔴`처럼 **굵게 표기 없이** 쓴다. `- **severity**:`는 정본 형식이 아니다. 각 finding은 `### <심각도> [<rule_id>] <위치>` 제목으로 시작한다.
-- 비평 행을 모두 추가한 뒤 `python .claude/review_post.py --finalize docs/reviews/<오늘 날짜>-all.md`를 실행한다. 이 단계가 `summary`를 다시 계산하고 finding을 정본 순서로 재정렬한다. 건너뛰면 리포트가 미완료 상태로 남는다.
-- 저장이 끝나면 저장된 경로를 사용자에게 알린다.
+- 비평 행을 모두 추가한 뒤 `python .claude/review_post.py --finalize --strict docs/reviews/<오늘 날짜>-all.md`를 실행한다. 이 단계가 `summary`를 다시 계산하고 finding을 정본 순서로 재정렬한 뒤 품질 게이트를 판정한다. 건너뛰면 리포트가 미완료 상태로 남는다.
+- **리뷰 종료 조건은 이 명령의 exit code를 사용자에게 보고하는 것이다.** `gate_effect: fail`인 finding이 있으면 exit 1, 어느 한 포스트라도 L1–L7 coverage가 비거나 스키마가 어긋나면 exit 2다. 자세한 계약은 `docs/reviews/README.md`의 Gate 계약 절에 있다.
+- `--strict` 없는 `--finalize`는 비평이 아직 끝나지 않은 중간 저장용이다. 최종 단계에서 `--strict`를 빼면 🔴가 남아 있어도 exit 0이 나오므로 종료 판정으로 쓰지 않는다.
+- 저장이 끝나면 저장된 경로와 게이트 결과를 사용자에게 알린다.
