@@ -739,6 +739,117 @@ class TestCliContractsV2(unittest.TestCase):
 
         self.assertEqual(rc, 0)
 
+    def _post_coverage(self, post, rule_ids=("L1", "L2", "L3", "L4", "L5", "L6", "L7")):
+        """`-all` 리포트용 coverage row. 어느 포스트를 덮었는지 location으로 밝힌다."""
+        return [{
+            "severity": "🟢", "source": "L", "rule_id": rule_id,
+            "location": f"src/content/posts/{post}.md:1-100", "quote": "not-recorded",
+            "message": "검토 완료, 이슈 없음", "recommendation": "not-recorded",
+            "gate_effect": "info",
+        } for rule_id in rule_ids]
+
+    def test_all_report_fails_when_one_post_has_no_coverage(self):
+        """포스트가 여럿이면 한 포스트의 coverage가 나머지를 대신할 수 없다."""
+        report = self._gate_report(
+            self._post_coverage("alpha")
+            + [self._problem("🟡", "D", "D3", "warn") | {
+                "location": "src/content/posts/beta.md:12"}],
+            name="2026-08-02-all.md",
+        )
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("beta.md", stderr)
+
+    def test_all_report_passes_when_every_post_is_covered(self):
+        report = self._gate_report(
+            self._post_coverage("alpha") + self._post_coverage("beta"),
+            name="2026-08-02-all.md",
+        )
+
+        rc, stdout, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 0, stdout + stderr)
+
+    def test_all_report_names_only_the_uncovered_categories(self):
+        report = self._gate_report(
+            self._post_coverage("alpha")
+            + self._post_coverage("beta", ("L1", "L2", "L3", "L4", "L5", "L7")),
+            name="2026-08-02-all.md",
+        )
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("beta.md", stderr)
+        self.assertIn("L6", stderr)
+        self.assertNotIn("alpha.md", stderr)
+
+    def test_gate_reports_missing_field_instead_of_crashing(self):
+        """필드가 빠진 finding은 크래시가 아니라 인프라 실패(2)로 끊는다.
+
+        exit 1은 품질 실패 코드다. 크래시가 1로 새어 나가면 CI가 둘을 구분할 수 없다.
+        """
+        report = self._gate_report(
+            self._coverage() + [self._problem("🔴", "L", "L7", "fail")])
+        broken = report.read_text(encoding="utf-8").replace(
+            "- location: src/content/posts/gate.md:12\n", "", 1)
+        report.write_text(broken, encoding="utf-8")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("location", stderr)
+        self.assertNotIn("Traceback", stderr)
+
+    def test_gate_rejects_heading_and_field_severity_mismatch(self):
+        """제목 🔴 · 필드 🟢는 정본화로 덮지 않고 거부한다."""
+        report = self._gate_report(self._coverage())
+        sneaky = report.read_text(encoding="utf-8").replace(
+            "### 🟢 [L1] not-recorded", "### 🔴 [L7] not-recorded", 1)
+        report.write_text(sneaky, encoding="utf-8")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("제목", stderr)
+        self.assertIn("### 🔴 [L7] not-recorded",
+                      report.read_text(encoding="utf-8"))
+
+    def test_coverage_gap_still_canonicalizes_the_report(self):
+        """게이트가 실패해도 정본화는 끝낸다. 근거가 남아야 하기 때문이다."""
+        report = self._gate_report(
+            self._coverage(("L1", "L2", "L3", "L4", "L5", "L7")))
+        stale = report.read_text(encoding="utf-8").replace(
+            "summary: 🔴 0 · 🟡 0 · 🟢 6", "summary: 🔴 9 · 🟡 9 · 🟢 9", 1)
+        report.write_text(stale, encoding="utf-8")
+
+        rc, _, stderr = run_main_streams(
+            ["review_post.py", "--finalize", "--strict", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("L6", stderr)
+        self.assertIn("summary: 🔴 0 · 🟡 0 · 🟢 6",
+                      report.read_text(encoding="utf-8"))
+
+    def test_finalize_and_migrate_together_is_an_input_error(self):
+        """두 모드를 함께 주어 migrate의 거부를 우회할 수 없다."""
+        report = self._gate_report(self._coverage())
+        before = report.read_text(encoding="utf-8")
+
+        rc, _, stderr = run_main_streams([
+            "review_post.py", "--finalize", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("--migrate", stderr)
+        self.assertEqual(report.read_text(encoding="utf-8"), before)
+
     def test_json_keeps_stdout_machine_readable_and_errors_on_stderr(self):
         valid = write_post(self.root / "posts" / "valid.md", "본문")
         missing = self.root / "posts" / "missing.md"
@@ -961,9 +1072,20 @@ class TestReportSchemaV2(unittest.TestCase):
         text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
 
         for term in ("--finalize --strict", "exit code `1`", "exit code `2`",
-                     "L1–L7", "coverage 누락"):
+                     "L1–L7", "coverage 누락",
+                     # 게이트를 우회할 수 있던 경로들. 계약을 문서에 고정해 둔다.
+                     "판정 단위는 포스트다", "검증 → 저장 → 판정",
+                     "`--finalize`와 `--migrate`는 함께 쓸 수 없다"):
             with self.subTest(term=term):
                 self.assertIn(term, text)
+
+    def test_command_docs_require_strict_as_the_final_step(self):
+        """`--strict`를 빼는 것이 기본 경로면 게이트를 안 돌리는 우회가 남는다."""
+        for command_name in ("review-post.md", "review-post-all.md"):
+            with self.subTest(command=command_name):
+                text = (COMMAND_DIR / command_name).read_text(encoding="utf-8")
+                self.assertIn("--finalize --strict docs/reviews/", text)
+                self.assertIn("리뷰 종료 조건", text)
 
     def test_readme_documents_canonical_order_and_two_valid_states(self):
         text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
@@ -1462,6 +1584,68 @@ class TestLlmCoverage(unittest.TestCase):
         self.assertEqual(
             rp.missing_llm_coverage(rows),
             ["L1", "L2", "L3", "L4", "L5", "L6", "L7"],
+        )
+
+    def _post_rows(self, post, rule_ids=("L1", "L2", "L3", "L4", "L5", "L6", "L7")):
+        rows = self._rows(rule_ids)
+        for row in rows:
+            row["location"] = f"src/content/posts/{post}.md:1-100"
+        return rows
+
+    def test_single_target_report_is_checked_report_wide(self):
+        """포스트가 하나면 coverage row에 위치가 없어도 리포트 전체로 본다."""
+        rows = self._rows(["L1", "L2", "L3", "L4", "L5", "L6", "L7"])
+        rows.append({
+            "severity": "🟡", "source": "D", "rule_id": "D3",
+            "location": "src/content/posts/only.md:12", "quote": "q",
+            "message": "m", "recommendation": "r", "gate_effect": "warn",
+        })
+
+        self.assertEqual(rp.missing_llm_coverage_by_target(rows), {})
+
+    def test_multi_target_report_is_checked_per_post(self):
+        rows = self._post_rows("alpha") + self._post_rows("beta", ("L1", "L2"))
+
+        self.assertEqual(
+            rp.missing_llm_coverage_by_target(rows),
+            {"src/content/posts/beta.md": ["L3", "L4", "L5", "L6", "L7"]},
+        )
+
+    def test_post_without_any_llm_row_is_reported(self):
+        rows = self._post_rows("alpha")
+        rows.append({
+            "severity": "🔴", "source": "D", "rule_id": "D1",
+            "location": "src/content/posts/beta.md:7", "quote": "q",
+            "message": "m", "recommendation": "r", "gate_effect": "fail",
+        })
+
+        self.assertEqual(
+            list(rp.missing_llm_coverage_by_target(rows)),
+            ["src/content/posts/beta.md"],
+        )
+
+    def test_svg_location_is_not_a_coverage_target(self):
+        """L4는 SVG 경로를 가리킬 수 있다. SVG는 포스트가 아니므로 대상이 아니다."""
+        rows = self._post_rows("alpha")
+        rows[3]["location"] = "public/images/alpha/figure.svg:3"
+
+        self.assertEqual(rp.missing_llm_coverage_by_target(rows), {})
+
+
+class TestGateEffectSingleSource(unittest.TestCase):
+    def test_severity_to_gate_effect_has_one_definition(self):
+        """대응이 갈라지면 validator가 migrate 산출물을 거부한다. 사본을 두지 않는다."""
+        import review_report as rr
+
+        self.assertIs(rp._GATE_BY_SEVERITY, rr.CANONICAL_GATE_EFFECT)
+        self.assertEqual(
+            rp._SEVERITY_BY_GATE,
+            {gate: severity for severity, gate in rr.CANONICAL_GATE_EFFECT.items()},
+        )
+        self.assertEqual(
+            rp.GATE_EFFECT,
+            {label: rr.CANONICAL_GATE_EFFECT[icon]
+             for label, icon in rp.SEVERITY_ICON.items()},
         )
 
 

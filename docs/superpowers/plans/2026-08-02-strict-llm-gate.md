@@ -469,11 +469,24 @@ def finalize_reports(report_paths, strict=False):
     return 1 if quality_failed else 0
 ```
 
+> **구현에서 달라진 점.** 위 스케치는 coverage를 저장 전에 보고 판정 루프에서 필드를 직접 인덱싱한다. 실제 구현은 순서를 검증 → 저장 → 판정으로 두고, coverage를 포스트 단위로 확인한다. 이유는 `docs/reviews/README.md`의 Gate 계약 절에 있고, 그 문서가 살아 있는 계약이다.
+
 `main()`의 finalize 분기를 고친다.
 
+`--finalize`/`--migrate`는 값을 받는 옵션이 아니라 flag가 되고, 리포트 경로는 positional로 공유한다. 값을 받는 옵션이면 문서가 규정한 `--finalize --strict <report.md>`에서 `--strict`가 파일명으로 먹히기 때문이다. 두 모드는 상호 배타로 두어, 함께 주었을 때 `--migrate`의 총계 대조 거부가 `--finalize`로 우회되지 않게 한다.
+
 ```python
-    if opts["finalize"]:
-        return finalize_reports(opts["finalize"], strict=opts["strict"])
+    if opts["finalize"] or opts["migrate"]:
+        if opts["finalize"] and opts["migrate"]:
+            print("--finalize와 --migrate는 함께 쓸 수 없다", file=sys.stderr)
+            return 2
+        if not opts["paths"]:
+            mode = "--finalize" if opts["finalize"] else "--migrate"
+            print(f"{mode}는 리포트 경로가 필요하다", file=sys.stderr)
+            return 2
+        if opts["finalize"]:
+            return finalize_reports(opts["paths"], strict=opts["strict"])
+        return migrate_reports(opts["paths"])
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
