@@ -177,6 +177,8 @@ exit code는 `--finalize --strict`와 같다. `0` 통과, `1` 🔴 남음, `2` �
 
 ### LLM 비평 coverage 누락
 
+L1–L7 범주의 정본은 `docs/review-rubric.md` 하나다. 두 리뷰 커맨드가 그 문서를 읽어 적용하므로 같은 글은 어느 진입점으로 시작해도 같은 범주로 판정된다. `.claude/review_post.py`의 `REQUIRED_LLM_RULES`도 그 문서와 일치해야 하고, 계약 테스트가 둘을 대조한다.
+
 두 리뷰 커맨드는 문제가 없는 범주도 생략하지 말고 explicit coverage row를 남기도록 규정한다. 따라서 `source: L`인 finding이 L1–L7을 모두 덮지 않으면 비평 단계가 끝나지 않은 것이다.
 
 strict는 이를 품질 통과로 처리하지 않고 exit code `2`로 끝낸다. LLM 단계의 인프라 실패나 출력 계약 위반이 조용히 통과하는 것을 막기 위해서다. 누락된 범주는 stderr에 나열된다.
