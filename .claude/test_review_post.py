@@ -1221,6 +1221,41 @@ class TestLlmRubricSingleSource(unittest.TestCase):
 
         self.assertEqual(rp.REQUIRED_LLM_RULES, defined)
 
+    V1_SPEC = (REPO_ROOT / "docs" / "superpowers" / "specs"
+               / "2026-06-03-review-post-command-design.md")
+
+    def test_superseded_v1_spec_is_marked_historical(self):
+        """v1 설계서는 L1–L5만 정의하고 수학 정확성을 판정하지 않는다고 적었다.
+
+        현재 L7과 정면으로 어긋나므로, 그 문서를 현재 계약으로 읽으면 안 된다는
+        표시와 정본 링크가 문서 안에 있어야 한다.
+        """
+        text = self.V1_SPEC.read_text(encoding="utf-8")
+
+        head = text.split("\n## ", 1)[0]
+        self.assertIn("docs/review-rubric.md", head)
+        for term in ("v1", "기록"):
+            with self.subTest(term=term):
+                self.assertIn(term, head)
+
+    def test_readme_does_not_present_the_v1_spec_as_the_current_design(self):
+        text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        self.assertNotIn("자세한 설계는 `docs/superpowers/specs/2026-06-03", text)
+        self.assertIn("docs/review-rubric.md", text)
+
+    def test_readme_category_labels_match_the_canonical_rubric(self):
+        """범주 이름을 README가 따로 적어 두면 정본과 갈라진다."""
+        rubric = self._rubric_text()
+        readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        for match in re.finditer(r"(?m)^- \*\*(L[1-7]) ([^:*]+):\*\*", rubric):
+            rule_id, label = match.group(1), match.group(2).strip()
+            with self.subTest(rule=rule_id):
+                if rule_id in readme and f"{rule_id} " in readme:
+                    self.assertIn(f"{rule_id} {label}", readme,
+                                  f"README의 {rule_id} 이름이 정본과 다르다")
+
     def test_command_specific_output_differences_are_preserved(self):
         """루브릭을 합치면서 편별·집계 출력 차이를 지우지 않는다."""
         single = self._command_text("review-post.md")

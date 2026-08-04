@@ -200,11 +200,13 @@ strict는 이를 품질 통과로 처리하지 않고 exit code `2`로 끝낸다
 ## 검사 항목 요약
 
 결정적(D): D1 깨진 굵게 · D2 줄표 남발 · D3 강조 과다 · D4 SVG 유효성 · D5 에셋 경로 · D6 내부 링크 · D7 frontmatter · D8 수식 짝 · D9 이모지 금지 · D10 callout 순서 · D11 수식 블록 줄 분리 · D12 시리즈 인접 편 링크 · D13 SVG 세로 클리핑
-LLM 비평(L): L1 문체(AI 신호) · L2 설명 흐름 · L3 용어·어체 일관성 · L4 SVG↔본문 일치 · L5 제목·description 적합성 · L6 소스 자료 충실성 · L7 논증·복잡도 정확성
+LLM 비평(L): L1 문체(AI 신호 + 바른 문장) · L2 설명 흐름·명료성 · L3 용어·어체 일관성 · L4 SVG ↔ 본문 일치 · L5 제목·description 적합성 · L6 소스 자료 충실성 · L7 논증·복잡도 정확성
+
+각 범주의 정의와 문구는 `docs/review-rubric.md`가 정본이다. 위 목록은 이름만 훑는 색인이므로, 판정 기준이 필요하면 정본을 본다.
 
 마이그레이션된 과거 finding은 원래 출처가 분명하지 않을 때 `MIGRATED` source를 쓴다. D/L taxonomy는 유지하며 새 구현은 기존 D/L rule id를 가능한 한 보존한다.
 
-자세한 설계는 `docs/superpowers/specs/2026-06-03-review-post-command-design.md` 참고.
+`docs/superpowers/specs/2026-06-03-review-post-command-design.md`는 커맨드를 처음 만들 때의 **v1 설계 기록**이다. 현재 계약이 아니다. 그 문서의 루브릭은 L1–L5까지만 정의하고 수학 정확성을 적극 판정하지 않는다고 적어 두었는데, 지금은 L6·L7이 더해지고 L7이 증명·복잡도를 직접 판정한다. 현재 기준은 이 README와 `docs/review-rubric.md`다.
 
 ## 비고
 
