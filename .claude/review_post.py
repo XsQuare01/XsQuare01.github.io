@@ -719,6 +719,17 @@ def _legacy_rows(text):
     return rows
 
 
+def _existing_newline(path):
+    """기존 파일의 줄 끝 스타일을 돌려준다. 파일이 없으면 None(플랫폼 기본)이다."""
+    try:
+        data = path.read_bytes()
+    except OSError:
+        return None
+    if b"\r\n" in data:
+        return "\r\n"
+    return "\n" if b"\n" in data else None
+
+
 def atomic_write_text(path, text, encoding="utf-8"):
     """같은 디렉터리의 임시 파일에 쓴 뒤 `os.replace()`로 교체한다.
 
@@ -731,6 +742,10 @@ def atomic_write_text(path, text, encoding="utf-8"):
     `docs/reviews/README.md`에 적었다.
     """
     path = Path(path)
+    # 줄 끝은 기존 파일 스타일을 따른다. 저장소 리포트는 LF와 CRLF가 섞여 있어서,
+    # 플랫폼 기본으로 쓰면 정본화만 해도 파일 전체가 바뀐 것처럼 보인다. 근거를
+    # 읽으려는 사람에게 diff는 신호여야 한다.
+    newline = _existing_newline(path)
     # 임시 파일은 대상과 같은 디렉터리에 만든다. os.replace는 같은 파일 시스템
     # 안에서만 원자적이라, 시스템 임시 디렉터리를 쓰면 그 보장이 사라진다.
     fd, tmp_name = tempfile.mkstemp(
@@ -741,7 +756,7 @@ def atomic_write_text(path, text, encoding="utf-8"):
     # 들고 다니며 어느 중단 지점에서든 가진 것만 닫는다.
     handle = None
     try:
-        handle = os.fdopen(fd, "w", encoding=encoding)
+        handle = os.fdopen(fd, "w", encoding=encoding, newline=newline)
         fd = None  # 소유권이 handle로 넘어갔다. 이제 fd를 직접 닫으면 안 된다.
         # mkstemp은 0600으로 만든다. 그대로 교체하면 리포트 권한이 조용히 좁아진다.
         try:
@@ -776,6 +791,29 @@ def atomic_write_text(path, text, encoding="utf-8"):
         raise
 
 
+# 전환 모델이 담을 수 있는 섹션. 이 목록에 없는 섹션은 전환하면 조용히 사라진다.
+_KNOWN_SECTION_RE = re.compile(
+    r"^(?:# 리뷰 리포트|## 결정적 검사|## LLM 비평|## Findings)\b", re.IGNORECASE
+)
+_SECTION_HEADING_RE = re.compile(r"^#{1,2} \S")
+
+
+def unknown_sections(text):
+    """정본 모델에 자리가 없는 섹션 제목을 돌려준다.
+
+    finding과 감사 섹션 밖의 내용은 전환하면 사라진다. 무손실을 증명할 수 없으면
+    쓰지 않는 편이 낫다. 어느 섹션이 걸림돌인지 알려 사람이 판단하게 한다.
+    """
+    found = []
+    for line in text.splitlines():
+        if not _SECTION_HEADING_RE.match(line):
+            continue
+        if _KNOWN_SECTION_RE.match(line) or rr.AUDIT_HEADING_RE.match(line):
+            continue
+        found.append(line.strip())
+    return found
+
+
 def migrate_reports(report_paths):
     """과거 리포트를 v2 정본으로 전환한다. 없는 근거는 만들어 내지 않는다."""
     failed = False
@@ -806,6 +844,23 @@ def migrate_reports(report_paths):
             failed = True
             continue
 
+        unknown = unknown_sections(text)
+        if unknown:
+            print(
+                f"{path}: 정본 모델에 자리가 없는 섹션이 있어 전환하지 않는다 — "
+                f"{', '.join(unknown)}. 감사 섹션으로 옮기거나 손으로 정본화한다",
+                file=sys.stderr,
+            )
+            failed = True
+            continue
+
+        source_errors = rr.validate_source_findings(findings)
+        if source_errors:
+            for error in source_errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            failed = True
+            continue
+
         # 과거 리포트는 손으로 쓴 형식이 제각각이라, 파서가 한 종류를 놓치면
         # finding이 조용히 사라진다. 원본이 밝힌 총계와 대조해 확인되지 않으면
         # 쓰지 않는다. 확인할 수 없는 전환은 하지 않는 편이 낫다.
@@ -832,11 +887,22 @@ def migrate_reports(report_paths):
             sources=header.get("sources", []),
             # 이미 전환된 리포트를 다시 돌려도 손실 표시가 사라지지 않아야 한다.
             migrated_from=migrated_from or header.get("migrated_from"),
+            audit=parsed["audit"],
         )
         errors = rr.validate_report(canonical, state="complete")
         if errors:
             for error in errors:
                 print(f"{path}: {error}", file=sys.stderr)
+            failed = True
+            continue
+
+        # 심각도 개수가 같아도 인용이 잘리거나 감사 기록이 빠질 수 있다. 값을 하나씩
+        # 대조해 무손실을 확인한다. 확인되지 않으면 쓰지 않는다.
+        losses = rr.verify_round_trip(canonical, findings, parsed["audit"])
+        if losses:
+            for loss in losses:
+                print(f"{path}: {loss}", file=sys.stderr)
+            print(f"{path}: 무손실을 확인할 수 없어 전환하지 않는다", file=sys.stderr)
             failed = True
             continue
 
@@ -1087,6 +1153,9 @@ def finalize_reports(report_paths, strict=False):
             sources=header.get("sources", []),
             # 손실 있는 전환이었다는 표시는 정본화에서 살아남아야 한다.
             migrated_from=header.get("migrated_from"),
+            # 지적을 어떻게 처리했는지 적은 감사 섹션도 남는다. 이것이 사라지면
+            # 리포트가 "경고만 있고 해결은 없는" 상태를 잘못 전달한다.
+            audit=parsed["audit"],
         )
         errors = rr.validate_report(canonical, state="complete")
         if errors:
@@ -1214,6 +1283,7 @@ def gate_reports(reports_dir=DEFAULT_REPORTS_DIR):
             findings=findings,
             sources=header.get("sources", []),
             migrated_from=header.get("migrated_from"),
+            audit=parsed["audit"],
         )
         errors = rr.validate_report(canonical, state="complete")
         if errors:

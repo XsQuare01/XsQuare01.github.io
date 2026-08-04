@@ -94,3 +94,7 @@ summary: 🔴 0 · 🟡 0 · 🟢 8
 - message: 2×2 행렬 곱 랭크 = 7 (Strassen 1969 ≤7, Winograd 1971 ≥7), 3×3 상한 23(Laderman)·하한 19, Winograd 변형 덧셈 15회 — 알려진 사실과 일치. 하한 증명은 범위 밖이라 인용 처리(과형식화 회피).
 - recommendation: not-recorded
 - gate_effect: info
+
+## 반영 상태
+
+- 🟡/🔴 없음. 🟢 8건은 검증·커버리지 기록으로 조치 불필요.

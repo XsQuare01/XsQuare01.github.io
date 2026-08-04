@@ -1653,6 +1653,333 @@ class TestLegacyMigration(unittest.TestCase):
         self.assertEqual(report.read_text(encoding="utf-8"), canonical)
 
 
+CANONICAL_WITH_AUDIT = (
+    "schema_version: review-report/v2\n"
+    "target: dp-2\n"
+    "generated_at: 2026-07-28\n"
+    "strict: not-recorded\n"
+    "summary: 🔴 0 · 🟡 1 · 🟢 0\n"
+    "\n"
+    "## Findings\n"
+    "\n"
+    "### 🟡 [L7] src/content/posts/dp-2.md:91\n"
+    "\n"
+    "- severity: 🟡\n"
+    "- source: L\n"
+    "- rule_id: L7\n"
+    "- location: src/content/posts/dp-2.md:91\n"
+    "- quote: `S(0)` / `S(1)`\n"
+    "- message: 기저 문구가 점화식 범위와 어긋난다\n"
+    "- recommendation: 기저를 직접 정하고 점화식은 n≥2부터 적용한다\n"
+    "- gate_effect: warn\n"
+    "\n"
+    "## 후속 처리\n"
+    "\n"
+    "- 🟡 [L7] 기저 문구(dp-2:91) → 커밋 `69ec1f0`에서 정정. **반영 완료**.\n"
+    "- 재검증: `npm run build` 성공(106 pages).\n"
+)
+
+# PR #97이 감사 섹션을 지운 리포트. 복구했으니 다시 사라지면 안 된다(#103).
+REPORTS_WITH_AUDIT_SECTION = (
+    "2026-06-25-divide-and-conquer.md",
+    "2026-06-27-quicksort.md",
+    "2026-07-08-convex-hull-2.md",
+    "2026-07-09-convex-hull-3.md",
+    "2026-07-10-convex-hull-bst-tangent.md",
+    "2026-07-13-convex-hull-4.md",
+    "2026-07-15-convex-hull-5.md",
+    "2026-07-23-matrix-strassen-why-seven.md",
+    "2026-07-24-dp-1.md",
+    "2026-07-28-dp-2.md",
+    "2026-07-30-dp-3.md",
+)
+
+
+class TestEvidenceFidelity(unittest.TestCase):
+    """정본화가 근거를 바꾸지 않는다는 계약(#103)."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _write(self, name, text):
+        path = self.root / name
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    # ---- code span ----
+
+    def test_multiple_code_spans_survive_parsing(self):
+        """감싼 백틱 한 쌍만 벗기면 여러 code span이 뒤집힌 스팬 하나로 깨진다."""
+        import review_report as rr
+
+        raw = "`int matrixChain(const vector<int>& d, int n)` / `d[i-1]*d[k]*d[j]`"
+        parsed = rr.parse_report(
+            "## Findings\n\n### 🟡 [L7] a.md:1\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L7\n- location: a.md:1\n"
+            f"- quote: {raw}\n- message: m\n- recommendation: r\n- gate_effect: warn\n"
+        )
+
+        self.assertEqual(parsed["findings"][0]["quote"], raw)
+
+    def test_single_code_span_is_still_unwrapped(self):
+        import review_report as rr
+
+        parsed = rr.parse_report(
+            "## Findings\n\n### 🟡 [L7] a.md:1\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L7\n- location: `a.md:1`\n"
+            "- quote: `트리가 **DAG)**가`\n- message: m\n"
+            "- recommendation: r\n- gate_effect: warn\n"
+        )
+
+        self.assertEqual(parsed["findings"][0]["quote"], "트리가 **DAG)**가")
+        self.assertEqual(parsed["findings"][0]["location"], "a.md:1")
+
+    def test_awkward_values_round_trip_byte_identically(self):
+        """백틱이 섞인 값이 정본화를 반복해도 바이트가 그대로여야 한다.
+
+        값 전체를 감싼 백틱 한 쌍은 표기 정규화로 한 번 벗겨진다(`location`이 그
+        대상이다). 그 뒤로는 손대지 않는다. 정규화가 매 실행마다 값을 깎으면
+        리포트를 다시 돌릴 때마다 근거가 조금씩 사라진다.
+        """
+        import review_report as rr
+
+        def canonicalize(value):
+            findings = value if isinstance(value, list) else [{
+                "severity": "🟡", "source": "L", "rule_id": "L7",
+                "location": "a.md:1", "quote": value, "message": value,
+                "recommendation": "r", "gate_effect": "warn",
+            }]
+            return rr.serialize_report(target="t", generated_at="2026-08-04",
+                                       strict=False, findings=findings)
+
+        for value in (
+            "`A` / `B`",
+            "`int f(vector<int>& d)` / `d[i-1]*d[k]*d[j]`",
+            "표기 `M_i`와 `M[i,j]`를 구분한다",
+            "백틱 ` 하나만 있다",
+            "`$M[1,3]=\\min(28,48)=28$`",
+        ):
+            with self.subTest(value=value):
+                once = canonicalize(value)
+                parsed = rr.parse_report(once)
+                twice = canonicalize(parsed["findings"])
+
+                self.assertEqual(rr.parse_report(twice), parsed)
+                self.assertEqual(canonicalize(rr.parse_report(twice)["findings"]), twice)
+                self.assertEqual(rr.verify_round_trip(twice, parsed["findings"]), [])
+
+    # ---- audit 섹션 ----
+
+    def test_audit_section_round_trips_byte_identically(self):
+        import review_report as rr
+
+        parsed = rr.parse_report(CANONICAL_WITH_AUDIT)
+        rebuilt = rr.serialize_report(
+            target=parsed["header"]["target"],
+            generated_at=parsed["header"]["generated_at"],
+            strict=parsed["header"]["strict"],
+            findings=parsed["findings"],
+            audit=parsed["audit"],
+        )
+
+        self.assertEqual(rebuilt, CANONICAL_WITH_AUDIT)
+
+    def test_audit_section_bullets_are_not_read_as_findings(self):
+        """감사 섹션의 `- 🟡 [L7] …` 불릿은 finding 제목 꼴이다. finding으로 세면 안 된다."""
+        import review_report as rr
+
+        parsed = rr.parse_report(CANONICAL_WITH_AUDIT)
+
+        self.assertEqual(len(parsed["findings"]), 1)
+        self.assertEqual(rr.validate_report(CANONICAL_WITH_AUDIT), [])
+
+    def test_validate_rejects_a_finding_below_the_audit_section(self):
+        """감사 섹션 뒤 finding은 파서가 읽지 않으므로 조용히 사라진다."""
+        import review_report as rr
+
+        text = CANONICAL_WITH_AUDIT + (
+            "\n### 🔴 [L1] a.md:3\n\n"
+            "- severity: 🔴\n- source: L\n- rule_id: L1\n- location: a.md:3\n"
+            "- quote: q\n- message: m\n- recommendation: r\n- gate_effect: fail\n"
+        )
+
+        errors = rr.validate_report(text)
+
+        self.assertTrue(errors)
+        self.assertTrue(any("감사 섹션" in e for e in errors), errors)
+
+    # ---- multiline 값 ----
+
+    def test_multiline_field_value_is_reported_not_truncated(self):
+        import review_report as rr
+
+        parsed = rr.parse_report(
+            "## Findings\n\n### 🟡 [L7] a.md:1\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L7\n- location: a.md:1\n"
+            "- quote: q\n"
+            "- message: 첫 줄이다\n"
+            "  둘째 줄은 조용히 사라진다\n"
+            "- recommendation: r\n- gate_effect: warn\n"
+        )
+        errors = rr.validate_source_findings(parsed["findings"])
+
+        self.assertTrue(any("여러 줄" in e for e in errors), errors)
+
+    # ---- round-trip 검증 헬퍼 ----
+
+    def test_round_trip_check_catches_a_changed_field_value(self):
+        import review_report as rr
+
+        parsed = rr.parse_report(CANONICAL_WITH_AUDIT)
+        tampered = [dict(parsed["findings"][0], quote="다른 인용")]
+
+        errors = rr.verify_round_trip(CANONICAL_WITH_AUDIT, tampered, parsed["audit"])
+
+        self.assertTrue(any("quote" in e for e in errors), errors)
+
+    def test_round_trip_check_catches_a_dropped_audit_section(self):
+        import review_report as rr
+
+        parsed = rr.parse_report(CANONICAL_WITH_AUDIT)
+        without_audit = CANONICAL_WITH_AUDIT.split("\n## 후속 처리", 1)[0] + "\n"
+
+        errors = rr.verify_round_trip(without_audit, parsed["findings"], parsed["audit"])
+
+        self.assertTrue(any("후속 처리" in e or "감사 섹션" in e for e in errors), errors)
+
+    # ---- migrate / finalize ----
+
+    def test_finalize_preserves_the_audit_section(self):
+        report = self._write("2026-07-28-dp-2.md", CANONICAL_WITH_AUDIT)
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 0, stderr)
+        self.assertEqual(report.read_text(encoding="utf-8"), CANONICAL_WITH_AUDIT)
+
+    def test_migrate_preserves_the_audit_section_and_code_spans(self):
+        import review_report as rr
+
+        report = self._write("2026-07-30-dp-3.md", (
+            "## LLM 비평: src/content/posts/dp-3.md\n\n"
+            "### 🟡 [L7] 비용 자료형의 유효 범위가 제시되지 않음\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L7\n"
+            "- location: src/content/posts/dp-3.md:103\n"
+            "- quote: `int matrixChain(const vector<int>& d, int n)` / `d[i-1]*d[k]*d[j]`\n"
+            "- message: int로 계산한다\n- recommendation: long long을 쓴다\n"
+            "- gate_effect: warn\n\n"
+            "요약: 🔴 0 · 🟡 1 · 🟢 0\n\n"
+            "## 후속 처리\n\n"
+            "- 🟡 [L7] 자료형 → `long long`으로 바꿈. **반영 완료**.\n"
+        ))
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stderr)
+        text = report.read_text(encoding="utf-8")
+        self.assertEqual(rr.validate_report(text), [])
+        self.assertIn("## 후속 처리", text)
+        self.assertIn("- 🟡 [L7] 자료형 → `long long`으로 바꿈. **반영 완료**.", text)
+        self.assertIn(
+            "- quote: `int matrixChain(const vector<int>& d, int n)` / `d[i-1]*d[k]*d[j]`",
+            text,
+        )
+        self.assertEqual(len(rr.parse_report(text)["findings"]), 1)
+
+    def test_migrate_refuses_when_an_unknown_section_would_be_dropped(self):
+        report = self._write("2026-07-20-alpha.md", (
+            "## LLM 비평: src/content/posts/alpha.md\n\n"
+            "### 🟡 [L7] alpha\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L7\n- location: alpha.md:1\n"
+            "- quote: q\n- message: m\n- recommendation: r\n- gate_effect: warn\n\n"
+            "요약: 🔴 0 · 🟡 1 · 🟢 0\n\n"
+            "## 검증 로그\n\n"
+            "- 빌드 성공을 여기에 적었다.\n"
+        ))
+        original = report.read_bytes()
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("검증 로그", stderr)
+        self.assertEqual(report.read_bytes(), original)
+
+    def test_migrate_refuses_when_the_round_trip_loses_a_field(self):
+        """무손실을 증명할 수 없으면 쓰지 않는다."""
+        import review_report as rr
+
+        report = self._write("2026-07-20-alpha.md", (
+            "## LLM 비평: src/content/posts/alpha.md\n\n"
+            "### 🟡 [L7] alpha\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L7\n- location: alpha.md:1\n"
+            "- quote: 인용이다\n- message: m\n- recommendation: r\n- gate_effect: warn\n\n"
+            "요약: 🔴 0 · 🟡 1 · 🟢 0\n"
+        ))
+        original = report.read_bytes()
+        real_serialize = rr.serialize_report
+
+        def lossy_serialize(**kwargs):
+            findings = [dict(f, quote="not-recorded") for f in kwargs.pop("findings")]
+            return real_serialize(findings=findings, **kwargs)
+
+        with mock.patch.object(rr, "serialize_report", lossy_serialize):
+            rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("quote", stderr)
+        self.assertEqual(report.read_bytes(), original)
+
+    # ---- 실제 손상 사례 회귀 ----
+
+    def test_readme_documents_the_evidence_contract(self):
+        text = (REPO_ROOT / "docs" / "reviews" / "README.md").read_text(encoding="utf-8")
+        for term in (
+            "### 감사 섹션",
+            "## 후속 처리",
+            "## 반영 상태",
+            "## 반영 결과",
+            "한 쌍뿐일 때만",
+            "한 줄에 담는다",
+        ):
+            self.assertIn(term, text)
+
+    def test_audit_headings_in_the_readme_match_the_parser(self):
+        """문서와 파서가 갈라지면 문서에 적힌 제목이 조용히 사라진다."""
+        import review_report as rr
+
+        text = (REPO_ROOT / "docs" / "reviews" / "README.md").read_text(encoding="utf-8")
+        section = text.split("### 감사 섹션", 1)[1].split("\n### ", 1)[0]
+        documented = {m for m in re.findall(r"`## ([^`]+)`", section)}
+
+        self.assertEqual(documented, set(rr.AUDIT_HEADINGS))
+
+    def test_repository_reports_keep_their_audit_sections(self):
+        reports = REPO_ROOT / "docs" / "reviews"
+        for name in REPORTS_WITH_AUDIT_SECTION:
+            with self.subTest(report=name):
+                text = (reports / name).read_text(encoding="utf-8")
+                self.assertRegex(
+                    text, r"(?m)^## (후속 처리|반영 상태|반영 결과)",
+                    f"{name}: 감사 섹션이 없다. PR #97에서 지워진 기록을 복구했으니 유지해야 한다",
+                )
+
+    def test_repository_dp_3_report_keeps_both_code_spans(self):
+        text = (REPO_ROOT / "docs" / "reviews" / "2026-07-30-dp-3.md").read_text(encoding="utf-8")
+
+        self.assertIn(
+            "- quote: `int matrixChain(const vector<int>& d, int n)` / `d[i-1]*d[k]*d[j]`",
+            text,
+        )
+        self.assertIn(
+            "- quote: `① 3·2·4 = 24` / `② 3·4·2 = 24` / `24 + 24 = 48` / `16 + 12 = 28`",
+            text,
+        )
+
+
 class TestLlmCoverage(unittest.TestCase):
     def _rows(self, rule_ids, source="L"):
         return [{
@@ -2071,6 +2398,19 @@ class TestAtomicReportWrite(unittest.TestCase):
         rp.atomic_write_text(actual, text)
 
         self.assertEqual(actual.read_bytes(), expected.read_bytes())
+
+    def test_atomic_write_keeps_the_line_endings_of_the_replaced_file(self):
+        """저장소 리포트는 LF와 CRLF가 섞여 있다. 정본화가 줄 끝을 뒤집으면 전체 diff가 난다."""
+        for name, ending in (("lf.md", b"\n"), ("crlf.md", b"\r\n")):
+            with self.subTest(ending=ending):
+                target = self.root / name
+                target.write_bytes("옛 내용".encode("utf-8") + ending)
+
+                rp.atomic_write_text(target, "첫 줄\n둘째 줄\n")
+
+                data = target.read_bytes()
+                self.assertEqual(data.count(b"\r\n"), 2 if ending == b"\r\n" else 0, name)
+                self.assertEqual(data.count(b"\n"), 2, name)
 
     def test_atomic_write_keeps_the_permissions_of_the_replaced_file(self):
         """임시 파일은 0600으로 생긴다. 그대로 교체하면 리포트 권한이 좁아진다."""

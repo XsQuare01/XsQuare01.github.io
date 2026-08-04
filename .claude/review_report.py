@@ -84,7 +84,9 @@ def _strict_text(strict):
     return text or NOT_RECORDED
 
 
-def serialize_report(*, target, generated_at, strict, findings, sources=(), migrated_from=None):
+def serialize_report(*, target, generated_at, strict, findings, sources=(),
+                     migrated_from=None, audit=None):
+    """정본 Markdown을 만든다. `audit`은 리포트 끝의 감사 섹션을 그대로 싣는다."""
     rows = sorted(findings, key=finding_sort_key)
     header = [
         f"schema_version: {SCHEMA_VERSION}",
@@ -100,6 +102,8 @@ def serialize_report(*, target, generated_at, strict, findings, sources=(), migr
 
     blocks = ["\n".join(header), FINDINGS_HEADING]
     blocks += [serialize_finding(row) for row in rows]
+    if audit:
+        blocks.append(audit.strip())
     return "\n\n".join(blocks) + "\n"
 
 
@@ -116,6 +120,12 @@ _BULLET_HEADING_RE = re.compile(r"^- ((?:🔴|🟡|🟢) \[(?:D\d+|L\d+)\].*)$")
 _SEVERITY_START_RE = re.compile(r"^- \*{0,2}severity\*{0,2}: ?(.*)$")
 # 8개 필드를 정본 순서 그대로 표 한 줄에 담은 리포트도 있다.
 _TABLE_ROW_RE = re.compile(r"^\|(.+)\|\s*$")
+# 리포트 끝에는 지적을 어떻게 처리했는지 적은 감사 섹션이 붙는다. 어느 지적을 어느
+# 커밋에서 고쳤는지, 재검증을 했는지가 여기 남는다. finding 모델에 자리가 없다는
+# 이유로 버리면 리포트가 "경고만 있고 해결은 없는" 상태를 잘못 전달한다.
+AUDIT_HEADINGS = ("후속 처리", "반영 상태", "반영 결과")
+AUDIT_HEADING_RE = re.compile(r"^## (?:" + "|".join(AUDIT_HEADINGS) + r")\b.*$")
+_FINDING_HEADING_LINE_RE = re.compile(r"(?m)^### (?:" + "|".join(SEVERITY_VALUES) + r") \[")
 
 
 def _table_row_finding(line):
@@ -132,8 +142,13 @@ def _table_row_finding(line):
 
 
 def _clean_field_value(raw):
+    """값을 감싼 백틱 한 쌍만 벗긴다. 값 안에 백틱이 더 있으면 벗기지 않는다.
+
+    `` `A` / `B` ``처럼 code span이 여러 개인 값의 양 끝을 벗기면 남은 백틱이
+    가운데를 감싸, 인용이 반대로 렌더된다. 근거를 바꾸는 것이라 하지 않는다.
+    """
     text = raw.strip()
-    if len(text) >= 2 and text[0] == "`" and text[-1] == "`":
+    if len(text) >= 2 and text[0] == "`" and text[-1] == "`" and "`" not in text[1:-1]:
         text = text[1:-1].strip()
     return text or NOT_RECORDED
 
@@ -147,13 +162,32 @@ def parse_report(text):
 
     각 finding의 `_heading` 키에는 `### ` 뒤 원문을 그대로 담는다. 스키마 필드가
     아니라 마이그레이션이 설명형 제목을 되살릴 때만 쓰는 내부 값이다.
+
+    감사 섹션(`## 후속 처리` 등)부터 끝까지는 `audit`에 원문 그대로 담고 finding으로
+    읽지 않는다. 그 섹션의 `- 🟡 [L7] …` 불릿이 finding 제목 꼴이라, 읽으면 필드 없는
+    finding이 유령처럼 생긴다.
+
+    필드 값이 다음 줄로 이어진 리포트는 이어진 필드 이름을 `_continued`에 적어 둔다.
+    정본은 필드 하나를 한 줄에 담으므로, 조용히 버리지 않고 검증에서 막기 위해서다.
     """
     header = {}
     findings = []
     current = None
     in_findings = False
+    audit_lines = None
+    last_field = None
 
     for line in text.splitlines():
+        if audit_lines is not None:
+            audit_lines.append(line)
+            continue
+        if AUDIT_HEADING_RE.match(line):
+            if current:
+                findings.append(current)
+                current = None
+            audit_lines = [line]
+            continue
+
         heading = None
         if line.startswith("### "):
             heading = line[len("### "):].strip()
@@ -166,6 +200,7 @@ def parse_report(text):
             if current:
                 findings.append(current)
             current = {"_heading": heading}
+            last_field = None
             continue
 
         row = _table_row_finding(line)
@@ -183,6 +218,7 @@ def parse_report(text):
             if current:
                 findings.append(current)
             current = {}
+            last_field = None
 
         if not in_findings:
             match = _HEADER_RE.match(line)
@@ -199,11 +235,19 @@ def parse_report(text):
             continue
         match = _FIELD_RE.match(line)
         if match:
-            current[match.group(1)] = _clean_field_value(match.group(2))
+            last_field = match.group(1)
+            current[last_field] = _clean_field_value(match.group(2))
+            continue
+        # 이어진 줄만 센다. 들여쓰기 없는 줄은 finding 블록 밖의 산문(`요약:` 등)이라
+        # 마지막 필드의 연장으로 볼 수 없다.
+        if (last_field and line[:1].isspace() and line.strip()
+                and not line.lstrip().startswith(("#", "|", "-"))):
+            current.setdefault("_continued", []).append(last_field)
 
     if current:
         findings.append(current)
-    return {"header": header, "findings": findings}
+    audit = "\n".join(audit_lines).strip() if audit_lines else None
+    return {"header": header, "findings": findings, "audit": audit}
 
 
 _CANONICAL_HEADING_RE = re.compile(r"^(🔴|🟡|🟢) \[([^\]]+)\] ?(.*)$")
@@ -227,6 +271,14 @@ def validate_source_findings(findings):
         if missing:
             errors.append(f"{label} missing fields: {', '.join(missing)}")
 
+        continued = finding.get("_continued")
+        if continued:
+            errors.append(
+                f"{label} {', '.join(sorted(set(continued)))} 값이 여러 줄이다. "
+                "정본은 필드 하나를 한 줄에 담으므로 이어진 줄이 사라진다. "
+                "값을 한 줄로 합친 뒤 다시 실행한다"
+            )
+
         match = _CANONICAL_HEADING_RE.match((finding.get("_heading") or "").strip())
         if not match:
             continue
@@ -248,10 +300,47 @@ def validate_source_findings(findings):
     return errors
 
 
+def verify_round_trip(text, findings, audit=None):
+    """정본화한 텍스트가 원본 근거를 그대로 담았는지 대조한다.
+
+    심각도 개수만 세면 값이 바뀐 것을 놓친다. 개수가 같아도 인용이 잘리거나 감사
+    섹션이 사라지면 리포트는 다른 사실을 말한다. 그래서 필드 값을 하나하나 비교한다.
+
+    비교 기준은 직렬화에 실제로 넘긴 값이다. 마이그레이션이 없는 근거를 의도적으로
+    `not-recorded`로 채우는 것은 손실이 아니라 표시이므로 여기서 걸리지 않는다.
+
+    직렬화는 finding을 정본 순서로 재정렬하므로 같은 키로 정렬한 뒤 짝지어 본다.
+    입력 순서로 비교하면 재정렬을 손실로 오인한다.
+    """
+    errors = []
+    parsed = parse_report(text)
+    if len(parsed["findings"]) != len(findings):
+        return [f"finding 개수가 다르다: 원본 {len(findings)}건 정본 {len(parsed['findings'])}건"]
+
+    canonical_order = sorted(findings, key=finding_sort_key)
+    for index, (before, after) in enumerate(zip(canonical_order, parsed["findings"]), 1):
+        for field in FINDING_FIELDS:
+            expected = _value(before, field)
+            if after.get(field) != expected:
+                errors.append(
+                    f"finding #{index} {field} 값이 정본화에서 바뀌었다: "
+                    f"원본 {expected!r} → 정본 {after.get(field)!r}"
+                )
+    if (audit or None) != (parsed["audit"] or None):
+        errors.append("감사 섹션이 정본화에서 바뀌었다")
+    return errors
+
+
 def validate_report(text, *, state="complete"):
     errors = []
     parsed = parse_report(text)
     header, findings = parsed["header"], parsed["findings"]
+
+    if parsed["audit"] and _FINDING_HEADING_LINE_RE.search(parsed["audit"]):
+        errors.append(
+            "감사 섹션 뒤에 finding이 있다. 파서가 읽지 않아 판정에서 빠지므로 "
+            "감사 섹션 앞으로 옮겨야 한다"
+        )
 
     if header.get("schema_version") != SCHEMA_VERSION:
         errors.append(f"schema_version must be {SCHEMA_VERSION}")
