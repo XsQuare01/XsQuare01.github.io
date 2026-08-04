@@ -1,10 +1,12 @@
 import contextlib
 import io
 import json
+import os
 import re
 import unittest
 import tempfile
 from pathlib import Path
+from unittest import mock
 import review_post as rp
 
 
@@ -1947,6 +1949,225 @@ class TestGateEffectSingleSource(unittest.TestCase):
             {label: rr.CANONICAL_GATE_EFFECT[icon]
              for label, icon in rp.SEVERITY_ICON.items()},
         )
+
+
+class _HalfWriter:
+    """받은 텍스트의 절반만 쓰고 실패하는 파일 핸들. 부분 쓰기를 주입한다."""
+
+    def __init__(self, handle):
+        self._handle = handle
+
+    def write(self, text):
+        self._handle.write(text[: len(text) // 2])
+        raise OSError(28, "No space left on device")
+
+    def flush(self):
+        self._handle.flush()
+
+    def fileno(self):
+        return self._handle.fileno()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc_info):
+        self._handle.close()
+        return False
+
+
+_REAL_FDOPEN = os.fdopen
+
+
+def _half_writing_fdopen(*args, **kwargs):
+    return _HalfWriter(_REAL_FDOPEN(*args, **kwargs))
+
+
+def _failing_replace(exc, only=None):
+    """`os.replace` 실패를 주입한다. only를 주면 그 경로에서만 실패한다."""
+    real = os.replace
+
+    def replace(src, dst, **kwargs):
+        if only is None or str(dst).endswith(only):
+            raise exc
+        return real(src, dst, **kwargs)
+
+    return replace
+
+
+class TestAtomicReportWrite(unittest.TestCase):
+    """리포트 교체는 파일별로 원자적이다. 실패하면 원본이 그대로 남아야 한다(#101)."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _names(self, directory=None):
+        return sorted(p.name for p in (directory or self.root).iterdir())
+
+    def _v2_report(self, name="2026-08-02-alpha.md", target="alpha"):
+        import review_report as rr
+
+        report = self.root / name
+        report.write_text(rr.serialize_report(
+            target=target, generated_at="2026-08-02", strict=False,
+            findings=[{
+                "severity": "🟡", "source": "L", "rule_id": "L1",
+                "location": f"src/content/posts/{target}.md:12",
+                "quote": "줄표가 남발된다", "message": "줄표 남발",
+                "recommendation": "마침표로 끊는다", "gate_effect": "warn",
+            }],
+            sources=[f"src/content/posts/{target}.md"],
+        ), encoding="utf-8")
+        return report
+
+    def _legacy_report(self, name="2026-07-24-legacy.md"):
+        report = self.root / name
+        report.write_text(
+            "🟢 참고 (1)\n\n"
+            "- [L6] not-recorded · gate: info — 노션 원본과 대조했다.\n\n"
+            "요약: 🔴 0 · 🟡 0 · 🟢 1\n",
+            encoding="utf-8",
+        )
+        return report
+
+    def test_atomic_write_replaces_content_and_leaves_no_temp_file(self):
+        target = self.root / "report.md"
+        target.write_text("옛 내용\n", encoding="utf-8")
+
+        rp.atomic_write_text(target, "새 내용\n")
+
+        self.assertEqual(target.read_text(encoding="utf-8"), "새 내용\n")
+        self.assertEqual(self._names(), ["report.md"])
+
+    def test_atomic_write_matches_path_write_text_bytes(self):
+        """줄 끝 처리가 달라지면 정본화만 해도 저장소 전체 diff가 생긴다."""
+        text = "첫 줄\n둘째 줄\n"
+        expected = self.root / "expected.md"
+        expected.write_text(text, encoding="utf-8")
+        actual = self.root / "actual.md"
+
+        rp.atomic_write_text(actual, text)
+
+        self.assertEqual(actual.read_bytes(), expected.read_bytes())
+
+    def test_atomic_write_keeps_the_permissions_of_the_replaced_file(self):
+        """임시 파일은 0600으로 생긴다. 그대로 교체하면 리포트 권한이 좁아진다."""
+        target = self.root / "report.md"
+        target.write_text("옛 내용\n", encoding="utf-8")
+        before = target.stat().st_mode & 0o777
+
+        rp.atomic_write_text(target, "새 내용\n")
+
+        self.assertEqual(target.stat().st_mode & 0o777, before)
+
+    def test_atomic_write_keeps_the_target_intact_when_the_write_fails(self):
+        target = self.root / "report.md"
+        target.write_text("원본 근거\n", encoding="utf-8")
+        original = target.read_bytes()
+
+        with mock.patch("os.fdopen", _half_writing_fdopen):
+            with self.assertRaises(OSError):
+                rp.atomic_write_text(target, "새 내용이 아주 길어서 절반만 써진다\n")
+
+        self.assertEqual(target.read_bytes(), original)
+        self.assertEqual(self._names(), ["report.md"])
+
+    def test_atomic_write_keeps_the_target_intact_when_replace_fails(self):
+        target = self.root / "report.md"
+        target.write_text("원본 근거\n", encoding="utf-8")
+        original = target.read_bytes()
+
+        with mock.patch("os.replace", _failing_replace(OSError(13, "Permission denied"))):
+            with self.assertRaises(OSError):
+                rp.atomic_write_text(target, "새 내용\n")
+
+        self.assertEqual(target.read_bytes(), original)
+        self.assertEqual(self._names(), ["report.md"])
+
+    def test_atomic_write_cleans_up_when_interrupted(self):
+        """프로세스 중단(KeyboardInterrupt)은 Exception이 아니다. 임시 파일이 남으면 안 된다."""
+        target = self.root / "report.md"
+        target.write_text("원본 근거\n", encoding="utf-8")
+
+        with mock.patch("os.replace", _failing_replace(KeyboardInterrupt())):
+            with self.assertRaises(KeyboardInterrupt):
+                rp.atomic_write_text(target, "새 내용\n")
+
+        self.assertEqual(target.read_text(encoding="utf-8"), "원본 근거\n")
+        self.assertEqual(self._names(), ["report.md"])
+
+    def test_finalize_keeps_the_original_when_the_replacement_fails(self):
+        report = self._v2_report()
+        original = report.read_bytes()
+
+        with mock.patch("os.replace", _failing_replace(OSError(28, "No space left on device"))):
+            rc, _, stderr = run_main_streams(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("쓰기 실패", stderr)
+        self.assertEqual(report.read_bytes(), original)
+        self.assertEqual(self._names(), [report.name])
+
+    def test_migrate_keeps_the_original_when_the_replacement_fails(self):
+        report = self._legacy_report()
+        original = report.read_bytes()
+
+        with mock.patch("os.replace", _failing_replace(OSError(28, "No space left on device"))):
+            rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("쓰기 실패", stderr)
+        self.assertEqual(report.read_bytes(), original)
+        self.assertEqual(self._names(), [report.name])
+
+    def test_batch_finalize_applies_per_file_and_names_the_failing_file(self):
+        """정책은 파일별 원자성이다. batch all-or-nothing이 아니므로 성공분은 남는다."""
+        first = self._v2_report("2026-08-02-alpha.md", "alpha")
+        second = self._v2_report("2026-08-02-beta.md", "beta")
+        # 요약을 지워 두면 정본화가 실제로 일어났는지 내용으로 확인할 수 있다.
+        for report in (first, second):
+            report.write_text(
+                report.read_text(encoding="utf-8").replace("summary: 🔴 0 · 🟡 1 · 🟢 0",
+                                                           "summary: 🔴 9 · 🟡 9 · 🟢 9"),
+                encoding="utf-8",
+            )
+        stale = second.read_bytes()
+
+        with mock.patch("os.replace",
+                        _failing_replace(OSError(28, "No space left"), only="beta.md")):
+            rc, _, stderr = run_main_streams([
+                "review_post.py", "--finalize", str(first), str(second),
+            ])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("summary: 🔴 0 · 🟡 1 · 🟢 0", first.read_text(encoding="utf-8"))
+        self.assertEqual(second.read_bytes(), stale)
+        self.assertIn(second.name, stderr)
+        self.assertEqual(self._names(), [first.name, second.name])
+
+    def test_scaffold_write_leaves_no_temp_file_when_replace_fails(self):
+        post = self.root / "posts" / "alpha.md"
+        post.parent.mkdir(parents=True, exist_ok=True)
+        post.write_text("---\ntitle: T\n---\n본문이다.\n", encoding="utf-8")
+        output_dir = self.root / "reports"
+
+        with mock.patch("os.replace", _failing_replace(OSError(28, "No space left"))):
+            rc, _, stderr = run_main_streams([
+                "review_post.py", "--write-reports", "--output-dir", str(output_dir),
+                "--date", "2026-08-04", str(post),
+            ])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("쓰기 실패", stderr)
+        self.assertEqual(self._names(output_dir), [])
+
+    def test_readme_documents_the_write_policy(self):
+        text = (REPO_ROOT / "docs" / "reviews" / "README.md").read_text(encoding="utf-8")
+        for term in ("os.replace", "임시 파일", "파일별 원자성", "byte-identical"):
+            self.assertIn(term, text)
 
 
 class TestStdoutEncoding(unittest.TestCase):
