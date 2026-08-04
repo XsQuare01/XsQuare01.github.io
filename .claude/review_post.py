@@ -4,9 +4,11 @@
 사용법: python review_post.py <파일.md> [<파일2.md> ...]
 인자가 없으면 아무것도 출력하지 않고 0으로 종료한다.
 """
+import os
 import sys
 import re
 import json
+import tempfile
 import xml.dom.minidom as minidom
 from collections import namedtuple
 from datetime import date
@@ -717,6 +719,63 @@ def _legacy_rows(text):
     return rows
 
 
+def atomic_write_text(path, text, encoding="utf-8"):
+    """같은 디렉터리의 임시 파일에 쓴 뒤 `os.replace()`로 교체한다.
+
+    `Path.write_text()`는 대상 파일을 먼저 truncate한다. 디스크 부족, 권한·인코딩
+    오류, 프로세스 중단이 쓰는 도중에 일어나면 원본 대신 잘린 파일이 남는다.
+    리포트는 리뷰 근거의 유일한 기록이라 부분 파일이 원본보다 나쁘다.
+
+    실패하면 임시 파일을 지우고 예외를 그대로 올린다. 대상 파일은 손대지 않아
+    byte-identical하게 남는다. 여러 파일을 처리할 때의 정책은 파일별 원자성이며
+    `docs/reviews/README.md`에 적었다.
+    """
+    path = Path(path)
+    # 임시 파일은 대상과 같은 디렉터리에 만든다. os.replace는 같은 파일 시스템
+    # 안에서만 원자적이라, 시스템 임시 디렉터리를 쓰면 그 보장이 사라진다.
+    fd, tmp_name = tempfile.mkstemp(
+        dir=str(path.parent), prefix=f"{path.name}.", suffix=".tmp",
+    )
+    # 임시 파일을 지우려면 먼저 닫아야 한다. Windows는 열린 파일을 지우지 못하므로,
+    # 닫지 못한 descriptor는 곧 지우지 못하는 임시 파일이다. 소유권을 명시적으로
+    # 들고 다니며 어느 중단 지점에서든 가진 것만 닫는다.
+    handle = None
+    try:
+        handle = os.fdopen(fd, "w", encoding=encoding)
+        fd = None  # 소유권이 handle로 넘어갔다. 이제 fd를 직접 닫으면 안 된다.
+        # mkstemp은 0600으로 만든다. 그대로 교체하면 리포트 권한이 조용히 좁아진다.
+        try:
+            os.chmod(tmp_name, (path.stat().st_mode & 0o777) if path.exists() else 0o644)
+        except OSError:
+            pass
+        handle.write(text)
+        handle.flush()
+        os.fsync(handle.fileno())
+        handle.close()
+        handle = None
+        # 되읽어 대조한다. 예외 없이 잘린 쓰기를 교체 전에 잡는다.
+        if Path(tmp_name).read_text(encoding=encoding) != text:
+            raise OSError(f"임시 파일 내용이 쓰려던 내용과 다르다: {tmp_name}")
+        os.replace(tmp_name, str(path))
+    except BaseException:
+        # 중단(KeyboardInterrupt)도 Exception이 아니므로 BaseException으로 받는다.
+        if handle is not None:
+            try:
+                handle.close()
+            except OSError:
+                pass
+        elif fd is not None:
+            try:
+                os.close(fd)
+            except OSError:
+                pass
+        try:
+            os.unlink(tmp_name)
+        except OSError:
+            pass
+        raise
+
+
 def migrate_reports(report_paths):
     """과거 리포트를 v2 정본으로 전환한다. 없는 근거는 만들어 내지 않는다."""
     failed = False
@@ -781,7 +840,12 @@ def migrate_reports(report_paths):
             failed = True
             continue
 
-        path.write_text(canonical, encoding="utf-8")
+        try:
+            atomic_write_text(path, canonical)
+        except OSError as e:
+            print(f"리포트 쓰기 실패: {path}: {e}", file=sys.stderr)
+            failed = True
+            continue
         print(f"마이그레이션 완료: {path}")
     return 2 if failed else 0
 
@@ -857,7 +921,8 @@ def write_markdown_report(output_dir, report_date, path, findings, strict=False)
     out_path = report_path_for(output_dir, report_date, path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     rows = [finding_to_report_v2(path, f) for f in findings]
-    out_path.write_text(
+    atomic_write_text(
+        out_path,
         rr.serialize_report(
             target=Path(path).stem,
             generated_at=report_date,
@@ -865,7 +930,6 @@ def write_markdown_report(output_dir, report_date, path, findings, strict=False)
             findings=rows,
             sources=[str(path)],
         ),
-        encoding="utf-8",
     )
     return out_path
 
@@ -1032,7 +1096,7 @@ def finalize_reports(report_paths, strict=False):
             continue
 
         try:
-            path.write_text(canonical, encoding="utf-8")
+            atomic_write_text(path, canonical)
         except OSError as e:
             print(f"리포트 쓰기 실패: {path}: {e}", file=sys.stderr)
             infra_failed = True
