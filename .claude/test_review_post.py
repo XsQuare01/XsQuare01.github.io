@@ -1163,6 +1163,110 @@ class TestReportSchemaV2(unittest.TestCase):
                     self.assertIn(f"`{field}`", text)
 
 
+class TestLlmRubricSingleSource(unittest.TestCase):
+    """L1–L7 루브릭은 정본 하나만 둔다(#87).
+
+    두 커맨드가 문구를 각자 들고 있으면 갈라진다. 실제로 `/review-post-all`의 L1은
+    `docs/writing-rules.md` 참조와 강박 금지 단서를 빠뜨린 채 오래 유지됐다.
+    """
+
+    RUBRIC = REPO_ROOT / "docs" / "review-rubric.md"
+    COMMANDS = ("review-post.md", "review-post-all.md")
+
+    def _rubric_text(self):
+        return self.RUBRIC.read_text(encoding="utf-8")
+
+    def _command_text(self, name):
+        return (COMMAND_DIR / name).read_text(encoding="utf-8")
+
+    def _critique_section(self, text):
+        return text.split("## 2단계: LLM 비평", 1)[1].split("\n## ", 1)[0]
+
+    def test_canonical_rubric_defines_exactly_l1_to_l7(self):
+        text = self._rubric_text()
+
+        defined = re.findall(r"(?m)^- \*\*(L[1-7]) ", text)
+        self.assertEqual(defined, ["L1", "L2", "L3", "L4", "L5", "L6", "L7"])
+        self.assertNotIn("**L8", text)
+
+    def test_canonical_rubric_l1_keeps_the_writing_guide_and_anti_compulsion(self):
+        l1 = self._rubric_text().split("- **L1 ", 1)[1].split("\n- **L2", 1)[0]
+
+        for term in ("docs/writing-rules.md", "바른 문장 쓰기", "강박 금지",
+                     "논리 전환에 꼭 필요한 접속어"):
+            with self.subTest(term=term):
+                self.assertIn(term, l1)
+
+    def test_both_commands_point_at_the_canonical_rubric(self):
+        for name in self.COMMANDS:
+            with self.subTest(command=name):
+                text = self._command_text(name)
+                self.assertIn("docs/review-rubric.md", text)
+
+    def test_neither_command_redefines_the_rubric(self):
+        """정본을 두고도 문구를 복제하면 다시 갈라진다."""
+        for name in self.COMMANDS:
+            with self.subTest(command=name):
+                text = self._command_text(name)
+                inlined = re.findall(r"(?m)^- \*\*(L[1-7]) ", text)
+                self.assertEqual(inlined, [], f"{name}에 루브릭 문구가 복제돼 있다")
+
+    def test_both_commands_share_one_critique_section(self):
+        sections = [self._critique_section(self._command_text(n)) for n in self.COMMANDS]
+
+        self.assertEqual(sections[0], sections[1])
+
+    def test_coverage_constant_matches_the_canonical_rubric(self):
+        defined = tuple(re.findall(r"(?m)^- \*\*(L[1-7]) ", self._rubric_text()))
+
+        self.assertEqual(rp.REQUIRED_LLM_RULES, defined)
+
+    V1_SPEC = (REPO_ROOT / "docs" / "superpowers" / "specs"
+               / "2026-06-03-review-post-command-design.md")
+
+    def test_superseded_v1_spec_is_marked_historical(self):
+        """v1 설계서는 L1–L5만 정의하고 수학 정확성을 판정하지 않는다고 적었다.
+
+        현재 L7과 정면으로 어긋나므로, 그 문서를 현재 계약으로 읽으면 안 된다는
+        표시와 정본 링크가 문서 안에 있어야 한다.
+        """
+        text = self.V1_SPEC.read_text(encoding="utf-8")
+
+        head = text.split("\n## ", 1)[0]
+        self.assertIn("docs/review-rubric.md", head)
+        for term in ("v1", "기록"):
+            with self.subTest(term=term):
+                self.assertIn(term, head)
+
+    def test_readme_does_not_present_the_v1_spec_as_the_current_design(self):
+        text = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        self.assertNotIn("자세한 설계는 `docs/superpowers/specs/2026-06-03", text)
+        self.assertIn("docs/review-rubric.md", text)
+
+    def test_readme_category_labels_match_the_canonical_rubric(self):
+        """범주 이름을 README가 따로 적어 두면 정본과 갈라진다."""
+        rubric = self._rubric_text()
+        readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        for match in re.finditer(r"(?m)^- \*\*(L[1-7]) ([^:*]+):\*\*", rubric):
+            rule_id, label = match.group(1), match.group(2).strip()
+            with self.subTest(rule=rule_id):
+                if rule_id in readme and f"{rule_id} " in readme:
+                    self.assertIn(f"{rule_id} {label}", readme,
+                                  f"README의 {rule_id} 이름이 정본과 다르다")
+
+    def test_command_specific_output_differences_are_preserved(self):
+        """루브릭을 합치면서 편별·집계 출력 차이를 지우지 않는다."""
+        single = self._command_text("review-post.md")
+        aggregate = self._command_text("review-post-all.md")
+
+        self.assertIn("<오늘 날짜>-<slug>.md", single)
+        self.assertNotIn("aggregate summary", single)
+        self.assertIn("<오늘 날짜>-all.md", aggregate)
+        self.assertIn("aggregate summary", aggregate)
+
+
 class TestAuthoringGuideContracts(unittest.TestCase):
     def test_agents_and_review_commands_share_canonical_authority_and_ownership(self):
         agents_text = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
