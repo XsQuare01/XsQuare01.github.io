@@ -736,27 +736,39 @@ def atomic_write_text(path, text, encoding="utf-8"):
     fd, tmp_name = tempfile.mkstemp(
         dir=str(path.parent), prefix=f"{path.name}.", suffix=".tmp",
     )
+    # 임시 파일을 지우려면 먼저 닫아야 한다. Windows는 열린 파일을 지우지 못하므로,
+    # 닫지 못한 descriptor는 곧 지우지 못하는 임시 파일이다. 소유권을 명시적으로
+    # 들고 다니며 어느 중단 지점에서든 가진 것만 닫는다.
+    handle = None
     try:
+        handle = os.fdopen(fd, "w", encoding=encoding)
+        fd = None  # 소유권이 handle로 넘어갔다. 이제 fd를 직접 닫으면 안 된다.
         # mkstemp은 0600으로 만든다. 그대로 교체하면 리포트 권한이 조용히 좁아진다.
         try:
             os.chmod(tmp_name, (path.stat().st_mode & 0o777) if path.exists() else 0o644)
         except OSError:
             pass
-        try:
-            handle = os.fdopen(fd, "w", encoding=encoding)
-        except BaseException:
-            os.close(fd)
-            raise
-        with handle:
-            handle.write(text)
-            handle.flush()
-            os.fsync(handle.fileno())
+        handle.write(text)
+        handle.flush()
+        os.fsync(handle.fileno())
+        handle.close()
+        handle = None
         # 되읽어 대조한다. 예외 없이 잘린 쓰기를 교체 전에 잡는다.
         if Path(tmp_name).read_text(encoding=encoding) != text:
             raise OSError(f"임시 파일 내용이 쓰려던 내용과 다르다: {tmp_name}")
         os.replace(tmp_name, str(path))
     except BaseException:
         # 중단(KeyboardInterrupt)도 Exception이 아니므로 BaseException으로 받는다.
+        if handle is not None:
+            try:
+                handle.close()
+            except OSError:
+                pass
+        elif fd is not None:
+            try:
+                os.close(fd)
+            except OSError:
+                pass
         try:
             os.unlink(tmp_name)
         except OSError:

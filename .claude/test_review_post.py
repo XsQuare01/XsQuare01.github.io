@@ -1967,19 +1967,38 @@ class _HalfWriter:
     def fileno(self):
         return self._handle.fileno()
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *exc_info):
+    def close(self):
         self._handle.close()
-        return False
+
+    @property
+    def closed(self):
+        return self._handle.closed
 
 
 _REAL_FDOPEN = os.fdopen
+_REAL_MKSTEMP = tempfile.mkstemp
 
 
 def _half_writing_fdopen(*args, **kwargs):
     return _HalfWriter(_REAL_FDOPEN(*args, **kwargs))
+
+
+def _recording_fdopen(handles):
+    def fdopen(*args, **kwargs):
+        handle = _REAL_FDOPEN(*args, **kwargs)
+        handles.append(handle)
+        return handle
+
+    return fdopen
+
+
+def _recording_mkstemp(descriptors):
+    def mkstemp(*args, **kwargs):
+        fd, name = _REAL_MKSTEMP(*args, **kwargs)
+        descriptors.append(fd)
+        return fd, name
+
+    return mkstemp
 
 
 def _failing_replace(exc, only=None):
@@ -2096,6 +2115,44 @@ class TestAtomicReportWrite(unittest.TestCase):
             with self.assertRaises(KeyboardInterrupt):
                 rp.atomic_write_text(target, "새 내용\n")
 
+        self.assertEqual(target.read_text(encoding="utf-8"), "원본 근거\n")
+        self.assertEqual(self._names(), ["report.md"])
+
+    def test_atomic_write_closes_the_handle_when_interrupted_before_replace(self):
+        """임시 파일을 지우려면 먼저 닫아야 한다. 열린 파일은 Windows에서 지워지지 않는다."""
+        target = self.root / "report.md"
+        target.write_text("원본 근거\n", encoding="utf-8")
+        handles = []
+
+        with mock.patch("os.fdopen", _recording_fdopen(handles)), \
+             mock.patch("os.chmod", side_effect=KeyboardInterrupt()):
+            with self.assertRaises(KeyboardInterrupt):
+                rp.atomic_write_text(target, "새 내용\n")
+
+        self.assertEqual(len(handles), 1, "임시 파일 핸들이 열리지 않았다")
+        self.assertTrue(handles[0].closed, "중단 뒤에도 임시 파일 핸들이 열려 있다")
+        self.assertEqual(target.read_text(encoding="utf-8"), "원본 근거\n")
+        self.assertEqual(self._names(), ["report.md"])
+
+    def test_atomic_write_closes_the_descriptor_when_the_handle_cannot_be_opened(self):
+        """os.fdopen이 실패하면 raw descriptor 소유권이 아직 우리에게 있다."""
+        target = self.root / "report.md"
+        target.write_text("원본 근거\n", encoding="utf-8")
+        descriptors, closed = [], []
+        real_close = os.close
+
+        def recording_close(fd):
+            closed.append(fd)
+            return real_close(fd)
+
+        with mock.patch("tempfile.mkstemp", _recording_mkstemp(descriptors)), \
+             mock.patch("os.fdopen", side_effect=KeyboardInterrupt()), \
+             mock.patch("os.close", recording_close):
+            with self.assertRaises(KeyboardInterrupt):
+                rp.atomic_write_text(target, "새 내용\n")
+
+        self.assertEqual(len(descriptors), 1, "임시 파일이 만들어지지 않았다")
+        self.assertIn(descriptors[0], closed, "raw descriptor가 닫히지 않았다")
         self.assertEqual(target.read_text(encoding="utf-8"), "원본 근거\n")
         self.assertEqual(self._names(), ["report.md"])
 
