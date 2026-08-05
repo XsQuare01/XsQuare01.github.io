@@ -19,7 +19,7 @@ allowed-tools: Write, Edit, Bash(python:*), Bash(git diff:*), Read, Grep, Glob
 
 `python .claude/review_post.py --write-reports src/content/posts/*.md`
 
-- stdout의 결정적 검사 결과는 리포트의 결정적 검사 섹션에 그대로 포함한다.
+- stdout의 결정적 검사 결과는 사용자에게 보고한다. **리포트에 `## 결정적 검사` 같은 산문 섹션을 만들지 않는다.** 발견 사항은 scaffold가 이미 `D` 출처 finding 행으로 담고 있고, 정본 형식에는 그 밖의 섹션이 없다. 만들면 `--finalize`가 exit 2로 거부한다.
 - `--write-reports`가 만든 포스트별 scaffold를 참고하되, `/review-post-all` 최종 산출물은 `docs/reviews/<오늘 날짜>-all.md` 한 파일이다.
 - Python scaffold와 LLM 비평 행을 섞어 쓰지 않는다. LLM 비평은 아래 2단계 후 Write/Edit로 전체 리뷰 파일에 명시적으로 추가한다.
 

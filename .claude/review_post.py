@@ -791,24 +791,33 @@ def atomic_write_text(path, text, encoding="utf-8"):
         raise
 
 
-# 전환 모델이 담을 수 있는 섹션. 이 목록에 없는 섹션은 전환하면 조용히 사라진다.
-_KNOWN_SECTION_RE = re.compile(
-    r"^(?:# 리뷰 리포트|## 결정적 검사|## LLM 비평|## Findings)\b", re.IGNORECASE
+# 정본 형식이 담는 섹션은 `## Findings`와 감사 섹션뿐이다.
+_CANONICAL_SECTION_RE = re.compile(r"^## Findings\b", re.IGNORECASE)
+# 과거 리포트가 쓴 진행용 제목. 전환 대상이므로 `--migrate`에서만 허용한다.
+# 정본화(`--finalize`)에서 함께 허용하면, 이 제목 아래 적은 산문이 성공 코드와
+# 함께 사라진다. 진행용 제목은 전환의 입력이지 정본의 일부가 아니다.
+_PROGRESS_SECTION_RE = re.compile(
+    r"^(?:# 리뷰 리포트|## 결정적 검사|## LLM 비평)\b", re.IGNORECASE
 )
 _SECTION_HEADING_RE = re.compile(r"^#{1,2} \S")
 
 
-def unknown_sections(text):
+def unknown_sections(text, *, legacy=False):
     """정본 모델에 자리가 없는 섹션 제목을 돌려준다.
 
-    finding과 감사 섹션 밖의 내용은 전환하면 사라진다. 무손실을 증명할 수 없으면
+    finding과 감사 섹션 밖의 내용은 정본화하면 사라진다. 무손실을 증명할 수 없으면
     쓰지 않는 편이 낫다. 어느 섹션이 걸림돌인지 알려 사람이 판단하게 한다.
+
+    `legacy`면 과거 리포트의 진행용 제목을 허용한다. `--migrate`는 그 형식을 읽어
+    옮기는 것이 일이므로 거부하면 아무것도 전환하지 못한다.
     """
     found = []
     for line in text.splitlines():
         if not _SECTION_HEADING_RE.match(line):
             continue
-        if _KNOWN_SECTION_RE.match(line) or rr.AUDIT_HEADING_RE.match(line):
+        if _CANONICAL_SECTION_RE.match(line) or rr.AUDIT_HEADING_RE.match(line):
+            continue
+        if legacy and _PROGRESS_SECTION_RE.match(line):
             continue
         found.append(line.strip())
     return found
@@ -844,7 +853,7 @@ def migrate_reports(report_paths):
             failed = True
             continue
 
-        unknown = unknown_sections(text)
+        unknown = unknown_sections(text, legacy=True)
         if unknown:
             print(
                 f"{path}: 정본 모델에 자리가 없는 섹션이 있어 전환하지 않는다 — "
@@ -1135,28 +1144,29 @@ def finalize_reports(report_paths, strict=False):
             infra_failed = True
             continue
 
+        unknown = unknown_sections(text)
+        if unknown:
+            print(
+                f"{path}: 정본 모델에 자리가 없는 섹션이 있어 정본화하지 않는다 — "
+                f"{', '.join(unknown)}. 내용을 finding이나 감사 섹션으로 옮긴다",
+                file=sys.stderr,
+            )
+            infra_failed = True
+            continue
+
         parsed = rr.parse_report(text)
-        header = parsed["header"]
         findings = parsed["findings"]
-        source_errors = rr.validate_source_findings(findings)
+        source_errors = rr.validate_source_header(text, parsed["header"])
+        source_errors += rr.validate_source_findings(findings)
         if source_errors:
             for error in source_errors:
                 print(f"{path}: {error}", file=sys.stderr)
             infra_failed = True
             continue
 
-        canonical = rr.serialize_report(
-            target=header.get("target", rr.NOT_RECORDED),
-            generated_at=header.get("generated_at", rr.NOT_RECORDED),
-            strict=True if strict else header.get("strict", "false"),
-            findings=findings,
-            sources=header.get("sources", []),
-            # 손실 있는 전환이었다는 표시는 정본화에서 살아남아야 한다.
-            migrated_from=header.get("migrated_from"),
-            # 지적을 어떻게 처리했는지 적은 감사 섹션도 남는다. 이것이 사라지면
-            # 리포트가 "경고만 있고 해결은 없는" 상태를 잘못 전달한다.
-            audit=parsed["audit"],
-        )
+        # `migrated_from`(손실 있는 전환 표시)과 감사 섹션(해결 기록)은 정본화에서
+        # 살아남아야 한다. 두 가지 다 canonical_form()이 함께 옮긴다.
+        canonical = canonical_form(parsed, strict=True if strict else None)
         errors = rr.validate_report(canonical, state="complete")
         if errors:
             for error in errors:
@@ -1243,6 +1253,25 @@ def latest_reports(reports_dir):
     return [path for _, path in sorted(newest.values())]
 
 
+def canonical_form(parsed, *, strict=None):
+    """읽어 들인 리포트를 정본 형식으로 다시 직렬화한다.
+
+    정본 여부를 판정하는 곳(게이트, 정본화, 코퍼스 테스트)이 각자 직렬화 인자를
+    나열하면 하나가 빠져도 드러나지 않는다. 실제로 `migrated_from`이 그렇게 사라진
+    적이 있다. 한 곳에서만 조립한다.
+    """
+    header = parsed["header"]
+    return rr.serialize_report(
+        target=header.get("target", rr.NOT_RECORDED),
+        generated_at=header.get("generated_at", rr.NOT_RECORDED),
+        strict=header.get("strict", "false") if strict is None else strict,
+        findings=parsed["findings"],
+        sources=header.get("sources", []),
+        migrated_from=header.get("migrated_from"),
+        audit=parsed["audit"],
+    )
+
+
 def gate_reports(reports_dir=DEFAULT_REPORTS_DIR):
     """대상별 최신 리포트에 최종 품질 게이트를 건다. 파일은 고치지 않는다.
 
@@ -1276,15 +1305,7 @@ def gate_reports(reports_dir=DEFAULT_REPORTS_DIR):
             infra_failed = True
             continue
 
-        canonical = rr.serialize_report(
-            target=header.get("target", rr.NOT_RECORDED),
-            generated_at=header.get("generated_at", rr.NOT_RECORDED),
-            strict=header.get("strict", "false"),
-            findings=findings,
-            sources=header.get("sources", []),
-            migrated_from=header.get("migrated_from"),
-            audit=parsed["audit"],
-        )
+        canonical = canonical_form(parsed)
         errors = rr.validate_report(canonical, state="complete")
         if errors:
             for error in errors:
