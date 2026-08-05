@@ -93,3 +93,10 @@ summary: 🔴 1 · 🟡 1 · 🟢 6
 - message: 검토 완료, 이슈 없음
 - recommendation: Notion tools are unavailable in this session, so original-source comparison could not be performed. The review only checks the repository version against its own prose, math, and SVGs.
 - gate_effect: info
+
+## 반영 결과 (2026-07-13, 2차 리뷰)
+
+- 🔴 [L7] `convex-hull-4.md:76` 선형 워킹 의사코드 방향 불일치 — **반영 완료**. `below(a,b,c)`(방향선 a→b 기준)를 `belowLine(p,q,c)`(두 점 p,q를 지나는 **무방향 직선** 기준)로 바꾸고, 두 검사 모두 같은 기준선 `L[a]–R[b]`를 쓰도록 통일했다(`belowLine(L[a], R[b], ...)`). 끝점을 뒤집던 둘째 검사의 부호 반전 문제 제거. 본문 프로세 표기도 `직선 a→b`→`직선 ab`(무방향)로 맞추고, 기준선이 세로가 아니라 '아래'가 잘 정의됨을 주석에 명시.
+- 🟡 [L7] `convex-hull-4.md:107` 접선 접점 모호성 — **반영 완료**. "상단 공통 접선을 찾는다고 하고 … 외부 점 $a$에서 오른쪽 껍질로는 위·아래 두 접선이 나오지만, 그중 **상단 접선의 접점**은 하나로 정해진다"로 대상 접선(상단)과 사슬을 먼저 제한해 모호성 제거.
+- 재검증: `npm run build` 성공(106 pages), `python .claude/review_post.py` 재실행 "발견 사항 없음 ✅".
+- 참고(L6): 2차 리뷰는 세션에서 Notion 도구 미가용으로 원본 대조를 못 했다고 기록했으나, 1차 리뷰에서 `notion-fetch`로 `Convex hull 2` 원본을 확보해 대조를 이미 수행했다(원본 핵심 반영·누락 없음, 선형 워킹은 승인된 보강).
