@@ -2340,6 +2340,26 @@ class TestRepositoryGate(unittest.TestCase):
         self.assertEqual(rc, 2)
         self.assertIn("L6", stderr)
 
+    def test_missing_reports_directory_is_an_infra_failure(self):
+        """경로를 잘못 적으면 CI가 아무것도 검사하지 않고 초록이 된다."""
+        rc, stdout, stderr = run_main_streams([
+            "review_post.py", "--gate", "--reports-dir", str(self.root / "없는경로"),
+        ])
+
+        self.assertEqual(rc, 2, stdout)
+        self.assertIn("없는경로", stderr)
+
+    def test_empty_reports_directory_is_an_infra_failure(self):
+        """검사한 리포트가 0개면 게이트는 아무것도 보장하지 못한다. 통과로 읽히면 안 된다."""
+        (self.root / "README.md").write_text("문서다\n", encoding="utf-8")
+
+        rc, stdout, stderr = run_main_streams([
+            "review_post.py", "--gate", "--reports-dir", str(self.root),
+        ])
+
+        self.assertEqual(rc, 2, stdout)
+        self.assertIn("리포트", stderr)
+
     def test_gate_never_writes_to_reports(self):
         path = self._report("2026-08-03-alpha.md", self._coverage("alpha"))
         before = path.read_bytes()
@@ -2433,6 +2453,60 @@ class TestGateIsWiredIntoCI(unittest.TestCase):
         scripts = package.get("scripts", {})
         self.assertTrue(any("--gate" in command for command in scripts.values()),
                         f"package.json에 게이트 실행 스크립트가 없다: {sorted(scripts)}")
+
+
+class TestUnknownFlags(unittest.TestCase):
+    """모르는 옵션은 경로가 아니라 오류다. 쓰기 전에 거부한다."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _report(self):
+        path = self.root / "2026-08-05-alpha.md"
+        path.write_text(rr.serialize_report(
+            target="alpha", generated_at="2026-08-05", strict=False,
+            findings=[{
+                "severity": "🟢", "source": "L", "rule_id": rule,
+                "location": "src/content/posts/alpha.md:1", "quote": "not-recorded",
+                "message": "검토 완료, 이슈 없음", "recommendation": "not-recorded",
+                "gate_effect": "info",
+            } for rule in rp.REQUIRED_LLM_RULES],
+        ), encoding="utf-8")
+        return path
+
+    def test_mistyped_strict_does_not_finalize_without_judging(self):
+        """`--strcit`가 경로로 먹히면, 실패 코드와 함께 판정 없는 정본화가 일어난다."""
+        report = self._report()
+        before = report.read_bytes()
+
+        rc, stdout, stderr = run_main_streams([
+            "review_post.py", "--finalize", "--strcit", str(report),
+        ])
+
+        self.assertEqual(rc, 2, stdout)
+        self.assertIn("--strcit", stderr)
+        self.assertNotIn("정본화 완료", stdout)
+        self.assertEqual(report.read_bytes(), before)
+
+    def test_mistyped_gate_says_which_option_is_wrong(self):
+        rc, _, stderr = run_main_streams(["review_post.py", "--gates"])
+
+        self.assertEqual(rc, 2)
+        self.assertIn("--gates", stderr)
+        self.assertNotIn("No such file", stderr)
+
+    def test_known_options_still_work(self):
+        report = self._report()
+
+        rc, stdout, _ = run_main_streams([
+            "review_post.py", "--finalize", "--strict", str(report),
+        ])
+
+        self.assertEqual(rc, 0, stdout)
 
 
 class TestGateEffectSingleSource(unittest.TestCase):

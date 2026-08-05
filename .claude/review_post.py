@@ -1062,6 +1062,10 @@ def parse_args(argv):
                 i += 1
             else:
                 opts["errors"].append("--date requires a value")
+        elif arg.startswith("-") and arg != "-":
+            # 모르는 옵션을 경로로 삼으면 오타가 조용히 기능을 끈다. `--strcit`는
+            # 읽기 실패 하나를 남기고 나머지 리포트를 판정 없이 정본화했다.
+            opts["errors"].append(f"모르는 옵션이다: {arg}")
         else:
             opts["paths"].append(arg)
         i += 1
@@ -1279,11 +1283,23 @@ def gate_reports(reports_dir=DEFAULT_REPORTS_DIR):
     이는 `--finalize`를 돌리지 않아 요약과 판정이 어긋난 리포트를 통과시키지
     않기 위해서다.
     """
+    # 경로를 잘못 적거나 리포트가 없으면 게이트는 아무것도 보장하지 못한다. 그 상태를
+    # 통과로 돌려주면 CI가 "검사했고 문제없다"로 읽는다. 검사한 것이 없다고 말해야 한다.
+    directory = Path(reports_dir)
+    if not directory.is_dir():
+        print(f"리포트 디렉터리가 없다: {directory}", file=sys.stderr)
+        return 2
+
+    reports = latest_reports(reports_dir)
+    if not reports:
+        print(f"검사할 리포트가 없다: {directory}", file=sys.stderr)
+        return 2
+
     infra_failed = False
     quality_failed = False
     checked, skipped = [], []
 
-    for path in latest_reports(reports_dir):
+    for path in reports:
         if not report_under_canonical_contract(path):
             skipped.append(path)
             continue
