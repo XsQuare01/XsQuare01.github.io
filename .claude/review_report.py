@@ -23,6 +23,9 @@ FINDING_FIELDS = (
 SEVERITY_VALUES = ("🔴", "🟡", "🟢")
 SOURCE_VALUES = ("D", "L", "MIGRATED")
 GATE_EFFECT_VALUES = ("fail", "warn", "info")
+STRICT_VALUES = ("true", "false", NOT_RECORDED)
+# scaffold는 finding 0건을 허용하는 중간 상태, complete는 최종 산출물이다.
+REPORT_STATES = ("scaffold", "complete")
 # 정본 대응. 이 대응을 검증하지 않으면 🔴 finding에 gate_effect: info를 적어
 # 품질 게이트를 우회할 수 있다.
 CANONICAL_GATE_EFFECT = {"🔴": "fail", "🟡": "warn", "🟢": "info"}
@@ -335,6 +338,15 @@ def verify_round_trip(text, findings, audit=None):
 
 
 def validate_report(text, *, state="complete"):
+    """저장 리포트가 정본 계약을 지키는지 본다. 오류 목록을 돌려준다.
+
+    `state`가 `scaffold`·`complete`가 아니면 ValueError다. 오타를 오류 목록에 담으면
+    호출자가 그것을 데이터 결함으로 읽고 넘어간다. 알 수 없는 상태는 데이터가 아니라
+    호출 쪽 버그이므로 조용히 scaffold처럼 처리하지 않고 즉시 터뜨린다.
+    """
+    if state not in REPORT_STATES:
+        raise ValueError(f"state must be one of {REPORT_STATES}: {state!r}")
+
     errors = []
     parsed = parse_report(text)
     header, findings = parsed["header"], parsed["findings"]
@@ -347,9 +359,17 @@ def validate_report(text, *, state="complete"):
 
     if header.get("schema_version") != SCHEMA_VERSION:
         errors.append(f"schema_version must be {SCHEMA_VERSION}")
+    # 선언은 첫 줄이어야 한다. 아래쪽에 묻힌 선언은 리포트를 여는 사람도, 첫 줄로
+    # 정본 여부를 가리는 게이트도 보지 못한다.
+    elif text.split("\n", 1)[0].strip() != f"schema_version: {SCHEMA_VERSION}":
+        errors.append("schema_version must be the first line")
     for key in ("target", "generated_at", "strict", "summary"):
         if not header.get(key):
             errors.append(f"missing required header field: {key}")
+    if header.get("strict") and header["strict"] not in STRICT_VALUES:
+        errors.append(
+            f"invalid strict: {header['strict']} (must be one of {', '.join(STRICT_VALUES)})"
+        )
     if FINDINGS_HEADING not in text:
         errors.append(f"missing section: {FINDINGS_HEADING}")
 

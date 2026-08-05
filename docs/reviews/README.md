@@ -82,6 +82,12 @@ finding 뒤에 `## 후속 처리`, `## 반영 상태`, `## 반영 결과` 중 �
 | scaffold | `--write-reports` | 0건 허용 | `validate_report(text, state="scaffold")` |
 | complete | LLM 행 추가 후 `--finalize` | 1건 이상 필수 | `validate_report(text, state="complete")` |
 
+상태 이름은 이 둘뿐이다. 다른 값을 주면 `ValueError`로 즉시 터진다. 오타를 검증 오류 목록에 담으면 호출자가 그것을 데이터 결함으로 읽고 넘어가, 검사하지 않은 리포트가 검사한 것처럼 통과한다.
+
+`schema_version` 선언은 **첫 줄**이어야 한다. 아래쪽에 묻힌 선언은 리포트를 여는 사람도, 첫 줄로 정본 여부를 가리는 게이트도 보지 못한다. `strict` 값은 `true`·`false`·`not-recorded` 셋뿐이다.
+
+`## 결정적 검사`, `## LLM 비평` 같은 진행용 제목은 정본 형식에 없다. 정본화하면 사라지므로 그 아래 적은 내용은 finding이나 감사 섹션으로 옮긴다. 그 밖의 `##` 섹션을 만나면 `--finalize`·`--migrate` 모두 **쓰지 않고 exit code `2`로 끝난다.**
+
 `docs/reviews/`에 남는 최종 산출물은 complete 상태다. `--finalize`는 finding을 정본 순서로 재정렬하고 `summary`를 다시 계산한다. 멱등이므로 여러 번 실행해도 결과가 같다.
 
 ## 정본 강제 범위와 과거 리포트

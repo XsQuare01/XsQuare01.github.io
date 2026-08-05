@@ -8,24 +8,17 @@ import tempfile
 from pathlib import Path
 from unittest import mock
 import review_post as rp
+import review_report as rr
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-REVIEW_REPORT_DIR = REPO_ROOT / "docs" / "reviews"
+REVIEW_REPORT_DIR = REPO_ROOT / rp.DEFAULT_REPORTS_DIR
 COMMAND_DIR = REPO_ROOT / ".claude" / "commands"
-REQUIRED_REPORT_FIELDS = {
-    "severity",
-    "source",
-    "rule_id",
-    "location",
-    "quote",
-    "message",
-    "recommendation",
-    "gate_effect",
-}
-SEVERITY_VALUES = {"🔴", "🟡", "🟢"}
-SOURCE_VALUES = {"D", "L", "MIGRATED"}
-GATE_EFFECT_VALUES = {"fail", "warn", "info"}
+# 스키마 상수는 정본 모듈에서 가져온다. 사본을 두면 갈라져도 테스트가 통과한다(#100).
+REQUIRED_REPORT_FIELDS = set(rr.FINDING_FIELDS)
+SEVERITY_VALUES = set(rr.SEVERITY_VALUES)
+SOURCE_VALUES = set(rr.SOURCE_VALUES)
+GATE_EFFECT_VALUES = set(rr.GATE_EFFECT_VALUES)
 
 
 def write_post(path, body="본문", frontmatter=None):
@@ -107,46 +100,14 @@ def assert_finding_schema(testcase, finding):
     testcase.assertIn(finding["gate_effect"], GATE_EFFECT_VALUES)
 
 
-# 이 날짜 이후 생성된 리포트는 정본 계약을 지켜야 한다. 그 이전 리포트는 정본
-# serializer가 없던 시절 손으로 쓴 산물이라 형식이 최소 일곱 가지로 갈린다.
-# 일괄 재작성은 근거 손실 위험이 커서 하지 않는다(#84). 대신 검증 가능한 건만
-# `--migrate`로 옮기고, 옮겨진 리포트는 아래 조건에 걸려 자동으로 검사 대상이 된다.
-CANONICAL_FROM = "2026-08-01"
+# 기준일과 면제 판정은 production과 같은 것을 쓴다. 테스트가 사본을 들면 계약이
+# 갈라져도 초록으로 남는다(#100).
+CANONICAL_FROM = rp.CANONICAL_CONTRACT_FROM
+report_must_conform = rp.report_under_canonical_contract
 
 
 def stored_reports():
     return sorted(p for p in REVIEW_REPORT_DIR.glob("*.md") if p.name != "README.md")
-
-
-def report_must_conform(path):
-    """정본 계약을 강제할 리포트인지 판단한다.
-
-    기준일 이후 생성분은 전부 강제한다. 그 이전 리포트라도 이미 정본을 선언했다면
-    되돌아가지 않도록 함께 검사한다.
-    """
-    if path.name[:10] >= CANONICAL_FROM:
-        return True
-    first_line = path.read_text(encoding="utf-8").split("\n", 1)[0].strip()
-    return first_line == "schema_version: review-report/v2"
-
-
-def parse_report_findings(markdown):
-    findings = []
-    current = None
-    for line in markdown.splitlines():
-        if line.startswith("### "):
-            if current is not None:
-                findings.append(current)
-            current = {}
-            continue
-        if current is None or not line.startswith("- "):
-            continue
-        m = re.match(r"- (severity|source|rule_id|location|quote|message|recommendation|gate_effect):\s*(.*)$", line)
-        if m:
-            current[m.group(1)] = m.group(2).strip().strip("`")
-    if current is not None:
-        findings.append(current)
-    return findings
 
 
 class TestSkeleton(unittest.TestCase):
@@ -1036,6 +997,12 @@ class TestReportSchemaV2(unittest.TestCase):
         self.assertEqual(row["gate_effect"], "fail")
 
     def test_reports_under_canonical_contract_conform_to_v2_schema(self):
+        """저장 리포트 검사는 정본 validator와 정본 직렬화 하나로만 한다(#100).
+
+        테스트가 자체 parser와 enum 사본으로 검사하면, production이 놓치는 위반을
+        테스트도 같이 놓친다. 실제로 사본 parser는 백틱을 무조건 벗겨 `` `A` / `B` ``를
+        깨뜨렸는데, 그 손실이 정확히 #103에서 드러났다.
+        """
         reports = stored_reports()
         self.assertTrue(reports, "expected at least one stored review report")
         checked = [path for path in reports if report_must_conform(path)]
@@ -1044,19 +1011,10 @@ class TestReportSchemaV2(unittest.TestCase):
         for report in checked:
             with self.subTest(report=report.name):
                 text = report.read_text(encoding="utf-8")
-                self.assertIn("schema_version: review-report/v2", text)
-                self.assertRegex(text, r"(?m)^target: .+", report.name)
-                self.assertRegex(text, r"(?m)^generated_at: .+", report.name)
-                self.assertRegex(text, r"(?m)^strict: .+", report.name)
-                self.assertRegex(text, r"(?m)^summary: 🔴 \d+ · 🟡 \d+ · 🟢 \d+", report.name)
-                self.assertIn("## Findings", text)
-                findings = parse_report_findings(text)
-                self.assertTrue(findings, f"{report.name} has no parsed findings")
-                for finding in findings:
-                    self.assertEqual(set(finding), REQUIRED_REPORT_FIELDS, finding)
-                    self.assertIn(finding["severity"], SEVERITY_VALUES)
-                    self.assertIn(finding["source"], SOURCE_VALUES)
-                    self.assertIn(finding["gate_effect"], GATE_EFFECT_VALUES)
+
+                self.assertEqual(rr.validate_report(text, state="complete"), [], report.name)
+                self.assertEqual(text, rp.canonical_form(rr.parse_report(text)),
+                                 f"{report.name}: 정본 바이트와 다르다")
 
     def test_legacy_exemption_is_explicit_and_documented(self):
         """면제 대상은 조용히 빠지지 않고 목록과 문서로 남아야 한다."""
@@ -1163,6 +1121,117 @@ class TestReportSchemaV2(unittest.TestCase):
                     self.assertIn(term, text)
                 for field in REQUIRED_REPORT_FIELDS:
                     self.assertIn(f"`{field}`", text)
+
+
+class TestStoredReportValidation(unittest.TestCase):
+    """저장 리포트 검사는 정본 validator 하나로 한다(#100).
+
+    아래 위반은 전부 예전 검사(테스트 전용 parser + enum 사본)를 통과했다.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        self.canonical = rr.serialize_report(
+            target="alpha", generated_at="2026-08-05", strict=False,
+            findings=[{
+                "severity": "🟡", "source": "L", "rule_id": "L1",
+                "location": "src/content/posts/alpha.md:12", "quote": "인용",
+                "message": "문제", "recommendation": "권고", "gate_effect": "warn",
+            }],
+        )
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_canonical_report_passes(self):
+        self.assertEqual(rr.validate_report(self.canonical), [])
+
+    def test_unknown_state_is_a_caller_bug_not_a_finding(self):
+        """오타 난 state를 오류 목록에 담으면 호출자가 데이터 결함으로 읽고 넘어간다."""
+        with self.assertRaises(ValueError):
+            rr.validate_report(self.canonical, state="scaffolding")
+        for state in rr.REPORT_STATES:
+            with self.subTest(state=state):
+                rr.validate_report(self.canonical, state=state)
+
+    def test_invalid_strict_value_is_rejected(self):
+        text = self.canonical.replace("strict: false", "strict: banana")
+
+        errors = rr.validate_report(text)
+
+        self.assertTrue(any("strict" in e for e in errors), errors)
+
+    def test_schema_version_must_be_the_first_line(self):
+        text = "# 리뷰 리포트\n\n" + self.canonical
+
+        errors = rr.validate_report(text)
+
+        self.assertTrue(any("first line" in e for e in errors), errors)
+
+    def test_stale_summary_is_rejected(self):
+        text = self.canonical.replace("summary: 🔴 0 · 🟡 1 · 🟢 0",
+                                      "summary: 🔴 0 · 🟡 9 · 🟢 0")
+
+        errors = rr.validate_report(text)
+
+        self.assertTrue(any("stale" in e for e in errors), errors)
+
+    def test_non_canonical_order_and_spacing_are_caught_by_byte_equality(self):
+        """정렬·공백은 validator가 아니라 정본 바이트 비교가 잡는다."""
+        two_blank_lines = self.canonical.replace("## Findings\n\n", "## Findings\n\n\n")
+        reordered = rr.serialize_report(
+            target="alpha", generated_at="2026-08-05", strict=False,
+            findings=[
+                {"severity": "🟢", "source": "L", "rule_id": "L2",
+                 "location": "a.md:2", "quote": "q", "message": "m",
+                 "recommendation": "r", "gate_effect": "info"},
+                {"severity": "🔴", "source": "L", "rule_id": "L1",
+                 "location": "a.md:1", "quote": "q", "message": "m",
+                 "recommendation": "r", "gate_effect": "fail"},
+            ],
+        ).replace("### 🔴 [L1] a.md:1", "### PLACEHOLDER")  # 순서만 흔든다
+        swapped = reordered.replace("### 🟢 [L2] a.md:2", "### 🔴 [L1] a.md:1")
+        swapped = swapped.replace("### PLACEHOLDER", "### 🟢 [L2] a.md:2")
+
+        for name, text in (("빈 줄 두 개", two_blank_lines), ("정렬 어긋남", swapped)):
+            with self.subTest(case=name):
+                self.assertNotEqual(text, rp.canonical_form(rr.parse_report(text)))
+
+    def test_gate_rejects_a_stored_report_with_an_invalid_strict_value(self):
+        """validator가 좁아진 만큼 게이트도 함께 좁아져야 한다."""
+        reports = self.root / "reviews"
+        reports.mkdir()
+        (reports / "2026-08-05-alpha.md").write_text(
+            self.canonical.replace("strict: false", "strict: banana"), encoding="utf-8")
+
+        rc, _, stderr = run_main_streams([
+            "review_post.py", "--gate", "--reports-dir", str(reports),
+        ])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("strict", stderr)
+
+    def test_finalize_refuses_a_section_the_canonical_form_cannot_hold(self):
+        report = self.root / "2026-08-05-alpha.md"
+        report.write_text(self.canonical + "\n## 검증 로그\n\n- 빌드 성공\n", encoding="utf-8")
+        original = report.read_bytes()
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("검증 로그", stderr)
+        self.assertEqual(report.read_bytes(), original)
+
+    def test_no_second_report_parser_lives_in_the_tests(self):
+        """테스트가 자체 parser를 다시 들이면 계약이 조용히 갈라진다."""
+        source = Path(__file__).read_text(encoding="utf-8")
+
+        # 이 파일 자신에 걸리지 않도록 조각으로 나눠 찾는다.
+        self.assertNotIn("def " + "parse_report_findings", source)
+        self.assertIs(report_must_conform, rp.report_under_canonical_contract)
+        self.assertEqual(REQUIRED_REPORT_FIELDS, set(rr.FINDING_FIELDS))
+        self.assertEqual(CANONICAL_FROM, rp.CANONICAL_CONTRACT_FROM)
 
 
 class TestLlmRubricSingleSource(unittest.TestCase):
