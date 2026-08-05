@@ -791,24 +791,33 @@ def atomic_write_text(path, text, encoding="utf-8"):
         raise
 
 
-# 전환 모델이 담을 수 있는 섹션. 이 목록에 없는 섹션은 전환하면 조용히 사라진다.
-_KNOWN_SECTION_RE = re.compile(
-    r"^(?:# 리뷰 리포트|## 결정적 검사|## LLM 비평|## Findings)\b", re.IGNORECASE
+# 정본 형식이 담는 섹션은 `## Findings`와 감사 섹션뿐이다.
+_CANONICAL_SECTION_RE = re.compile(r"^## Findings\b", re.IGNORECASE)
+# 과거 리포트가 쓴 진행용 제목. 전환 대상이므로 `--migrate`에서만 허용한다.
+# 정본화(`--finalize`)에서 함께 허용하면, 이 제목 아래 적은 산문이 성공 코드와
+# 함께 사라진다. 진행용 제목은 전환의 입력이지 정본의 일부가 아니다.
+_PROGRESS_SECTION_RE = re.compile(
+    r"^(?:# 리뷰 리포트|## 결정적 검사|## LLM 비평)\b", re.IGNORECASE
 )
 _SECTION_HEADING_RE = re.compile(r"^#{1,2} \S")
 
 
-def unknown_sections(text):
+def unknown_sections(text, *, legacy=False):
     """정본 모델에 자리가 없는 섹션 제목을 돌려준다.
 
-    finding과 감사 섹션 밖의 내용은 전환하면 사라진다. 무손실을 증명할 수 없으면
+    finding과 감사 섹션 밖의 내용은 정본화하면 사라진다. 무손실을 증명할 수 없으면
     쓰지 않는 편이 낫다. 어느 섹션이 걸림돌인지 알려 사람이 판단하게 한다.
+
+    `legacy`면 과거 리포트의 진행용 제목을 허용한다. `--migrate`는 그 형식을 읽어
+    옮기는 것이 일이므로 거부하면 아무것도 전환하지 못한다.
     """
     found = []
     for line in text.splitlines():
         if not _SECTION_HEADING_RE.match(line):
             continue
-        if _KNOWN_SECTION_RE.match(line) or rr.AUDIT_HEADING_RE.match(line):
+        if _CANONICAL_SECTION_RE.match(line) or rr.AUDIT_HEADING_RE.match(line):
+            continue
+        if legacy and _PROGRESS_SECTION_RE.match(line):
             continue
         found.append(line.strip())
     return found
@@ -844,7 +853,7 @@ def migrate_reports(report_paths):
             failed = True
             continue
 
-        unknown = unknown_sections(text)
+        unknown = unknown_sections(text, legacy=True)
         if unknown:
             print(
                 f"{path}: 정본 모델에 자리가 없는 섹션이 있어 전환하지 않는다 — "
@@ -1147,7 +1156,8 @@ def finalize_reports(report_paths, strict=False):
 
         parsed = rr.parse_report(text)
         findings = parsed["findings"]
-        source_errors = rr.validate_source_findings(findings)
+        source_errors = rr.validate_source_header(text, parsed["header"])
+        source_errors += rr.validate_source_findings(findings)
         if source_errors:
             for error in source_errors:
                 print(f"{path}: {error}", file=sys.stderr)

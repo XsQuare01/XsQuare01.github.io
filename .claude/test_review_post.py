@@ -1223,6 +1223,78 @@ class TestStoredReportValidation(unittest.TestCase):
         self.assertIn("검증 로그", stderr)
         self.assertEqual(report.read_bytes(), original)
 
+    def test_finalize_refuses_progress_sections_that_hold_prose(self):
+        """진행용 제목은 전환의 입력이지 정본의 일부가 아니다.
+
+        `--migrate`가 허용하는 목록을 정본화가 함께 쓰면, 그 제목 아래 산문이
+        성공 코드와 함께 사라진다.
+        """
+        for section in ("## 결정적 검사", "## LLM 비평", "# 리뷰 리포트"):
+            with self.subTest(section=section):
+                report = self.root / "2026-08-05-alpha.md"
+                report.write_text(
+                    f"{self.canonical}\n{section}\n\n보존해야 할 산문\n", encoding="utf-8")
+                original = report.read_bytes()
+
+                rc, _, stderr = run_main_streams(["review_post.py", "--finalize", str(report)])
+
+                self.assertEqual(rc, 2, stderr)
+                self.assertIn(section.lstrip("# "), stderr)
+                self.assertEqual(report.read_bytes(), original)
+                self.assertIn("보존해야 할 산문", report.read_text(encoding="utf-8"))
+
+    def test_migrate_still_accepts_progress_sections(self):
+        """정본화가 좁아진 것이 전환까지 막으면 과거 리포트를 옮길 수 없다."""
+        report = self.root / "2026-07-20-alpha.md"
+        report.write_text(
+            "## 결정적 검사: src/content/posts/alpha.md\n발견 사항 없음 ✅\n\n"
+            "## LLM 비평\n\n### 🟡 [L1] src/content/posts/alpha.md:12\n\n"
+            "- severity: 🟡\n- source: L\n- rule_id: L1\n"
+            "- location: src/content/posts/alpha.md:12\n"
+            "- quote: 인용\n- message: 문제\n- recommendation: 권고\n- gate_effect: warn\n\n"
+            "요약: 🔴 0 · 🟡 1 · 🟢 0\n", encoding="utf-8")
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 0, stderr)
+        self.assertEqual(rr.validate_report(report.read_text(encoding="utf-8")), [])
+
+    def test_finalize_refuses_an_invalid_strict_value_even_with_strict_flag(self):
+        """`--strict`가 strict 값을 덮어쓰므로, 원본을 먼저 보지 않으면 결함이 지워진다."""
+        report = self.root / "2026-08-05-alpha.md"
+        for argv in (["--finalize"], ["--finalize", "--strict"]):
+            with self.subTest(argv=" ".join(argv)):
+                report.write_text(self.canonical.replace("strict: false", "strict: banana"),
+                                  encoding="utf-8")
+                original = report.read_bytes()
+
+                rc, _, stderr = run_main_streams(["review_post.py", *argv, str(report)])
+
+                self.assertEqual(rc, 2, stderr)
+                self.assertIn("strict", stderr)
+                self.assertEqual(report.read_bytes(), original)
+
+    def test_finalize_refuses_a_buried_schema_declaration(self):
+        """serializer가 선언을 첫 줄로 옮기므로, 원본을 먼저 보지 않으면 위반이 정규화된다."""
+        report = self.root / "2026-08-05-alpha.md"
+        report.write_text("리포트 머리말\n\n" + self.canonical, encoding="utf-8")
+        original = report.read_bytes()
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--finalize", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("first line", stderr)
+        self.assertEqual(report.read_bytes(), original)
+
+    def test_commands_do_not_ask_for_a_progress_section(self):
+        """커맨드가 만들라고 한 섹션을 정본화가 거부하면 계약이 서로 어긋난다."""
+        for name in ("review-post.md", "review-post-all.md"):
+            with self.subTest(command=name):
+                text = (COMMAND_DIR / name).read_text(encoding="utf-8")
+
+                self.assertNotIn("리포트의 결정적 검사 섹션에 그대로 포함한다", text)
+                self.assertIn("산문 섹션을 만들지 않는다", text)
+
     def test_no_second_report_parser_lives_in_the_tests(self):
         """테스트가 자체 parser를 다시 들이면 계약이 조용히 갈라진다."""
         source = Path(__file__).read_text(encoding="utf-8")

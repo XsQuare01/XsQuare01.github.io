@@ -306,6 +306,24 @@ def validate_source_findings(findings):
     return errors
 
 
+def validate_source_header(text, header):
+    """정본화가 **고치지 않는** 헤더 계약을 원본에서 검사한다.
+
+    요약 갱신, finding 정렬, 공백은 정본화가 맡아 고치는 항목이라 여기서 보지 않는다.
+    반면 `strict` 값과 선언 위치는 고칠 대상이 아니라 입력 결함이다. 정본화가 조용히
+    덮어쓰면 결함이 리포트에서 지워진 채 통과한다. `--strict`를 붙이면 `strict` 값을
+    덮어쓰므로 특히 그렇다.
+    """
+    errors = []
+    if header.get("strict") and header["strict"] not in STRICT_VALUES:
+        errors.append(
+            f"invalid strict: {header['strict']} (must be one of {', '.join(STRICT_VALUES)})"
+        )
+    if text.split("\n", 1)[0].strip() != f"schema_version: {SCHEMA_VERSION}":
+        errors.append("schema_version must be the first line")
+    return errors
+
+
 def verify_round_trip(text, findings, audit=None):
     """정본화한 텍스트가 원본 근거를 그대로 담았는지 대조한다.
 
