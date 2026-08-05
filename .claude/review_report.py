@@ -238,10 +238,13 @@ def parse_report(text):
             last_field = match.group(1)
             current[last_field] = _clean_field_value(match.group(2))
             continue
-        # 이어진 줄만 센다. 들여쓰기 없는 줄은 finding 블록 밖의 산문(`요약:` 등)이라
-        # 마지막 필드의 연장으로 볼 수 없다.
-        if (last_field and line[:1].isspace() and line.strip()
-                and not line.lstrip().startswith(("#", "|", "-"))):
+        # 들여쓴 비어 있지 않은 줄은 앞 필드의 연장이다. 중첩 목록(`  - 근거`)이든
+        # 표든 모양으로 가리지 않는다. 정본 한 줄 형식에 담을 수 없는 내용이라는
+        # 사실은 같고, 모양으로 걸러 내면 걸러진 모양만 조용히 사라진다.
+        #
+        # 들여쓰기 없는 줄은 finding 블록 밖의 산문(`요약:` 등)이라 연장이 아니다.
+        # 들여쓴 하위 필드(`  - source: L`)는 위에서 필드로 먼저 읽는다.
+        if last_field and line[:1].isspace() and line.strip():
             current.setdefault("_continued", []).append(last_field)
 
     if current:

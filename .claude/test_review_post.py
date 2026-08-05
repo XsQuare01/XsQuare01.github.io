@@ -1814,20 +1814,53 @@ class TestEvidenceFidelity(unittest.TestCase):
 
     # ---- multiline 값 ----
 
-    def test_multiline_field_value_is_reported_not_truncated(self):
-        import review_report as rr
-
-        parsed = rr.parse_report(
+    def _report_with_continuation(self, continuation):
+        return (
             "## Findings\n\n### 🟡 [L7] a.md:1\n\n"
             "- severity: 🟡\n- source: L\n- rule_id: L7\n- location: a.md:1\n"
             "- quote: q\n"
             "- message: 첫 줄이다\n"
-            "  둘째 줄은 조용히 사라진다\n"
+            f"{continuation}\n"
             "- recommendation: r\n- gate_effect: warn\n"
         )
-        errors = rr.validate_source_findings(parsed["findings"])
 
-        self.assertTrue(any("여러 줄" in e for e in errors), errors)
+    def test_multiline_field_value_is_reported_not_truncated(self):
+        """모양으로 걸러 내면 걸러진 모양만 조용히 사라진다. 들여쓴 줄은 다 잡는다."""
+        import review_report as rr
+
+        for continuation in (
+            "  둘째 줄은 조용히 사라진다",
+            "  - 중첩된 근거",           # 중첩 목록
+            "  1. 번호 붙인 근거",
+            "  | 셀 | 셀 |",            # 들여쓴 표
+            "  # 들여쓴 제목처럼 보이는 줄",
+            "\t탭으로 들여쓴 줄",
+        ):
+            with self.subTest(continuation=continuation):
+                text = self._report_with_continuation(continuation)
+                parsed = rr.parse_report(text)
+
+                errors = rr.validate_source_findings(parsed["findings"])
+
+                self.assertTrue(any("여러 줄" in e for e in errors), errors)
+                self.assertNotIn(continuation.strip(), rr.serialize_report(
+                    target="t", generated_at="2026-08-04", strict=False,
+                    findings=parsed["findings"],
+                ), "정본에 담기지 않는 내용이면 검증에서 막아야 한다")
+
+    def test_migrate_refuses_a_nested_bullet_inside_a_field(self):
+        report = self._write("2026-07-20-alpha.md", (
+            "## LLM 비평: src/content/posts/alpha.md\n\n"
+            + self._report_with_continuation("  - 중첩된 근거")
+            + "\n요약: 🔴 0 · 🟡 1 · 🟢 0\n"
+        ))
+        original = report.read_bytes()
+
+        rc, _, stderr = run_main_streams(["review_post.py", "--migrate", str(report)])
+
+        self.assertEqual(rc, 2, stderr)
+        self.assertIn("여러 줄", stderr)
+        self.assertEqual(report.read_bytes(), original)
 
     # ---- round-trip 검증 헬퍼 ----
 
