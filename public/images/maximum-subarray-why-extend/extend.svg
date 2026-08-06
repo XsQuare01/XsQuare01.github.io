@@ -1,0 +1,84 @@
+<svg viewBox="0 0 860 440" width="1290" height="660" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="ms-ex-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ms-ex-arrow-hi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="440" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">a₆ 을 포함하는 후보는 a₅ 에서 끝나는 후보와 1:1로 대응한다</text>
+  <text x="430" y="51" text-anchor="middle" fill="#64748b" font-size="11">x = a₆ = 3 · 모든 후보에 같은 3을 더하므로 순위가 바뀌지 않는다</text>
+
+  <text x="246" y="82" text-anchor="middle" fill="#94a3b8" font-size="11.5">S₅ : a₅ 에서 끝나는 후보 (빈 배열 포함)</text>
+  <text x="636" y="82" text-anchor="middle" fill="#94a3b8" font-size="11.5">T₆ : a₆ 에서 끝나고 a₆ 을 포함하는 후보</text>
+
+  <!-- row 1 -->
+  <rect x="96" y="96" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="110" y="117" fill="#cbd5e1" font-size="12.5">빈 배열</text>
+  <text x="382" y="117" text-anchor="end" fill="#cbd5e1" font-size="13">0</text>
+  <path d="M404,112 H478" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ms-ex-arrow)"/>
+  <text x="441" y="104" text-anchor="middle" fill="#64748b" font-size="9.5">+3</text>
+  <rect x="486" y="96" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="500" y="117" fill="#cbd5e1" font-size="12.5">[a₆]</text>
+  <text x="772" y="117" text-anchor="end" fill="#cbd5e1" font-size="13">3</text>
+
+  <!-- row 2 -->
+  <rect x="96" y="140" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="110" y="161" fill="#cbd5e1" font-size="12.5">[a₅]</text>
+  <text x="382" y="161" text-anchor="end" fill="#f87171" font-size="13">−2</text>
+  <path d="M404,156 H478" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ms-ex-arrow)"/>
+  <text x="441" y="148" text-anchor="middle" fill="#64748b" font-size="9.5">+3</text>
+  <rect x="486" y="140" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="500" y="161" fill="#cbd5e1" font-size="12.5">[a₅ a₆]</text>
+  <text x="772" y="161" text-anchor="end" fill="#cbd5e1" font-size="13">1</text>
+
+  <!-- row 3 -->
+  <rect x="96" y="184" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="110" y="205" fill="#cbd5e1" font-size="12.5">[a₄ a₅]</text>
+  <text x="382" y="205" text-anchor="end" fill="#cbd5e1" font-size="13">2</text>
+  <path d="M404,200 H478" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ms-ex-arrow)"/>
+  <text x="441" y="192" text-anchor="middle" fill="#64748b" font-size="9.5">+3</text>
+  <rect x="486" y="184" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="500" y="205" fill="#cbd5e1" font-size="12.5">[a₄ a₅ a₆]</text>
+  <text x="772" y="205" text-anchor="end" fill="#cbd5e1" font-size="13">5</text>
+
+  <!-- row 4 : 최댓값 -->
+  <rect x="96" y="228" width="300" height="32" rx="5" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <text x="110" y="249" fill="#6ee7b7" font-size="12.5" font-weight="700">[a₃ a₄ a₅]</text>
+  <text x="382" y="249" text-anchor="end" fill="#6ee7b7" font-size="13.5" font-weight="700">4</text>
+  <path d="M404,244 H478" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ms-ex-arrow-hi)"/>
+  <text x="441" y="236" text-anchor="middle" fill="#34d399" font-size="9.5">+3</text>
+  <rect x="486" y="228" width="300" height="32" rx="5" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <text x="500" y="249" fill="#6ee7b7" font-size="12.5" font-weight="700">[a₃ a₄ a₅ a₆]</text>
+  <text x="772" y="249" text-anchor="end" fill="#6ee7b7" font-size="13.5" font-weight="700">7</text>
+
+  <!-- row 5 -->
+  <rect x="96" y="272" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="110" y="293" fill="#cbd5e1" font-size="12.5">[a₂ a₃ a₄ a₅]</text>
+  <text x="382" y="293" text-anchor="end" fill="#f87171" font-size="13">−1</text>
+  <path d="M404,288 H478" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ms-ex-arrow)"/>
+  <text x="441" y="280" text-anchor="middle" fill="#64748b" font-size="9.5">+3</text>
+  <rect x="486" y="272" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="500" y="293" fill="#cbd5e1" font-size="12.5">[a₂ a₃ a₄ a₅ a₆]</text>
+  <text x="772" y="293" text-anchor="end" fill="#cbd5e1" font-size="13">2</text>
+
+  <!-- row 6 -->
+  <rect x="96" y="316" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="110" y="337" fill="#cbd5e1" font-size="12.5">[a₁ a₂ a₃ a₄ a₅]</text>
+  <text x="382" y="337" text-anchor="end" fill="#cbd5e1" font-size="13">2</text>
+  <path d="M404,332 H478" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#ms-ex-arrow)"/>
+  <text x="441" y="324" text-anchor="middle" fill="#64748b" font-size="9.5">+3</text>
+  <rect x="486" y="316" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
+  <text x="500" y="337" fill="#cbd5e1" font-size="12.5">[a₁ a₂ a₃ a₄ a₅ a₆]</text>
+  <text x="772" y="337" text-anchor="end" fill="#cbd5e1" font-size="13">5</text>
+
+  <line x1="96" y1="366" x2="786" y2="366" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="246" y="394" text-anchor="middle" fill="#34d399" font-size="14" font-weight="700">최댓값 4 = k₅</text>
+  <text x="636" y="394" text-anchor="middle" fill="#34d399" font-size="14" font-weight="700">최댓값 7 = k₆ = k₅ + 3</text>
+  <text x="430" y="422" text-anchor="middle" fill="#94a3b8" font-size="11.5">떼어낸 것이 x 하나뿐이라 대응하는 두 후보의 합은 정확히 x 만큼 차이 난다. 그래서 순위가 보존된다.</text>
+</svg>
