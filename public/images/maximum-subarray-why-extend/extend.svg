@@ -10,11 +10,11 @@
 
   <rect width="860" height="440" rx="10" fill="#0f1117"/>
 
-  <text x="430" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">a₆ 을 포함하는 후보는 a₅ 에서 끝나는 후보와 1:1로 대응한다</text>
+  <text x="430" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">a₆ 을 포함하는 후보는 a₁ … a₅ 의 뒷조각과 1:1로 대응한다</text>
   <text x="430" y="51" text-anchor="middle" fill="#64748b" font-size="11">x = a₆ = 3 · 모든 후보에 같은 3을 더하므로 순위가 바뀌지 않는다</text>
 
-  <text x="246" y="82" text-anchor="middle" fill="#94a3b8" font-size="11.5">S₅ : a₅ 에서 끝나는 후보 (빈 배열 포함)</text>
-  <text x="636" y="82" text-anchor="middle" fill="#94a3b8" font-size="11.5">T₆ : a₆ 에서 끝나고 a₆ 을 포함하는 후보</text>
+  <text x="246" y="82" text-anchor="middle" fill="#94a3b8" font-size="11.5">S₅ : a₁ … a₅ 의 뒷조각 (빈 것 포함)</text>
+  <text x="636" y="82" text-anchor="middle" fill="#94a3b8" font-size="11.5">T₆ : a₆ 을 포함하는 a₁ … a₆ 의 뒷조각</text>
 
   <!-- row 1 -->
   <rect x="96" y="96" width="300" height="32" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.1"/>
