@@ -1,0 +1,71 @@
+<svg viewBox="0 0 860 420" width="1290" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">자리마다 값 하나만 들고 간다 — kᵢ₊₁ = max(kᵢ + x, 0)</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">kᵢ = aᵢ 에서 끝나는 부분배열의 최대 합 (빈 배열 허용)</text>
+
+  <g fill="#64748b" font-size="11" text-anchor="middle">
+    <text x="156" y="86">i = 1</text>
+    <text x="236" y="86">2</text>
+    <text x="316" y="86">3</text>
+    <text x="396" y="86">4</text>
+    <text x="476" y="86">5</text>
+    <text x="556" y="86">6</text>
+    <text x="636" y="86">7</text>
+    <text x="716" y="86">8</text>
+  </g>
+
+  <!-- a 행 -->
+  <text x="104" y="124" text-anchor="end" fill="#94a3b8" font-size="12">aᵢ</text>
+  <rect x="120" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="200" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="280" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="360" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="440" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="520" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="600" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="680" y="98" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <g font-size="15" text-anchor="middle">
+    <text x="156" y="124" fill="#cbd5e1">3</text>
+    <text x="236" y="124" fill="#f87171">−5</text>
+    <text x="316" y="124" fill="#cbd5e1">2</text>
+    <text x="396" y="124" fill="#cbd5e1">4</text>
+    <text x="476" y="124" fill="#f87171">−2</text>
+    <text x="556" y="124" fill="#cbd5e1">3</text>
+    <text x="636" y="124" fill="#f87171">−6</text>
+    <text x="716" y="124" fill="#cbd5e1">8</text>
+  </g>
+
+  <!-- k 행 -->
+  <text x="104" y="196" text-anchor="end" fill="#94a3b8" font-size="12">kᵢ</text>
+  <rect x="120" y="170" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="200" y="170" width="72" height="40" rx="5" fill="#3a2c0f" stroke="#fbbf24" stroke-width="1.8"/>
+  <rect x="280" y="170" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="360" y="170" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="440" y="170" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="520" y="170" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="600" y="170" width="72" height="40" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="680" y="170" width="72" height="40" rx="5" fill="#0e3a2c" stroke="#34d399" stroke-width="2"/>
+  <g font-size="15" text-anchor="middle">
+    <text x="156" y="196" fill="#cbd5e1">3</text>
+    <text x="236" y="196" fill="#fef3c7" font-weight="700">0</text>
+    <text x="316" y="196" fill="#cbd5e1">2</text>
+    <text x="396" y="196" fill="#cbd5e1">6</text>
+    <text x="476" y="196" fill="#cbd5e1">4</text>
+    <text x="556" y="196" fill="#cbd5e1">7</text>
+    <text x="636" y="196" fill="#cbd5e1">1</text>
+    <text x="716" y="196" fill="#6ee7b7" font-weight="700">9</text>
+  </g>
+
+  <!-- 끊기는 자리 -->
+  <path d="M276,164 V246" stroke="#fbbf24" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="270" y="266" text-anchor="end" fill="#fcd34d" font-size="11">k₁ + a₂ = 3 − 5 = −2 &lt; 0 이라 0으로 끊는다</text>
+  <text x="282" y="266" text-anchor="start" fill="#94a3b8" font-size="11">여기서부터 새 구간이 자란다</text>
+
+  <line x1="100" y1="290" x2="760" y2="290" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="322" text-anchor="middle" fill="#34d399" font-size="20" font-weight="700">max(k₁ … k₈) = 9</text>
+  <text x="430" y="348" text-anchor="middle" fill="#94a3b8" font-size="12">끊긴 자리 다음인 a₃ 에서 자라기 시작해 a₈ 에서 최대가 된다</text>
+
+  <text x="430" y="390" text-anchor="middle" fill="#94a3b8" font-size="11.5">모든 부분배열은 어딘가에서 끝나므로, 자리별 최선을 다 모으면 빠뜨린 후보가 없다.</text>
+</svg>

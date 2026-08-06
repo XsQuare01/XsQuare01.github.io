@@ -1,0 +1,52 @@
+<svg viewBox="0 0 860 380" width="1290" height="570" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="860" height="380" rx="10" fill="#0f1117"/>
+
+  <text x="430" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">합이 가장 큰 연속 구간 — 배열 전체를 쓰는 것이 답이 아니다</text>
+  <text x="430" y="53" text-anchor="middle" fill="#64748b" font-size="11">전체 합은 7, 최대 부분배열의 합은 9</text>
+
+  <!-- index labels -->
+  <g fill="#64748b" font-size="11" text-anchor="middle">
+    <text x="156" y="92">a₁</text>
+    <text x="236" y="92">a₂</text>
+    <text x="316" y="92">a₃</text>
+    <text x="396" y="92">a₄</text>
+    <text x="476" y="92">a₅</text>
+    <text x="556" y="92">a₆</text>
+    <text x="636" y="92">a₇</text>
+    <text x="716" y="92">a₈</text>
+  </g>
+
+  <!-- cells: 1,2 중립 / 3..8 정답 구간 -->
+  <rect x="120" y="104" width="72" height="56" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="200" y="104" width="72" height="56" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.2"/>
+  <rect x="280" y="104" width="72" height="56" rx="6" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <rect x="360" y="104" width="72" height="56" rx="6" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <rect x="440" y="104" width="72" height="56" rx="6" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <rect x="520" y="104" width="72" height="56" rx="6" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <rect x="600" y="104" width="72" height="56" rx="6" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+  <rect x="680" y="104" width="72" height="56" rx="6" fill="#0e3a2c" stroke="#34d399" stroke-width="1.8"/>
+
+  <g font-size="20" font-weight="600" text-anchor="middle">
+    <text x="156" y="141" fill="#e2e8f0">3</text>
+    <text x="236" y="141" fill="#f87171">−5</text>
+    <text x="316" y="141" fill="#6ee7b7">2</text>
+    <text x="396" y="141" fill="#6ee7b7">4</text>
+    <text x="476" y="141" fill="#f87171">−2</text>
+    <text x="556" y="141" fill="#6ee7b7">3</text>
+    <text x="636" y="141" fill="#f87171">−6</text>
+    <text x="716" y="141" fill="#6ee7b7">8</text>
+  </g>
+
+  <!-- 전체 구간 -->
+  <path d="M120,188 v10 H752 v-10" fill="none" stroke="#475569" stroke-width="1.4"/>
+  <text x="436" y="216" text-anchor="middle" fill="#94a3b8" font-size="12.5">a₁ … a₈ = 3 − 5 + 2 + 4 − 2 + 3 − 6 + 8 = 7</text>
+
+  <!-- 정답 구간 -->
+  <path d="M280,248 v10 H752 v-10" fill="none" stroke="#34d399" stroke-width="1.8"/>
+  <text x="516" y="276" text-anchor="middle" fill="#6ee7b7" font-size="13.5" font-weight="700">a₃ … a₈ = 2 + 4 − 2 + 3 − 6 + 8 = 9</text>
+
+  <line x1="100" y1="300" x2="760" y2="300" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="430" y="326" text-anchor="middle" fill="#94a3b8" font-size="11.5">앞머리 a₁ + a₂ = −2 라, 둘을 함께 쓰면 뒤의 모든 구간이 2만큼 손해를 본다.</text>
+  <text x="430" y="350" text-anchor="middle" fill="#94a3b8" font-size="11.5">중간의 −2 와 −6 은 통과한다. 연속이라는 조건 때문에 뒤의 8 을 쓰려면 반드시 지나가야 한다.</text>
+</svg>
