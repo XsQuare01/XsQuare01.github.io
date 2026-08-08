@@ -7,7 +7,7 @@
 
   <rect width="860" height="420" rx="10" fill="#0f1117"/>
 
-  <text x="430" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">누적합 꺾은선에서 낙차가 가장 큰 구간</text>
+  <text x="430" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">누적합 꺾은선에서 상승폭이 가장 큰 구간</text>
   <text x="430" y="51" text-anchor="middle" fill="#64748b" font-size="11">골짜기는 봉우리보다 왼쪽에 있어야 한다 · 여기서는 P₂ = −2 에서 P₈ = 7 까지</text>
 
   <!-- 0 기준선 -->
@@ -46,7 +46,7 @@
   <text x="248" y="296" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">−2</text>
   <text x="732" y="70" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="700">7</text>
 
-  <!-- 낙차 -->
+  <!-- 상승폭 -->
   <path d="M750,278 V80" fill="none" stroke="#34d399" stroke-width="1.6" marker-start="url(#ms-pm-arrow)" marker-end="url(#ms-pm-arrow)"/>
   <text x="768" y="176" text-anchor="start" fill="#34d399" font-size="15" font-weight="700">9</text>
   <text x="270" y="312" text-anchor="middle" fill="#fbbf24" font-size="10">지금까지의 최소</text>

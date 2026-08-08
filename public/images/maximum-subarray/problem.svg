@@ -48,5 +48,5 @@
   <line x1="100" y1="300" x2="760" y2="300" stroke="#1e293b" stroke-width="1"/>
 
   <text x="430" y="326" text-anchor="middle" fill="#94a3b8" font-size="11.5">앞머리 a₁ + a₂ = −2 라, 둘을 함께 쓰면 뒤의 모든 구간이 2만큼 손해를 본다.</text>
-  <text x="430" y="350" text-anchor="middle" fill="#94a3b8" font-size="11.5">중간의 −2 와 −6 은 통과한다. 연속이라는 조건 때문에 뒤의 8 을 쓰려면 반드시 지나가야 한다.</text>
+  <text x="430" y="350" text-anchor="middle" fill="#94a3b8" font-size="11.5">중간의 −2 와 −6 은 통과한다. 앞의 2, 4 와 뒤의 8 을 한 구간에 함께 담으려면 연속이라는 조건 때문에 지나가야 한다.</text>
 </svg>
