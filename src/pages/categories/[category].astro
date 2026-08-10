@@ -5,15 +5,20 @@ import { categories } from '../../data/categories';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
-  return categories.map((cat) => ({
-    params: { category: cat.slug },
-    props: {
-      label: cat.label,
-      posts: posts
-        .filter((p) => p.data.category === cat.slug)
-        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
-    },
-  }));
+  // 글이 없는 카테고리는 페이지를 만들지 않는다. 목록 페이지와 사이드바는 이미
+  // 걸러내고 있어서 어디에서도 링크되지 않는데, 사이트맵에는 올라가 크롤러와 AI에게
+  // 빈 페이지로 노출된다. categories.ts에는 그대로 두므로 첫 글이 생기면 다시 생긴다.
+  return categories
+    .map((cat) => ({
+      params: { category: cat.slug },
+      props: {
+        label: cat.label,
+        posts: posts
+          .filter((p) => p.data.category === cat.slug)
+          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+      },
+    }))
+    .filter((entry) => entry.props.posts.length > 0);
 }
 
 const { label, posts } = Astro.props;
@@ -21,31 +26,28 @@ const { label, posts } = Astro.props;
 
 <BaseLayout title={label}>
   <h1 class="page-title">{label}</h1>
-  {posts.length === 0 ? (
-    <p style="color: var(--text-muted);">아직 글이 없습니다.</p>
-  ) : (
-    <ul class="post-list">
-      {posts.map((post) => (
-        <li class="post-item">
-          <a href={`/blog/${post.id}`} class="post-item-link" aria-label={post.data.title}></a>
-          <span class="post-item-date">
-            {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </span>
-          <span class="post-item-title">
-            {post.data.title}
-          </span>
-          {post.data.description && (
-            <p class="post-item-desc">{post.data.description}</p>
-          )}
-          {post.data.tags.length > 0 && (
-            <div class="tags">
-              {post.data.tags.map((tag) => (
-                <a href={`/tags/${tag}`} class="tag">{tag}</a>
-              ))}
-            </div>
-          )}
-        </li>
-      ))}
-    </ul>
-  )}
+  {/* 빈 카테고리는 getStaticPaths에서 걸러지므로 '글 없음' 분기는 두지 않는다 */}
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li class="post-item">
+        <a href={`/blog/${post.id}`} class="post-item-link" aria-label={post.data.title}></a>
+        <span class="post-item-date">
+          {post.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </span>
+        <span class="post-item-title">
+          {post.data.title}
+        </span>
+        {post.data.description && (
+          <p class="post-item-desc">{post.data.description}</p>
+        )}
+        {post.data.tags.length > 0 && (
+          <div class="tags">
+            {post.data.tags.map((tag) => (
+              <a href={`/tags/${tag}`} class="tag">{tag}</a>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
 </BaseLayout>
