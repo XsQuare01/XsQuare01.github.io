@@ -13,9 +13,15 @@ for (const post of posts) {
 }
 
 const activeCategories = categories.filter((cat) => (countByCategory[cat.slug] ?? 0) > 0);
+
+// 어떤 주제가 있는지를 설명 자체에 담는다. 목록 페이지가 전역 기본값을 물려받으면
+// 개별 카테고리 페이지와 설명이 구별되지 않는다.
+const description =
+  `${activeCategories.map((cat) => `${cat.label} ${countByCategory[cat.slug]}편`).join(', ')}. ` +
+  '주제별 학습 장(章)으로 묶은 글 목록입니다. 각 장은 정의부터 증명까지 이어집니다.';
 ---
 
-<BaseLayout title="카테고리">
+<BaseLayout title="카테고리" description={description}>
   <h1 class="page-title">카테고리</h1>
   <p class="page-sub">주제별 학습 장(章). 각 장은 정의부터 증명까지 이어지는 글 묶음입니다.</p>
 

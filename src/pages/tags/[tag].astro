@@ -15,9 +15,19 @@ export async function getStaticPaths() {
 
 const { tag, posts } = Astro.props;
 const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// 태그 페이지도 설명을 넘기지 않으면 전부 같은 전역 기본값을 쓴다. 어떤 카테고리의
+// 글이 몇 편 모여 있는지를 담아 페이지마다 구별되게 한다.
+const tagCategories = [
+  ...new Set(sorted.map((p) => p.data.category).filter(Boolean)),
+].map((slug) => getCategoryLabel(slug as string));
+const description =
+  `${tag} 태그가 붙은 글 ${sorted.length}편` +
+  `${tagCategories.length > 0 ? ` (${tagCategories.join(', ')})` : ''}. ` +
+  '계산 이론·암호학·알고리즘을 정의부터 증명까지 정리하는 학습 노트.';
 ---
 
-<BaseLayout title={`#${tag}`}>
+<BaseLayout title={`#${tag}`} description={description}>
   <h1 class="page-title"># {tag}</h1>
   <ul class="post-list">
     {sorted.map((post) => (

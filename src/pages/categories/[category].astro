@@ -13,6 +13,7 @@ export async function getStaticPaths() {
       params: { category: cat.slug },
       props: {
         label: cat.label,
+        intro: cat.intro ?? cat.description,
         posts: posts
           .filter((p) => p.data.category === cat.slug)
           .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
@@ -21,10 +22,14 @@ export async function getStaticPaths() {
     .filter((entry) => entry.props.posts.length > 0);
 }
 
-const { label, posts } = Astro.props;
+const { label, intro, posts } = Astro.props;
+
+// 설명을 넘기지 않으면 모든 카테고리가 사이트 전역 기본값을 물려받아, 허브 페이지들의
+// 메타 설명이 서로 완전히 같아진다. 홈·llms.txt와 같은 문장을 써서 주제를 구분한다.
+const description = `${intro.replace(/\s+/g, ' ').trim()} 총 ${posts.length}편.`;
 ---
 
-<BaseLayout title={label}>
+<BaseLayout title={label} description={description}>
   <h1 class="page-title">{label}</h1>
   {/* 빈 카테고리는 getStaticPaths에서 걸러지므로 '글 없음' 분기는 두지 않는다 */}
   <ul class="post-list">
