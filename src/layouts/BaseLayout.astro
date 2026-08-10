@@ -234,13 +234,6 @@ const currentPath = Astro.url.pathname;
     </div>
   </div>
 
-  <button id="back-to-top" aria-label="맨 위로">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <line x1="8" y1="13" x2="8" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      <polyline points="4,7 8,3 12,7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-
   <div id="search-modal" role="dialog" aria-modal="true" aria-label="검색">
     <div class="search-modal-box">
       <div class="search-modal-input-row">
@@ -395,12 +388,6 @@ const currentPath = Astro.url.pathname;
       items[navIdx]?.click();
     }
   });
-
-  const btn = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    btn?.classList.toggle('visible', window.scrollY > 300);
-  }, { passive: true });
-  btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── 모바일 사이드바 토글 ──
   const sidebarToggle = document.getElementById('sidebar-toggle');

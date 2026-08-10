@@ -1151,38 +1151,6 @@ pre:hover .code-copy-btn { opacity: 1; }
   background: rgba(74, 222, 128, 0.1);
 }
 
-/* ── Back to Top ── */
-#back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--term-bg);
-  color: var(--term-fg);
-  border: 1px solid #3a3f37;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  z-index: 200;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, color 0.2s, border-color 0.2s;
-  pointer-events: none;
-  touch-action: manipulation;
-}
-#back-to-top.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-#back-to-top:hover {
-  background: #1d2027;
-}
-
 /* ── Search Modal ── */
 #search-modal {
   position: fixed;
