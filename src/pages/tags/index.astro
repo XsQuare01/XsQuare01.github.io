@@ -21,9 +21,19 @@ for (let i = 0; i < tags.length; i += COLS) {
   while (row.length < COLS) row.push(null);
   rows.push(row);
 }
+
+// 설명을 넘기지 않으면 전역 기본값을 물려받아 다른 허브 페이지와 구별되지 않는다.
+// 어떤 태그가 많이 쓰였는지를 담아 이 색인이 무엇의 색인인지 드러낸다.
+const topTags = Object.entries(tagCount)
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 8)
+  .map(([tag]) => tag);
+const description =
+  `태그 ${tags.length}개로 분류한 글 ${posts.length}편의 색인입니다. ` +
+  `${topTags.join(', ')} 등 계산 이론·암호학·알고리즘 주제를 다룹니다.`;
 ---
 
-<BaseLayout title="태그">
+<BaseLayout title="태그" description={description}>
   <h1 class="page-title">태그</h1>
   <p class="page-sub">모든 태그 색인 — 총 {tags.length}개. 가나다·알파벳 순.</p>
 

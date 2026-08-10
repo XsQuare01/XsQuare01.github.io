@@ -62,6 +62,9 @@ const currentPath = Astro.url.pathname;
   <meta name="theme-color" content="#15171c" />
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
+  {/* 한국어 단일 언어 사이트라 대체 언어판이 없다. 자기참조 + x-default만 선언한다. */}
+  <link rel="alternate" hreflang="ko" href={canonicalURL} />
+  <link rel="alternate" hreflang="x-default" href={canonicalURL} />
 
   <!-- Open Graph -->
   <meta property="og:type" content={ogType} />

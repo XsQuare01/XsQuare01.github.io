@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { categories, getCategoryLabel } from '../data/categories';
+import { categories, getCategoryLabel, HOME_FEATURED } from '../data/categories';
 import { tagStyle } from '../utils/tagColor';
 
 const allPosts = await getCollection('posts');
@@ -21,12 +21,26 @@ const categoryCounts = categories
 
 const maxCount = Math.max(...categoryCounts.map((c) => c.count), 1);
 
-const FEATURED_IDS = ['rsa', 'algo-orientation'];
-const featuredPosts = FEATURED_IDS.map((id) => allPosts.find((p) => p.id === id)).filter(Boolean);
+// 대표 글 선정은 categories.ts에 모아 두고 llms.txt와 공유한다. 사람에게 먼저 권하는
+// 글과 기계에게 먼저 권하는 글이 갈리지 않게 한다.
+const featuredPosts = HOME_FEATURED.map((id) => allPosts.find((p) => p.id === id)).filter(Boolean);
 const fmtDate = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
-// 홈 구조화 데이터 — 사이트(WebSite)와 저자(Person) 엔티티
+// 주제 소개 문장은 categories.ts에 있다. 카테고리 허브·llms.txt와 같은 문장을 쓴다.
+const homeTopics = categoryCounts.filter((cat) => cat.intro);
+
+// 홈 제목은 사이트 주제를 그대로 적는다. "홈"이라고만 두면 페이지 구조(카테고리 탭·
+// 링크 피드·카운트 막대)와 겹쳐 일반 포털 인덱스로 읽힌다.
+const homeTitle = '계산 이론·암호학·알고리즘 학습 노트';
+const homeDescription =
+  '계산 이론, 암호학, 알고리즘을 정의부터 증명까지 직접 풀어 정리하는 한국어 학습 노트입니다. ' +
+  '튜링 기계와 복잡도 클래스, RSA와 이산로그 기반 암호, 분할 정복과 동적 계획법, ' +
+  `볼록 껍질과 최단 경로를 다룹니다. 총 ${totalPosts}편.`;
+
+// 홈 구조화 데이터 — 사이트(WebSite)와 저자(Person) 엔티티.
+// description은 화면에 보이는 설명을 그대로 쓴다. 사람이 읽는 주제 설명과 기계가 읽는
+// 것이 다르면, 둘 중 어느 쪽이 이 사이트의 주제인지 판단할 근거가 흐려진다.
 const siteUrl = Astro.site?.toString() ?? 'https://xsquare01.github.io/';
 const homeJsonLd = JSON.stringify([
   {
@@ -36,7 +50,13 @@ const homeJsonLd = JSON.stringify([
     alternateName: 'XsQuare01 학습 노트',
     url: siteUrl,
     inLanguage: 'ko',
-    description: '계산 이론·암호학·알고리즘을 정의부터 증명까지 정리하는 학습 노트',
+    description: homeDescription,
+    // 각 카테고리가 무엇을 다루는지도 화면과 같은 문장으로 넘긴다.
+    about: homeTopics.map((cat) => ({
+      '@type': 'Thing',
+      name: cat.label,
+      description: cat.intro,
+    })),
     author: { '@type': 'Person', name: 'XsQuare01', url: siteUrl },
   },
   {
@@ -45,12 +65,19 @@ const homeJsonLd = JSON.stringify([
     name: 'XsQuare01',
     url: siteUrl,
     image: 'https://github.com/XsQuare01.png',
-    knowsAbout: ['계산 이론', '암호학', '알고리즘', '정수론', '복잡도', '그리디'],
+    // sameAs가 없으면 이 사이트의 저자와 GitHub 계정을 같은 인물로 묶을 근거가 없다.
+    sameAs: ['https://github.com/XsQuare01'],
+    // 화면의 주제 소개에 실제로 등장하는 개념들로 맞춘다.
+    knowsAbout: [
+      '계산 이론', '오토마타', '튜링 기계', '결정 가능성', '복잡도 클래스',
+      '암호학', '정수론', 'RSA', 'Diffie-Hellman', '영지식 증명', '전자 서명',
+      '알고리즘', '분할 정복', '그리디', '동적 계획법', '계산기하', '그래프 알고리즘',
+    ],
   },
 ]);
 ---
 
-<BaseLayout title="홈">
+<BaseLayout title={homeTitle} description={homeDescription}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={homeJsonLd} />
   </Fragment>
@@ -153,6 +180,23 @@ const homeJsonLd = JSON.stringify([
       ))}
     </ul>
 
+    <div class="section-divider"></div>
+
+    <!-- 주제 소개 — 사람에게는 길잡이, 기계에게는 이 사이트가 무엇에 관한 것인지의 근거 -->
+    <div class="section-head">
+      <h2 class="section-label">여기서 다루는 것</h2>
+    </div>
+    <div class="topics">
+      {homeTopics.map((cat) => (
+        <section class="topic">
+          <h3 class="topic-name">
+            <a href={`/categories/${cat.slug}`}>{cat.label}</a>
+            <span class="topic-n">{cat.count}편</span>
+          </h3>
+          <p class="topic-desc">{cat.intro}</p>
+        </section>
+      ))}
+    </div>
 
   </div>
 </BaseLayout>
@@ -449,6 +493,54 @@ const homeJsonLd = JSON.stringify([
       transition: none;
     }
     .feed-item { animation: none; }
+  }
+
+  /* ── 주제 소개 ── */
+  .topics {
+    display: flex;
+    flex-direction: column;
+  }
+  .topic {
+    border-top: 1px solid var(--rule);
+    padding: 1.1rem 0;
+  }
+  .topic:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  .topic-name {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 0.4rem;
+  }
+  .topic-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+  .topic-name a:hover { color: var(--accent); }
+  .topic-name a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+  .topic-n {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .topic-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+    text-wrap: pretty;
   }
 
   /* ── 반응형 ── */
