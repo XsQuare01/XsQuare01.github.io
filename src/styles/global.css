@@ -78,11 +78,13 @@ a { color: var(--accent-2); text-decoration: none; }
 a:hover { color: var(--accent); }
 
 /* ══ 조용한 레일 (Quiet Rail) ══
-   평소엔 아이콘만 있는 얇은 레일 → 호버 시 본문 위로 펼침(오버레이) → 📌 고정 시 열림 유지.
-   본문(.main-wrap)은 --main-gap 만 따르므로 호버 확장 시 밀리지 않는다. */
+   평소엔 아이콘만 있는 얇은 레일 → 호버 시 펼침 → 📌 고정 시 열림 유지.
+   펼칠 때는 본문(.main-wrap)의 --main-gap도 함께 늘려 밀어낸다. 예전에는 리플로우를
+   피하려고 본문 위로 겹쳐 펼쳤지만, 레일이 어떤 상태에서도 읽기 콘텐츠를 덮어서는
+   안 된다는 원칙이 우선한다. (#78) */
 :root {
   --rail-w: 3.9rem;    /* 접힌 레일 폭 (사이드바 실제 폭) */
-  --main-gap: 3.9rem;  /* 본문 왼쪽 여백 (호버로는 안 바뀜) */
+  --main-gap: 3.9rem;  /* 본문 왼쪽 여백 (레일 폭에 맞춰 함께 움직인다) */
   --rail-bg: color-mix(in srgb, var(--ink) 3.5%, var(--paper));
   --rail-expanded: 14rem;  /* 내부 콘텐츠 고정 폭 */
 }
@@ -114,11 +116,21 @@ html.rail-pinned {
   flex-direction: column;
   padding: 1rem 0.5rem;
 }
-/* 호버 확장 (고정 아닐 때만) — 오버레이 */
+/* 호버 확장 (고정 아닐 때만) */
 html:not(.rail-pinned) .sidebar:hover,
 html:not(.rail-pinned) .sidebar:focus-within {
-  width: 14rem;
+  width: var(--rail-expanded);
   box-shadow: 6px 0 30px rgba(34, 32, 27, 0.10);
+}
+/* 확장한 만큼 본문도 밀어 겹침을 없앤다 (#78).
+   .sidebar와 .main-wrap은 형제라 공통 조상인 body에서 변수를 덮어쓴다.
+   .main-wrap의 margin-left 트랜지션이 레일 width와 같은 커브·시간이라 함께 움직인다.
+   rail-collapsing(핀 해제 직후 강제 접힘)일 때는 레일이 안 펼쳐지므로 여백도 그대로 둔다.
+   모바일은 드로어라 이 규칙이 걸려도 아래 미디어 쿼리의 `.main-wrap { margin-left: 0 }`가
+   덮어쓴다. */
+html:not(.rail-pinned) body:has(.sidebar:hover:not(.rail-collapsing)),
+html:not(.rail-pinned) body:has(.sidebar:focus-within:not(.rail-collapsing)) {
+  --main-gap: var(--rail-expanded);
 }
 
 /* reduced-motion은 파일 하단의 전역 규칙(*{transition:none!important})이 이미 커버 */
@@ -1325,7 +1337,19 @@ pre:hover .code-copy-btn { opacity: 1; }
 
 /* Mobile — 레일 대신 전체 서랍(drawer)으로 */
 @media (max-width: 768px) {
-  .sidebar-toggle { display: flex; }
+  /* 콘텐츠 위에 떠서 H1·breadcrumb를 덮던 것을 문서 흐름 안으로 되돌린다 (#78).
+     body가 세로 flex이므로 첫 flex item이 되어 스스로 자리를 차지한다.
+     static이 아니라 relative인 이유: z-index를 살려야 드로어가 열려도 닫기(✕)가 눌린다.
+     스크롤하면 함께 밀려나므로 본문을 상시 가리는 고정 장애물이 되지 않는다. */
+  .sidebar-toggle {
+    display: flex;
+    position: relative;
+    top: auto;
+    left: auto;
+    align-self: flex-start;
+    flex-shrink: 0;
+    margin: 0.75rem 0 0 0.75rem;
+  }
   .sidebar {
     position: fixed;
     width: 15rem;
@@ -1340,7 +1364,9 @@ pre:hover .code-copy-btn { opacity: 1; }
   .rail-txt, .rail-expand-only { opacity: 1; visibility: visible; }
   .sidebar-inner { width: 100%; }
   body { flex-direction: column; }
-  .main-wrap { margin-left: 0; padding: 1.5rem; min-height: calc(100vh - 60px); }
+  /* 위쪽 여백은 흐름 안으로 들어온 메뉴 버튼이 이미 만들어 주므로 그만큼 줄인다.
+     빼는 값 52px = 버튼 margin-top 0.75rem(12px) + 버튼 높이 40px */
+  .main-wrap { margin-left: 0; padding: 1rem 1.5rem 1.5rem; min-height: calc(100vh - 52px); }
   .right-panel { display: none; }
   .post-header h1 { font-size: 1.4rem; }
   .post-nav {
