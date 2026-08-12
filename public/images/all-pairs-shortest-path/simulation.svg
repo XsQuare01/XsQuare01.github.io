@@ -1,0 +1,174 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">k를 늘리며 행렬을 갱신한다</text>
+
+  <!-- ===================== matrix 1 : k = 0 ===================== -->
+  <text x="178" y="140" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">k = 0</text>
+
+  <text x="139" y="162" text-anchor="middle" fill="#64748b" font-size="11">1</text>
+  <text x="165" y="162" text-anchor="middle" fill="#64748b" font-size="11">2</text>
+  <text x="191" y="162" text-anchor="middle" fill="#64748b" font-size="11">3</text>
+  <text x="217" y="162" text-anchor="middle" fill="#64748b" font-size="11">4</text>
+  <text x="122" y="183" text-anchor="end" fill="#64748b" font-size="11">1</text>
+  <text x="122" y="209" text-anchor="end" fill="#64748b" font-size="11">2</text>
+  <text x="122" y="235" text-anchor="end" fill="#64748b" font-size="11">3</text>
+  <text x="122" y="261" text-anchor="end" fill="#64748b" font-size="11">4</text>
+
+  <g>
+    <!-- row 1: 0 1 5 7 -->
+    <rect x="126" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="139" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="152" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="165" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="178" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="191" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">5</text>
+    <rect x="204" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="217" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">7</text>
+
+    <!-- row 2: 1 0 INF 1 -->
+    <rect x="126" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="139" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="152" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="165" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="178" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="191" y="209" text-anchor="middle" fill="#cbd5e1" font-size="11">INF</text>
+    <rect x="204" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="217" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+
+    <!-- row 3: 5 INF 0 10 -->
+    <rect x="126" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="139" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">5</text>
+    <rect x="152" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="165" y="235" text-anchor="middle" fill="#cbd5e1" font-size="11">INF</text>
+    <rect x="178" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="191" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="204" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="217" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">10</text>
+
+    <!-- row 4: 7 1 10 0 -->
+    <rect x="126" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="139" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">7</text>
+    <rect x="152" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="165" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="178" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="191" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">10</text>
+    <rect x="204" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="217" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+  </g>
+
+  <text x="263" y="223" text-anchor="middle" fill="#64748b" font-size="26">→</text>
+
+  <!-- ===================== matrix 2 : k = 1 ===================== -->
+  <text x="348" y="140" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">k = 1</text>
+
+  <text x="309" y="162" text-anchor="middle" fill="#64748b" font-size="11">1</text>
+  <text x="335" y="162" text-anchor="middle" fill="#64748b" font-size="11">2</text>
+  <text x="361" y="162" text-anchor="middle" fill="#64748b" font-size="11">3</text>
+  <text x="387" y="162" text-anchor="middle" fill="#64748b" font-size="11">4</text>
+  <text x="292" y="183" text-anchor="end" fill="#64748b" font-size="11">1</text>
+  <text x="292" y="209" text-anchor="end" fill="#64748b" font-size="11">2</text>
+  <text x="292" y="235" text-anchor="end" fill="#64748b" font-size="11">3</text>
+  <text x="292" y="261" text-anchor="end" fill="#64748b" font-size="11">4</text>
+
+  <g>
+    <!-- row 1: 0 1 5 7 -->
+    <rect x="296" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="309" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="322" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="335" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="348" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="361" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">5</text>
+    <rect x="374" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="387" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">7</text>
+
+    <!-- row 2: 1 0 6* 1  (2,3) highlighted -->
+    <rect x="296" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="309" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="322" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="335" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="348" y="192" width="26" height="26" rx="4" fill="#14352b" stroke="#34d399" stroke-width="1.8"/>
+    <text x="361" y="209" text-anchor="middle" fill="#d1fae5" font-size="13" font-weight="700">6</text>
+    <rect x="374" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="387" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+
+    <!-- row 3: 5 6* 0 10  (3,2) highlighted -->
+    <rect x="296" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="309" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">5</text>
+    <rect x="322" y="218" width="26" height="26" rx="4" fill="#14352b" stroke="#34d399" stroke-width="1.8"/>
+    <text x="335" y="235" text-anchor="middle" fill="#d1fae5" font-size="13" font-weight="700">6</text>
+    <rect x="348" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="361" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="374" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="387" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">10</text>
+
+    <!-- row 4: 7 1 10 0 -->
+    <rect x="296" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="309" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">7</text>
+    <rect x="322" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="335" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="348" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="361" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">10</text>
+    <rect x="374" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="387" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+  </g>
+
+  <text x="433" y="223" text-anchor="middle" fill="#64748b" font-size="26">→</text>
+
+  <!-- ===================== matrix 3 : k = 2 ===================== -->
+  <text x="518" y="140" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">k = 2</text>
+
+  <text x="479" y="162" text-anchor="middle" fill="#64748b" font-size="11">1</text>
+  <text x="505" y="162" text-anchor="middle" fill="#64748b" font-size="11">2</text>
+  <text x="531" y="162" text-anchor="middle" fill="#64748b" font-size="11">3</text>
+  <text x="557" y="162" text-anchor="middle" fill="#64748b" font-size="11">4</text>
+  <text x="462" y="183" text-anchor="end" fill="#64748b" font-size="11">1</text>
+  <text x="462" y="209" text-anchor="end" fill="#64748b" font-size="11">2</text>
+  <text x="462" y="235" text-anchor="end" fill="#64748b" font-size="11">3</text>
+  <text x="462" y="261" text-anchor="end" fill="#64748b" font-size="11">4</text>
+
+  <g>
+    <!-- row 1: 0 1 5 2*  (1,4) highlighted -->
+    <rect x="466" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="479" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="492" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="505" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="518" y="166" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="531" y="183" text-anchor="middle" fill="#cbd5e1" font-size="13">5</text>
+    <rect x="544" y="166" width="26" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="557" y="183" text-anchor="middle" fill="#fef3c7" font-size="13" font-weight="700">2</text>
+
+    <!-- row 2: 1 0 6 1 -->
+    <rect x="466" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="479" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="492" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="505" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="518" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="531" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">6</text>
+    <rect x="544" y="192" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="557" y="209" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+
+    <!-- row 3: 5 6 0 7*  (3,4) highlighted -->
+    <rect x="466" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="479" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">5</text>
+    <rect x="492" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="505" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">6</text>
+    <rect x="518" y="218" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="531" y="235" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+    <rect x="544" y="218" width="26" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="557" y="235" text-anchor="middle" fill="#fef3c7" font-size="13" font-weight="700">7</text>
+
+    <!-- row 4: 2* 1 7* 0  (4,1) and (4,3) highlighted -->
+    <rect x="466" y="244" width="26" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="479" y="261" text-anchor="middle" fill="#fef3c7" font-size="13" font-weight="700">2</text>
+    <rect x="492" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="505" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">1</text>
+    <rect x="518" y="244" width="26" height="26" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="531" y="261" text-anchor="middle" fill="#fef3c7" font-size="13" font-weight="700">7</text>
+    <rect x="544" y="244" width="26" height="26" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="557" y="261" text-anchor="middle" fill="#cbd5e1" font-size="13">0</text>
+  </g>
+
+  <line x1="40" y1="375" x2="640" y2="375" stroke="#1e293b" stroke-width="1"/>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="12">3→4는 k=1에서 1번을 버렸지만 k=2에서 3→1→2→4 = 7로 되살아난다</text>
+</svg>
