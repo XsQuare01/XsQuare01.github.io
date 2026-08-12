@@ -38,5 +38,5 @@
   <text x="620" y="210" text-anchor="middle" fill="#34d399" font-size="14" font-weight="700">D^k[i][j]</text>
 
   <line x1="40" y1="375" x2="640" y2="375" stroke="#1e293b" stroke-width="1"/>
-  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="12">최단 경로에 같은 노드가 두 번 나오지 않으므로 k는 정확히 한 번 지난다</text>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="12">고른 길에 같은 노드가 두 번 나오지 않으므로, k를 지난다면 정확히 한 번 지난다</text>
 </svg>

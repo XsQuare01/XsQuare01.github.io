@@ -109,7 +109,7 @@ $$
 
 층을 오가는 인덱스도 함께 사라진다. 공간은 $O(N^2)$이고, 남는 것은 세 겹 `for`와 `min` 하나다.
 
-![k단계에서 k행과 k열은 값이 바뀌지 않는다. 그래서 덮어써도 안전하다.](/images/floyd-warshall-memory/overwrite-safe.svg)
+![k단계에서 k행과 k열은 값이 바뀌지 않으므로 덮어써도 안전하다.](/images/floyd-warshall-memory/overwrite-safe.svg)
 
 ---
 
