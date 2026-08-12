@@ -1,7 +1,7 @@
 <svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
   <rect width="680" height="420" rx="10" fill="#0f1117"/>
 
-  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">k행과 k열은 변하지 않는다</text>
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">k단계에서 k행과 k열은 변하지 않는다</text>
 
   <!-- ===================== left: 6x6 grid with row k / col k highlighted ===================== -->
   <!-- column headers -->

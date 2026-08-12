@@ -1,11 +1,10 @@
 <svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
   <rect width="680" height="420" rx="10" fill="#0f1117"/>
 
-  <text x="24" y="32" fill="#e2e8f0" font-size="17" font-weight="700">모든 쌍의 최단 거리</text>
-  <text x="24" y="52" fill="#64748b" font-size="13">답은 한 개가 아니라 N² 개다</text>
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">모든 쌍의 최단 거리</text>
 
   <!-- panel divider -->
-  <line x1="510" y1="80" x2="510" y2="380" stroke="#1e293b" stroke-width="1"/>
+  <line x1="510" y1="80" x2="510" y2="355" stroke="#1e293b" stroke-width="1"/>
 
   <!-- ===== left: 4-node weighted graph ===== -->
   <!-- edges -->
@@ -81,4 +80,7 @@
     <rect x="604" y="264" width="28" height="28"/>
     <rect x="632" y="264" width="28" height="28"/>
   </g>
+
+  <line x1="40" y1="375" x2="640" y2="375" stroke="#1e293b" stroke-width="1"/>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="12">간선은 5개뿐인데 채워야 할 칸은 16개다</text>
 </svg>
