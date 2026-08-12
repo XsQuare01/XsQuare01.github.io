@@ -1,0 +1,39 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">층을 줄인다</text>
+
+  <!-- ===================== stage 1 : N^3, four layers stacked diagonally ===================== -->
+  <text x="108" y="132" text-anchor="middle" fill="#64748b" font-size="11">1층 … N층</text>
+
+  <rect x="58" y="180" width="64" height="64" rx="4" fill="#12161f" stroke="#29344a" stroke-width="1.4"/>
+  <rect x="70" y="168" width="64" height="64" rx="4" fill="#151b26" stroke="#2e3a52" stroke-width="1.4"/>
+  <rect x="82" y="156" width="64" height="64" rx="4" fill="#1a2230" stroke="#34405a" stroke-width="1.4"/>
+  <rect x="94" y="144" width="64" height="64" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+
+  <text x="108" y="270" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">D[k][i][j]</text>
+  <text x="108" y="288" text-anchor="middle" fill="#64748b" font-size="12">N³ 칸</text>
+
+  <text x="191" y="216" text-anchor="middle" fill="#64748b" font-size="26">→</text>
+
+  <!-- ===================== stage 2 : 2N^2, prev / curr layers ===================== -->
+  <text x="260" y="164" text-anchor="middle" fill="#94a3b8" font-size="11">prev</text>
+  <rect x="225" y="174" width="70" height="70" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+
+  <text x="344" y="164" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700">curr</text>
+  <rect x="309" y="174" width="70" height="70" rx="4" fill="#3a2c0f" stroke="#f59e0b" stroke-width="1.8"/>
+
+  <text x="302" y="270" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="700">D[k%2][i][j]</text>
+  <text x="302" y="288" text-anchor="middle" fill="#64748b" font-size="12">2N² 칸</text>
+
+  <text x="449" y="216" text-anchor="middle" fill="#64748b" font-size="26">→</text>
+
+  <!-- ===================== stage 3 : N^2, single layer, conclusion ===================== -->
+  <rect x="520" y="174" width="70" height="70" rx="4" fill="#14352b" stroke="#34d399" stroke-width="2.4"/>
+
+  <text x="555" y="270" text-anchor="middle" fill="#34d399" font-size="13" font-weight="700">D[i][j]</text>
+  <text x="555" y="288" text-anchor="middle" fill="#64748b" font-size="12">N² 칸</text>
+
+  <line x1="40" y1="375" x2="640" y2="375" stroke="#1e293b" stroke-width="1"/>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="12">k층은 k-1층만 참조한다</text>
+</svg>
