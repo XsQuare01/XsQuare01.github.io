@@ -1,9 +1,9 @@
-<svg viewBox="0 0 760 380" width="1140" height="570" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif" role="img" aria-labelledby="any-mst-title any-mst-desc">
+<svg viewBox="0 0 760 404" width="1140" height="606" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif" role="img" aria-labelledby="any-mst-title any-mst-desc">
   <title id="any-mst-title">같은 그래프에서 가능한 두 MST 비교</title>
-  <desc id="any-mst-desc">4 정점 5 간선 그래프에서 가중치 2로 동률인 간선 B-C와 A-D 중 어느 쪽을 고르느냐에 따라 두 가지 다른 MST가 만들어진다. 두 MST는 가중치 합이 4로 같다.</desc>
+  <desc id="any-mst-desc">4 정점 5 간선 그래프에서 가중치 1인 A-B와 C-D는 두 MST에 모두 들어간다. 남은 두 덩어리를 잇는 자리를 두고 가중치가 같은 B-C와 A-D가 맞서며, 어느 쪽을 고르느냐에 따라 두 가지 다른 MST가 만들어진다. 두 MST는 가중치 합이 4로 같다.</desc>
 
   <!-- Background -->
-  <rect width="760" height="380" rx="10" fill="#0f1117"/>
+  <rect width="760" height="404" rx="10" fill="#0f1117"/>
 
   <!-- Title -->
   <text x="380" y="26" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">같은 그래프, 두 가능한 MST</text>
@@ -122,6 +122,5 @@
   <circle cx="460" cy="365" r="6" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
   <text x="472" y="369" fill="#94a3b8" font-size="11">정점</text>
 
-  <text x="540" y="369" fill="#64748b" font-size="11">·</text>
-  <text x="556" y="369" fill="#64748b" font-size="11" font-style="italic">동률 간선이 사이에 사이클(A–B–C–D–A)을 만든다</text>
+  <text x="380" y="392" text-anchor="middle" fill="#64748b" font-size="11" font-style="italic">A·B 쪽과 C·D 쪽을 잇는 자리를 두고 B–C와 A–D가 맞서 MST가 갈린다</text>
 </svg>
