@@ -78,7 +78,9 @@ difficulty: 입문
 - **Base Case:** $n = 1$이면 좌변 $= 1$, 우변 $= \frac{1 \cdot 2}{2} = 1$. 성립.
 - **Inductive Step:** $1 + 2 + \cdots + k = \frac{k(k+1)}{2}$라 가정하면,
 
-$$1 + 2 + \cdots + k + (k+1) = \frac{k(k+1)}{2} + (k+1) = \frac{(k+1)(k+2)}{2}$$
+$$
+1 + 2 + \cdots + k + (k+1) = \frac{k(k+1)}{2} + (k+1) = \frac{(k+1)(k+2)}{2}
+$$
 
 ### 강한 귀납법 (Strong Induction)
 
@@ -199,7 +201,9 @@ $n$이 충분히 커질 때 $T(n)$의 **성장률**을 나타내는 표기 체�
 
 ### Big-O (상한, Upper Bound)
 
-$$f(n) = O(g(n)) \iff \exists\, c > 0,\; n_0 > 0 \;\text{s.t.}\; \forall n \ge n_0,\; f(n) \le c \cdot g(n)$$
+$$
+f(n) = O(g(n)) \iff \exists\, c > 0,\; n_0 > 0 \;\text{s.t.}\; \forall n \ge n_0,\; f(n) \le c \cdot g(n)
+$$
 
 "$f$는 충분히 큰 $n$에 대해 $c \cdot g(n)$을 절대 넘지 않는다." 즉, $g(n)$은 $f(n)$의 **상한**이다.
 
@@ -209,7 +213,9 @@ $c = 4$, $n_0 = 6$으로 놓으면 $n \ge 6$인 모든 정수에서 $3n^2 + 5n +
 
 ### Big-Ω (하한, Lower Bound)
 
-$$f(n) = \Omega(g(n)) \iff \exists\, c > 0,\; n_0 > 0 \;\text{s.t.}\; \forall n \ge n_0,\; f(n) \ge c \cdot g(n)$$
+$$
+f(n) = \Omega(g(n)) \iff \exists\, c > 0,\; n_0 > 0 \;\text{s.t.}\; \forall n \ge n_0,\; f(n) \ge c \cdot g(n)
+$$
 
 "$f$는 충분히 큰 $n$에 대해 $c \cdot g(n)$ 이상이다." 즉, $g(n)$은 $f(n)$의 **하한**이다.
 
@@ -219,7 +225,9 @@ $c = 1$로 놓으면 모든 $n \ge 1$에서 $3n^2 + 5n + 1 \ge n^2$ 성립.
 
 ### Big-Θ (점근적으로 긴밀한 경계, Tight Bound)
 
-$$f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \;\text{and}\; f(n) = \Omega(g(n))$$
+$$
+f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \;\text{and}\; f(n) = \Omega(g(n))
+$$
 
 "$f$와 $g$는 본질적으로 같은 성장률을 갖는다."
 
@@ -247,7 +255,9 @@ $$f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \;\text{and}\; f(n) = \Omega(g(n))$$
 
 자주 등장하는 복잡도 클래스를 성장 속도가 느린 것부터 빠른 순으로 나열하면 다음과 같다. 여기서 $\prec$는 집합 포함이 아니라 **성장률이 더 느리다**는 순서를 뜻한다.
 
-$$O(1) \;\prec\; O(\log n) \;\prec\; O(\sqrt{n}) \;\prec\; O(n) \;\prec\; O(n \log n) \;\prec\; O(n^2) \;\prec\; O(2^n) \;\prec\; O(n!)$$
+$$
+O(1) \;\prec\; O(\log n) \;\prec\; O(\sqrt{n}) \;\prec\; O(n) \;\prec\; O(n \log n) \;\prec\; O(n^2) \;\prec\; O(2^n) \;\prec\; O(n!)
+$$
 
 | 복잡도 | 이름 | 대표 알고리즘 |
 |---|---|---|
@@ -287,8 +297,13 @@ def find_max(arr: list[int]) -> int:
 | 루프 내 대입 (최악) | $n - 1$ |
 | 반환 | 1 |
 
-$$T_{\text{worst}}(n) = 1 + (n-1) + (n-1) + 1 = 2n = O(n)$$
-$$T_{\text{best}}(n) = 1 + (n-1) + 0 + 1 = n = O(n)$$
+$$
+T_{\text{worst}}(n) = 1 + (n-1) + (n-1) + 1 = 2n = O(n)
+$$
+
+$$
+T_{\text{best}}(n) = 1 + (n-1) + 0 + 1 = n = O(n)
+$$
 
 최선과 최악 모두 $O(n)$이므로 $T(n) = \Theta(n)$.
 
@@ -337,7 +352,9 @@ def binary_search(arr: list[int], target: int) -> int:
 
 매 반복마다 탐색 범위가 **절반**으로 줄어든다.
 
-$$n \to \frac{n}{2} \to \frac{n}{4} \to \cdots \to 1 \quad \Rightarrow \quad \frac{n}{2^k} = 1 \implies k = \log_2 n$$
+$$
+n \to \frac{n}{2} \to \frac{n}{4} \to \cdots \to 1 \quad \Rightarrow \quad \frac{n}{2^k} = 1 \implies k = \log_2 n
+$$
 
 - **최선:** $O(1)$ (첫 시도에 발견)
 - **최악:** $O(\log n)$

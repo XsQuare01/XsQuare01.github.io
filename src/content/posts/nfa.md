@@ -31,7 +31,9 @@ NFA(Non-deterministic Finite Automata)는 **비결정론적 유한 오토마타*
 
 NFA도 DFA와 마찬가지로 다섯 가지 요소의 튜플로 정의한다.
 
-$$M = (Q,\ \Sigma,\ q_0,\ F,\ \Delta)$$
+$$
+M = (Q,\ \Sigma,\ q_0,\ F,\ \Delta)
+$$
 
 - **$Q$**: State들의 집합
 - **$\Sigma$**: Alphabet
@@ -39,7 +41,9 @@ $$M = (Q,\ \Sigma,\ q_0,\ F,\ \Delta)$$
 - **$F$**: Accepting state들의 집합
 - **$\Delta$**: Transition **relation**
 
-$$\Delta: Q \times \Sigma \to \mathcal{P}(Q)$$
+$$
+\Delta: Q \times \Sigma \to \mathcal{P}(Q)
+$$
 
 DFA의 transition function $\delta: Q \times \Sigma \to Q$는 항상 정확히 **하나의** 다음 상태를 반환한다. 반면 NFA의 $\Delta$는 가능한 다음 상태들의 **집합** 을 반환한다.
 
@@ -103,7 +107,9 @@ NFA가 state 1과 3에 **동시에** 있는 상황을 DFA의 state $\{1, 3\}$으
 | Initial state | $\{1\}$ (NFA의 initial state만 포함) |
 | Accepting states | NFA의 accepting state(state 4)를 원소로 포함하는 모든 부분집합 |
 
-$$\{4\},\ \{1,4\},\ \{2,4\},\ \{3,4\},\ \{1,2,4\},\ \ldots$$
+$$
+\{4\},\ \{1,4\},\ \{2,4\},\ \{3,4\},\ \{1,2,4\},\ \ldots
+$$
 
 ---
 
@@ -111,7 +117,9 @@ $$\{4\},\ \{1,4\},\ \{2,4\},\ \{3,4\},\ \{1,2,4\},\ \ldots$$
 
 모든 NFA는 Powerset Construction으로 동등한 DFA로 변환할 수 있다. 따라서 NFA가 accept하는 모든 언어는 DFA도 accept할 수 있고, 그 역도 성립한다.
 
-$$\text{Class NFA} = \text{Class DFA}$$
+$$
+\text{Class NFA} = \text{Class DFA}
+$$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>

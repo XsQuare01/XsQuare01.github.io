@@ -53,7 +53,9 @@ difficulty: 심화
 
 **Reduction(귀착)** 은 문제의 난이도를 비교하는 핵심 도구다. 문제 $A$를 문제 $B$로 **다항식 시간 귀착** 한다는 것은, 다항식 시간에 계산 가능한 변환 함수 $f$가 존재해 다음이 성립하는 것이다.
 
-$$A \leq_p B \iff \exists f \text{ (다항식 시간 계산 가능) s.t. } x \in A \Leftrightarrow f(x) \in B$$
+$$
+A \leq_p B \iff \exists f \text{ (다항식 시간 계산 가능) s.t. } x \in A \Leftrightarrow f(x) \in B
+$$
 
 귀착 과정은 다음 세 단계로 이루어진다.
 
@@ -80,13 +82,17 @@ SAT는 주어진 Boolean formula를 참(True)으로 만드는 변수 배정이 �
 
 **Satisfiable 예시:**
 
-$$\varphi = (p \lor q) \land \lnot p$$
+$$
+\varphi = (p \lor q) \land \lnot p
+$$
 
 $p = \text{False},\ q = \text{True}$로 설정하면 $\varphi$가 참 → **Satisfiable**
 
 **Unsatisfiable 예시:**
 
-$$\varphi = p \land \lnot p$$
+$$
+\varphi = p \land \lnot p
+$$
 
 어떤 변수 배정으로도 참이 될 수 없음 → **Unsatisfiable**
 
@@ -127,7 +133,9 @@ DTM의 실행을 시간 $t = 0, 1, 2, \ldots, T$에 따라 테이프 내용을 �
 
 NP의 임의의 문제 $L$을 푸는 NTM $M$이 있다고 하자. NTM은 각 단계에서 여러 선택지가 존재한다. 이 선택을 **Choice 변수** 로 인코딩한다.
 
-$$\text{Choice}_t \in \{0, 1\} : \text{시간 } t \text{에서 어느 전이를 선택하는가}$$
+$$
+\text{Choice}_t \in \{0, 1\} : \text{시간 } t \text{에서 어느 전이를 선택하는가}
+$$
 
 | 구분 | DTM | NTM |
 |---|---|---|
@@ -138,12 +146,19 @@ $$\text{Choice}_t \in \{0, 1\} : \text{시간 } t \text{에서 어느 전이를 
 
 **Step 3: SAT로 변환**
 
-$$\text{Choice 변수} \longleftrightarrow \text{SAT의 변수}$$
-$$\text{NTM 회로식} \longleftrightarrow \text{SAT의 논리식}$$
+$$
+\text{Choice 변수} \longleftrightarrow \text{SAT의 변수}
+$$
+
+$$
+\text{NTM 회로식} \longleftrightarrow \text{SAT의 논리식}
+$$
 
 입력 $x$가 $L$에 속하면 해당 Choice 변수 값이 논리식을 참으로 만들고, 속하지 않으면 어떤 값으로도 참이 되지 않는다.
 
-$$x \in L \iff \text{(NTM 회로에 대한 SAT 인스턴스가 Satisfiable)}$$
+$$
+x \in L \iff \text{(NTM 회로에 대한 SAT 인스턴스가 Satisfiable)}
+$$
 
 임의의 NP 문제 $L$을 SAT로 다항식 시간에 귀착할 수 있다. **따라서 SAT ∈ NP-Complete.**
 
@@ -177,7 +192,9 @@ NP-Hard는 두 번째 조건(NP-hardness)만 만족하는 더 넓은 개념이�
 
 Co-NP는 NP의 보완(complement) 개념이다.
 
-$$L \in \text{Co-NP} \iff L^c \in \text{NP}$$
+$$
+L \in \text{Co-NP} \iff L^c \in \text{NP}
+$$
 
 NP가 **"Yes"에 대한 짧은 증명서** 가 존재하는 언어라면, Co-NP는 **"No"에 대한 짧은 증명서** 가 존재하는 언어다.
 

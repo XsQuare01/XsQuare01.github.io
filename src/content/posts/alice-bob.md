@@ -69,7 +69,9 @@ Alice는 메시지 m을 key k로 암호화해 암호문 c = Enc_k(m)을 전송�
 
 ### Class P: 다항식 시간
 
-$$L \in P \iff \exists \text{ DTM } M_1,\ \exists \text{ 다항식 } p \text{ s.t. } M_1 \text{ decides } L,\ \forall x:\ T_{M_1}(x) \leq p(|x|)$$
+$$
+L \in P \iff \exists \text{ DTM } M_1,\ \exists \text{ 다항식 } p \text{ s.t. } M_1 \text{ decides } L,\ \forall x:\ T_{M_1}(x) \leq p(|x|)
+$$
 
 임의의 입력 x에 대해 **다항식 시간** $p(|x|)$ 안에 Yes/No를 출력하는 DTM이 존재하면 $L \in P$이다.
 
@@ -77,7 +79,9 @@ $$L \in P \iff \exists \text{ DTM } M_1,\ \exists \text{ 다항식 } p \text{ s.
 
 ### Class NP: 비결정론적 다항식 시간
 
-$$L \in NP \iff \exists \text{ NTM } M_2,\ \exists \text{ 다항식 } p \text{ s.t. } M_2 \text{ decides } L,\ \forall x,\ \forall \text{경로}:\ T_{M_2}(x) \leq p(|x|)$$
+$$
+L \in NP \iff \exists \text{ NTM } M_2,\ \exists \text{ 다항식 } p \text{ s.t. } M_2 \text{ decides } L,\ \forall x,\ \forall \text{경로}:\ T_{M_2}(x) \leq p(|x|)
+$$
 
 NTM이 다항식 시간 안에 L을 결정하면 $L \in NP$이다. 여기서 다항식 시간의 기준은 **모든 계산 경로** 다. NTM은 각 단계에서 여러 경로를 동시에 시도하므로, 가장 긴 경로가 $p(|x|)$ 안에 끝나야 한다.
 
@@ -85,7 +89,9 @@ NTM이 다항식 시간 안에 L을 결정하면 $L \in NP$이다. 여기서 다
 
 ### Class EXP: 지수 시간
 
-$$L \in EXP \iff \exists \text{ DTM } M_3,\ \exists \text{ 다항식 } p \text{ s.t. } M_3 \text{ decides } L \text{ in time } 2^{p(|x|)}$$
+$$
+L \in EXP \iff \exists \text{ DTM } M_3,\ \exists \text{ 다항식 } p \text{ s.t. } M_3 \text{ decides } L \text{ in time } 2^{p(|x|)}
+$$
 
 입력 길이를 $|x|=n$으로 두면, DTM이 지수 시간 $2^{p(n)}$ 안에 L을 결정하면 $L \in EXP$이다. 다항식 시간은 지수 시간에 포함되므로 $P \subseteq EXP$이다.
 
@@ -111,17 +117,23 @@ $$L \in EXP \iff \exists \text{ DTM } M_3,\ \exists \text{ 다항식 } p \text{ 
 - 헤드 위치: $s(n)$ 가지
 - 상태: $|Q|$ 가지
 
-$$\text{총 형상 수} = |\Gamma|^{s(n)} \times s(n) \times |Q|$$
+$$
+\text{총 형상 수} = |\Gamma|^{s(n)} \times s(n) \times |Q|
+$$
 
 이는 $s(n)$에 대해 지수적이다. TM이 이 수보다 많은 단계를 실행하면 동일한 형상이 반복되어 무한 루프에 빠진다(Pumping 논리). 따라서 다항식 공간을 쓰는 TM은 지수 시간 안에 반드시 정지한다.
 
-$$PSPACE \subseteq EXP$$
+$$
+PSPACE \subseteq EXP
+$$
 
 ### 전체 계층
 
 아래 관계가 성립한다.
 
-$$P \subseteq NP \subseteq PSPACE \subseteq EXP$$
+$$
+P \subseteq NP \subseteq PSPACE \subseteq EXP
+$$
 
 확장해서 보면 NEXP도 있지만, 이 글의 표와 그림은 EXP까지를 다룬다.
 
@@ -148,7 +160,9 @@ $$P \subseteq NP \subseteq PSPACE \subseteq EXP$$
 
 $s(n)$이 다항식이면 $s(n)^2$도 다항식이므로 NPSPACE ⊆ PSPACE가 성립하고, 반대 방향은 자명하므로:
 
-$$PSPACE = NPSPACE$$
+$$
+PSPACE = NPSPACE
+$$
 
 이는 시간 클래스(P vs NP)와 대조적이다. 공간에서는 비결정론의 이점이 제곱 인수 이내로 흡수된다.
 

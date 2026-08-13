@@ -39,7 +39,9 @@ difficulty: 입문
 
 두 집합 $A$, $B$의 **모든 원소가 일대일 대응(bijection)** 된다면, 두 집합의 크기는 같다고 정의한다.
 
-$$|A| = |B| \iff \exists f: A \to B \text{ (전단사 함수)}$$
+$$
+|A| = |B| \iff \exists f: A \to B \text{ (전단사 함수)}
+$$
 
 유한 집합의 경우 이는 직관적이다. $A = \{1, 2, 3\}$이면 $|A| = 3$이다. 그런데 무한 집합에서는 이 정의가 예상치 못한 결과를 만들어낸다.
 
@@ -49,7 +51,9 @@ $$|A| = |B| \iff \exists f: A \to B \text{ (전단사 함수)}$$
 
 유한 집합 $X$에 대하여, 크기는 자연수로 나타낼 수 있다.
 
-$$|X| = k \quad (k \in \mathbb{N})$$
+$$
+|X| = k \quad (k \in \mathbb{N})
+$$
 
 ---
 
@@ -65,11 +69,15 @@ $X = \{0\} \cup \mathbb{N} = \{0, 1, 2, \ldots\}$라고 할 때, $X$의 각 원�
 
 정수 집합도 자연수 집합과 크기가 같다. 다음과 같이 양수·음수 쌍으로 묶어 자연수를 대응시킬 수 있기 때문이다.
 
-$$\mathbb{Z} = \{(0)_0,\ (1,\ {-1})_1,\ (2,\ {-2})_2,\ \ldots\}$$
+$$
+\mathbb{Z} = \{(0)_0,\ (1,\ {-1})_1,\ (2,\ {-2})_2,\ \ldots\}
+$$
 
 밑첨자는 대응되는 자연수를 나타낸다. 이 방식으로 정수 집합의 모든 원소에 번호를 매길 수 있으므로,
 
-$$|\mathbb{Z}| = |\mathbb{N}|$$
+$$
+|\mathbb{Z}| = |\mathbb{N}|
+$$
 
 ---
 
@@ -77,11 +85,15 @@ $$|\mathbb{Z}| = |\mathbb{N}|$$
 
 모든 양의 유리수는 기약분수 $\frac{p}{q}$ 형태, 즉 두 자연수의 쌍으로 나타낼 수 있다. 분자와 분모의 합이 같은 것들을 묶어 순서를 매기면 된다.
 
-$$\mathbb{Q}^+ = \left\{\left(\frac{1}{1}\right)_1,\ \left(\frac{1}{2},\ \frac{2}{1}\right)_2,\ \left(\frac{1}{3},\ \frac{2}{2},\ \frac{3}{1}\right)_3,\ \ldots\right\}$$
+$$
+\mathbb{Q}^+ = \left\{\left(\frac{1}{1}\right)_1,\ \left(\frac{1}{2},\ \frac{2}{1}\right)_2,\ \left(\frac{1}{3},\ \frac{2}{2},\ \frac{3}{1}\right)_3,\ \ldots\right\}
+$$
 
 이 방식으로 모든 양의 유리수에 자연수 번호를 매길 수 있으므로,
 
-$$|\mathbb{Q}^+| = |\mathbb{N}|$$
+$$
+|\mathbb{Q}^+| = |\mathbb{N}|
+$$
 
 ![가산 무한 — 자연수와의 일대일 대응](/images/cardinality/countable-compare.svg)
 
@@ -95,7 +107,9 @@ $$|\mathbb{Q}^+| = |\mathbb{N}|$$
 
 여기서 $\mathfrak{c}=2^{\aleph_0}=|\mathbb{R}|$는 연속체의 크기이며, $\mathfrak{c}=\aleph_1$이라고 가정하지 않는다.
 
-$$|\mathbb{N}| \ne |\mathbb{R}|$$
+$$
+|\mathbb{N}| \ne |\mathbb{R}|
+$$
 
 이를 **칸토어의 대각선 논법(Cantor Diagonalization)** 으로 증명한다.
 
@@ -116,20 +130,35 @@ $\mathbb{R}_{01} = \{x \mid 0 \le x < 1\}$과 $\mathbb{N}$이 일대일 대응�
 
 그러면 모든 실수를 자연수에 대응한 표를 다음과 같이 쓸 수 있다.
 
-$$a_1 = 0.d_{11}d_{12}d_{13}d_{14}\cdots$$
-$$a_2 = 0.d_{21}d_{22}d_{23}d_{24}\cdots$$
-$$a_3 = 0.d_{31}d_{32}d_{33}d_{34}\cdots$$
-$$\vdots$$
+$$
+a_1 = 0.d_{11}d_{12}d_{13}d_{14}\cdots
+$$
+
+$$
+a_2 = 0.d_{21}d_{22}d_{23}d_{24}\cdots
+$$
+
+$$
+a_3 = 0.d_{31}d_{32}d_{33}d_{34}\cdots
+$$
+
+$$
+\vdots
+$$
 
 이제 다음 수 $X$를 정의한다.
 
-$$X = 0.D_1D_2D_3D_4\cdots, \quad D_i = \begin{cases} 4 & \text{if } d_{ii} = 5 \\ 5 & \text{if } d_{ii} \ne 5 \end{cases}$$
+$$
+X = 0.D_1D_2D_3D_4\cdots, \quad D_i = \begin{cases} 4 & \text{if } d_{ii} = 5 \\ 5 & \text{if } d_{ii} \ne 5 \end{cases}
+$$
 
 $X$는 위 표의 어떤 $a_n$과도 다르다. $a_n$과 $X$는 소수점 $n$번째 자리($d_{nn}$과 $D_n$)에서 반드시 다르기 때문이다.
 
 따라서 $X \in \mathbb{R}_{01}$이지만 표에 존재하지 않는다. 이는 일대일 대응이 가능하다는 가정에 모순이므로,
 
-$$|\mathbb{R}_{01}| > |\mathbb{N}|, \quad \therefore |\mathbb{R}| > |\mathbb{N}|$$
+$$
+|\mathbb{R}_{01}| > |\mathbb{N}|, \quad \therefore |\mathbb{R}| > |\mathbb{N}|
+$$
 
 ---
 
@@ -149,7 +178,9 @@ $$|\mathbb{R}_{01}| > |\mathbb{N}|, \quad \therefore |\mathbb{R}| > |\mathbb{N}|
 
 집합 $A$의 모든 부분집합의 집합을 **Power Set** $2^A$라 한다.
 
-$$A = \{1, 2, 3, \ldots, n\} \implies |2^A| = 2^n = 2^{|A|}$$
+$$
+A = \{1, 2, 3, \ldots, n\} \implies |2^A| = 2^n = 2^{|A|}
+$$
 
 <div class="section-label section-label-deep">증명</div>
 
@@ -161,18 +192,27 @@ $$A = \{1, 2, 3, \ldots, n\} \implies |2^A| = 2^n = 2^{|A|}$$
 
 다음 집합 $P$를 정의한다.
 
-$$P = \{a \mid a \in X,\ a \notin f(a)\}$$
+$$
+P = \{a \mid a \in X,\ a \notin f(a)\}
+$$
 
 $P$는 $X$의 부분집합이므로 $P \in 2^X$다. 따라서 $f(b) = P$를 만족하는 $b \in X$가 존재해야 한다.
 
 그런데 $b$에 대해 다음 모순이 발생한다.
 
-$$b \in P \implies b \notin f(b) = P \implies b \notin P$$
-$$b \notin P \implies b \in f(b) = P \implies b \in P$$
+$$
+b \in P \implies b \notin f(b) = P \implies b \notin P
+$$
+
+$$
+b \notin P \implies b \in f(b) = P \implies b \in P
+$$
 
 $f(b) = P$를 만족하는 $b$가 존재할 수 없으므로, 일대일 대응이 성립하지 않는다.
 
-$$\therefore |X| \ne |2^X| \text{ (모든 집합 } X \text{에 대해)}$$
+$$
+\therefore |X| \ne |2^X| \text{ (모든 집합 } X \text{에 대해)}
+$$
 
 이 결과와 뒤의 Cantor Set 절에서 볼 수 있듯 $|\mathbb{R}| = |2^\mathbb{N}|$라는 관점을 결합하면, 실수 집합이 자연수 집합의 Power Set과 크기가 같음을 알 수 있다.
 
@@ -186,7 +226,9 @@ $$\therefore |X| \ne |2^X| \text{ (모든 집합 } X \text{에 대해)}$$
 
 **$|\mathbb{R}| = |\mathbb{R}^2|$:** 임의의 실수 $x = 0.d_1d_2d_3d_4\ldots$에 대해, 홀수·짝수 자리를 분리해 두 실수를 만든다.
 
-$$p = 0.d_1d_3d_5\ldots, \quad q = 0.d_2d_4d_6\ldots$$
+$$
+p = 0.d_1d_3d_5\ldots, \quad q = 0.d_2d_4d_6\ldots
+$$
 
 이 방식으로 $\mathbb{R}$의 원소를 $\mathbb{R}^2$의 원소와 일대일 대응시킬 수 있다.
 
@@ -206,7 +248,9 @@ $[0, 1)$에서 임의의 실수 $x$를 뽑을 때, $x$가 유리수일 확률은
 
 $[0, 1)$에서 중간 $\frac{1}{3}$ 구간을 계속 제거해나가는 Cantor Set을 생각해보자. 제거되는 구간의 길이의 합은 등비급수의 합으로,
 
-$$\frac{1/3}{1 - 2/3} = 1$$
+$$
+\frac{1/3}{1 - 2/3} = 1
+$$
 
 즉 길이(measure)가 $1$인 구간이 모두 제거되는데도, **제거되지 않는 점들이 여전히 존재한다.** 이 점들은 3진수로 표현했을 때 $1$이 한 번도 등장하지 않는 수들이다.
 

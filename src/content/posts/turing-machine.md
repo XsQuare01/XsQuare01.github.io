@@ -30,7 +30,9 @@ DTM(Deterministic Turing Machine)은 현재 컴퓨터의 이론적 모델이다.
 
 튜링 머신은 다음 여섯 가지 요소의 튜플로 정의한다.
 
-$$M = (Q,\ \Sigma,\ \Gamma,\ q_0,\ F,\ \delta)$$
+$$
+M = (Q,\ \Sigma,\ \Gamma,\ q_0,\ F,\ \delta)
+$$
 
 - **$Q$**: State들의 집합
 - **$\Sigma$**: 입력 알파벳 (Input alphabet). 입력으로 들어올 수 있는 심볼들의 집합
@@ -41,7 +43,9 @@ $$M = (Q,\ \Sigma,\ \Gamma,\ q_0,\ F,\ \delta)$$
 
 전이 함수는 다음과 같이 표현한다.
 
-$$(q,\ a) \to (r,\ b,\ R)$$
+$$
+(q,\ a) \to (r,\ b,\ R)
+$$
 
 현재 상태가 $q$이고 헤드가 $a$를 읽으면, $b$를 쓰고 헤드를 오른쪽($R$)으로 이동한 뒤 상태를 $r$로 전환한다. 헤드의 이동 방향은 Left($L$), Right($R$), Stay($S$), 세 가지다.
 
@@ -51,7 +55,9 @@ $$(q,\ a) \to (r,\ b,\ R)$$
 
 ## L13: 튜링 머신으로 문제 풀기
 
-$$L_{13} = \{x \mid x = y \mathtt{2} y,\ y \in \{0, 1\}^*\}$$
+$$
+L_{13} = \{x \mid x = y \mathtt{2} y,\ y \in \{0, 1\}^*\}
+$$
 
 구분자 $\mathtt{2}$를 기준으로 앞뒤의 문자열 $y$가 동일한지 검사하는 문제다.
 
@@ -147,7 +153,9 @@ NTM의 실행은 선택 지점마다 가지가 갈라지는 **계산 트리(comp
 
 NTM이 accept한다면 UTM도 그 경로를 탐색하여 accept하므로, DTM = NTM이 성립한다.
 
-$$\text{Class DTM} = \text{Class NTM}$$
+$$
+\text{Class DTM} = \text{Class NTM}
+$$
 
 ---
 
