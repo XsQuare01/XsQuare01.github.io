@@ -1,0 +1,78 @@
+<svg viewBox="0 0 680 420" width="1020" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">중간에 지나갈 수 있는 노드를 제한한다</text>
+
+  <!-- column separators -->
+  <line x1="240" y1="70" x2="240" y2="360" stroke="#1e293b" stroke-width="1"/>
+  <line x1="440" y1="70" x2="440" y2="360" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- column captions -->
+  <text x="140" y="90" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">k = 0</text>
+  <text x="340" y="90" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">k = 1</text>
+  <text x="540" y="90" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">k = 2</text>
+
+  <!-- ===================== column 1 : k = 0, no allowed via-node ===================== -->
+  <g>
+    <!-- edges (scaled 0.45x layout of the shared graph, node1(190,140) node2(450,110) node3(170,320) node4(440,300)) -->
+    <line x1="86" y1="154" x2="203" y2="140" stroke="#475569" stroke-width="1.2"/>
+    <line x1="86" y1="154" x2="77" y2="235" stroke="#475569" stroke-width="1.2"/>
+    <line x1="86" y1="154" x2="199" y2="226" stroke="#475569" stroke-width="1.2"/>
+    <line x1="203" y1="140" x2="199" y2="226" stroke="#475569" stroke-width="1.2"/>
+    <line x1="77" y1="235" x2="199" y2="226" stroke="#475569" stroke-width="1.2"/>
+
+    <circle cx="86" cy="154" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="86" y="158" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">1</text>
+    <circle cx="203" cy="140" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="203" y="144" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">2</text>
+    <circle cx="77" cy="235" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="77" y="239" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">3</text>
+    <circle cx="199" cy="226" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="199" y="230" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">4</text>
+
+    <text x="140" y="257" text-anchor="middle" fill="#64748b" font-size="11">직행 간선만</text>
+  </g>
+
+  <!-- ===================== column 2 : k = 1, node 1 allowed ===================== -->
+  <g>
+    <line x1="286" y1="154" x2="403" y2="140" stroke="#475569" stroke-width="1.2"/>
+    <line x1="286" y1="154" x2="277" y2="235" stroke="#475569" stroke-width="1.2"/>
+    <line x1="286" y1="154" x2="399" y2="226" stroke="#475569" stroke-width="1.2"/>
+    <line x1="403" y1="140" x2="399" y2="226" stroke="#475569" stroke-width="1.2"/>
+    <line x1="277" y1="235" x2="399" y2="226" stroke="#475569" stroke-width="1.2"/>
+
+    <circle cx="286" cy="154" r="10" fill="#14352b" stroke="#34d399" stroke-width="1.8"/>
+    <text x="286" y="158" text-anchor="middle" fill="#d1fae5" font-size="10" font-weight="700">1</text>
+    <circle cx="403" cy="140" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="403" y="144" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">2</text>
+    <circle cx="277" cy="235" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="277" y="239" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">3</text>
+    <circle cx="399" cy="226" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="399" y="230" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">4</text>
+
+    <text x="340" y="257" text-anchor="middle" fill="#64748b" font-size="11">1번을 경유할 수 있다</text>
+  </g>
+
+  <!-- ===================== column 3 : k = 2, nodes 1 and 2 allowed ===================== -->
+  <g>
+    <line x1="486" y1="154" x2="603" y2="140" stroke="#475569" stroke-width="1.2"/>
+    <line x1="486" y1="154" x2="477" y2="235" stroke="#475569" stroke-width="1.2"/>
+    <line x1="486" y1="154" x2="599" y2="226" stroke="#475569" stroke-width="1.2"/>
+    <line x1="603" y1="140" x2="599" y2="226" stroke="#475569" stroke-width="1.2"/>
+    <line x1="477" y1="235" x2="599" y2="226" stroke="#475569" stroke-width="1.2"/>
+
+    <circle cx="486" cy="154" r="10" fill="#14352b" stroke="#34d399" stroke-width="1.8"/>
+    <text x="486" y="158" text-anchor="middle" fill="#d1fae5" font-size="10" font-weight="700">1</text>
+    <circle cx="603" cy="140" r="10" fill="#14352b" stroke="#34d399" stroke-width="1.8"/>
+    <text x="603" y="144" text-anchor="middle" fill="#d1fae5" font-size="10" font-weight="700">2</text>
+    <circle cx="477" cy="235" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="477" y="239" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">3</text>
+    <circle cx="599" cy="226" r="10" fill="#1e293b" stroke="#475569" stroke-width="1.6"/>
+    <text x="599" y="230" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="700">4</text>
+
+    <text x="540" y="257" text-anchor="middle" fill="#64748b" font-size="11">1번과 2번을 경유할 수 있다</text>
+  </g>
+
+  <line x1="40" y1="375" x2="640" y2="375" stroke="#1e293b" stroke-width="1"/>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="12">쓸 수 있다는 뜻이지 반드시 써야 한다는 뜻이 아니다</text>
+</svg>
