@@ -62,7 +62,9 @@ $$
 
 3. 이 최소 원소 $x$에 대해, '집합 $U$에서 가장 작은 원소'라는 '흥미로운' 점이 존재한다. 따라서, 모순이 발생한다.
 
-$$\therefore \text{ 귀류법에 의해, 모든 자연수는 흥미롭다.}$$
+$$
+\therefore \text{ 귀류법에 의해, 모든 자연수는 흥미롭다.}
+$$
 
 <div class="callout">
 <div class="callout-title">주의</div>

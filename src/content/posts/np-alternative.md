@@ -27,15 +27,21 @@ difficulty: 고급
 
 ### Df1: NTM 기반 정의
 
-$$L \in NP \iff \exists \text{ 다항식 시간 NTM } M : L = L(M)$$
+$$
+L \in NP \iff \exists \text{ 다항식 시간 NTM } M : L = L(M)
+$$
 
 NTM이 모든 계산 경로를 동시에 탐색하는 것을 허용한다. 경로 중 하나라도 accept 상태에 도달하면 accept한다.
 
 ### Df2: 검증자(Verifier) 기반 정의
 
-$$L \in NP \iff \exists \text{ 다항식 시간 DTM (검증자) } V,\ \exists \text{ 다항식 } p : $$
+$$
+L \in NP \iff \exists \text{ 다항식 시간 DTM (검증자) } V,\ \exists \text{ 다항식 } p :
+$$
 
-$$x \in L \iff \exists h,\ |h| \leq p(|x|) : V(x, h) = \text{Yes}$$
+$$
+x \in L \iff \exists h,\ |h| \leq p(|x|) : V(x, h) = \text{Yes}
+$$
 
 여기서 $h$를 **증명서(Certificate)** 또는 **증인(Witness)** 이라 한다. $x$가 언어에 속한다는 사실을 증명해주는 힌트다.
 

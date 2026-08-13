@@ -28,7 +28,9 @@ DFA는 다섯 가지 요소의 튜플로 정의한다.
 
 보통 전이함수는 $\delta$로 쓰지만, 이 글에서는 같은 대상을 $s$로 표기한다.
 
-$$M = (Q,\ \Sigma,\ q,\ F,\ s)$$
+$$
+M = (Q,\ \Sigma,\ q,\ F,\ s)
+$$
 
 - **Q**: State들의 집합
 - **$\Sigma$**: Tape에 들어갈 수 있는 Symbol들의 집합 (= Alphabet)
@@ -56,7 +58,9 @@ DFA가 문제를 accept하려면 **오직 하나의 유한한 machine** 이 해�
 
 ## Problem X1: 입력은 짝수인가?
 
-$$L_1 = \{0, 00, 10, 010, \ldots\}$$
+$$
+L_1 = \{0, 00, 10, 010, \ldots\}
+$$
 
 마지막 비트가 0인 문자열, 즉 짝수를 나타내는 이진 문자열의 집합이다. 이에 대한 DFA는 다음과 같다.
 
@@ -81,7 +85,9 @@ $$L_1 = \{0, 00, 10, 010, \ldots\}$$
 
 ## Problem X3: 입력에 '101'이 존재하는가?
 
-$$L_3 = \{101, 0101, 01010, 1101, \ldots\}$$
+$$
+L_3 = \{101, 0101, 01010, 1101, \ldots\}
+$$
 
 부분 문자열로 `101`을 포함하는 모든 문자열의 집합이다. 이에 대한 DFA는 다음과 같다.
 
@@ -104,7 +110,9 @@ q₀와 q₁이 모두 Accepting State인 이유: 0만 나온 상태(q₀)도, 0
 
 ## 추가) Problem X4': 입력에 '10'이 존재하는가?
 
-$$L_4' = \{x \mid x \text{는 '10'을 포함한다}\}$$
+$$
+L_4' = \{x \mid x \text{는 '10'을 포함한다}\}
+$$
 
 ![L4' DFA](/images/dfa/L4prime.svg)
 
@@ -112,7 +120,9 @@ $$L_4' = \{x \mid x \text{는 '10'을 포함한다}\}$$
 
 L4에서 Accepting State가 되려면 **1이 나온 이후 0이 나오면 안 된다**. 따라서 L4를 다음과 같이 재정의할 수 있다.
 
-$$L_4 = \{x \mid x\text{는 '10'을 포함하지 않는다}\}$$
+$$
+L_4 = \{x \mid x\text{는 '10'을 포함하지 않는다}\}
+$$
 
 ---
 
@@ -158,11 +168,15 @@ L4에서는 앞에 0이 몇 개 나오든 상관없었지만, L5에서는 0이 1
 
 $n$개의 입력이 처리되는 동안의 상태 전이를 다음과 같이 표현한다.
 
-$$q_1 \xrightarrow{i_1} q_2 \xrightarrow{i_2} q_3 \xrightarrow{i_3} \cdots \xrightarrow{i_n} q_{n+1}$$
+$$
+q_1 \xrightarrow{i_1} q_2 \xrightarrow{i_2} q_3 \xrightarrow{i_3} \cdots \xrightarrow{i_n} q_{n+1}
+$$
 
 $q_1, q_2, \ldots, q_{n+1}$은 총 $n+1$개이지만 상태는 $n$개뿐이다. **비둘기집 원리** 에 의해 반드시 중복 상태가 존재한다. 이 중복 상태를 $r_k$라 하면:
 
-$$q_1 \xrightarrow{i_1} \cdots \xrightarrow{i_l} r_k \xrightarrow{i_m} \cdots \xrightarrow{i_o} r_k \xrightarrow{i_p} \cdots \xrightarrow{i_n} q_f$$
+$$
+q_1 \xrightarrow{i_1} \cdots \xrightarrow{i_l} r_k \xrightarrow{i_m} \cdots \xrightarrow{i_o} r_k \xrightarrow{i_p} \cdots \xrightarrow{i_n} q_f
+$$
 
 $r_k$에서 $r_k$로 돌아오는 구간을 제거하거나 반복해도 여전히 $q_f$ (accepting state)에 도달할 수 있다. L3의 DFA를 예로 들면, q₁의 self-loop(1→q₁)가 cycle이 되어, 이 구간을 생략하거나 반복해도 accepting state에 도달한다.
 
@@ -170,11 +184,15 @@ $r_k$에서 $r_k$로 돌아오는 구간을 제거하거나 반복해도 여전�
 
 accept되는 string $w$에 대해, $|w| \ge n$이면 $w = xyz$로 분해할 수 있고, **모든 $i \ge 0$에 대해 $xy^iz$도 accept된다.**
 
-$$|xy| \le n,\quad |y| > 0,\quad \forall i \ge 0:\ xy^iz \in L$$
+$$
+|xy| \le n,\quad |y| > 0,\quad \forall i \ge 0:\ xy^iz \in L
+$$
 
 풀어서 쓰면 다음이 모두 accept된다.
 
-$$xz\ (i=0),\quad xyz\ (i=1),\quad xy^2z\ (i=2),\quad xy^3z\ (i=3),\quad \ldots$$
+$$
+xz\ (i=0),\quad xyz\ (i=1),\quad xy^2z\ (i=2),\quad xy^3z\ (i=3),\quad \ldots
+$$
 
 - $x = i_1 i_2 \cdots i_l$ ($r_k$ 앞의 string)
 - $y = i_m \cdots i_o$ ($r_k$에서 $r_k$로 돌아오는 구간)
@@ -201,7 +219,9 @@ $|xy| \le n$ 조건이 의미하는 바를 정확히 이해하자.
 5. 그런데 $xz'1^n$을 보면, $|y| > 0$이므로 0의 개수가 최소 1개 줄어들어 **0의 개수 ≠ 1의 개수** 가 된다.
 6. L5는 $0^i 1^i$ ($i$개씩 같아야 accept)이므로, $xz'1^n \notin L_5$이다. **모순.**
 
-$$\therefore \text{DFA로는 L5를 풀 수 없다.}$$
+$$
+\therefore \text{DFA로는 L5를 풀 수 없다.}
+$$
 
 ---
 
@@ -241,7 +261,9 @@ $$\therefore \text{DFA로는 L5를 풀 수 없다.}$$
 
 **DFA로 풀 수 있는 Language들의 집합** 을 Class DFA라 한다.
 
-$$L_4 \in \text{DFA}, \quad L_5 \notin \text{DFA}$$
+$$
+L_4 \in \text{DFA}, \quad L_5 \notin \text{DFA}
+$$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>

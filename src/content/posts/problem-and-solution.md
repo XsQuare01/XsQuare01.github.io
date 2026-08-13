@@ -119,7 +119,9 @@ String들의 집합. 크기가 유한하든 무한하든 상관없다.
 
 **답이 yes인 입력들을 모아놓은 집합이 곧 Problem이다.**
 
-$$\text{Language} = \text{Problem}$$
+$$
+\text{Language} = \text{Problem}
+$$
 
 Language에 속하는 문자열은 답이 yes인 입력이다. 예시를 통해 이해해보자.
 
@@ -143,7 +145,9 @@ $L_1 = L_2$이므로, $X_1$과 $X_2$는 서로 같은 문제다.
 
 $\Sigma = \{a, b, c\}$라 할 때, 가능한 모든 문자열 집합 $\Sigma^*$는 다음과 같다.
 
-$$\Sigma^* = \{(\lambda)_0,\ (a, b, c)_1,\ aa,\ ab,\ ac,\ \ldots\}$$
+$$
+\Sigma^* = \{(\lambda)_0,\ (a, b, c)_1,\ aa,\ ab,\ ac,\ \ldots\}
+$$
 
 길이에 따라 자연수 번호를 붙일 수 있으므로, $|\Sigma^*| = |\mathbb{N}|$ — 가산 무한이다.
 
@@ -151,7 +155,9 @@ $$\Sigma^* = \{(\lambda)_0,\ (a, b, c)_1,\ aa,\ ab,\ ac,\ \ldots\}$$
 
 모든 Problem은 $\Sigma^*$의 부분집합이므로, 가능한 문제의 집합은 $2^{\Sigma^*}$이다.
 
-$$|2^{\Sigma^*}| = |\mathbb{R}|$$
+$$
+|2^{\Sigma^*}| = |\mathbb{R}|
+$$
 
 <div class="callout callout-key">
 <div class="callout-title">핵심 크기 비교</div>
@@ -203,7 +209,9 @@ Thesis(명제)라고 부르는 이유는, 아직 만들어지지 않은 미래�
   - **State**: Control의 현재 상태
   - **Rule**: 다음과 같이 표현한다.
 
-$$(q,\ x_1) \to (x_2,\ R,\ r)$$
+$$
+(q,\ x_1) \to (x_2,\ R,\ r)
+$$
 
 현재 State가 $q$이고 Head가 $x_1$을 가리키면, $x_2$를 쓰고 오른쪽($R$)으로 이동 후 State를 $r$로 전환한다.
 

@@ -93,7 +93,9 @@ L이 **사전식 순서(lexicographic order)** 로 열거 가능하다면, L∈D
 
 **정지 문제(Halting Problem)** 는 다음과 같이 정의한다.
 
-$$L_{halt} = \{ \langle M, x \rangle \mid M \text{은 TM이고 } M(x) \text{가 정지함} \}$$
+$$
+L_{halt} = \{ \langle M, x \rangle \mid M \text{은 TM이고 } M(x) \text{가 정지함} \}
+$$
 
 ### L_halt ∈ E
 
@@ -124,7 +126,9 @@ H가 $L_{halt}$의 결정기라고 가정하자. 즉, 모든 ⟨M, x⟩에 대�
 
 Language L의 **보집합(complement)** 은 $\bar{L} = \Sigma^* \setminus L$로 정의한다. **Class co-E** 는 보집합이 E에 속하는 언어들의 집합이다.
 
-$$\text{co-E} = \{ L \mid \bar{L} \in E \}$$
+$$
+\text{co-E} = \{ L \mid \bar{L} \in E \}
+$$
 
 TM M이 L의 열거기라면, M의 accept/reject 출력을 단순히 반전시키는 것만으로는 co-E의 열거기를 얻을 수 없다. reject가 "정지하고 거절"이 아니라 "무한 루프"일 수 있기 때문이다.
 
@@ -165,7 +169,9 @@ M₁은 모든 입력에 대해 정지한다.
 
 따라서 L∈D이다. ∎
 
-$$D = E \cap \text{co-E}$$
+$$
+D = E \cap \text{co-E}
+$$
 
 ---
 
@@ -173,7 +179,9 @@ $$D = E \cap \text{co-E}$$
 
 **"TM이 테이프에 'a'를 쓰는가?"**
 
-$$L_a = \{ \langle M \rangle \mid \text{어떤 입력에 대해 M이 테이프에 } a \text{를 쓴다} \}$$
+$$
+L_a = \{ \langle M \rangle \mid \text{어떤 입력에 대해 M이 테이프에 } a \text{를 쓴다} \}
+$$
 
 이 문제는 결정 불가능($L_a \notin D$)하다. $L_{halt}$에서의 환산(reduction)으로 증명한다: 만약 $L_a$의 결정기가 존재한다면, M이 어떤 입력 x에 대해 정지할 때만 'a'를 쓰도록 M을 변형함으로써 $L_{halt}$의 결정기도 만들 수 있다. 하지만 $L_{halt} \notin D$이므로 모순이다.
 

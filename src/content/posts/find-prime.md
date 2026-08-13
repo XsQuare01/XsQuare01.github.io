@@ -32,12 +32,17 @@ difficulty: 중급
 
 $1$부터 $n$까지의 정수 중 소수의 개수 $\pi(n)$은 다음과 같이 근사된다:
 
-$$\pi(n) \approx \frac{n}{\ln n}$$
+$$
+\pi(n) \approx \frac{n}{\ln n}
+$$
+
 </div>
 
 예를 들어 $n = 1{,}000{,}000$이면:
 
-$$\frac{1{,}000{,}000}{\ln 1{,}000{,}000} \approx \frac{1{,}000{,}000}{13.8} \approx 72{,}000$$
+$$
+\frac{1{,}000{,}000}{\ln 1{,}000{,}000} \approx \frac{1{,}000{,}000}{13.8} \approx 72{,}000
+$$
 
 실제 $\pi(1{,}000{,}000) = 78{,}498$이다. 근사값과 상당히 가깝다.
 
@@ -55,11 +60,15 @@ $$\frac{1{,}000{,}000}{\ln 1{,}000{,}000} \approx \frac{1{,}000{,}000}{13.8} \ap
 
 페르마의 소정리는 다음을 보장한다:
 
-$$n \text{이 소수이고 } \gcd(a, n) = 1 \implies a^{n-1} \equiv 1 \pmod{n}$$
+$$
+n \text{이 소수이고 } \gcd(a, n) = 1 \implies a^{n-1} \equiv 1 \pmod{n}
+$$
 
 대우를 취하면:
 
-$$a^{n-1} \not\equiv 1 \pmod{n} \implies n \text{은 합성수}$$
+$$
+a^{n-1} \not\equiv 1 \pmod{n} \implies n \text{은 합성수}
+$$
 
 **판별 절차:**
 
@@ -70,7 +79,9 @@ $$a^{n-1} \not\equiv 1 \pmod{n} \implies n \text{은 합성수}$$
 
 **예시: 8379 판별**
 
-$$35^{8378} \equiv 2989 \pmod{8379}$$
+$$
+35^{8378} \equiv 2989 \pmod{8379}
+$$
 
 $2989 \neq 1$이므로 $8379$는 합성수이다. (실제로 $8379 = 3 \times 2793 = 3 \times 3 \times 931$)
 
@@ -96,7 +107,9 @@ Witness가 하나라도 존재하면 $n$이 합성수임이 확정된다. 반대
 
 가장 작은 Carmichael 수: $561 = 3 \times 11 \times 17$
 
-$$a^{560} \equiv 1 \pmod{561} \quad \text{for all } \gcd(a, 561) = 1$$
+$$
+a^{560} \equiv 1 \pmod{561} \quad \text{for all } \gcd(a, 561) = 1
+$$
 
 Carmichael 수에 대해서는 Fermat 테스트가 전혀 동작하지 않는다.
 
@@ -112,22 +125,35 @@ Carmichael 수를 제외한 합성수에서는 Witness가 얼마나 많은가?
 
 $\mathbb{Z}_n^*$를 Witness 집합 $A$와 non-Witness 집합 $B$로 분리한다:
 
-$$A = \{ a \in \mathbb{Z}_n^* \mid a^{n-1} \not\equiv 1 \pmod{n} \}$$
-$$B = \{ b \in \mathbb{Z}_n^* \mid b^{n-1} \equiv 1 \pmod{n} \}$$
+$$
+A = \{ a \in \mathbb{Z}_n^* \mid a^{n-1} \not\equiv 1 \pmod{n} \}
+$$
+
+$$
+B = \{ b \in \mathbb{Z}_n^* \mid b^{n-1} \equiv 1 \pmod{n} \}
+$$
 
 $n$이 Carmichael 수가 아니므로 적어도 하나의 Witness $a \in A$가 존재한다. 이제 함수 $f: B \to \mathbb{Z}_n^*$를
 
-$$f(b) = ab$$
+$$
+f(b) = ab
+$$
 
 로 정의하면:
 
 - $b^{n-1} \equiv 1 \pmod{n}$이고 $a^{n-1} \equiv k \pmod{n}$ ($k \neq 1$)이므로,
-  $$(ab)^{n-1} \equiv k \cdot 1 = k \not\equiv 1 \pmod{n}$$
+
+$$
+(ab)^{n-1} \equiv k \cdot 1 = k \not\equiv 1 \pmod{n}
+$$
+
 - 따라서 $ab \in A$, 즉 $f(b)$는 Witness다.
 
 $f$는 단사(injective)이므로 $|B| \leq |A|$. 따라서:
 
-$$|A| \geq \frac{|\mathbb{Z}_n^*|}{2}$$
+$$
+|A| \geq \frac{|\mathbb{Z}_n^*|}{2}
+$$
 
 **임의의 $a$를 골랐을 때 그것이 Witness일 확률은 $\geq 1/2$이다.**
 
@@ -152,7 +178,9 @@ $n$이 합성수(Carmichael 수 제외)일 때, 각 라운드에서 Witness를 �
 
 $k$번 모두 Witness를 고르지 못할 확률, 즉 합성수를 소수로 잘못 판정할 확률은:
 
-$$P(\text{오판}) \leq \left(\frac{1}{2}\right)^k$$
+$$
+P(\text{오판}) \leq \left(\frac{1}{2}\right)^k
+$$
 
 $k = 100$이면 오판 확률은 $2^{-100}$으로, 실용적으로는 0에 수렴한다.
 

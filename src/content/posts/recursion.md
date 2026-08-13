@@ -57,11 +57,15 @@ Base Case 없는 재귀는 무한히 자기 자신을 호출하다 **스택 오�
 
 ## 팩토리얼
 
-$$n! = n \times (n-1) \times (n-2) \times \cdots \times 1, \quad 0! = 1$$
+$$
+n! = n \times (n-1) \times (n-2) \times \cdots \times 1, \quad 0! = 1
+$$
 
 이를 재귀적으로 정의하면:
 
-$$n! = \begin{cases} 1 & n = 0 \\ n \times (n-1)! & n \ge 1 \end{cases}$$
+$$
+n! = \begin{cases} 1 & n = 0 \\ n \times (n-1)! & n \ge 1 \end{cases}
+$$
 
 아래 구현은 $n \ge 0$을 전제로 한다 (음수 입력은 Base Case에 닿지 못해 무한 재귀에 빠지므로, 방어가 필요하면 `if n < 0: raise ValueError`를 앞에 둔다).
 
@@ -95,7 +99,9 @@ factorial(4)
 
 이를 전개하면:
 
-$$T(n) = T(n-1) + c = T(n-2) + 2c = \cdots = T(0) + nc = O(n)$$
+$$
+T(n) = T(n-1) + c = T(n-2) + 2c = \cdots = T(0) + nc = O(n)
+$$
 
 시간 복잡도: $O(n)$, 공간 복잡도: $O(n)$.
 
@@ -156,7 +162,9 @@ factorial(k+1)
 
 ## 피보나치와 지수적 폭발
 
-$$F(n) = \begin{cases} 0 & n = 0 \\ 1 & n = 1 \\ F(n-1) + F(n-2) & n \ge 2 \end{cases}$$
+$$
+F(n) = \begin{cases} 0 & n = 0 \\ 1 & n = 1 \\ F(n-1) + F(n-2) & n \ge 2 \end{cases}
+$$
 
 ```python
 def fib_naive(n: int) -> int:
@@ -191,7 +199,9 @@ fib(5)
 
 `fib(n)`을 계산하는 데 필요한 호출 횟수를 $T(n)$이라 하면:
 
-$$T(n) = T(n-1) + T(n-2) + O(1)$$
+$$
+T(n) = T(n-1) + T(n-2) + O(1)
+$$
 
 $T(n)$은 피보나치 수열 자체와 같은 성장률을 가지며, $T(n) = O(\phi^n)$ ($\phi \approx 1.618$, 황금비)이다. $O(\phi^n)$과 $O(2^n)$은 정확히 같은 차수는 아니지만, 둘 다 **지수 함수 꼴로 폭발**한다는 점에서 같은 계열이다.
 
@@ -240,7 +250,9 @@ def fib(n: int) -> int:
 
 A에서 C로 모든 원판을 옮기는 알고리즘은 다음과 같다 (원판이 최소 하나 있다고 보고 $n \ge 1$을 전제한다).
 
-$$\text{hanoi}(n, A \to C) = \text{hanoi}(n-1, A \to B) + \text{move}(A \to C) + \text{hanoi}(n-1, B \to C)$$
+$$
+\text{hanoi}(n, A \to C) = \text{hanoi}(n-1, A \to B) + \text{move}(A \to C) + \text{hanoi}(n-1, B \to C)
+$$
 
 ```python
 def hanoi(n: int, source: str, target: str, aux: str) -> None:
@@ -273,13 +285,19 @@ hanoi(3, 'A', 'C', 'B')
 
 **점화식:**
 
-$$T(n) = 2T(n-1) + 1, \quad T(1) = 1$$
+$$
+T(n) = 2T(n-1) + 1, \quad T(1) = 1
+$$
 
 전개하면:
 
-$$T(n) = 2T(n-1) + 1 = 2(2T(n-2) + 1) + 1 = 4T(n-2) + 3 = \cdots = 2^{n-1}T(1) + (2^{n-1} - 1) = 2^n - 1$$
+$$
+T(n) = 2T(n-1) + 1 = 2(2T(n-2) + 1) + 1 = 4T(n-2) + 3 = \cdots = 2^{n-1}T(1) + (2^{n-1} - 1) = 2^n - 1
+$$
 
-$$T(n) = \Theta(2^n)$$
+$$
+T(n) = \Theta(2^n)
+$$
 
 $n = 64$일 때 필요한 이동 횟수: $2^{64} - 1 \approx 1.8 \times 10^{19}$회. 초당 1회 이동한다면 약 **5800억 년**이 걸린다.
 
@@ -305,7 +323,9 @@ $n = 64$일 때 필요한 이동 횟수: $2^{64} - 1 \approx 1.8 \times 10^{19}$
 
 $a \ge 1$, $b > 1$인 상수에 대해 점화식이 다음 형태이면:
 
-$$T(n) = aT\!\left(\frac{n}{b}\right) + f(n)$$
+$$
+T(n) = aT\!\left(\frac{n}{b}\right) + f(n)
+$$
 
 마스터 정리(Master Theorem)로 $T(n)$의 점근적 해를 구할 수 있다.
 
@@ -313,15 +333,21 @@ $$T(n) = aT\!\left(\frac{n}{b}\right) + f(n)$$
 
 ### Case 1: 리프 비용이 지배
 
-$$f(n) = O(n^{\log_b a - \varepsilon}), \quad \varepsilon > 0 \implies T(n) = \Theta(n^{\log_b a})$$
+$$
+f(n) = O(n^{\log_b a - \varepsilon}), \quad \varepsilon > 0 \implies T(n) = \Theta(n^{\log_b a})
+$$
 
 ### Case 2: 균형 (동등)
 
-$$f(n) = \Theta(n^{\log_b a}) \implies T(n) = \Theta(n^{\log_b a} \cdot \log n)$$
+$$
+f(n) = \Theta(n^{\log_b a}) \implies T(n) = \Theta(n^{\log_b a} \cdot \log n)
+$$
 
 ### Case 3: 분할/병합 비용이 지배
 
-$$f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \le cf(n) \implies T(n) = \Theta(f(n))$$
+$$
+f(n) = \Omega(n^{\log_b a + \varepsilon}), \quad \varepsilon > 0,\; af(n/b) \le cf(n) \implies T(n) = \Theta(f(n))
+$$
 
 ### 마스터 정리 적용 예시
 

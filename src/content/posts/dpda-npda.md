@@ -54,7 +54,9 @@ DFA로는 풀 수 없었던 $L_5 = \{0^i 1^i \mid i \ge 0\}$을 DPDA는 스택�
 
 DPDA도 모든 문제를 해결할 수는 없다. 대표적인 예시가 다음 언어다.
 
-$$L_7 = \{x \mid x = yy^R,\ y \in \{a, b\}^*\}$$
+$$
+L_7 = \{x \mid x = yy^R,\ y \in \{a, b\}^*\}
+$$
 
 $y^R$은 $y$를 뒤집은 문자열이다. 예를 들어 abba는 $y = \text{ab}$, $y^R = \text{ba}$이므로 $L_7$에 속한다.
 
@@ -99,7 +101,9 @@ DFA와 NFA의 경우, 모든 DFA는 NFA의 특수한 경우이고 모든 NFA는 
 - **DPDA는 $L_7$을 풀 수 없다.** $y$와 $y^R$의 전환점이 어디인지 결정론적으로 알 수 없기 때문이다.
 - **NPDA는 $L_7$을 풀 수 있다.** 가능한 모든 전환점을 동시에 시도해, 그 중 하나라도 올바르게 매칭되면 accept하면 된다.
 
-$$\text{Class DPDA} \subsetneq \text{Class NPDA}$$
+$$
+\text{Class DPDA} \subsetneq \text{Class NPDA}
+$$
 
 <div class="callout callout-simple">
 <div class="callout-title">쉽게 말하면</div>
@@ -116,10 +120,21 @@ DPDA는 DFA에 스택을 1개 추가한 모델이다. 그렇다면 스택을 1�
 
 아래의 언어들을 먼저 살펴보자. 여기서 $\mathtt{2}$는 구분자 역할을 하는 알파벳 심볼이다.
 
-$$L_8 = \{x \mid x = y \mathtt{2} y^R \mathtt{2} y^R\}$$
-$$L_9 = \{x \mid x = y \mathtt{2} y^R \mathtt{2} y^R \mathtt{2} y^R\}$$
-$$L_{10} = \{x \mid x = yy^Ry^R\}$$
-$$L_{11} = \{x \mid x = yy^Ry^Ry^R\}$$
+$$
+L_8 = \{x \mid x = y \mathtt{2} y^R \mathtt{2} y^R\}
+$$
+
+$$
+L_9 = \{x \mid x = y \mathtt{2} y^R \mathtt{2} y^R \mathtt{2} y^R\}
+$$
+
+$$
+L_{10} = \{x \mid x = yy^Ry^R\}
+$$
+
+$$
+L_{11} = \{x \mid x = yy^Ry^Ry^R\}
+$$
 
 이 언어들은 모두 스택 1개짜리 DPDA로는 해결할 수 없다. $y$를 스택에 push해 첫 번째 $y^R$과 매칭한 뒤에는 스택이 비어버리기 때문에, 두 번째 $y^R$을 매칭할 때 필요한 $y$의 정보를 이미 잃어버린 상태다.
 

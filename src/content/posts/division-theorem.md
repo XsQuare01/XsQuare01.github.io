@@ -27,7 +27,9 @@ difficulty: 입문
 
 정수 $a, b, c$에 대해, $b = ca$가 성립할 때 (나머지가 0일 때) $a$가 $b$를 **나누어 떨어뜨린다** 고 하며, 다음과 같이 표기한다.
 
-$$a \mid b \quad (a \text{ divides } b)$$
+$$
+a \mid b \quad (a \text{ divides } b)
+$$
 
 | 표현 | 의미 |
 |---|---|
@@ -43,23 +45,33 @@ $$a \mid b \quad (a \text{ divides } b)$$
 
 **기본 성질:**
 
-$$1 \mid a, \quad -1 \mid a, \quad a \mid 0$$
+$$
+1 \mid a, \quad -1 \mid a, \quad a \mid 0
+$$
 
-$$a \mid a, \quad a \mid -a, \quad -a \mid a, \quad -a \mid -a$$
+$$
+a \mid a, \quad a \mid -a, \quad -a \mid a, \quad -a \mid -a
+$$
 
 **선형 결합 성질 (Linear Combination):**
 
-$$a \mid b, \quad a \mid c \implies a \mid (bx + cy)$$
+$$
+a \mid b, \quad a \mid c \implies a \mid (bx + cy)
+$$
 
 **증명:** $b = k_1 a$, $c = k_2 a$로 놓으면:
 
-$$bx + cy = k_1 ax + k_2 ay = a(k_1 x + k_2 y)$$
+$$
+bx + cy = k_1 ax + k_2 ay = a(k_1 x + k_2 y)
+$$
 
 $k_1 x + k_2 y$는 정수이므로 $a \mid (bx + cy)$.
 
 **추이 성질 (Transitivity):**
 
-$$a \mid b, \quad b \mid c \implies a \mid c$$
+$$
+a \mid b, \quad b \mid c \implies a \mid c
+$$
 
 **증명:** $b = k_1 a$, $c = k_2 b = k_1 k_2 a$이다. $k_1 k_2$는 정수이므로 $a \mid c$.
 
@@ -76,7 +88,7 @@ $$a \mid b, \quad b \mid c \implies a \mid c$$
 <div class="callout callout-key">
 <div class="callout-title">Division Theorem</div>
 <p>양의 정수 $a, b$에 대해, 다음을 만족하는 유일한 정수 $q, r$이 존재한다.</p>
-<p style="text-align:center"><strong>$$b = qa + r \quad (0 \le r < a)$$</strong></p>
+<p style="text-align:center"><strong>$b = qa + r \quad (0 \le r < a)$</strong></p>
 <p>$q$를 <strong>몫(quotient)</strong>, $r$을 <strong>나머지(remainder)</strong>라 한다.</p>
 </div>
 
@@ -93,7 +105,9 @@ $$a \mid b, \quad b \mid c \implies a \mid c$$
 
 $b$에서 $a$를 반복해서 빼면 반드시 음수가 된다. $b - ka < 0$이 되는 최솟값 $k$를 잡으면:
 
-$$b - ka < 0, \quad b - (k-1)a \geq 0$$
+$$
+b - ka < 0, \quad b - (k-1)a \geq 0
+$$
 
 $q = k - 1,\ r = b - (k-1)a$로 정의하면:
 
@@ -109,15 +123,22 @@ $q = k - 1,\ r = b - (k-1)a$로 정의하면:
 
 두 쌍 $(q_1, r_1)$과 $(q_2, r_2)$가 모두 조건을 만족하고 $r_1 \leq r_2$라 하자.
 
-$$b = q_1 a + r_1 = q_2 a + r_2 \quad (0 \leq r_1 \leq r_2 < a)$$
+$$
+b = q_1 a + r_1 = q_2 a + r_2 \quad (0 \leq r_1 \leq r_2 < a)
+$$
 
 두 식의 차를 구하면:
 
-$$(q_1 - q_2)a = r_2 - r_1$$
+$$
+(q_1 - q_2)a = r_2 - r_1
+$$
 
 $0 \leq r_2 - r_1 < a$이므로 우변은 $0$ 이상이고 $a$ 미만이다. 그런데 좌변 $(q_1 - q_2)a$는 $a$의 배수이고, $0 \leq x < a$를 만족하는 $a$의 배수는 $0$ 뿐이다.
 
-$$\therefore \ r_2 - r_1 = 0 \implies r_1 = r_2, \quad q_1 = q_2$$
+$$
+\therefore \ r_2 - r_1 = 0 \implies r_1 = r_2, \quad q_1 = q_2
+$$
+
 ---
 
 ## 결론
