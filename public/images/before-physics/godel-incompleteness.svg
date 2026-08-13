@@ -15,11 +15,11 @@
   </defs>
 
   <rect width="680" height="440" fill="#0f1117" rx="10"/>
-  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">괴델의 불완전성 정리 — 자기 참조의 딜레마</text>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">괴델의 불완전성 정리 — 직관으로 본 자기 참조</text>
 
   <!-- ===== Theorem A ===== -->
   <rect x="160" y="28" width="360" height="36" rx="6" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="2"/>
-  <text x="340" y="51" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#f97316">정리 A: "이 정리는 증명을 갖지 않는다"</text>
+  <text x="340" y="51" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11.2" font-weight="700" fill="#f97316">직관용 문장 A: "이 정리는 증명을 갖지 않는다"</text>
 
   <!-- ===== Two branches ===== -->
   <line x1="260" y1="64" x2="170" y2="92" stroke="#f87171" stroke-width="1.5" marker-end="url(#ra)"/>
@@ -61,24 +61,24 @@
   <!-- ===== 제1 불완전성 정리 ===== -->
   <rect x="18" y="252" width="310" height="80" rx="8" fill="rgba(249,115,22,0.06)" stroke="#f97316" stroke-width="1.5"/>
   <text x="173" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#f97316">제1 불완전성 정리</text>
-  <text x="173" y="292" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">무모순적인 체계라면,</text>
-  <text x="173" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">참이지만 증명할 수 없는 명제가 존재한다</text>
-  <text x="173" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">(경우 1을 배제 → 경우 2가 필연)</text>
+  <text x="173" y="292" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">산술을 표현하는 무모순 체계에는</text>
+  <text x="173" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">증명도 반증도 되지 않는 명제가 존재한다</text>
+  <text x="173" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">(「참이다」를 말하려면 해석과 건전성이 더 필요)</text>
 
   <!-- ===== 제2 불완전성 정리 ===== -->
   <rect x="352" y="252" width="310" height="80" rx="8" fill="rgba(167,139,250,0.06)" stroke="#a78bfa" stroke-width="1.5"/>
   <text x="507" y="272" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#a78bfa">제2 불완전성 정리</text>
-  <text x="507" y="292" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">무모순적인 체계는</text>
+  <text x="507" y="292" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">같은 조건의 체계는</text>
   <text x="507" y="308" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">자신의 무모순성을 증명할 수 없다</text>
-  <text x="507" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">(무모순성을 안다면 A를 증명하게 되어 모순)</text>
+  <text x="507" y="324" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">(힐베르트·베르나이스 도출 조건이 전제)</text>
 
   <!-- ===== Gödel Numbering ===== -->
   <rect x="18" y="346" width="644" height="80" rx="8" fill="#0d1524" stroke="#334155" stroke-width="1.5"/>
-  <text x="340" y="366" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">괴델 넘버링 — 자기 참조를 형식화하기</text>
+  <text x="340" y="366" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#e2e8f0">괴델 넘버링 — 자기 참조를 형식화하는 길</text>
 
   <text x="30" y="388" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">모든 문자열에 고유 번호를 부여:  λ₁, a₂, b₃, aa₄, ab₅, …</text>
-  <text x="30" y="406" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">k번째 문자열이 "k번 정리는 증명을 갖지 않는다"가 되는 k가 존재</text>
+  <text x="30" y="406" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">번호 위에서 증명 가능성 술어 Prov(x)를 정의할 수 있다</text>
 
   <rect x="30" y="412" width="620" height="10" rx="2" fill="rgba(249,115,22,0.08)"/>
-  <text x="340" y="420" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">→ 자기 참조가 체계 내부에서 형식적으로 구성 가능함을 증명</text>
+  <text x="340" y="420" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#f97316">→ 대각화 보조정리가 자기 참조 문장의 존재를 보장한다</text>
 </svg>
