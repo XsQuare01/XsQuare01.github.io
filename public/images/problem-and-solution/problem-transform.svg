@@ -27,7 +27,7 @@
   <text x="115" y="61" text-anchor="middle" font-size="10.4" font-weight="700" fill="#4ade80">Decision 문제</text>
   <text x="115" y="96" text-anchor="middle" font-size="10.4" fill="#cbd5e0">입력: G, S, E, L</text>
   <text x="115" y="116" text-anchor="middle" font-size="10.4" fill="#cbd5e0">출력: yes / no</text>
-  <text x="115" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#4ade80">G, S, E, L → ?</text>
+  <text x="115" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#4ade80">길이 ≤ L 경로 존재?</text>
   <text x="115" y="173" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(가장 단순한 형태)</text>
 
   <!-- Card 2: 길이 문제 (blue, x=275..475) -->
