@@ -46,7 +46,7 @@
   <text x="30" y="214" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Bob의 기저:</text>
   <text x="120" y="214" font-family="monospace" font-size="9.6" font-weight="700" fill="#a78bfa">+   ×   +   +   ×   ×   +   +</text>
   <text x="30" y="230" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Bob의 결과:</text>
-  <text x="120" y="230" font-family="monospace" font-size="9.6" font-weight="700" fill="#60a5fa">1   0   ?   1   ?   0   1   ?</text>
+  <text x="120" y="230" font-family="monospace" font-size="9.6" font-weight="700" fill="#60a5fa">1   0   1   1   0   0   1   1</text>
 
   <!-- Step 3 arrow -->
   <line x1="350" y1="238" x2="350" y2="256" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#oa)"/>
@@ -54,7 +54,7 @@
 
   <!-- ===== Step 3: Compare bases ===== -->
   <rect x="18" y="260" width="664" height="60" rx="6" fill="#0d1524" stroke="#334155" stroke-width="1"/>
-  <text x="30" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">Step 3: 기저 비교 — 같은 기저만 유지</text>
+  <text x="30" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#e2e8f0">Step 3: 기저 비교 — 같은 기저만 유지 (기저가 다르면 결과는 무작위라 버린다)</text>
 
   <text x="30" y="296" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">기저 일치?</text>
   <text x="120" y="296" font-family="monospace" font-size="9.6" font-weight="700" fill="#4ade80">✓   ✓   ✗   ✓   ✗   ✓   ✓   ✗</text>

@@ -18,7 +18,7 @@
   </defs>
 
   <rect width="680" height="430" fill="#0f1117" rx="10"/>
-  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">마이켈슨 간섭계 (Michelson Interferometer)</text>
+  <text x="340" y="17" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">마흐·젠더 간섭계 (Mach–Zehnder Interferometer)</text>
 
   <!-- ===== 장치 구조 ===== -->
   <!-- Photon source -->
@@ -90,5 +90,5 @@
   <text x="173" y="405" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#4ade80">d₁과 d₂의 거리차로 파동의 위상차 조절</text>
 
   <rect x="352" y="384" width="310" height="34" rx="4" fill="rgba(249,115,22,0.06)" stroke="#f97316" stroke-width="1"/>
-  <text x="507" y="405" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f97316">LIGO: 이 원리로 중력파 검출 (10⁻²¹ m 변위)</text>
+  <text x="507" y="405" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#f97316">LIGO: 같은 원리 · 변형률 h ~ 10⁻²¹ → 4 km 팔에서 4×10⁻¹⁸ m</text>
 </svg>
