@@ -31,7 +31,7 @@
   <text x="695" y="54" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="700" fill="#4ade80">&#xACB0;&#xACFC; DFA &#xC0C1;&#xD0DC;</text>
   <text x="695" y="82" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#cbd5e0">Initial: {1}</text>
   <text x="695" y="106" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#cbd5e0">Accepting: 4&#xB97C; &#xD3EC;&#xD568;&#xD558;&#xB294; &#xBD80;&#xBD84;&#xC9D1;&#xD569;</text>
-  <text x="695" y="128" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#4ade80">{4}, {1,4}, {2,4}, {1,2,4}, &#x2026;</text>
+  <text x="695" y="128" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.6" fill="#4ade80">{4}, {1,4}, {2,4}, {3,4}, {1,2,4}, &#x2026;</text>
   <text x="695" y="155" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">&#xCD5C;&#xB300; 2&#x207F;&#xAC1C;&#xC758; DFA &#xC0C1;&#xD0DC; &#xAC00;&#xB2A5;</text>
   <text x="695" y="178" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" fill="#e2e8f0">(n = NFA &#xC0C1;&#xD0DC; &#xC218;)</text>
 </svg>

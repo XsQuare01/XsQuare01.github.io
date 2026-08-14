@@ -21,7 +21,7 @@ difficulty: 중급
 
 ## DFA vs NFA
 
-![DFA vs NFA 비교](/images/nfa/dfa-vs-nfa.svg)
+![DFA와 NFA의 구조 비교 — 전이 개수는 정확히 1개 대 0개 이상, ε-전이는 둘 다 없고 확장판 ε-NFA에서만 허용, accept 조건은 최종 상태 하나 대 하나라도 accept, 전이가 돌려주는 것은 상태 하나 대 상태들의 집합](/images/nfa/dfa-vs-nfa.svg)
 
 NFA(Non-deterministic Finite Automata)는 **비결정론적 유한 오토마타** 다. DFA와 구조는 유사하지만, 하나의 상태에서 동일한 입력에 대해 여러 상태로 동시에 전이할 수 있다는 점이 근본적으로 다르다. "비결정론적"이란 다음 상태가 하나로 결정되지 않는다는 의미다.
 
@@ -49,13 +49,13 @@ DFA의 transition function $\delta: Q \times \Sigma \to Q$는 항상 정확히 *
 
 예를 들어 $\Delta(q, a) = \{r, s\}$이면, 상태 $q$에서 $a$를 읽었을 때 $r$로도, $s$로도 전이할 수 있다. 만약 $\Delta(q, a) = \emptyset$이면 해당 경로는 막힌다(dead end).
 
-> **ε-전이(Epsilon Transition):** NFA의 확장 버전으로, 입력을 소비하지 않고도 상태를 전이할 수 있는 **ε-NFA** 가 있다. $\Delta: Q \times (\Sigma \cup \{\varepsilon\}) \to \mathcal{P}(Q)$로 정의하며, 입력 없이 자유롭게 다른 상태로 이동할 수 있다. ε-NFA도 Powerset Construction으로 DFA로 변환 가능하므로 계산 능력은 동일하다. 이 글에서는 ε-전이 없는 기본 NFA를 다룬다.
+> **ε-전이(Epsilon Transition):** NFA의 확장 버전으로, 입력을 소비하지 않고도 상태를 전이할 수 있는 **ε-NFA** 가 있다. $\Delta: Q \times (\Sigma \cup \{\varepsilon\}) \to \mathcal{P}(Q)$로 정의하며, 입력 없이 자유롭게 다른 상태로 이동할 수 있다. ε-NFA도 DFA로 변환할 수 있어 계산 능력은 동일하다. 다만 변환에 한 단계가 더 붙는다. 부분집합을 만들 때마다 ε만 따라가서 더 도달할 수 있는 상태를 모두 끌어모으는 **ε-폐포(ε-closure)** 를 취해야 한다. 아래에서 다루는 Powerset Construction은 이 단계가 없는 형태이며, **이 글에서 NFA라고 하면 ε-전이 없는 기본 NFA를 가리킨다.**
 
 ---
 
 ## NFA의 비결정성: 동시에 여러 경로
 
-![NFA 분기 동작](/images/nfa/nfa-branch.svg)
+![NFA 분기 동작 — 상태 q에서 입력 a 하나로 상태 r과 s 두 갈래가 동시에 열리고, 한쪽은 accepting state에 닿고 다른 쪽은 dead end로 막힌다. 하나라도 닿았으므로 전체는 accept](/images/nfa/nfa-branch.svg)
 
 NFA는 같은 입력에서 여러 경로를 **동시에** 탐색한다. 각 분기점에서 가능한 모든 다음 상태로 동시에 이동하며, 경로 중 하나라도 accepting state에 도달하면 accept한다.
 
@@ -74,11 +74,11 @@ NFA는 직접 구현하기보다 **이론적 도구** 로서 유용하다. DFA�
 
 아래는 4개의 state를 가진 NFA 예시다.
 
-![NFA 예시](/images/nfa/nfa-example.svg)
+![4개 상태를 가진 NFA 예시 — '101'을 부분 문자열로 포함하는 문자열을 인식한다. 상태 1과 4는 0,1 자기 루프를 갖고, 1에서 1을 읽어 2로, 2에서 0을 읽어 3으로, 3에서 1을 읽어 accepting state인 4로 간다](/images/nfa/nfa-example.svg)
 
 모든 NFA는 **Powerset Construction(부분집합 구성법)** 을 통해 동등한 DFA로 변환할 수 있다. NFA의 state 집합을 $Q$라 하면, 변환된 DFA의 각 state는 $Q$의 부분집합 $\mathcal{P}(Q)$의 원소가 된다.
 
-![Powerset Construction](/images/nfa/powerset-step.svg)
+![Powerset Construction 한 걸음 — NFA가 상태 1과 3에 동시에 있을 때 입력 1을 주면 상태 1은 1,2로 상태 3은 4로 가고, 두 집합의 합집합인 1,2,4가 변환된 DFA의 단일 상태가 된다](/images/nfa/powerset-step.svg)
 
 이 NFA를 DFA로 변환하면 최대 $2^4 = 16$개의 state가 필요하다.
 
@@ -110,6 +110,8 @@ NFA가 state 1과 3에 **동시에** 있는 상황을 DFA의 state $\{1, 3\}$으
 $$
 \{4\},\ \{1,4\},\ \{2,4\},\ \{3,4\},\ \{1,2,4\},\ \ldots
 $$
+
+state 4를 고정하고 나머지 세 state를 넣거나 빼는 경우의 수이므로, accepting state는 모두 $2^3 = 8$개다.
 
 ---
 
