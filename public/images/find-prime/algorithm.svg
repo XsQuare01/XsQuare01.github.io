@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 492" width="780" height="738">
-  <desc>Carmichael Yes -> n 재선택; No -> 다음 단계</desc>
+  <desc>작은 소수로 나뉘면 Yes -> n 재선택; No -> 다음 단계</desc>
   <defs>
     <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
@@ -25,9 +25,9 @@
   <!-- Arrow 1 → 2 -->
   <line x1="260" y1="63" x2="260" y2="97" stroke="#64748b" stroke-width="1.5" marker-end="url(#ag)"/>
 
-  <!-- ── Node 2: Carmichael? (center 260,125, hw=93, hh=28) ── -->
+  <!-- ── Node 2: 작은 소수 시험 나눗셈 (center 260,125, hw=93, hh=28) ── -->
   <polygon points="260,97 353,125 260,153 167,125" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="130" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">Carmichael 수?</text>
+  <text x="260" y="130" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">작은 소수로 나뉘는가?</text>
 
   <!-- Arrow 2 → 3 (No) -->
   <line x1="260" y1="153" x2="260" y2="190" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
@@ -44,10 +44,10 @@
   <rect x="224" y="256" width="30" height="16" fill="#0f1117"/>
   <text x="248" y="269" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#4ade80">Yes</text>
 
-  <!-- ── Node 4: Fermat test (center 260,311, hw=100, hh=28) ── -->
+  <!-- ── Node 4: Miller-Rabin round (center 260,311, hw=100, hh=28) ── -->
   <polygon points="260,283 360,311 260,339 160,311" fill="#1a1f2e" stroke="#475569" stroke-width="1.5"/>
-  <text x="260" y="306" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">a<tspan baseline-shift="super" font-size="70%">n−1</tspan> ≡ 1 (mod n) ?</text>
-  <text x="260" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">Fermat 테스트</text>
+  <text x="260" y="306" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" fill="#e2e8f0">Miller-Rabin 통과?</text>
+  <text x="260" y="322" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">밑 a로 한 라운드</text>
 
   <!-- Arrow 4 → 5 (Yes) -->
   <line x1="260" y1="339" x2="260" y2="373" stroke="#4ade80" stroke-width="1.5" marker-end="url(#av)"/>
@@ -65,7 +65,7 @@
 
   <!-- ── Node 6: 소수 (end) ── -->
   <rect x="175" y="451" width="170" height="34" rx="17" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="260" y="473" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#4ade80">n은 소수 ✓</text>
+  <text x="260" y="473" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="10.4" font-weight="600" fill="#4ade80">probable prime ✓</text>
 
   <!-- ══ Right rejection rail (Yes → n 재선택) ══ -->
 
