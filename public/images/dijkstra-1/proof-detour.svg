@@ -1,4 +1,9 @@
 <svg viewBox="0 0 720 440" width="1080" height="660" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="pd-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+    </marker>
+  </defs>
   <rect width="720" height="440" rx="10" fill="#0f1117"/>
   <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">증명 2 — 왜 u의 엣지만 갱신해도 충분한가</text>
   <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">u → t → R^C 우회 경로는 불필요 — t는 u보다 먼저 R에 들어왔으므로 u 없는 d_min(t)가 이미 확정</text>
@@ -43,7 +48,7 @@
   <line x1="310" y1="280" x2="620" y2="270" stroke="#64748b" stroke-width="2" stroke-dasharray="4 3"/>
 
   <!-- Direct path from u to R^C: u → v (red solid, "이게 충분") -->
-  <line x1="400" y1="200" x2="560" y2="220" stroke="#ef4444" stroke-width="2.5"/>
+  <line x1="400" y1="200" x2="604.8" y2="265.1" stroke="#ef4444" stroke-width="2.5" marker-end="url(#pd-arrow)"/>
 
   <!-- Labels -->
   <rect x="320" y="172" width="80" height="20" rx="4" fill="#0f1117" stroke="#ef4444"/>
