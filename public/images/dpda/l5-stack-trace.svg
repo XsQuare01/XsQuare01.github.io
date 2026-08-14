@@ -71,5 +71,6 @@
   <rect x="741" y="106" width="70" height="88" rx="3" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3,2"/>
   <text x="776" y="154" text-anchor="middle" font-size="7.2" fill="#4a5568" font-style="italic">비어있음</text>
   <rect x="718" y="208" width="116" height="20" rx="3" fill="rgba(74,222,128,0.15)"/>
-  <text x="776" y="222" text-anchor="middle" font-size="7.2" fill="#4ade80" font-weight="700">✓ Accept</text>
+  <text x="776" y="222" text-anchor="middle" font-size="7.2" fill="#4ade80" font-weight="700">pop</text>
+  <text x="440" y="254" text-anchor="middle" fill="#94a3b8" font-size="11">두 번째 1을 읽고 마지막 0을 pop — 입력을 모두 읽었고 스택이 비었으므로 ✓ Accept</text>
 </svg>
