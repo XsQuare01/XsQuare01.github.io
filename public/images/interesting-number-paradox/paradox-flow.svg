@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 222" width="1410" height="333">
   <rect width="940" height="222" fill="#0f1117" rx="10"/>
-  <text x="470" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">귀류법 전개 — 4단계</text>
+  <text x="470" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">귀류법 전개 — 네 단계</text>
 
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
@@ -28,7 +28,7 @@
   <rect x="252" y="40" width="210" height="40" rx="8" fill="rgba(56,189,248,0.15)"/>
   <rect x="252" y="68" width="210" height="12" rx="0" fill="rgba(56,189,248,0.15)"/>
   <text x="357" y="66" text-anchor="middle" font-size="11.2" font-weight="700" fill="#38bdf8">STEP 2  최솟값 선택</text>
-  <text x="357" y="101" text-anchor="middle" font-size="10.4" fill="#cbd5e0">정렬 원리에 의해</text>
+  <text x="357" y="101" text-anchor="middle" font-size="10.4" fill="#cbd5e0">정렬 원리(Well-ordering)로</text>
   <text x="357" y="120" text-anchor="middle" font-size="10.4" fill="#cbd5e0">U의 최소 원소 x 존재</text>
   <text x="357" y="151" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.4" fill="#f0f6fc">∃ min(U) = x</text>
   <text x="357" y="178" text-anchor="middle" font-size="8.8" fill="#e2e8f0">(자연수의 성질)</text>
