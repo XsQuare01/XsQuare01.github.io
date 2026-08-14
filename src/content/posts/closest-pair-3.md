@@ -9,6 +9,8 @@ numbered: true
 ---
 
 > [①](/blog/closest-pair-1)·[②](/blog/closest-pair-2)에서 분할 정복으로 $O(n \log n)$에 닿았다. 이번엔 분할도 재귀도 없이, 점들을 왼쪽에서 오른쪽으로 **한 번 훑으면서** 같은 복잡도에 닿는다. 무기는 균형 이진 탐색 트리다.
+>
+> 입력은 점이 $n \ge 2$개라고 둔다. 「가장 가까운 점 쌍」이라는 물음이 뜻을 가지려면 쌍이 하나는 있어야 한다. 점이 하나뿐이거나 없으면 답이 정의되지 않으므로 아래 코드도 그 경우를 다루지 않는다.
 
 <div class="callout">
 <div class="callout-title">이 포스트에서 다루는 내용</div>
@@ -152,7 +154,7 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n;
+    int n;                  // 전제: n >= 2 (쌍이 하나는 있어야 한다)
     cin >> n;
     vector<P> pts(n);
     for (auto& p : pts) cin >> p.x >> p.y;

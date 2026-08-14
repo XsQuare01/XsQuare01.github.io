@@ -3,7 +3,7 @@
 
   <!-- Title -->
   <text x="380" y="26" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">P 위쪽 후보 영역을 (D/2) 칸으로 나눠 세기</text>
-  <text x="380" y="46" text-anchor="middle" fill="#64748b" font-size="11">P에서 위로 2D×D 직사각형 · 8칸 · 칸당 ≤ 1점 → 다음 7개만 검사</text>
+  <text x="380" y="46" text-anchor="middle" fill="#64748b" font-size="11">P에서 위로 2D×D · 왼쪽 D×D와 오른쪽 D×D · 한쪽 편은 각 4점 → 다음 7개만 검사</text>
 
   <!-- ── Geometry ──
        Rectangle: x=220..500 (width 2D=280), y=100..240 (height D=140). Divider at x=360.
@@ -79,8 +79,8 @@
   <line x1="60" y1="395" x2="700" y2="395" stroke="#1e293b" stroke-width="1"/>
 
   <!-- Summary -->
-  <text x="380" y="416" text-anchor="middle" fill="#cbd5e1" font-size="12">8칸 × 칸당 ≤ 1점 = P 포함 최대 8점 → P가 비교할 점은 다음 7개</text>
-  <text x="380" y="434" text-anchor="middle" fill="#64748b" font-size="10">한 칸 대각선 D/2·√2 ≈ 0.71D &lt; D → 한 칸에 같은 편 두 점이면 거리 &lt; D (모순) → 칸당 ≤ 1점</text>
+  <text x="380" y="416" text-anchor="middle" fill="#cbd5e1" font-size="12">왼쪽 편 ≤ 4점, 오른쪽 편 ≤ 4점 = P 포함 최대 8점 → P가 비교할 점은 다음 7개</text>
+  <text x="380" y="434" text-anchor="middle" fill="#64748b" font-size="10">한 칸 대각선 D/2·√2 ≈ 0.71D &lt; D → 한 칸에 같은 편 두 점이면 거리 &lt; D (모순) → 같은 편은 칸당 ≤ 1점</text>
 
   <!-- Legend -->
   <circle cx="92" cy="465" r="6" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
