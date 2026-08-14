@@ -90,5 +90,5 @@
   <text x="320" y="486" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">공격자가 후보 평문을 직접 암호화 → C와 비교 가능 → IND-CPA 불충족</text>
 
   <!-- 최하단 요약 -->
-  <text x="320" y="507" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">ElGamal은 k 재선택으로 IND-CPA 만족 — 단, 암호문 크기 2배 (A, B) 트레이드오프</text>
+  <text x="320" y="507" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">ElGamal의 IND-CPA는 소수 위수 부분군의 DDH 가정 아래 성립 — 암호문 크기는 2배 (A, B)</text>
 </svg>
