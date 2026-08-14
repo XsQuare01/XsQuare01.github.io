@@ -1,4 +1,9 @@
 <svg viewBox="0 0 720 480" width="1080" height="720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="dk-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+    </marker>
+  </defs>
   <rect width="720" height="480" rx="10" fill="#0f1117"/>
   <text x="360" y="32" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">최단 경로 복원 — 각 노드가 "나를 갱신한 노드"를 기억한다</text>
   <text x="360" y="52" text-anchor="middle" fill="#64748b" font-size="11">1편과 같은 그래프 (시작점 A). 굵은 빨간 간선 = 최단경로 트리, 화살표는 predecessor(부모)를 가리킴</text>
@@ -20,10 +25,10 @@
   <line x1="450" y1="250" x2="610" y2="350" stroke="#475569" stroke-width="1.5"/>
 
   <!-- Shortest-path-tree edges (thick red): A-B, B-C, C-D, D-E -->
-  <line x1="110" y1="280" x2="270" y2="170" stroke="#ef4444" stroke-width="3.5"/>
-  <line x1="270" y1="170" x2="270" y2="400" stroke="#ef4444" stroke-width="3.5"/>
-  <line x1="270" y1="400" x2="450" y2="250" stroke="#ef4444" stroke-width="3.5"/>
-  <line x1="450" y1="250" x2="610" y2="350" stroke="#ef4444" stroke-width="3.5"/>
+  <line x1="270" y1="170" x2="128.1" y2="267.5" stroke="#ef4444" stroke-width="3.5" marker-end="url(#dk-arrow)"/>
+  <line x1="270" y1="400" x2="270.0" y2="192.0" stroke="#ef4444" stroke-width="3.5" marker-end="url(#dk-arrow)"/>
+  <line x1="450" y1="250" x2="286.9" y2="385.9" stroke="#ef4444" stroke-width="3.5" marker-end="url(#dk-arrow)"/>
+  <line x1="610" y1="350" x2="468.7" y2="261.7" stroke="#ef4444" stroke-width="3.5" marker-end="url(#dk-arrow)"/>
 
   <!-- Edge weights -->
   <rect x="179" y="216" width="22" height="18" rx="3" fill="#0f1117" stroke="#ef4444"/>
