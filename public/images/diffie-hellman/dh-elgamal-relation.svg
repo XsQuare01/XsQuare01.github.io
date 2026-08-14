@@ -40,7 +40,7 @@
   <text x="173" y="208" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">양쪽 모두 온라인이어야 함 (대화형)</text>
 
   <!-- DH properties -->
-  <text x="30" y="240" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 전방향 안전성 (Forward Secrecy)</text>
+  <text x="30" y="240" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 전방향 안전성 — a·b를 세션마다 새로 뽑고 지울 때</text>
   <text x="30" y="256" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 세션마다 독립적 비밀</text>
   <text x="30" y="272" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#f87171">✗ 인증 없음 (MITM 취약)</text>
 
@@ -71,7 +71,7 @@
   <text x="507" y="238" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#94a3b8">수신자가 오프라인이어도 암호화 가능 (비대화형)</text>
 
   <!-- ElGamal properties -->
-  <text x="364" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 확률적 암호화 (IND-CPA)</text>
+  <text x="364" y="270" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 확률적 암호화 — 소수 위수 부분군의 DDH 아래 IND-CPA</text>
   <text x="364" y="286" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#4ade80">✓ 매 암호화마다 새 k → 새 공유 비밀</text>
 
   <!-- ===== 하단: 핵심 통찰 ===== -->
