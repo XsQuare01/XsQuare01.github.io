@@ -7,7 +7,7 @@
   </defs>
 
   <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">접점의 조건 — 사슬이 직선 아래에 다 들어가는 꼭짓점</text>
-  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">접함: 두 이웃이 모두 직선 아래 · 뚫음: 이웃이 직선 위로 삐져나옴</text>
+  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">접함: 두 이웃이 모두 직선 아래 · 뚫음: 이웃이 직선 위로 삐져나옴  (p는 사슬보다 오른쪽, 위 = ccw(p,v,q) &lt; 0)</text>
 
   <!-- chain (dim) -->
   <polyline points="90,300 170,210 250,150 340,120 430,150 510,220 580,300" fill="none" stroke="#334155" stroke-width="2"/>
@@ -24,7 +24,8 @@
   <!-- vertices -->
   <g fill="#0f1117" stroke="#64748b" stroke-width="2">
     <circle cx="90" cy="300" r="5"/><circle cx="170" cy="210" r="5"/><circle cx="250" cy="150" r="5"/>
-    <circle cx="510" cy="220" r="5"/><circle cx="580" cy="300" r="5"/>
+    <circle cx="510" cy="220" r="6.5" fill="#1f2937" stroke="#ef4444" stroke-width="2"/>
+  <text x="516" y="245" fill="#fca5a5" font-size="12">후보 v</text><circle cx="580" cy="300" r="5"/>
   </g>
   <circle cx="430" cy="150" r="6" fill="#1f2937" stroke="#f87171" stroke-width="2"/>
   <!-- tangent point 4 -->
