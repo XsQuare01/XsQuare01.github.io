@@ -1,7 +1,7 @@
-<svg viewBox="0 0 720 700" width="1080" height="1050" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
-  <rect width="720" height="700" rx="10" fill="#0f1117"/>
+<svg viewBox="0 0 720 724" width="1080" height="1086" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="724" rx="10" fill="#0f1117"/>
   <text x="360" y="30" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Prim 알고리즘 진행 과정</text>
-  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">A에서 시작 — 매 단계 트리에 인접한 가장 가벼운 간선을 선택</text>
+  <text x="360" y="50" text-anchor="middle" fill="#64748b" font-size="11">A에서 시작 — 매 단계 컷을 가로지르는 가장 가벼운 간선을 선택</text>
 
   <!-- Panel separators -->
   <line x1="360" y1="80" x2="360" y2="680" stroke="#1e293b" stroke-width="1"/>
@@ -110,7 +110,7 @@
   <circle cx="270" cy="640" r="20" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
   <text x="270" y="645" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">D</text>
 
-  <text x="180" y="685" text-anchor="middle" fill="#64748b" font-size="10">후보: B-D(4), C-D(5) → 최소는 B-D(4) (A-C는 cycle)</text>
+  <text x="180" y="685" text-anchor="middle" fill="#64748b" font-size="10">후보: B-D(4), C-D(5) → 최소는 B-D(4) (A-C는 사이클)</text>
 
   <!-- ====== PANEL 4: After picking B-D (MST complete) ====== -->
   <!-- panel origin: (360, 380) -->
@@ -143,4 +143,5 @@
   <text x="630" y="645" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">D</text>
 
   <text x="540" y="685" text-anchor="middle" fill="#4ade80" font-size="10">MST = {A-B, B-C, B-D}, 합 = 2 + 1 + 4 = 7</text>
+  <text x="360" y="712" text-anchor="middle" fill="#94a3b8" font-size="10">빨간 정점과 간선은 그 단계까지 트리에 들어온 전체다 (새로 추가된 것만이 아니다)</text>
 </svg>
