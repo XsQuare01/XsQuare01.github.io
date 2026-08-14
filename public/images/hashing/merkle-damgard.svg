@@ -61,7 +61,7 @@
   <!-- 압축 f₁ (체인 행) -->
   <rect x="116" y="154" width="80" height="44" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
   <text x="156" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">압축 f</text>
-  <text x="156" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256→256)</text>
+  <text x="156" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256+512→256)</text>
 
   <!-- 화살표 f₁ → h₁ -->
   <line x1="196" y1="176" x2="224" y2="176" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ra)"/>
@@ -82,7 +82,7 @@
   <!-- 압축 f₂ -->
   <rect x="308" y="154" width="80" height="44" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
   <text x="348" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">압축 f</text>
-  <text x="348" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256→256)</text>
+  <text x="348" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256+512→256)</text>
 
   <!-- 화살표 f₂ → h₂ -->
   <line x1="388" y1="176" x2="408" y2="176" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ra)"/>
@@ -103,7 +103,7 @@
   <!-- 압축 fₙ -->
   <rect x="524" y="154" width="80" height="44" rx="5" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2"/>
   <text x="564" y="172" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#fbbf24">압축 f</text>
-  <text x="564" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256→256)</text>
+  <text x="564" y="188" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" fill="#fbbf24">(256+512→256)</text>
 
   <!-- 화살표 fₙ → Hash -->
   <line x1="604" y1="176" x2="624" y2="176" stroke="#4ade80" stroke-width="2" marker-end="url(#ga)"/>
@@ -138,8 +138,8 @@
 
   <!-- Davies-Meyer 박스 -->
   <rect x="472" y="244" width="210" height="44" rx="5" fill="rgba(74,222,128,0.08)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="577" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" font-weight="700" fill="#4ade80">Davies-Meyer 구조</text>
-  <text x="577" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">hᵢ = f(hᵢ₋₁, mᵢ) ⊕ hᵢ₋₁</text>
+  <text x="577" y="261" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.4" font-weight="700" fill="#4ade80">Davies-Meyer 계열 되먹임</text>
+  <text x="577" y="278" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">hᵢ = f(hᵢ₋₁, mᵢ) ⊞ hᵢ₋₁  (워드별 mod 2³²)</text>
 
   <!-- ============================================================ -->
   <!-- ④ Length Extension 취약점  y=304 ~ 408                       -->

@@ -1,7 +1,7 @@
 ---
 title: "Digital Signature — 전자 서명의 수학적 구조"
 date: 2026-03-31T10:00:00
-description: "RSA·ElGamal 전자 서명의 생성과 검증, 인증기관(CA)의 역할, 암호화 해시(SHA)와 Birthday Paradox, 그리고 AES+RSA+SHA를 결합한 최종 프로토콜까지, 디지털 서명의 전체 그림을 다룬다."
+description: "RSA·ElGamal 전자 서명의 생성과 검증, 인증기관(CA)의 역할, 암호학적 해시(SHA)와 Birthday Paradox, 그리고 AES+RSA+SHA를 결합한 최종 프로토콜까지, 디지털 서명의 전체 그림을 다룬다."
 tags: ["Computer Science", "Cryptography"]
 category: cryptography
 difficulty: 중급
@@ -15,7 +15,7 @@ difficulty: 중급
 <li><strong>RSA 서명</strong>: $s = m^d \bmod n$, 검증: $s^e = m$ (비밀키로 서명, 공개키로 검증)</li>
 <li><strong>ElGamal 서명</strong>: $r = g^k \bmod p$, $s = (m - ar)k^{-1} \bmod (p-1)$ (DLP 기반)</li>
 <li><strong>인증기관(CA)</strong>: 공개키의 신뢰를 보증하는 신뢰 앵커</li>
-<li><strong>암호화 해시</strong>: SHA로 $m \to h$(고정 크기). 서명 크기와 속도 문제 해결</li>
+<li><strong>암호학적 해시</strong>: SHA로 $m \to h$(고정 크기). 서명 크기와 속도 문제 해결</li>
 <li><strong>최종 프로토콜</strong>: AES(기밀성) + RSA(키 전달·서명) + SHA(무결성) 통합</li>
 </ul>
 </div>
@@ -110,11 +110,11 @@ $k$와 $k^{-1}$이 상쇄되고, $a$는 공개키 $y = g^a$ 형태로만 검증�
 
 ElGamal 서명을 표준화한 것이 **DSS(Digital Signature Standard)** 이다.
 
-## 서명 크기 문제: 암호화 해시
+## 서명 크기 문제: 암호학적 해시
 
 RSA 서명의 문제는 크기이다. $m$이 100MB라면 서명 $s = m^d \bmod n$ 역시 비슷한 크기가 된다. 목적(누가 보냈는가 확인)에 비해 과도하게 크다.
 
-해결책은 **암호화 해시 함수(Cryptographic Hash Function)** 다.
+해결책은 **암호학적 해시 함수(Cryptographic Hash Function)** 다.
 
 $$
 h = \text{SHA}(m)
@@ -193,5 +193,5 @@ $$
 
 <div class="callout">
 <div class="callout-title">다음 포스트</div>
-<p><strong>Cryptographic Hashing, 암호화 해시 함수.</strong> SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, 그리고 MD5/SHA-1이 왜 더 이상 안전하지 않은지까지 다룬다.</p>
+<p><strong>Cryptographic Hashing, 암호학적 해시 함수.</strong> SHA의 내부 구조(Merkle-Damgård), 일방향성·충돌 저항성의 수학, Birthday Paradox가 해시 길이에 미치는 영향, 그리고 MD5/SHA-1이 왜 더 이상 안전하지 않은지까지 다룬다.</p>
 </div>

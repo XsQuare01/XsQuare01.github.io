@@ -12,7 +12,7 @@
   </defs>
 
   <rect width="660" height="410" fill="#0f1117" rx="10"/>
-  <text x="330" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">암호화 해시 함수의 3대 보안 성질</text>
+  <text x="330" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">암호학적 해시 함수의 3대 보안 성질</text>
 
   <!-- ===== 1. Pre-image Resistance (일방향성) ===== -->
   <rect x="16" y="28" width="196" height="162" rx="8" fill="rgba(74,222,128,0.04)" stroke="#4ade80" stroke-width="1.5"/>
@@ -84,7 +84,7 @@
 
   <!-- ===== Checksum vs Hash comparison ===== -->
   <line x1="16" y1="206" x2="644" y2="206" stroke="#2d3748" stroke-width="1"/>
-  <text x="330" y="226" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#e2e8f0">Checksum vs 암호화 해시</text>
+  <text x="330" y="226" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#e2e8f0">Checksum vs 암호학적 해시</text>
 
   <!-- Checksum -->
   <rect x="16" y="236" width="300" height="150" rx="8" fill="rgba(248,113,113,0.04)" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
@@ -97,7 +97,7 @@
 
   <!-- Crypto Hash -->
   <rect x="344" y="236" width="300" height="150" rx="8" fill="rgba(74,222,128,0.04)" stroke="#4ade80" stroke-width="1.5"/>
-  <text x="494" y="256" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">암호화 해시 — 무결성 보장</text>
+  <text x="494" y="256" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" font-weight="700" fill="#4ade80">암호학적 해시 — 무결성 보장</text>
   <text x="358" y="278" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">· 임의 길이 → 고정 크기 (SHA-256: 256 bit)</text>
   <text x="358" y="298" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#e2e8f0">· 1 bit 변경 → 해시값 완전히 달라짐 (눈사태)</text>
   <text x="358" y="318" font-family="system-ui,-apple-system,sans-serif" font-size="8.3" fill="#4ade80">· 해시 맞추는 메시지 조작 = 계산적 불가능</text>
