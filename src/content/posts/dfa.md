@@ -18,7 +18,7 @@ difficulty: 초급
 </ul>
 </div>
 
-DFA(Deterministic Finite Automata)는 튜링 머신을 단순화한 자동 기계로, 상태를 저장하는 state machine이다. 계산 이론에서 DFA는 가장 제한적인 계산 모델이며, 이를 통해 "어떤 문제가 DFA로 해결 가능한가?"라는 질문에 답할 수 있다.
+DFA(Deterministic Finite Automaton)는 튜링 머신을 단순화한 자동 기계로, 상태 하나만 기억하는 기계다. 계산 이론에서 DFA는 가장 제한적인 계산 모델이며, 이를 통해 "어떤 문제가 DFA로 해결 가능한가?"라는 질문에 답할 수 있다.
 
 ---
 
@@ -34,8 +34,8 @@ $$
 
 - **Q**: State들의 집합
 - **$\Sigma$**: Tape에 들어갈 수 있는 Symbol들의 집합 (= Alphabet)
-- **q**: 처음 시작할 위치 (Initial state)
-- **F**: Final State의 집합 (Accepting State)
+- **q**: 시작 상태(initial state)
+- **F**: 수용 상태(accepting state)의 집합
   - 종료 시점의 상태를 $t$라 할 때, $t \in F$이면 **yes** 를 출력한다.
 - **s**: Transition Function
   - $(q, a) \to r$: 상태 $q$에서 입력 $a$를 읽으면 상태 $r$로 전이한다.
@@ -68,7 +68,7 @@ $$
 
 - **→** 는 초기 상태를 나타낸다.
 - edge 위의 숫자는 해당 입력 Symbol을 의미한다.
-- **이중 원 = Accepting State**: 이 상태에서 입력이 끝나면 yes를 출력한다.
+- **이중 원 = 수용 상태**: 이 상태에서 입력이 끝나면 yes를 출력한다.
 - `q_even`은 "마지막으로 읽은 비트가 0"인 상태, `q_odd`는 "마지막으로 읽은 비트가 1"인 상태다.
 
 **입력 `110`(6, 짝수)에 대한 실행 trace:**
@@ -104,7 +104,7 @@ $$
 
 ![L4 DFA](/images/dfa/L4.svg)
 
-q₀와 q₁이 모두 Accepting State인 이유: 0만 나온 상태(q₀)도, 0 다음에 1이 나온 상태(q₁)도 모두 L₄에 속한다. `10`이 등장하는 순간 L₄ 조건을 위반하므로 Dead State(q_d)로 이동한다.
+q₀와 q₁이 모두 수용 상태인 이유: 0만 나온 상태(q₀)도, 0 다음에 1이 나온 상태(q₁)도 모두 L₄에 속한다. `10`이 등장하는 순간 L₄ 조건을 위반하므로 Dead State(q_d)로 이동한다.
 
 ---
 
@@ -142,9 +142,9 @@ L4에서는 앞에 0이 몇 개 나오든 상관없었지만, L5에서는 0이 1
    - 그 이후 추가 입력이 오면 reject (dead state로 이동).
 3. 0이 한 번 더 들어오면, "0이 1개인 상태"와 "0이 2개인 상태"는 다른 state여야 한다.
    - 전자는 이후 1이 한 번 나와야 accept, 후자는 두 번 나와야 accept하기 때문이다.
-4. 이 과정을 반복하면 Machine의 크기가 무한히 커진다.
+4. 이 과정을 반복하면 기계의 크기가 무한히 커진다.
 
-> 무한히 큰 machine은 현실에서 의미가 없지만, 이것만으로 "DFA로 풀 수 없다"는 근거가 되지는 않는다. 지금까지의 논의만으로는 L5가 DFA로 해결 가능한지 결론 내릴 수 없다.
+> 무한히 큰 기계는 현실에서 의미가 없지만, 이것만으로 "DFA로 풀 수 없다"는 근거가 되지는 않는다. 지금까지의 논의만으로는 L5가 DFA로 해결 가능한지 결론 내릴 수 없다.
 
 ---
 
@@ -156,7 +156,7 @@ L4에서는 앞에 0이 몇 개 나오든 상관없었지만, L5에서는 0이 1
 
 당연해 보이지만, 아래 증명의 핵심 근거로 쓰인다.
 
-**DFA에서의 적용:** $n$개의 상태를 가진 DFA가 길이 $n$인 입력을 처리하면 상태 전이가 $n+1$번 일어난다. 상태는 $n$개뿐이므로, 비둘기집 원리에 의해 **어딘가에서 같은 상태가 반드시 두 번 등장한다.** 이 반복 구간이 Pumping Lemma의 $y$가 된다.
+**DFA에서의 적용:** $n$개의 상태를 가진 DFA가 길이 $n$인 입력을 처리하면 상태 전이는 $n$번 일어나고, 시작 상태를 포함해 **$n+1$개의 상태를 거친다.** 상태의 종류는 $n$개뿐이므로, 비둘기집 원리에 의해 **거쳐 간 상태 중 같은 것이 반드시 두 번 나온다.** 이 반복 구간이 Pumping Lemma의 $y$가 된다.
 
 ---
 
@@ -178,11 +178,11 @@ $$
 q_1 \xrightarrow{i_1} \cdots \xrightarrow{i_l} r_k \xrightarrow{i_m} \cdots \xrightarrow{i_o} r_k \xrightarrow{i_p} \cdots \xrightarrow{i_n} q_f
 $$
 
-$r_k$에서 $r_k$로 돌아오는 구간을 제거하거나 반복해도 여전히 $q_f$ (accepting state)에 도달할 수 있다. L3의 DFA를 예로 들면, q₁의 self-loop(1→q₁)가 cycle이 되어, 이 구간을 생략하거나 반복해도 accepting state에 도달한다.
+$r_k$에서 $r_k$로 돌아오는 구간을 제거하거나 반복해도 여전히 수용 상태 $q_f$에 도달할 수 있다. L3의 DFA를 예로 들면, q₁의 self-loop(1→q₁)가 cycle이 되어, 이 구간을 생략하거나 반복해도 accepting state에 도달한다.
 
 ### Pumping Lemma
 
-accept되는 string $w$에 대해, $|w| \ge n$이면 $w = xyz$로 분해할 수 있고, **모든 $i \ge 0$에 대해 $xy^iz$도 accept된다.**
+accept되는 문자열 $w$에 대해, $|w| \ge n$이면 $w = xyz$로 분해할 수 있고, **모든 $i \ge 0$에 대해 $xy^iz$도 accept된다.**
 
 $$
 |xy| \le n,\quad |y| > 0,\quad \forall i \ge 0:\ xy^iz \in L
@@ -194,10 +194,10 @@ $$
 xz\ (i=0),\quad xyz\ (i=1),\quad xy^2z\ (i=2),\quad xy^3z\ (i=3),\quad \ldots
 $$
 
-- $x = i_1 i_2 \cdots i_l$ ($r_k$ 앞의 string)
+- $x = i_1 i_2 \cdots i_l$ ($r_k$ 앞의 문자열)
 - $y = i_m \cdots i_o$ ($r_k$에서 $r_k$로 돌아오는 구간)
   - 비둘기집 원리에 의해 중복은 반드시 발생하므로, $|y| > 0$
-- $z = i_p \cdots i_n$ ($r_k$ 뒤의 string)
+- $z = i_p \cdots i_n$ ($r_k$ 뒤의 문자열)
 - $|x|, |z| \ge 0$ (겹치는 부분의 앞뒤가 없을 수도 있으므로)
 
 $y$는 중복이 발생하는 구간이므로, 이를 제거하거나 반복해도 accept된다. 또한 길이 $n$인 string을 처리하는 동안 중복이 발생하므로 $|xy| \le n$이다.
@@ -255,7 +255,15 @@ $$
 
 ![계산 모델 계층 구조](/images/dfa/model-hierarchy.svg)
 
-**Class** 는 공통된 성질을 가진 Problem들의 집합이다. Problem의 집합 전체 크기는 약 $2^{2^{|\Sigma^*|}}$개, 즉 $|2^{|\mathbb{R}|}|$개에 달하지만, 실제로 기술(describable) 가능한 Class의 수는 가산 무한(Countable Infinite)이다.
+**Class** 는 공통된 성질을 가진 Problem들의 집합이다.
+
+Problem이 몇 개인지 세어 보자. 알파벳 $\Sigma$가 유한하면 그 위의 문자열 전체 $\Sigma^*$는 길이별로 유한 개씩 늘어놓을 수 있어 **가산 무한**, 곧 $|\Sigma^*| = \aleph_0$이다. Problem을 「어떤 문자열을 받아들이는가」, 곧 $\Sigma^*$의 부분집합으로 보면 Problem 전체는 $\mathcal{P}(\Sigma^*)$이므로
+
+$$
+|\mathcal{P}(\Sigma^*)| = 2^{\aleph_0} = |\mathbb{R}|
+$$
+
+이다. 반면 실제로 기술(describable) 가능한 Class의 수는 가산 무한이다. 기술이란 유한한 문자열로 적는 일이고, 유한 문자열은 가산 개뿐이기 때문이다.
 
 ### Class DFA
 
