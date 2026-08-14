@@ -83,7 +83,7 @@
   <rect x="565" y="106" width="140" height="56" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1"/>
   <text x="635" y="124" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#4ade80">살아남은 원소의 수</text>
   <text x="635" y="142" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" font-weight="700" fill="#4ade80">|Cantor Set| = |ℝ|</text>
-  <text x="635" y="156" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">불가산 무한 (ℵ₁)</text>
+  <text x="635" y="156" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="7.2" fill="#cbd5e1">불가산 무한 (𝔠 = 2^ℵ₀)</text>
 
   <rect x="565" y="172" width="140" height="28" rx="4" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1"/>
   <text x="635" y="190" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#a78bfa">길이 0 ≠ 원소 0개</text>
