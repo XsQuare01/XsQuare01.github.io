@@ -1598,6 +1598,25 @@ class TestAuthoringGuideContracts(unittest.TestCase):
             with self.subTest(term=term):
                 self.assertIn(term, l7)
 
+    def test_canonical_guide_complexity_module_defines_cost_model(self):
+        """비용 모델 없이 Big-O를 단정하면 무엇을 세는지 검증할 수 없다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        module = text.split("##### 복잡도 모듈", 1)[1].split("\n##### ", 1)[0]
+
+        for term in ("비용 모델", "1 연산", "점화식", "기저 조건", "비재귀 작업"):
+            with self.subTest(term=term):
+                self.assertIn(term, module)
+
+    def test_canonical_guide_has_a_representation_alignment_module(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+
+        self.assertIn("##### 표현 정렬 모듈", text)
+        module = text.split("##### 표현 정렬 모듈", 1)[1].split("\n### ", 1)[0]
+        for term in ("의사코드", "계산 예시", "SVG", "수식",
+                     "N/A — 해당 요소 없음"):
+            with self.subTest(term=term):
+                self.assertIn(term, module)
+
 
 class TestLegacyMigration(unittest.TestCase):
     def setUp(self):
