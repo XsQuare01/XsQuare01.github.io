@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 230" width="1170" height="345">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 300" width="1170" height="450">
   <defs>
     <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
       <polygon points="0,0 7,3.5 0,7" fill="#4a5568"/>
     </marker>
   </defs>
-  <rect width="780" height="230" fill="#0f1117" rx="10"/>
+  <rect width="780" height="300" fill="#0f1117" rx="10"/>
   <text x="390" y="20" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">Universal Turing Machine (UTM) — 구조</text>
   <text x="107" y="35" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">입력</text>
   <rect x="10" y="45" width="195" height="58" rx="8" fill="#1a2035" stroke="#fb923c" stroke-width="1.5"/>
@@ -13,8 +13,8 @@
   <text x="107" y="103" text-anchor="middle" fill="#e2e8f0" font-size="8" font-family="system-ui,-apple-system,sans-serif">(이진 인코딩)</text>
   <rect x="10" y="120" width="195" height="58" rx="8" fill="#1a2035" stroke="#60a5fa" stroke-width="1.5"/>
   <text x="107" y="143" text-anchor="middle" fill="#60a5fa" font-size="8.8" font-weight="700" font-family="system-ui,-apple-system,sans-serif">Tape 2</text>
-  <text x="107" y="163" text-anchor="middle" fill="#cbd5e0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">입력 문자열 w</text>
-  <text x="107" y="178" text-anchor="middle" fill="#e2e8f0" font-size="8" font-family="system-ui,-apple-system,sans-serif">(M의 초기 상태 포함)</text>
+  <text x="107" y="161" text-anchor="middle" fill="#cbd5e0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">M의 configuration</text>
+  <text x="107" y="175" text-anchor="middle" fill="#e2e8f0" font-size="8" font-family="system-ui,-apple-system,sans-serif">상태 + 테이프 내용 + 헤드 위치</text>
   <line x1="205" y1="112" x2="253" y2="112" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arr)"/>
   <rect x="255" y="45" width="270" height="140" rx="10" fill="#1a2035" stroke="#a78bfa" stroke-width="2"/>
   <rect x="255" y="45" width="270" height="40" rx="10" fill="rgba(167,139,250,0.15)"/>
@@ -28,5 +28,21 @@
   <text x="672" y="96" text-anchor="middle" fill="#4ade80" font-size="8.8" font-weight="700" font-family="system-ui,-apple-system,sans-serif">출력</text>
   <text x="672" y="118" text-anchor="middle" fill="#cbd5e0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">M(w)의 실행 결과</text>
   <text x="672" y="138" text-anchor="middle" fill="#4ade80" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">(Accept / Reject)</text>
-  <text x="390" y="210" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">Tape 1을 M'의 rule set으로 교체하면 어떤 기계든 시뮬레이션 가능</text>
+  <text x="390" y="208" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">Tape 1을 M'의 rule set으로 교체하면 어떤 기계든 시뮬레이션 가능</text>
+  <text x="256" y="267" text-anchor="end" fill="#94a3b8" font-size="8" font-family="system-ui,-apple-system,sans-serif">Tape 2 상세</text>
+  <rect x="268" y="246" width="42" height="32" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="289" y="267" text-anchor="middle" fill="#60a5fa" font-size="11" font-family="system-ui,-apple-system,sans-serif">q₃</text>
+  <rect x="310" y="246" width="42" height="32" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="331" y="267" text-anchor="middle" fill="#fb923c" font-size="11" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="352" y="246" width="42" height="32" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="373" y="267" text-anchor="middle" fill="#fb923c" font-size="11" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="394" y="246" width="42" height="32" fill="#1e2d4a" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="415" y="267" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="436" y="246" width="42" height="32" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="457" y="267" text-anchor="middle" fill="#fb923c" font-size="11" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="478" y="246" width="42" height="32" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="499" y="267" text-anchor="middle" fill="#64748b" font-size="11" font-family="system-ui,-apple-system,sans-serif">⊔</text>
+  <polygon points="408,233 422,233 415,245" fill="#4ade80"/>
+  <text x="507" y="240" text-anchor="middle" fill="#4ade80" font-size="8" font-family="system-ui,-apple-system,sans-serif">▾ M의 헤드 위치 마커</text>
+  <text x="390" y="296" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="system-ui,-apple-system,sans-serif">UTM은 M의 상태와 헤드 위치를 테이프 2에 표시해 추적한다</text>
 </svg>

@@ -1,40 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 195" width="1170" height="293">
-  <rect width="780" height="195" fill="#0f1117" rx="10"/>
-  <text x="390" y="18" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">L₁₃ 실행 예시 — '0102010' 입력: 헤드 이동 과정</text>
-  <text x="390" y="42" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">Before</text>
-  <rect x="110" y="50" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="150" y="74" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <rect x="190" y="50" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="230" y="74" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
-  <rect x="270" y="50" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="310" y="74" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <rect x="350" y="50" width="80" height="40" fill="#1a2035" stroke="#a78bfa" stroke-width="1"/>
-  <text x="390" y="74" text-anchor="middle" fill="#a78bfa" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">2</text>
-  <rect x="430" y="50" width="80" height="40" fill="#1e2d4a" stroke="#60a5fa" stroke-width="2.5"/>
-  <text x="470" y="74" text-anchor="middle" fill="#60a5fa" font-size="12.8" font-weight="700" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <rect x="510" y="50" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="550" y="74" text-anchor="middle" fill="#cbd5e0" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
-  <rect x="590" y="50" width="80" height="40" fill="#1a2035" stroke="#a78bfa" stroke-width="1"/>
-  <text x="630" y="74" text-anchor="middle" fill="#a78bfa" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <polygon points="462,38 478,38 470,50" fill="#60a5fa"/>
-  <text x="470" y="32" text-anchor="middle" fill="#60a5fa" font-size="8" font-family="system-ui,-apple-system,sans-serif">q: 비교 중</text>
-  <text x="390" y="112" text-anchor="middle" fill="#4ade80" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">↓ 0 → 3으로 마킹, 복귀 시작</text>
-  <text x="390" y="126" text-anchor="middle" fill="#e2e8f0" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">After</text>
-  <rect x="110" y="134" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="150" y="158" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <rect x="190" y="134" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="230" y="158" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
-  <rect x="270" y="134" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="310" y="158" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <rect x="350" y="134" width="80" height="40" fill="#1a2035" stroke="#a78bfa" stroke-width="1"/>
-  <text x="390" y="158" text-anchor="middle" fill="#a78bfa" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">2</text>
-  <rect x="430" y="134" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="470" y="158" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <rect x="510" y="134" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
-  <text x="550" y="158" text-anchor="middle" fill="#cbd5e0" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
-  <rect x="590" y="134" width="80" height="40" fill="#1a2035" stroke="#a78bfa" stroke-width="1"/>
-  <text x="630" y="158" text-anchor="middle" fill="#a78bfa" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
-  <polygon points="142,122 158,122 150,134" fill="#4ade80"/>
-  <text x="200" y="120" text-anchor="middle" fill="#4ade80" font-size="8" font-family="system-ui,-apple-system,sans-serif">← 왼쪽으로 복귀</text>
-  <text x="390" y="186" text-anchor="middle" fill="#e2e8f0" font-size="8" font-family="system-ui,-apple-system,sans-serif">3=marked 0, 4=marked 1, 2=구분자  ·  파란 셀 = 현재 헤드 위치</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 232" width="1170" height="348">
+  <rect width="780" height="232" fill="#0f1117" rx="10"/>
+  <text x="390" y="16" text-anchor="middle" fill="#e2e8f0" font-size="9.6" font-family="system-ui,-apple-system,sans-serif">L₁₃ 실행 예시 — 입력 0102010, 첫 쌍을 맞춰 보는 한 걸음</text>
+  <text x="390" y="34" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="system-ui,-apple-system,sans-serif">Before — 왼쪽 첫 0은 이미 3으로 마킹, 오른쪽 첫 미처리 심볼에 도착</text>
+  <text x="470" y="56" text-anchor="middle" fill="#60a5fa" font-size="8" font-family="system-ui,-apple-system,sans-serif">q(찾음-0): 0을 기대</text>
+  <polygon points="462,60 478,60 470,72" fill="#60a5fa"/>
+  <rect x="110" y="72" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="150" y="96" text-anchor="middle" fill="#4ade80" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">3</text>
+  <rect x="190" y="72" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="230" y="96" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="270" y="72" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="310" y="96" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="350" y="72" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="390" y="96" text-anchor="middle" fill="#a78bfa" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">2</text>
+  <rect x="430" y="72" width="80" height="40" fill="#1e2d4a" stroke="#60a5fa" stroke-width="2.5"/>
+  <text x="470" y="96" text-anchor="middle" fill="#60a5fa" font-size="12.8" font-weight="700" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="510" y="72" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="550" y="96" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="590" y="72" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="630" y="96" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <text x="390" y="134" text-anchor="middle" fill="#4ade80" font-size="8.8" font-family="system-ui,-apple-system,sans-serif">↓ 기대와 일치 → 0을 3으로 마킹하고 왼쪽 끝으로 복귀 시작</text>
+  <text x="390" y="152" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="system-ui,-apple-system,sans-serif">After — 양쪽 첫 심볼이 모두 3, 헤드는 왼쪽으로 돌아가는 중</text>
+  <rect x="110" y="160" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="150" y="184" text-anchor="middle" fill="#4ade80" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">3</text>
+  <rect x="190" y="160" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="230" y="184" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="270" y="160" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="310" y="184" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <rect x="350" y="160" width="80" height="40" fill="#1e2d4a" stroke="#60a5fa" stroke-width="2.5"/>
+  <text x="390" y="184" text-anchor="middle" fill="#60a5fa" font-size="12.8" font-weight="700" font-family="system-ui,-apple-system,sans-serif">2</text>
+  <rect x="430" y="160" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="470" y="184" text-anchor="middle" fill="#4ade80" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">3</text>
+  <rect x="510" y="160" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="550" y="184" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">1</text>
+  <rect x="590" y="160" width="80" height="40" fill="#1a2035" stroke="#4a5568" stroke-width="1"/>
+  <text x="630" y="184" text-anchor="middle" fill="#fb923c" font-size="11.2" font-family="system-ui,-apple-system,sans-serif">0</text>
+  <polygon points="382,212 398,212 390,200" fill="#4ade80"/>
+  <text x="460" y="210" text-anchor="middle" fill="#4ade80" font-size="8" font-family="system-ui,-apple-system,sans-serif">← 왼쪽으로 복귀</text>
+  <text x="390" y="228" text-anchor="middle" fill="#e2e8f0" font-size="8" font-family="system-ui,-apple-system,sans-serif">3 = 처리된 0, 4 = 처리된 1 (초록) · 2 = 구분자 (보라) · 미처리 0/1 (주황) · 파란 셀 = 현재 헤드 위치</text>
 </svg>
