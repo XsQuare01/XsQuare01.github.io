@@ -1364,6 +1364,50 @@ class TestLlmRubricSingleSource(unittest.TestCase):
 
         self.assertEqual(rp.REQUIRED_LLM_RULES, defined)
 
+    def _l6_section(self):
+        return self._rubric_text().split("- **L6 ", 1)[1].split("\n- **L7", 1)[0]
+
+    def test_canonical_rubric_defines_four_l6_states(self):
+        """L6는 네 상태로 기록한다(#88).
+
+        원문 접근 실패를 검증 통과와 같은 색으로 보고하면 판정 의미가 흔들린다.
+        2026-08-13 전수 리뷰는 대조 실패를 59개 글 전부 🟢으로 적었다.
+        """
+        l6 = self._l6_section()
+
+        for state in ("verified fidelity", "approved extension",
+                      "source unavailable", "actual mismatch"):
+            with self.subTest(state=state):
+                self.assertIn(state, l6)
+
+    def test_canonical_rubric_maps_l6_states_to_severity(self):
+        """상태만 있고 severity가 없으면 리뷰마다 색이 갈린다."""
+        l6 = self._l6_section()
+
+        rows = {
+            "verified fidelity": ("🟢", "info"),
+            "approved extension": ("🟢", "info"),
+            "source unavailable": ("🟡", "warn"),
+        }
+        for state, (severity, gate_effect) in rows.items():
+            with self.subTest(state=state):
+                row = next(line for line in l6.splitlines() if state in line)
+                self.assertIn(severity, row)
+                self.assertIn(gate_effect, row)
+
+        mismatch_rows = [line for line in l6.splitlines() if "actual mismatch" in line]
+        self.assertEqual(len(mismatch_rows), 2, "국소와 핵심 불일치를 나눠 적는다")
+        self.assertTrue(any("🔴" in row and "fail" in row for row in mismatch_rows))
+        self.assertTrue(any("🟡" in row and "warn" in row for row in mismatch_rows))
+
+    def test_canonical_rubric_forbids_reporting_missing_source_as_verified(self):
+        l6 = self._l6_section()
+
+        for term in ("`message` 맨 앞", "미완료",
+                     "추가 자체를 불일치로 판정하지 않는다"):
+            with self.subTest(term=term):
+                self.assertIn(term, l6)
+
     V1_SPEC = (REPO_ROOT / "docs" / "superpowers" / "specs"
                / "2026-06-03-review-post-command-design.md")
 
