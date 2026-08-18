@@ -1,9 +1,9 @@
-<svg viewBox="0 0 720 420" width="1080" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
-  <rect width="720" height="420" rx="10" fill="#0f1117"/>
+<svg viewBox="0 0 720 442" width="1080" height="663" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="720" height="442" rx="10" fill="#0f1117"/>
 
   <!-- Title -->
   <text x="360" y="26" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">그룹 크기 g=3 vs g=5 — 보장 영역과 재귀 비율 합 비교</text>
-  <text x="360" y="44" text-anchor="middle" fill="#64748b" font-size="11">비율 합 α+β &lt; 1 이어야 선형 — g=3은 등식, g=5는 0.9로 여유가 생긴다</text>
+  <text x="360" y="44" text-anchor="middle" fill="#64748b" font-size="11">비율 합 α+β &lt; 1 이어야 선형 — g=3과 g=4는 등식, g=5는 0.9로 여유가 생긴다</text>
 
   <!-- ===== LEFT PANEL: g=3 ===== -->
   <!-- Panel background -->
@@ -167,17 +167,24 @@
   <text x="535" y="368" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">1/3 + 2/3 = 1</text>
   <text x="655" y="368" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="700">✗</text>
 
+  <!-- Row g=4 (짝수) -->
+  <text x="130" y="388" text-anchor="middle" fill="#fca5a5" font-size="11">g = 4</text>
+  <text x="265" y="388" text-anchor="middle" fill="#cbd5e1" font-size="11">n/4</text>
+  <text x="400" y="388" text-anchor="middle" fill="#cbd5e1" font-size="11">3n/4</text>
+  <text x="535" y="388" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">1/4 + 3/4 = 1</text>
+  <text x="655" y="388" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="700">✗</text>
+
   <!-- Row g=5 -->
-  <text x="130" y="388" text-anchor="middle" fill="#86efac" font-size="11">g = 5</text>
-  <text x="265" y="388" text-anchor="middle" fill="#cbd5e1" font-size="11">0.3n</text>
-  <text x="400" y="388" text-anchor="middle" fill="#cbd5e1" font-size="11">0.7n</text>
-  <text x="535" y="388" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">0.2 + 0.7 = 0.9</text>
-  <text x="655" y="388" text-anchor="middle" fill="#22c55e" font-size="13" font-weight="700">✓</text>
+  <text x="130" y="408" text-anchor="middle" fill="#86efac" font-size="11">g = 5</text>
+  <text x="265" y="408" text-anchor="middle" fill="#cbd5e1" font-size="11">0.3n</text>
+  <text x="400" y="408" text-anchor="middle" fill="#cbd5e1" font-size="11">0.7n</text>
+  <text x="535" y="408" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">0.2 + 0.7 = 0.9</text>
+  <text x="655" y="408" text-anchor="middle" fill="#22c55e" font-size="13" font-weight="700">✓</text>
 
   <!-- Row g=7 -->
-  <text x="130" y="407" text-anchor="middle" fill="#a78bfa" font-size="11">g = 7</text>
-  <text x="265" y="407" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ 2n/7</text>
-  <text x="400" y="407" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ 5n/7</text>
-  <text x="535" y="407" text-anchor="middle" fill="#a78bfa" font-size="11">1/7 + 5/7 ≈ 0.857</text>
-  <text x="655" y="407" text-anchor="middle" fill="#a78bfa" font-size="11">✓ (비용↑)</text>
+  <text x="130" y="428" text-anchor="middle" fill="#a78bfa" font-size="11">g = 7</text>
+  <text x="265" y="428" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ 2n/7</text>
+  <text x="400" y="428" text-anchor="middle" fill="#cbd5e1" font-size="11">≈ 5n/7</text>
+  <text x="535" y="428" text-anchor="middle" fill="#a78bfa" font-size="11">1/7 + 5/7 ≈ 0.857</text>
+  <text x="655" y="428" text-anchor="middle" fill="#a78bfa" font-size="11">✓ (비용↑)</text>
 </svg>
