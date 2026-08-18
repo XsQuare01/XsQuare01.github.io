@@ -18,7 +18,7 @@
   </defs>
 
   <rect width="700" height="400" fill="#0f1117" rx="10"/>
-  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">최종 암호화 + 서명 프로토콜 (AES + RSA + SHA)</text>
+  <text x="350" y="18" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="9.6" fill="#e2e8f0">역할 분담 뼈대 (AES + RSA + SHA) — 교육용, 실제 프로토콜 아님</text>
 
   <!-- ======= ALICE SIDE ======= -->
   <rect x="12" y="26" width="316" height="260" rx="8" fill="rgba(74,222,128,0.03)" stroke="#1e3a2f" stroke-width="1.5"/>
