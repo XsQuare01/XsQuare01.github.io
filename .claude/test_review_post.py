@@ -1383,6 +1383,7 @@ class TestLlmRubricSingleSource(unittest.TestCase):
     def test_canonical_rubric_maps_l6_states_to_severity(self):
         """상태만 있고 severity가 없으면 리뷰마다 색이 갈린다."""
         l6 = self._l6_section()
+        table_rows = [line for line in l6.splitlines() if line.strip().startswith("|")]
 
         rows = {
             "verified fidelity": ("🟢", "info"),
@@ -1391,11 +1392,13 @@ class TestLlmRubricSingleSource(unittest.TestCase):
         }
         for state, (severity, gate_effect) in rows.items():
             with self.subTest(state=state):
-                row = next(line for line in l6.splitlines() if state in line)
+                matches = [line for line in table_rows if state in line]
+                self.assertTrue(matches, f"L6 표에서 '{state}' 행을 찾지 못했다")
+                row = matches[0]
                 self.assertIn(severity, row)
                 self.assertIn(gate_effect, row)
 
-        mismatch_rows = [line for line in l6.splitlines() if "actual mismatch" in line]
+        mismatch_rows = [line for line in table_rows if "actual mismatch" in line]
         self.assertEqual(len(mismatch_rows), 2, "국소와 핵심 불일치를 나눠 적는다")
         self.assertTrue(any("🔴" in row and "fail" in row for row in mismatch_rows))
         self.assertTrue(any("🟡" in row and "warn" in row for row in mismatch_rows))
@@ -1404,7 +1407,8 @@ class TestLlmRubricSingleSource(unittest.TestCase):
         l6 = self._l6_section()
 
         for term in ("`message` 맨 앞", "미완료",
-                     "추가 자체를 불일치로 판정하지 않는다"):
+                     "추가 자체를 불일치로 판정하지 않는다",
+                     "`verified fidelity`로 적지 않는다"):
             with self.subTest(term=term):
                 self.assertIn(term, l6)
 
@@ -1419,6 +1423,8 @@ class TestLlmRubricSingleSource(unittest.TestCase):
                 self.assertIn("L6는 이 고정에서 예외다", text)
                 self.assertIn("source unavailable", text)
                 self.assertIn("docs/review-rubric.md", text)
+                self.assertIn("🟡", text)
+                self.assertIn("warn", text)
 
     def test_readme_documents_l6_severity_and_reporting_examples(self):
         readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
@@ -1576,9 +1582,11 @@ class TestAuthoringGuideContracts(unittest.TestCase):
         text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
 
         self.assertIn("###### 강한 주장과 증명 의무", text)
-        for obligation in ("완전성", "건전성", "유일성", "존재성", "최적성", "종료성"):
+        table = text.split("###### 강한 주장과 증명 의무", 1)[1].split("\n##### ", 1)[0]
+        for obligation in ("완전성", "필요조건", "유일성", "존재성", "중복 배제",
+                           "최적성", "불가능성", "하한", "종료성"):
             with self.subTest(obligation=obligation):
-                self.assertIn(obligation, text)
+                self.assertIn(obligation, table)
 
     def test_canonical_guide_proof_module_covers_scope_and_degenerate_cases(self):
         text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
@@ -1591,7 +1599,7 @@ class TestAuthoringGuideContracts(unittest.TestCase):
 
     def test_canonical_rubric_l7_points_at_the_obligation_table(self):
         rubric = (REPO_ROOT / "docs" / "review-rubric.md").read_text(encoding="utf-8")
-        l7 = rubric.split("- **L7 ", 1)[1]
+        l7 = rubric.split("- **L7 ", 1)[1].split("\n## ", 1)[0]
 
         for term in ("비용 모델", "점화식", "증명 의무", "직관",
                      "docs/writing-rules.md"):
