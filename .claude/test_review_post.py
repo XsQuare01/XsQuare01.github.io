@@ -1423,8 +1423,11 @@ class TestLlmRubricSingleSource(unittest.TestCase):
                 self.assertIn("L6는 이 고정에서 예외다", text)
                 self.assertIn("source unavailable", text)
                 self.assertIn("docs/review-rubric.md", text)
-                self.assertIn("🟡", text)
-                self.assertIn("warn", text)
+                # 스키마 범례에도 🟡·warn이 나오므로, L6 예외 문단이 실제로 요구하는
+                # 조합 리터럴을 붙잡아야 severity/gate_effect를 초록으로 되돌리는
+                # 회귀(#88의 원래 버그)를 잡을 수 있다.
+                self.assertIn("severity: 🟡", text)
+                self.assertIn("gate_effect: warn", text)
 
     def test_readme_documents_l6_severity_and_reporting_examples(self):
         readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
