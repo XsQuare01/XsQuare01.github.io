@@ -1631,6 +1631,26 @@ class TestAuthoringGuideContracts(unittest.TestCase):
                 self.assertIn(name, intro, "workflow 서두 열거에 빠졌다")
                 self.assertIn(name, handoff, "리뷰 인계 열거에 빠졌다")
 
+    def test_canonical_guide_marks_strong_claims_at_design_stage(self):
+        """의무를 4단계에서 처음 발견하면 수정이 구조 변경이 된다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        stage_two = text.split("### 2. 글 설계", 1)[1].split("\n### 3. ", 1)[0]
+        required = stage_two.split("#### 공통 필수", 1)[1].split("\n#### ", 1)[0]
+
+        for term in ("강한 한정사", "정확히 한 번", "증명 의무"):
+            with self.subTest(term=term):
+                self.assertIn(term, required)
+
+    def test_canonical_guide_allows_transparent_intent_preserving_extension(self):
+        """추가를 일률적으로 금지하면 승인된 확장까지 불일치로 몰린다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        stage_one = text.split("### 1. 원문 확인", 1)[1].split("\n### 2. ", 1)[0]
+
+        for term in ("추가는 금지가 아니다", "세 조건 중 하나라도",
+                     "provenance", "승인", "의도"):
+            with self.subTest(term=term):
+                self.assertIn(term, stage_one)
+
 
 class TestLegacyMigration(unittest.TestCase):
     def setUp(self):
