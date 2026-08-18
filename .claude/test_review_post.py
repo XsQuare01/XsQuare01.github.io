@@ -1540,7 +1540,7 @@ class TestAuthoringGuideContracts(unittest.TestCase):
         for term in required_terms:
             self.assertIn(term, text)
 
-    def test_canonical_guide_has_three_annotated_examples_and_split_policy(self):
+    def test_canonical_guide_has_four_annotated_examples_and_split_policy(self):
         text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
         annotation_counts = {
             "**결함:**": 0,
@@ -1559,12 +1559,13 @@ class TestAuthoringGuideContracts(unittest.TestCase):
 
         self.assertEqual(
             annotation_counts,
-            {"**결함:**": 3, "**수정 후**": 3, "**개선 이유:**": 3},
+            {"**결함:**": 4, "**수정 후**": 4, "**개선 이유:**": 4},
         )
         for term in (
             "개념 설명 문단",
             "증명 진행 문단",
             "코드 및 예시 설명 문단",
+            "증명 의무를 닫지 않은 문단",
             "독립된 질문",
             "고정 템플릿을 요구하지 않는다",
         ):
