@@ -1408,6 +1408,27 @@ class TestLlmRubricSingleSource(unittest.TestCase):
             with self.subTest(term=term):
                 self.assertIn(term, l6)
 
+    def test_both_commands_declare_the_l6_coverage_exception(self):
+        """coverage row를 🟢으로 고정한 규정과 L6 WARN이 충돌한다(#88).
+
+        L6는 원문 대조가 안 되면 '이슈 없음'이 아니라 '검증 미완료'다.
+        """
+        for name in self.COMMANDS:
+            with self.subTest(command=name):
+                text = self._command_text(name)
+                self.assertIn("L6는 이 고정에서 예외다", text)
+                self.assertIn("source unavailable", text)
+                self.assertIn("docs/review-rubric.md", text)
+
+    def test_readme_documents_l6_severity_and_reporting_examples(self):
+        readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("#### L6 상태가 severity를 정한다", readme)
+        for term in ("source unavailable", "verified fidelity",
+                     "gate_effect: warn", "2026-08-18"):
+            with self.subTest(term=term):
+                self.assertIn(term, readme)
+
     V1_SPEC = (REPO_ROOT / "docs" / "superpowers" / "specs"
                / "2026-06-03-review-post-command-design.md")
 

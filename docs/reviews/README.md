@@ -192,6 +192,8 @@ exit code는 `--finalize --strict`와 같다. `0` 통과, `1` 🔴 남음, `2` �
 
 `migrated_from`이 붙은 리포트에서 coverage만 면제하는 이유는 레거시 산문을 옮긴 결과라 `source: MIGRATED` finding만 있고 L 비평 행이 애초에 없기 때문이다. 여기에 L1–L7을 요구하면 과거 글 전체의 재리뷰를 강제하게 된다. 🔴 판정은 면제하지 않는다.
 
+L6 상태 규약은 2026-08-18 이후 생성된 리포트에 적용한다. 그 이전 리포트의 L6 행을 고쳐 쓰지 않는다. 판정은 그 시점의 근거로 남기며, 소급 수정은 위 「감사 섹션」 규약과 어긋난다.
+
 ### 두 가지 strict 경로
 
 | 명령 | 보는 것 | 쓰임 |
@@ -213,6 +215,40 @@ exit code는 `--finalize --strict`와 같다. `0` 통과, `1` 🔴 남음, `2` �
 | `🟢` | `info` |
 
 이 대응은 검증 대상이다. `🔴` finding에 `gate_effect: info`를 적어 게이트를 우회할 수 없다. 어긋나면 exit code `2`다.
+
+#### L6 상태가 severity를 정한다
+
+위 3단 매핑은 그대로다. L6만 판정 상태가 severity를 먼저 정하고, 그 severity가 매핑에 따라 `gate_effect`를 정한다. 원문 대조에 실패한 상태는 "이슈 없음"이 아니라 "검증 미완료"이므로 coverage row라도 🟢을 쓰지 않는다. 상태 목록과 매핑의 정본은 `docs/review-rubric.md`의 L6 절이다.
+
+검증을 마치지 못한 경우.
+
+```
+### 🟡 [L6] src/content/posts/any-mst.md:1
+
+- severity: 🟡
+- source: L
+- rule_id: L6
+- location: src/content/posts/any-mst.md:1
+- quote: not-recorded
+- message: source unavailable — 대조할 노션 원문이나 승인된 자료에 접근할 수 없어 충실도를 검증하지 못했다. 현재 저장소 글의 구조와 논지만 보존 기준으로 삼았다.
+- recommendation: 원문 접근이 가능해지면 핵심 구조, 논증 흐름, 누락, 자의적 추가를 대조한다.
+- gate_effect: warn
+```
+
+대조를 마친 경우.
+
+```
+### 🟢 [L6] src/content/posts/all-pairs-shortest-path.md:25
+
+- severity: 🟢
+- source: L
+- rule_id: L6
+- location: src/content/posts/all-pairs-shortest-path.md:25
+- quote: 무엇을 구하는가
+- message: verified fidelity — 승인된 설계 스펙과 대조해 문제 정의, 경유 제약, 점화식 증명, 의사코드의 핵심 줄기가 보존됨을 확인했다.
+- recommendation: not-recorded
+- gate_effect: info
+```
 
 ### LLM 비평 coverage 누락
 

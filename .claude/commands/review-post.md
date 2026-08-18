@@ -50,6 +50,8 @@ allowed-tools: Write, Edit, Bash(python:*), Bash(git diff:*), Read, Grep, Glob
 
 SVG와 L1-L7 범주 중 문제가 없는 범주는 생략하지 말고, 각 포스트마다 explicit coverage row를 남긴다. 문구는 `검토 완료, 이슈 없음`을 사용하고 `rule_id`는 해당 범주(`L1`~`L7`, SVG는 `L4`)로 기록한다. 이 coverage row는 `severity: 🟢`, `source: L`, `gate_effect: info`를 쓴다.
 
+**L6는 이 고정에서 예외다.** L6 coverage row는 `docs/review-rubric.md`의 L6 상태 표가 정한 severity를 쓴다. 원문 대조에 실패한 상태를 `검토 완료, 이슈 없음`으로 적지 않고, 상태 이름 `source unavailable`과 검증하지 못한 이유를 `message`에 적으며 `severity: 🟡`, `gate_effect: warn`으로 기록한다. 대조를 실제로 마쳤을 때만 `verified fidelity` 또는 `approved extension`으로 적고 🟢을 쓴다.
+
 **자동 수정 금지. 자동 수정은 하지 않는다.** 지적과 권고만 제시한다.
 
 ## 저장 (문서화): 필수
