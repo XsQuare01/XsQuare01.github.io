@@ -1570,6 +1570,33 @@ class TestAuthoringGuideContracts(unittest.TestCase):
         ):
             self.assertIn(term, text)
 
+    def test_canonical_guide_defines_proof_obligations_per_claim(self):
+        """강한 주장이 만드는 의무를 이름으로 부르지 못하면 닫혔는지 판단할 수 없다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+
+        self.assertIn("###### 강한 주장과 증명 의무", text)
+        for obligation in ("완전성", "건전성", "유일성", "존재성", "최적성", "종료성"):
+            with self.subTest(obligation=obligation):
+                self.assertIn(obligation, text)
+
+    def test_canonical_guide_proof_module_covers_scope_and_degenerate_cases(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        module = text.split("##### 증명 모듈", 1)[1].split("\n##### ", 1)[0]
+
+        for term in ("적용 영역", "한정사", "MECE", "base", "step",
+                     "퇴화 사례", "직관"):
+            with self.subTest(term=term):
+                self.assertIn(term, module)
+
+    def test_canonical_rubric_l7_points_at_the_obligation_table(self):
+        rubric = (REPO_ROOT / "docs" / "review-rubric.md").read_text(encoding="utf-8")
+        l7 = rubric.split("- **L7 ", 1)[1]
+
+        for term in ("비용 모델", "점화식", "증명 의무", "직관",
+                     "docs/writing-rules.md"):
+            with self.subTest(term=term):
+                self.assertIn(term, l7)
+
 
 class TestLegacyMigration(unittest.TestCase):
     def setUp(self):
