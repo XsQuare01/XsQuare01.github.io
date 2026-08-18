@@ -1617,6 +1617,20 @@ class TestAuthoringGuideContracts(unittest.TestCase):
             with self.subTest(term=term):
                 self.assertIn(term, module)
 
+    def test_canonical_guide_enumerations_name_every_conditional_module(self):
+        """모듈을 새로 만들고 열거 문장을 잊으면 그 모듈은 인계에서 빠진다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+
+        modules = [m.group(1) for m in re.finditer(r"(?m)^##### (.+?) 모듈$", text)]
+        self.assertIn("표현 정렬", modules)
+
+        intro = text.split("## 6단계 작성 workflow", 1)[1].split("\n### 1. ", 1)[0]
+        handoff = text.split("### 6. 리뷰 인계", 1)[1].split("\n## ", 1)[0]
+        for name in modules:
+            with self.subTest(module=name):
+                self.assertIn(name, intro, "workflow 서두 열거에 빠졌다")
+                self.assertIn(name, handoff, "리뷰 인계 열거에 빠졌다")
+
 
 class TestLegacyMigration(unittest.TestCase):
     def setUp(self):
