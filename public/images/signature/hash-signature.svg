@@ -114,11 +114,11 @@
   <rect x="18" y="252" width="224" height="54" rx="6" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4,3"/>
   <text x="130" y="270" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#fbbf24">왜 해시를 쓰는가?</text>
   <text x="130" y="286" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">m이 수 MB여도 h는 256 bit 고정</text>
-  <text x="130" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">→ 서명 크기 = h 크기, 속도 빠름</text>
+  <text x="130" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">→ 서명은 모듈러스 크기로 고정, 속도 빠름</text>
 
   <!-- Not convertible note -->
   <rect x="454" y="252" width="208" height="54" rx="6" fill="rgba(248,113,113,0.05)" stroke="#f87171" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="558" y="270" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f87171">Not Convertible</text>
-  <text x="558" y="286" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">서명 s는 m에 종속 (h에 기반)</text>
-  <text x="558" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">→ 다른 문서에 재사용 불가</text>
+  <text x="558" y="270" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8.8" font-weight="700" fill="#f87171">메시지 결속 (message binding)</text>
+  <text x="558" y="286" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">서명 s는 h를 통해 m에 묶인다</text>
+  <text x="558" y="300" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#e2e8f0">→ 옮겨 붙이려면 제2원상을 찾아야</text>
 </svg>
