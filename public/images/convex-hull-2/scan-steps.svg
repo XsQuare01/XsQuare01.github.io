@@ -19,7 +19,7 @@
     <circle cx="140" cy="220" r="5"/>
   </g>
 
-  <g data-step="1" data-step-label="기준점 Y를 잡고 각도 순으로 점을 정렬한다">
+  <g data-step="1" data-step-label="기준점 Y에서 시작한다">
     <circle cx="150" cy="340" r="8" fill="#34d399"/>
     <text x="140" y="368" fill="#6ee7b7" font-size="12" font-weight="700">Y</text>
   </g>
@@ -61,6 +61,10 @@
   </g>
 
   <g data-step="7" data-step-label="5를 pop하고 4→6을 잇는다 — 4→6은 좌회전이라 여기서 멈춘다">
+    <line x1="360" y1="120" x2="280" y2="190" stroke="#0f1117" stroke-width="5"/>
+    <line x1="360" y1="120" x2="280" y2="190" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 5"/>
+    <rect x="288" y="183" width="20" height="17" fill="#0f1117"/>
+    <text x="294" y="196" fill="#94a3b8" font-size="11">5 (안쪽)</text>
     <circle cx="280" cy="190" r="7" fill="#1f2937" stroke="#ef4444" stroke-width="2" opacity="0.75"/>
     <line x1="271" y1="181" x2="289" y2="199" stroke="#ef4444" stroke-width="2" opacity="0.75"/>
     <line x1="289" y1="181" x2="271" y2="199" stroke="#ef4444" stroke-width="2" opacity="0.75"/>
@@ -69,6 +73,14 @@
 
   <g data-step="8" data-step-label="점 7까지 처리하면 스택에 껍질 꼭짓점만 남는다">
     <polygon points="150,340 540,320 520,250 460,150 360,120 230,160 140,220" fill="#34d39914" stroke="#34d399" stroke-width="2.5"/>
+    <circle cx="150" cy="340" r="8" fill="#34d399"/>
+    <circle cx="540" cy="320" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="520" cy="250" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="460" cy="150" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="360" cy="120" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="218" y="132" width="18" height="16" fill="#0f1117"/>
+    <circle cx="230" cy="160" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+    <text x="226" y="145" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">6</text>
     <circle cx="140" cy="220" r="7" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
     <text x="122" y="215" fill="#93c5fd" font-size="13" font-weight="700">7</text>
     <text x="340" y="400" text-anchor="middle" fill="#94a3b8" font-size="12">최종 스택 [Y, 1, 2, 3, 4, 6, 7] — 각 점은 최대 한 번 push, 한 번 pop되므로 스캔은 O(N)</text>
