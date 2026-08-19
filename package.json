@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "review:gate": "python .claude/review_post.py --gate"
+    "review:gate": "python .claude/review_post.py --gate",
+    "test:js": "node --test src/plugins/**/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
