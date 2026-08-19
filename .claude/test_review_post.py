@@ -1364,6 +1364,80 @@ class TestLlmRubricSingleSource(unittest.TestCase):
 
         self.assertEqual(rp.REQUIRED_LLM_RULES, defined)
 
+    def _l6_section(self):
+        return self._rubric_text().split("- **L6 ", 1)[1].split("\n- **L7", 1)[0]
+
+    def test_canonical_rubric_defines_four_l6_states(self):
+        """L6는 네 상태로 기록한다(#88).
+
+        원문 접근 실패를 검증 통과와 같은 색으로 보고하면 판정 의미가 흔들린다.
+        2026-08-13 전수 리뷰는 대조 실패를 59개 글 전부 🟢으로 적었다.
+        """
+        l6 = self._l6_section()
+
+        for state in ("verified fidelity", "approved extension",
+                      "source unavailable", "actual mismatch"):
+            with self.subTest(state=state):
+                self.assertIn(state, l6)
+
+    def test_canonical_rubric_maps_l6_states_to_severity(self):
+        """상태만 있고 severity가 없으면 리뷰마다 색이 갈린다."""
+        l6 = self._l6_section()
+        table_rows = [line for line in l6.splitlines() if line.strip().startswith("|")]
+
+        rows = {
+            "verified fidelity": ("🟢", "info"),
+            "approved extension": ("🟢", "info"),
+            "source unavailable": ("🟡", "warn"),
+        }
+        for state, (severity, gate_effect) in rows.items():
+            with self.subTest(state=state):
+                matches = [line for line in table_rows if state in line]
+                self.assertTrue(matches, f"L6 표에서 '{state}' 행을 찾지 못했다")
+                row = matches[0]
+                self.assertIn(severity, row)
+                self.assertIn(gate_effect, row)
+
+        mismatch_rows = [line for line in table_rows if "actual mismatch" in line]
+        self.assertEqual(len(mismatch_rows), 2, "국소와 핵심 불일치를 나눠 적는다")
+        self.assertTrue(any("🔴" in row and "fail" in row for row in mismatch_rows))
+        self.assertTrue(any("🟡" in row and "warn" in row for row in mismatch_rows))
+
+    def test_canonical_rubric_forbids_reporting_missing_source_as_verified(self):
+        l6 = self._l6_section()
+
+        for term in ("`message` 맨 앞", "미완료",
+                     "추가 자체를 불일치로 판정하지 않는다",
+                     "`verified fidelity`로 적지 않는다"):
+            with self.subTest(term=term):
+                self.assertIn(term, l6)
+
+    def test_both_commands_declare_the_l6_coverage_exception(self):
+        """coverage row를 🟢으로 고정한 규정과 L6 WARN이 충돌한다(#88).
+
+        L6는 원문 대조가 안 되면 '이슈 없음'이 아니라 '검증 미완료'다.
+        """
+        for name in self.COMMANDS:
+            with self.subTest(command=name):
+                text = self._command_text(name)
+                self.assertIn("L6는 이 고정에서 예외다", text)
+                self.assertIn("source unavailable", text)
+                self.assertIn("docs/review-rubric.md", text)
+                # 스키마 범례에도 🟡·warn이 나오므로, L6 예외 문단이 실제로 요구하는
+                # 조합 리터럴을 붙잡아야 severity/gate_effect를 초록으로 되돌리는
+                # 회귀(#88의 원래 버그)를 잡을 수 있다.
+                self.assertIn("severity: 🟡", text)
+                self.assertIn("gate_effect: warn", text)
+
+    def test_readme_documents_l6_severity_and_reporting_examples(self):
+        readme = (REVIEW_REPORT_DIR / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("#### L6 상태가 severity를 정한다", readme)
+        for term in ("source unavailable", "verified fidelity",
+                     "gate_effect: warn", "2026-08-18"):
+            with self.subTest(term=term):
+                self.assertIn(term, readme)
+
     V1_SPEC = (REPO_ROOT / "docs" / "superpowers" / "specs"
                / "2026-06-03-review-post-command-design.md")
 
@@ -1475,7 +1549,7 @@ class TestAuthoringGuideContracts(unittest.TestCase):
         for term in required_terms:
             self.assertIn(term, text)
 
-    def test_canonical_guide_has_three_annotated_examples_and_split_policy(self):
+    def test_canonical_guide_has_four_annotated_examples_and_split_policy(self):
         text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
         annotation_counts = {
             "**결함:**": 0,
@@ -1494,16 +1568,99 @@ class TestAuthoringGuideContracts(unittest.TestCase):
 
         self.assertEqual(
             annotation_counts,
-            {"**결함:**": 3, "**수정 후**": 3, "**개선 이유:**": 3},
+            {"**결함:**": 4, "**수정 후**": 4, "**개선 이유:**": 4},
         )
         for term in (
             "개념 설명 문단",
             "증명 진행 문단",
             "코드 및 예시 설명 문단",
+            "증명 의무를 닫지 않은 문단",
             "독립된 질문",
             "고정 템플릿을 요구하지 않는다",
         ):
             self.assertIn(term, text)
+
+    def test_canonical_guide_defines_proof_obligations_per_claim(self):
+        """강한 주장이 만드는 의무를 이름으로 부르지 못하면 닫혔는지 판단할 수 없다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+
+        self.assertIn("###### 강한 주장과 증명 의무", text)
+        table = text.split("###### 강한 주장과 증명 의무", 1)[1].split("\n##### ", 1)[0]
+        for obligation in ("완전성", "필요조건", "유일성", "존재성", "중복 배제",
+                           "최적성", "불가능성", "하한", "종료성"):
+            with self.subTest(obligation=obligation):
+                self.assertIn(obligation, table)
+
+    def test_canonical_guide_proof_module_covers_scope_and_degenerate_cases(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        module = text.split("##### 증명 모듈", 1)[1].split("\n##### ", 1)[0]
+
+        for term in ("적용 영역", "한정사", "MECE", "base", "step",
+                     "퇴화 사례", "직관"):
+            with self.subTest(term=term):
+                self.assertIn(term, module)
+
+    def test_canonical_rubric_l7_points_at_the_obligation_table(self):
+        rubric = (REPO_ROOT / "docs" / "review-rubric.md").read_text(encoding="utf-8")
+        l7 = rubric.split("- **L7 ", 1)[1].split("\n## ", 1)[0]
+
+        for term in ("비용 모델", "점화식", "증명 의무", "직관",
+                     "docs/writing-rules.md"):
+            with self.subTest(term=term):
+                self.assertIn(term, l7)
+
+    def test_canonical_guide_complexity_module_defines_cost_model(self):
+        """비용 모델 없이 Big-O를 단정하면 무엇을 세는지 검증할 수 없다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        module = text.split("##### 복잡도 모듈", 1)[1].split("\n##### ", 1)[0]
+
+        for term in ("비용 모델", "1 연산", "점화식", "기저 조건", "비재귀 작업"):
+            with self.subTest(term=term):
+                self.assertIn(term, module)
+
+    def test_canonical_guide_has_a_representation_alignment_module(self):
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+
+        self.assertIn("##### 표현 정렬 모듈", text)
+        module = text.split("##### 표현 정렬 모듈", 1)[1].split("\n### ", 1)[0]
+        for term in ("의사코드", "계산 예시", "SVG", "수식",
+                     "N/A — 해당 요소 없음"):
+            with self.subTest(term=term):
+                self.assertIn(term, module)
+
+    def test_canonical_guide_enumerations_name_every_conditional_module(self):
+        """모듈을 새로 만들고 열거 문장을 잊으면 그 모듈은 인계에서 빠진다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+
+        modules = [m.group(1) for m in re.finditer(r"(?m)^##### (.+?) 모듈$", text)]
+        self.assertIn("표현 정렬", modules)
+
+        intro = text.split("## 6단계 작성 workflow", 1)[1].split("\n### 1. ", 1)[0]
+        handoff = text.split("### 6. 리뷰 인계", 1)[1].split("\n## ", 1)[0]
+        for name in modules:
+            with self.subTest(module=name):
+                self.assertIn(name, intro, "workflow 서두 열거에 빠졌다")
+                self.assertIn(name, handoff, "리뷰 인계 열거에 빠졌다")
+
+    def test_canonical_guide_marks_strong_claims_at_design_stage(self):
+        """의무를 4단계에서 처음 발견하면 수정이 구조 변경이 된다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        stage_two = text.split("### 2. 글 설계", 1)[1].split("\n### 3. ", 1)[0]
+        required = stage_two.split("#### 공통 필수", 1)[1].split("\n#### ", 1)[0]
+
+        for term in ("강한 한정사", "정확히 한 번", "증명 의무"):
+            with self.subTest(term=term):
+                self.assertIn(term, required)
+
+    def test_canonical_guide_allows_transparent_intent_preserving_extension(self):
+        """추가를 일률적으로 금지하면 승인된 확장까지 불일치로 몰린다(#88)."""
+        text = (REPO_ROOT / "docs" / "writing-rules.md").read_text(encoding="utf-8")
+        stage_one = text.split("### 1. 원문 확인", 1)[1].split("\n### 2. ", 1)[0]
+
+        for term in ("추가는 금지가 아니다", "세 조건 중 하나라도",
+                     "provenance", "승인", "의도"):
+            with self.subTest(term=term):
+                self.assertIn(term, stage_one)
 
 
 class TestLegacyMigration(unittest.TestCase):
