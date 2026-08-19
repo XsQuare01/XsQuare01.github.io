@@ -2,6 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { rehypeSvgSteps } from './rehype-svg-steps.mjs';
 
+// 테스트 파일은 package.json의 "test:js"에 경로를 직접 나열해 등록한다(글롭이 아니다).
+// 글롭으로 걸어 두면 패턴이 하나도 안 맞을 때도 "tests 0, pass 0, fail 0"으로 조용히
+// 종료 코드 0을 내기 때문이다 — 테스트가 하나도 안 돈 걸 성공으로 오인할 수 있다.
+// 그러니 이 파일 옆에 새 *.test.mjs를 추가하면 "test:js" 스크립트에도 그 경로를 손으로 더해야 한다.
+
 // rehypeFigureCaption이 만들어 둔 모양을 그대로 흉내낸다: figure.post-figure > (img, figcaption).
 // wrapper div는 없다 — Astro는 rehype-raw를 사용자 rehype 플러그인 뒤에 돌리므로, 마크다운의
 // raw HTML div는 이 단계에서 아직 파싱되지 않은 'raw' 문자열 노드다(className을 볼 수 없다).
@@ -61,4 +66,13 @@ test('src가 -steps.svg로 끝나지 않으면 건드리지 않는다(파일 내
   const svg = fig.children[0];
   assert.equal(svg.tagName, 'img', '파일명 규약이 아니면 data-step 유무와 무관하게 무시한다');
   assert.ok(!classes(fig).includes('svg-steps'));
+});
+
+test('주석 안에 남은 data-step 초안은 단계로 세지 않는다', () => {
+  const fig = figure(run(tree('/commented-steps.svg')));
+  const svg = fig.children[0];
+  assert.equal(svg.tagName, 'svg');
+  const groups = svg.children.filter((c) => c.tagName === 'g');
+  assert.equal(groups.length, 1, '주석 속 data-step="9"는 세지 않고 실제 그룹 하나만 남는다');
+  assert.equal(groups[0].properties['data-step'], '1');
 });

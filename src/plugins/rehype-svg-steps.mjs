@@ -31,14 +31,21 @@ function buildSvg(source, label) {
   const attrs = parseAttrs(openMatch[0]);
   const inner = source.slice(openMatch.index + openMatch[0].length, source.lastIndexOf('</svg>'));
 
+  // HTML 주석은 먼저 지운다. 주석 안에 data-step 예시나 초안이 남아 있어도(예:
+  // <!-- draft: <g data-step="9" ...>...</g> -->) 그룹 정규식이 이를 실제 단계로
+  // 잘못 세지 않도록 하는 것이다. 즉 도식 작성자는 단계를 끄고 싶을 때 주석 처리에
+  // 의존하면 안 된다 — 주석은 통째로 사라지고, 남아 있던 실제 <g data-step="n">만
+  // 살아남는다는 사실을 알고 있어야 한다.
+  const withoutComments = inner.replace(/<!--[\s\S]*?-->/g, '');
+
   // data-step 그룹을 찾는다. 정규식이 non-greedy([\s\S]*?)이므로 그룹 본문 안에 중첩된
   // <g>가 있으면 그 안쪽의 첫 </g>에서 잘려 나간다 — 즉 data-step 그룹 내부에는
   // 추가 <g>를 두면 안 된다(도식을 만들 때 지켜야 할 제약, 이 태스크에서는 도식을 직접
   // 작성하지 않지만 다음 태스크를 위해 남겨 둔다).
   const groups = [];
   const groupRe = /<g\b([^>]*\bdata-step="\d+"[^>]*)>([\s\S]*?)<\/g>/g;
-  let rest = inner;
-  for (const m of inner.matchAll(groupRe)) {
+  let rest = withoutComments;
+  for (const m of withoutComments.matchAll(groupRe)) {
     groups.push({ attrs: parseAttrs(`<g ${m[1]}>`), body: m[2] });
     rest = rest.replace(m[0], '');
   }
