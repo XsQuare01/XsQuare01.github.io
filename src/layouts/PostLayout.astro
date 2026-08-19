@@ -530,4 +530,55 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+
+  // ── SVG 단계 재생기 ──
+  // .svg-steps는 별도 wrapper가 아니라, rehypeSvgSteps가 클래스를 얹은 figure 자신이다.
+  // 이 클래스가 없는 글에서는 querySelectorAll 결과가 비어 아무 일도 하지 않는다.
+  document.querySelectorAll('.svg-steps').forEach((fig) => {
+    const steps = [...fig.querySelectorAll('svg g[data-step]')].sort(
+      (a, b) => Number(a.dataset.step) - Number(b.dataset.step)
+    );
+    if (steps.length < 2) return; // 단계가 1개 이하면 컨트롤을 만들 이유가 없다
+
+    const controls = document.createElement('div');
+    controls.className = 'step-controls';
+    const prev = document.createElement('button');
+    const next = document.createElement('button');
+    prev.type = next.type = 'button';
+    prev.textContent = '◀ 이전';
+    next.textContent = '다음 ▶';
+    prev.setAttribute('aria-label', '이전 단계');
+    next.setAttribute('aria-label', '다음 단계');
+    const counter = document.createElement('span');
+    counter.className = 'step-counter';
+    const label = document.createElement('span');
+    label.className = 'step-label';
+    label.setAttribute('aria-live', 'polite');
+    controls.append(prev, counter, next, label);
+    fig.append(controls); // figcaption 다음, figure 안에 컨트롤이 놓인다
+
+    let at = 1;
+    const render = () => {
+      steps.forEach((g) => {
+        g.classList.toggle('is-hidden', Number(g.dataset.step) > at);
+      });
+      counter.textContent = `${at}/${steps.length}`;
+      label.textContent = steps[at - 1].dataset.stepLabel || '';
+      prev.disabled = at === 1;
+      next.disabled = at === steps.length;
+    };
+
+    prev.addEventListener('click', () => { if (at > 1) { at -= 1; render(); } });
+    next.addEventListener('click', () => { if (at < steps.length) { at += 1; render(); } });
+    controls.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && at > 1) { at -= 1; render(); }
+      else if (e.key === 'ArrowRight' && at < steps.length) { at += 1; render(); }
+      else return;
+      e.preventDefault();
+    });
+
+    // 이 클래스가 붙기 전까지는 CSS가 어떤 단계도 숨기지 않는다(JS 실패 시 전체 도식 유지)
+    fig.classList.add('is-live');
+    render();
+  });
 </script>

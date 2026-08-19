@@ -538,6 +538,38 @@ article .prose h2 {
   border-radius: 10px;
   padding: 1rem 1rem 0.5rem;
 }
+
+/* SVG 단계 재생기 — .svg-steps는 wrapper가 아니라 figure 자신이다 */
+.svg-steps .step-controls {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0.5rem;
+  font-size: 0.875rem;
+}
+.svg-steps.is-live .step-controls { display: flex; }
+
+.svg-steps .step-controls button {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--rule, #cbd5e1);
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+.svg-steps .step-controls button:disabled { opacity: 0.4; cursor: default; }
+.svg-steps .step-counter { font-variant-numeric: tabular-nums; }
+.svg-steps .step-label { flex: 1; color: var(--muted, #64748b); }
+
+/* JS가 붙은 뒤에만 단계를 숨긴다 — .is-live가 없으면(JS 실패) 전 layer가 보인다 */
+.svg-steps.is-live svg g[data-step].is-hidden { visibility: hidden; }
+
+@media print {
+  .svg-steps .step-controls { display: none !important; }
+  .svg-steps.is-live svg g[data-step].is-hidden { visibility: visible; }
+}
+
 .prose img { max-width: 100%; display: block; margin: 0 auto; border-radius: 4px; cursor: zoom-in; }
 .prose figcaption {
   font-family: var(--font-mono);
