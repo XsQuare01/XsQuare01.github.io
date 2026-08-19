@@ -244,7 +244,7 @@ import { rehypeSvgSteps } from './src/plugins/rehype-svg-steps.mjs';
 플러그인 배열에서 `rehypeFigureCaption` **뒤**에 넣는다. 캡션이 먼저 만들어져야 그 안의 `<img>`를 볼 수 있다.
 
 ```javascript
-rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption, rehypeSvgSteps()],
+rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption, rehypeSvgSteps],
 ```
 
 - [ ] **Step 7: 빌드가 깨지지 않는지 확인한다**

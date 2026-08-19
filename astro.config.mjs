@@ -122,7 +122,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption, rehypeSvgSteps()],
+    rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption, rehypeSvgSteps],
     shikiConfig: {
       themes: {
         light: 'github-light',
