@@ -550,15 +550,18 @@ article .prose h2 {
   gap: 0.75rem;
   margin: 0.5rem 0 0.5rem;
   font-size: 0.875rem;
+  /* figure는 --term-bg 어두운 판이다. 본문 글자색(--ink)을 물려받으면 판에 묻히므로
+     이 표면의 짝인 --term-fg를 쓴다(506~507행과 같은 규약). */
+  color: var(--term-fg);
 }
 .svg-steps.is-live .step-controls { display: flex; }
 
 .svg-steps .step-controls button {
   padding: 0.25rem 0.75rem;
-  border: 1px solid var(--rule, #cbd5e1);
+  border: 1px solid var(--term-dim);
   border-radius: 4px;
   background: transparent;
-  color: inherit;
+  color: var(--term-fg);
   cursor: pointer;
   font: inherit;
 }
@@ -567,7 +570,7 @@ article .prose h2 {
 .svg-steps .step-controls button[aria-disabled="true"] { opacity: 0.4; cursor: default; }
 .svg-steps .step-status { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
 .svg-steps .step-counter { font-variant-numeric: tabular-nums; }
-.svg-steps .step-label { flex: 1; color: var(--muted, #64748b); }
+.svg-steps .step-label { flex: 1; color: var(--term-dim); }
 
 /* JS가 붙은 뒤에만 단계를 숨긴다 — .is-live가 없으면(JS 실패) 전 layer가 보인다 */
 .svg-steps.is-live svg g[data-step].is-hidden { visibility: hidden; }
