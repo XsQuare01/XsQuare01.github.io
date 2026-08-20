@@ -76,3 +76,29 @@ test('주석 안에 남은 data-step 초안은 단계로 세지 않는다', () =
   assert.equal(groups.length, 1, '주석 속 data-step="9"는 세지 않고 실제 그룹 하나만 남는다');
   assert.equal(groups[0].properties['data-step'], '1');
 });
+
+// data-step-label 값 안에 리터럴 '>'가 있으면 quote-unaware하게 [^>]*로 여는 태그를
+// 훑을 때 그 '>'에서 태그가 잘려 나갔다(라벨이 빈 문자열이 되고 나머지가 stray text로
+// <g> 안에 끼어들었다). 이제는 quote-aware하게 훑으므로 라벨이 그대로 살아야 한다 —
+// 그래서 이 케이스는 "안전하게 거부"가 아니라 "정확히 파싱"을 골랐다: 값 안의 '>'는
+// 합법적인 XML이고, 저작자가 라벨에 비교 연산자를 쓰지 못하게 막을 이유가 없다.
+test("data-step-label 값 안의 리터럴 '>'는 태그를 자르지 않고 라벨로 그대로 파싱된다", () => {
+  const fig = figure(run(tree('/gt-label-steps.svg')));
+  const svg = fig.children[0];
+  assert.equal(svg.tagName, 'svg', '거부하지 않고 인라인 svg로 교체된다');
+  const groups = svg.children.filter((c) => c.tagName === 'g');
+  assert.equal(groups.length, 2);
+  assert.equal(groups[1].properties['data-step-label'], '외적 > 0', "'>' 이후가 잘리지 않는다");
+  // stray text가 없어야 한다: 두 번째 그룹의 유일한 자식은 body를 감싼 raw 노드 하나뿐
+  assert.equal(groups[1].children.length, 1);
+});
+
+// data-step="1a"처럼 값이 숫자가 아니면 groupRe가 그 <g>를 그룹으로 뽑아내지 못한다.
+// 실제 data-step 속성 등장 횟수(2)와 뽑힌 그룹 수(1)가 어긋나므로, 잘못된 결과를
+// 조용히 내보내는 대신 null을 돌려줘 호출자가 원래의 <img>로 되돌아가야 한다.
+test('data-step 값이 숫자가 아니면 개수가 어긋나 img로 거부된다', () => {
+  const fig = figure(run(tree('/malformed-step-steps.svg')));
+  const svg = fig.children[0];
+  assert.equal(svg.tagName, 'img', '개수 불일치로 안전하게 거부한다');
+  assert.ok(!classes(fig).includes('svg-steps'));
+});

@@ -540,6 +540,10 @@ article .prose h2 {
 }
 
 /* SVG 단계 재생기 — .svg-steps는 wrapper가 아니라 figure 자신이다 */
+/* 인라인된 svg는 .prose img의 max-width 규칙이 적용되지 않고(태그가 다르다), 기본이
+   inline이라 baseline 하강폭만큼 밑에 틈이 남는다. img와 같은 크기 규약을 명시한다. */
+.svg-steps svg { display: block; width: 100%; height: auto; }
+
 .svg-steps .step-controls {
   display: none;
   align-items: center;
@@ -569,6 +573,7 @@ article .prose h2 {
 .svg-steps.is-live svg g[data-step].is-hidden { visibility: hidden; }
 
 @media print {
+  .svg-steps { break-inside: avoid; }
   .svg-steps .step-controls { display: none !important; }
   .svg-steps.is-live svg g[data-step].is-hidden { visibility: visible; }
 }
