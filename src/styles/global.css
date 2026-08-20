@@ -657,7 +657,7 @@ article .prose h2 {
   cursor: grab;
 }
 #image-lightbox .lightbox-content.zoom.grabbing { cursor: grabbing; }
-#image-lightbox .lightbox-content.zoom img {
+#image-lightbox .lightbox-content.zoom :is(img, svg) {
   position: absolute;
   top: 0;
   left: 0;
