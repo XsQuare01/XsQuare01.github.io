@@ -553,8 +553,13 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
     counter.className = 'step-counter';
     const label = document.createElement('span');
     label.className = 'step-label';
-    label.setAttribute('aria-live', 'polite');
-    controls.append(prev, counter, next, label);
+    // counter와 label을 하나의 라이브 리전으로 묶는다 — 따로면 위치(counter)는
+    // 스크린리더에 전혀 알려지지 않고 설명(label)만 알려진다
+    const status = document.createElement('span');
+    status.className = 'step-status';
+    status.setAttribute('aria-live', 'polite');
+    status.append(counter, label);
+    controls.append(prev, status, next);
     fig.append(controls); // figcaption 다음, figure 안에 컨트롤이 놓인다
 
     let at = 1;
@@ -564,8 +569,12 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
       });
       counter.textContent = `${at}/${steps.length}`;
       label.textContent = steps[at - 1].dataset.stepLabel || '';
-      prev.disabled = at === 1;
-      next.disabled = at === steps.length;
+      // disabled 대신 aria-disabled만 표시한다: 끝 단계에서 disabled를 주면 포커스를
+      // 쥔 버튼이 브라우저의 포커스 보정 규칙으로 body로 쫓겨나 화살표 키가 죽는다.
+      // 버튼은 계속 포커스 가능한 상태로 두고, 실제 이동 차단은 아래 클릭/키다운
+      // 핸들러의 범위 검사(at > 1 / at < steps.length)에 맡긴다.
+      prev.setAttribute('aria-disabled', String(at === 1));
+      next.setAttribute('aria-disabled', String(at === steps.length));
     };
 
     prev.addEventListener('click', () => { if (at > 1) { at -= 1; render(); } });
