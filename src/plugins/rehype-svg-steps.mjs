@@ -48,11 +48,84 @@ function raw(value) {
 //    공통 내용이 그룹 뒤에 있으면 z-order상 그룹들 밑에 깔려 버린다.
 // 3) 허용 목록(viewBox, xmlns, role, aria-label, font-family, preserveAspectRatio)
 //    밖의 루트 속성은 조용히 버려진다.
-// 4) 엘리먼트 id는 인라인되는 순간 페이지 전역이 된다(예: 이 파일의 <marker id="ss-g">).
-//    한 페이지에 단계 도식이 두 개면 id가 충돌한다 — 이 플러그인은 id를 재작성하지 않는다.
+// 4) 엘리먼트 id에는 파일 경로에서 만든 접두어가 자동으로 붙는다(prefixIds). 저작자가
+//    id를 페이지 전역에서 유일하게 지을 의무는 없다. 대신 속성값을 겹따옴표로 써야 한다 —
+//    홑따옴표 id나 이 코드가 다루지 못하는 참조 형태가 있으면 도식 전체가 img로 물러난다.
 const TAG_ATTRS = '(?:[^>"]|"[^"]*")*';
 
-function buildSvg(source, label) {
+// 인라인되는 순간 SVG 내부 id는 페이지 전역 이름이 된다. 한 페이지에 단계 도식이 둘이면
+// 같은 id(예: 두 도식이 각자 <marker id="ss-g">를 정의하는 경우)가 겹치고, url(#ss-g)는
+// 문서 순서상 먼저 나온 정의로 해석된다 — 둘째 도식의 화살촉이 첫 도식의 것으로 바뀐다.
+// 그래서 모든 id와 그 참조에 파일 경로에서 만든 접두어를 붙인다.
+//
+// 접두어의 근거를 문서 순서(첫째·둘째)가 아니라 경로로 잡았다. 같은 도식이 어느 글에
+// 들어가든, 몇 번째로 놓이든 같은 id가 나와야 빌드 산출물을 눈으로 대조할 수 있고,
+// 앞에 도식을 하나 끼워 넣었을 때 뒤 도식의 id가 따라 밀리지 않는다.
+function idPrefix(src) {
+  const slug = src
+    .replace(/^\//, '')
+    .replace(/^images\//, '') // 모든 도식이 공유하는 접두어라 구별에 기여하지 않는다
+    .replace(/\.svg$/i, '')
+    .replace(/[^A-Za-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  // XML Name은 숫자로 시작할 수 없다(디렉터리가 '2-sat'인 경우를 생각한다).
+  return /^[A-Za-z]/.test(slug) ? `${slug}-` : `svg-${slug}-`;
+}
+
+function escapeRe(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// 참조가 실제로 놓이는 자리. 남은 참조를 검사할 때 텍스트 전체에서 '#id'를 찾으면
+// 색 리터럴(id가 'bad'이고 어딘가에 #bad가 있는 경우)과 부딪히므로, 참조 구문 안에서만 본다.
+const REF_SITE_RE = /url\(\s*['"]?#([^)'"\s]+)|(?:xlink:)?href\s*=\s*['"]#([^'"]+)['"]/g;
+
+// id와 그 참조에 접두어를 붙인다. 붙이지 못한 참조가 하나라도 남으면 null을 돌려주고,
+// 호출자는 원래의 <img>로 되돌아간다 — 화살촉이 사라진 선처럼 조용히 깨진 그림을 내보내는
+// 것보다, 상호작용을 포기하고 온전한 정적 이미지로 물러나는 편이 낫다.
+function prefixIds(source, prefix) {
+  const declared = [...source.matchAll(/\sid="([^"]*)"/g)].map((m) => m[1]).filter(Boolean);
+
+  // 위 정규식은 겹따옴표에 값이 빈 문자열이 아닌 id만 본다. 그것이 파일에 있는 id 전부인지는
+  // 스스로 알 수 없으므로(id='x', id = "x", id=""), 느슨하게 센 개수와 비교한다.
+  // data-step 개수 검사와 같은 방식이고, 같은 이유로 어긋나면 안전하게 거부한다.
+  const looseCount = (source.match(/\sid\s*=\s*(?:"[^"]*"|'[^']*')/g) || []).length;
+  if (declared.length !== looseCount) return null;
+  if (declared.length === 0) return source;
+
+  const known = new Set(declared);
+  let out = source;
+  for (const id of known) {
+    const e = escapeRe(id);
+    out = out
+      // 세 패턴 모두 뒤끝을 닫아 둔다(닫는 따옴표, 닫는 괄호). 열어 두면 id가 'x'이고
+      // 'xy'도 있을 때 url(#xy)의 앞부분이 x로 잡혀 엉뚱하게 바뀐다.
+      .replace(new RegExp(`(\\sid=")${e}(")`, 'g'), `$1${prefix}${id}$2`)
+      .replace(new RegExp(`url\\((["']?)#${e}\\1\\)`, 'g'), `url($1#${prefix}${id}$1)`)
+      .replace(new RegExp(`((?:xlink:)?href=")#${e}(")`, 'g'), `$1#${prefix}${id}$2`);
+  }
+
+  // url()·href 말고 id를 이름으로 직접 가리키는 속성. 공백으로 나열할 수 있다.
+  out = out.replace(/\saria-(labelledby|describedby)="([^"]*)"/g, (_match, name, value) => {
+    const tokens = value
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((token) => (known.has(token) ? prefix + token : token));
+    return ` aria-${name}="${tokens.join(' ')}"`;
+  });
+
+  // 접두어를 붙이지 못한 참조가 남았는지 본다. 위 세 패턴이 이 파일의 참조 형태를 전부
+  // 덮는다는 보장은 없으므로(url( #x ), href='#x' 같은 변형), 결과를 다시 읽어 확인한다.
+  // 이 파일이 정의한 id를 접두어 없이 가리키는 자리가 하나라도 있으면 거부한다.
+  // 정의되지 않은 id를 가리키는 참조(url(#absent))는 손대지 않고 그대로 둔다 — 이 도식
+  // 밖의 무언가를 가리키려던 것일 수 있고, 우리가 접두어를 붙이면 확실히 깨진다.
+  for (const match of out.matchAll(REF_SITE_RE)) {
+    if (known.has(match[1] ?? match[2])) return null;
+  }
+  return out;
+}
+
+function buildSvg(source, label, prefix) {
   const openMatch = source.match(new RegExp(`<svg\\b(${TAG_ATTRS})>`));
   if (!openMatch) return null;
   const attrs = parseAttrs(openMatch[0]);
@@ -65,14 +138,20 @@ function buildSvg(source, label) {
   // 살아남는다는 사실을 알고 있어야 한다.
   const withoutComments = inner.replace(/<!--[\s\S]*?-->/g, '');
 
+  // id 접두어는 그룹을 쪼개기 전에, 주석을 지운 뒤에 붙인다. 정의(<defs> 안)와 참조(단계
+  // 그룹 안)가 서로 다른 조각으로 갈라지기 전에 한 번에 훑어야 짝이 어긋나지 않고,
+  // 주석 속 초안 id를 실제 정의로 세지 않게 된다.
+  const prefixed = prefixIds(withoutComments, prefix);
+  if (prefixed === null) return null;
+
   // data-step 그룹을 찾는다. 정규식이 non-greedy([\s\S]*?)이므로 그룹 본문 안에 중첩된
   // <g>가 있으면 그 안쪽의 첫 </g>에서 잘려 나간다 — 즉 data-step 그룹 내부에는
   // 추가 <g>를 두면 안 된다(도식을 만들 때 지켜야 할 제약, 이 태스크에서는 도식을 직접
   // 작성하지 않지만 다음 태스크를 위해 남겨 둔다).
   const groups = [];
   const groupRe = new RegExp(`<g\\b(${TAG_ATTRS}\\bdata-step="\\d+"${TAG_ATTRS})>([\\s\\S]*?)</g>`, 'g');
-  let rest = withoutComments;
-  for (const m of withoutComments.matchAll(groupRe)) {
+  let rest = prefixed;
+  for (const m of prefixed.matchAll(groupRe)) {
     groups.push({ attrs: parseAttrs(`<g ${m[1]}>`), body: m[2] });
     rest = rest.replace(m[0], '');
   }
@@ -84,7 +163,7 @@ function buildSvg(source, label) {
   // (따옴표 종류·값 유효성과 무관하게) 실제로 몇 번 나오는지 별도로 세어 비교한다.
   // 둘이 다르면 잘못된 결과를 조용히 내보내는 대신 img로 안전하게 되돌아간다.
   const dataStepAttrCount =
-    (withoutComments.match(/\bdata-step\s*=\s*(?:"[^"]*"|'[^']*')/g) || []).length;
+    (prefixed.match(/\bdata-step\s*=\s*(?:"[^"]*"|'[^']*')/g) || []).length;
   if (groups.length !== dataStepAttrCount) return null;
 
   const children = [raw(rest)];
@@ -143,8 +222,8 @@ export function rehypeSvgSteps({ publicDir = DEFAULT_PUBLIC_DIR } = {}) {
             return leaf; // 파일이 없거나 읽을 수 없으면 지금 동작(img)으로 되돌아간다
           }
 
-          const svg = buildSvg(source, leaf.properties.alt || '');
-          if (!svg) return leaf; // data-step 그룹이 없으면 교체하지 않는다
+          const svg = buildSvg(source, leaf.properties.alt || '', idPrefix(src));
+          if (!svg) return leaf; // data-step 그룹이 없거나 규약을 어기면 교체하지 않는다
 
           addStepsClass(node);
           return svg;

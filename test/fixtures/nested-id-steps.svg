@@ -1,0 +1,9 @@
+<svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6"><path d="M0,0 L6,3 L0,6 Z" fill="#34d399"/></marker>
+    <marker id="arr-red" markerWidth="6" markerHeight="6"><path d="M0,0 L6,3 L0,6 Z" fill="#f87171"/></marker>
+  </defs>
+  <rect width="100" height="50" fill="#0f1117"/>
+  <g data-step="1" data-step-label="채택한 변을 잇는다"><line x1="20" y1="25" x2="80" y2="25" stroke="#34d399" marker-end="url(#arr)"/></g>
+  <g data-step="2" data-step-label="거부한 변을 표시한다"><line x1="20" y1="40" x2="80" y2="40" stroke="#f87171" marker-end="url(#arr-red)"/></g>
+</svg>
