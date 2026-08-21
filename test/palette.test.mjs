@@ -83,3 +83,18 @@ test('검사 2 — 문서의 팔레트가 CSS와 한 글자도 다르지 않다'
     assert.ok(!values.includes(legacy), `레거시 색 ${legacy}가 팔레트에 들어왔다`);
   }
 });
+
+// 규칙을 문자열로 대조한다. 공백을 지워 비교하므로 줄바꿈·들여쓰기가 달라도 통과하고,
+// 「어느 hex가 어느 토큰으로 가는가」는 정확히 붙잡는다.
+const squash = (text) => text.replace(/\s+/g, '');
+
+test('검사 4 — 팔레트 값마다 fill·stroke 매핑 규칙이 있다', () => {
+  const flat = squash(CSS);
+  for (const name of TOKENS) {
+    const hex = css.get(name);
+    for (const prop of ['fill', 'stroke']) {
+      const rule = squash(`.svg-steps svg [${prop}="${hex}"] { ${prop}: var(--${name}); }`);
+      assert.ok(flat.includes(rule), `${prop} 매핑이 없다: ${hex} → --${name}`);
+    }
+  }
+});

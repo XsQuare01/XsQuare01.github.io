@@ -605,6 +605,52 @@ article .prose h2 {
 /* JS가 붙은 뒤에만 단계를 숨긴다 — .is-live가 없으면(JS 실패) 전 layer가 보인다 */
 .svg-steps.is-live svg g[data-step].is-hidden { visibility: hidden; }
 
+/* 도판 팔레트 매핑 — 인라인된 단계 도식의 프레젠테이션 속성을 토큰으로 덮는다.
+   CSS가 프레젠테이션 속성을 이기므로, 인라인되면 토큰이 이기고 <img>로 물러나면
+   속성값이 남는다. 그래서 SVG 파일을 한 글자도 고치지 않고 토큰이 닿는다.
+   오늘은 토큰 값이 속성값과 같아 시각적으로 no-op이고, 팔레트 값이 바뀌는 날
+   인라인 도식이 따라온다. 그게 이 층의 전부다.
+   범위를 .svg-steps svg로 한정한 이유는 본문의 다른 요소가 같은 hex를 속성으로
+   써도 영향받지 않아야 하기 때문이다. 18색 전부에 fill·stroke 두 규칙을 둔다 —
+   예외를 두면 검사가 「어느 값에 어느 규칙이 필요한가」 목록을 알아야 하고,
+   그 목록이 다음 드리프트의 자리가 된다. */
+.svg-steps svg [fill="#0f1117"] { fill: var(--dg-bg); }
+.svg-steps svg [stroke="#0f1117"] { stroke: var(--dg-bg); }
+.svg-steps svg [fill="#e2e8f0"] { fill: var(--dg-fg); }
+.svg-steps svg [stroke="#e2e8f0"] { stroke: var(--dg-fg); }
+.svg-steps svg [fill="#cbd5e1"] { fill: var(--dg-fg-soft); }
+.svg-steps svg [stroke="#cbd5e1"] { stroke: var(--dg-fg-soft); }
+.svg-steps svg [fill="#94a3b8"] { fill: var(--dg-fg-muted); }
+.svg-steps svg [stroke="#94a3b8"] { stroke: var(--dg-fg-muted); }
+.svg-steps svg [fill="#64748b"] { fill: var(--dg-line); }
+.svg-steps svg [stroke="#64748b"] { stroke: var(--dg-line); }
+.svg-steps svg [fill="#475569"] { fill: var(--dg-line-dim); }
+.svg-steps svg [stroke="#475569"] { stroke: var(--dg-line-dim); }
+.svg-steps svg [fill="#1e293b"] { fill: var(--dg-surface); }
+.svg-steps svg [stroke="#1e293b"] { stroke: var(--dg-surface); }
+.svg-steps svg [fill="#4ade80"] { fill: var(--dg-green); }
+.svg-steps svg [stroke="#4ade80"] { stroke: var(--dg-green); }
+.svg-steps svg [fill="#6ee7b7"] { fill: var(--dg-green-soft); }
+.svg-steps svg [stroke="#6ee7b7"] { stroke: var(--dg-green-soft); }
+.svg-steps svg [fill="#14352b"] { fill: var(--dg-green-fill); }
+.svg-steps svg [stroke="#14352b"] { stroke: var(--dg-green-fill); }
+.svg-steps svg [fill="#3b82f6"] { fill: var(--dg-blue); }
+.svg-steps svg [stroke="#3b82f6"] { stroke: var(--dg-blue); }
+.svg-steps svg [fill="#93c5fd"] { fill: var(--dg-blue-soft); }
+.svg-steps svg [stroke="#93c5fd"] { stroke: var(--dg-blue-soft); }
+.svg-steps svg [fill="#1e3a5f"] { fill: var(--dg-blue-fill); }
+.svg-steps svg [stroke="#1e3a5f"] { stroke: var(--dg-blue-fill); }
+.svg-steps svg [fill="#f87171"] { fill: var(--dg-red); }
+.svg-steps svg [stroke="#f87171"] { stroke: var(--dg-red); }
+.svg-steps svg [fill="#7c2d12"] { fill: var(--dg-red-fill); }
+.svg-steps svg [stroke="#7c2d12"] { stroke: var(--dg-red-fill); }
+.svg-steps svg [fill="#fbbf24"] { fill: var(--dg-amber); }
+.svg-steps svg [stroke="#fbbf24"] { stroke: var(--dg-amber); }
+.svg-steps svg [fill="#3a2c0f"] { fill: var(--dg-amber-fill); }
+.svg-steps svg [stroke="#3a2c0f"] { stroke: var(--dg-amber-fill); }
+.svg-steps svg [fill="#a78bfa"] { fill: var(--dg-violet); }
+.svg-steps svg [stroke="#a78bfa"] { stroke: var(--dg-violet); }
+
 @media print {
   .svg-steps { break-inside: avoid; }
   .svg-steps .step-controls { display: none !important; }
