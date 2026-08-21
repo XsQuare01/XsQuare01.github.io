@@ -40,7 +40,11 @@ function declarations(text) {
   return resolved;
 }
 
-const css = declarations(CSS);
+// :root 블록에서만 선언을 읽는다. 파일 전체를 훑으면 같은 이름의 나중 선언이 이기므로
+// :root 밖의 재선언이 정본 값을 가릴 수 있다 — 이 파일에는 html.rail-pinned와 :has()
+// 선택자 안에서 --main-gap을 다시 선언하는 자리가 이미 있다.
+const ROOT = [...CSS.matchAll(/:root\s*\{([\s\S]*?)\}/g)].map((m) => m[1]).join('\n');
+const css = declarations(ROOT);
 const doc = declarations(DOC);
 
 test('검사 1 — global.css가 팔레트 18색을 정의한다', () => {
@@ -57,7 +61,7 @@ test('검사 1 — global.css가 팔레트 18색을 정의한다', () => {
 
   // 배경은 값을 베끼지 않고 판을 가리켜야 한다. 그래야 판과 도식의 검정이
   // 구조적으로 어긋날 수 없다.
-  assert.match(CSS, /--dg-bg:\s*var\(--term-bg\);/, '--dg-bg는 --term-bg를 가리켜야 한다');
+  assert.match(ROOT, /--dg-bg:\s*var\(--term-bg\);/, '--dg-bg는 --term-bg를 가리켜야 한다');
 
   // 두 토큰이 같은 값을 가지면 매핑 규칙이 겹쳐 나중 것이 이긴다. 역할과 값은 1:1이어야 한다.
   const values = TOKENS.map((n) => css.get(n));
@@ -86,12 +90,24 @@ test('검사 2 — 문서의 팔레트가 CSS와 한 글자도 다르지 않다'
   for (const legacy of LEGACY) {
     assert.ok(!values.includes(legacy), `레거시 색 ${legacy}가 팔레트에 들어왔다`);
   }
+
+  // 문서의 표에도 같은 hex가 여러 벌 적혀 있고, 위 비교는 코드 블록만 본다. 표가 조용히
+  // 거짓말하지 않도록 문서에 나오는 6자리 hex가 전부 팔레트나 레거시 중 하나임을 확인한다.
+  // 8자리 예시(#4ade8014)는 여섯 자리 뒤에 단어 경계가 없어 이 정규식에 걸리지 않는다.
+  const known = new Set([...TOKENS.map((n) => css.get(n)), ...LEGACY]);
+  for (const m of DOC.matchAll(/#[0-9a-f]{6}\b/g)) {
+    assert.ok(known.has(m[0]), `문서에 팔레트도 레거시도 아닌 색이 있다: ${m[0]}`);
+  }
 });
 
 // 규칙을 문자열로 대조한다. 공백을 지워 비교하므로 줄바꿈·들여쓰기가 달라도 통과하고,
 // 「어느 hex가 어느 토큰으로 가는가」는 정확히 붙잡는다.
 const squash = (text) => text.replace(/\s+/g, '');
 
+// 이 검사가 증명하는 것은 규칙 텍스트가 있다는 것뿐이다. 캐스케이드가 실제로 그 색을
+// 전달하는지는 증명하지 않는다 — 같은 특이도의 규칙을 뒤에 더하거나 이 블록을 @media로
+// 감싸면 검사는 초록인 채로 매핑이 죽는다. 거기까지 잡으려면 캐스케이드를 흉내내야 하므로
+// 여기서 멈추고 한계를 적어 둔다.
 test('검사 4 — 팔레트 값마다 fill·stroke 매핑 규칙이 있다', () => {
   const flat = squash(CSS);
   for (const name of TOKENS) {
@@ -110,14 +126,14 @@ function steppedSvgs(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) out.push(...steppedSvgs(full));
-    else if (entry.name.endsWith('-steps.svg')) out.push(full);
+    else if (entry.name.toLowerCase().endsWith('-steps.svg')) out.push(full);
   }
   return out;
 }
 
 test('검사 3 — 단계 도식은 팔레트 색만, 소문자로만 쓴다', () => {
   const palette = new Set(TOKENS.map((n) => css.get(n)));
-  const files = steppedSvgs('public/images');
+  const files = steppedSvgs('public');
   assert.ok(files.length > 0, '검사할 단계 도식이 없으면 이 검사는 아무것도 지키지 않는다');
 
   for (const file of files) {
