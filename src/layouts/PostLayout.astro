@@ -310,7 +310,9 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
   function closeLightbox() {
     lightbox.classList.remove('open');
     if (zoomAbort) { zoomAbort.abort(); zoomAbort = null; }
-    content.classList.remove('zoom', 'grabbing');
+    // svg-steps/is-live는 단계 도식을 열 때만 붙는다(아래) — 다음에 일반 이미지를
+    // 열 때로 새어 나가지 않게 여기서 함께 벗긴다.
+    content.classList.remove('zoom', 'grabbing', 'svg-steps', 'is-live');
     content.innerHTML = '';
     if (lastFocused) {
       lastFocused.focus();
@@ -359,7 +361,9 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
       const r = stage.getBoundingClientRect(); return { x: clientX - r.left, y: clientY - r.top };
     };
 
-    if (image.complete) fit(); else image.addEventListener('load', fit, { signal });
+    // 인라인 <svg> 클론에는 'complete'가 없다 — 이미 파싱되어 DOM에 붙은 노드라 로드를
+    // 기다릴 이유가 없으므로, 그 경우 바로 맞춘다. img일 때는 기존 동작 그대로다.
+    if (!('complete' in image) || image.complete) fit(); else image.addEventListener('load', fit, { signal });
     window.addEventListener('resize', fit, { signal });
 
     stage.addEventListener('wheel', (e) => {
@@ -417,19 +421,30 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
     return ac;
   }
 
-  document.querySelectorAll('.prose img').forEach((el) => {
-    const img = el as HTMLImageElement;
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
+  // 라이트박스를 여는 동작 하나를 두 대상에 재사용한다: .prose img(마크다운 이미지,
+  // src로 svg 여부를 가린다)와 .svg-steps svg(인라인된 단계 도식, 이미 svg임이 확정돼
+  // 있다). 여는 방식이 img.src를 fetch하는 게 아니라 엘리먼트 자체를 cloneNode(true)
+  // 하는 것이므로, <svg>에도 그대로 통한다 — 현재 단계의 is-hidden 클래스까지 클론에
+  // 그대로 남는다.
+  function bindLightbox(el: Element, forceSvg: boolean) {
+    (el as HTMLElement).style.cursor = 'zoom-in';
+    el.addEventListener('click', () => {
       lastFocused = document.activeElement as HTMLElement;
-      const clone = img.cloneNode(true) as HTMLImageElement;
+      const clone = el.cloneNode(true) as HTMLImageElement;
       clone.removeAttribute('width');
       clone.removeAttribute('height');
-      const origRect = img.getBoundingClientRect();
+      const origRect = el.getBoundingClientRect();
       content.innerHTML = '';
       content.appendChild(clone);
       lightbox.classList.add('open');
-      if (isSvgSrc(clone.currentSrc || clone.src)) {
+      if (forceSvg || isSvgSrc(clone.currentSrc || clone.src || '')) {
+        if (forceSvg) {
+          // 클론이 들고 온 is-hidden 클래스가 실제로 숨겨지려면, 그걸 숨기는 CSS
+          // 규칙(.svg-steps.is-live svg g[data-step].is-hidden)의 조상 조건이 이
+          // 컨테이너에도 걸려 있어야 한다. 본문의 figure 밖으로 나온 클론이므로 여기서
+          // 직접 켠다 — 닫을 때 위 closeLightbox가 벗긴다.
+          content.classList.add('svg-steps', 'is-live');
+        }
         content.classList.add('zoom');
         zoomAbort = setupZoom(content, clone, origRect.width, origRect.height);
       } else {
@@ -438,7 +453,19 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
       }
       closeBtn.focus();
     });
-  });
+  }
+
+  document.querySelectorAll('.prose img').forEach((el) => bindLightbox(el, false));
+
+  // 단계 도식은 <img>가 아니라 인라인 <svg>라 위 선택자에 걸리지 않는다. 별도 바인딩으로
+  // 덧붙인다 — 여기서 실패해도 위 .prose img 바인딩은 이미 끝나 있어 영향이 없다.
+  try {
+    // 직접 자식만 선택한다. 이후 컨트롤 요소가 figure 안에 들어가 SVG 아이콘을 가질 수
+    // 있는데, 자손 선택자로는 그 아이콘까지 라이트박스에 바인드되어 버튼 클릭이 줌을 연다.
+    document.querySelectorAll('.svg-steps > svg').forEach((el) => bindLightbox(el, true));
+  } catch {
+    // 무시: 단계 도식의 확대만 빠지고, 나머지 이미지의 라이트박스는 정상 동작한다
+  }
 
   // ── TOC 활성 링크 ──
   const headings = document.querySelectorAll('article h2[id]');
@@ -530,4 +557,77 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+
+  // ── SVG 단계 재생기 ──
+  // .svg-steps는 별도 wrapper가 아니라, rehypeSvgSteps가 클래스를 얹은 figure 자신이다.
+  // 이 클래스가 없는 글에서는 querySelectorAll 결과가 비어 아무 일도 하지 않는다.
+  document.querySelectorAll('.svg-steps').forEach((fig) => {
+    // 빌드 플러그인이 단계 그룹을 svg의 직접 자식으로만 만들므로, 중첩된 g[data-step]은
+    // 잘못된 입력이다. 선택자도 그 불변식을 따르는 게 맞다.
+    const steps = [...fig.querySelectorAll('svg > g[data-step]')].sort(
+      (a, b) => Number(a.dataset.step) - Number(b.dataset.step)
+    );
+    if (steps.length < 2) return; // 단계가 1개 이하면 컨트롤을 만들 이유가 없다
+
+    const controls = document.createElement('div');
+    controls.className = 'step-controls';
+    const prev = document.createElement('button');
+    const next = document.createElement('button');
+    prev.type = next.type = 'button';
+    prev.textContent = '◀ 이전';
+    next.textContent = '다음 ▶';
+    prev.setAttribute('aria-label', '이전 단계');
+    next.setAttribute('aria-label', '다음 단계');
+    const counter = document.createElement('span');
+    counter.className = 'step-counter';
+    const label = document.createElement('span');
+    label.className = 'step-label';
+    // counter와 label을 하나의 라이브 리전으로 묶는다 — 따로면 위치(counter)는
+    // 스크린리더에 전혀 알려지지 않고 설명(label)만 알려진다
+    const status = document.createElement('span');
+    status.className = 'step-status';
+    status.setAttribute('aria-live', 'polite');
+    // counter와 label을 별도로 알리면 두 번 바뀐 알림으로 나뉜다. 한 발화로 묶는다.
+    status.setAttribute('aria-atomic', 'true');
+    status.append(counter, label);
+    controls.append(prev, status, next);
+    // figcaption은 HTML 콘텐츠 모델상 figure의 첫 또는 마지막 자식이어야 한다.
+    // 컨트롤을 append하면 svg, figcaption, div 순으로 figcaption이 중간 자식이 된다.
+    // figcaption 앞에 넣어 컨트롤이 도식 바로 아래, figcaption보다 앞에 오게 한다.
+    // figcaption이 없으면 insertBefore(node, null)은 appendChild와 같이 동작해 안전하다.
+    fig.insertBefore(controls, fig.querySelector('figcaption'));
+
+    let at = 1;
+    const render = () => {
+      // 숨김은 값(data-step) 대신 정렬된 배열의 인덱스로 판단한다. steps[at - 1]로
+      // 라벨을 읽는 아래 줄과 같은 기준을 써야, data-step이 1..N 연속·중복 없음을
+      // 요구하지 않는다 — 단계를 지우거나 번호를 건너뛰어도 "몇 번째"만 맞으면 된다.
+      steps.forEach((g, i) => {
+        g.classList.toggle('is-hidden', i + 1 > at);
+      });
+      counter.textContent = `${at}/${steps.length}`;
+      label.textContent = steps[at - 1].dataset.stepLabel || '';
+      // disabled 대신 aria-disabled만 표시한다: 끝 단계에서 disabled를 주면 포커스를
+      // 쥔 버튼이 브라우저의 포커스 보정 규칙으로 body로 쫓겨나 화살표 키가 죽는다.
+      // 버튼은 계속 포커스 가능한 상태로 두고, 실제 이동 차단은 아래 클릭/키다운
+      // 핸들러의 범위 검사(at > 1 / at < steps.length)에 맡긴다.
+      prev.setAttribute('aria-disabled', String(at === 1));
+      next.setAttribute('aria-disabled', String(at === steps.length));
+    };
+
+    prev.addEventListener('click', () => { if (at > 1) { at -= 1; render(); } });
+    next.addEventListener('click', () => { if (at < steps.length) { at += 1; render(); } });
+    controls.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && at > 1) { at -= 1; render(); }
+      else if (e.key === 'ArrowRight' && at < steps.length) { at += 1; render(); }
+      else return;
+      e.preventDefault();
+    });
+
+    render();
+    // 이 클래스가 붙기 전까지는 CSS가 어떤 단계도 숨기지 않는다(JS 실패 시 전체 도식 유지).
+    // render() 다음에 붙여서, render() 안에서 예외가 나도 레이어는 숨겨지고 컨트롤만
+    // 죽어 있는 상태(is-live는 이미 켜졌는데 render가 못 끝난 상태)를 만들지 않는다.
+    fig.classList.add('is-live');
+  });
 </script>

@@ -538,6 +538,49 @@ article .prose h2 {
   border-radius: 10px;
   padding: 1rem 1rem 0.5rem;
 }
+
+/* SVG 단계 재생기 — .svg-steps는 wrapper가 아니라 figure 자신이다 */
+/* 인라인된 svg는 .prose img의 max-width 규칙이 적용되지 않고(태그가 다르다), 기본이
+   inline이라 baseline 하강폭만큼 밑에 틈이 남는다. img와 같은 크기 규약을 명시한다. */
+.svg-steps svg { display: block; width: 100%; height: auto; }
+
+.svg-steps .step-controls {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0.5rem;
+  font-size: 0.875rem;
+  /* figure는 --term-bg 어두운 판이다. 본문 글자색(--ink)을 물려받으면 판에 묻히므로
+     이 표면의 짝인 --term-fg를 쓴다(506~507행과 같은 규약). */
+  color: var(--term-fg);
+}
+.svg-steps.is-live .step-controls { display: flex; }
+
+.svg-steps .step-controls button {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--term-dim);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--term-fg);
+  cursor: pointer;
+  font: inherit;
+}
+/* disabled 대신 aria-disabled를 쓴다 — 포커스를 쥔 채로 disabled가 되면 브라우저가
+   포커스를 body로 쫓아내(HTML 포커스 보정 규칙) 화살표 키 탐색이 죽기 때문이다 */
+.svg-steps .step-controls button[aria-disabled="true"] { opacity: 0.4; cursor: default; }
+.svg-steps .step-status { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
+.svg-steps .step-counter { font-variant-numeric: tabular-nums; }
+.svg-steps .step-label { flex: 1; color: var(--term-dim); }
+
+/* JS가 붙은 뒤에만 단계를 숨긴다 — .is-live가 없으면(JS 실패) 전 layer가 보인다 */
+.svg-steps.is-live svg g[data-step].is-hidden { visibility: hidden; }
+
+@media print {
+  .svg-steps { break-inside: avoid; }
+  .svg-steps .step-controls { display: none !important; }
+  .svg-steps.is-live svg g[data-step].is-hidden { visibility: visible; }
+}
+
 .prose img { max-width: 100%; display: block; margin: 0 auto; border-radius: 4px; cursor: zoom-in; }
 .prose figcaption {
   font-family: var(--font-mono);
@@ -617,7 +660,7 @@ article .prose h2 {
   cursor: grab;
 }
 #image-lightbox .lightbox-content.zoom.grabbing { cursor: grabbing; }
-#image-lightbox .lightbox-content.zoom img {
+#image-lightbox .lightbox-content.zoom :is(img, svg) {
   position: absolute;
   top: 0;
   left: 0;

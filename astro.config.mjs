@@ -3,6 +3,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import katex from 'katex';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
+import { rehypeSvgSteps } from './src/plugins/rehype-svg-steps.mjs';
 
 const BLOG_POST_PATH = /^\/blog\/[^/]+\/?$/;
 
@@ -121,7 +122,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption],
+    rehypePlugins: [rehypeCalloutMath, rehypeKatex, rehypeLazyImages, rehypeFigureCaption, rehypeSvgSteps],
     shikiConfig: {
       themes: {
         light: 'github-light',

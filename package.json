@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-dist-bodies.mjs",
     "preview": "astro preview",
-    "review:gate": "python .claude/review_post.py --gate"
+    "review:gate": "python .claude/review_post.py --gate",
+    "test:js": "node --test src/plugins/rehype-svg-steps.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
