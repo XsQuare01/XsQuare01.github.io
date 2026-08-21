@@ -20,7 +20,10 @@ const LEGACY = [
   '#4a5568', '#2d3748', '#1f2937', '#cbd5e0',
 ];
 
-const CSS = readFileSync('src/styles/global.css', 'utf8');
+// CSS 주석을 먼저 지운다. 지우지 않으면 /* ... */로 감싸 죽여 둔 선언과 규칙이
+// 살아 있는 것으로 읽힌다 — 「있다」와 「산다」가 갈리는 자리다. 같은 이유로
+// src/plugins/rehype-svg-steps.mjs도 단계를 세기 전에 SVG 주석을 먼저 지운다.
+const CSS = readFileSync('src/styles/global.css', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
 const DOC = readFileSync('docs/design/DIAGRAM_PALETTE.md', 'utf8');
 
 // `--name: value;` 를 모두 뽑는다. 값이 `var(--other)`면 한 단계 따라간다.
