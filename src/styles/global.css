@@ -35,10 +35,38 @@
   --warn-dim: rgba(156, 68, 54, 0.07);
   --note-dim: rgba(34, 32, 27, 0.04);
 
-  --term-bg: #15171c;
+  /* 도식 181개가 자기 배경으로 #0f1117을 칠한다. 판이 #15171c였을 때는 도판마다
+     옅은 안쪽 패널이 한 겹 더 보였다(대비 1.1:1). 도식 쪽을 밝히면 그 안의 색이
+     모두 이 값 위에서 골라진 것이라 181개의 내부 대비가 흔들리므로, 판을 도식에
+     맞춘다. 영향받는 곳은 .prose pre · .astro-code · .post-figure 셋이다. */
+  --term-bg: #0f1117;
   --term-fg: #cdd3cc;
   --term-dim: #6a7069;
   --term-green: #6fc07a;
+
+  /* 도판 팔레트 — 크롬에서 색은 장식이라 하나면 되지만, 도판 안에서 색은 데이터다.
+     채택·거부·현재를 괘선이나 번호로 대신할 수 없다. 대신 역할 이름이 없는 색은
+     쓰지 않고 계열을 다섯에서 멈춘다. 값·쓰임·대비의 정본은
+     docs/design/DIAGRAM_PALETTE.md이고, test/palette.test.mjs가 둘을 대조한다.
+     배경은 값을 베끼지 않고 판을 그대로 가리켜, 판과 도식의 검정이 어긋날 수 없게 한다. */
+  --dg-bg: var(--term-bg);
+  --dg-fg: #e2e8f0;
+  --dg-fg-soft: #cbd5e1;
+  --dg-fg-muted: #94a3b8;
+  --dg-line: #64748b;
+  --dg-line-dim: #475569;
+  --dg-surface: #1e293b;
+  --dg-green: #4ade80;
+  --dg-green-soft: #6ee7b7;
+  --dg-green-fill: #14352b;
+  --dg-blue: #3b82f6;
+  --dg-blue-soft: #93c5fd;
+  --dg-blue-fill: #1e3a5f;
+  --dg-red: #f87171;
+  --dg-red-fill: #7c2d12;
+  --dg-amber: #fbbf24;
+  --dg-amber-fill: #3a2c0f;
+  --dg-violet: #a78bfa;
 
   /* 하위 호환 별칭: 기존 셀렉터가 참조하던 이름 → 새 팔레트로 매핑 */
   --bg: var(--paper);
