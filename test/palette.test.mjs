@@ -60,6 +60,16 @@ test('검사 1 — global.css가 팔레트 18색을 정의한다', () => {
   assert.equal(new Set(values).size, TOKENS.length, '팔레트에 같은 값을 쓰는 토큰이 둘 있다');
 });
 
+test('검사 1-b — theme-color 메타가 판과 같은 색을 쓴다', () => {
+  // theme-color는 --term-bg와 같은 값을 손으로 복제한다(HTML 메타는 CSS 변수를 읽지
+  // 못한다). #41에서 둘을 함께 바꿨고, 그때부터 짝을 맞추는 일이 사람 기억에 맡겨져
+  // 있었다. 주석이 아니라 검사로 붙잡는다.
+  const layout = readFileSync('src/layouts/BaseLayout.astro', 'utf8');
+  const meta = layout.match(/name="theme-color" content="(#[0-9a-f]{6})"/);
+  assert.ok(meta, 'BaseLayout.astro에 theme-color 메타가 있어야 한다');
+  assert.equal(meta[1], css.get('term-bg'), 'theme-color가 --term-bg와 다르다');
+});
+
 test('검사 2 — 문서의 팔레트가 CSS와 한 글자도 다르지 않다', () => {
   const docTokens = [...doc.keys()].filter((k) => k.startsWith('dg-')).sort();
   assert.deepEqual(docTokens, [...TOKENS].sort(), '문서 블록의 토큰 목록이 팔레트와 다르다');
