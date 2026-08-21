@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 
 // 팔레트의 이름 목록을 이 파일에 손으로 적는다. CSS에서 읽어 오면 「CSS에 있는 것이
 // 팔레트다」가 되어 검사가 아무것도 막지 못한다. 토큰을 더하거나 빼려면 이 배열을
@@ -98,6 +99,37 @@ test('검사 4 — 팔레트 값마다 fill·stroke 매핑 규칙이 있다', ()
     for (const prop of ['fill', 'stroke']) {
       const rule = squash(`.svg-steps svg [${prop}="${hex}"] { ${prop}: var(--${name}); }`);
       assert.ok(flat.includes(rule), `${prop} 매핑이 없다: ${hex} → --${name}`);
+    }
+  }
+});
+
+// 단계 도식만 검사한다. 기존 도식 180개를 대상에 넣으면 레거시 116색을 허용
+// 목록에 적어야 하고, 그 목록이 검사를 스스로 무력화한다. 새 세대 파일만 조인다.
+function steppedSvgs(dir) {
+  const out = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...steppedSvgs(full));
+    else if (entry.name.endsWith('-steps.svg')) out.push(full);
+  }
+  return out;
+}
+
+test('검사 3 — 단계 도식은 팔레트 색만, 소문자로만 쓴다', () => {
+  const palette = new Set(TOKENS.map((n) => css.get(n)));
+  const files = steppedSvgs('public/images');
+  assert.ok(files.length > 0, '검사할 단계 도식이 없으면 이 검사는 아무것도 지키지 않는다');
+
+  for (const file of files) {
+    const text = readFileSync(file, 'utf8');
+    for (const m of text.matchAll(/#[0-9a-fA-F]{3,8}\b/g)) {
+      const value = m[0];
+      assert.equal(
+        value,
+        value.toLowerCase(),
+        `${file}: hex를 소문자로 쓴다 (${value}) — 매핑 선택자가 대소문자를 구별한다`,
+      );
+      assert.ok(palette.has(value), `${file}: 팔레트 밖의 색 ${value}`);
     }
   }
 });
