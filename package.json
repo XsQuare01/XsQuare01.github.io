@@ -7,7 +7,7 @@
     "build": "astro build && node scripts/check-dist-bodies.mjs",
     "preview": "astro preview",
     "review:gate": "python .claude/review_post.py --gate",
-    "test:js": "node --test src/plugins/rehype-svg-steps.test.mjs"
+    "test:js": "node --test src/plugins/rehype-svg-steps.test.mjs test/palette.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",

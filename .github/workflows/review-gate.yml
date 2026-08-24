@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       # 대상별 최신 리포트만 판정한다. exit 1 = 🔴 남음, exit 2 = 스키마·정본화·coverage 실패.
       - name: 리뷰 품질 게이트
@@ -28,3 +31,9 @@ jobs:
       - name: 리뷰 도구 테스트
         working-directory: .claude
         run: python -m unittest discover -p "test_*.py" -v
+
+      # 마크다운 파이프라인과 도판 팔레트의 계약을 지키는 테스트. node 내장 러너만
+      # 쓰고 외부 의존이 없으므로 npm install이 필요하지 않다. 이 단계가 없으면
+      # 플러그인과 팔레트 검사가 초록인 채로 깨질 수 있다.
+      - name: 빌드 도구 테스트
+        run: npm run test:js
