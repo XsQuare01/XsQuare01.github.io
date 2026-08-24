@@ -59,7 +59,11 @@ const currentPath = Astro.url.pathname;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f1117" />
+  {/* 브라우저 크롬은 페이지 표면을 따른다. 이 사이트는 밝은 종이 한 벌이므로 --paper와
+      같은 값이다. 예전에는 코드·도판 표면인 --term-bg를 따라 어두웠는데, 2026-07-17
+      디자인 리뷰가 그것을 「종이 인터페이스와 다른 어두운 값」으로 지적했다.
+      값은 손으로 복제하므로 test/palette.test.mjs가 --paper와 대조한다. */}
+  <meta name="theme-color" content="#faf8f3" />
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
   {/* 한국어 단일 언어 사이트라 대체 언어판이 없다. 자기참조 + x-default만 선언한다. */}

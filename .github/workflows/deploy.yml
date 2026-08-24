@@ -30,6 +30,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      # Review Gate 워크플로도 이 테스트를 돌리지만, 그쪽은 별개 워크플로라 실패해도
+      # 배포를 막지 못한다. 배포 전 강제는 이 job 안에 있어야 성립한다. 설치보다 앞에
+      # 두어 빨리 실패하게 한다 — 테스트는 node 내장 모듈만 쓰므로 의존이 없다.
+      - name: 빌드 도구 테스트
+        run: npm run test:js
+
       - run: npm install
       - run: node scripts/fetch-ga-stats.mjs
         env:

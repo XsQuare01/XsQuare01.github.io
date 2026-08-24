@@ -68,14 +68,16 @@ test('검사 1 — global.css가 팔레트 18색을 정의한다', () => {
   assert.equal(new Set(values).size, TOKENS.length, '팔레트에 같은 값을 쓰는 토큰이 둘 있다');
 });
 
-test('검사 1-b — theme-color 메타가 판과 같은 색을 쓴다', () => {
-  // theme-color는 --term-bg와 같은 값을 손으로 복제한다(HTML 메타는 CSS 변수를 읽지
-  // 못한다). #41에서 둘을 함께 바꿨고, 그때부터 짝을 맞추는 일이 사람 기억에 맡겨져
-  // 있었다. 주석이 아니라 검사로 붙잡는다.
+test('검사 1-b — theme-color 메타가 종이 색과 같다', () => {
+  // theme-color는 브라우저 크롬 색이므로 페이지 표면을 따라야 한다. 이 사이트는 밝은
+  // 종이 한 벌이니 --paper다. 처음에는 --term-bg에 묶었는데, 그것은 #41에서 두 값이
+  // 함께 바뀐 이력을 의미적 소유로 잘못 읽은 것이었다 — 2026-07-17 디자인 리뷰가 이미
+  // 어두운 theme-color를 결함으로 적어 두었으므로, 그 값에 묶는 검사는 부채를 불변식으로
+  // 굳히는 일이 된다. HTML 메타는 CSS 변수를 읽지 못해 값을 손으로 복제하므로 검사로 묶는다.
   const layout = readFileSync('src/layouts/BaseLayout.astro', 'utf8');
   const meta = layout.match(/name="theme-color" content="(#[0-9a-f]{6})"/);
   assert.ok(meta, 'BaseLayout.astro에 theme-color 메타가 있어야 한다');
-  assert.equal(meta[1], css.get('term-bg'), 'theme-color가 --term-bg와 다르다');
+  assert.equal(meta[1], css.get('paper'), 'theme-color가 --paper와 다르다');
 });
 
 test('검사 2 — 문서의 팔레트가 CSS와 한 글자도 다르지 않다', () => {
