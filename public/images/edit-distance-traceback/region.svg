@@ -1,0 +1,138 @@
+<svg viewBox="0 0 680 460" width="1020" height="690" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="edt-r-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+    <marker id="edt-r-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="edt-r-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/>
+    </marker>
+    <marker id="edt-r-soft" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6ee7b7"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="460" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">최적 경로가 여럿이면 결과는 영역이 된다</text>
+  <text x="340" y="53" text-anchor="middle" fill="#64748b" font-size="11">세 경로가 함께 지나는 구간은 옅은 초록으로 한 번만 그렸다</text>
+
+  <!-- 열 머리 -->
+  <g font-size="12" text-anchor="middle" fill="#94a3b8">
+    <text x="197" y="104">–</text>
+    <text x="251" y="104">a</text>
+    <text x="305" y="104">b</text>
+    <text x="359" y="104">c</text>
+    <text x="413" y="104">b</text>
+    <text x="467" y="104">a</text>
+  </g>
+  <!-- 행 머리 -->
+  <g font-size="12" text-anchor="end" fill="#94a3b8">
+    <text x="158" y="133">–</text>
+    <text x="158" y="167">a</text>
+    <text x="158" y="201">b</text>
+    <text x="158" y="235">c</text>
+    <text x="158" y="269">a</text>
+    <text x="158" y="303">b</text>
+  </g>
+
+  <!-- 격자 -->
+  <g stroke="#475569" stroke-width="0.8">
+    <line x1="170" y1="112" x2="494" y2="112"/>
+    <line x1="170" y1="146" x2="494" y2="146"/>
+    <line x1="170" y1="180" x2="494" y2="180"/>
+    <line x1="170" y1="214" x2="494" y2="214"/>
+    <line x1="170" y1="248" x2="494" y2="248"/>
+    <line x1="170" y1="282" x2="494" y2="282"/>
+    <line x1="170" y1="316" x2="494" y2="316"/>
+    <line x1="170" y1="112" x2="170" y2="316"/>
+    <line x1="224" y1="112" x2="224" y2="316"/>
+    <line x1="278" y1="112" x2="278" y2="316"/>
+    <line x1="332" y1="112" x2="332" y2="316"/>
+    <line x1="386" y1="112" x2="386" y2="316"/>
+    <line x1="440" y1="112" x2="440" y2="316"/>
+    <line x1="494" y1="112" x2="494" y2="316"/>
+  </g>
+
+  <!-- 영역: 어떤 최적 경로가 지나는 칸 -->
+  <g fill="none" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="5 3">
+    <rect x="170" y="112" width="54" height="34"/>
+    <rect x="224" y="146" width="54" height="34"/>
+    <rect x="278" y="180" width="54" height="34"/>
+    <rect x="332" y="214" width="54" height="34"/>
+    <rect x="386" y="214" width="54" height="34"/>
+    <rect x="332" y="248" width="54" height="34"/>
+    <rect x="386" y="248" width="54" height="34"/>
+    <rect x="440" y="248" width="54" height="34"/>
+    <rect x="386" y="282" width="54" height="34"/>
+    <rect x="440" y="282" width="54" height="34"/>
+  </g>
+
+  <!-- 기저 값 -->
+  <g font-size="13" text-anchor="middle" fill="#94a3b8">
+    <text x="197" y="133">0</text>
+    <text x="251" y="133">1</text>
+    <text x="305" y="133">2</text>
+    <text x="359" y="133">3</text>
+    <text x="413" y="133">4</text>
+    <text x="467" y="133">5</text>
+    <text x="197" y="167">1</text>
+    <text x="197" y="201">2</text>
+    <text x="197" y="235">3</text>
+    <text x="197" y="269">4</text>
+    <text x="197" y="303">5</text>
+  </g>
+
+  <!-- 내부 값 -->
+  <g font-size="13" text-anchor="middle" fill="#cbd5e1">
+    <text x="251" y="167">0</text><text x="305" y="167">1</text><text x="359" y="167">2</text><text x="413" y="167">3</text><text x="467" y="167">4</text>
+    <text x="251" y="201">1</text><text x="305" y="201">0</text><text x="359" y="201">1</text><text x="413" y="201">2</text><text x="467" y="201">3</text>
+    <text x="251" y="235">2</text><text x="305" y="235">1</text><text x="359" y="235">0</text><text x="413" y="235">1</text><text x="467" y="235">2</text>
+    <text x="251" y="269">3</text><text x="305" y="269">2</text><text x="359" y="269">1</text><text x="413" y="269">1</text><text x="467" y="269">1</text>
+    <text x="251" y="303">4</text><text x="305" y="303">3</text><text x="359" y="303">2</text><text x="413" y="303">1</text><text x="467" y="303">2</text>
+  </g>
+
+  <!-- 세 경로가 공유하는 구간 -->
+  <g stroke="#6ee7b7" stroke-width="1.8" fill="none" marker-end="url(#edt-r-soft)">
+    <path d="M 344,222 L 320,206"/>
+    <path d="M 290,188 L 266,172"/>
+    <path d="M 236,154 L 212,138"/>
+  </g>
+
+  <!-- 경로 1: 바꾸기 두 번 -->
+  <g stroke="#4ade80" stroke-width="1.8" fill="none" marker-end="url(#edt-r-green)">
+    <path d="M 456,294 L 424,270"/>
+    <path d="M 398,256 L 374,240"/>
+  </g>
+
+  <!-- 경로 2: b 넣고 b 지우기 -->
+  <g stroke="#fbbf24" stroke-width="1.8" fill="none" marker-end="url(#edt-r-amber)">
+    <path d="M 475,292 L 475,272"/>
+    <path d="M 452,258 L 428,238"/>
+    <path d="M 398,224 L 376,224"/>
+  </g>
+
+  <!-- 경로 3: a 지우고 a 넣기 -->
+  <g stroke="#a78bfa" stroke-width="1.8" fill="none" marker-end="url(#edt-r-violet)">
+    <path d="M 450,307 L 428,307"/>
+    <path d="M 398,292 L 374,272"/>
+    <path d="M 347,258 L 347,238"/>
+  </g>
+
+  <!-- 범례 -->
+  <rect x="120" y="344" width="12" height="4" fill="#4ade80"/>
+  <text x="142" y="352" fill="#cbd5e1" font-size="11.5">경로 1 · 바꾸기 두 번</text>
+
+  <rect x="120" y="366" width="12" height="4" fill="#fbbf24"/>
+  <text x="142" y="374" fill="#cbd5e1" font-size="11.5">경로 2 · b 를 넣고 b 를 지운다</text>
+
+  <rect x="120" y="388" width="12" height="4" fill="#a78bfa"/>
+  <text x="142" y="396" fill="#cbd5e1" font-size="11.5">경로 3 · a 를 지우고 a 를 넣는다</text>
+
+  <rect x="120" y="408" width="12" height="12" fill="none" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <text x="142" y="418" fill="#cbd5e1" font-size="11.5">파선 칸 · 어떤 최적 경로가 지나는 칸, 곧 영역</text>
+
+  <text x="340" y="444" text-anchor="middle" fill="#94a3b8" font-size="11">영역 안을 아무렇게나 걸어도 최적은 아니다. (3, 4)와 (4, 3)을 함께 쓰는 경로는 없다</text>
+</svg>

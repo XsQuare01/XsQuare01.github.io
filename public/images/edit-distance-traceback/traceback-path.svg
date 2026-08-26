@@ -1,0 +1,111 @@
+<svg viewBox="0 0 680 400" width="1020" height="600" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="edt-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+    <marker id="edt-arrow-dim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="400" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">표를 거꾸로 읽으면 연산이 나온다</text>
+  <text x="340" y="53" text-anchor="middle" fill="#64748b" font-size="11">칸마다 어느 이웃에서 왔는지 되묻는다</text>
+
+  <!-- 열 머리 -->
+  <g font-size="12" text-anchor="middle" fill="#94a3b8">
+    <text x="197" y="104">–</text>
+    <text x="251" y="104">a</text>
+    <text x="305" y="104">b</text>
+    <text x="359" y="104">c</text>
+    <text x="413" y="104">b</text>
+    <text x="467" y="104">a</text>
+  </g>
+  <!-- 행 머리 -->
+  <g font-size="12" text-anchor="end" fill="#94a3b8">
+    <text x="158" y="133">–</text>
+    <text x="158" y="167">a</text>
+    <text x="158" y="201">b</text>
+    <text x="158" y="235">c</text>
+    <text x="158" y="269">a</text>
+    <text x="158" y="303">b</text>
+  </g>
+
+  <!-- 격자 -->
+  <g stroke="#475569" stroke-width="0.8">
+    <line x1="170" y1="112" x2="494" y2="112"/>
+    <line x1="170" y1="146" x2="494" y2="146"/>
+    <line x1="170" y1="180" x2="494" y2="180"/>
+    <line x1="170" y1="214" x2="494" y2="214"/>
+    <line x1="170" y1="248" x2="494" y2="248"/>
+    <line x1="170" y1="282" x2="494" y2="282"/>
+    <line x1="170" y1="316" x2="494" y2="316"/>
+    <line x1="170" y1="112" x2="170" y2="316"/>
+    <line x1="224" y1="112" x2="224" y2="316"/>
+    <line x1="278" y1="112" x2="278" y2="316"/>
+    <line x1="332" y1="112" x2="332" y2="316"/>
+    <line x1="386" y1="112" x2="386" y2="316"/>
+    <line x1="440" y1="112" x2="440" y2="316"/>
+    <line x1="494" y1="112" x2="494" y2="316"/>
+  </g>
+
+  <!-- 되짚은 경로가 지나는 칸 -->
+  <g fill="none" stroke="#4ade80" stroke-width="1.8">
+    <rect x="170" y="112" width="54" height="34"/>
+    <rect x="224" y="146" width="54" height="34"/>
+    <rect x="278" y="180" width="54" height="34"/>
+    <rect x="332" y="214" width="54" height="34"/>
+    <rect x="386" y="248" width="54" height="34"/>
+    <rect x="440" y="282" width="54" height="34"/>
+  </g>
+
+  <!-- 기저 값 -->
+  <g font-size="13" text-anchor="middle" fill="#94a3b8">
+    <text x="197" y="133">0</text>
+    <text x="251" y="133">1</text>
+    <text x="305" y="133">2</text>
+    <text x="359" y="133">3</text>
+    <text x="413" y="133">4</text>
+    <text x="467" y="133">5</text>
+    <text x="197" y="167">1</text>
+    <text x="197" y="201">2</text>
+    <text x="197" y="235">3</text>
+    <text x="197" y="269">4</text>
+    <text x="197" y="303">5</text>
+  </g>
+
+  <!-- 내부 값 -->
+  <g font-size="13" text-anchor="middle" fill="#cbd5e1">
+    <text x="251" y="167">0</text><text x="305" y="167">1</text><text x="359" y="167">2</text><text x="413" y="167">3</text><text x="467" y="167">4</text>
+    <text x="251" y="201">1</text><text x="305" y="201">0</text><text x="359" y="201">1</text><text x="413" y="201">2</text><text x="467" y="201">3</text>
+    <text x="251" y="235">2</text><text x="305" y="235">1</text><text x="359" y="235">0</text><text x="413" y="235">1</text><text x="467" y="235">2</text>
+    <text x="251" y="269">3</text><text x="305" y="269">2</text><text x="359" y="269">1</text><text x="413" y="269">1</text><text x="467" y="269">1</text>
+    <text x="251" y="303">4</text><text x="305" y="303">3</text><text x="359" y="303">2</text><text x="413" y="303">1</text><text x="467" y="303">2</text>
+  </g>
+
+  <!-- 되짚기 화살표 (칸 경계를 가로지른다) -->
+  <g stroke="#4ade80" stroke-width="1.8" fill="none" marker-end="url(#edt-arrow)">
+    <path d="M 456,294 L 424,270"/>
+    <path d="M 398,256 L 374,240"/>
+    <path d="M 344,222 L 320,206"/>
+    <path d="M 290,188 L 266,172"/>
+    <path d="M 236,154 L 212,138"/>
+  </g>
+
+  <!-- 고르지 않은 이웃 -->
+  <g stroke="#64748b" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#edt-arrow-dim)">
+    <path d="M 475,292 L 475,272"/>
+    <path d="M 450,307 L 428,307"/>
+  </g>
+
+  <!-- 연산 라벨 -->
+  <text x="506" y="303" fill="#fbbf24" font-size="11">바꾸기 b → a</text>
+  <text x="506" y="269" fill="#fbbf24" font-size="11">바꾸기 a → b</text>
+  <text x="506" y="235" fill="#94a3b8" font-size="11">맞추기 c</text>
+  <text x="506" y="201" fill="#94a3b8" font-size="11">맞추기 b</text>
+  <text x="506" y="167" fill="#94a3b8" font-size="11">맞추기 a</text>
+
+  <text x="340" y="352" text-anchor="middle" fill="#94a3b8" font-size="11">점선은 고르지 않은 이웃이다. (5, 5)에서는 세 이웃 모두 등호가 성립한다</text>
+  <text x="340" y="374" text-anchor="middle" fill="#64748b" font-size="10.5">S₁ = abcab (행) · S₂ = abcba (열) · 편집 거리 2</text>
+</svg>
