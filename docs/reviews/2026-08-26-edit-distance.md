@@ -152,7 +152,7 @@ summary: 🔴 0 · 🟡 4 · 🟢 8
 
 ### 전체 브랜치 리뷰 반영 (2026-08-26, 추가)
 
-아래는 위 rubric finding에서 이미 다룬 지적이 아니라, 별도로 진행한 전체 브랜치(whole-branch) 리뷰가 새로 낸 지적을 반영한 기록이다. Important 2건, Minor 6건.
+아래는 위 rubric finding에서 이미 다룬 지적이 아니라, 별도로 진행한 전체 브랜치(whole-branch) 리뷰가 새로 낸 지적을 반영한 기록이다. Important 3건, Minor 5건.
 
 - `src/content/posts/edit-distance.md:92` — 정렬(alignment)의 정의에 "각 문자열의 글자를 순서대로 하나씩 모두 쓰고, 위아래가 함께 비는 열은 두지 않는다"를 더했다. 정리 1의 증명이 기대는 정의가 원래 너무 얇았다(Important).
 - `src/content/posts/edit-distance.md:58` — 가중 편집 거리 정의를 "바꾸기의 비용을 글자 쌍마다"에서 "연산마다, 그리고 바꾸기라면 글자 쌍마다"로 넓혔다. 뒤에서 넣기·지우기 비용도 가중치로 다루는 서술과 정의 폭을 맞췄다(Minor).
