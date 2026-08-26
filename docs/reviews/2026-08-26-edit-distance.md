@@ -138,3 +138,14 @@ summary: 🔴 0 · 🟡 4 · 🟢 8
 - message: 문맥이 $O(NM)$ 을 겨눈 하한이라는 점은 앞 문장이 정해 주지만, 문장만 떼어 놓으면 입력을 읽는 비용에서 나오는 $\Omega(N+M)$ 같은 자명한 하한까지 없다는 말로 읽힌다. 절 전체는 조건부 하한과 조건을 좁힌 더 빠른 방법을 함께 적어 '무조건 불가'로 읽히지 않으므로 참고 사항이다.
 - recommendation: "무조건적인 이차 하한" 또는 "$O(NM)$ 에 맞는 무조건적 하한"으로 범위를 붙인다.
 - gate_effect: info
+
+## 후속 처리
+
+- 🟡 [L4] `public/images/edit-distance/recurrence.svg:13` — **반영 완료**. 도판 제목 "한 칸은 세 이웃만 보고, 다시 세 칸에 쓰인다"를 "한 칸은 세 이웃만 보고, 표 안쪽에서는 다시 세 칸에 쓰인다"로 고쳐, 세 번 재사용이 표 안쪽 칸에 한정된다는 조건을 본문(180행)을 만나기 전에도 제목에서부터 밝혔다.
+- 🟡 [L7] `src/content/posts/edit-distance.md:98` — **반영 완료**. "정렬의 비용은 열 비용의 합이고, 편집 거리는 비용이 가장 작은 정렬의 비용이다."를 양방향 논증으로 바꿨다. 연산의 열을 정렬로 옮기는 방향과 정렬을 연산의 열로 되짚는 방향을 각각 짚어, 최소 연산 수와 최소 정렬 비용이 같다는 결론을 정리 1의 증명이 기대는 전제로 명시했다.
+- 🟡 [L7] `src/content/posts/edit-distance.md:186` — **반영 완료**. "Backurs와 Indyk는 SETH가 참이라면…"에 "길이가 모두 $n$ 인 두 문자열에 대해"를 앞세워, 176행에서 고정한 $N$, $M$ 표기와 하한 진술의 단일 기호 $n$ 이 같은 길이 조건($N = M = n$)을 가리킴을 밝혔다.
+- 🟡 [L7] `src/content/posts/edit-distance.md:257` — **반영 완료**. 핵심 정리 콜아웃의 "이보다 빠른 일반 알고리즘이 없다는 결론은…"을 "강한 준이차 시간의 일반 알고리즘이 없다는 결론은…"으로 고쳐, 186행이 이미 밝힌 SETH의 배제 범위($O(n^{2-\varepsilon})$, 강한 준이차 시간)와 표현을 맞추고 Masek–Paterson처럼 더 빠른 준이차 알고리즘의 존재와 모순되지 않게 했다.
+
+판정을 바꾸는 수정은 없다. 점화식, 정리 1의 진술, 손계산 예시, 의사코드, $O(NM)$ 판정은 그대로다.
+
+재검증: `python .claude/review_post.py src/content/posts/edit-distance.md src/content/posts/edit-distance-traceback.md` 두 파일 모두 발견 사항 없음, `npm run build` 141 page(s) built, `npm run test:js` 21/21 통과, `public/images/edit-distance/recurrence.svg` minidom 파싱 통과 및 팔레트 색만 사용 확인.

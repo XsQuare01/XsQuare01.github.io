@@ -83,3 +83,12 @@ summary: 🔴 0 · 🟡 2 · 🟢 5
 - message: approved extension — 노션 원문에 직접 접근할 도구가 없어 승인된 설계 스펙 docs/superpowers/specs/2026-08-26-edit-distance-design.md를 대조 자료로 삼았다. 이 편은 원문 줄기 8(거슬러 올라가며 무슨 연산이었는지 찾고, 답이 여러 개 나올 수 있어 결과가 영역으로 나온다)과 원문 요청 4를 받는 확장 편이며, 스펙 provenance 표가 되짚기 규칙, 최적 경로 DAG, 영역의 정의, 경로 개수 세기, abcab/abcba 예시를 모두 확장으로 등재해 두었다. 절 구성이 스펙 2.4의 일곱 항목과 순서까지 같고 원문 줄기 8의 두 요소가 모두 보존된다. 스펙이 쓴 '부분 DAG'가 본문에서 '칸의 집합'으로 풀린 것은 원문 어휘가 아니라 스펙의 설명 어휘이고 뜻이 같아 불일치로 보지 않았다. 90행의 영역 판정식 callout은 provenance 표에 개별 항목으로 없으나 '영역의 정의'라는 승인 항목 안의 상세이고 원문의 의도를 훼손하지 않는다.
 - recommendation: 스펙 provenance 표에 영역 판정식(정·역 두 표)을 한 줄로 등재하면 확장 목록과 본문이 정확히 맞는다. 본문 수정은 필요하지 않다.
 - gate_effect: info
+
+## 후속 처리
+
+- 🟡 [L7] `src/content/posts/edit-distance-traceback.md:85` — **반영 완료**. "경로는 오른쪽과 아래로만 움직이므로 $(3, 4)$ 를 지난 뒤에는 열 번호가 4보다 작은 칸으로 갈 수 없다."를 두 순서($(3,4)$→$(4,3)$ 과 $(4,3)$→$(3,4)$)를 모두 닫는 대칭 논증으로 바꿨다. 이동도 오른쪽·아래 둘로 줄이던 서술을 "오른쪽·아래·대각선 셋"으로 고쳐, 본편(edit-distance.md) 145~147행이 적은 세 걸음과 표현을 맞췄다.
+- 🟡 [L2] `src/content/posts/edit-distance-traceback.md:90` — **반영 완료**. "두 문자열을 각각 뒤집어 같은 표를 한 번 더 채우면 $(i, j)$ 에서 $(n, m)$ 까지의 최소 비용 $D'(i, j)$ 를 얻는다."에 뒤집은 표의 어느 칸이 $D'(i, j)$ 인지 밝히는 문장을 더했다. "뒤집은 표의 칸 $(n-i, m-j)$ 가 원래 표에서 $(i, j)$ 에서 $(n, m)$ 까지 가는 최소 비용이고, 이 값을 $D'(i, j)$ 라 하자."로 첨자 대응을 명시해, 판정식 $D(i, j) + D'(i, j) = D(n, m)$ 을 글자대로 구현할 수 있게 했다.
+
+판정을 바꾸는 수정은 없다. 영역 판정식 자체, 두 표를 $O(NM)$ 에 채운다는 복잡도, abcab/abcba 예시는 그대로다.
+
+재검증: `python .claude/review_post.py src/content/posts/edit-distance.md src/content/posts/edit-distance-traceback.md` 두 파일 모두 발견 사항 없음, `npm run build` 141 page(s) built, `npm run test:js` 21/21 통과.
