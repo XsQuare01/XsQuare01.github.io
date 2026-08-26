@@ -1,0 +1,93 @@
+<svg viewBox="0 0 700 450" width="1050" height="675" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="700" height="450" rx="10" fill="#0f1117"/>
+
+  <text x="350" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">표를 채우면 마지막 칸에 답이 남는다</text>
+  <text x="350" y="53" text-anchor="middle" fill="#64748b" font-size="11">왼쪽·위·왼쪽 위 대각선만 보고 칸마다 한 번씩 채운다</text>
+
+  <!-- 열 머리 -->
+  <g font-size="12" text-anchor="middle" fill="#94a3b8">
+    <text x="176" y="105">–</text>
+    <text x="228" y="105">a</text>
+    <text x="280" y="105">b</text>
+    <text x="332" y="105">c</text>
+    <text x="384" y="105">d</text>
+    <text x="436" y="105">a</text>
+    <text x="488" y="105">b</text>
+    <text x="540" y="105">c</text>
+  </g>
+
+  <!-- 행 머리 -->
+  <g font-size="12" text-anchor="end" fill="#94a3b8">
+    <text x="138" y="143">–</text>
+    <text x="138" y="177">a</text>
+    <text x="138" y="211">b</text>
+    <text x="138" y="245">c</text>
+    <text x="138" y="279">a</text>
+    <text x="138" y="313">b</text>
+    <text x="138" y="347">c</text>
+    <text x="138" y="381">d</text>
+  </g>
+
+  <!-- 격자 -->
+  <g stroke="#475569" stroke-width="0.8">
+    <line x1="150" y1="118" x2="566" y2="118"/>
+    <line x1="150" y1="152" x2="566" y2="152"/>
+    <line x1="150" y1="186" x2="566" y2="186"/>
+    <line x1="150" y1="220" x2="566" y2="220"/>
+    <line x1="150" y1="254" x2="566" y2="254"/>
+    <line x1="150" y1="288" x2="566" y2="288"/>
+    <line x1="150" y1="322" x2="566" y2="322"/>
+    <line x1="150" y1="356" x2="566" y2="356"/>
+    <line x1="150" y1="390" x2="566" y2="390"/>
+    <line x1="150" y1="118" x2="150" y2="390"/>
+    <line x1="202" y1="118" x2="202" y2="390"/>
+    <line x1="254" y1="118" x2="254" y2="390"/>
+    <line x1="306" y1="118" x2="306" y2="390"/>
+    <line x1="358" y1="118" x2="358" y2="390"/>
+    <line x1="410" y1="118" x2="410" y2="390"/>
+    <line x1="462" y1="118" x2="462" y2="390"/>
+    <line x1="514" y1="118" x2="514" y2="390"/>
+    <line x1="566" y1="118" x2="566" y2="390"/>
+  </g>
+
+  <!-- 기저: 0행 -->
+  <g font-size="13" text-anchor="middle" fill="#94a3b8">
+    <text x="176" y="143">0</text>
+    <text x="228" y="143">1</text>
+    <text x="280" y="143">2</text>
+    <text x="332" y="143">3</text>
+    <text x="384" y="143">4</text>
+    <text x="436" y="143">5</text>
+    <text x="488" y="143">6</text>
+    <text x="540" y="143">7</text>
+  </g>
+  <!-- 기저: 0열 -->
+  <g font-size="13" text-anchor="middle" fill="#94a3b8">
+    <text x="176" y="177">1</text>
+    <text x="176" y="211">2</text>
+    <text x="176" y="245">3</text>
+    <text x="176" y="279">4</text>
+    <text x="176" y="313">5</text>
+    <text x="176" y="347">6</text>
+    <text x="176" y="381">7</text>
+  </g>
+
+  <!-- 내부 값 -->
+  <g font-size="13" text-anchor="middle" fill="#cbd5e1">
+    <text x="228" y="177">0</text><text x="280" y="177">1</text><text x="332" y="177">2</text><text x="384" y="177">3</text><text x="436" y="177">4</text><text x="488" y="177">5</text><text x="540" y="177">6</text>
+    <text x="228" y="211">1</text><text x="280" y="211">0</text><text x="332" y="211">1</text><text x="384" y="211">2</text><text x="436" y="211">3</text><text x="488" y="211">4</text><text x="540" y="211">5</text>
+    <text x="228" y="245">2</text><text x="280" y="245">1</text><text x="332" y="245">0</text><text x="384" y="245">1</text><text x="436" y="245">2</text><text x="488" y="245">3</text><text x="540" y="245">4</text>
+    <text x="228" y="279">3</text><text x="280" y="279">2</text><text x="332" y="279">1</text><text x="384" y="279">1</text><text x="436" y="279">1</text><text x="488" y="279">2</text><text x="540" y="279">3</text>
+    <text x="228" y="313">4</text><text x="280" y="313">3</text><text x="332" y="313">2</text><text x="384" y="313">2</text><text x="436" y="313">2</text><text x="488" y="313">1</text><text x="540" y="313">2</text>
+    <text x="228" y="347">5</text><text x="280" y="347">4</text><text x="332" y="347">3</text><text x="384" y="347">3</text><text x="436" y="347">3</text><text x="488" y="347">2</text><text x="540" y="347">1</text>
+    <text x="228" y="381">6</text><text x="280" y="381">5</text><text x="332" y="381">4</text><text x="384" y="381">3</text><text x="436" y="381">4</text><text x="488" y="381">3</text>
+  </g>
+
+  <!-- 답 칸 -->
+  <rect x="514" y="356" width="52" height="34" fill="none" stroke="#4ade80" stroke-width="2"/>
+  <text x="540" y="381" text-anchor="middle" fill="#4ade80" font-size="14" font-weight="700">2</text>
+
+  <text x="604" y="381" text-anchor="middle" fill="#4ade80" font-size="11">답</text>
+  <text x="350" y="422" text-anchor="middle" fill="#94a3b8" font-size="11">회색 줄은 기저. 빈 문자열과의 거리는 남은 글자 수와 같다</text>
+  <text x="350" y="440" text-anchor="middle" fill="#64748b" font-size="10.5">S₁ = abcabcd (행) · S₂ = abcdabc (열) · 편집 거리 2</text>
+</svg>

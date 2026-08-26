@@ -1,0 +1,55 @@
+<svg viewBox="0 0 700 420" width="1050" height="630" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="ed-arrow-in" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="ed-arrow-out" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="420" rx="10" fill="#0f1117"/>
+
+  <text x="350" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">한 칸은 세 이웃만 보고, 다시 세 칸에 쓰인다</text>
+  <text x="350" y="53" text-anchor="middle" fill="#64748b" font-size="11">실선은 이 칸을 계산하는 경로, 점선은 이 칸이 쓰이는 곳</text>
+
+  <!-- 이웃 세 칸과 대상 칸 -->
+  <rect x="170" y="110" width="120" height="54" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+  <text x="230" y="142" text-anchor="middle" fill="#cbd5e1" font-size="13">D(i−1, j−1)</text>
+
+  <rect x="350" y="110" width="120" height="54" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+  <text x="410" y="142" text-anchor="middle" fill="#cbd5e1" font-size="13">D(i−1, j)</text>
+
+  <rect x="170" y="220" width="120" height="54" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+  <text x="230" y="252" text-anchor="middle" fill="#cbd5e1" font-size="13">D(i, j−1)</text>
+
+  <rect x="350" y="220" width="120" height="54" rx="4" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="410" y="252" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="700">D(i, j)</text>
+
+  <!-- 재사용될 세 칸 -->
+  <rect x="530" y="220" width="120" height="54" rx="4" fill="none" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="590" y="252" text-anchor="middle" fill="#64748b" font-size="12">D(i, j+1)</text>
+
+  <rect x="350" y="320" width="120" height="54" rx="4" fill="none" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="410" y="352" text-anchor="middle" fill="#64748b" font-size="12">D(i+1, j)</text>
+
+  <rect x="530" y="320" width="120" height="54" rx="4" fill="none" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="590" y="352" text-anchor="middle" fill="#64748b" font-size="12">D(i+1, j+1)</text>
+
+  <!-- 들어오는 화살표 -->
+  <path d="M 287,161 L 347,217" fill="none" stroke="#3b82f6" stroke-width="1.6" marker-end="url(#ed-arrow-in)"/>
+  <text x="286" y="198" text-anchor="end" fill="#93c5fd" font-size="11">+ t(i, j)</text>
+
+  <path d="M 410,164 L 410,216" fill="none" stroke="#3b82f6" stroke-width="1.6" marker-end="url(#ed-arrow-in)"/>
+  <text x="422" y="196" fill="#93c5fd" font-size="11">+1 · S₁[i] 지우기</text>
+
+  <path d="M 290,247 L 346,247" fill="none" stroke="#3b82f6" stroke-width="1.6" marker-end="url(#ed-arrow-in)"/>
+  <text x="230" y="296" text-anchor="middle" fill="#93c5fd" font-size="11">+1 · S₂[j] 넣기</text>
+
+  <!-- 나가는 화살표 -->
+  <path d="M 470,247 L 526,247" fill="none" stroke="#64748b" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#ed-arrow-out)"/>
+  <path d="M 410,274 L 410,316" fill="none" stroke="#64748b" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#ed-arrow-out)"/>
+  <path d="M 467,271 L 527,317" fill="none" stroke="#64748b" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#ed-arrow-out)"/>
+
+  <text x="350" y="398" text-anchor="middle" fill="#94a3b8" font-size="11">t(i, j) 는 S₁[i] 와 S₂[j] 가 같으면 0, 다르면 1</text>
+</svg>
