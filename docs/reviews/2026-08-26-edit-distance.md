@@ -149,3 +149,21 @@ summary: 🔴 0 · 🟡 4 · 🟢 8
 판정을 바꾸는 수정은 없다. 점화식, 정리 1의 진술, 손계산 예시, 의사코드, $O(NM)$ 판정은 그대로다.
 
 재검증: `python .claude/review_post.py src/content/posts/edit-distance.md src/content/posts/edit-distance-traceback.md` 두 파일 모두 발견 사항 없음, `npm run build` 141 page(s) built, `npm run test:js` 21/21 통과, `public/images/edit-distance/recurrence.svg` minidom 파싱 통과 및 팔레트 색만 사용 확인.
+
+### 전체 브랜치 리뷰 반영 (2026-08-26, 추가)
+
+아래는 위 rubric finding에서 이미 다룬 지적이 아니라, 별도로 진행한 전체 브랜치(whole-branch) 리뷰가 새로 낸 지적을 반영한 기록이다. Important 2건, Minor 6건.
+
+- `src/content/posts/edit-distance.md:92` — 정렬(alignment)의 정의에 "각 문자열의 글자를 순서대로 하나씩 모두 쓰고, 위아래가 함께 비는 열은 두지 않는다"를 더했다. 정리 1의 증명이 기대는 정의가 원래 너무 얇았다(Important).
+- `src/content/posts/edit-distance.md:58` — 가중 편집 거리 정의를 "바꾸기의 비용을 글자 쌍마다"에서 "연산마다, 그리고 바꾸기라면 글자 쌍마다"로 넓혔다. 뒤에서 넣기·지우기 비용도 가중치로 다루는 서술과 정의 폭을 맞췄다(Minor).
+- `src/content/posts/edit-distance.md:180` — "호출 수가 $3^{n+m}$ 까지 간다"를 "$3^{n+m}$ 규모로 커진다"로 고쳤다. 상한이 아니라 규모라는 점을 밝혔다(Minor).
+- `src/content/posts/edit-distance.md:180` — 같은 문단 끝에 "겹치는 부분 문제를 한 번만 풀고 재사용하는 이 방식이 동적 계획법이고, [동적 계획법 ②](/blog/dp-2)가 같은 방식으로 다른 문제를 푼다."를 더했다. frontmatter의 Dynamic Programming 태그를 본문이 한 번도 이름으로 받지 않던 문제를 닫고 시리즈로 링크했다(Important).
+- `src/content/posts/edit-distance.md:186` — "무조건적인 하한은 알려져 있지 않다"를 "이차에 가까운 무조건적 하한은 알려져 있지 않다"로 좁혔다. $\Omega(N+M)$ 같은 자명한 하한까지 부정하는 것으로 읽히지 않게 했다(Minor).
+- `src/content/posts/edit-distance.md:188` — "조건을 좁히면 더 빠른 방법이 실제로 있다." 뒤에 "아래 둘은 위의 하한과 부딪히지 않는다. 로그 인자만큼 줄인 시간은 여전히 $O(n^{2-\varepsilon})$ 이 아니고, $O(nd)$ 는 거리가 작다는 가정을 새로 얹은 결과다."를 더했다. 유한 알파벳·거리 제한 항목이 SETH 하한의 예외처럼 읽히던 문제를 닫았다(Important).
+- `src/content/posts/edit-distance.md:133` — `recurrence.svg`의 alt 텍스트에 "표 안쪽의"를 더했다. L4 정정("한 칸은 세 이웃만 보고, 표 안쪽에서는 다시 세 칸에 쓰인다")이 도판 제목에는 갔지만 alt 텍스트에는 못 미쳤던 것을 닫았다(Minor).
+- `src/content/posts/edit-distance.md:84` — `subproblem.svg`의 alt 텍스트에 "그 값이 각각 2, 4, 2임을"을 더했다. 이 저장소의 다른 alt 텍스트 관례(도판이 보여주는 값을 alt에도 적는다)를 따랐다(Minor).
+- `docs/superpowers/specs/2026-08-26-edit-distance-design.md`(「원문의 오류·부정확」 절) — 정정 목록에 "6. 값의 개수" 항목을 더해, 원문 서술을 `NM`에서 `(n+1)(m+1)`로 고친 정정이 스펙 목록에 빠져 있던 것을 채웠다(record-keeping).
+- `docs/superpowers/specs/2026-08-26-edit-distance-design.md`(「도판」 절, `subproblem.svg`·`table.svg` 행과 뒤이은 채움 규칙 문장) — 색 쓰임을 "채움 + 라벨"에서 "테두리만"으로 고쳐, 실제로 배포된 도판(채움 없이 테두리만 씀)과 스펙을 맞췄다(record-keeping).
+- `docs/superpowers/specs/2026-08-26-edit-distance-design.md`(「원문의 오류·부정확」 절, 4번) — "상한은 `3^(n+m)`이다"를 "규모는 `3^(n+m)`이다"로 고쳤다(record-keeping).
+
+재검증(위 반영 후): `python .claude/review_post.py src/content/posts/edit-distance.md src/content/posts/edit-distance-traceback.md` 두 파일 모두 발견 사항 없음, `npm run build` 141 page(s) built, `npm run test:js` 21/21 통과.

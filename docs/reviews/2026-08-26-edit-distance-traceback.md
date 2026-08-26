@@ -92,3 +92,17 @@ summary: 🔴 0 · 🟡 2 · 🟢 5
 판정을 바꾸는 수정은 없다. 영역 판정식 자체, 두 표를 $O(NM)$ 에 채운다는 복잡도, abcab/abcba 예시는 그대로다.
 
 재검증: `python .claude/review_post.py src/content/posts/edit-distance.md src/content/posts/edit-distance-traceback.md` 두 파일 모두 발견 사항 없음, `npm run build` 141 page(s) built, `npm run test:js` 21/21 통과.
+
+### 전체 브랜치 리뷰 반영 (2026-08-26, 추가)
+
+아래는 위 rubric finding에서 이미 다룬 지적이 아니라, 별도로 진행한 전체 브랜치(whole-branch) 리뷰가 새로 낸 지적을 반영한 기록이다. Important 2건, Minor 3건.
+
+- `src/content/posts/edit-distance-traceback.md:28` — "값을 구하는 데 필요하지 않았기 때문이다." 뒤에 "본편이 두 행만 남겨 공간을 줄인 판을 보였는데, 되짚기는 그 판으로 할 수 없다. 지나온 칸을 하나씩 되물어야 하므로 표가 통째로 남아 있어야 한다."를 더했다. 본편의 두 행 공간 절약 판과 되짚기가 표 전체를 요구한다는 점이 이 쌍 어디에서도 맞물리지 않던 것을 닫았다(Important).
+- `src/content/posts/edit-distance-traceback.md:38` — "$t(i, j) = 0$ 이면 맞추기, 1이면 바꾸기다"를 "$t(i, j)$ 는 $S_1[i]$ 와 $S_2[j]$ 가 같으면 0, 다르면 1이므로, 0이면 맞추기고 1이면 바꾸기다"로 풀었다. `t(i, j)`가 본편의 정리 1 안에서만 정의되고 이 글에는 무설명으로 등장하던 문제를 닫았다(Minor).
+- `src/content/posts/edit-distance-traceback.md:100` — "나머지 칸에서는 되짚기 등식이 성립하는 이웃의 $C$ 를 더한다." 뒤에 "본편처럼 본문의 인덱스는 1부터 세고 배열은 0부터 세므로, 코드에서 글자를 꺼낼 때 하나를 뺀다."를 더했다. 본편이 밝힌 1-기반/0-기반 인덱스 관례를 이 글에서는 밝히지 않고 코드로 바로 넘어가던 것을 닫았다(Minor).
+- `src/content/posts/edit-distance-traceback.md:136` — "대각선을 먼저 검사하면 빈 칸을 되도록 늦게 만들고, 위쪽을 먼저 검사하면 지우기를 앞으로 몰아 놓는다."를 "되짚기는 정렬을 뒤에서부터 복원하므로, 대각선을 먼저 보면 뒤쪽에서 최대한 글자를 짝지어 나가고 빈 칸은 정렬의 앞쪽으로 밀린다. 위쪽을 먼저 보면 지우기가 뒤쪽에 먼저 놓인다."로 바꿨다. 되짚기가 뒤에서부터 복원한다는 이 글 자신의 서술과 어긋나게 앞/뒤 방향이 뒤집혀 있던 문장을 바로잡았다(Important).
+- `src/content/posts/edit-distance-traceback.md:138` — "빈 칸을 여는 비용과 늘리는 비용을 따로 두는 모델을 쓴다." 뒤에 "이 모델은 세 항의 상수만 바꿔서는 담기지 않고, 지금 열이 빈 칸의 연속인지를 함께 들고 가야 한다."를 더했다. affine gap 모델이 점화식 세 항의 상수 교체만으로 표현되는 것으로 잘못 읽힐 여지를 닫았다(Minor).
+- `docs/superpowers/specs/2026-08-26-edit-distance-design.md`(「Provenance 분류」 표) — `abcab`/`abcba` 예시 행 뒤에 "영역 판정식 `D(i,j) + D'(i,j) = D(n,m)`"과 "최적 경로 수가 이항계수로 커지는 예" 두 행을 더해, 이 편이 실제로 반영한 두 확장이 표에 빠져 있던 것을 채웠다(record-keeping).
+- `docs/superpowers/specs/2026-08-26-edit-distance-design.md`(「도판」 절, `region.svg` 행과 뒤이은 채움 규칙 문장) — "마름모 영역으로 채움"을 "칸을 파선으로 묶어 영역을 보인다"로 고치고 색 표기도 "영역 채움 `#1e3a5f`"에서 "영역은 `#93c5fd` 파선 테두리"로 고쳐, 실제로 배포된 도판(채움 없이 파선 테두리만 씀)과 스펙을 맞췄다(record-keeping).
+
+재검증(위 반영 후): `python .claude/review_post.py src/content/posts/edit-distance.md src/content/posts/edit-distance-traceback.md` 두 파일 모두 발견 사항 없음, `npm run build` 141 page(s) built, `npm run test:js` 21/21 통과.
