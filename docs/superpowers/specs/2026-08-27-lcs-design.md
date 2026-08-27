@@ -83,13 +83,15 @@ Notion 「Longest Common subsequence (LCS)」 (`전공 과목 페이지 › 알�
 title: "최장 공통 부분수열 — 바꾸기를 뺀 자리에 남는 것"
 date: 2026-08-27T09:00:00
 description: "지우기만 허용하고 순서를 지켜 남긴 것이 부분수열이다. 두 수열의 공통 부분수열 중 가장 긴 것을 표 하나로 구하고, 편집 거리에서 바꾸기를 빼면 정확히 이 문제가 된다는 등식까지 세운다."
-tags: ["Algorithm", "LCS", "Longest Common Subsequence", "Dynamic Programming", "Edit Distance"]
+tags: ["Algorithm", "LCS", "Dynamic Programming", "Edit Distance"]
 category: algorithm
 difficulty: 중급
 numbered: true
 ```
 
 `description`은 결정적 검사의 40~220자 범위 안이다.
+
+약어와 풀어쓴 이름을 태그로 함께 달지 않는다. 저장소의 다른 글(`mst`·`dfa`·`crt`)이 약어 하나만 쓰고, 둘을 함께 달면 글 하나짜리 태그 페이지가 두 개 생긴다. (전체 리뷰 지적, 2026-08-27)
 
 ### 2.3 절 구성
 
