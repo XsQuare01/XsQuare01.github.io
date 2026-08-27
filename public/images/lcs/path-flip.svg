@@ -1,0 +1,62 @@
+<svg viewBox="0 0 680 430" width="1020" height="645" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="lcs-p-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/>
+    </marker>
+    <marker id="lcs-p-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="430" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">대각선을 늘리는 것과 비용을 줄이는 것은 같은 일이다</text>
+  <text x="340" y="53" text-anchor="middle" fill="#64748b" font-size="11">X = abc (행) · Y = acb (열) · 걸음은 오른쪽·아래·대각선 셋뿐이다</text>
+
+  <!-- 열 글자 -->
+  <g font-size="12" text-anchor="middle" fill="#94a3b8">
+    <text x="240" y="104">a</text>
+    <text x="320" y="104">c</text>
+    <text x="400" y="104">b</text>
+  </g>
+  <!-- 행 글자 -->
+  <g font-size="12" text-anchor="end" fill="#94a3b8">
+    <text x="186" y="164">a</text>
+    <text x="186" y="244">b</text>
+    <text x="186" y="324">c</text>
+  </g>
+
+  <!-- 격자선 -->
+  <g stroke="#475569" stroke-width="0.8">
+    <line x1="200" y1="120" x2="440" y2="120"/>
+    <line x1="200" y1="200" x2="440" y2="200"/>
+    <line x1="200" y1="280" x2="440" y2="280"/>
+    <line x1="200" y1="360" x2="440" y2="360"/>
+    <line x1="200" y1="120" x2="200" y2="360"/>
+    <line x1="280" y1="120" x2="280" y2="360"/>
+    <line x1="360" y1="120" x2="360" y2="360"/>
+    <line x1="440" y1="120" x2="440" y2="360"/>
+  </g>
+
+  <!-- 쓰지 않은 대각선: x₃ = c 와 y₂ = c 를 짝짓는 (2,1)→(3,2) 걸음. 다른 최적 경로(ac)의 것 -->
+  <path d="M 284,284 L 356,356" fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="5 3"/>
+
+  <!-- 경로: 대각선 a, 오른쪽 c, 대각선 b, 아래 c -->
+  <path d="M 204,124 L 276,196" fill="none" stroke="#4ade80" stroke-width="2.2" marker-end="url(#lcs-p-green)"/>
+  <path d="M 284,200 L 356,200" fill="none" stroke="#fbbf24" stroke-width="2.2" marker-end="url(#lcs-p-amber)"/>
+  <path d="M 364,204 L 436,276" fill="none" stroke="#4ade80" stroke-width="2.2" marker-end="url(#lcs-p-green)"/>
+  <path d="M 440,284 L 440,356" fill="none" stroke="#fbbf24" stroke-width="2.2" marker-end="url(#lcs-p-amber)"/>
+
+  <!-- 걸음 라벨 (대각선이 지나지 않는 쪽에 둔다) -->
+  <text x="210" y="190" fill="#4ade80" font-size="11.5">a 짝짓기</text>
+  <text x="320" y="190" text-anchor="middle" fill="#fbbf24" font-size="11.5">c 넣기</text>
+  <text x="366" y="272" fill="#4ade80" font-size="11.5">b 짝짓기</text>
+  <text x="452" y="324" fill="#fbbf24" font-size="11.5">c 지우기</text>
+
+  <text x="206" y="332" fill="#64748b" font-size="10">쓰지 않은</text>
+  <text x="206" y="346" fill="#64748b" font-size="10">대각선</text>
+
+  <!-- 셈 -->
+  <text x="60" y="386" fill="#cbd5e1" font-size="12">대각선 d = 2 · 아래 걸음 n − d = 1 · 오른쪽 걸음 m − d = 1</text>
+  <text x="60" y="408" fill="#e2e8f0" font-size="13" font-weight="600">비용 = (n − d) + (m − d) = n + m − 2d = 3 + 3 − 4 = 2</text>
+</svg>
