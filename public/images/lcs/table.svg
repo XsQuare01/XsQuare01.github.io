@@ -1,0 +1,102 @@
+<svg viewBox="0 0 700 460" width="1050" height="690" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="700" height="460" rx="10" fill="#0f1117"/>
+
+  <text x="350" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">되짚기를 따라가며 값이 대각선에서 늘어난 자리가 짝지은 글자다</text>
+  <text x="350" y="53" text-anchor="middle" fill="#64748b" font-size="11">같으면 왼쪽 위에서 하나 늘리고, 다르면 위·왼쪽 중 큰 값을 그대로 옮긴다</text>
+
+  <!-- 열 머리 -->
+  <g font-size="12" text-anchor="middle" fill="#94a3b8">
+    <text x="176" y="105">–</text>
+    <text x="228" y="105">v</text>
+    <text x="280" y="105">i</text>
+    <text x="332" y="105">n</text>
+    <text x="384" y="105">t</text>
+    <text x="436" y="105">n</text>
+    <text x="488" y="105">e</text>
+    <text x="540" y="105">r</text>
+  </g>
+
+  <!-- 행 머리 -->
+  <g font-size="12" text-anchor="end" fill="#94a3b8">
+    <text x="138" y="143">–</text>
+    <text x="138" y="177">w</text>
+    <text x="138" y="211">r</text>
+    <text x="138" y="245">i</text>
+    <text x="138" y="279">t</text>
+    <text x="138" y="313">e</text>
+    <text x="138" y="347">r</text>
+    <text x="138" y="381">s</text>
+  </g>
+
+  <!-- 격자 -->
+  <g stroke="#475569" stroke-width="0.8">
+    <line x1="150" y1="118" x2="566" y2="118"/>
+    <line x1="150" y1="152" x2="566" y2="152"/>
+    <line x1="150" y1="186" x2="566" y2="186"/>
+    <line x1="150" y1="220" x2="566" y2="220"/>
+    <line x1="150" y1="254" x2="566" y2="254"/>
+    <line x1="150" y1="288" x2="566" y2="288"/>
+    <line x1="150" y1="322" x2="566" y2="322"/>
+    <line x1="150" y1="356" x2="566" y2="356"/>
+    <line x1="150" y1="390" x2="566" y2="390"/>
+    <line x1="150" y1="118" x2="150" y2="390"/>
+    <line x1="202" y1="118" x2="202" y2="390"/>
+    <line x1="254" y1="118" x2="254" y2="390"/>
+    <line x1="306" y1="118" x2="306" y2="390"/>
+    <line x1="358" y1="118" x2="358" y2="390"/>
+    <line x1="410" y1="118" x2="410" y2="390"/>
+    <line x1="462" y1="118" x2="462" y2="390"/>
+    <line x1="514" y1="118" x2="514" y2="390"/>
+    <line x1="566" y1="118" x2="566" y2="390"/>
+  </g>
+
+  <!-- iter 를 짝지은 네 칸 -->
+  <g fill="none" stroke="#4ade80" stroke-width="2">
+    <rect x="254" y="220" width="52" height="34"/>
+    <rect x="358" y="254" width="52" height="34"/>
+    <rect x="462" y="288" width="52" height="34"/>
+    <rect x="514" y="322" width="52" height="34"/>
+  </g>
+
+  <!-- 기저 (0행·0열) -->
+  <g font-size="13" text-anchor="middle" fill="#94a3b8">
+    <text x="176" y="143">0</text>
+    <text x="228" y="143">0</text>
+    <text x="280" y="143">0</text>
+    <text x="332" y="143">0</text>
+    <text x="384" y="143">0</text>
+    <text x="436" y="143">0</text>
+    <text x="488" y="143">0</text>
+    <text x="540" y="143">0</text>
+    <text x="176" y="177">0</text>
+    <text x="176" y="211">0</text>
+    <text x="176" y="245">0</text>
+    <text x="176" y="279">0</text>
+    <text x="176" y="313">0</text>
+    <text x="176" y="347">0</text>
+    <text x="176" y="381">0</text>
+  </g>
+
+  <!-- 내부 값 -->
+  <g font-size="13" text-anchor="middle" fill="#cbd5e1">
+    <text x="228" y="177">0</text><text x="280" y="177">0</text><text x="332" y="177">0</text><text x="384" y="177">0</text><text x="436" y="177">0</text><text x="488" y="177">0</text><text x="540" y="177">0</text>
+    <text x="228" y="211">0</text><text x="280" y="211">0</text><text x="332" y="211">0</text><text x="384" y="211">0</text><text x="436" y="211">0</text><text x="488" y="211">0</text><text x="540" y="211">1</text>
+    <text x="228" y="245">0</text><text x="332" y="245">1</text><text x="384" y="245">1</text><text x="436" y="245">1</text><text x="488" y="245">1</text><text x="540" y="245">1</text>
+    <text x="228" y="279">0</text><text x="280" y="279">1</text><text x="332" y="279">1</text><text x="436" y="279">2</text><text x="488" y="279">2</text><text x="540" y="279">2</text>
+    <text x="228" y="313">0</text><text x="280" y="313">1</text><text x="332" y="313">1</text><text x="384" y="313">2</text><text x="436" y="313">2</text><text x="540" y="313">3</text>
+    <text x="228" y="347">0</text><text x="280" y="347">1</text><text x="332" y="347">1</text><text x="384" y="347">2</text><text x="436" y="347">2</text><text x="488" y="347">3</text>
+    <text x="228" y="381">0</text><text x="280" y="381">1</text><text x="332" y="381">1</text><text x="384" y="381">2</text><text x="436" y="381">2</text><text x="488" y="381">3</text><text x="540" y="381">4</text>
+  </g>
+
+  <!-- 강조 칸의 값은 초록으로 -->
+  <g font-size="13" text-anchor="middle" fill="#4ade80" font-weight="700">
+    <text x="280" y="245">1</text>
+    <text x="384" y="279">2</text>
+    <text x="488" y="313">3</text>
+    <text x="540" y="347">4</text>
+  </g>
+
+  <text x="604" y="381" text-anchor="middle" fill="#4ade80" font-size="11">답 4</text>
+  <text x="350" y="422" text-anchor="middle" fill="#94a3b8" font-size="11">강조한 네 칸이 i · t · e · r 를 짝지은 자리다</text>
+  <text x="350" y="442" text-anchor="middle" fill="#64748b" font-size="10.5">X = writers (행) · Y = vintner (열) · LCS = iter, 길이 4</text>
+</svg>
