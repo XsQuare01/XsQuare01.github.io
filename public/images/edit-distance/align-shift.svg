@@ -1,0 +1,77 @@
+<svg viewBox="0 0 680 360" width="1020" height="540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="360" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">한 글자가 빠지면 그 뒤가 전부 밀린다</text>
+  <text x="340" y="53" text-anchor="middle" fill="#64748b" font-size="11">위는 자리끼리만 맞춘 비교, 아래는 빈 칸을 허용한 비교</text>
+
+  <!-- ===== 위: 자리끼리 맞춤 ===== -->
+  <text x="178" y="105" text-anchor="end" fill="#94a3b8" font-size="12">S₁</text>
+  <text x="178" y="147" text-anchor="end" fill="#94a3b8" font-size="12">S₂</text>
+
+  <rect x="190" y="82" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="254" y="82" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="318" y="82" width="52" height="34" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+  <rect x="382" y="82" width="52" height="34" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+  <rect x="446" y="82" width="52" height="34" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+
+  <g font-size="15" text-anchor="middle">
+    <text x="216" y="105" fill="#cbd5e1">a</text>
+    <text x="280" y="105" fill="#cbd5e1">b</text>
+    <text x="344" y="105" fill="#f87171">a</text>
+    <text x="408" y="105" fill="#f87171">b</text>
+    <text x="472" y="105" fill="#f87171">c</text>
+  </g>
+
+  <rect x="190" y="124" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="254" y="124" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="318" y="124" width="52" height="34" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+  <rect x="382" y="124" width="52" height="34" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+  <rect x="446" y="124" width="52" height="34" rx="4" fill="none" stroke="#475569" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+  <g font-size="15" text-anchor="middle">
+    <text x="216" y="147" fill="#cbd5e1">a</text>
+    <text x="280" y="147" fill="#cbd5e1">b</text>
+    <text x="344" y="147" fill="#f87171">b</text>
+    <text x="408" y="147" fill="#f87171">c</text>
+  </g>
+  <text x="472" y="146" text-anchor="middle" fill="#64748b" font-size="10">상대 없음</text>
+
+  <text x="340" y="182" text-anchor="middle" fill="#f87171" font-size="12">어긋난 자리 세 곳 — 세 번 고쳐야 하는 것처럼 보인다</text>
+
+  <line x1="60" y1="200" x2="620" y2="200" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- ===== 아래: 빈 칸 허용 ===== -->
+  <text x="178" y="245" text-anchor="end" fill="#94a3b8" font-size="12">S₁</text>
+  <text x="178" y="287" text-anchor="end" fill="#94a3b8" font-size="12">S₂</text>
+
+  <rect x="190" y="222" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="254" y="222" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="318" y="222" width="52" height="34" rx="4" fill="#1e293b" stroke="#4ade80" stroke-width="1.8"/>
+  <rect x="382" y="222" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="446" y="222" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+
+  <g font-size="15" text-anchor="middle" fill="#cbd5e1">
+    <text x="216" y="245">a</text>
+    <text x="280" y="245">b</text>
+    <text x="344" y="245" fill="#4ade80">a</text>
+    <text x="408" y="245">b</text>
+    <text x="472" y="245">c</text>
+  </g>
+
+  <rect x="190" y="264" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="254" y="264" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="318" y="264" width="52" height="34" rx="4" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-dasharray="4 3"/>
+  <rect x="382" y="264" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="446" y="264" width="52" height="34" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+
+  <g font-size="15" text-anchor="middle" fill="#cbd5e1">
+    <text x="216" y="287">a</text>
+    <text x="280" y="287">b</text>
+    <text x="344" y="287" fill="#4ade80">–</text>
+    <text x="408" y="287">b</text>
+    <text x="472" y="287">c</text>
+  </g>
+
+  <text x="340" y="322" text-anchor="middle" fill="#4ade80" font-size="12">빈 칸 한 개 = 글자 하나를 지우는 연산 한 번</text>
+  <text x="340" y="344" text-anchor="middle" fill="#64748b" font-size="10.5">S₁ = ababc · S₂ = abbc</text>
+</svg>

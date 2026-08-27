@@ -1,0 +1,101 @@
+<svg viewBox="0 0 680 410" width="1020" height="615" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="680" height="410" rx="10" fill="#0f1117"/>
+
+  <text x="340" y="32" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">같은 비용의 정렬이 셋이다</text>
+  <text x="340" y="53" text-anchor="middle" fill="#64748b" font-size="11">위 줄이 S₁, 아래 줄이 S₂. – 는 빈 칸이다</text>
+
+  <!-- ===== 정렬 1: 바꾸기 두 번 ===== -->
+  <text x="188" y="112" text-anchor="end" fill="#cbd5e1" font-size="12">정렬 1</text>
+
+  <g fill="#1e293b" stroke="#475569" stroke-width="1">
+    <rect x="200" y="88" width="40" height="32" rx="3"/>
+    <rect x="246" y="88" width="40" height="32" rx="3"/>
+    <rect x="292" y="88" width="40" height="32" rx="3"/>
+    <rect x="200" y="126" width="40" height="32" rx="3"/>
+    <rect x="246" y="126" width="40" height="32" rx="3"/>
+    <rect x="292" y="126" width="40" height="32" rx="3"/>
+  </g>
+  <g fill="#1e293b" stroke="#fbbf24" stroke-width="1.6">
+    <rect x="338" y="88" width="40" height="32" rx="3"/>
+    <rect x="384" y="88" width="40" height="32" rx="3"/>
+    <rect x="338" y="126" width="40" height="32" rx="3"/>
+    <rect x="384" y="126" width="40" height="32" rx="3"/>
+  </g>
+  <g font-size="14" text-anchor="middle" fill="#94a3b8">
+    <text x="220" y="109">a</text><text x="266" y="109">b</text><text x="312" y="109">c</text>
+    <text x="220" y="147">a</text><text x="266" y="147">b</text><text x="312" y="147">c</text>
+  </g>
+  <g font-size="14" text-anchor="middle" fill="#fbbf24">
+    <text x="358" y="109">a</text><text x="404" y="109">b</text>
+    <text x="358" y="147">b</text><text x="404" y="147">a</text>
+  </g>
+  <text x="450" y="128" fill="#cbd5e1" font-size="11.5">바꾸기 두 번</text>
+
+  <!-- ===== 정렬 2: b 를 넣고 b 를 지운다 ===== -->
+  <text x="188" y="210" text-anchor="end" fill="#cbd5e1" font-size="12">정렬 2</text>
+
+  <g fill="#1e293b" stroke="#475569" stroke-width="1">
+    <rect x="200" y="186" width="40" height="32" rx="3"/>
+    <rect x="246" y="186" width="40" height="32" rx="3"/>
+    <rect x="292" y="186" width="40" height="32" rx="3"/>
+    <rect x="384" y="186" width="40" height="32" rx="3"/>
+    <rect x="200" y="224" width="40" height="32" rx="3"/>
+    <rect x="246" y="224" width="40" height="32" rx="3"/>
+    <rect x="292" y="224" width="40" height="32" rx="3"/>
+    <rect x="384" y="224" width="40" height="32" rx="3"/>
+  </g>
+  <rect x="338" y="186" width="40" height="32" rx="3" fill="none" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <rect x="338" y="224" width="40" height="32" rx="3" fill="#1e293b" stroke="#93c5fd" stroke-width="1.6"/>
+  <rect x="430" y="186" width="40" height="32" rx="3" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+  <rect x="430" y="224" width="40" height="32" rx="3" fill="none" stroke="#f87171" stroke-width="1.6" stroke-dasharray="4 3"/>
+
+  <g font-size="14" text-anchor="middle" fill="#94a3b8">
+    <text x="220" y="207">a</text><text x="266" y="207">b</text><text x="312" y="207">c</text><text x="404" y="207">a</text>
+    <text x="220" y="245">a</text><text x="266" y="245">b</text><text x="312" y="245">c</text><text x="404" y="245">a</text>
+  </g>
+  <text x="358" y="207" text-anchor="middle" fill="#93c5fd" font-size="14">–</text>
+  <text x="358" y="245" text-anchor="middle" fill="#93c5fd" font-size="14">b</text>
+  <text x="450" y="207" text-anchor="middle" fill="#f87171" font-size="14">b</text>
+  <text x="450" y="245" text-anchor="middle" fill="#f87171" font-size="14">–</text>
+  <text x="496" y="226" fill="#cbd5e1" font-size="11.5">넣기 1 + 지우기 1</text>
+
+  <!-- ===== 정렬 3: a 를 지우고 a 를 넣는다 ===== -->
+  <text x="188" y="308" text-anchor="end" fill="#cbd5e1" font-size="12">정렬 3</text>
+
+  <g fill="#1e293b" stroke="#475569" stroke-width="1">
+    <rect x="200" y="284" width="40" height="32" rx="3"/>
+    <rect x="246" y="284" width="40" height="32" rx="3"/>
+    <rect x="292" y="284" width="40" height="32" rx="3"/>
+    <rect x="384" y="284" width="40" height="32" rx="3"/>
+    <rect x="200" y="322" width="40" height="32" rx="3"/>
+    <rect x="246" y="322" width="40" height="32" rx="3"/>
+    <rect x="292" y="322" width="40" height="32" rx="3"/>
+    <rect x="384" y="322" width="40" height="32" rx="3"/>
+  </g>
+  <rect x="338" y="284" width="40" height="32" rx="3" fill="#1e293b" stroke="#f87171" stroke-width="1.6"/>
+  <rect x="338" y="322" width="40" height="32" rx="3" fill="none" stroke="#f87171" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <rect x="430" y="284" width="40" height="32" rx="3" fill="none" stroke="#93c5fd" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <rect x="430" y="322" width="40" height="32" rx="3" fill="#1e293b" stroke="#93c5fd" stroke-width="1.6"/>
+
+  <g font-size="14" text-anchor="middle" fill="#94a3b8">
+    <text x="220" y="305">a</text><text x="266" y="305">b</text><text x="312" y="305">c</text><text x="404" y="305">b</text>
+    <text x="220" y="343">a</text><text x="266" y="343">b</text><text x="312" y="343">c</text><text x="404" y="343">b</text>
+  </g>
+  <text x="358" y="305" text-anchor="middle" fill="#f87171" font-size="14">a</text>
+  <text x="358" y="343" text-anchor="middle" fill="#f87171" font-size="14">–</text>
+  <text x="450" y="305" text-anchor="middle" fill="#93c5fd" font-size="14">–</text>
+  <text x="450" y="343" text-anchor="middle" fill="#93c5fd" font-size="14">a</text>
+  <text x="496" y="324" fill="#cbd5e1" font-size="11.5">지우기 1 + 넣기 1</text>
+
+  <!-- 범례 -->
+  <rect x="176" y="370" width="10" height="10" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+  <text x="192" y="379" fill="#94a3b8" font-size="11">바꾸기</text>
+  <rect x="256" y="370" width="10" height="10" fill="none" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="272" y="379" fill="#94a3b8" font-size="11">넣기</text>
+  <rect x="326" y="370" width="10" height="10" fill="none" stroke="#f87171" stroke-width="1.6"/>
+  <text x="342" y="379" fill="#94a3b8" font-size="11">지우기</text>
+  <rect x="406" y="370" width="10" height="10" fill="none" stroke="#475569" stroke-width="1.6"/>
+  <text x="422" y="379" fill="#94a3b8" font-size="11">맞추기</text>
+
+  <text x="340" y="398" text-anchor="middle" fill="#64748b" font-size="10.5">S₁ = abcab · S₂ = abcba · 세 정렬 모두 비용 2</text>
+</svg>
