@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="420" viewBox="0 0 400 420" role="img" aria-label="원점을 (1, 2)로 옮기면 A의 좌표는 (0, -1), B는 (3, 3)이 된다. 두 점과 변위는 제자리다" font-family="sans-serif">
+  <rect width="400" height="420" rx="8" fill="#0f1117"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">원점만 오른쪽 1, 위쪽 2로</text>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1L9 5L0 9Z" fill="#93c5fd"/></marker></defs>
+  <path d="M30 320H355 M70 365V60" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <path d="M30 240H355 M110 365V60" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+  <line x1="110" y1="280" x2="230" y2="120" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+  <circle cx="110" cy="280" r="8" fill="#93c5fd"/><path d="M230 110L240 120L230 130L220 120Z" fill="#93c5fd"/>
+  <rect x="104" y="234" width="12" height="12" fill="#e2e8f0"/>
+  <g fill="#e2e8f0" font-size="22">
+    <text x="47" y="345">O</text><text x="124" y="235">O′</text><text x="125" y="293">A (0, −1)</text><text x="245" y="118">B (3, 3)</text>
+    <text x="362" y="247">x′</text><text x="103" y="54">y′</text>
+  </g>
+  <text x="24" y="390" fill="#cbd5e1" font-size="22">변위 (3, 4) · 거리 5는 그대로</text>
+</svg>

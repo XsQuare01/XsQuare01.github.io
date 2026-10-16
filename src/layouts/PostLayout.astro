@@ -4,6 +4,7 @@ import { tagStyle } from '../utils/tagColor';
 import { getCategoryLabel } from '../data/categories';
 import { difficultyStars } from '../utils/difficulty';
 import katex from 'katex';
+import '../styles/svg-labs.css';
 
 function renderHeadingText(text: string): string {
   return text.replace(/\$([^$]+)\$/g, (_, math) => {
@@ -245,6 +246,9 @@ const jsonLd = JSON.stringify([blogPosting, breadcrumbList]);
 </BaseLayout>
 
 <script>
+  import { initLabs } from '../labs/index.js';
+  void initLabs();
+
   // ── 읽기 진행률 바 ──
   const bar = document.createElement('div');
   bar.id = 'reading-progress';

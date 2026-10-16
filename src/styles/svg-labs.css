@@ -1,0 +1,78 @@
+/* The static image is visible until the module has fully initialized. */
+.svg-lab.is-live > .lab-static { display: none; }
+.svg-lab .lab-live[hidden] { display: none; }
+.svg-lab svg { display: block; width: 100%; height: auto; max-width: 32rem; margin: 0 auto; }
+.svg-lab [data-point] { cursor: grab; touch-action: none; }
+.svg-lab [data-point]:active { cursor: grabbing; }
+.svg-lab [data-part^="label-"] { pointer-events: none; }
+.svg-lab .is-selected .point-ring { stroke-opacity: 1; }
+.svg-lab .lab-controls { color: var(--dg-fg); font-family: var(--font-mono); font-size: 0.875rem; }
+.svg-lab .lab-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.svg-lab select, .svg-lab button {
+  min-height: 44px; padding: 0.4rem 0.75rem; border: 1px solid var(--dg-line);
+  border-radius: 4px; background: var(--dg-bg); color: var(--dg-fg); font: inherit;
+}
+.svg-lab select { color-scheme: dark; }
+.svg-lab button { cursor: pointer; margin-left: auto; }
+.svg-lab :is(button, select, input):focus-visible { outline: 2px solid var(--dg-fg); outline-offset: 3px; }
+.svg-lab .lab-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.svg-lab .lab-inputs label { min-width: 0; }
+.svg-lab .lab-inputs label > span { display: flex; gap: 1rem; justify-content: space-between; }
+.svg-lab .lab-inputs input { width: 100%; min-height: 44px; margin: 0; accent-color: var(--dg-blue-soft); cursor: pointer; }
+.svg-lab output, .svg-lab dd { font-variant-numeric: tabular-nums; }
+.prose .svg-lab .lab-input-note { margin: 0.75rem 0; color: var(--dg-fg-soft); font-size: 0.875rem; line-height: 1.6; }
+.svg-lab .lab-readouts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; margin: 0.75rem 0; }
+.svg-lab .lab-readouts dt { color: var(--dg-fg-muted); font-size: 0.8rem; }
+.svg-lab .lab-readouts dd { margin: 0.2rem 0 0; font-size: 1rem; }
+.svg-lab .lab-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (hover: hover) { .svg-lab button:hover { background: var(--dg-surface); } }
+@media (max-width: 24rem) {
+  .svg-lab .lab-inputs { gap: 1rem; }
+  .svg-lab .lab-toolbar { gap: 0.5rem; }
+}
+@media (forced-colors: active) {
+  .svg-lab :is(button, select, input):focus-visible { outline-color: Highlight; }
+}
+@media print {
+  .svg-lab { break-inside: avoid; }
+  .svg-lab .lab-live { display: none !important; }
+  .svg-lab.is-live > .lab-static { display: block !important; }
+}
+
+/* Preserve presentation attributes for the static fallback. */
+.svg-lab svg [fill="#0f1117"] { fill: var(--dg-bg); }
+.svg-lab svg [stroke="#0f1117"] { stroke: var(--dg-bg); }
+.svg-lab svg [fill="#e2e8f0"] { fill: var(--dg-fg); }
+.svg-lab svg [stroke="#e2e8f0"] { stroke: var(--dg-fg); }
+.svg-lab svg [fill="#cbd5e1"] { fill: var(--dg-fg-soft); }
+.svg-lab svg [stroke="#cbd5e1"] { stroke: var(--dg-fg-soft); }
+.svg-lab svg [fill="#94a3b8"] { fill: var(--dg-fg-muted); }
+.svg-lab svg [stroke="#94a3b8"] { stroke: var(--dg-fg-muted); }
+.svg-lab svg [fill="#64748b"] { fill: var(--dg-line); }
+.svg-lab svg [stroke="#64748b"] { stroke: var(--dg-line); }
+.svg-lab svg [fill="#475569"] { fill: var(--dg-line-dim); }
+.svg-lab svg [stroke="#475569"] { stroke: var(--dg-line-dim); }
+.svg-lab svg [fill="#1e293b"] { fill: var(--dg-surface); }
+.svg-lab svg [stroke="#1e293b"] { stroke: var(--dg-surface); }
+.svg-lab svg [fill="#4ade80"] { fill: var(--dg-green); }
+.svg-lab svg [stroke="#4ade80"] { stroke: var(--dg-green); }
+.svg-lab svg [fill="#6ee7b7"] { fill: var(--dg-green-soft); }
+.svg-lab svg [stroke="#6ee7b7"] { stroke: var(--dg-green-soft); }
+.svg-lab svg [fill="#14352b"] { fill: var(--dg-green-fill); }
+.svg-lab svg [stroke="#14352b"] { stroke: var(--dg-green-fill); }
+.svg-lab svg [fill="#3b82f6"] { fill: var(--dg-blue); }
+.svg-lab svg [stroke="#3b82f6"] { stroke: var(--dg-blue); }
+.svg-lab svg [fill="#93c5fd"] { fill: var(--dg-blue-soft); }
+.svg-lab svg [stroke="#93c5fd"] { stroke: var(--dg-blue-soft); }
+.svg-lab svg [fill="#1e3a5f"] { fill: var(--dg-blue-fill); }
+.svg-lab svg [stroke="#1e3a5f"] { stroke: var(--dg-blue-fill); }
+.svg-lab svg [fill="#f87171"] { fill: var(--dg-red); }
+.svg-lab svg [stroke="#f87171"] { stroke: var(--dg-red); }
+.svg-lab svg [fill="#7c2d12"] { fill: var(--dg-red-fill); }
+.svg-lab svg [stroke="#7c2d12"] { stroke: var(--dg-red-fill); }
+.svg-lab svg [fill="#fbbf24"] { fill: var(--dg-amber); }
+.svg-lab svg [stroke="#fbbf24"] { stroke: var(--dg-amber); }
+.svg-lab svg [fill="#3a2c0f"] { fill: var(--dg-amber-fill); }
+.svg-lab svg [stroke="#3a2c0f"] { stroke: var(--dg-amber-fill); }
+.svg-lab svg [fill="#a78bfa"] { fill: var(--dg-violet); }
+.svg-lab svg [stroke="#a78bfa"] { stroke: var(--dg-violet); }

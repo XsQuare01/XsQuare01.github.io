@@ -25,6 +25,14 @@ export const HOME_FEATURED = ['rsa', 'algo-orientation'];
 
 export const categories: Category[] = [
   {
+    slug: 'robotics',
+    label: '로보틱스',
+    icon: '🦾',
+    description: '좌표와 벡터에서 시작해 로봇의 기구학과 경로를 공부합니다.',
+    intro: '점과 벡터, 좌표계부터 시작해 관절의 움직임을 수식으로 표현합니다. 순기구학과 역기구학, 해의 연결과 경로 선택을 그림과 직접 조작하는 실험으로 살펴봅니다.',
+    featured: ['robotics-points-vectors'],
+  },
+  {
     slug: 'theory',
     label: '계산 이론',
     icon: '🧮',

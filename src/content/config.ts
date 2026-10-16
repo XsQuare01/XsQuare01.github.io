@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-const CATEGORY_SLUGS = ['theory', 'cryptography', 'algorithm', 'os', 'unity', 'web-dev'] as const;
+const CATEGORY_SLUGS = ['theory', 'cryptography', 'algorithm', 'os', 'unity', 'web-dev', 'robotics'] as const;
 
 const posts = defineCollection({
   type: 'content',

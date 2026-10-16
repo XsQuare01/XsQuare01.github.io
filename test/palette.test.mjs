@@ -26,6 +26,7 @@ const LEGACY = [
 // src/plugins/rehype-svg-steps.mjs도 단계를 세기 전에 SVG 주석을 먼저 지운다.
 const CSS = readFileSync('src/styles/global.css', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
 const DOC = readFileSync('docs/design/DIAGRAM_PALETTE.md', 'utf8');
+const LAB_CSS = readFileSync('src/styles/svg-labs.css', 'utf8');
 
 // `--name: value;` 를 모두 뽑는다. 값이 `var(--other)`면 한 단계 따라간다.
 // CSS와 문서에 같은 함수를 쓰므로 「같은 방식으로 읽어서 같아야 한다」가 된다.
@@ -117,6 +118,8 @@ test('검사 4 — 팔레트 값마다 fill·stroke 매핑 규칙이 있다', ()
     for (const prop of ['fill', 'stroke']) {
       const rule = squash(`.svg-steps svg [${prop}="${hex}"] { ${prop}: var(--${name}); }`);
       assert.ok(flat.includes(rule), `${prop} 매핑이 없다: ${hex} → --${name}`);
+      const labRule = squash(`.svg-lab svg [${prop}="${hex}"] { ${prop}: var(--${name}); }`);
+      assert.ok(squash(LAB_CSS).includes(labRule), `실험 ${prop} 매핑이 없다: ${hex} → --${name}`);
     }
   }
 });
@@ -128,7 +131,7 @@ function steppedSvgs(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) out.push(...steppedSvgs(full));
-    else if (entry.name.toLowerCase().endsWith('-steps.svg')) out.push(full);
+    else if (/(?:-steps|-lab)\.svg$/i.test(entry.name)) out.push(full);
   }
   return out;
 }

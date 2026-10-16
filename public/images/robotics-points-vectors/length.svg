@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="360" viewBox="0 0 400 360" role="img" aria-label="A에서 B까지 가로로 3, 세로로 4만큼 가면 꺾인 경로의 길이는 7이다. 두 점을 곧게 이은 변위의 길이는 5다" font-family="sans-serif">
+  <rect width="400" height="360" rx="8" fill="#0f1117"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">변위의 길이와 경로의 길이</text>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1L9 5L0 9Z" fill="#93c5fd"/></marker></defs>
+  <path d="M100 270H220V110 M205 270V255H220" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="100" y1="270" x2="220" y2="110" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+  <circle cx="100" cy="270" r="7" fill="#93c5fd"/><path d="M220 100L230 110L220 120L210 110Z" fill="#93c5fd"/>
+  <g fill="#e2e8f0" font-size="22">
+    <text x="70" y="282">A</text><text x="235" y="116">B</text>
+    <text x="153" y="298">3</text><text x="236" y="196">4</text>
+    <text x="119" y="188" fill="#93c5fd">5</text>
+  </g>
+  <text x="24" y="338" fill="#cbd5e1" font-size="21">직선거리 5 · 꺾인 경로 3 + 4 = 7</text>
+</svg>
