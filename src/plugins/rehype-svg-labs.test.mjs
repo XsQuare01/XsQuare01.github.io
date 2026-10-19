@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { rehypeSvgLabs } from './rehype-svg-labs.mjs';
@@ -46,6 +46,26 @@ test('missing, remote, traversal, and ordinary image paths stay static', (t) => 
     plugin({ children: [fig] });
     assert.deepEqual(fig, before);
   }
+});
+
+// The path regex rejects `..` and `%2e`, so the cases above never reach the realpath
+// check. A linked directory inside public/ is the remaining way out, and only the
+// realpath comparison catches it. A junction needs no extra privilege on Windows;
+// elsewhere the type is ignored and a directory symlink is made.
+test('a lab file that resolves outside the public directory stays static', (t) => {
+  const publicDir = mkdtempSync(path.join(os.tmpdir(), 'svg-lab-public-'));
+  const outside = mkdtempSync(path.join(os.tmpdir(), 'svg-lab-outside-'));
+  t.after(() => { rmSync(publicDir, { recursive: true, force: true }); rmSync(outside, { recursive: true, force: true }); });
+  writeFileSync(path.join(outside, 'test-lab.svg'), sample);
+  try {
+    symlinkSync(outside, path.join(publicDir, 'images'), 'junction');
+  } catch (error) {
+    t.skip(`cannot create a directory link here (${error.code})`);
+    return;
+  }
+  const fig = figure(), before = structuredClone(fig);
+  rehypeSvgLabs({ publicDir })({ children: [fig] });
+  assert.deepEqual(fig, before);
 });
 
 test('unknown labs, active content, and unsupported ID syntax retain fallback', (t) => {

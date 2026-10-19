@@ -1,9 +1,10 @@
 const modules = { 'point-vector': () => import('./point-vector.js') };
 
-export async function initLabs(root = document) {
+// `registry` is injectable so tests can exercise the fallback paths without a DOM.
+export async function initLabs(root = document, registry = modules) {
   for (const figure of root.querySelectorAll('.svg-lab[data-lab]')) {
     if (figure.classList.contains('is-live')) continue;
-    const load = modules[figure.dataset.lab];
+    const load = registry[figure.dataset.lab];
     if (!load) continue;
     try {
       const { mount } = await load();
