@@ -55,7 +55,7 @@ BROKEN_BOLD = re.compile(
 )
 BOLD_RE = re.compile(r"\*\*[^*\n]+\*\*")
 REQUIRED_KEYS = ["title", "date", "description", "tags", "category", "difficulty"]
-CANONICAL_CATEGORIES = {"theory", "cryptography", "algorithm", "os", "unity", "web-dev"}
+CANONICAL_CATEGORIES = {"theory", "cryptography", "algorithm", "os", "unity", "web-dev", "robotics"}
 CANONICAL_DIFFICULTIES = {"입문", "초급", "중급", "고급", "심화"}
 _FM_KEY_RE = re.compile(r"^([A-Za-z_]+):\s*(.*)$")
 _FENCE_RE = re.compile(r"```.*?```", re.DOTALL)

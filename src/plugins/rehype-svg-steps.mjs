@@ -83,7 +83,7 @@ const REF_SITE_RE = /url\(\s*['"]?#([^)'"\s]+)|(?:xlink:)?href\s*=\s*['"]#([^'"]
 // id와 그 참조에 접두어를 붙인다. 붙이지 못한 참조가 하나라도 남으면 null을 돌려주고,
 // 호출자는 원래의 <img>로 되돌아간다 — 화살촉이 사라진 선처럼 조용히 깨진 그림을 내보내는
 // 것보다, 상호작용을 포기하고 온전한 정적 이미지로 물러나는 편이 낫다.
-function prefixIds(source, prefix) {
+export function prefixIds(source, prefix) {
   const declared = [...source.matchAll(/\sid="([^"]*)"/g)].map((m) => m[1]).filter(Boolean);
 
   // 위 정규식은 겹따옴표에 값이 빈 문자열이 아닌 id만 본다. 그것이 파일에 있는 id 전부인지는

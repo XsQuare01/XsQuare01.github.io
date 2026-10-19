@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="360" viewBox="0 0 400 360" role="img" aria-label="원점에서 오른쪽으로 4, 위로 5만큼 가면 점 B (4, 5)에 도착한다" font-family="sans-serif">
+  <rect width="400" height="360" rx="8" fill="#0f1117"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">좌표는 기준에서 읽는다</text>
+  <path d="M70 70V300 M30 270H345" fill="none" stroke="#64748b" stroke-width="2"/>
+  <path d="M70 270H230V70" fill="none" stroke="#93c5fd" stroke-width="3" stroke-dasharray="7 5"/>
+  <path d="M70 230H110V270 M110 265V275 M150 265V275 M190 265V275 M230 265V275 M65 230H75 M65 190H75 M65 150H75 M65 110H75 M65 70H75" fill="none" stroke="#64748b" stroke-width="1"/>
+  <circle cx="110" cy="230" r="7" fill="#e2e8f0"/><circle cx="230" cy="70" r="8" fill="#93c5fd"/>
+  <g fill="#e2e8f0" font-size="22">
+    <text x="46" y="295">O</text><text x="354" y="277">x</text><text x="64" y="59">y</text>
+    <text x="101" y="297">1</text><text x="221" y="297">4</text><text x="47" y="237">1</text><text x="47" y="77">5</text>
+    <text x="124" y="224">A (1, 1)</text><text x="246" y="78">B (4, 5)</text>
+  </g>
+  <text x="24" y="338" fill="#cbd5e1" font-size="21">한 칸 = 길이 1 · 오른쪽 x, 위쪽 y</text>
+</svg>

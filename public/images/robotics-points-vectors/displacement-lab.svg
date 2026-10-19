@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="450" viewBox="0 0 400 450" role="img" aria-label="A (1, 1)에서 B (4, 5)로 향하는 변위 (3, 4)의 길이는 5다" data-lab="point-vector" font-family="sans-serif">
+  <rect width="400" height="450" rx="8" fill="#0f1117"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker>
+  </defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">A에서 B로 가는 변위</text>
+  <g data-part="grid" stroke="#475569" stroke-width="1">
+    <path d="M30 110V390 M70 110V390 M110 110V390 M150 110V390 M190 110V390 M230 110V390 M270 110V390 M310 110V390 M30 110H310 M30 150H310 M30 190H310 M30 230H310 M30 270H310 M30 310H310 M30 350H310 M30 390H310" fill="none"/>
+    <g fill="#94a3b8" stroke="none" font-size="20" text-anchor="middle">
+      <text x="30" y="375">−1</text><text x="110" y="375">1</text><text x="150" y="375">2</text><text x="190" y="375">3</text><text x="230" y="375">4</text><text x="270" y="375">5</text><text x="310" y="375">6</text>
+      <text x="52" y="317">1</text><text x="52" y="277">2</text><text x="52" y="237">3</text><text x="52" y="197">4</text><text x="52" y="157">5</text><text x="52" y="117">6</text><text x="52" y="397">−1</text>
+    </g>
+  </g>
+  <line data-part="x-axis" x1="24" y1="350" x2="350" y2="350" stroke="#64748b" stroke-width="2"/>
+  <line data-part="y-axis" x1="70" y1="400" x2="70" y2="70" stroke="#64748b" stroke-width="2"/>
+  <text data-part="x-label" x="363" y="357" fill="#e2e8f0" font-size="23">x</text>
+  <text data-part="y-label" x="63" y="60" fill="#e2e8f0" font-size="23">y</text>
+  <line data-part="vector" x1="110" y1="310" x2="230" y2="150" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+  <g data-part="o" data-point="o" transform="translate(70 350)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <path d="M-7 -7H7V7H-7Z" fill="#e2e8f0"/>
+  </g>
+  <g data-part="a" data-point="a" transform="translate(110 310)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <circle r="8" fill="#93c5fd"/>
+  </g>
+  <g data-part="b" data-point="b" transform="translate(230 150)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <path d="M0 -10L10 0L0 10L-10 0Z" fill="#93c5fd"/>
+  </g>
+  <text data-part="label-o" x="42" y="378" fill="#e2e8f0" font-size="24">O</text>
+  <text data-part="label-a" x="125" y="294" fill="#e2e8f0" font-size="24">A</text>
+  <text data-part="label-b" x="245" y="134" fill="#e2e8f0" font-size="24">B</text>
+  <text data-part="summary" x="24" y="432" fill="#e2e8f0" font-size="20">변위 (3, 4) · 거리 5</text>
+</svg>

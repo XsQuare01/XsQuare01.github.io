@@ -867,6 +867,7 @@ class TestDeterministicValidatorsV2(unittest.TestCase):
         invalid = TestFrontmatter.FULL.replace("category: algorithm", "category: math").replace("difficulty: 입문", "difficulty: beginner")
 
         self.assertEqual(rp.check_frontmatter(valid), [])
+        self.assertEqual(rp.check_frontmatter(valid.replace("category: cryptography", "category: robotics")), [])
         out = rp.check_frontmatter(invalid)
         messages = "\n".join(f.message for f in out)
         self.assertIn("category", messages)
