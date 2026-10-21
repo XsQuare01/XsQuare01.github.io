@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="340" viewBox="0 0 400 340" role="img" aria-label="(3, 1)은 x축 방향 단위벡터 세 개와 y축 방향 단위벡터 하나를 이어 붙인 것이다" font-family="sans-serif">
+  <rect width="400" height="340" rx="8" fill="#0f1117"/>
+  <defs><marker id="rvp-u-x" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#fbbf24"/></marker><marker id="rvp-u-y" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#4ade80"/></marker><marker id="rvp-u-a" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">두 축 방향의 단위벡터로 나누기</text>
+  <path d="M140 70V250 M220 70V250 M300 70V250 M380 70V250 M60 170H380 M60 90H380" fill="none" stroke="#475569" stroke-width="1"/>
+  <path d="M50 250H386 M60 262V64" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="60" y1="250" x2="140" y2="250" stroke="#fbbf24" stroke-width="4" marker-end="url(#rvp-u-x)"/>
+  <text x="100" y="276" fill="#fbbf24" font-size="20" text-anchor="middle"><tspan font-weight="bold">e</tspan><tspan font-size="14" dy="5">x</tspan><tspan dy="-5"> </tspan></text>
+  <line x1="140" y1="250" x2="220" y2="250" stroke="#fbbf24" stroke-width="4" marker-end="url(#rvp-u-x)"/>
+  <text x="180" y="276" fill="#fbbf24" font-size="20" text-anchor="middle"><tspan font-weight="bold">e</tspan><tspan font-size="14" dy="5">x</tspan><tspan dy="-5"> </tspan></text>
+  <line x1="220" y1="250" x2="300" y2="250" stroke="#fbbf24" stroke-width="4" marker-end="url(#rvp-u-x)"/>
+  <text x="260" y="276" fill="#fbbf24" font-size="20" text-anchor="middle"><tspan font-weight="bold">e</tspan><tspan font-size="14" dy="5">x</tspan><tspan dy="-5"> </tspan></text>
+  <line x1="300" y1="250" x2="300" y2="170" stroke="#4ade80" stroke-width="4" marker-end="url(#rvp-u-y)"/>
+  <line x1="60" y1="250" x2="300" y2="170" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-u-a)"/>
+  <text x="312" y="217" fill="#4ade80" font-size="20"><tspan font-weight="bold">e</tspan><tspan font-size="14" dy="5">y</tspan><tspan dy="-5"> </tspan></text>
+  <text x="150" y="196" fill="#93c5fd" font-size="20" text-anchor="middle"><tspan font-weight="bold">a</tspan> = (3, 1)</text>
+  <text x="52" y="272" fill="#e2e8f0" font-size="20" text-anchor="end">O</text>
+  <text x="24" y="318" fill="#e2e8f0" font-size="22"><tspan font-weight="bold">a</tspan> = 3<tspan font-weight="bold">e</tspan><tspan font-size="15" dy="5">x</tspan><tspan dy="-5"> </tspan>+ 1<tspan font-weight="bold">e</tspan><tspan font-size="15" dy="5">y</tspan><tspan dy="-5"> </tspan></text>
+</svg>

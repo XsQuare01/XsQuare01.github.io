@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="410" viewBox="0 0 400 410" role="img" aria-label="(1, 3)을 (0.6, 0.8) 방향의 직선에 정사영하면 수선의 발은 (1.8, 2.4)이고 정사영의 길이는 3, 나머지의 길이는 1이다" font-family="sans-serif">
+  <rect width="400" height="410" rx="8" fill="#0f1117"/>
+  <defs><marker id="rvp-h-a" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker><marker id="rvp-h-u" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#e2e8f0"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">한 방향으로 그림자 내리기</text>
+  <path d="M40 322H380 M70 340V60" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="57.4" y1="338.8" x2="242.2" y2="92.4" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <line x1="70" y1="322" x2="196" y2="154" stroke="#fbbf24" stroke-width="6"/>
+  <line x1="196" y1="154" x2="140" y2="112" stroke="#4ade80" stroke-width="3" stroke-dasharray="6 4"/>
+  <path d="M190 162L182 156L188 148" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <path d="M108.4 270.8A64 64 0 0 0 90.2 261.3" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="70" y1="322" x2="140" y2="112" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-h-a)"/>
+  <line x1="112.8" y1="301.6" x2="154.8" y2="245.6" stroke="#e2e8f0" stroke-width="3" marker-end="url(#rvp-h-u)"/>
+  <circle cx="196" cy="154" r="5" fill="#fbbf24"/>
+  <g font-size="19">
+    <text x="152" y="104" fill="#93c5fd"><tspan font-weight="bold">a</tspan> (1, 3)</text>
+    <text x="162.8" y="267.6" fill="#e2e8f0"><tspan font-weight="bold">u</tspan></text>
+    <text x="210" y="174" fill="#fbbf24">F (1.8, 2.4)</text>
+    <text x="109.9" y="252.8" fill="#cbd5e1" text-anchor="middle">φ</text>
+    <text x="78" y="346" fill="#e2e8f0">O</text>
+    <text x="248.2" y="96.4" fill="#94a3b8">ℓ</text>
+  </g>
+  <g font-size="17" fill="#cbd5e1">
+    <line x1="24" y1="366" x2="52" y2="366" stroke="#fbbf24" stroke-width="6"/><text x="60" y="372">정사영, 길이 3</text>
+    <line x1="210" y1="366" x2="238" y2="366" stroke="#4ade80" stroke-width="3" stroke-dasharray="6 4"/><text x="246" y="372">나머지, 길이 1</text>
+    <text x="24" y="398">점선 ℓ: 원점을 지나 <tspan font-weight="bold">u</tspan> 방향으로 뻗은 직선</text>
+  </g>
+</svg>
