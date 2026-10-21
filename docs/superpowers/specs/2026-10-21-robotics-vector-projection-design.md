@@ -46,9 +46,9 @@
 |---|---|---|---|
 | 모든 $\mathbf a,\mathbf b$에 대해 $\mathbf a+\mathbf b=\mathbf b+\mathbf a$ | 모든 …에 대해 | 완전성 | 1절. 성분마다 수의 덧셈은 순서와 무관하다 |
 | 모든 $k$, $\mathbf a$에 대해 $\lVert k\mathbf a\rVert=|k|\lVert\mathbf a\rVert$ | 모든 …에 대해 | 완전성 | 2절. $\sqrt{k^2a_x^2+k^2a_y^2}=\sqrt{k^2}\sqrt{a_x^2+a_y^2}$, $\sqrt{k^2}=|k|$ |
-| $k<0$이면 $k\mathbf a$는 $\mathbf a$와 정반대 방향 | 모든 …에 대해 | 완전성 | 2절. $k\mathbf a=|k|(-\mathbf a)$이고 $-\mathbf a$의 끝점 $(-a_x,-a_y)$는 원점에 대해 $\mathbf a$의 끝점 반대편(기초 2의 $(3,4)$/$(-3,-4)$) |
+| $\mathbf a\neq\mathbf 0$이고 $k<0$이면 $k\mathbf a$는 $\mathbf a$와 정반대 방향 | 모든 …에 대해 | 완전성 | 2절. $k\mathbf a=|k|(-\mathbf a)$이고 $-\mathbf a$의 끝점 $(-a_x,-a_y)$는 원점에 대해 $\mathbf a$의 끝점 반대편(기초 2의 $(3,4)$/$(-3,-4)$). $\mathbf a=\mathbf 0$이면 $k$와 관계없이 영벡터라 방향이 없다(추가 리뷰, 2026-10-21) |
 | 모든 벡터는 $a_x\mathbf e_x+a_y\mathbf e_y$ | 모든 …에 대해 | 완전성 | 3절. $a_x\mathbf e_x=(a_x,0)$, $a_y\mathbf e_y=(0,a_y)$의 합 |
-| 모든 $\varphi$에 대해 $s=\lVert\mathbf a\rVert\cos\varphi$ | 모든 …에 대해 | 완전성 | 5절. 원점 중심 회전은 길이·각·수직을 보존한다는 사실(종이를 돌리는 것)을 전제로 두고, 돌린 그림에서 기초 2의 결론(모든 각도)을 쓴다 |
+| $\mathbf a\neq\mathbf 0$이면 모든 $\varphi$에 대해 $s=\lVert\mathbf a\rVert\cos\varphi$ | 모든 …에 대해 | 완전성 | 5절. 원점 중심 회전은 길이·각·수직을 보존한다는 사실(종이를 돌리는 것)을 전제로 두고, 돌린 그림에서 기초 2의 결론(모든 각도)을 쓴다. $\mathbf a=\mathbf 0$이면 $\varphi$가 없고 $s=0$. 일반 벡터의 각도 공식 $\mathbf a\cdot\mathbf b=\lVert\mathbf a\rVert\lVert\mathbf b\rVert\cos\varphi$도 두 벡터가 모두 영벡터가 아닐 때만 쓰고, 한쪽이 영벡터이면 성분 정의로 내적 0(추가 리뷰, 2026-10-21) |
 | 그림자는 더해지고 실수배된다 | 모든 …에 대해 | 완전성 | 6절 ①. 회전은 그림 전체를 함께 옮기므로 이어 붙인 모양과 실수배 관계가 유지된다 |
 | 모든 $\mathbf a$와 단위벡터 $\mathbf u$에 대해 $s=a_xu_x+a_yu_y$ | 모든 …에 대해 | 완전성 | 6절 ①②③ |
 | 영벡터가 아닌 두 벡터는 내적이 0일 때에만 수직 | …인 경우에만 | 필요충분 | 6절. $\mathbf a\cdot\mathbf b=\lVert\mathbf a\rVert\lVert\mathbf b\rVert\cos\varphi$, 길이가 양수이므로 $\cos\varphi=0$과 동치. $(-180^\circ,180^\circ]$에서 단위원의 가로 좌표가 0인 곳은 $\pm90^\circ$뿐 |
@@ -122,6 +122,8 @@
 - 라벨: 고정 범례. 정사영·나머지·$\mathbf a$ 모두 길이 0이 될 수 있다.
 
 ### 두 실험 공통
+
+- 읽기 값은 소수 둘째 자리까지 반올림한다. 읽기 값의 식(‖a‖ + ‖b‖, a · u의 성분 계산, ‖a‖ cos φ, 요약 줄의 a · u)은 보이는 수가 모두 정확할 때만 `=`로 잇고, 하나라도 반올림했으면 `≈`로 잇는다. 독자가 보이는 수로 검산할 수 있어야 하기 때문이다(추가 리뷰, 2026-10-21: a=b=(0.5,0.5)에서 "0.71 + 0.71 = 1.41"이 나왔다). 값의 정밀도를 낮춰 식을 맞추지는 않는다. 상태 전체를 훑어 `=`로 이은 식이 보이는 수로 성립하는지를 테스트가 검사한다(`src/labs/readout.mjs`).
 
 - 모델이 모든 좌표를 계산하고, 정적 SVG가 첫 화면과 같은지 테스트로 묶는다.
 - 손잡이가 겹치면(영벡터 등) 맨 위에 그린 쪽이 아니라 포인터에서 가장 가까운 손잡이를 잡고, 같은 거리면 선택 상자에서 고른 쪽을 잡는다(`src/labs/pick-handle.mjs`).
