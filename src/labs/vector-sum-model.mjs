@@ -1,3 +1,5 @@
+import { relation } from './readout.mjs';
+
 // Both arrows stay in [−3, 3] on a 0.5 grid, so the chain a + b ends inside the
 // ±6 plot and every drawn coordinate is a whole pixel (one step is 15px).
 export const LIMITS = Object.freeze({ min: -3, max: 3, step: 0.5 });
@@ -23,6 +25,14 @@ export function measure({ a, b }) {
 
 // The text uses U+2212 for negatives, so the live readouts do too.
 export const formatNumber = (n) => Number(n.toFixed(2)).toString().replace('-', '−');
+
+// The ‖a‖ + ‖b‖ readout. Lengths such as √0.5 are rounded, so the sign is "≈"
+// unless every number shown is exact.
+export function lengthSumText(state) {
+  const { lengths } = measure(state);
+  const total = lengths.a + lengths.b;
+  return `${formatNumber(lengths.a)} + ${formatNumber(lengths.b)} ${relation(lengths.a, lengths.b, total)} ${formatNumber(total)}`;
+}
 
 // SVG geometry shared by the static picture and the live lab: one unit is 30px,
 // and model (0, 0) sits at (200, 245).

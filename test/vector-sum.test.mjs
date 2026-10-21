@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  initialState, measure, move, dragTo, layout, toSvg, formatNumber, LIMITS, HEAD_MIN,
+  initialState, measure, move, dragTo, layout, lengthSumText, toSvg, formatNumber, LIMITS, HEAD_MIN,
 } from '../src/labs/vector-sum-model.mjs';
 import { pickHandle } from '../src/labs/pick-handle.mjs';
 
@@ -46,6 +46,27 @@ test('over every state, the arrows and the dashed other order close a parallelog
       const vec = (s) => ({ x: s.x2 - s.x1, y: s.y2 - s.y1 });
       assert.deepEqual(vec(at.aSecond), vec(at.a), `opposite sides are the same vector at ${where}`);
       assert.deepEqual(vec(at.bFirst), vec(at.b), `opposite sides are the same vector at ${where}`);
+    }
+  }
+});
+
+// A reader can check a displayed equation by hand, so "=" must hold for the numbers
+// as shown. Whether a number was rounded is judged from the true value here, not
+// from the model's own test for exactness.
+const shown = (text) => Number(text.replace('−', '-').replace(/[()]/g, ''));
+test('the length readout says = only when the numbers shown add up exactly', () => {
+  assert.equal(lengthSumText({ a: { x: 0.5, y: 0.5 }, b: { x: 0.5, y: 0.5 } }), '0.71 + 0.71 ≈ 1.41');
+  assert.equal(lengthSumText(initialState()), '3.16 + 2.24 ≈ 5.4');
+  assert.equal(lengthSumText({ a: { x: 3, y: 0 }, b: { x: 0, y: 2 } }), '3 + 2 = 5');
+  for (const a of VECTORS) {
+    for (const b of VECTORS) {
+      const m = lengthSumText({ a, b }).match(/^(\S+) \+ (\S+) ([=≈]) (\S+)$/);
+      assert.ok(m, 'readout shape');
+      const [x, y, z] = [m[1], m[2], m[4]].map(shown);
+      const truth = [Math.hypot(a.x, a.y), Math.hypot(b.x, b.y)];
+      const rounded = [x - truth[0], y - truth[1], z - truth[0] - truth[1]].some((e) => Math.abs(e) > 1e-9);
+      if (m[3] === '=') { assert.ok(!rounded, `rounded numbers joined by = at a ${a.x},${a.y} b ${b.x},${b.y}`); near(x + y, z, 'shown numbers add up'); }
+      else assert.ok(rounded, `exact numbers joined by ≈ at a ${a.x},${a.y} b ${b.x},${b.y}`);
     }
   }
 });

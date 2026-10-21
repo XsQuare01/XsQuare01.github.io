@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  initialState, measure, move, moveTo, dragTo, layout, toSvg, formatNumber, LIMITS, PLOT, UNIT, HEAD_MIN,
+  initialState, measure, move, moveTo, dragTo, layout, dotText, cosText, toSvg, formatNumber, LIMITS, PLOT, UNIT, HEAD_MIN,
 } from '../src/labs/vector-projection-model.mjs';
 
 const near = (actual, expected, message, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${message}: ${actual} ≠ ${expected}`);
@@ -32,6 +32,40 @@ test('the perpendicular and the negative examples', () => {
   near(measure({ a: { x: 2, y: 5 }, d: { x: 1, y: 0 } }).s, 2, 'onto e_x the shadow is the x component');
   near(measure({ a: { x: 2, y: 5 }, d: { x: 0, y: 1 } }).s, 5, 'onto e_y it is the y component');
   assert.equal(measure({ a: { x: 0, y: 0 }, d }).phi, null, 'a zero vector has no angle');
+});
+
+// A reader can check a displayed equation by hand, so "=" must hold for the numbers
+// as shown. Whether a number was rounded is judged from the true value here, not
+// from the model's own test for exactness.
+const shown = (text) => Number(text.replace('−', '-').replace(/[()]/g, ''));
+test('the a · u readouts say = only when the numbers shown work out exactly', () => {
+  assert.equal(dotText(initialState()), '1 × 0.6 + 3 × 0.8 = 3');
+  assert.equal(cosText(initialState()), '3.16 × cos 18.43° ≈ 3');
+  assert.equal(dotText({ a: { x: 2.5, y: 2 }, d: { x: 1, y: 1 } }), '2.5 × 0.71 + 2 × 0.71 ≈ 3.18');
+  assert.equal(dotText({ a: { x: 1, y: 3 }, d: { x: 3, y: -1 } }), '1 × 0.95 + 3 × (−0.32) ≈ 0');
+  assert.equal(cosText({ a: { x: 3, y: 0 }, d: { x: 0, y: 1 } }), '3 × cos 90° = 0');
+  assert.equal(cosText({ a: { x: 0, y: 0 }, d: { x: 3, y: 4 } }), '0 (a의 방향을 정할 수 없음)');
+  for (const d of D_VALUES) {
+    for (const a of A_VALUES) {
+      const where = `a ${a.x},${a.y} D ${d.x},${d.y}`;
+      const dl = Math.hypot(d.x, d.y), u = { x: d.x / dl, y: d.y / dl };
+      const s = a.x * u.x + a.y * u.y, al = Math.hypot(a.x, a.y);
+      const dm = dotText({ a, d }).match(/^(\S+) × (\S+) \+ (\S+) × (\S+) ([=≈]) (\S+)$/);
+      assert.ok(dm, `dot readout shape at ${where}`);
+      const [p, q, r, t, z] = [dm[1], dm[2], dm[3], dm[4], dm[6]].map(shown);
+      const dotRounded = [p - a.x, q - u.x, r - a.y, t - u.y, z - s].some((e) => Math.abs(e) > 1e-9);
+      if (dm[5] === '=') { assert.ok(!dotRounded, `rounded numbers joined by = at ${where}`); near(p * q + r * t, z, `shown numbers work out at ${where}`); }
+      else assert.ok(dotRounded, `exact numbers joined by ≈ at ${where}`);
+      if (al === 0) continue;
+      const cm = cosText({ a, d }).match(/^(\S+) × cos (\S+)° ([=≈]) (\S+)$/);
+      assert.ok(cm, `cos readout shape at ${where}`);
+      const [m, phi, w] = [cm[1], cm[2], cm[4]].map(shown);
+      const truePhi = (Math.acos(Math.max(-1, Math.min(1, s / al))) * 180) / Math.PI;
+      const cosRounded = [m - al, phi - truePhi, w - s].some((e) => Math.abs(e) > 1e-6);
+      if (cm[3] === '=') { assert.ok(!cosRounded, `rounded numbers joined by = at ${where}`); near(m * Math.cos((phi * Math.PI) / 180), w, `shown numbers work out at ${where}`, 1e-6); }
+      else assert.ok(cosRounded, `exact numbers joined by ≈ at ${where}`);
+    }
+  }
 });
 
 test('inputs snap and clamp, and the arrow keys carry D across the origin', () => {

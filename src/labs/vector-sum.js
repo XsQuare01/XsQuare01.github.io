@@ -1,4 +1,4 @@
-import { initialState, measure, move, dragTo, layout, LIMITS, formatNumber as fmt } from './vector-sum-model.mjs';
+import { initialState, measure, move, dragTo, layout, lengthSumText, LIMITS, formatNumber as fmt } from './vector-sum-model.mjs';
 import { pickHandle } from './pick-handle.mjs';
 
 const pair = (v) => `(${fmt(v.x)}, ${fmt(v.y)})`;
@@ -64,7 +64,7 @@ export function mount(figure) {
     outputs.a.textContent = pair(state.a);
     outputs.b.textContent = pair(state.b);
     outputs.sum.textContent = pair(sum);
-    outputs.lengths.textContent = `${fmt(lengths.a)} + ${fmt(lengths.b)} = ${fmt(lengths.a + lengths.b)}`;
+    outputs.lengths.textContent = lengthSumText(state);
     outputs['sum-length'].textContent = fmt(lengths.sum);
     const summary = `a ${pair(state.a)}, b ${pair(state.b)}. a + b ${pair(sum)}, 길이 ${fmt(lengths.sum)}. 두 길이의 합은 ${fmt(lengths.a + lengths.b)}.`;
     svg.setAttribute('aria-label', summary);

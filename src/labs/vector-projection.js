@@ -1,9 +1,8 @@
-import { initialState, measure, move, dragTo, layout, LIMITS, formatNumber as fmt } from './vector-projection-model.mjs';
+import { initialState, measure, move, dragTo, layout, dotText, cosText, LIMITS, formatNumber as fmt } from './vector-projection-model.mjs';
 import { pickHandle } from './pick-handle.mjs';
+import { relation } from './readout.mjs';
 
 const pair = (v) => `(${fmt(v.x)}, ${fmt(v.y)})`;
-// A negative factor reads better in parentheses: 1 × (−0.6).
-const factor = (n) => { const text = fmt(n); return text.startsWith('−') ? `(${text})` : text; };
 const NAMES = { a: '화살표 a의 성분', d: '방향 점 D의 좌표' };
 const RANGES = { a: [LIMITS.min, LIMITS.max], d: [LIMITS.dirMin, LIMITS.dirMax] };
 
@@ -71,13 +70,14 @@ export function mount(figure) {
       : '방향 점 D의 좌표입니다. 방향만 쓰므로 D를 원점에 둘 수는 없습니다.';
     outputs.a.textContent = pair(state.a);
     outputs.u.textContent = pair(v.u);
-    outputs.dot.textContent = `${factor(state.a.x)} × ${factor(v.u.x)} + ${factor(state.a.y)} × ${factor(v.u.y)} = ${fmt(v.s)}`;
-    outputs.cos.textContent = v.phi === null ? '0 (a의 방향을 정할 수 없음)' : `${fmt(v.lengths.a)} × cos ${fmt(v.phi)}° = ${fmt(v.s)}`;
+    outputs.dot.textContent = dotText(state);
+    outputs.cos.textContent = cosText(state);
     outputs.proj.textContent = pair(v.proj);
     outputs.rest.textContent = `${pair(v.rest)}, 길이 ${fmt(v.lengths.rest)}`;
-    const summary = `a ${pair(state.a)}, u ${pair(v.u)}. a · u = ${fmt(v.s)}, 정사영 ${pair(v.proj)}, 나머지 ${pair(v.rest)}.`;
+    const sign = relation(v.s);
+    const summary = `a ${pair(state.a)}, u ${pair(v.u)}. a · u ${sign} ${fmt(v.s)}, 정사영 ${pair(v.proj)}, 나머지 ${pair(v.rest)}.`;
     svg.setAttribute('aria-label', summary);
-    parts.summary.textContent = `a · u = ${fmt(v.s)}, 정사영 ${pair(v.proj)}`;
+    parts.summary.textContent = `a · u ${sign} ${fmt(v.s)}, 정사영 ${pair(v.proj)}`;
     return summary;
   };
   const announce = () => { status.textContent = render(); };

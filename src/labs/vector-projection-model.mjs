@@ -1,3 +1,5 @@
+import { relation } from './readout.mjs';
+
 // a stays in [−3, 3] so that |a| ≤ 3√2 ≈ 4.24: the foot F of the perpendicular is
 // never farther from O than a's tip, so it stays inside the ±4.5 plot. The
 // direction point D may go to ±4; only its direction matters.
@@ -56,6 +58,22 @@ export function measure({ a, d }) {
 
 // The text uses U+2212 for negatives, so the live readouts do too.
 export const formatNumber = (n) => Number(n.toFixed(2)).toString().replace('-', '−');
+// A negative factor reads better in parentheses: 1 × (−0.6).
+const factor = (n) => { const text = formatNumber(n); return text.startsWith('−') ? `(${text})` : text; };
+
+// The two readouts that compute a · u. u is usually rounded (D = (1, 2) gives
+// 0.447…), so each sign is "≈" unless every number shown is exact.
+export function dotText(state) {
+  const { u, s } = measure(state);
+  const { a } = state;
+  return `${factor(a.x)} × ${factor(u.x)} + ${factor(a.y)} × ${factor(u.y)} ${relation(a.x, a.y, u.x, u.y, s)} ${formatNumber(s)}`;
+}
+
+export function cosText(state) {
+  const { lengths, phi, s } = measure(state);
+  if (phi === null) return '0 (a의 방향을 정할 수 없음)';
+  return `${formatNumber(lengths.a)} × cos ${formatNumber(phi)}° ${relation(lengths.a, phi, s)} ${formatNumber(s)}`;
+}
 
 // SVG geometry shared by the static picture and the live lab: one unit is 40px,
 // and model (0, 0) sits at (200, 250).
