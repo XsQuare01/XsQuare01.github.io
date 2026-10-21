@@ -3,6 +3,8 @@
 export const LAB_MODULES = {
   'point-vector': () => import('./point-vector.js'),
   'rod-angle': () => import('./rod-angle.js'),
+  'vector-sum': () => import('./vector-sum.js'),
+  'vector-projection': () => import('./vector-projection.js'),
 };
 const modules = LAB_MODULES;
 

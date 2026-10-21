@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="534" viewBox="0 0 400 534" role="img" aria-label="a (3, 1)에 b (1, 2)를 이어 붙이면 끝점은 (4, 3)이고 길이는 5다" data-lab="vector-sum" font-family="sans-serif">
+  <rect width="400" height="534" rx="8" fill="#0f1117"/>
+  <defs><marker id="rvp-l-a" viewBox="0 0 10 10" refX="17.3" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker><marker id="rvp-l-b" viewBox="0 0 10 10" refX="18.2" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#a78bfa"/></marker><marker id="rvp-l-s" viewBox="0 0 10 10" refX="15.9" refY="5" markerUnits="userSpaceOnUse" markerWidth="16" markerHeight="16" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#e2e8f0"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">화살표 두 개를 이어 붙이기</text>
+  <g stroke="#475569" stroke-width="1">
+    <path d="M20 65V425 M20 425H380 M50 65V425 M20 395H380 M80 65V425 M20 365H380 M110 65V425 M20 335H380 M140 65V425 M20 305H380 M170 65V425 M20 275H380 M230 65V425 M20 215H380 M260 65V425 M20 185H380 M290 65V425 M20 155H380 M320 65V425 M20 125H380 M350 65V425 M20 95H380 M380 65V425 M20 65H380" fill="none"/>
+    <g fill="#94a3b8" stroke="none" font-size="18" text-anchor="middle">
+      <text x="80" y="267">−4</text><text x="140" y="267">−2</text><text x="260" y="267">2</text><text x="320" y="267">4</text>
+      <g text-anchor="end"><text x="188" y="371">−4</text><text x="188" y="311">−2</text><text x="188" y="191">2</text><text x="188" y="131">4</text></g>
+    </g>
+  </g>
+  <line x1="14" y1="245" x2="382" y2="245" stroke="#64748b" stroke-width="2"/>
+  <line x1="200" y1="431" x2="200" y2="61" stroke="#64748b" stroke-width="2"/>
+  <text x="386" y="252" fill="#e2e8f0" font-size="20">x</text>
+  <text x="207" y="62" fill="#e2e8f0" font-size="20">y</text>
+  <text x="188" y="236" fill="#e2e8f0" font-size="20" text-anchor="end">O</text>
+  <line data-part="b-first" x1="200" y1="245" x2="230" y2="185" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 5"/>
+  <line data-part="a-second" x1="230" y1="185" x2="320" y2="155" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line data-part="sum" x1="200" y1="245" x2="320" y2="155" stroke="#e2e8f0" stroke-width="6" marker-end="url(#rvp-l-s)" data-marker="url(#rvp-l-s)"/>
+  <line data-part="a" x1="200" y1="245" x2="290" y2="215" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-l-a)" data-marker="url(#rvp-l-a)"/>
+  <line data-part="b" x1="290" y1="215" x2="320" y2="155" stroke="#a78bfa" stroke-width="3" marker-end="url(#rvp-l-b)" data-marker="url(#rvp-l-b)"/>
+  <g data-part="handle-a" data-point="a" transform="translate(290 215)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <circle r="8" fill="#93c5fd"/>
+  </g>
+  <g data-part="handle-b" data-point="b" transform="translate(320 155)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <path d="M0 -10L10 0L0 10L-10 0Z" fill="#a78bfa"/>
+  </g>
+  <g font-size="17" fill="#cbd5e1">
+    <line x1="24" y1="456" x2="52" y2="456" stroke="#93c5fd" stroke-width="3"/><text x="60" y="462"><tspan font-weight="bold">a</tspan> (파란 점)</text>
+    <line x1="210" y1="456" x2="238" y2="456" stroke="#a78bfa" stroke-width="3"/><text x="246" y="462"><tspan font-weight="bold">b</tspan> (보라 마름모)</text>
+    <line x1="24" y1="482" x2="52" y2="482" stroke="#e2e8f0" stroke-width="6"/><text x="60" y="488"><tspan font-weight="bold">a</tspan> + <tspan font-weight="bold">b</tspan></text>
+    <line x1="210" y1="482" x2="224" y2="482" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 5"/><line x1="224" y1="482" x2="238" y2="482" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/><text x="246" y="488">순서를 바꾼 길</text>
+  </g>
+  <text data-part="summary" x="24" y="518" fill="#e2e8f0" font-size="20">a + b = (4, 3), 길이 5</text>
+</svg>
