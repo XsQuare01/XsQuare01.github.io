@@ -1,4 +1,7 @@
-// θ runs over (−180°, 180°], the range atan2 returns, so the slider starts at −179.
+// θ runs over (−180°, 180°], the representative range this lab and the article use
+// for a direction (30°, 390° and −330° are one direction). Math.atan2 itself returns
+// radians in [−π, π], so fromTip converts to degrees and wrap() turns −180° into
+// 180°. The slider therefore starts at −179.
 export const LIMITS = Object.freeze({
   thetaMin: -179, thetaMax: 180, thetaStep: 1,
   lengthMin: 0.5, lengthMax: 3, lengthStep: 0.25,

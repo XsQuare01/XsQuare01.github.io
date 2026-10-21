@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="336" viewBox="0 0 680 336" role="img" aria-label="한 변이 1인 정삼각형을 수선으로 반으로 나누면 30°의 맞은편 변은 1/2, 이웃한 직각변은 √3/2다. 같은 직각삼각형을 막대 방향으로 놓으면 두 변이 cos 30°와 sin 30°가 된다" font-family="sans-serif">
+  <rect width="680" height="336" rx="8" fill="#0f1117"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="22">30°의 사인과 코사인 구하기</text>
+
+  <polygon points="40,230 190,230 115,100.1" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <g fill="#cbd5e1" font-size="16">
+    <text x="64" y="162" text-anchor="end">1</text>
+    <text x="166" y="162">1</text>
+    <text x="115" y="252" text-anchor="middle">1</text>
+  </g>
+  <g fill="#94a3b8" font-size="14">
+    <text x="115" y="142" text-anchor="middle">60°</text>
+    <text x="58" y="223">60°</text>
+    <text x="172" y="223" text-anchor="end">60°</text>
+  </g>
+
+  <text x="230" y="175" fill="#94a3b8" font-size="28" text-anchor="middle">→</text>
+
+  <polyline points="345,100.1 270,230 345,230" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <polygon points="345,100.1 420,230 345,230" fill="#1e3a5f"/>
+  <line x1="345" y1="100.1" x2="420" y2="230" stroke="#93c5fd" stroke-width="3"/>
+  <line x1="345" y1="100.1" x2="345" y2="230" stroke="#fbbf24" stroke-width="3"/>
+  <line x1="345" y1="230" x2="420" y2="230" stroke="#4ade80" stroke-width="3" stroke-dasharray="6 4"/>
+  <path d="M345 220H355V230" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <path d="M345 122.1A22 22 0 0 0 356 119.2" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="349" y="151" fill="#e2e8f0" font-size="13">30°</text>
+  <g font-size="15">
+    <text x="392" y="162" fill="#93c5fd">1</text>
+    <text x="338" y="172" fill="#fbbf24" text-anchor="end">√3/2</text>
+    <text x="382" y="252" fill="#4ade80" text-anchor="middle">1/2</text>
+  </g>
+
+  <text x="445" y="175" fill="#94a3b8" font-size="28" text-anchor="middle">→</text>
+
+  <polygon points="470,235 599.9,235 599.9,160" fill="#1e3a5f"/>
+  <line x1="470" y1="235" x2="599.9" y2="235" stroke="#fbbf24" stroke-width="3"/>
+  <line x1="599.9" y1="235" x2="599.9" y2="160" stroke="#4ade80" stroke-width="3" stroke-dasharray="6 4"/>
+  <line x1="470" y1="235" x2="599.9" y2="160" stroke="#93c5fd" stroke-width="3" stroke-linecap="round"/>
+  <path d="M589.9 235V225H599.9" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <path d="M504 235A34 34 0 0 0 499.4 218" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <circle cx="599.9" cy="160" r="5" fill="#93c5fd"/>
+  <text x="516" y="229" fill="#e2e8f0" font-size="13" text-anchor="middle">30°</text>
+  <text x="462" y="252" fill="#e2e8f0" font-size="16" text-anchor="end">O</text>
+  <g font-size="15">
+    <text x="529" y="187" fill="#93c5fd" text-anchor="middle">1</text>
+    <text x="535" y="258" fill="#fbbf24" text-anchor="middle">cos 30° = √3/2</text>
+    <text x="608" y="196" fill="#4ade80">1/2 =</text>
+    <text x="608" y="214" fill="#4ade80">sin 30°</text>
+  </g>
+
+  <g fill="#cbd5e1" font-size="15" text-anchor="middle">
+    <text x="115" y="290">① 한 변이 1인 정삼각형</text>
+    <text x="345" y="290">② 수선으로 반을 자른다</text>
+    <text x="535" y="290">③ 막대 방향으로 놓는다</text>
+  </g>
+  <text x="24" y="322" fill="#94a3b8" font-size="15">30°의 맞은편 변 1/2 = sin 30° · 30°에 이웃한 직각변 √3/2 = cos 30°</text>
+</svg>
