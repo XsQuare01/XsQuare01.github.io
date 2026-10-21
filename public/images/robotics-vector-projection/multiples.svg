@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="360" viewBox="0 0 400 360" role="img" aria-label="(2, 1)에 2, 0.5, −1, 0을 곱한 화살표. 길이는 곱한 수의 크기만큼 늘거나 줄고, 음수를 곱하면 방향이 반대가 된다" font-family="sans-serif">
+  <rect width="400" height="360" rx="8" fill="#0f1117"/>
+  <defs><marker id="rvp-m-a" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">수를 곱하면 길이와 방향이 바뀐다</text>
+  <line x1="230" y1="104" x2="282" y2="78" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-m-a)"/>
+  <circle cx="230" cy="104" r="3" fill="#94a3b8"/>
+  <text x="24" y="98" fill="#e2e8f0" font-size="19"><tspan font-weight="bold">a</tspan> = (2, 1)</text>
+  <text x="390" y="97" fill="#cbd5e1" font-size="16" text-anchor="end">‖<tspan font-weight="bold">a</tspan>‖</text>
+  <line x1="230" y1="182" x2="334" y2="130" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-m-a)"/>
+  <circle cx="230" cy="182" r="3" fill="#94a3b8"/>
+  <text x="24" y="163" fill="#e2e8f0" font-size="19">2<tspan font-weight="bold">a</tspan> = (4, 2)</text>
+  <text x="390" y="162" fill="#cbd5e1" font-size="16" text-anchor="end">2‖<tspan font-weight="bold">a</tspan>‖</text>
+  <line x1="230" y1="228" x2="256" y2="215" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-m-a)"/>
+  <circle cx="230" cy="228" r="3" fill="#94a3b8"/>
+  <text x="24" y="228.5" fill="#e2e8f0" font-size="19">0.5<tspan font-weight="bold">a</tspan> = (1, 0.5)</text>
+  <text x="390" y="227.5" fill="#cbd5e1" font-size="16" text-anchor="end">0.5‖<tspan font-weight="bold">a</tspan>‖</text>
+  <line x1="230" y1="258" x2="178" y2="284" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-m-a)"/>
+  <circle cx="230" cy="258" r="3" fill="#94a3b8"/>
+  <text x="24" y="278" fill="#e2e8f0" font-size="19">−<tspan font-weight="bold">a</tspan> = (−2, −1)</text>
+  <text x="390" y="277" fill="#cbd5e1" font-size="16" text-anchor="end">‖<tspan font-weight="bold">a</tspan>‖, 반대 방향</text>
+  <circle cx="230" cy="330" r="5" fill="#93c5fd"/>
+  <text x="24" y="337" fill="#e2e8f0" font-size="19">0<tspan font-weight="bold">a</tspan> = (0, 0)</text>
+  <text x="390" y="336" fill="#cbd5e1" font-size="16" text-anchor="end">0, 방향 없음</text>
+</svg>

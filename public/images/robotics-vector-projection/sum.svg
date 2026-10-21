@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="372" viewBox="0 0 400 372" role="img" aria-label="a (3, 1) 다음 b (1, 2)를 이어 붙이면 끝점은 (4, 3)이다. 순서를 바꿔도 같은 점에서 끝난다" font-family="sans-serif">
+  <rect width="400" height="372" rx="8" fill="#0f1117"/>
+  <defs><marker id="rvp-s-a" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker><marker id="rvp-s-b" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#a78bfa"/></marker><marker id="rvp-s-s" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#e2e8f0"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">화살표를 이어 붙이면 더해진다</text>
+  <path d="M110 60V300 M170 60V300 M230 60V300 M290 60V300 M350 60V300 M50 240H350 M50 180H350 M50 120H350 M50 60H350" fill="none" stroke="#475569" stroke-width="1"/>
+  <path d="M40 300H360 M50 310V56" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="50" y1="300" x2="110" y2="180" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="110" y1="180" x2="290" y2="120" stroke="#93c5fd" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="50" y1="300" x2="290" y2="120" stroke="#e2e8f0" stroke-width="3" marker-end="url(#rvp-s-s)"/>
+  <line x1="50" y1="300" x2="230" y2="240" stroke="#93c5fd" stroke-width="3" marker-end="url(#rvp-s-a)"/>
+  <line x1="230" y1="240" x2="290" y2="120" stroke="#a78bfa" stroke-width="3" marker-end="url(#rvp-s-b)"/>
+  <g font-size="20">
+    <text x="162" y="292" fill="#93c5fd" text-anchor="middle"><tspan font-weight="bold">a</tspan> (3, 1)</text>
+    <text x="274" y="196" fill="#a78bfa"><tspan font-weight="bold">b</tspan> (1, 2)</text>
+    <text x="140" y="207" fill="#e2e8f0" text-anchor="middle"><tspan font-weight="bold">a</tspan> + <tspan font-weight="bold">b</tspan></text>
+    <text x="302" y="114" fill="#e2e8f0">(4, 3)</text>
+    <text x="42" y="322" fill="#e2e8f0" text-anchor="end">O</text>
+  </g>
+  <text x="24" y="356" fill="#cbd5e1" font-size="18">점선: <tspan font-weight="bold">b</tspan>를 먼저, <tspan font-weight="bold">a</tspan>를 나중에 간 길</text>
+</svg>
