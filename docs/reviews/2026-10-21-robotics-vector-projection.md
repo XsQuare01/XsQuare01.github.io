@@ -3,7 +3,7 @@ target: robotics-vector-projection
 generated_at: 2026-10-21
 strict: true
 sources: src/content/posts/robotics-vector-projection.md
-summary: 🔴 0 · 🟡 6 · 🟢 9
+summary: 🔴 0 · 🟡 8 · 🟢 14
 
 ## Findings
 
@@ -51,6 +51,28 @@ summary: 🔴 0 · 🟡 6 · 🟢 9
 - recommendation: 구분자를 쉼표나 줄바꿈으로 바꾼다(예: "a · u = 3, 정사영 (1.8, 2.4)", "a + b = (4, 3), 길이 5"). 실험 코드가 요약 문자열을 만들므로(vector-projection.js:77, vector-sum.js:68) 정적 SVG와 함께 고친다.
 - gate_effect: warn
 
+### 🟡 [L4] src/labs/vector-sum.js:67
+
+- severity: 🟡
+- source: L
+- rule_id: L4
+- location: src/labs/vector-sum.js:67
+- quote: outputs.lengths.textContent = `${fmt(lengths.a)} + ${fmt(lengths.b)} = ${fmt(lengths.a + lengths.b)}`;
+- message: PR #247 재검토(head 341eff5): 내부 계산은 맞지만, 항과 합을 각각 반올림한 숫자를 정확한 등호로 잇는다. a=b=(0.5,0.5)를 입력하면 브라우저에 “0.71 + 0.71 = 1.41”이 표시된다. src/labs/vector-projection.js:74–75도 같은 문제다. a=(2.5,2), D=(1,1)에서는 “2.5 × 0.71 + 2 × 0.71 = 3.18”이 나오지만 왼쪽에 표시된 수의 계산 결과는 3.195다. 수직 예 a=(1,3), D=(3,-1)도 “1 × 0.95 + 3 × (−0.32) = 0”으로 보여 왼쪽은 −0.01이 된다. 반올림 안내가 있더라도 손으로 계산을 따라가는 입문 독자에게 정확한 등식과 근삿값의 구별이 흐려진다. 작성 정본의 계산 예시·표현 정렬 모듈에 해당한다.
+- recommendation: 반올림한 숫자를 잇는 등호를 근사 관계로 바꾸거나, 각 길이의 근삿값과 반올림 전 값으로 계산한 합을 별도 읽기 값으로 제시한다. 예를 들어 “‖a‖ ≈ 0.71, ‖b‖ ≈ 0.71, ‖a‖ + ‖b‖ ≈ 1.41”로 쓴다. 정사영 실험도 같은 표시 원칙을 적용한다. 계산의 정밀도를 낮춰 표시된 항에 결과를 억지로 맞추지는 않는다. 수정 시 모델 테스트뿐 아니라 이 두 입력의 실제 출력 문자열도 확인한다.
+- gate_effect: warn
+
+### 🟡 [L7] src/content/posts/robotics-vector-projection.md:59
+
+- severity: 🟡
+- source: L
+- rule_id: L7
+- location: src/content/posts/robotics-vector-projection.md:59
+- quote: 방향은 $k$의 부호가 정한다. $k>0$이면 두 성분이 같은 비율로 늘거나 줄고 부호도 그대로라, 원점에서 본 방향이 $\mathbf a$와 같다.
+- message: PR #247 재검토(head 341eff5): 방향을 같거나 반대라고 말하려면 a≠0이라는 전제가 필요하다. a=0이면 k=2 또는 k=-1이어도 결과는 영벡터여서 방향이 없다. 현재 51행의 “어떤 k와 a에서도” 뒤에 이 문단이 이어지고, 핵심 정리 208행도 k<0이면 방향이 반대라고 일반화한다. 같은 경계 누락이 157–163행에도 있다. b≠0만 가정한 뒤 a·b=‖a‖‖b‖cos φ를 쓰지만, a=0이면 b에서 a까지의 각 φ는 정의되지 않는다. 117행의 영벡터 정사영 s=0과 165행의 두 벡터가 모두 영벡터가 아니라는 수직 조건은 이미 올바르다. 해당 두 문단에 그 구분을 연결하면 된다.
+- recommendation: 방향 설명은 “a가 영벡터가 아닐 때”로 한정하고, a=0이면 k와 관계없이 영벡터라고 덧붙인다. 내적의 각도 공식은 두 벡터가 모두 영벡터가 아닐 때 유도한다고 밝히고, 한쪽이 영벡터이면 각도 공식 대신 성분 정의로 내적 0을 얻는다고 구분한다. 핵심 정리와 스펙의 음수 실수배 주장에도 같은 조건을 반영한다. 모든 a와 k에 성립하는 노름 식 54행은 그대로 유지한다.
+- gate_effect: warn
+
 ### 🟡 [L7] src/content/posts/robotics-vector-projection.md:117
 
 - severity: 🟡
@@ -73,6 +95,17 @@ summary: 🔴 0 · 🟡 6 · 🟢 9
 - recommendation: $\mathbf e_y$ 경우를 따로 한 문단으로 뺀다. 예: "$\mathbf e_y$는 $x$축에서 $90^\circ$ 돈 방향이므로 $\mathbf u$에서 $\mathbf e_y$까지 잰 각은 $90^\circ-\alpha$, $\mathbf e_y$에서 $\mathbf u$까지 잰 각은 $\alpha-90^\circ$다. 두 각의 코사인은 같고, $\mathbf u$를 $\mathbf e_y$ 방향으로 정사영한 길이는 앞 절에 따라 $u_y$다."
 - gate_effect: warn
 
+### 🟢 [L1] src/content/posts/robotics-vector-projection.md:11
+
+- severity: 🟢
+- source: L
+- rule_id: L1
+- location: src/content/posts/robotics-vector-projection.md:11
+- quote: 두 화살표를 이어 붙였을 때 끝점이 어디인지가 첫 번째 질문이다.
+- message: PR #247 재검토(head 341eff5): 검토 완료, 이슈 없음. 두 질문이 구체적이며, 평서체·문장 연결·용어를 도입하는 어조가 안정적이다. 기존 리뷰의 인용부호 수정도 반영되었다. 내부 작성 가이드에 따라 문체만을 이유로 증명을 줄이거나 본문의 구조를 바꿀 필요는 없다.
+- recommendation: 현재 도입과 어체를 유지한다.
+- gate_effect: info
+
 ### 🟢 [L1] src/content/posts/robotics-vector-projection.md:69
 
 - severity: 🟢
@@ -93,6 +126,28 @@ summary: 🔴 0 · 🟡 6 · 🟢 9
 - quote: 축을 돌리면 $\mathbf e_x$와 $\mathbf e_y$도 함께 돌지만, 두 단위벡터의 실수배를 더한다는 모양은 그대로 남는다.
 - message: 돌린 두 단위벡터로도 모든 벡터를 나타낼 수 있다는, 근거 없는 일반 주장이 본문에 단정문으로 들어가 있다. "모양"이 무엇을 가리키는지도 흐리다. 다음 글의 주제를 예고하는 문장이다.
 - recommendation: 예고임을 드러낸다. 예: "축을 돌려도 돌아간 두 단위벡터의 실수배를 더해 점을 나타낼 수 있는지는 다음 글에서 확인한다." 아니면 이 문장을 "이어지는 글" callout으로 옮긴다.
+- gate_effect: info
+
+### 🟢 [L2] src/content/posts/robotics-vector-projection.md:123
+
+- severity: 🟢
+- source: L
+- rule_id: L2
+- location: src/content/posts/robotics-vector-projection.md:123
+- quote: 그림자의 길이를 성분으로 계산하기
+- message: PR #247 재검토(head 341eff5): 검토 완료, 이슈 없음. 합과 실수배 → 축 방향 단위벡터 → 정사영의 기하 → 선형성과 서로의 방향으로 내린 정사영 → 성분 내적 → 수직인 나머지와 유일한 최근접점으로 이어지는 순서에 논리 도약은 없다. 기존 리뷰에서 요구한 수선의 발 설명, e_y에 대한 두 각의 연결, 회전 후에도 평행이동 관계가 보존된다는 문장이 모두 반영되었다. 읽힘 가이드의 “추상과 구체의 왕복” 관점에서는 127–137행이 가장 밀도 높은 대목이다.
+- recommendation: 선택적 보완으로 기존 예 u=(0.6,0.8)를 활용하여 “e_x 하나는 레일 방향으로 0.6, e_y 하나는 0.8만큼 기여한다”는 한 문장이나 작은 도식을 중간에 넣으면 좋다. 현재 세 단계의 증명은 본편에 유지한다. 이 제안은 읽힘 개선이며 증명 누락에 대한 필수 수정이 아니다.
+- gate_effect: info
+
+### 🟢 [L3] src/content/posts/robotics-vector-projection.md:107
+
+- severity: 🟢
+- source: L
+- rule_id: L3
+- location: src/content/posts/robotics-vector-projection.md:107
+- quote: 이 $s$를 정사영의 길이라 부르자. $F$가 원점에서 $\mathbf u$ 쪽에 있으면 양수, 반대쪽에 있으면 음수, 원점이면 0인 부호 있는 길이다.
+- message: PR #247 재검토(head 341eff5): 검토 완료, 이슈 없음. s를 부호 있는 길이라고 명시하므로 음수 s의 사용은 수학 오류가 아니다. 나머지 r, 단위벡터, 성분·좌표의 구분도 일관된다. 다만 앞 절에서 사용한 보통의 길이 ‖·‖와 s는 서로 다른 양이므로, 입문 독자에게 둘의 관계를 한 번 더 연결하면 유익하다.
+- recommendation: 선택적으로 “정사영 화살표 자체의 길이는 ‖s u‖=|s|이고, s의 부호는 u와 같은 쪽인지 반대쪽인지를 나타낸다”를 덧붙인다. description과 핵심 정리에서도 “부호 있는 길이”로 부르면 따로 읽었을 때의 혼동이 줄어든다.
 - gate_effect: info
 
 ### 🟢 [L3] src/content/posts/robotics-vector-projection.md:129
@@ -137,6 +192,28 @@ summary: 🔴 0 · 🟡 6 · 🟢 9
 - quote: title: "벡터의 덧셈과 정사영 — 화살표를 잇고 한 방향에 그림자 내리기"
 - message: 제목과 description은 덧셈, 실수배, 정사영, 내적, 수직인 나머지를 잘 대표하고 시리즈의 제목 형식과도 맞다. 사소한 어긋남이 둘 있다. 부제의 "한 방향에"는 절 제목과 shadow.svg 제목의 "한 방향으로"와 조사가 다르다. description의 "길이 1인 방향 u"는 방향에 길이를 붙인 표현이다. 본문은 "길이 1인 벡터 u"라고 쓴다.
 - recommendation: 부제를 "한 방향으로 그림자 내리기"로 맞추고, description을 "길이 1인 벡터 u의 방향으로 내린 정사영의 길이는…"으로 고친다.
+- gate_effect: info
+
+### 🟢 [L5] src/content/posts/robotics-vector-projection.md:4
+
+- severity: 🟢
+- source: L
+- rule_id: L5
+- location: src/content/posts/robotics-vector-projection.md:4
+- quote: 길이 1인 벡터 u의 방향으로 내린 정사영의 길이는 내적 a·u로 계산하고, 그 나머지는 u에 수직이다.
+- message: PR #247 재검토(head 341eff5): 검토 완료, 이슈 없음. 제목과 description이 글의 두 질문과 결론을 대표하며, 기존 리뷰의 “길이 1인 방향” 표현도 벡터로 수정됐다. 본문의 상세 조건은 L7, 부호 있는 길이의 표현 보완은 L3에 따로 기록했다.
+- recommendation: 제목과 범위를 유지한다.
+- gate_effect: info
+
+### 🟢 [L6] docs/superpowers/specs/2026-10-21-robotics-vector-projection-design.md:1
+
+- severity: 🟢
+- source: L
+- rule_id: L6
+- location: docs/superpowers/specs/2026-10-21-robotics-vector-projection-design.md:1
+- quote: 로보틱스 기초 3 — 벡터의 덧셈과 정사영
+- message: approved extension — PR #247 재검토(head 341eff5). 승인된 내부 스펙의 독자·목적·절 순서·증명 의무·예시 표·provenance·실험 범위를 현재 본문 및 구현과 실제로 대조했다. 기하에서 내적을 유도하는 순서와 레일 예시는 작성자 추가로 밝혀져 있으며, 관절 구속식과 회전행렬은 후속 범위로 남아 있다. docs/design/SVG_LABS.md의 등록·정적 초기 상태·키보드 경로와도 부합한다. 이번 대조는 내부 스펙과 현재 저장소 자료를 기준으로 했으며, 기존 리뷰의 비공개 PPT·선형대수 PDF 대조를 이번 리뷰어가 다시 수행했다고 주장하지 않는다.
+- recommendation: 기존 provenance와 범위를 유지한다. 수학 조건에 관한 L7 권고를 반영할 때 스펙의 증명 의무 표도 본문과 맞춘다.
 - gate_effect: info
 
 ### 🟢 [L6] src/content/posts/robotics-vector-projection.md:183
@@ -221,3 +298,33 @@ summary: 🔴 0 · 🟡 6 · 🟢 9
 리뷰어의 변이 목록을 새 코드의 고정점에 맞게 옮겼다. 새 동작(쪽 고르기, 0 건너기, 대각선 끌기)에 대한 변이도 더해 27개를 다시 돌렸고, 모두 테스트가 잡았다. 처음 돌렸을 때는 두 개가 살아남았다. 하나는 대각선 끌기를 한 축씩 적용하는 변이이고, 다른 하나는 발 F를 반올림하지 않는 변이다. 이 둘을 잡는 검사를 더했다. 바뀐 규칙 두 가지(겹치는 손잡이, `data-marker`)는 `docs/design/SVG_LABS.md`에 적었다. 실험 동작 변경은 스펙의 실험 절에도 반영했다.
 
 브라우저 렌더, 실기기 터치, 인쇄는 작성자도 두 리뷰어도 보지 못했다. 그림은 resvg 래스터로만 근사 확인했다.
+
+### PR #247 추가 검토 — 2026-10-21, head 341eff5
+
+사용자가 내부 문서를 기준으로 다시 리뷰해 달라고 요청하여 현재 PR head `341eff5bb42b3a12ffb6e7d689161dfd1ba8eb1f`를 검토했다. 앞선 finding 15건과 반영 기록은 보존했다. 위에서 `PR #247 재검토(head 341eff5)`로 시작하는 7개 항목이 이번 판정이며, 추가 권고는 2건이다. 리포트 머리의 개수는 과거 finding을 포함한 누적 개수다. 이미 반영된 과거 6건을 다시 미해결로 판정한 것이 아니다.
+
+- 적용한 내부 기준: `AGENTS.md`, `docs/writing-rules.md`의 증명·계산 예시·표현 정렬 모듈, `docs/review-rubric.md` L1–L7, `docs/readability-guide.md`의 이해 순서·추상과 구체의 왕복, 포스트별 스펙, `docs/design/SVG_LABS.md`.
+- 추가 판정: 필수 수정 0건, 보완 권고 2건, 참고 5건. 핵심 수학과 예시 계산은 타당하다. 실험에서 반올림한 숫자를 등호로 잇는 표시, 실수배의 방향 및 내적의 각도 공식에 빠진 영벡터 제외 조건을 권고했다.
+- 논증 검토: 성분 덧셈의 교환법칙, 모든 실수 k에 대한 ‖k a‖=|k|‖a‖, 단위 축에 의한 분해, 회전으로 얻는 정사영과 선형성, cos의 짝수성을 사용한 성분 내적 유도, 영벡터가 아닌 두 벡터의 수직 필요충분 조건, a=s u+r 및 r·u=0, (s−t)²+‖r‖²에 의한 최근접점의 유일성을 확인했다. 수학 공식의 증명과 표본 테스트의 역할을 구분했다.
+- 계산 재검증: a=(1,3), u=(0.6,0.8)에서 s=3, F=(1.8,2.4), r=(-0.8,0.6), ‖r‖=1, 10=3²+1²가 맞다. 반올림 표시의 반례도 Node에서 재계산하고 실제 브라우저에서 재현했다.
+- 화면 근거: [합 실험의 읽기 값](../review-prep/2026-10-21-pr247-sum-rounding.png), [정사영 실험의 읽기 값](../review-prep/2026-10-21-pr247-projection-rounding.png). 첫 화면의 기본 예에서는 드러나지 않는 표시 문제라 입력을 바꿔 확인했다.
+- 실행한 검사: 결정적 포스트 검사 발견 사항 0건. `npm run test:js` 68/68 통과. PR head의 별도 worktree에서 `npm run build` exit 0, 151쪽 생성, 75개 글의 dist 본문 검사 통과. 새 변이 시험은 이번 검토에서 실행하지 않았다.
+- 브라우저 검증: Chromium에서 정적 도판 6장을 렌더링하여 값·기호·화살표를 확인했다. 두 실험의 키보드 입력과 초기화, a=(0,0)일 때 각도를 정할 수 없다는 표시, 직선 위의 a=(1.5,2)에서 나머지 0, a=(1,3)와 D=(3,-1)에서 정사영 0, D의 방향키 이동 -0.5→0.5, D=(-4,0)에서 u 화살표의 위치를 확인했다. 포인터로 a를 (1.5,2)에 끄는 동작도 재현했다. 데스크톱 및 390px 폭에서 확인했고, 390px에서 문서 가로 넘침은 없었다. 페이지 실행 중 JavaScript 예외와 `.katex-error` 요소는 0건이었다.
+- fallback 검증: JavaScript를 끈 브라우저에서도 두 실험의 원본 SVG가 보였다. 인쇄 매체의 CSS에서 `.lab-live`가 숨겨지는 것은 확인했다. 실제 종이 인쇄·휴대폰 실기기 터치·모든 입력 상태의 브라우저 시각 검수는 하지 않았다.
+- 소스 보존: 본문·SVG·실험 코드는 수정하지 않았다. 기존 리뷰 기록을 보존하면서 재검토 결과와 화면 근거만 추가했다. PR 댓글·리뷰 제출·커밋·push는 하지 않았다.
+
+### 추가 검토 반영 — 2026-10-21
+
+작성자가 위 추가 검토의 권고 2건과 참고 2건을 반영했다. 반영한 뒤 결정적 검사는 지적 0건, `npm run test:js`는 70/70이다. 격리 빌드는 151쪽을 만들었고 본문 검사를 통과했으며 KaTeX 오류는 0이다.
+
+- 🟡 [L4] vector-sum.js:67과 vector-projection.js:74–75: 식을 만드는 함수를 모델로 옮겼다. 보이는 수가 모두 정확할 때만 `=`로 잇고, 하나라도 반올림했으면 `≈`로 잇는다(`src/labs/readout.mjs`). 값의 정밀도는 그대로 두었다.
+  - 두 실험의 요약 줄 "a · u = …"에도 같은 규칙을 적용했다. 첫 화면은 값이 정확해 "a · u = 3"으로 남는다.
+  - 리뷰가 든 세 입력의 출력은 각각 "0.71 + 0.71 ≈ 1.41", "2.5 × 0.71 + 2 × 0.71 ≈ 3.18", "1 × 0.95 + 3 × (−0.32) ≈ 0"이 되었고, 테스트에 그대로 고정했다.
+  - 상태 전체(합 28,561개, 정사영 48,672개)를 훑는 테스트도 더했다. `=`로 이은 식은 보이는 수로 계산해도 성립하는지 본다. 반올림 여부는 모델의 판정이 아니라 참값과의 차이로 따로 판단해, 정확한 식을 `≈`로 잇는 경우도 잡는다.
+- 🟡 [L7] 59행과 157–163행:
+  - 방향 설명을 "a가 영벡터가 아니면"으로 한정하고, a가 영벡터이면 k와 관계없이 영벡터라는 문장을 더했다.
+  - 내적의 각도 공식은 "두 벡터가 모두 영벡터가 아니라고 하자"로 시작하게 했다. 한쪽이 영벡터이면 사이각은 정해지지 않고 내적은 성분 정의에서 바로 0이라고 구분했다.
+  - 정사영의 각 φ를 정의하는 111행과 117행, 핵심 정리, 스펙의 증명 의무 표에도 같은 조건을 넣었다. 54행의 노름 식은 그대로 두었다.
+- 🟢 [L2] 123행: 셋째 단계에 처음 예를 넣었다. "u=(0.6,0.8)이므로 e_x 하나는 레일 방향으로 0.6, e_y 하나는 0.8만큼 기여한다"이고, (1,3)이 e_x 하나와 e_y 셋이라 1×0.6+3×0.8=3이라는 계산을 일반식보다 먼저 보인다. 뒤에 있던 같은 계산 문단은 내적 표기로 한 줄로 줄였다.
+- 🟢 [L3] 107행: "정사영 화살표 자체의 길이는 ‖s u‖=|s|이고, s의 부호는 F가 u와 같은 쪽에 있는지 반대쪽에 있는지를 나타낸다"를 더했다. 핵심 정리와 description은 "부호 있는 길이"로 고쳤다.
+- 리뷰어의 화면 근거 두 장(`docs/review-prep/2026-10-21-pr247-*.png`)은 위 링크가 가리키므로 리포트와 함께 커밋한다.
