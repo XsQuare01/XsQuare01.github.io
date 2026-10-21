@@ -1,6 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { initLabs } from '../src/labs/index.js';
+import { initLabs, LAB_MODULES } from '../src/labs/index.js';
+import { LABS } from '../src/plugins/rehype-svg-labs.mjs';
+
+// The plugin decides which figures get a live copy and the loader decides which
+// module mounts it. A lab in only one list stays static with no error, so the two
+// lists are compared here instead of being trusted.
+test('the build plugin and the runtime loader register the same labs', async () => {
+  assert.deepEqual(Object.keys(LAB_MODULES).sort(), [...LABS].sort());
+  // A typo in an import path would also leave the figure static, so each loader is
+  // run once. The modules only touch the DOM inside mount(), so Node can import them.
+  for (const [name, load] of Object.entries(LAB_MODULES)) {
+    assert.equal(typeof (await load()).mount, 'function', `${name} does not export mount()`);
+  }
+});
 
 // The loader only touches classList, dataset and `.lab-live`'s `hidden`, so a stub
 // with those three is enough. It does not model layout, events or rendering.

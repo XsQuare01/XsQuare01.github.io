@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { prefixIds } from './rehype-svg-steps.mjs';
 
 const PUBLIC = fileURLToPath(new URL('../../public/', import.meta.url));
-const LABS = new Set(['point-vector']);
+// The runtime registry (LAB_MODULES in src/labs/index.js) must list the same labs.
+export const LABS = new Set(['point-vector', 'rod-angle']);
 const escapeAttr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 // Trusted, repository-authored SVGs only. This is an authoring convention, not an
