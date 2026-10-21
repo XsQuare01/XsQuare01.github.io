@@ -41,6 +41,8 @@ test('the tip gives back length and angle, with the quadrant y/x alone would los
   assert.deepEqual(fromTip(state, { x: 0, y: 0 }), { theta: state.theta, length: LIMITS.lengthMin }, 'the origin has no angle');
   assert.deepEqual(fromTip(state, { x: 30, y: 0 }), { theta: 0, length: LIMITS.lengthMax });
   assert.equal(fromTip(state, { x: -2, y: -0.01 }).theta, 180, 'just below the negative x-axis rounds to 180°, never −180°');
+  assert.equal(Math.atan2(-0, -2), -Math.PI, 'the API itself can return −π');
+  assert.equal(fromTip(state, { x: -2, y: -0 }).theta, 180, 'the article says the lab turns that −180° into 180°');
   assert.equal(fromTip(state, { x: NaN, y: 1 }), state);
 });
 
