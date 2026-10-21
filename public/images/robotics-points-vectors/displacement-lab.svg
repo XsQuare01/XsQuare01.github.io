@@ -8,7 +8,7 @@
     <path d="M30 110V390 M70 110V390 M110 110V390 M150 110V390 M190 110V390 M230 110V390 M270 110V390 M310 110V390 M30 110H310 M30 150H310 M30 190H310 M30 230H310 M30 270H310 M30 310H310 M30 350H310 M30 390H310" fill="none"/>
     <g fill="#94a3b8" stroke="none" font-size="20" text-anchor="middle">
       <text x="30" y="375">−1</text><text x="110" y="375">1</text><text x="150" y="375">2</text><text x="190" y="375">3</text><text x="230" y="375">4</text><text x="270" y="375">5</text><text x="310" y="375">6</text>
-      <text x="52" y="317">1</text><text x="52" y="277">2</text><text x="52" y="237">3</text><text x="52" y="197">4</text><text x="52" y="157">5</text><text x="52" y="117">6</text><text x="52" y="397">−1</text>
+      <g text-anchor="end"><text x="57" y="317">1</text><text x="57" y="277">2</text><text x="57" y="237">3</text><text x="57" y="197">4</text><text x="57" y="157">5</text><text x="57" y="117">6</text><text x="57" y="397">−1</text></g>
     </g>
   </g>
   <line data-part="x-axis" x1="24" y1="350" x2="350" y2="350" stroke="#64748b" stroke-width="2"/>
@@ -31,8 +31,8 @@
     <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
     <path d="M0 -10L10 0L0 10L-10 0Z" fill="#93c5fd"/>
   </g>
-  <text data-part="label-o" x="42" y="378" fill="#e2e8f0" font-size="24">O</text>
-  <text data-part="label-a" x="125" y="294" fill="#e2e8f0" font-size="24">A</text>
-  <text data-part="label-b" x="245" y="134" fill="#e2e8f0" font-size="24">B</text>
+  <text data-part="label-o" x="57" y="340" fill="#e2e8f0" font-size="24" text-anchor="end">O</text>
+  <text data-part="label-a" x="96" y="337" fill="#e2e8f0" font-size="24" text-anchor="middle">A</text>
+  <text data-part="label-b" x="244" y="139" fill="#e2e8f0" font-size="24" text-anchor="middle">B</text>
   <text data-part="summary" x="24" y="432" fill="#e2e8f0" font-size="20">변위 (3, 4) · 거리 5</text>
 </svg>

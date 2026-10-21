@@ -1,8 +1,8 @@
-import { initialState, measure, move, LIMITS, formatNumber as fmt } from './point-vector-model.mjs';
+import { initialState, measure, move, dragTo, labelPositions, toSvg, LIMITS, formatNumber as fmt } from './point-vector-model.mjs';
 
 const NS = 'http://www.w3.org/2000/svg';
-const px = (x) => 70 + 40 * x;
-const py = (y) => 350 - 40 * y;
+const px = (x) => toSvg({ x, y: 0 }).x;
+const py = (y) => toSvg({ x: 0, y }).y;
 const pair = (v) => `(${fmt(v.x)}, ${fmt(v.y)})`;
 
 export function mount(figure) {
@@ -51,7 +51,7 @@ export function mount(figure) {
     const tick = (text, x, y, anchor) => {
       const el = document.createElementNS(NS, 'text');
       attrs(el, { x, y, fill: '#94a3b8', stroke: 'none', 'font-size': 20, 'text-anchor': anchor });
-      el.textContent = text;
+      el.textContent = fmt(text);
       fragment.append(el);
     };
     for (let n = -7; n <= 7; n++) {
@@ -74,15 +74,11 @@ export function mount(figure) {
     attrs(parts['y-axis'], { x1: px(state.o.x), x2: px(state.o.x) });
     attrs(parts['x-label'], { y: py(state.o.y) + 7 });
     attrs(parts['y-label'], { x: px(state.o.x) - 7 });
+    const labels = labelPositions(state);
     for (const key of ['a', 'b', 'o']) {
       attrs(parts[key], { transform: `translate(${px(state[key].x)} ${py(state[key].y)})` });
       parts[key].classList.toggle('is-selected', key === selected);
-      // Separate labels when points coincide; controls remain usable at all overlaps.
-      const nearA = key === 'b' && Math.hypot(state.a.x - state.b.x, state.a.y - state.b.y) < 0.8;
-      const nearBottom = nearA && state.b.y < 0;
-      const labelY = key === 'o' ? 28 : nearA && !nearBottom ? 32 : -16;
-      const labelX = key === 'o' || nearBottom ? -28 : 15;
-      attrs(parts[`label-${key}`], { x: px(state[key].x) + labelX, y: py(state[key].y) + labelY });
+      attrs(parts[`label-${key}`], labels[key]);
     }
     attrs(parts.vector, { x1: px(state.a.x), y1: py(state.a.y), x2: px(state.b.x), y2: py(state.b.y) });
     if (values.distance === 0) parts.vector.removeAttribute('marker-end');
@@ -136,10 +132,16 @@ export function mount(figure) {
     if (!drag || event.pointerId !== drag.pointer) return;
     const p = pointerPosition(event);
     if (!p) return;
-    state = move(state, selected, 'x', (p.x - drag.x - 70) / 40);
-    state = move(state, selected, 'y', (350 - p.y + drag.y) / 40);
+    state = dragTo(state, selected, p, drag);
     render();
   });
+  // Browsers read touch-action from the outer <svg>, not from its children, so the
+  // CSS on [data-point] alone lets the page pan and cancel the drag on touch screens.
+  // Blocking the default only for touches that start on a handle keeps page
+  // scrolling for the rest of the figure.
+  svg.addEventListener('touchstart', (event) => {
+    if (event.target.closest?.('[data-point]')) event.preventDefault();
+  }, { passive: false });
   const end = (event) => {
     if (!drag || event.pointerId !== drag.pointer) return;
     const pointer = drag.pointer; drag = null;

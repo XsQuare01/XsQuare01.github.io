@@ -7,7 +7,7 @@
     "build": "astro build && node scripts/check-dist-bodies.mjs",
     "preview": "astro preview",
     "review:gate": "python .claude/review_post.py --gate",
-    "test:js": "node --test src/plugins/rehype-svg-steps.test.mjs src/plugins/rehype-svg-labs.test.mjs test/palette.test.mjs test/point-vector.test.mjs"
+    "test:js": "node --test src/plugins/rehype-svg-steps.test.mjs src/plugins/rehype-svg-labs.test.mjs test/palette.test.mjs test/point-vector.test.mjs test/lab-loader.test.mjs test/rod-angle.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",

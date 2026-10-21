@@ -1,9 +1,16 @@
-const modules = { 'point-vector': () => import('./point-vector.js') };
+// Must list the same labs as LABS in src/plugins/rehype-svg-labs.mjs; a lab missing
+// here stays a static picture without any error. test/lab-loader.test.mjs compares them.
+export const LAB_MODULES = {
+  'point-vector': () => import('./point-vector.js'),
+  'rod-angle': () => import('./rod-angle.js'),
+};
+const modules = LAB_MODULES;
 
-export async function initLabs(root = document) {
+// `registry` is injectable so tests can exercise the fallback paths without a DOM.
+export async function initLabs(root = document, registry = modules) {
   for (const figure of root.querySelectorAll('.svg-lab[data-lab]')) {
     if (figure.classList.contains('is-live')) continue;
-    const load = modules[figure.dataset.lab];
+    const load = registry[figure.dataset.lab];
     if (!load) continue;
     try {
       const { mount } = await load();
