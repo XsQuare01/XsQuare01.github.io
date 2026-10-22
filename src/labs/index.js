@@ -5,6 +5,7 @@ export const LAB_MODULES = {
   'rod-angle': () => import('./rod-angle.js'),
   'vector-sum': () => import('./vector-sum.js'),
   'vector-projection': () => import('./vector-projection.js'),
+  'rotation-matrix': () => import('./rotation-matrix.js'),
 };
 const modules = LAB_MODULES;
 
