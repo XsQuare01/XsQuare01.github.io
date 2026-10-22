@@ -17,6 +17,7 @@
 .svg-lab :is(button, select, input):focus-visible { outline: 2px solid var(--dg-fg); outline-offset: 3px; }
 .svg-lab .lab-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .svg-lab .lab-inputs label { min-width: 0; }
+.svg-lab :is(.lab-inputs, .lab-readouts) > .lab-wide { grid-column: 1 / -1; }
 .svg-lab .lab-inputs label > span { display: flex; gap: 1rem; justify-content: space-between; }
 .svg-lab .lab-inputs input { width: 100%; min-height: 44px; margin: 0; accent-color: var(--dg-blue-soft); cursor: pointer; }
 .svg-lab output, .svg-lab dd { font-variant-numeric: tabular-nums; }

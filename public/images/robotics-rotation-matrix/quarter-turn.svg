@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="350" viewBox="0 0 400 350" role="img" aria-label="(3, 1)은 e_x 세 개와 e_y 하나를 이은 것이다. 90° 돌리면 e_x는 (0, 1)로, e_y는 (−1, 0)으로 가므로 (−1, 3)이 된다" font-family="sans-serif">
+  <rect width="400" height="350" rx="8" fill="#0f1117"/>
+  <defs><marker id="rrm-q-x" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#fbbf24"/></marker><marker id="rrm-q-y" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#4ade80"/></marker><marker id="rrm-q-p" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">90° 돌리면 (a, b)는 (−b, a)로 간다</text>
+  <path d="M40 286H380 M186 300V60" fill="none" stroke="#64748b" stroke-width="2"/>
+  <path d="M267.6 258.8A86 86 0 0 0 158.8 204.4" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="186" y1="286" x2="318" y2="286" stroke="#fbbf24" stroke-width="4" marker-end="url(#rrm-q-x)"/>
+  <line x1="318" y1="286" x2="318" y2="242" stroke="#4ade80" stroke-width="4" marker-end="url(#rrm-q-y)"/>
+  <line x1="186" y1="286" x2="186" y2="154" stroke="#fbbf24" stroke-width="4" marker-end="url(#rrm-q-x)"/>
+  <line x1="186" y1="154" x2="142" y2="154" stroke="#4ade80" stroke-width="4" marker-end="url(#rrm-q-y)"/>
+  <line x1="186" y1="286" x2="318" y2="242" stroke="#93c5fd" stroke-width="3" marker-end="url(#rrm-q-p)"/>
+  <line x1="186" y1="286" x2="142" y2="154" stroke="#93c5fd" stroke-width="3" marker-end="url(#rrm-q-p)"/>
+  <g font-size="17">
+    <text x="252" y="310" fill="#fbbf24" text-anchor="middle">3 × (1, 0)</text>
+    <text x="326" y="270" fill="#4ade80">1 × (0, 1)</text>
+    <text x="312" y="230" fill="#93c5fd" text-anchor="middle">(3, 1)</text>
+    <text x="196" y="173.8" fill="#fbbf24">3 × (0, 1)</text>
+    <text x="164" y="142" fill="#4ade80" text-anchor="middle">1 × (−1, 0)</text>
+    <text x="132" y="178" fill="#93c5fd" text-anchor="end">(−1, 3)</text>
+    <text x="230.7" y="196.6" fill="#cbd5e1" text-anchor="middle">90°</text>
+    <text x="178" y="308" fill="#e2e8f0" text-anchor="end">O</text>
+  </g>
+  <text x="24" y="336" fill="#cbd5e1" font-size="17"><tspan font-weight="bold">e</tspan><tspan font-size="13" dy="5">x</tspan><tspan dy="-5"> </tspan>는 (0, 1)로, <tspan font-weight="bold">e</tspan><tspan font-size="13" dy="5">y</tspan><tspan dy="-5"> </tspan>는 (−1, 0)으로 간다</text>
+</svg>
