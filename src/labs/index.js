@@ -6,6 +6,8 @@ export const LAB_MODULES = {
   'vector-sum': () => import('./vector-sum.js'),
   'vector-projection': () => import('./vector-projection.js'),
   'rotation-matrix': () => import('./rotation-matrix.js'),
+  'arm-forward': () => import('./arm-forward.js'),
+  'arm-inverse': () => import('./arm-inverse.js'),
 };
 const modules = LAB_MODULES;
 
