@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="470" viewBox="0 0 400 470" role="img" aria-label="첫 링크 2, 둘째 링크 1인 팔의 손끝은 원점에서 1 이상 3 이하인 고리 안에만 닿는다. 고리 안쪽은 자세가 둘, 경계는 하나, 바깥은 없다" font-family="sans-serif">
+  <rect width="400" height="470" rx="8" fill="#0f1117"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">닿는 범위는 고리 모양</text>
+  <path d="M44 222a156 156 0 1 0 312 0a156 156 0 1 0 -312 0Z M148 222a52 52 0 1 0 104 0a52 52 0 1 0 -104 0Z" fill="#1e293b" fill-rule="evenodd"/>
+  <circle cx="200" cy="222" r="156" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <circle cx="200" cy="222" r="52" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <path d="M24 222H376 M200 392V52" fill="none" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.7"/>
+  <line x1="200" y1="222" x2="262.4" y2="138.8" stroke="#93c5fd" stroke-width="3" stroke-dasharray="7 5"/>
+  <line x1="262.4" y1="138.8" x2="304" y2="170" stroke="#a78bfa" stroke-width="3" stroke-dasharray="7 5"/>
+  <line x1="200" y1="222" x2="304" y2="222" stroke="#93c5fd" stroke-width="3"/>
+  <line x1="304" y1="222" x2="304" y2="170" stroke="#a78bfa" stroke-width="3"/>
+  <line x1="200" y1="222" x2="96" y2="222" stroke="#93c5fd" stroke-width="3"/>
+  <line x1="96" y1="222" x2="44" y2="222" stroke="#a78bfa" stroke-width="3"/>
+  <line x1="200" y1="222" x2="200" y2="326" stroke="#93c5fd" stroke-width="3"/>
+  <line x1="200" y1="326" x2="200" y2="274" stroke="#a78bfa" stroke-width="3"/>
+  <circle cx="304" cy="170" r="8" fill="none" stroke="#e2e8f0" stroke-width="2.5"/><circle cx="304" cy="170" r="2.5" fill="#e2e8f0"/>
+  <circle cx="44" cy="222" r="8" fill="none" stroke="#e2e8f0" stroke-width="2.5"/><circle cx="44" cy="222" r="2.5" fill="#e2e8f0"/>
+  <circle cx="200" cy="274" r="8" fill="none" stroke="#e2e8f0" stroke-width="2.5"/><circle cx="200" cy="274" r="2.5" fill="#e2e8f0"/>
+  <circle cx="356" cy="170" r="8" fill="none" stroke="#f87171" stroke-width="2.5"/><circle cx="356" cy="170" r="2.5" fill="#f87171"/>
+  <circle cx="200" cy="196" r="8" fill="none" stroke="#f87171" stroke-width="2.5"/><circle cx="200" cy="196" r="2.5" fill="#f87171"/>
+  <g font-size="17">
+    <text x="318" y="196" fill="#e2e8f0" text-anchor="start">2개</text>
+    <text x="44" y="206" fill="#e2e8f0" text-anchor="start">1개</text>
+    <text x="214" y="294" fill="#e2e8f0" text-anchor="start">1개</text>
+    <text x="356" y="152" fill="#f87171" text-anchor="middle">없음</text>
+    <text x="186" y="202" fill="#f87171" text-anchor="end">없음</text>
+    <text x="192" y="244" fill="#e2e8f0" text-anchor="end">O</text>
+  </g>
+  <g font-size="16" fill="#cbd5e1">
+    <rect x="24" y="408" width="28" height="14" fill="#1e293b" stroke="#64748b" stroke-dasharray="4 3"/><text x="60" y="420">작업 공간: 원점에서 1 이상 3 이하</text>
+    <text x="24" y="448">점 옆의 수: 손끝을 그 점에 놓는 자세의 수</text>
+  </g>
+</svg>
