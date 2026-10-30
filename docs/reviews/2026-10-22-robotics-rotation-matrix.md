@@ -3,9 +3,20 @@ target: robotics-rotation-matrix
 generated_at: 2026-10-22
 strict: true
 sources: src/content/posts/robotics-rotation-matrix.md
-summary: 🔴 0 · 🟡 0 · 🟢 12
+summary: 🔴 0 · 🟡 0 · 🟢 19
 
 ## Findings
+
+### 🟢 [L1] src/content/posts/robotics-rotation-matrix.md:11
+
+- severity: 🟢
+- source: L
+- rule_id: L1
+- location: src/content/posts/robotics-rotation-matrix.md:11
+- quote: 막대를 따라 3, 막대의 왼쪽으로 1만큼 간 자리에 있다.
+- message: PR #248 독립 재검토(e8fa4f7): 검토 완료, 이슈 없음. 평서체와 구체적인 집게 예제를 유지한다. 설명에 필요한 전환과 반복이며, 독해를 방해해 고쳐야 할 문체 문제를 찾지 못했다.
+- recommendation: 없음
+- gate_effect: info
 
 ### 🟢 [L1] src/content/posts/robotics-rotation-matrix.md:41
 
@@ -49,6 +60,17 @@ summary: 🔴 0 · 🟡 0 · 🟢 12
 - quote: 나머지 $(-0.8,0.6)$은 $\mathbf e_y'$의 1배였다.
 - message: 앞 글에는 $\mathbf e_y'$가 없었다. '1배였다'처럼 과거형으로 쓰면 앞 글에서 이미 그렇게 말한 것처럼 읽힌다. 1차 리뷰가 제안한 문구를 그대로 옮긴 결과다.
 - recommendation: "앞 글에서 (1,3)을 레일에 정사영한 길이는 3이었고, 그 나머지 (−0.8, 0.6)은 $\mathbf e_y'$의 1배다."
+- gate_effect: info
+
+### 🟢 [L2] src/content/posts/robotics-rotation-matrix.md:33
+
+- severity: 🟢
+- source: L
+- rule_id: L2
+- location: src/content/posts/robotics-rotation-matrix.md:33
+- quote: 이 글은 회전에 관한 사실 하나를 전제로 쓴다.
+- message: PR #248 독립 재검토(e8fa4f7): 검토 완료, 이슈 없음. 회전의 덧셈·실수배 보존을 전제로 밝힌 뒤 90° 규칙, 돌아간 두 축, 임의 점, 행렬 표기, 정사영을 통한 역변환, 덧셈정리로 진행한다. 고교 수학을 잊은 독자가 기초 1–3을 읽었다는 조건에서 구체 예제와 일반식을 연결하는 흐름이 자연스럽다. 막대 좌표와 고정 좌표, 두 축의 성분, 행·열의 정의가 사용 전에 나온다.
+- recommendation: 없음
 - gate_effect: info
 
 ### 🟢 [L2] src/content/posts/robotics-rotation-matrix.md:69
@@ -95,6 +117,28 @@ summary: 🔴 0 · 🟡 0 · 🟢 12
 - recommendation: 13행 두 번째 문장을 "그 공식은 마지막에 덤으로 얻는다"로 고친다. 195행 제목과 197행은 "두 각의 합 공식"처럼 한 이름으로 맞추고, 212행에서 "고교에서 배우는 덧셈정리"라고 이름을 붙인다.
 - gate_effect: info
 
+### 🟢 [L3] src/content/posts/robotics-rotation-matrix.md:25
+
+- severity: 🟢
+- source: L
+- rule_id: L3
+- location: src/content/posts/robotics-rotation-matrix.md:25
+- quote: 막대 좌표
+- message: PR #248 독립 재검토(e8fa4f7): 검토 완료, 이슈 없음. 막대 좌표/고정 좌표, 점 P와 좌표 벡터, 돌아간 두 단위벡터, 열벡터/전치행렬의 뜻을 구분했다. 왼쪽은 막대 진행 방향을 기준으로 정의했고, 두 각의 합 공식과 덧셈정리도 같은 개념임을 밝혔다.
+- recommendation: 없음
+- gate_effect: info
+
+### 🟢 [L4] public/images/robotics-rotation-matrix/turned-axes.svg:7
+
+- severity: 🟢
+- source: L
+- rule_id: L4
+- location: public/images/robotics-rotation-matrix/turned-axes.svg:7
+- quote: <path d="M230 300V198H94"
+- message: PR #248 독립 재검토(e8fa4f7): 검토 완료, 이슈 없음. 정적 SVG 4장과 실험 SVG의 원문 및 Chromium 렌더링을 본문과 대조했다. turned-axes.svg의 노란 삼각형 (230,300)→(332,300)→(332,164)을 수학적 반시계 90° 회전하면 초록 삼각형 (230,300)→(230,198)→(94,198)이 되어 수정된 그림이 설명과 일치한다. 실험 초기 30°는 약 (2.1,2.37), 90°는 정확한 표시 (-1,3)이며, 반올림 수치에는 ≈가 나온다. 데스크톱 1100px·모바일 폭 390px에서 도판·행렬·읽기 값의 유의미한 겹침이나 문서 가로 넘침을 발견하지 못했다. 포인터 드래그와 키보드 입력, 음수 좌표, 영벡터, 드래그 중 초기화, no-JS 정적 그림 및 print media 전환을 독립 확인했다.
+- recommendation: 없음
+- gate_effect: info
+
 ### 🟢 [L4] src/content/posts/robotics-rotation-matrix.md:61
 
 - severity: 🟢
@@ -103,6 +147,17 @@ summary: 🔴 0 · 🟡 0 · 🟢 12
 - location: src/content/posts/robotics-rotation-matrix.md:61
 - quote: not-recorded
 - message: 검토 완료, 이슈 없음. SVG 다섯 장의 좌표를 수치로 대조했다. turned-axes(O=(230,300), 1단위 170px)의 노란 경로 `H332V164`는 O→(0.6,0)→(0.6,0.8), 초록 `V198H94`는 O→(0,0.6)→(−0.8,0.6)이라 노란 꼭짓점을 원점 중심으로 90° 돌린 상과 정확히 일치하고, 라벨 자리는 캡션·63행·aria-label과 맞는다. rod-frame(34px, 막대 4, 돌린 칸의 P (284,148) = 3e′+1e′), quarter-turn(44px, (3,1)→(−1,3), 호의 두 끝 방향), turned-point(64px, 3e′_x 끝 (1.8,2.4), P (1,3), 라벨과 범례 P), rotation-lab(40px, rotate(−30) 적용 후 P (2.098, 2.366), 읽기 값 2.1·2.37과 ≈, 첫째 열 앰버·둘째 열 초록)이 본문과 맞는다. 157행 설명은 입력 θ·s_x·s_y, 0.5 단위 스냅, 반올림 규칙을 실험 코드와 대조했다. resvg로 다시 래스터화했고 다섯 장 모두 겹침이 없다.
+- recommendation: 없음
+- gate_effect: info
+
+### 🟢 [L5] src/content/posts/robotics-rotation-matrix.md:2
+
+- severity: 🟢
+- source: L
+- rule_id: L5
+- location: src/content/posts/robotics-rotation-matrix.md:2
+- quote: 회전행렬 — 돌아간 두 축이 행렬의 두 열이 된다
+- message: PR #248 독립 재검토(e8fa4f7): 검토 완료, 이슈 없음. 제목과 description이 본문의 중심인 회전한 두 축을 행렬의 열로 놓는 구성과 일치한다. 정사영 역변환과 덧셈정리는 그 중심에서 이어지는 설명이다.
 - recommendation: 없음
 - gate_effect: info
 
@@ -128,6 +183,17 @@ summary: 🔴 0 · 🟡 0 · 🟢 12
 - recommendation: 없음. 원하면 스펙 11·23행의 '막대 끝'을 본문에 맞춘다.
 - gate_effect: info
 
+### 🟢 [L6] src/content/posts/robotics-rotation-matrix.md:122
+
+- severity: 🟢
+- source: L
+- rule_id: L6
+- location: src/content/posts/robotics-rotation-matrix.md:122
+- quote: R(\theta)=
+- message: approved extension. PR #248 독립 재검토(e8fa4f7): 승인 자료인 2026-10-22-robotics-rotation-matrix-design.md의 질문·범위·증명 의무·provenance와 본문을 대조했고, 사용자 제공 공수-선대.pdf 42·44·46·49쪽을 직접 렌더링해 확인했다. 기저벡터의 상을 열로 놓기, 회전행렬의 네 성분, 행렬-열벡터 곱, 회전 합성에서 덧셈정리를 얻는 원천 핵심이 보존된다. 원자료의 행렬-행렬 곱을 입문용 한 벡터의 회전 계산으로 바꾼 구성과 집게 예제는 스펙에 추가로 명시돼 있다. 이번 독립 검토에서는 PPT 자체 및 미분방정식 PDF를 다시 대조하지 않았으며, 이 글의 수학 판정에는 승인 스펙과 선형대수 해당 쪽을 사용했다.
+- recommendation: 없음
+- gate_effect: info
+
 ### 🟢 [L7] src/content/posts/robotics-rotation-matrix.md:1
 
 - severity: 🟢
@@ -136,6 +202,17 @@ summary: 🔴 0 · 🟡 0 · 🟢 12
 - location: src/content/posts/robotics-rotation-matrix.md:1
 - quote: not-recorded
 - message: 검토 완료, 이슈 없음. 재계산이 모두 맞다: c²+s²=1, atan2(4,3)=53.1301°, e′x·e′y=0, 90° 규칙 (3,1)→(−1,3), 3(0.6,0.8)+(−0.8,0.6)=(1,3), 길이 √10, 행 계산 1·3, 되찾기 3·1, R(90°)·R(0°), 덧셈정리 30°+60°에서 0과 1, 실험 30°에서 (2.098, 2.366), 53°에서 (1.0068, 2.9977). θ·s·α 1000회 무작위로 ‖Rs‖=‖s‖, Rᵀ(Rs)=s, R(−θ)=R(θ)ᵀ, rot_θ(e_y)=rot_90(e′_x), cos(α+θ) 공식을 확인했다. 41·49·53·81·99·139·169/175·179·191·212행의 증명 의무(모든 θ, 모든 (a,b), 모든 s, 열 읽기 = 행 읽기, 존재·유일)가 닫혀 있다. 덧셈정리는 90° 규칙과 전제에서 나오고 그 앞 논증은 덧셈정리를 쓰지 않아 순환이 없다. 63행은 직관(그림)과 증명(90° 규칙)을 나눴다. 다시 쓴 53행은 33행 전제에서 나오는 회전각의 가법성만 쓴다. 169행 존재 논증은 −θ 되돌린 뒤 θ 돌리기가 항등이라는 점과 3절 결과로 닫히고, 유일성은 175행이 닫는다.
+- recommendation: 없음
+- gate_effect: info
+
+### 🟢 [L7] src/content/posts/robotics-rotation-matrix.md:33
+
+- severity: 🟢
+- source: L
+- rule_id: L7
+- location: src/content/posts/robotics-rotation-matrix.md:33
+- quote: 이어 붙인 화살표는 이어 붙은 채로 돌고
+- message: PR #248 독립 재검토(e8fa4f7): 검토 완료, 이슈 없음. 모든 실수 좌표에서의 90° 규칙, e′y=(-sinθ,cosθ), 길이 보존, 행/열 두 계산의 동치, 정사영을 통한 좌표 복원, R(θ)의 전치=R(-θ), 삼각함수 덧셈정리가 명시한 평면 회전 전제에서 성립한다. 임의 고정 점의 막대 좌표 존재는 되돌린 점으로, 유일성은 두 축과의 내적으로 설명되어 있다. 앞선 유도에 덧셈정리를 사용하지 않아 순환 논증이 아니다. 영벡터와 음수 성분에도 식이 유효하다. 테스트 79/79를 직접 실행했고 회전 실험의 60,840개 허용 상태 검사와 본문 예제, 역변환, 표시 등호 검사를 확인했다.
 - recommendation: 없음
 - gate_effect: info
 
@@ -171,3 +248,14 @@ summary: 🔴 0 · 🟡 0 · 🟢 12
 - 결정적 검사: 지적 0건
 - `npm run test:js`: 79/79
 - 빌드: dev 서버를 피해 격리된 복사본에서 실행. 153쪽 생성, 76개 글 본문 검사 통과, KaTeX 오류 0
+
+### PR #248 독립 재검토 — 2026-10-22, head e8fa4f7
+
+- 대상: PR의 최신 head e8fa4f76f4e19e74e2bda7af1adaeca2477966b0과 일치하는 로컬 파일. 작성 정본·읽기 쉬운 글 가이드·L1–L7 루브릭·포스트별 설계 스펙·SVG 실험 계약에 따라 검토했다.
+- 이번 판정: 🔴 0 · 🟡 0 · 🟢 7. 앞선 2차 리뷰 12개 finding과 감사 기록은 보존했고, 이번 coverage 7개를 추가했다. 헤더 summary는 누적 19개이며 새 권고 19개를 뜻하지 않는다.
+- 검증: 결정적 검사 지적 0건, npm run test:js 79/79, 격리 worktree 빌드 exit 0(153쪽 생성, 글 76개 본문 검사 통과). Chromium 페이지 오류 및 해당 글의 KaTeX 오류 0건.
+- 실제 브라우저 조작: 흰 손잡이를 중심에서 비껴 잡아 30°→130°→−160° 회전, 파란 점을 돌아간 격자의 (1,2)로 이동, 드래그 중 Enter 초기화 후 이동해도 초기값 유지, 영벡터 화살촉 제거, 180°에서 (-3,-3)→(3,3), range 키보드로 90°에서 (-1,3)을 확인했다.
+- 표시: 초기 반올림 행렬/좌표에는 ≈, 90°의 정확한 표시에는 =가 나온다. 모바일 폭 390px에서 문서 scrollWidth=390, JS 차단 및 print media에서 원본 그림이 보이고 실험은 숨겨진다.
+- 시각 근거: [수정된 두 축 그림](../review-prep/2026-10-22-pr248-turned-axes.png), [모바일 실험](../review-prep/2026-10-22-pr248-lab-mobile.png), [모바일 읽기 값](../review-prep/2026-10-22-pr248-readouts-mobile.png).
+- 한계: 모바일은 Chromium 뷰포트 검증이다. 실제 터치 기기·다른 브라우저·출력물의 인쇄 페이지 나눔은 확인하지 않았다. print media에서 정적 그림으로 전환되는 동작만 확인했다.
+- 본문·SVG·실험 코드에는 변경하지 않았다. 이 리뷰 기록과 공개 본문 화면의 증거 이미지만 저장했으며, 비공개 PDF 렌더는 임시 폴더에만 두었다. GitHub 댓글/리뷰 제출은 하지 않았다.
