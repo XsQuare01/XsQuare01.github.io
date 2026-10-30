@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="570" viewBox="0 0 400 570" role="img" aria-label="첫 관절 30°, 둘째 관절 60°이면 손끝은 약 (1.73, 2)에 있다" data-lab="arm-forward" font-family="sans-serif">
+  <rect width="400" height="570" rx="8" fill="#0f1117"/>
+  <defs><marker id="rta-l-a" viewBox="0 0 10 10" refX="17.3" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker><marker id="rta-l-b" viewBox="0 0 10 10" refX="18.2" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#a78bfa"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">두 관절을 돌려 손끝 찾기</text>
+  <rect x="35" y="75" width="350" height="350" fill="none" stroke="#475569" stroke-width="1"/>
+  <line x1="35" y1="250" x2="385" y2="250" stroke="#64748b" stroke-width="2"/>
+  <line x1="210" y1="75" x2="210" y2="425" stroke="#64748b" stroke-width="2"/>
+  <path d="M60 246V254 M206 400H214 M110 246V254 M206 350H214 M160 246V254 M206 300H214 M260 246V254 M206 200H214 M310 246V254 M206 150H214 M360 246V254 M206 100H214" fill="none" stroke="#64748b" stroke-width="2"/>
+  <g fill="#94a3b8" font-size="16">
+    <text x="60" y="445" text-anchor="middle">−3</text><text x="110" y="445" text-anchor="middle">−2</text><text x="160" y="445" text-anchor="middle">−1</text><text x="260" y="445" text-anchor="middle">1</text><text x="310" y="445" text-anchor="middle">2</text><text x="360" y="445" text-anchor="middle">3</text>
+    <text x="28" y="406" text-anchor="end">−3</text><text x="28" y="356" text-anchor="end">−2</text><text x="28" y="306" text-anchor="end">−1</text><text x="28" y="206" text-anchor="end">1</text><text x="28" y="156" text-anchor="end">2</text><text x="28" y="106" text-anchor="end">3</text>
+  </g>
+  <line data-part="extension" x1="296.6" y1="200" x2="331.2" y2="180" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <path data-part="arc1" d="M240 250A30 30 0 0 0 236 235" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <path data-part="arc2" d="M315.7 189A22 22 0 0 0 296.6 178" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line data-part="reach" x1="210" y1="250" x2="296.6" y2="150" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="7 5"/>
+  <line data-part="link1" x1="210" y1="250" x2="296.6" y2="200" stroke="#93c5fd" stroke-width="4" marker-end="url(#rta-l-a)"/>
+  <line data-part="link2" x1="296.6" y1="200" x2="296.6" y2="150" stroke="#a78bfa" stroke-width="4" marker-end="url(#rta-l-b)"/>
+  <circle cx="210" cy="250" r="6" fill="#64748b"/>
+  <g data-part="handle-elbow" data-point="elbow" transform="translate(296.6 200)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <circle r="8" fill="#93c5fd"/>
+  </g>
+  <g data-part="handle-tip" data-point="tip" transform="translate(296.6 150)">
+    <circle r="27" fill="#0f1117" fill-opacity="0"/>
+    <circle class="point-ring" r="17" fill="none" stroke="#e2e8f0" stroke-opacity="0" stroke-width="2"/>
+    <path d="M0 -10L10 0L0 10L-10 0Z" fill="#a78bfa"/>
+  </g>
+  <g font-size="16" fill="#cbd5e1">
+    <line x1="24" y1="472" x2="48" y2="472" stroke="#93c5fd" stroke-width="4"/><text x="56" y="478"><tspan font-weight="bold">a</tspan>: 첫 링크, 점 E</text>
+    <line x1="214" y1="472" x2="238" y2="472" stroke="#a78bfa" stroke-width="4"/><text x="246" y="478"><tspan font-weight="bold">b</tspan>: 둘째 링크, P</text>
+    <line x1="24" y1="498" x2="48" y2="498" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="7 5"/><text x="56" y="504"><tspan font-weight="bold">a</tspan> + <tspan font-weight="bold">b</tspan>: O에서 P까지</text>
+    <line x1="214" y1="498" x2="238" y2="498" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><text x="246" y="504">θ<tspan font-size="12" dy="5">2</tspan><tspan dy="-5"> </tspan>의 기준선</text>
+  </g>
+  <text data-part="summary" x="24" y="546" fill="#e2e8f0" font-size="20">손끝 P ≈ (1.73, 2)</text>
+</svg>

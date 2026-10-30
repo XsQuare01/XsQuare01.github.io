@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="430" viewBox="0 0 400 430" role="img" aria-label="목표점 (2, 1)에 손끝을 놓는 자세는 둘이다. 팔꿈치가 (2, 0)인 자세와 (1.2, 1.6)인 자세이고, 두 자세는 직선 OT에 대해 거울상이다" font-family="sans-serif">
+  <rect width="400" height="430" rx="8" fill="#0f1117"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">두 자세는 직선 OT에 대해 거울상</text>
+  <path d="M40 300H380 M70 316V60" fill="none" stroke="#64748b" stroke-width="2"/>
+  <path d="M248.2 325.1A180 180 0 0 0 137.4 133.1" fill="none" stroke="#93c5fd" stroke-width="1.2" stroke-opacity="0.6" stroke-dasharray="3 5"/>
+  <circle cx="250" cy="210" r="90" fill="none" stroke="#a78bfa" stroke-width="1.2" stroke-opacity="0.6" stroke-dasharray="3 5"/>
+  <line x1="70" y1="300" x2="367" y2="151.5" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8 4 2 4"/>
+  <line x1="70" y1="300" x2="178" y2="156" stroke="#93c5fd" stroke-width="4" stroke-dasharray="9 6"/>
+  <line x1="178" y1="156" x2="250" y2="210" stroke="#a78bfa" stroke-width="4" stroke-dasharray="9 6"/>
+  <line x1="70" y1="300" x2="250" y2="300" stroke="#93c5fd" stroke-width="4"/>
+  <line x1="250" y1="300" x2="250" y2="210" stroke="#a78bfa" stroke-width="4"/>
+  <circle cx="250" cy="300" r="6" fill="#93c5fd"/>
+  <circle cx="178" cy="156" r="6" fill="#0f1117" stroke="#93c5fd" stroke-width="2.5"/>
+  <circle cx="250" cy="210" r="9" fill="none" stroke="#e2e8f0" stroke-width="2.5"/><circle cx="250" cy="210" r="3" fill="#e2e8f0"/>
+  <g font-size="18">
+    <text x="62" y="322" fill="#e2e8f0" text-anchor="end">O</text>
+    <text x="266" y="216" fill="#e2e8f0">T (2, 1)</text>
+    <text x="250" y="326" fill="#93c5fd" text-anchor="middle">(2, 0)</text>
+    <text x="166" y="146" fill="#93c5fd" text-anchor="end">(1.2, 1.6)</text>
+    <text x="363" y="141.5" fill="#94a3b8" text-anchor="end">직선 OT</text>
+  </g>
+  <g font-size="17" fill="#cbd5e1">
+    <line x1="24" y1="352" x2="38" y2="352" stroke="#93c5fd" stroke-width="4"/><line x1="38" y1="352" x2="52" y2="352" stroke="#a78bfa" stroke-width="4"/><text x="60" y="358">자세 ①: (θ<tspan font-size="12" dy="5">1</tspan><tspan dy="-5"> </tspan>, θ<tspan font-size="12" dy="5">2</tspan><tspan dy="-5"> </tspan>) = (0°, 90°)</text>
+    <line x1="24" y1="380" x2="39" y2="380" stroke="#93c5fd" stroke-width="4" stroke-dasharray="9 6"/><line x1="39" y1="380" x2="54" y2="380" stroke="#a78bfa" stroke-width="4" stroke-dasharray="9 6"/><text x="62" y="386">자세 ②: (θ<tspan font-size="12" dy="5">1</tspan><tspan dy="-5"> </tspan>, θ<tspan font-size="12" dy="5">2</tspan><tspan dy="-5"> </tspan>) ≈ (53.13°, −90°)</text>
+    <text x="24" y="414">옅은 점선: O에서 2인 호와 T에서 1인 원</text>
+  </g>
+</svg>

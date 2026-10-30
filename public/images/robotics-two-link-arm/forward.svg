@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="440" viewBox="0 0 400 440" role="img" aria-label="첫 링크 a = (√3, 1)에 둘째 링크 b = (0, 1)을 이으면 손끝은 (√3, 2)다. 둘째 링크의 방향 각은 θ1 + θ2 = 90°다" font-family="sans-serif">
+  <rect width="400" height="440" rx="8" fill="#0f1117"/>
+  <defs><marker id="rta-f-a" viewBox="0 0 10 10" refX="15.7" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#93c5fd"/></marker><marker id="rta-f-b" viewBox="0 0 10 10" refX="16.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#a78bfa"/></marker><marker id="rta-f-p" viewBox="0 0 10 10" refX="16.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill="#e2e8f0"/></marker></defs>
+  <text x="24" y="34" fill="#e2e8f0" font-size="23">두 링크의 기여를 더한다</text>
+  <path d="M40 300H380 M64 316V56" fill="none" stroke="#64748b" stroke-width="2"/>
+  <path d="M154 295V305 M59 210H69 M244 295V305 M59 120H69" fill="none" stroke="#64748b" stroke-width="2"/>
+  <g fill="#94a3b8" font-size="16"><text x="154" y="322" text-anchor="middle">1</text><text x="54" y="216" text-anchor="end">1</text><text x="244" y="322" text-anchor="middle">2</text><text x="54" y="126" text-anchor="end">2</text></g>
+  <line x1="219.9" y1="210" x2="268.4" y2="182" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <line x1="219.9" y1="210" x2="289.9" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 4"/>
+  <path d="M108 300A44 44 0 0 0 102.1 278" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <path d="M245.9 195A30 30 0 0 0 219.9 180" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <path d="M285.9 210A66 66 0 0 0 219.9 144" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <line x1="64" y1="300" x2="219.9" y2="120" stroke="#e2e8f0" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#rta-f-p)"/>
+  <line x1="64" y1="300" x2="219.9" y2="210" stroke="#93c5fd" stroke-width="4" marker-end="url(#rta-f-a)"/>
+  <line x1="219.9" y1="210" x2="219.9" y2="120" stroke="#a78bfa" stroke-width="4" marker-end="url(#rta-f-b)"/>
+  <circle cx="219.9" cy="210" r="6" fill="#93c5fd"/>
+  <circle cx="219.9" cy="120" r="6" fill="#a78bfa"/>
+  <g font-size="18">
+    <text x="56" y="322" fill="#e2e8f0" text-anchor="end">O</text>
+    <text x="233.9" y="230" fill="#93c5fd">E (√3, 1)</text>
+    <text x="233.9" y="126" fill="#a78bfa">P (√3, 2)</text>
+    <text x="120" y="292" fill="#cbd5e1" text-anchor="middle">30°</text>
+    <text x="241.5" y="175.4" fill="#cbd5e1" text-anchor="middle">60°</text>
+    <text x="285.2" y="164.6" fill="#94a3b8">90°</text>
+  </g>
+  <g font-size="17" fill="#cbd5e1">
+    <line x1="24" y1="352" x2="52" y2="352" stroke="#93c5fd" stroke-width="4"/><text x="60" y="358"><tspan font-weight="bold">a</tspan> = 2(cos 30°, sin 30°) = (√3, 1)</text>
+    <line x1="24" y1="380" x2="52" y2="380" stroke="#a78bfa" stroke-width="4"/><text x="60" y="386"><tspan font-weight="bold">b</tspan> = 1(cos 90°, sin 90°) = (0, 1)</text>
+    <line x1="24" y1="408" x2="52" y2="408" stroke="#e2e8f0" stroke-width="2.5" stroke-dasharray="7 5"/><text x="60" y="414"><tspan font-weight="bold">a</tspan> + <tspan font-weight="bold">b</tspan> = (√3, 2)</text>
+  </g>
+</svg>
